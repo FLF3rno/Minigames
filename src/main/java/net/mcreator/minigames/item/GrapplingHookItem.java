@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class GrapplingHookItem extends Item {
 	public GrapplingHookItem(Item.Properties properties) {
-		super(properties.stacksTo(1));
+		super(properties.durability(2));
 	}
 
 	@Override

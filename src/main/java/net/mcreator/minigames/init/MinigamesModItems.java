@@ -31,6 +31,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> GRAPPLING_HOOK;
 	public static final DeferredItem<Item> REPLAY_SPLEEF;
 	public static final DeferredItem<Item> SYMMETRICAL_SHOVEL;
+	public static final DeferredItem<Item> MAGMA_DART;
+	public static final DeferredItem<Item> SNOW_SHOVEL;
+	public static final DeferredItem<Item> HYPNOTIC_PENDULUM;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -45,6 +48,9 @@ public class MinigamesModItems {
 		GRAPPLING_HOOK = register("grappling_hook", GrapplingHookItem::new);
 		REPLAY_SPLEEF = register("replay_spleef", ReplaySpleefItem::new);
 		SYMMETRICAL_SHOVEL = register("symmetrical_shovel", SymmetricalShovelItem::new);
+		MAGMA_DART = register("magma_dart", MagmaDartItem::new);
+		SNOW_SHOVEL = register("snow_shovel", SnowShovelItem::new);
+		HYPNOTIC_PENDULUM = register("hypnotic_pendulum", HypnoticPendulumItem::new);
 	}
 
 	// Start of user code block custom items

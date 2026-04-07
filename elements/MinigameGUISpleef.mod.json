@@ -1,0 +1,150 @@
+{
+  "_fv": 85,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "spleefwindow.png",
+          "use1Xscale": false,
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_achievement_run",
+          "text": {
+            "fixedValue": "Spleef"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 36,
+          "y": 17,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_start_normal",
+          "text": "Start",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "SpleefSettingsChosen"
+          },
+          "width": 98,
+          "height": 20,
+          "x": 164,
+          "y": 200,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_keep_inventory",
+          "text": {
+            "fixedValue": "Enable powerups"
+          },
+          "width": 45,
+          "height": 70,
+          "x": 195,
+          "y": 82,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "symmetrical_shovel.png",
+          "use1Xscale": false,
+          "x": 200,
+          "y": 84,
+          "locked": false
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "name": "powerup",
+          "text": "",
+          "isCheckedProcedure": {
+            "name": "KeepInventoryChecked"
+          },
+          "x": 206,
+          "y": 129,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 29,
+          "y": 205,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_compass_16",
+          "image": "compass_16.png",
+          "hoveredImage": "selectedgamecompass.png",
+          "onClick": {
+            "name": "GoBack"
+          },
+          "x": 31,
+          "y": 219,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 357,
+          "y": 204,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_bucket",
+          "image": "bucket.png",
+          "hoveredImage": "selectcolor.png",
+          "onClick": {
+            "name": "OpenCustomizationScreen"
+          },
+          "x": 361,
+          "y": 218,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

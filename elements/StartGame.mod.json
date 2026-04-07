@@ -99,7 +99,7 @@
       {
         "type": "image",
         "data": {
-          "image": "blank_section.png",
+          "image": "spleef_section.png",
           "use1Xscale": false,
           "x": 255,
           "y": 22,
@@ -267,6 +267,51 @@
           "height": 24,
           "x": 388,
           "y": 220,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_spleef",
+          "text": {
+            "fixedValue": "Spleef"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 281,
+          "y": 38,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_snowball",
+          "image": "snowball2x.png",
+          "hoveredImage": "snowballselected.png",
+          "onClick": {
+            "name": "SelectSpleef"
+          },
+          "x": 281,
+          "y": 73,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_mine_blocks_under_opponents_to_e",
+          "text": {
+            "fixedValue": "Mine blocks under opponents to eliminate them and obtain powerups"
+          },
+          "width": 31,
+          "height": 30,
+          "x": 281,
+          "y": 74,
           "locked": false
         }
       }

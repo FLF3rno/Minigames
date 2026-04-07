@@ -39,6 +39,10 @@ public class MinigamesModEntities {
 			EntityType.Builder.<GrappleEntity>of(GrappleEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 0.6f));
+	public static final DeferredHolder<EntityType<?>, EntityType<MagmaHitboxEntity>> MAGMA_HITBOX = register("magma_hitbox",
+			EntityType.Builder.<MagmaHitboxEntity>of(MagmaHitboxEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 0.6f));
+	public static final DeferredHolder<EntityType<?>, EntityType<MagmaDartProjectileEntity>> MAGMA_DART_PROJECTILE = register("magma_dart_projectile",
+			EntityType.Builder.<MagmaDartProjectileEntity>of(MagmaDartProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -52,6 +56,7 @@ public class MinigamesModEntities {
 		GoldenSpiderEntity.init(event);
 		GoldenZombieEntity.init(event);
 		GrapplingHitboxEntity.init(event);
+		MagmaHitboxEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -60,5 +65,6 @@ public class MinigamesModEntities {
 		event.put(GOLDEN_SPIDER.get(), GoldenSpiderEntity.createAttributes().build());
 		event.put(GOLDEN_ZOMBIE.get(), GoldenZombieEntity.createAttributes().build());
 		event.put(GRAPPLING_HITBOX.get(), GrapplingHitboxEntity.createAttributes().build());
+		event.put(MAGMA_HITBOX.get(), MagmaHitboxEntity.createAttributes().build());
 	}
 }

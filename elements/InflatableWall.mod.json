@@ -32,7 +32,9 @@
     "specialInformation": {
       "fixedValue": [
         "On §6right click:",
-        "    §2Place a wall in the direction of the block face clicked"
+        "    §2Place a wall in the direction of the block face clicked",
+        "§6While holding:",
+        "    §2Infinite place range, but can't break blocks"
       ]
     },
     "glowCondition": {
@@ -70,6 +72,15 @@
     "musicDiscLengthInTicks": 100,
     "musicDiscAnalogOutput": 0,
     "providedBannerPatterns": [],
-    "attributeModifiers": []
+    "attributeModifiers": [
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "BLOCK_REACH"
+        },
+        "amount": 1000.0,
+        "operation": "ADD_VALUE"
+      }
+    ]
   }
 }

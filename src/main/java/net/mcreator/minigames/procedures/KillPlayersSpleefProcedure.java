@@ -9,13 +9,16 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 import javax.annotation.Nullable;
 
@@ -111,6 +114,15 @@ public class KillPlayersSpleefProcedure {
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
 								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect clear @a minigames:crowned");
+							}
+						}
+						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.CROWNED, 1000000, 1));
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @a times 10 60 10");
 							}
 						}
@@ -129,7 +141,7 @@ public class KillPlayersSpleefProcedure {
 							}
 						}
 					}
-					if (entityiterator instanceof Player _plr14 && _plr14.gameMode() == GameType.SPECTATOR) {
+					if (entityiterator instanceof Player _plr16 && _plr16.gameMode() == GameType.SPECTATOR) {
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

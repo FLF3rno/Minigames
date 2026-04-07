@@ -3,6 +3,9 @@
   "values": [
     "minigames:thrusters",
     "minigames:grappling_hook",
+    "minigames:magma_dart",
+    "minecraft:wind_charge",
+    "minigames:snow_shovel",
     "minigames:inflatable_wall",
     "minigames:symmetrical_shovel",
     "minigames:ice_dart",

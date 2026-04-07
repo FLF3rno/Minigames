@@ -18,12 +18,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.minigames.block.entity.SpreadingIceBlockEntity;
 import net.mcreator.minigames.block.entity.InflatableWallBlockBlockEntity;
+import net.mcreator.minigames.block.entity.ExplodingMagmaBlockEntity;
 import net.mcreator.minigames.MinigamesMod;
 
 @EventBusSubscriber
 public class MinigamesModBlockEntities {
 	public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, MinigamesMod.MODID);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<InflatableWallBlockBlockEntity>> INFLATABLE_WALL_BLOCK = register("inflatable_wall_block", MinigamesModBlocks.INFLATABLE_WALL_BLOCK, InflatableWallBlockBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExplodingMagmaBlockEntity>> EXPLODING_MAGMA = register("exploding_magma", MinigamesModBlocks.EXPLODING_MAGMA, ExplodingMagmaBlockEntity::new);
 	// Start of user code block custom block entities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpreadingIceBlockEntity>> SPREADING_ICE = register("spreading_ice", MinigamesModBlocks.SPREADING_ICE, SpreadingIceBlockEntity::new);
 
@@ -35,5 +37,6 @@ public class MinigamesModBlockEntities {
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, INFLATABLE_WALL_BLOCK.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, EXPLODING_MAGMA.get(), SidedInvWrapper::new);
 	}
 }

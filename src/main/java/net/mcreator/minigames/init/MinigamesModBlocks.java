@@ -9,11 +9,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 
-import net.mcreator.minigames.block.SpreadingIceBlock;
-import net.mcreator.minigames.block.InflatableWallBlockBlock;
-import net.mcreator.minigames.block.CrownHuntCaptureBlock;
-import net.mcreator.minigames.block.CastleStairsBlock;
-import net.mcreator.minigames.block.CastleBricksBlock;
+import net.mcreator.minigames.block.*;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.function.Function;
@@ -25,12 +21,14 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> CASTLE_STAIRS;
 	public static final DeferredBlock<Block> SPREADING_ICE;
 	public static final DeferredBlock<Block> INFLATABLE_WALL_BLOCK;
+	public static final DeferredBlock<Block> EXPLODING_MAGMA;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
 		CASTLE_STAIRS = register("castle_stairs", CastleStairsBlock::new);
 		SPREADING_ICE = register("spreading_ice", SpreadingIceBlock::new);
 		INFLATABLE_WALL_BLOCK = register("inflatable_wall_block", InflatableWallBlockBlock::new);
+		EXPLODING_MAGMA = register("exploding_magma", ExplodingMagmaBlock::new);
 	}
 
 	// Start of user code block custom blocks

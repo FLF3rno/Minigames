@@ -8,6 +8,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -15,6 +16,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
 
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.entity.GrapplingHitboxEntity;
@@ -27,6 +29,10 @@ public class GrapplingHookRightclickedProcedure {
 		if (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("thrown", false) == false) {
 			if (world instanceof Level _level) {
 				_level.playSound(null, x, y, z, SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.PLAYERS, 1.0f, 0.4f);
+			}
+			if (entity instanceof LivingEntity _living) {
+				InteractionHand _hand = _living.getMainHandItem() == itemstack ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+				itemstack.hurtAndBreak(1, _living, _hand);
 			}
 			{
 				final String _tagName = "thrown";

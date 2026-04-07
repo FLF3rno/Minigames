@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "state=0": {
+      "model": "minigames:block/exploding_magma_0"
+    },
+    "state=1": {
+      "model": "minigames:block/exploding_magma_1"
+    },
+    "state=2": {
+      "model": "minigames:block/exploding_magma_2"
+    }
+  }
+}

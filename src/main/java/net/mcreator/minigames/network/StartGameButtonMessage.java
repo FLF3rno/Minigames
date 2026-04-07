@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.core.SectionPos;
 
+import net.mcreator.minigames.procedures.SelectSpleefProcedure;
 import net.mcreator.minigames.procedures.SelectCrownHuntProcedure;
 import net.mcreator.minigames.procedures.SelectAchievementRunProcedure;
 import net.mcreator.minigames.procedures.SelectAchievementHuntProcedure;
@@ -65,6 +66,10 @@ public record StartGameButtonMessage(int buttonID, int x, int y, int z) implemen
 		if (buttonID == 3) {
 
 			SelectCrownHuntProcedure.execute(world, x, y, z, entity);
+		}
+		if (buttonID == 4) {
+
+			SelectSpleefProcedure.execute(world, x, y, z, entity);
 		}
 	}
 

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "minigames:grappling_hook",
+    "minigames:snow_shovel",
     "minigames:symmetrical_shovel"
   ]
 }

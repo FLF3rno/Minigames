@@ -97,7 +97,7 @@ public class ConquerTopLayerProcedure {
 							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 50;
 							_vars.markSyncDirty();
 						}
-						SpleefPowerupProcedure.execute(entity);
+						SpleefPowerupProcedure.execute(world, entity);
 					}
 				}
 			}

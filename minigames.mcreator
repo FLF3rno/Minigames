@@ -1770,50 +1770,6 @@
       }
     },
     {
-      "name": "CrownDebuffDamage",
-      "type": "damagetype",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "crown_debuff_damage",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/damage_type/crown_debuff_damage.json"
-        ]
-      },
-      "path": "~/Achievement Run/settings"
-    },
-    {
-      "name": "CrownDoubleDamage",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "crown_double_damage",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "damagesource",
-            "type": "damagesource"
-          },
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "amount",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/CrownDoubleDamageProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/settings"
-    },
-    {
       "name": "SelectAchievementHunt",
       "type": "procedure",
       "compiles": true,
@@ -1855,9 +1811,9 @@
       "registry_name": "minigame_gui_achievement_hunt",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementHuntMenu.java",
           "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementHuntScreen.java",
-          "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementHuntButtonMessage.java",
-          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementHuntMenu.java"
+          "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementHuntButtonMessage.java"
         ]
       },
       "path": "~/Achievement Run/settings"
@@ -4079,19 +4035,6 @@
       "path": "~/Crown Hunt/golden mobs"
     },
     {
-      "name": "Spleef",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "spleef",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/SpleefCommand.java"
-        ]
-      },
-      "path": "~/Spleef"
-    },
-    {
       "name": "StartSpleef",
       "type": "procedure",
       "compiles": true,
@@ -4225,25 +4168,6 @@
       "path": "~/Spleef"
     },
     {
-      "name": "WinSpleef",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "win_spleef",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/WinSpleefProcedure.java"
-        ]
-      },
-      "path": "~/Spleef"
-    },
-    {
       "name": "KillPlayersSpleef",
       "type": "procedure",
       "compiles": true,
@@ -4369,6 +4293,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -4693,13 +4621,13 @@
       "name": "InflatableWall",
       "type": "item",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "inflatable_wall",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/inflatable_wall.json",
+          "src/main/resources/assets/minigames/items/inflatable_wall.json",
           "src/main/java/net/mcreator/minigames/item/InflatableWallItem.java",
-          "src/main/resources/assets/minigames/items/inflatable_wall.json"
+          "src/main/resources/assets/minigames/models/item/inflatable_wall.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4708,7 +4636,7 @@
       "name": "InflatableWallBlock",
       "type": "block",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "inflatable_wall_block",
       "metadata": {
         "files": [
@@ -4725,7 +4653,7 @@
       "name": "InflatableWallAdded",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "inflatable_wall_added",
       "metadata": {
         "dependencies": [
@@ -4764,7 +4692,7 @@
       "name": "InflatableWallSound",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "inflatable_wall_sound",
       "metadata": {
         "dependencies": [
@@ -4912,9 +4840,10 @@
       "registry_name": "grappling_hook",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/models/item/grappling_hook.json",
           "src/main/resources/assets/minigames/items/grappling_hook.json",
-          "src/main/java/net/mcreator/minigames/item/GrapplingHookItem.java",
-          "src/main/resources/assets/minigames/models/item/grappling_hook.json"
+          "src/main/resources/assets/minigames/models/item/grappling_hook_0.json",
+          "src/main/java/net/mcreator/minigames/item/GrapplingHookItem.java"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -5059,6 +4988,365 @@
           "src/main/java/net/mcreator/minigames/procedures/FirstTimeJoinProcedure.java"
         ]
       }
+    },
+    {
+      "name": "MiningFatigue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mining_fatigue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MiningFatigueProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "MagmaDart",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "magma_dart",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/magma_dart.json",
+          "src/main/java/net/mcreator/minigames/item/MagmaDartItem.java",
+          "src/main/resources/assets/minigames/items/magma_dart.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "MagmaDartRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "magma_dart_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MagmaDartRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "MagmaHitbox",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "magma_hitbox",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/MagmaHitboxRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/MagmaHitboxEntity.java",
+          "src/main/resources/assets/minigames/items/magma_hitbox_spawn_egg.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "MagmaDartProjectileWhileProjectileFlyingTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "magma_dart_projectile_while_projectile_flying_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MagmaDartProjectileWhileProjectileFlyingTickProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "MagmaDartProjectile",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "magma_dart_projectile",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/MagmaDartProjectileEntity.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "MagmaDartProjectileProjectileHitsBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "magma_dart_projectile_projectile_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MagmaDartProjectileProjectileHitsBlockProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "MagmaHitboxOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "magma_hitbox_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MagmaHitboxOnEntityTickUpdateProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "ExplodingMagma",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "exploding_magma",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/exploding_magma_0.json",
+          "src/main/java/net/mcreator/minigames/block/entity/ExplodingMagmaBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/exploding_magma.json",
+          "src/main/resources/assets/minigames/blockstates/exploding_magma.json",
+          "src/main/resources/assets/minigames/models/block/exploding_magma_1.json",
+          "src/main/resources/assets/minigames/models/block/exploding_magma.json",
+          "src/main/java/net/mcreator/minigames/block/ExplodingMagmaBlock.java",
+          "src/main/resources/assets/minigames/models/block/exploding_magma_2.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "ExplodingMagmaBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "exploding_magma_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExplodingMagmaBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SnowShovel",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snow_shovel",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SnowShovelItem.java",
+          "src/main/resources/assets/minigames/models/item/snow_shovel.json",
+          "src/main/resources/assets/minigames/items/snow_shovel.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SelectSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SelectSpleefProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "MinigameGUISpleef",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_spleef",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUISpleefScreen.java",
+          "src/main/java/net/mcreator/minigames/network/MinigameGUISpleefButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUISpleefMenu.java"
+        ]
+      },
+      "path": "~/Spleef/Settings"
+    },
+    {
+      "name": "SpleefSettingsChosen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spleef_settings_chosen",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpleefSettingsChosenProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Settings"
+    },
+    {
+      "name": "HypnoticPendulum",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hypnotic_pendulum",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/hypnotic_pendulum.json",
+          "src/main/java/net/mcreator/minigames/item/HypnoticPendulumItem.java",
+          "src/main/resources/assets/minigames/items/hypnotic_pendulum.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
     }
   ],
   "variable_elements": [
@@ -5517,6 +5805,12 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "spleefPowerups",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -5658,12 +5952,6 @@
     }
   ],
   "tag_elements": {
-    "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
-      "CUSTOM:CrownDebuffDamage"
-    ],
-    "DAMAGE_TYPES:minecraft:bypasses_effects": [
-      "CUSTOM:CrownDebuffDamage"
-    ],
     "ITEMS:minecraft:head_armor": [
       "~CUSTOM:CrownHelmet.helmet"
     ],
@@ -5716,13 +6004,19 @@
       "CUSTOM:InflatableWall",
       "CUSTOM:Snowbomb",
       "CUSTOM:GrapplingHook",
-      "CUSTOM:SymmetricalShovel"
+      "CUSTOM:SymmetricalShovel",
+      "CUSTOM:MagmaDart",
+      "CUSTOM:SnowShovel",
+      "Items.WIND_CHARGE"
     ],
     "BLOCKS:mod:spleefables": [
       "Blocks.SNOW",
-      "CUSTOM:InflatableWallBlock"
+      "CUSTOM:InflatableWallBlock",
+      "Blocks.MAGMA"
     ],
     "ITEMS:minecraft:enchantable/durability": [
+      "~CUSTOM:SnowShovel",
+      "~CUSTOM:GrapplingHook",
       "~CUSTOM:SymmetricalShovel"
     ]
   },
@@ -5762,9 +6056,6 @@
       "effect.minigames.crowned": "Crowned",
       "gui.minigames.achievement_reminder.label_obtain_this_achievement": "Obtain this achievement:",
       "gui.minigames.achievement_reminder.label_adventure_time": "Adventure Time",
-      "death.attack.crown_debuff_damage.item": "%1$s was bested by %2$s using %3$s",
-      "death.attack.crown_debuff_damage": "%1$s was bested",
-      "death.attack.crown_debuff_damage.player": "%1$s was slain whilst trying to escape %2$s",
       "gui.minigames.minigame_gui_achievement_run.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
       "gui.minigames.minigame_gui_achievement_run.crown": "",
       "gui.minigames.minigame_gui_achievement_run.tooltip_dont_reset_world_on_game_start": "Don\u0027t reset world on game start",
@@ -5778,7 +6069,7 @@
       "gui.minigames.minigame_gui_achievement_hunt.tooltip_dont_reset_world_on_game_start": "Give hunted a head start",
       "gui.minigames.minigame_gui_achievement_hunt.button_start_normal": "Start",
       "gui.minigames.minigame_gui_achievement_hunt.hp": "20",
-      "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Run",
+      "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Hunt",
       "gui.minigames.minigame_gui_achievement_hunt.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
       "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
       "gui.minigames.minigame_gui_achievement_hunt.crown": "",
@@ -5856,7 +6147,35 @@
       "item.minigames.replay_spleef": "Replay Spleef",
       "item.minigames.symmetrical_shovel": "Symmetrical Shovel",
       "item.minigames.symmetrical_shovel.description_1": "    §2Break a block in that coordinate in every layer",
-      "item.minigames.symmetrical_shovel.description_0": "On §6block break:"
+      "item.minigames.symmetrical_shovel.description_0": "On §6block break:",
+      "item.minigames.inflatable_wall.description_2": "§6While holding:",
+      "item.minigames.inflatable_wall.description_3": "    §2Infinite place range, but can\u0027t break blocks",
+      "item.minigames.magma_dart": "Magma Dart",
+      "entity.minigames.magma_hitbox": "Magma Hitbox",
+      "item.minigames.exploding_magma": "Exploding Magma",
+      "item.minigames.magma_dart.description_1": "    §2Throw a dart which creates a magmatic shockwave, travelling in a straight line and destroying everything",
+      "item.minigames.magma_dart.description_0": "On §6right click:",
+      "item.minigames.snow_shovel": "Snow Shovel",
+      "item.minigames.snow_shovel.description_0": "On §6block break:",
+      "item.minigames.snow_shovel.description_1": "    §2Break adjacent blocks",
+      "gui.minigames.start_game.label_spleef": "Spleef",
+      "gui.minigames.start_game.tooltip_mine_blocks_under_opponents_to_e": "Mine blocks under opponents to eliminate them and obtain powerups",
+      "gui.minigames.minigame_gui_spleef.label_achievement_run": "Spleef",
+      "gui.minigames.minigame_gui_spleef.hp": "20",
+      "gui.minigames.minigame_gui_spleef.button_start_normal": "Start",
+      "gui.minigames.minigame_gui_spleef.nightvision": "",
+      "gui.minigames.minigame_gui_spleef.tooltip_night_vision": "Night Vision",
+      "gui.minigames.minigame_gui_spleef.tooltip_keep_inventory": "Enable powerups",
+      "gui.minigames.minigame_gui_spleef.tooltip_health_amount": "Health Amount",
+      "gui.minigames.minigame_gui_spleef.keepinventory": "",
+      "gui.minigames.minigame_gui_spleef.tooltip_dont_reset_world_on_game_start": "Don\u0027t reset world on game start",
+      "gui.minigames.minigame_gui_spleef.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
+      "gui.minigames.minigame_gui_spleef.spawn": "",
+      "gui.minigames.minigame_gui_spleef.minimap": "",
+      "gui.minigames.minigame_gui_spleef.powerup": "",
+      "item.minigames.hypnotic_pendulum": "Hypnotic Pendulum",
+      "item.minigames.hypnotic_pendulum.description_1": "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision for 20s",
+      "item.minigames.hypnotic_pendulum.description_0": "On §6right click:"
     }
   },
   "metadata": {
@@ -5865,6 +6184,7 @@
       "src/main/java/net/mcreator/minigames/init/MinigamesModMenus.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
+      "src/main/java/net/mcreator/minigames/client/renderer/item/LegacyOverrideSelectItemModel.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMobEffects.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
@@ -5957,8 +6277,16 @@
                 "children": []
               }
             ]
+          },
+          {
+            "name": "Settings",
+            "children": []
           }
         ]
+      },
+      {
+        "name": "Dungeon",
+        "children": []
       }
     ]
   },

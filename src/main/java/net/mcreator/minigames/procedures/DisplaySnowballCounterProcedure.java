@@ -11,7 +11,7 @@ public class DisplaySnowballCounterProcedure {
 	public static boolean execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return false;
-		if (MinigamesModVariables.MapVariables.get(world).playingSpleef && !(entity instanceof Player _plr0 && _plr0.gameMode() == GameType.SPECTATOR)) {
+		if (MinigamesModVariables.MapVariables.get(world).playingSpleef && MinigamesModVariables.MapVariables.get(world).spleefPowerups && !(entity instanceof Player _plr0 && _plr0.gameMode() == GameType.SPECTATOR)) {
 			return true;
 		}
 		return false;

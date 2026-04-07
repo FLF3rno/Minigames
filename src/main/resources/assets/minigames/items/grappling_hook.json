@@ -1,6 +1,26 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "minigames:item/grappling_hook"
+    "type": "minigames:legacy_overrides",
+    "overrides": [
+      {
+        "predicate": [
+          {
+            "property": {
+              "property": "minecraft:damage",
+              "normalize": true
+            },
+            "value": 0.000000001
+          }
+        ],
+        "model": {
+          "type": "minecraft:model",
+          "model": "minigames:item/grappling_hook_0"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minigames:item/grappling_hook"
+    }
   }
 }

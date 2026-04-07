@@ -26,11 +26,12 @@ public class StartGameScreen extends AbstractContainerScreen<StartGameMenu> impl
 	private ImageButton imagebutton_achievementhunticon;
 	private ImageButton imagebutton_settings;
 	private ImageButton imagebutton_crownhunt;
+	private ImageButton imagebutton_snowball;
 	private static final ResourceLocation BACKGROUND = ResourceLocation.parse("minigames:textures/screens/start_game.png");
 	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/diamond_section.png");
 	private static final ResourceLocation IMAGE_1 = ResourceLocation.parse("minigames:textures/screens/gold_section.png");
 	private static final ResourceLocation IMAGE_2 = ResourceLocation.parse("minigames:textures/screens/blank_section.png");
-	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/blank_section.png");
+	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/spleef_section.png");
 	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/blank_section.png");
 	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/selectedextraslot.png");
 	private static final ResourceLocation IMAGE_6 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
@@ -73,6 +74,10 @@ public class StartGameScreen extends AbstractContainerScreen<StartGameMenu> impl
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.start_game.tooltip_change_player_name"), mouseX, mouseY);
 			customTooltipShown = true;
 		}
+		if (mouseX > leftPos + 278 && mouseX < leftPos + 309 && mouseY > topPos + 53 && mouseY < topPos + 83) {
+			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.start_game.tooltip_mine_blocks_under_opponents_to_e"), mouseX, mouseY);
+			customTooltipShown = true;
+		}
 		if (!customTooltipShown)
 			this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
@@ -105,6 +110,7 @@ public class StartGameScreen extends AbstractContainerScreen<StartGameMenu> impl
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.start_game.label_run"), 201, 25, -13027015, false);
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.start_game.label_crown"), 113, 16, -12829636, false);
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.start_game.label_hunt"), 116, 25, -12829636, false);
+		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.start_game.label_spleef"), 278, 17, -12829636, false);
 	}
 
 	@Override
@@ -170,5 +176,20 @@ public class StartGameScreen extends AbstractContainerScreen<StartGameMenu> impl
 			}
 		};
 		this.addRenderableWidget(imagebutton_crownhunt);
+		imagebutton_snowball = new ImageButton(this.leftPos + 278, this.topPos + 52, 32, 32,
+				new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/snowball2x.png"), ResourceLocation.parse("minigames:textures/screens/snowballselected.png")), e -> {
+					int x = StartGameScreen.this.x;
+					int y = StartGameScreen.this.y;
+					if (true) {
+						ClientPacketDistributor.sendToServer(new StartGameButtonMessage(4, x, y, z));
+						StartGameButtonMessage.handleButtonAction(entity, 4, x, y, z);
+					}
+				}) {
+			@Override
+			public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprites.get(isActive(), isHoveredOrFocused()), getX(), getY(), 0, 0, width, height, width, height);
+			}
+		};
+		this.addRenderableWidget(imagebutton_snowball);
 	}
 }

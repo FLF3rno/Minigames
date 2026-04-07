@@ -31,6 +31,7 @@ public class MinigamesModMenus {
 	public static final DeferredHolder<MenuType<?>, MenuType<ViewAchievmentHunterMenu>> VIEW_ACHIEVMENT_HUNTER = REGISTRY.register("view_achievment_hunter", () -> IMenuTypeExtension.create(ViewAchievmentHunterMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<CustomizeGUIMenu>> CUSTOMIZE_GUI = REGISTRY.register("customize_gui", () -> IMenuTypeExtension.create(CustomizeGUIMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUICrownHuntMenu>> MINIGAME_GUI_CROWN_HUNT = REGISTRY.register("minigame_gui_crown_hunt", () -> IMenuTypeExtension.create(MinigameGUICrownHuntMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUISpleefMenu>> MINIGAME_GUI_SPLEEF = REGISTRY.register("minigame_gui_spleef", () -> IMenuTypeExtension.create(MinigameGUISpleefMenu::new));
 
 	public interface MenuAccessor {
 		Map<String, Object> getMenuState();

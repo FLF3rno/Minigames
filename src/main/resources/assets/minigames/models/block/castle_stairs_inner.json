@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "minecraft:block/stone_bricks",
+    "bottom": "minecraft:block/stone_bricks",
+    "top": "minecraft:block/stone_bricks",
+    "side": "minecraft:block/stone_bricks"
+  },
+  "render_type": "solid"
+}

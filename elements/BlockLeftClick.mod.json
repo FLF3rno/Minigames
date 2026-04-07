@@ -1,0 +1,38 @@
+{
+  "_fv": 85,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Block Left Click",
+    "icon": "immobilized",
+    "color": {
+      "value": -16777216,
+      "falpha": 0.0
+    },
+    "onAddedSound": {
+      "value": ""
+    },
+    "isInstant": false,
+    "mobEffectCategory": "NEUTRAL",
+    "renderStatusInInventory": false,
+    "renderStatusInHUD": false,
+    "isCuredbyHoney": false,
+    "modifiers": [
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "ENTITY_REACH"
+        },
+        "amount": -110.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "BLOCK_REACH"
+        },
+        "amount": -100.0,
+        "operation": "ADD_VALUE"
+      }
+    ]
+  }
+}

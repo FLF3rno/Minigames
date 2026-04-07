@@ -1,0 +1,107 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "HIGHEST",
+    "components": [
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "hotbarslot.png",
+          "spritesCount": 1,
+          "displayCondition": {
+            "name": "ShowCompassHunter"
+          },
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 303,
+          "y": 217,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "hud.png",
+          "spritesCount": 3,
+          "displayCondition": {
+            "name": "HidePVPIconHunt"
+          },
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "PVPDisplay"
+          },
+          "anchorPoint": "BOTTOM_LEFT",
+          "x": 2,
+          "y": 195,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 3.0,
+            "name": "DisplayThunder"
+          },
+          "anchorPoint": "BOTTOM_LEFT",
+          "x": 42,
+          "y": 193,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "pvpanimation.png",
+          "spritesCount": 10,
+          "displayCondition": {
+            "name": "DisplayPVP"
+          },
+          "spriteIndex": {
+            "fixedValue": 6.0,
+            "name": "AnimatePVP"
+          },
+          "anchorPoint": "CENTER",
+          "x": -61,
+          "y": 31,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "compass.png",
+          "spritesCount": 32,
+          "displayCondition": {
+            "name": "ShowCompassHunter"
+          },
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "CompassHunterSprite"
+          },
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 313,
+          "y": 221,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "ShowDefaultTimer"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

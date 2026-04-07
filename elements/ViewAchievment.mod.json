@@ -1,0 +1,451 @@
+{
+  "_fv": 85,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "diamondwindow.png",
+          "spritesCount": 1,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "achievements.png",
+          "spritesCount": 78,
+          "spriteIndex": {
+            "fixedValue": 39.0,
+            "name": "DisplayAchievement"
+          },
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_im_ready",
+          "text": "I'm Ready",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "ReadyUp"
+          },
+          "displayCondition": {
+            "name": "ReadyDisplay"
+          },
+          "width": 72,
+          "height": 20,
+          "x": 42,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 132,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity2"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 168,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "lowerhalf.png",
+          "use1Xscale": false,
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity3"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 204,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity4"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 240,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity5"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 276,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity6"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 312,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_achievement_description3",
+          "text": {
+            "fixedValue": "",
+            "name": "AchievementDescription"
+          },
+          "color": {
+            "value": -11842741,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 55,
+          "y": 118,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_achievement_description",
+          "text": {
+            "fixedValue": "",
+            "name": "AchievementDescription"
+          },
+          "color": {
+            "value": -11842741,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 54,
+          "y": 118,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_achievement_description4",
+          "text": {
+            "fixedValue": "",
+            "name": "AchievementDescription"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 54,
+          "y": 117,
+          "locked": true
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_pvp_enables_after_5_minutes",
+          "text": {
+            "fixedValue": "PVP enables after 5 minutes",
+            "name": "DisplayBottomLeftDescription"
+          },
+          "width": 41,
+          "height": 39,
+          "x": 48,
+          "y": 162,
+          "locked": true
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_weather_will_permanently_be_thun",
+          "text": {
+            "fixedValue": "Weather will permanently be Thunder",
+            "name": "TooltipModifier"
+          },
+          "displayCondition": {
+            "name": "DisplayTooltipModifier"
+          },
+          "width": 42,
+          "height": 39,
+          "x": 92,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_match_settings",
+          "text": {
+            "fixedValue": "Match Settings:",
+            "name": "SettingsDisplay"
+          },
+          "width": 32,
+          "height": 32,
+          "x": 352,
+          "y": 168,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 1.0
+          },
+          "x": 344,
+          "y": 160,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "displayCondition": {
+            "name": "DisplayPVPTime"
+          },
+          "spriteIndex": {
+            "fixedValue": 2.0
+          },
+          "x": 42,
+          "y": 154,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 3.0,
+            "name": "DisplayThunder"
+          },
+          "x": 85,
+          "y": 158,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "lowerhalf.png",
+          "spritesCount": 1,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blackhead.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayEntityReady"
+          },
+          "x": 126,
+          "y": 183,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blackhead.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayEntityReady2"
+          },
+          "x": 162,
+          "y": 183,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blackhead.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayEntityReady3"
+          },
+          "x": 198,
+          "y": 183,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blackhead.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayEntityReady4"
+          },
+          "x": 234,
+          "y": 183,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blackhead.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayEntityReady5"
+          },
+          "x": 270,
+          "y": 183,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blackhead.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayEntityReady6"
+          },
+          "x": 306,
+          "y": 183,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_reroll",
+          "image": "reroll.png",
+          "hoveredImage": "rerollhover.png",
+          "onClick": {
+            "name": "RerollAchievementPressed"
+          },
+          "x": 375,
+          "y": 12,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_reroll_achievement",
+          "text": {
+            "fixedValue": "Reroll Achievement"
+          },
+          "width": 24,
+          "height": 24,
+          "x": 372,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "clock.png",
+          "spritesCount": 1,
+          "displayCondition": {
+            "name": "DisplayHeadStart"
+          },
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 53,
+          "y": 166,
+          "locked": false
+        }
+      }
+    ],
+    "onTick": {
+      "name": "CloseAchievementGUI"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

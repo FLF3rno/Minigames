@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "icestatus=0": {
+      "model": "minigames:block/spreading_ice_0"
+    },
+    "icestatus=1": {
+      "model": "minigames:block/spreading_ice_1"
+    },
+    "icestatus=2": {
+      "model": "minigames:block/spreading_ice_2"
+    },
+    "icestatus=3": {
+      "model": "minigames:block/spreading_ice"
+    }
+  }
+}

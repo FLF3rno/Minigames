@@ -1,0 +1,746 @@
+{
+  "_fv": 85,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 311,
+    "height": 112,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_customize_player_name",
+          "text": {
+            "fixedValue": "Customize player name"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 63,
+          "y": 69,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name",
+          "text": {
+            "fixedValue": "name1",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameWhite"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name2",
+          "text": {
+            "fixedValue": "name2",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -11207428,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameAqua"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name3",
+          "text": {
+            "fixedValue": "name3",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -11250436,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameBlue"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name4",
+          "text": {
+            "fixedValue": "name4",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -16734040,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameDarkAqua"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name5",
+          "text": {
+            "fixedValue": "name5",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -16777048,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameDarkBlue"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name6",
+          "text": {
+            "fixedValue": "name6",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -16734208,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameDarkGreen"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name7",
+          "text": {
+            "fixedValue": "name7",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -5767000,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameDarkPurple"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name8",
+          "text": {
+            "fixedValue": "name8",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -5767168,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameDarkRed"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name9",
+          "text": {
+            "fixedValue": "name9",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -219136,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameGold"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name10",
+          "text": {
+            "fixedValue": "name10",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -11207596,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameGreen"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name11",
+          "text": {
+            "fixedValue": "name11",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -240388,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameLightPurple"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name12",
+          "text": {
+            "fixedValue": "name12",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -240556,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameRed"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name14",
+          "text": {
+            "fixedValue": "name14",
+            "name": "GetDisplayName"
+          },
+          "color": {
+            "value": -197548,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "displayCondition": {
+            "name": "IsNameYellow"
+          },
+          "x": 64,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 10.0
+          },
+          "x": 73,
+          "y": 110,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 118,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 2.0
+          },
+          "x": 158,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 1.0
+          },
+          "x": 197,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 3.0
+          },
+          "x": 239,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 7.0
+          },
+          "x": 281,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 4.0
+          },
+          "x": 322,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 5.0
+          },
+          "x": 158,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 8.0
+          },
+          "x": 118,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 9.0
+          },
+          "x": 197,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 11.0
+          },
+          "x": 281,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 6.0
+          },
+          "x": 322,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "colors.png",
+          "spritesCount": 13,
+          "spriteIndex": {
+            "fixedValue": 12.0
+          },
+          "x": 239,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameWhite"
+          },
+          "displayCondition": {
+            "name": "IsNameNotWhite"
+          },
+          "x": 73,
+          "y": 110,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton1",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameAqua"
+          },
+          "displayCondition": {
+            "name": "IsNameNotAqua"
+          },
+          "x": 118,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton2",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameDarkAqua"
+          },
+          "displayCondition": {
+            "name": "IsNameNotDarkAqua"
+          },
+          "x": 158,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton3",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameBlue"
+          },
+          "displayCondition": {
+            "name": "IsNameNotBlue"
+          },
+          "x": 197,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton4",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameDarkBlue"
+          },
+          "displayCondition": {
+            "name": "IsNameNotDarkBlue"
+          },
+          "x": 239,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton5",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameGreen"
+          },
+          "displayCondition": {
+            "name": "IsNameNotGreen"
+          },
+          "x": 281,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton6",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameDarkGreen"
+          },
+          "displayCondition": {
+            "name": "IsNameNotDarkGreen"
+          },
+          "x": 322,
+          "y": 93,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton7",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameLightPurple"
+          },
+          "displayCondition": {
+            "name": "IsNameNotLightPurple"
+          },
+          "x": 118,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton8",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameDarkPurple"
+          },
+          "displayCondition": {
+            "name": "IsNameNotDarkPurple"
+          },
+          "x": 158,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton9",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameRed"
+          },
+          "displayCondition": {
+            "name": "IsNameNotRed"
+          },
+          "x": 197,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton10",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameDarkRed"
+          },
+          "displayCondition": {
+            "name": "IsNameNotDarkRed"
+          },
+          "x": 239,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton11",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameYellow"
+          },
+          "displayCondition": {
+            "name": "IsNameNotYellow"
+          },
+          "x": 281,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_colorbutton12",
+          "image": "colorbutton.png",
+          "hoveredImage": "colorhover.png",
+          "onClick": {
+            "name": "SetNameGold"
+          },
+          "displayCondition": {
+            "name": "IsNameNotGold"
+          },
+          "x": 322,
+          "y": 127,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 62,
+          "y": 163,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "selectedextraslot.png",
+          "use1Xscale": false,
+          "x": 326,
+          "y": 163,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "bucket.png",
+          "use1Xscale": false,
+          "x": 330,
+          "y": 177,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_compass_16",
+          "image": "compass_16.png",
+          "hoveredImage": "selectedgamecompass.png",
+          "onClick": {
+            "name": "GoBack"
+          },
+          "x": 64,
+          "y": 177,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

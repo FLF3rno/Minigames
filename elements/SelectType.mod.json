@@ -1,0 +1,51 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "HIGHEST",
+    "components": [
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "windowanimation.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 3.0,
+            "name": "SpriteAchievementTypeDisplay"
+          },
+          "anchorPoint": "CENTER",
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "windowbreak.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "SpriteRevealDisplay"
+          },
+          "anchorPoint": "CENTER",
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "DisplayTypeAchievment"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

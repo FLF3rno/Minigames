@@ -1,0 +1,116 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_next_layer_destroyed_in_dis1",
+          "text": {
+            "fixedValue": "",
+            "name": "NextLayerDestroyedInDisplay"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 147,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_next_layer_destroyed_in_dis2",
+          "text": {
+            "fixedValue": "",
+            "name": "NextLayerDestroyedInDisplay"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 148,
+          "y": 3,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_next_layer_destroyed_in_dis3",
+          "text": {
+            "fixedValue": "",
+            "name": "NextLayerDestroyedInDisplay"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 148,
+          "y": 5,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_next_layer_destroyed_in_dis4",
+          "text": {
+            "fixedValue": "",
+            "name": "NextLayerDestroyedInDisplay"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 149,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_next_layer_destroyed_in_dis",
+          "text": {
+            "fixedValue": "",
+            "name": "NextLayerDestroyedInDisplay"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 148,
+          "y": 4,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "DisplaySpleefTimer"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

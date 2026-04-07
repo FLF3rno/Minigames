@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "minigames:crown_helmet"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "minigames:crown_helmet"
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "_fv": 85,
+  "_type": "projectile",
+  "definition": {
+    "projectileItem": {
+      "value": "Blocks.ICE"
+    },
+    "showParticles": false,
+    "actionSound": {
+      "value": "entity.egg.throw"
+    },
+    "igniteFire": false,
+    "disableGravity": false,
+    "disableDiscarding": false,
+    "power": 1.2000000000000002,
+    "damage": 0.0,
+    "knockback": 5,
+    "entityModel": "Default",
+    "customModelTexture": "",
+    "modelWidth": 0.5,
+    "modelHeight": 0.5,
+    "onHitsBlock": {
+      "name": "IceDartProjectileProjectileHitsBlock"
+    },
+    "onFlyingTick": {
+      "name": "IceDartProjectileWhileProjectileFlyingTick"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "HIGHEST",
+    "components": [
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayWinnerCrownHunt"
+          },
+          "scale": 100,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "CENTER",
+          "x": 203,
+          "y": 191,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "blank.png",
+          "spritesCount": 1,
+          "displayCondition": {
+            "name": "DisplayBlankActuallyBlank"
+          },
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "anchorPoint": "CENTER",
+          "x": 0,
+          "y": 0,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "background.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 4.0,
+            "name": "DarkBackground"
+          },
+          "anchorPoint": "CENTER",
+          "x": -288,
+          "y": -411,
+          "locked": true
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "WinOverlayDisplay"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

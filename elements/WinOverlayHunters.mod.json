@@ -1,0 +1,126 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "HIGHEST",
+    "components": [
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity"
+          },
+          "scale": 40,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "CENTER",
+          "x": 202,
+          "y": 151,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "background.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 4.0,
+            "name": "DarkBackground"
+          },
+          "anchorPoint": "CENTER",
+          "x": -288,
+          "y": -411,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity2"
+          },
+          "scale": 36,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "CENTER",
+          "x": 133,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity3"
+          },
+          "scale": 36,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "CENTER",
+          "x": 274,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity5"
+          },
+          "scale": 30,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "CENTER",
+          "x": 360,
+          "y": 143,
+          "locked": false
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity4"
+          },
+          "scale": 30,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "CENTER",
+          "x": 56,
+          "y": 143,
+          "locked": false
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": {
+            "name": "DisplayEntity6"
+          },
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 392,
+          "y": 239,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "HunterWinOverlayDisplay"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

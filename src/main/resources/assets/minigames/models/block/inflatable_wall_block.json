@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/inflatablewall",
+    "particle": "minigames:block/inflatablewall"
+  },
+  "render_type": "solid"
+}

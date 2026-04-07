@@ -1,0 +1,300 @@
+{
+  "_fv": 85,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "goldwindow.png",
+          "use1Xscale": false,
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_achievement_run",
+          "text": {
+            "fixedValue": "Crown Hunt"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 36,
+          "y": 17,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_start_normal",
+          "text": "Start",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "PressedStartCrownHunt"
+          },
+          "width": 98,
+          "height": 20,
+          "x": 164,
+          "y": 200,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "clock.png",
+          "use1Xscale": false,
+          "x": 292,
+          "y": 80,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "night_vision.png",
+          "use1Xscale": false,
+          "x": 68,
+          "y": 70,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_night_vision",
+          "text": {
+            "fixedValue": "Night Vision"
+          },
+          "width": 52,
+          "height": 63,
+          "x": 69,
+          "y": 78,
+          "locked": false
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "0",
+          "name": "grace",
+          "width": 25,
+          "height": 20,
+          "x": 280,
+          "y": 119,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_keep_inventory",
+          "text": {
+            "fixedValue": "Keep Inventory"
+          },
+          "width": 46,
+          "height": 62,
+          "x": 195,
+          "y": 78,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_health_amount",
+          "text": {
+            "fixedValue": "Grace period timer and crown win time"
+          },
+          "width": 54,
+          "height": 46,
+          "x": 281,
+          "y": 73,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "keepinventory.png",
+          "use1Xscale": false,
+          "x": 196,
+          "y": 71,
+          "locked": false
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "name": "nightvision",
+          "text": "",
+          "isCheckedProcedure": {
+            "name": "NightVisionChecked"
+          },
+          "x": 85,
+          "y": 120,
+          "locked": false
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "name": "keepinventory",
+          "text": "",
+          "isCheckedProcedure": {
+            "name": "KeepInventoryChecked"
+          },
+          "x": 208,
+          "y": 120,
+          "locked": true
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "crown_head.png",
+          "use1Xscale": false,
+          "x": 142,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "name": "returncrown",
+          "text": "",
+          "x": 149,
+          "y": 120,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_last_winner_takes_15x_damage",
+          "text": {
+            "fixedValue": "At timer end the crowned player has to return to the gold blocks in the castle"
+          },
+          "width": 38,
+          "height": 65,
+          "x": 140,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "8",
+          "name": "minutes",
+          "width": 25,
+          "height": 20,
+          "x": 311,
+          "y": 119,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 30,
+          "y": 205,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_compass_16",
+          "image": "compass_16.png",
+          "hoveredImage": "selectedgamecompass.png",
+          "onClick": {
+            "name": "GoBack"
+          },
+          "x": 32,
+          "y": 219,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 357,
+          "y": 205,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_bucket",
+          "image": "bucket.png",
+          "hoveredImage": "selectcolor.png",
+          "onClick": {
+            "name": "OpenCustomizationScreen"
+          },
+          "x": 361,
+          "y": 219,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_grace_period_minutes",
+          "text": {
+            "fixedValue": "Grace period minutes"
+          },
+          "width": 24,
+          "height": 24,
+          "x": 280,
+          "y": 118,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_crown_timer",
+          "text": {
+            "fixedValue": "Crown timer"
+          },
+          "width": 24,
+          "height": 24,
+          "x": 312,
+          "y": 119,
+          "locked": false
+        }
+      }
+    ],
+    "onClosed": {
+      "name": "MinigameGUICrownHuntThisGUIIsClosed"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

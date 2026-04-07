@@ -1,0 +1,139 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "HIGHEST",
+    "components": [
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayHours"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 144,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayHours2"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 162,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 10.0
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 176,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayMinutes"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 190,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplayMinutes2"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 208,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 10.0
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 222,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplaySeconds"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 236,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "wintimer.png",
+          "spritesCount": 11,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "DisplaySeconds2"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 254,
+          "y": 10,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "WinOverlayDisplay"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

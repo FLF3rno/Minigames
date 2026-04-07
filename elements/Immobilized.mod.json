@@ -1,0 +1,86 @@
+{
+  "_fv": 85,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Freeze game",
+    "icon": "cantmove",
+    "color": {
+      "value": -16777209,
+      "falpha": 0.0
+    },
+    "onAddedSound": {
+      "value": ""
+    },
+    "isInstant": false,
+    "mobEffectCategory": "NEUTRAL",
+    "renderStatusInInventory": false,
+    "renderStatusInHUD": false,
+    "isCuredbyHoney": false,
+    "modifiers": [
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "BLOCK_REACH"
+        },
+        "amount": -10.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "ENTITY_REACH"
+        },
+        "amount": -10.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "FLYING_SPEED"
+        },
+        "amount": -10.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "EXPLOSION_KNOCKBACK_RESISTANCE"
+        },
+        "amount": 10.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "JUMP_STRENGTH"
+        },
+        "amount": -1000.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "ARMOR"
+        },
+        "amount": 1000.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "KNOCKBACK_RESISTANCE"
+        },
+        "amount": 1000.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "MOVEMENT_SPEED"
+        },
+        "amount": -1000.0,
+        "operation": "ADD_VALUE"
+      }
+    ]
+  }
+}

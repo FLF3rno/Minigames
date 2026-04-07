@@ -1,0 +1,153 @@
+package net.mcreator.minigames.procedures;
+
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.Event;
+
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandSource;
+
+import net.mcreator.minigames.network.MinigamesModVariables;
+
+import javax.annotation.Nullable;
+
+import java.util.ArrayList;
+
+@EventBusSubscriber
+public class KillPlayersSpleefProcedure {
+	@SubscribeEvent
+	public static void onWorldTick(LevelTickEvent.Post event) {
+		execute(event, event.getLevel());
+	}
+
+	public static void execute(LevelAccessor world) {
+		execute(null, world);
+	}
+
+	private static void execute(@Nullable Event event, LevelAccessor world) {
+		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
+			for (Entity entityiterator : world.getEntities(null, new AABB((-100), 0, (-100), 100, 75, 100))) {
+				if (entityiterator instanceof Player _plr0 && _plr0.gameMode() == GameType.SURVIVAL) {
+					if (entityiterator instanceof ServerPlayer _player)
+						_player.setGameMode(GameType.SPECTATOR);
+					{
+						Entity _ent = entityiterator;
+						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p times 10 60 10");
+						}
+					}
+					{
+						Entity _ent = entityiterator;
+						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:teameliminated master @p ~ ~ ~ 2 1");
+						}
+					}
+					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 1) {
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
+												_ent.getDisplayName(), _ent.level().getServer(), _ent),
+										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
+												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers + 1) + "nd\"}]"));
+							}
+						}
+					} else if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
+												_ent.getDisplayName(), _ent.level().getServer(), _ent),
+										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
+												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers + 1) + "rd\"}]"));
+							}
+						}
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You died!\"}");
+							}
+						}
+					} else {
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
+												_ent.getDisplayName(), _ent.level().getServer(), _ent),
+										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
+												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers + 1) + "th\"}]"));
+							}
+						}
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You died!\"}");
+							}
+						}
+					}
+					MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers = MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers - 1;
+					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				}
+			}
+			if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 1) {
+				for (Entity entityiterator : new ArrayList<>(world.players())) {
+					if (entityiterator instanceof Player _plr10 && _plr10.gameMode() == GameType.SURVIVAL) {
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @a times 10 60 10");
+							}
+						}
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"gold\",\"text\":\"You won!\"}");
+							}
+						}
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minecraft:ui.toast.challenge_complete player @s ~ ~ ~ 0.6 1.2");
+							}
+						}
+					}
+					if (entityiterator instanceof Player _plr14 && _plr14.gameMode() == GameType.SPECTATOR) {
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @a times 10 60 10");
+							}
+						}
+						{
+							Entity _ent = entityiterator;
+							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You lost!\"}");
+							}
+						}
+					}
+				}
+				StopSpleefProcedure.execute(world);
+			}
+		}
+	}
+}

@@ -1,0 +1,282 @@
+{
+  "_fv": 85,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 421,
+    "height": 198,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_achievementrunicon",
+          "image": "achievementrunicon.png",
+          "hoveredImage": "selectedachievementrunicon.png",
+          "onClick": {
+            "name": "SelectAchievementRun"
+          },
+          "x": 180,
+          "y": 74,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_achievement_run",
+          "text": {
+            "fixedValue": "First player to obtain a randomly chosen achievement wins"
+          },
+          "width": 61,
+          "height": 23,
+          "x": 182,
+          "y": 77,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_achievementhunticon",
+          "image": "achievementhunticon.png",
+          "hoveredImage": "selectedachievementhunticon.png",
+          "onClick": {
+            "name": "SelectAchievementHunt"
+          },
+          "x": 180,
+          "y": 107,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_achievement_hunt",
+          "text": {
+            "fixedValue": "One player is hunted while trying to obtain an achievement"
+          },
+          "width": 61,
+          "height": 41,
+          "x": 182,
+          "y": 109,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "diamond_section.png",
+          "use1Xscale": false,
+          "x": 172,
+          "y": 22,
+          "locked": true
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "gold_section.png",
+          "use1Xscale": false,
+          "x": 89,
+          "y": 22,
+          "locked": true
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "blank_section.png",
+          "use1Xscale": false,
+          "x": 6,
+          "y": 21,
+          "locked": true
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "blank_section.png",
+          "use1Xscale": false,
+          "x": 255,
+          "y": 22,
+          "locked": true
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "blank_section.png",
+          "use1Xscale": false,
+          "x": 338,
+          "y": 22,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_achievement",
+          "text": {
+            "fixedValue": "Achievement"
+          },
+          "color": {
+            "value": -13027015,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 183,
+          "y": 37,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_run",
+          "text": {
+            "fixedValue": "Run"
+          },
+          "color": {
+            "value": -13027015,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 204,
+          "y": 46,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_settings",
+          "image": "bucket.png",
+          "hoveredImage": "selectcolor.png",
+          "onClick": {
+            "name": "OpenCustomizationScreen"
+          },
+          "x": 384,
+          "y": 220,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_crown",
+          "text": {
+            "fixedValue": "Crown"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 116,
+          "y": 37,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_hunt",
+          "text": {
+            "fixedValue": "Hunt"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 119,
+          "y": 46,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_crownhunt",
+          "image": "crownhunt.png",
+          "hoveredImage": "crownhuntselected.png",
+          "onClick": {
+            "name": "SelectCrownHunt"
+          },
+          "x": 110,
+          "y": 69,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_steal_the_crown_from_other_playe",
+          "text": {
+            "fixedValue": "Steal the crown from other players and avoid getting it stolen to win"
+          },
+          "width": 41,
+          "height": 40,
+          "x": 110,
+          "y": 70,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "selectedextraslot.png",
+          "use1Xscale": false,
+          "x": 7,
+          "y": 207,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 380,
+          "y": 206,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "compass_16.png",
+          "use1Xscale": false,
+          "x": 9,
+          "y": 221,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_change_player_name",
+          "text": {
+            "fixedValue": "Change player name"
+          },
+          "width": 24,
+          "height": 24,
+          "x": 388,
+          "y": 220,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

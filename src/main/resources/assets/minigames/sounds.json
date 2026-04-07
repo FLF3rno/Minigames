@@ -1,0 +1,143 @@
+{
+  "countdown": {
+    "subtitle": "subtitles.countdown",
+    "sounds": [
+      {
+        "name": "minigames:countdown",
+        "stream": false
+      }
+    ]
+  },
+  "start": {
+    "subtitle": "subtitles.start",
+    "sounds": [
+      {
+        "name": "minigames:start",
+        "stream": false
+      }
+    ]
+  },
+  "rollaudio": {
+    "sounds": [
+      {
+        "name": "minigames:rollaudio",
+        "stream": false
+      }
+    ]
+  },
+  "netherbreak": {
+    "sounds": [
+      {
+        "name": "minigames:netherbreak",
+        "stream": false
+      }
+    ]
+  },
+  "sandbreak": {
+    "sounds": [
+      {
+        "name": "minigames:sandbreak",
+        "stream": false
+      }
+    ]
+  },
+  "stonebreak": {
+    "sounds": [
+      {
+        "name": "minigames:stonebreak",
+        "stream": false
+      }
+    ]
+  },
+  "dirtbreak": {
+    "sounds": [
+      {
+        "name": "minigames:dirtbreak",
+        "stream": false
+      }
+    ]
+  },
+  "pvp_swordshit": {
+    "sounds": [
+      {
+        "name": "minigames:swordshiteachother",
+        "stream": false
+      }
+    ]
+  },
+  "pvp_swind": {
+    "sounds": [
+      {
+        "name": "minigames:swing",
+        "stream": false
+      }
+    ]
+  },
+  "menu_switch": {
+    "sounds": [
+      {
+        "name": "minigames:switch",
+        "stream": false
+      }
+    ]
+  },
+  "teameliminated": {
+    "sounds": [
+      {
+        "name": "minigames:teameliminated",
+        "stream": false
+      }
+    ]
+  },
+  "rolldice": {
+    "sounds": [
+      {
+        "name": "minigames:rolldice",
+        "stream": false
+      }
+    ]
+  },
+  "rollaudioclean": {
+    "sounds": [
+      {
+        "name": "minigames:rollaudioclean",
+        "stream": false
+      }
+    ]
+  },
+  "clock": {
+    "sounds": [
+      {
+        "name": "minigames:clock",
+        "stream": false
+      }
+    ]
+  },
+  "thruster": {
+    "subtitle": "subtitles.thruster",
+    "sounds": [
+      {
+        "name": "minigames:thrusters",
+        "stream": false
+      }
+    ]
+  },
+  "inflate": {
+    "subtitle": "subtitles.inflate",
+    "sounds": [
+      {
+        "name": "minigames:inflate",
+        "stream": false
+      }
+    ]
+  },
+  "pop": {
+    "subtitle": "subtitles.pop",
+    "sounds": [
+      {
+        "name": "minigames:pop",
+        "stream": false
+      }
+    ]
+  }
+}

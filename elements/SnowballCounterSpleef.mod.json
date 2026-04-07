@@ -1,0 +1,127 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "snowball.png",
+          "use1Xscale": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 307,
+          "y": 221,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_snowball_counter_text",
+          "text": {
+            "fixedValue": "",
+            "name": "SnowballCounterText"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 324,
+          "y": 225,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_snowball_counter_text1",
+          "text": {
+            "fixedValue": "",
+            "name": "SnowballCounterText"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 323,
+          "y": 226,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_snowball_counter_text2",
+          "text": {
+            "fixedValue": "",
+            "name": "SnowballCounterText"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 324,
+          "y": 227,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_snowball_counter_text3",
+          "text": {
+            "fixedValue": "",
+            "name": "SnowballCounterText"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 325,
+          "y": 226,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_9999",
+          "text": {
+            "fixedValue": "99/99",
+            "name": "SnowballCounterText"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 324,
+          "y": 226,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "DisplaySnowballCounter"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "achievementpopup.png",
+          "spritesCount": 1,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "anchorPoint": "CENTER",
+          "x": 133,
+          "y": 2,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "achievementicons.png",
+          "spritesCount": 77,
+          "spriteIndex": {
+            "fixedValue": 22.0,
+            "name": "ReminderAchievementIcon"
+          },
+          "anchorPoint": "CENTER",
+          "x": 140,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_obtain_this_achievement",
+          "text": {
+            "fixedValue": "Obtain this achievement:"
+          },
+          "color": {
+            "value": -1214228,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "CENTER",
+          "x": 161,
+          "y": 8,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_adventure_time",
+          "text": {
+            "fixedValue": "Adventure Time",
+            "name": "AchievementTitle"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "CENTER",
+          "x": 161,
+          "y": 19,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Inventory",
+    "displayCondition": {
+      "name": "DisplayReminder"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

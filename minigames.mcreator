@@ -1,0 +1,5925 @@
+{
+  "mod_elements": [
+    {
+      "name": "SelectType",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_type",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/SelectTypeOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "RollType",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "roll_type",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RollTypeProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "StartRollType",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_roll_type",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartRollTypeProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayTypeAchievment",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_type_achievment",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayTypeAchievmentProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "SpriteAchievementTypeDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sprite_achievement_type_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpriteAchievementTypeDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "SpriteRevealDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sprite_reveal_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpriteRevealDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "BreakAnimation",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "break_animation",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BreakAnimationProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ViewAchievment",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "view_achievment",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentScreen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/ViewAchievmentMenu.java",
+          "src/main/java/net/mcreator/minigames/network/ViewAchievmentButtonMessage.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "OpenAchievementGUI",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "open_achievement_gui",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OpenAchievementGUIProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayAchievementProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ChooseAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choose_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChooseAchievementProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntity",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "PlayerAssignment",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_assignment",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayerAssignmentProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "DisplayEntity2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntity2Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntity3",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_3",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntity3Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntity4",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_4",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntity4Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntity5",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_5",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntity5Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntity6",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_6",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntity6Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ReadyDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ready_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReadyDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntityReady",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_ready",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityReadyProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntityReady2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_ready_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityReady2Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntityReady3",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_ready_3",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityReady3Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntityReady4",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_ready_4",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityReady4Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntityReady5",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_ready_5",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityReady5Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayEntityReady6",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_entity_ready_6",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayEntityReady6Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ReadyUp",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ready_up",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReadyUpProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "CloseAchievementGUI",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "close_achievement_gui",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CloseAchievementGUIProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "AchievementDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "StartGameAchieverun",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_game_achieverun",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartGameAchieverunProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayThunder",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_thunder",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayThunderProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "SetThunder",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_thunder",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetThunderProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "Immobilized",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "immobilized",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/ImmobilizedMobEffect.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DetectWin",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "detect_win",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DetectWinProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "StartWinCutscene",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "start_win_cutscene",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartWinCutsceneProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "ResetAchievementRun",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reset_achievement_run",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ResetAchievementRunProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "SettingsDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "settings_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SettingsDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "SettingsAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "settings_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SettingsAchievementProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "ManageTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "manage_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ManageTimerProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplaySeconds",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_seconds",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplaySecondsProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplaySeconds2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_seconds_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplaySeconds2Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayMinutes",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_minutes",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayMinutesProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayMinutes2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_minutes_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayMinutes2Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayHours",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_hours",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayHoursProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayHours2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_hours_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayHours2Procedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DefaultTimerMinigame",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "default_timer_minigame",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/DefaultTimerMinigameOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ShowDefaultTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_default_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowDefaultTimerProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "AchievementHud",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_hud",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/AchievementHudOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "ShowAchievementHud",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_achievement_hud",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowAchievementHudProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "PVPDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "pvp_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PVPDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "ActivatePVP",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "activate_pvp",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ActivatePVPProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "AnimatePVP",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "animate_pvp",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AnimatePVPProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "DisplayPVP",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_pvp",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayPVPProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "WinOverlay",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "win_overlay",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/WinOverlayOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "DarkBackground",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "dark_background",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DarkBackgroundProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "WinOverlayDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "win_overlay_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WinOverlayDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "WinTimerMinigame",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "win_timer_minigame",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/WinTimerMinigameOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "WinOverlayDisplayTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "win_overlay_display_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WinOverlayDisplayTimerProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "DisplayBlankActuallyBlank",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "display_blank_actually_blank",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayBlankActuallyBlankProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "StartGame",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_game",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/StartGameButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/StartGameScreen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/StartGameMenu.java"
+        ]
+      }
+    },
+    {
+      "name": "SelectAchievementRun",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_achievement_run",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SelectAchievementRunProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "MinigameGUIAchievementRun",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_achievement_run",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementRunScreen.java",
+          "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementRunButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementRunMenu.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "MinigameGUIAchievementRunThisGUIIsClosed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_achievement_run_this_gui_is_closed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MinigameGUIAchievementRunThisGUIIsClosedProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "GameCompass",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "game_compass",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/GameCompassItem.java",
+          "src/main/resources/assets/minigames/models/item/game_compass.json",
+          "src/main/resources/assets/minigames/items/game_compass.json"
+        ]
+      }
+    },
+    {
+      "name": "GameCompassRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "game_compass_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GameCompassRightclickedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "KeepInventoryChecked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "keep_inventory_checked",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/KeepInventoryCheckedProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "NightVisionChecked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "night_vision_checked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/NightVisionCheckedProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "Crown",
+      "type": "humanoidmodel",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "ModelCrown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "model_crown",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ModelCrownProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "RenderCrownOnPlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "render_crown_on_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "playerRenderEvent",
+            "type": "playerrendering"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RenderCrownOnPlayerProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "GiveGameCompass",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "give_game_compass",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GiveGameCompassProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "AdvanceWinAnimation",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "advance_win_animation",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AdvanceWinAnimationProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "RerollAchievementPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reroll_achievement_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RerollAchievementPressedProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "TooltipModifier",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "tooltip_modifier",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TooltipModifierProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayTooltipModifier",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_tooltip_modifier",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayTooltipModifierProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "CustomizeNameColor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "customize_name_color",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CustomizeNameColorProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "Customize",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "customize",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/CustomizeCommand.java"
+        ]
+      }
+    },
+    {
+      "name": "Crowned",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crowned",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/CrownedMobEffect.java"
+        ]
+      }
+    },
+    {
+      "name": "StopPVP",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stop_pvp",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "damagesource",
+            "type": "damagesource"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StopPVPProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "AddRespawningPlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "add_respawning_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AddRespawningPlayerProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "RemoveRespawningPlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "remove_respawning_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RemoveRespawningPlayerProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "AchievementReminder",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_reminder",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/AchievementReminderOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run/reminder"
+    },
+    {
+      "name": "ReminderAchievementIcon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reminder_achievement_icon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReminderAchievementIconProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/reminder"
+    },
+    {
+      "name": "AchievementTitle",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_title",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementTitleProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/reminder"
+    },
+    {
+      "name": "DisplayReminder",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_reminder",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayReminderProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/reminder"
+    },
+    {
+      "name": "SyncCrownedApply",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sync_crowned_apply",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SyncCrownedApplyProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SyncCrownedRemove",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sync_crowned_remove",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SyncCrownedRemoveProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "CrownDebuffDamage",
+      "type": "damagetype",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown_debuff_damage",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/damage_type/crown_debuff_damage.json"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "CrownDoubleDamage",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown_double_damage",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "damagesource",
+            "type": "damagesource"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CrownDoubleDamageProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "SelectAchievementHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_achievement_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SelectAchievementHuntProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "MinigameGUIAchievementHunt",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_achievement_hunt",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementHuntScreen.java",
+          "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementHuntButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementHuntMenu.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "ViewAchievmentHunter",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "view_achievment_hunter",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentHunterScreen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/ViewAchievmentHunterMenu.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "HunterAnimationAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hunter_animation_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HunterAnimationAchievementProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ClosingHunterAnimation",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "closing_hunter_animation",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ClosingHunterAnimationProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "HuntersWinCon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hunters_win_con",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HuntersWinConProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "HidePVPIconHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hide_pvp_icon_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HidePVPIconHuntProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "RemoveWinAnimation",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "remove_win_animation",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RemoveWinAnimationProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "ShowCompassHunter",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_compass_hunter",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowCompassHunterProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "CompassHunterSprite",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "compass_hunter_sprite",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CompassHunterSpriteProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "HuntedCoords",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hunted_coords",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HuntedCoordsProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "WinOverlayHunters",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "win_overlay_hunters",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/WinOverlayHuntersOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "HunterWinOverlayDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hunter_win_overlay_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HunterWinOverlayDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/win animation"
+    },
+    {
+      "name": "AchievementStasis",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_stasis",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementStasisProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "NerfHunters",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "nerf_hunters",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/NerfHuntersMobEffect.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "NerfHuntersOnEffectActiveTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "nerf_hunters_on_effect_active_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/NerfHuntersOnEffectActiveTickProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "StasisTimerMinigame",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stasis_timer_minigame",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/StasisTimerMinigameOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ShowStasisTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_stasis_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowStasisTimerProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "StartPVP",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_pvp",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartPVPProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/PVP"
+    },
+    {
+      "name": "DisplayPVPTime",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_pvp_time",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayPVPTimeProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayHeadStart",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_head_start",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayHeadStartProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "DisplayBottomLeftDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_bottom_left_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayBottomLeftDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "ManageMinimap",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "manage_minimap",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ManageMinimapProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ManageWaypoints",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "manage_waypoints",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ManageWaypointsProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "CustomizeGUI",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "customize_gui",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/CustomizeGUIButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/CustomizeGUIMenu.java",
+          "src/main/java/net/mcreator/minigames/client/gui/CustomizeGUIScreen.java"
+        ]
+      }
+    },
+    {
+      "name": "GetDisplayName",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "get_display_name",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GetDisplayNameProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameWhite",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_white",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameWhiteProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotWhite",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_white",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotWhiteProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameAqua",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_aqua",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameAquaProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotAqua",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_aqua",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotAquaProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameDarkAqua",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_dark_aqua",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkAquaProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotDarkAqua",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_dark_aqua",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkAquaProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameBlue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_blue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameBlueProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotBlue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_blue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotBlueProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameDarkBlue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_dark_blue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkBlueProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotDarkBlue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_dark_blue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkBlueProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameGreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_green",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameGreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotGreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_green",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotGreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameDarkGreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_dark_green",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkGreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotDarkGreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_dark_green",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkGreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameLightPurple",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_light_purple",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameLightPurpleProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotLightPurple",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_light_purple",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotLightPurpleProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameDarkPurple",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_dark_purple",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkPurpleProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotDarkPurple",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_dark_purple",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkPurpleProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameRed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_red",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameRedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotRed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_red",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotRedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameDarkRed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_dark_red",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkRedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotDarkRed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_dark_red",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkRedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameYellow",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_yellow",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameYellowProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotYellow",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_yellow",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotYellowProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameGold",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_gold",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameGoldProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "IsNameNotGold",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_name_not_gold",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsNameNotGoldProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameWhite",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_white",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameWhiteProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameAqua",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_aqua",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameAquaProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameDarkAqua",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_dark_aqua",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkAquaProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameBlue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_blue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameBlueProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameDarkBlue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_dark_blue",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkBlueProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameGreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_green",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameGreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameDarkGreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_dark_green",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkGreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameLightPurple",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_light_purple",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameLightPurpleProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameDarkPurple",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_dark_purple",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkPurpleProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameRed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_red",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameRedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameDarkRed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_dark_red",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkRedProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameYellow",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_yellow",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameYellowProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SetNameGold",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_name_gold",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetNameGoldProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "OpenCustomizationScreen",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "open_customization_screen",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OpenCustomizationScreenProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "GoBack",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "go_back",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GoBackProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "CrownHelmet",
+      "type": "armor",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown_helmet",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/item/CrownHelmetArmor.java",
+          "src/main/resources/assets/minigames/items/crown_helmet_helmet.json",
+          "src/main/resources/assets/minigames/models/item/crown_helmet_helmet.json",
+          "src/main/resources/assets/minigames/items/crown_helmet_leggings.json",
+          "src/main/resources/assets/minigames/items/crown_helmet_boots.json",
+          "src/main/resources/assets/minigames/items/crown_helmet_chestplate.json",
+          "src/main/java/net/mcreator/minigames/item/CrownHelmetItem.java",
+          "src/main/resources/assets/minigames/equipment/crown_helmet.json"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "PassCrown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "pass_crown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PassCrownProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "CrownTickEvent",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown_tick_event",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CrownTickEventProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "SummonNoOwnerCrown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "summon_no_owner_crown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SummonNoOwnerCrownProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ManageCountdown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "manage_countdown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ManageCountdownProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "HitArmorStand",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "hit_armor_stand",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HitArmorStandProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "AnimateCrownPickup",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "animate_crown_pickup",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AnimateCrownPickupProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "CrownTimerMinigame",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown_timer_minigame",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/CrownTimerMinigameOverlay.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ShowCrownTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_crown_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowCrownTimerProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ResetCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reset_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ResetCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "StartGameCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_game_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartGameCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "OnWinCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "on_win_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OnWinCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/win"
+    },
+    {
+      "name": "TimeOverCrownhunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "time_over_crownhunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TimeOverCrownhuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/win"
+    },
+    {
+      "name": "WinOverlayCrownHunt",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "win_overlay_crown_hunt",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/WinOverlayCrownHuntOverlay.java"
+        ]
+      },
+      "path": "~/Crown Hunt/win"
+    },
+    {
+      "name": "DisplayWinnerCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "display_winner_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayWinnerCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/win"
+    },
+    {
+      "name": "WinOverlayDisplayCrownHunter",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "win_overlay_display_crown_hunter",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WinOverlayDisplayCrownHunterProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/win"
+    },
+    {
+      "name": "AdvanceWinAnimationCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "advance_win_animation_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AdvanceWinAnimationCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/win"
+    },
+    {
+      "name": "LowTimeCrownTimerMinigame",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "low_time_crown_timer_minigame",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/LowTimeCrownTimerMinigameOverlay.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ShowLowCrownTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_low_crown_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowLowCrownTimerProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "MinigameGUICrownHunt",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_crown_hunt",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUICrownHuntMenu.java",
+          "src/main/java/net/mcreator/minigames/network/MinigameGUICrownHuntButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUICrownHuntScreen.java"
+        ]
+      },
+      "path": "~/Crown Hunt/settings"
+    },
+    {
+      "name": "MinigameGUICrownHuntThisGUIIsClosed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_crown_hunt_this_gui_is_closed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MinigameGUICrownHuntThisGUIIsClosedProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/settings"
+    },
+    {
+      "name": "SettingsAchievementCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "settings_achievement_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SettingsAchievementCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/settings"
+    },
+    {
+      "name": "PressedStartCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "pressed_start_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PressedStartCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/settings"
+    },
+    {
+      "name": "CrownHuntCapture",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crown_hunt_capture",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/crown_hunt_capture.json",
+          "src/main/java/net/mcreator/minigames/block/CrownHuntCaptureBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/crown_hunt_capture.json",
+          "src/main/resources/assets/minigames/blockstates/crown_hunt_capture.json",
+          "src/main/resources/assets/minigames/items/crown_hunt_capture.json",
+          "src/main/resources/assets/minigames/models/item/crown_hunt_capture.json"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "WalkOnCaptureCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "walk_on_capture_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WalkOnCaptureCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "CastleBricks",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "castle_bricks",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/castle_bricks.json",
+          "src/main/resources/assets/minigames/blockstates/castle_bricks.json",
+          "src/main/java/net/mcreator/minigames/block/CastleBricksBlock.java",
+          "src/main/resources/assets/minigames/items/castle_bricks.json",
+          "src/main/resources/data/minigames/loot_table/blocks/castle_bricks.json",
+          "src/main/resources/assets/minigames/models/block/castle_bricks.json"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ExpandCastle",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "expand_castle",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExpandCastleProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "SelectCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SelectCrownHuntProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "CastleStairs",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "castle_stairs",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/castle_stairs_outer.json",
+          "src/main/resources/assets/minigames/models/block/castle_stairs_inner.json",
+          "src/main/resources/assets/minigames/models/block/castle_stairs.json",
+          "src/main/java/net/mcreator/minigames/block/CastleStairsBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/castle_stairs.json",
+          "src/main/resources/assets/minigames/blockstates/castle_stairs.json",
+          "src/main/resources/assets/minigames/models/item/castle_stairs.json",
+          "src/main/resources/assets/minigames/items/castle_stairs.json"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "BlockArmorStandDestroy",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "block_armor_stand_destroy",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlockArmorStandDestroyProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "BlockLeftClick",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "block_left_click",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/BlockLeftClickMobEffect.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "NameColorApply",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "name_color_apply",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/NameColorApplyProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "RemoveVanishingKeepInvCrown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "remove_vanishing_keep_inv_crown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RemoveVanishingKeepInvCrownProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "StopPVPCrownHunt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stop_pvp_crown_hunt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "damagesource",
+            "type": "damagesource"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StopPVPCrownHuntProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ChangeNameColor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "change_name_color",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChangeNameColorProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "RepickAnimateCrown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "repick_animate_crown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RepickAnimateCrownProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "Phasmophobia",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "phasmophobia",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/PhasmophobiaCommand.java"
+        ]
+      },
+      "path": "~/Phasmophobia"
+    },
+    {
+      "name": "GoldenSkeleton",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "golden_skeleton",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/GoldenSkeletonEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/GoldenSkeletonRenderer.java",
+          "src/main/resources/assets/minigames/items/golden_skeleton_spawn_egg.json"
+        ]
+      },
+      "path": "~/Crown Hunt/golden mobs"
+    },
+    {
+      "name": "ApplyGlowing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "apply_glowing",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyGlowingProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/golden mobs"
+    },
+    {
+      "name": "GoldenSpider",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "golden_spider",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/GoldenSpiderRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/GoldenSpiderEntity.java",
+          "src/main/resources/assets/minigames/items/golden_spider_spawn_egg.json"
+        ]
+      },
+      "path": "~/Crown Hunt/golden mobs"
+    },
+    {
+      "name": "GoldenZombie",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "golden_zombie",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/GoldenZombieRenderer.java",
+          "src/main/resources/assets/minigames/items/golden_zombie_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/GoldenZombieEntity.java"
+        ]
+      },
+      "path": "~/Crown Hunt/golden mobs"
+    },
+    {
+      "name": "Spleef",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spleef",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/SpleefCommand.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "StartSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "StopSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stop_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StopSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "SpleefDimension",
+      "type": "dimension",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spleef_dimension",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/dimension/SpleefDimensionDimension.java",
+          "src/main/resources/data/minigames/dimension/spleef_dimension.json",
+          "src/main/resources/data/minigames/dimension_type/spleef_dimension.json"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "GameCountdown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "game_countdown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GameCountdownProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "SpleefShovel",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spleef_shovel",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SpleefShovelItem.java",
+          "src/main/resources/assets/minigames/models/item/spleef_shovel.json",
+          "src/main/resources/assets/minigames/items/spleef_shovel.json"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "ConquerTopLayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "conquer_top_layer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ConquerTopLayerProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "WinSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "win_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WinSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "KillPlayersSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "kill_players_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/KillPlayersSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "SnowballCounterSpleef",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowball_counter_spleef",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/SnowballCounterSpleefOverlay.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "DisplaySnowballCounter",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_snowball_counter",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplaySnowballCounterProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "SnowballCounterText",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowball_counter_text",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SnowballCounterTextProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "DestroySnowGrantSnowballSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "destroy_snow_grant_snowball_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DestroySnowGrantSnowballSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "SpleefPowerup",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spleef_powerup",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpleefPowerupProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "IceDart",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ice_dart",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/ice_dart.json",
+          "src/main/resources/assets/minigames/models/item/ice_dart.json",
+          "src/main/java/net/mcreator/minigames/item/IceDartItem.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "IceDartProjectile",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "ice_dart_projectile",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/IceDartProjectileEntity.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "IceDartProjectileWhileProjectileFlyingTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ice_dart_projectile_while_projectile_flying_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IceDartProjectileWhileProjectileFlyingTickProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SpreadingIceBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spreading_ice_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpreadingIceBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SpreadingIce",
+      "type": "block",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spreading_ice",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spreading_ice.json",
+          "src/main/resources/assets/minigames/blockstates/spreading_ice.json",
+          "src/main/resources/assets/minigames/models/block/spreading_ice.json",
+          "src/main/resources/assets/minigames/models/block/spreading_ice_2.json",
+          "src/main/resources/assets/minigames/models/block/spreading_ice_0.json",
+          "src/main/java/net/mcreator/minigames/block/SpreadingIceBlock.java",
+          "src/main/resources/assets/minigames/models/block/spreading_ice_1.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "IceDartRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ice_dart_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IceDartRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "IceDartProjectileProjectileHitsBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "ice_dart_projectile_projectile_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IceDartProjectileProjectileHitsBlockProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "Thrusters",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "thrusters",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/thrusters.json",
+          "src/main/resources/assets/minigames/models/item/thrusters.json",
+          "src/main/java/net/mcreator/minigames/item/ThrustersItem.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "ThrustersRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "thrusters_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ThrustersRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "ThrusterMove",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "thruster_move",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ThrusterMoveProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "ConquerTopLayerWorld",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "conquer_top_layer_world",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ConquerTopLayerWorldProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "NextLayerDestroyedInSpleef",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "next_layer_destroyed_in_spleef",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/NextLayerDestroyedInSpleefOverlay.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "NextLayerDestroyedInDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "next_layer_destroyed_in_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/NextLayerDestroyedInDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "DisplaySpleefTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_spleef_timer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplaySpleefTimerProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "InflatableWall",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "inflatable_wall",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/inflatable_wall.json",
+          "src/main/java/net/mcreator/minigames/item/InflatableWallItem.java",
+          "src/main/resources/assets/minigames/items/inflatable_wall.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "InflatableWallBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "inflatable_wall_block",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/entity/InflatableWallBlockBlockEntity.java",
+          "src/main/resources/assets/minigames/blockstates/inflatable_wall_block.json",
+          "src/main/java/net/mcreator/minigames/block/InflatableWallBlockBlock.java",
+          "src/main/resources/assets/minigames/models/block/inflatable_wall_block.json",
+          "src/main/resources/data/minigames/loot_table/blocks/inflatable_wall_block.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "InflatableWallAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "inflatable_wall_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/InflatableWallAddedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "InflatableWallSound",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "inflatable_wall_sound",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/InflatableWallSoundProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "Snowbomb",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowbomb",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SnowbombItem.java",
+          "src/main/resources/assets/minigames/items/snowbomb.json",
+          "src/main/resources/assets/minigames/models/item/snowbomb.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SnowbombProjectile",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowbomb_projectile",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/SnowbombProjectileEntity.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SnowbombProjectileProjectileHitsBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowbomb_projectile_projectile_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SnowbombProjectileProjectileHitsBlockProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SnowbombProjectileWhileProjectileFlyingTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowbomb_projectile_while_projectile_flying_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SnowbombProjectileWhileProjectileFlyingTickProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SnowbombRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "snowbomb_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SnowbombRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GrapplingHook",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "grappling_hook",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/grappling_hook.json",
+          "src/main/java/net/mcreator/minigames/item/GrapplingHookItem.java",
+          "src/main/resources/assets/minigames/models/item/grappling_hook.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GrapplingHookRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "grappling_hook_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GrapplingHookRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "Grapple",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "grapple",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/GrappleEntity.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GrapplingHitbox",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "grappling_hitbox",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/grappling_hitbox_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/GrapplingHitboxEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/GrapplingHitboxRenderer.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GrappleWhileProjectileFlyingTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "grapple_while_projectile_flying_tick",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GrappleWhileProjectileFlyingTickProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "ReplaySpleef",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "replay_spleef",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/replay_spleef.json",
+          "src/main/resources/assets/minigames/items/replay_spleef.json",
+          "src/main/java/net/mcreator/minigames/item/ReplaySpleefItem.java"
+        ]
+      },
+      "path": "~/Spleef"
+    }
+  ],
+  "variable_elements": [
+    {
+      "name": "achievmentType",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "achivementTypeTimer",
+      "type": "number",
+      "scope": "map",
+      "value": "295.0"
+    },
+    {
+      "name": "overlayAnimation1",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "openGameGUI",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "playersReady",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "achievement",
+      "type": "number",
+      "scope": "map",
+      "value": "-1.0"
+    },
+    {
+      "name": "team",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "ready",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "winner",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "nightVision",
+      "type": "logic",
+      "scope": "map",
+      "value": "true"
+    },
+    {
+      "name": "health",
+      "type": "number",
+      "scope": "global",
+      "value": "20.0"
+    },
+    {
+      "name": "players",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "gameTick",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "gameSeconds",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "gameMinutes",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "gameHours",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "displayTimer",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "timertype",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "pvpstate",
+      "type": "number",
+      "scope": "map",
+      "value": "-1.0"
+    },
+    {
+      "name": "winAnimation",
+      "type": "number",
+      "scope": "global",
+      "value": "-1.0"
+    },
+    {
+      "name": "winningTeam",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "crown",
+      "type": "texturelocation",
+      "scope": "global",
+      "value": "null"
+    },
+    {
+      "name": "joinFirstTime",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "winAnimationStart",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "winAnimationTick",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "pvpAnimationStart",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "pvpAnimationTick",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "p1state",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "p2state",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "p3state",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "p4state",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "p5state",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "p6state",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "rerollingPlayers",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "wantsToReroll",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "respawningPlayers",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "isCrowned",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "nerfWinner",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "randomizeSpawn",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "achievementHunterMode",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "randomHunterAchievement",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "hunterAchievement",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "animateHunter",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "animateHunterState",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "displayHunterPlayerAnimation",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "overwoldHuntedX",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "overworldHuntedZ",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "netherHuntedX",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "netherHuntedZ",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "hunteraWinAnimation",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "debuffLength",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "headStart",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "minimap",
+      "type": "logic",
+      "scope": "map",
+      "value": "true"
+    },
+    {
+      "name": "waypoints",
+      "type": "logic",
+      "scope": "map",
+      "value": "true"
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "scope": "player_persistent",
+      "value": "white"
+    },
+    {
+      "name": "MoveCrownTimer",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "ShowCrownTimer",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "CrownHuntInGame",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "crownHuntWinDisplay",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "canGrabCrown",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "returnToCastle",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "crownMinutes",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "graceMinutes",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "applyCustomNameColor",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "inGracePeriod",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "showRedTimer",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "helmet",
+      "type": "itemstack",
+      "scope": "player_persistent",
+      "value": "ItemStack.EMPTY"
+    },
+    {
+      "name": "winAnimationState",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "playingSpleef",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "layersRemainingSpleef",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "layerCountdownSpleef",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "snowballCountSpleef",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "spleefAlivePlayers",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "thrusterDirection",
+      "type": "vector",
+      "scope": "player_persistent",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "thrusterTicks",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    }
+  ],
+  "sound_elements": [
+    {
+      "name": "countdown",
+      "files": [
+        "countdown"
+      ],
+      "category": "player",
+      "subtitle": "Game count down begins"
+    },
+    {
+      "name": "start",
+      "files": [
+        "start"
+      ],
+      "category": "player",
+      "subtitle": "Game starts"
+    },
+    {
+      "name": "rollaudio",
+      "files": [
+        "rollaudio"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "netherbreak",
+      "files": [
+        "netherbreak"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "sandbreak",
+      "files": [
+        "sandbreak"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "stonebreak",
+      "files": [
+        "stonebreak"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "dirtbreak",
+      "files": [
+        "dirtbreak"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "pvp_swordshit",
+      "files": [
+        "swordshiteachother"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "pvp_swind",
+      "files": [
+        "swing"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "menu_switch",
+      "files": [
+        "switch"
+      ],
+      "category": "ui",
+      "subtitle": ""
+    },
+    {
+      "name": "teameliminated",
+      "files": [
+        "teameliminated"
+      ],
+      "category": "neutral",
+      "subtitle": ""
+    },
+    {
+      "name": "rolldice",
+      "files": [
+        "rolldice"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "rollaudioclean",
+      "files": [
+        "rollaudioclean"
+      ],
+      "category": "master",
+      "subtitle": ""
+    },
+    {
+      "name": "clock",
+      "files": [
+        "clock"
+      ],
+      "category": "player",
+      "subtitle": ""
+    },
+    {
+      "name": "thruster",
+      "files": [
+        "thrusters"
+      ],
+      "category": "player",
+      "subtitle": "Thruster activates"
+    },
+    {
+      "name": "inflate",
+      "files": [
+        "inflate"
+      ],
+      "category": "block",
+      "subtitle": "Wall inflates"
+    },
+    {
+      "name": "pop",
+      "files": [
+        "pop"
+      ],
+      "category": "block",
+      "subtitle": "Inflatable pops"
+    }
+  ],
+  "tag_elements": {
+    "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
+      "CUSTOM:CrownDebuffDamage"
+    ],
+    "DAMAGE_TYPES:minecraft:bypasses_effects": [
+      "CUSTOM:CrownDebuffDamage"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CUSTOM:CrownHelmet.helmet"
+    ],
+    "BLOCKS:minecraft:stairs": [
+      "~CUSTOM:CastleStairs"
+    ],
+    "BLOCKS:mod:replace": [
+      "Blocks.AIR",
+      "Blocks.TALLGRASS#1",
+      "Blocks.SHORT_DRY_GRASS",
+      "Blocks.TALL_DRY_GRASS",
+      "Blocks.TALLGRASS#2",
+      "Blocks.DOUBLE_PLANT#2",
+      "Blocks.SEAGRASS",
+      "Blocks.TALL_SEAGRASS",
+      "Blocks.KELP",
+      "Blocks.KELP_PLANT",
+      "Blocks.SEA_PICKLE",
+      "Blocks.BIG_DRIPLEAF_STEM",
+      "Blocks.SMALL_DRIPLEAF",
+      "Blocks.YELLOW_FLOWER",
+      "Blocks.RED_FLOWER#0",
+      "Blocks.RED_FLOWER#1",
+      "Blocks.RED_FLOWER#2",
+      "Blocks.RED_FLOWER#3",
+      "Blocks.RED_FLOWER#4",
+      "Blocks.RED_FLOWER#5",
+      "Blocks.RED_FLOWER#6",
+      "Blocks.RED_FLOWER#7",
+      "Blocks.RED_FLOWER#8",
+      "Blocks.CORNFLOWER",
+      "Blocks.TORCHFLOWER",
+      "Blocks.WILDFLOWERS",
+      "Blocks.DOUBLE_PLANT#0",
+      "Blocks.CACTUS_FLOWER",
+      "Blocks.TORCHFLOWER_CROP",
+      "Blocks.REEDS",
+      "Blocks.DEADBUSH",
+      "Blocks.BUSH",
+      "Blocks.DOUBLE_PLANT#4",
+      "Blocks.SWEET_BERRY_BUSH",
+      "Blocks.FIREFLY_BUSH",
+      "Blocks.LEAF_LITTER",
+      "Blocks.SNOW_LAYER",
+      "Blocks.VINE"
+    ],
+    "ITEMS:mod:spleef_powerup": [
+      "CUSTOM:IceDart",
+      "CUSTOM:Thrusters",
+      "CUSTOM:InflatableWall",
+      "CUSTOM:Snowbomb",
+      "CUSTOM:GrapplingHook"
+    ],
+    "BLOCKS:mod:spleefables": [
+      "Blocks.SNOW",
+      "CUSTOM:InflatableWallBlock"
+    ]
+  },
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "gui.minigames.select_type.label_your_achievement_is": "Your Achievement Is:",
+      "gui.minigames.view_achievment.button_im_ready": "I\u0027m Ready",
+      "subtitles.countdown": "Game count down begins",
+      "subtitles.start": "Game starts",
+      "gui.minigames.view_achievment.tooltip_pvp_enables_after_5_minutes": "PVP enables after 5 minutes",
+      "gui.minigames.view_achievment.tooltip_weather_will_permanently_be_thun": "Weather will permanently be Thunder",
+      "effect.minigames.immobilized": "Freeze game",
+      "gui.minigames.view_achievment.tooltip_match_settings": "Match Settings:",
+      "subtitles.rollaudio": "",
+      "subtitles.netherbreak": "",
+      "subtitles.sandbreak": "",
+      "subtitles.stonebreak": "",
+      "subtitles.dirtbreak": "",
+      "subtitles.pvp_swordshit": "",
+      "subtitles.pvp_swind": "",
+      "subtitles.menu_switch": "",
+      "gui.minigames.start_game.tooltip_achievement_run": "First player to obtain a randomly chosen achievement wins",
+      "gui.minigames.start_game.label_minigames": "Minigames",
+      "gui.minigames.minigame_gui_achievement_run.label_achievement_run": "Achievement Run",
+      "gui.minigames.minigame_gui_achievement_run.button_start_normal": "Start",
+      "gui.minigames.minigame_gui_achievement_run.tooltip_night_vision": "Night Vision",
+      "gui.minigames.minigame_gui_achievement_run.hp": "20",
+      "gui.minigames.minigame_gui_achievement_run.tooltip_keep_inventory": "Keep Inventory",
+      "gui.minigames.minigame_gui_achievement_run.tooltip_health_amount": "Health Amount",
+      "item.minigames.game_compass": "Game Compass",
+      "gui.minigames.minigame_gui_achievement_run.nightvision": "",
+      "gui.minigames.minigame_gui_achievement_run.keepinventory": "",
+      "subtitles.teameliminated": "",
+      "gui.minigames.view_achievment.tooltip_reroll_achievement": "Reroll Achievement",
+      "subtitles.rolldice": "",
+      "effect.minigames.crowned": "Crowned",
+      "gui.minigames.achievement_reminder.label_obtain_this_achievement": "Obtain this achievement:",
+      "gui.minigames.achievement_reminder.label_adventure_time": "Adventure Time",
+      "death.attack.crown_debuff_damage.item": "%1$s was bested by %2$s using %3$s",
+      "death.attack.crown_debuff_damage": "%1$s was bested",
+      "death.attack.crown_debuff_damage.player": "%1$s was slain whilst trying to escape %2$s",
+      "gui.minigames.minigame_gui_achievement_run.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
+      "gui.minigames.minigame_gui_achievement_run.crown": "",
+      "gui.minigames.minigame_gui_achievement_run.tooltip_dont_reset_world_on_game_start": "Don\u0027t reset world on game start",
+      "gui.minigames.minigame_gui_achievement_run.spawn": "",
+      "gui.minigames.start_game.tooltip_achievement_hunt": "One player is hunted while trying to obtain an achievement",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_night_vision": "Night Vision",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_keep_inventory": "Keep Inventory",
+      "gui.minigames.minigame_gui_achievement_hunt.spawn": "",
+      "gui.minigames.minigame_gui_achievement_hunt.nightvision": "",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_health_amount": "Health Amount",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_dont_reset_world_on_game_start": "Give hunted a head start",
+      "gui.minigames.minigame_gui_achievement_hunt.button_start_normal": "Start",
+      "gui.minigames.minigame_gui_achievement_hunt.hp": "20",
+      "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Run",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
+      "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
+      "gui.minigames.minigame_gui_achievement_hunt.crown": "",
+      "gui.minigames.minigame_gui_achievement_hunt.hunter": "",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_randomize_hunter": "Randomize hunter",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_name_of_the_hunter_disabled_if": "Name of the hunter (disabled if randomized)",
+      "gui.minigames.minigame_gui_achievement_hunt.randomhunter": "",
+      "gui.minigames.view_achievment_hunter.tooltip_reroll_achievement": "Reroll Achievement",
+      "gui.minigames.view_achievment_hunter.tooltip_pvp_enables_after_5_minutes": "PVP enables after 5 minutes",
+      "gui.minigames.view_achievment_hunter.button_im_ready": "I\u0027m Ready",
+      "subtitles.rollaudioclean": "",
+      "gui.minigames.start_game.label_achievement": "Achievement",
+      "gui.minigames.start_game.label_run": "Run",
+      "effect.minigames.nerf_hunters": "Nerf Hunters",
+      "gui.minigames.minigame_gui_achievement_hunt.headstart": "",
+      "gui.minigames.customize_gui.label_customize_player_name": "Customize player name",
+      "gui.minigames.start_game.label_crown": "Crown",
+      "gui.minigames.start_game.label_hunt": "Hunt",
+      "item.minigames.crown_helmet_helmet": "Crown",
+      "subtitles.clock": "",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_health_amount": "Grace period timer and crown win time",
+      "gui.minigames.minigame_gui_crown_hunt.hp": "20",
+      "gui.minigames.minigame_gui_crown_hunt.crown": "",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_dont_reset_world_on_game_start": "Don\u0027t reset world on game start",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_last_winner_takes_15x_damage": "At timer end the crowned player has to return to the gold blocks in the castle",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_keep_inventory": "Keep Inventory",
+      "gui.minigames.minigame_gui_crown_hunt.nightvision": "",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_night_vision": "Night Vision",
+      "gui.minigames.minigame_gui_crown_hunt.keepinventory": "",
+      "gui.minigames.minigame_gui_crown_hunt.button_start_normal": "Start",
+      "gui.minigames.minigame_gui_crown_hunt.label_achievement_run": "Crown Hunt",
+      "gui.minigames.minigame_gui_crown_hunt.spawn": "",
+      "gui.minigames.minigame_gui_crown_hunt.returncrown": "",
+      "gui.minigames.minigame_gui_crown_hunt.minutes": "8",
+      "gui.minigames.minigame_gui_crown_hunt.hours": "00",
+      "item.minigames.crown_hunt_capture": "Crown Hunt Capture Zone",
+      "item.minigames.castle_bricks": "Castle Bricks",
+      "gui.minigames.start_game.tooltip_steal_the_crown_from_other_playe": "Steal the crown from other players and avoid getting it stolen to win",
+      "item.minigames.castle_stairs": "Castle Bricks",
+      "effect.minigames.block_left_click": "Block Left Click",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_crown_timer": "Crown timer",
+      "gui.minigames.minigame_gui_crown_hunt.grace": "0",
+      "gui.minigames.minigame_gui_crown_hunt.tooltip_grace_period_minutes": "Grace period minutes",
+      "gui.minigames.minigame_gui_achievement_run.minimap": "",
+      "gui.minigames.minigame_gui_achievement_hunt.minimap": "",
+      "entity.minigames.golden_skeleton": "Golden Skeleton",
+      "entity.minigames.golden_spider": "King Spider",
+      "entity.minigames.golden_zombie": "King Zombie",
+      "item.minigames.spleef_shovel": "Spleef Shovel",
+      "item.minigames.ice_dart.description_1": "    §2Fire a dart that turns a block and its layer into very slippery ice for all opponents",
+      "item.minigames.ice_dart.description_0": "On §6right click:",
+      "item.minigames.ice_dart": "Ice Dart",
+      "item.minigames.spreading_ice": "Spreading Ice",
+      "item.minigames.thrusters": "Thrusters",
+      "subtitles.thruster": "Thruster activates",
+      "item.minigames.thrusters.description_1": "    §2Shoot yourself in the direction you are currently looking",
+      "item.minigames.thrusters.description_0": "On §6right click:",
+      "item.minigames.inflatable_wall": "Inflatable Wall",
+      "item.minigames.inflatable_wall.description_1": "    §2Place a wall in the direction of the block face clicked",
+      "item.minigames.inflatable_wall.description_0": "On §6right click:",
+      "item.minigames.inflatable_wall_block": "Inflatable Wall Block",
+      "subtitles.inflate": "Wall inflates",
+      "subtitles.pop": "Inflatable pops",
+      "item.minigames.snowbomb": "Snowbomb",
+      "item.minigames.snowbomb.description_1": "    §2Throw a bomb",
+      "item.minigames.snowbomb.description_0": "On §6right click:",
+      "item.minigames.grappling_hook": "Grappling Hook",
+      "item.minigames.grappling_hook.description_1": "    §2Launch a hook foreward pulling players hit towards you",
+      "item.minigames.grappling_hook.description_0": "On §6right click:",
+      "item.minigames.grappling_hook.description_3": "    §2Release the hook, launching the player in the direction they were being pulled",
+      "item.minigames.grappling_hook.description_2": "On §6right click §2while a player is hooked:",
+      "entity.minigames.grappling_hitbox": "Grappling Hitbox",
+      "gui.minigames.start_game.tooltip_change_player_name": "Change player name",
+      "item.minigames.replay_spleef.description_0": "Replay spleef with the same settings",
+      "item.minigames.replay_spleef": "Replay Spleef"
+    }
+  },
+  "metadata": {
+    "files": [
+      "src/main/java/net/mcreator/minigames/init/MinigamesModMenus.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
+      "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModMobEffects.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModItems.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModEntityRenderers.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModEntities.java",
+      "src/main/java/net/mcreator/minigames/client/ItemArms.java",
+      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java",
+      "src/main/resources/META-INF/neoforge.mods.toml",
+      "src/main/java/net/mcreator/minigames/network/PlayPlayerAnimationMessage.java",
+      "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
+      "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/client/RenderUtils.java",
+      "src/main/java/net/mcreator/minigames/network/MinigamesModVariables.java",
+      "src/main/resources/META-INF/accesstransformer.cfg",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModTabs.java",
+      "src/main/java/net/mcreator/minigames/MinigamesMod.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModRenderStateModifiers.java",
+      "src/main/java/net/mcreator/minigames/mixin/EntityRenderDispatcherMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java",
+      "src/main/resources/assets/minigames/sounds.json",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
+      "src/main/resources/minigames.mixins.json",
+      "src/main/resources/pack.mcmeta",
+      "src/main/java/net/mcreator/minigames/mixin/LivingEntityRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/CameraAccessor.java",
+      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationRendererMixin.java"
+    ],
+    "betteranimations_models": {},
+    "betteranimations_perspectives": {
+      "GameCompass": "All perspectives",
+      "SpleefShovel": "All perspectives"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": [
+      {
+        "name": "Achievement Run",
+        "children": [
+          {
+            "name": "settings",
+            "children": []
+          },
+          {
+            "name": "win animation",
+            "children": []
+          },
+          {
+            "name": "PVP",
+            "children": []
+          },
+          {
+            "name": "reminder",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Crown Hunt",
+        "children": [
+          {
+            "name": "win",
+            "children": []
+          },
+          {
+            "name": "settings",
+            "children": []
+          },
+          {
+            "name": "golden mobs",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Phasmophobia",
+        "children": []
+      },
+      {
+        "name": "Spleef",
+        "children": [
+          {
+            "name": "Snowballs",
+            "children": [
+              {
+                "name": "Items",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workspaceSettings": {
+    "modid": "minigames",
+    "modName": "Minigames",
+    "version": "2",
+    "description": "A mod with a few innovative minigames",
+    "author": "Gli FL",
+    "websiteURL": "https://www.curseforge.com/minecraft/mc-mods/minigames",
+    "license": "Academic Free License v3.0",
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "neoforge-1.21.8",
+    "credits": "FL_F3rno",
+    "modElementsPackage": "net.mcreator.minigames"
+  },
+  "mcreatorVersion": 202600113616
+}

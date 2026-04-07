@@ -18,7 +18,7 @@ import net.mcreator.minigames.init.MinigamesModMobEffects;
 @EventBusSubscriber
 public class HypnotizedMobEffect extends MobEffect {
 	public HypnotizedMobEffect() {
-		super(MobEffectCategory.NEUTRAL, -1);
+		super(MobEffectCategory.NEUTRAL, -16777216);
 	}
 
 	@Override

@@ -5,7 +5,7 @@
     "effectName": "Hypnotized",
     "icon": "hypnotized",
     "color": {
-      "value": -1,
+      "value": -16777216,
       "falpha": 0.0
     },
     "onAddedSound": {

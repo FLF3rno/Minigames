@@ -18,6 +18,7 @@ import net.mcreator.minigames.procedures.SyncCrownedRemoveProcedure;
 import net.mcreator.minigames.procedures.StartPVPProcedure;
 import net.mcreator.minigames.potion.NerfHuntersMobEffect;
 import net.mcreator.minigames.potion.ImmobilizedMobEffect;
+import net.mcreator.minigames.potion.HypnotizedMobEffect;
 import net.mcreator.minigames.potion.CrownedMobEffect;
 import net.mcreator.minigames.potion.BlockLeftClickMobEffect;
 import net.mcreator.minigames.MinigamesMod;
@@ -29,6 +30,7 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> CROWNED = REGISTRY.register("crowned", () -> new CrownedMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> NERF_HUNTERS = REGISTRY.register("nerf_hunters", () -> new NerfHuntersMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> BLOCK_LEFT_CLICK = REGISTRY.register("block_left_click", () -> new BlockLeftClickMobEffect());
+	public static final DeferredHolder<MobEffect, MobEffect> HYPNOTIZED = REGISTRY.register("hypnotized", () -> new HypnotizedMobEffect());
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {

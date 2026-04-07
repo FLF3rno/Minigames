@@ -5347,6 +5347,46 @@
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "Hypnotized",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hypnotized",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/HypnotizedMobEffect.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "HypnoticPendulumRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hypnotic_pendulum_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HypnoticPendulumRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
     }
   ],
   "variable_elements": [
@@ -6007,12 +6047,31 @@
       "CUSTOM:SymmetricalShovel",
       "CUSTOM:MagmaDart",
       "CUSTOM:SnowShovel",
-      "Items.WIND_CHARGE"
+      "CUSTOM:HypnoticPendulum"
     ],
     "BLOCKS:mod:spleefables": [
       "Blocks.SNOW",
       "CUSTOM:InflatableWallBlock",
-      "Blocks.MAGMA"
+      "Blocks.MAGMA",
+      "Blocks.QUARTZ_BLOCK#0",
+      "Blocks.WOOL#0",
+      "Blocks.STRIPPED_OAK_WOOD",
+      "Blocks.OAK_FENCE",
+      "Blocks.WOOL#1",
+      "Blocks.WOOL#2",
+      "Blocks.WOOL#3",
+      "Blocks.WOOL#4",
+      "Blocks.WOOL#5",
+      "Blocks.WOOL#6",
+      "Blocks.WOOL#7",
+      "Blocks.WOOL#8",
+      "Blocks.WOOL#9",
+      "Blocks.WOOL#10",
+      "Blocks.WOOL#11",
+      "Blocks.WOOL#12",
+      "Blocks.WOOL#13",
+      "Blocks.WOOL#14",
+      "Blocks.WOOL#15"
     ],
     "ITEMS:minecraft:enchantable/durability": [
       "~CUSTOM:SnowShovel",
@@ -6174,8 +6233,9 @@
       "gui.minigames.minigame_gui_spleef.minimap": "",
       "gui.minigames.minigame_gui_spleef.powerup": "",
       "item.minigames.hypnotic_pendulum": "Hypnotic Pendulum",
-      "item.minigames.hypnotic_pendulum.description_1": "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision for 20s",
-      "item.minigames.hypnotic_pendulum.description_0": "On §6right click:"
+      "item.minigames.hypnotic_pendulum.description_1": "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision",
+      "item.minigames.hypnotic_pendulum.description_0": "On §6right click:",
+      "effect.minigames.hypnotized": "Hypnotized"
     }
   },
   "metadata": {

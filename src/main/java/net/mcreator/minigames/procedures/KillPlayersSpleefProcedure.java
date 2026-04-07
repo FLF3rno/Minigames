@@ -37,7 +37,7 @@ public class KillPlayersSpleefProcedure {
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
-			for (Entity entityiterator : world.getEntities(null, new AABB((-100), 0, (-100), 100, 75, 100))) {
+			for (Entity entityiterator : world.getEntities(null, new AABB((-100), 0, (-100), 100, 85, 100))) {
 				if (entityiterator instanceof Player _plr0 && _plr0.gameMode() == GameType.SURVIVAL) {
 					if (entityiterator instanceof ServerPlayer _player)
 						_player.setGameMode(GameType.SPECTATOR);
@@ -118,7 +118,7 @@ public class KillPlayersSpleefProcedure {
 							}
 						}
 						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.CROWNED, 1000000, 1));
+							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.CROWNED, 1000000, 1, false, false));
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

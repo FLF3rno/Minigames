@@ -150,6 +150,7 @@
   "gui.minigames.minigame_gui_spleef.minimap": "",
   "gui.minigames.minigame_gui_spleef.powerup": "",
   "item.minigames.hypnotic_pendulum": "Hypnotic Pendulum",
-  "item.minigames.hypnotic_pendulum.description_1": "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision for 20s",
-  "item.minigames.hypnotic_pendulum.description_0": "On §6right click:"
+  "item.minigames.hypnotic_pendulum.description_1": "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision",
+  "item.minigames.hypnotic_pendulum.description_0": "On §6right click:",
+  "effect.minigames.hypnotized": "Hypnotized"
 }

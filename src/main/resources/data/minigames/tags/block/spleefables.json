@@ -1,8 +1,27 @@
 {
   "replace": false,
   "values": [
+    "minecraft:magma_block",
+    "minecraft:smooth_quartz",
+    "minecraft:oak_fence",
+    "minecraft:gray_wool",
+    "minecraft:pink_wool",
+    "minecraft:cyan_wool",
+    "minecraft:light_gray_wool",
+    "minecraft:stripped_oak_wood",
+    "minecraft:light_blue_wool",
     "minigames:inflatable_wall_block",
+    "minecraft:magenta_wool",
     "minecraft:snow_block",
-    "minecraft:magma_block"
+    "minecraft:lime_wool",
+    "minecraft:yellow_wool",
+    "minecraft:green_wool",
+    "minecraft:red_wool",
+    "minecraft:orange_wool",
+    "minecraft:black_wool",
+    "minecraft:white_wool",
+    "minecraft:purple_wool",
+    "minecraft:blue_wool",
+    "minecraft:brown_wool"
   ]
 }

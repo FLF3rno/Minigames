@@ -33,7 +33,7 @@ public class ConquerTopLayerProcedure {
 		double alivePlayersNumber = 0;
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef > 1) {
-				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 5) {
+				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 1) {
 					if (entity.getY() >= (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100) {
 						{
 							Entity _ent = entity;
@@ -46,42 +46,8 @@ public class ConquerTopLayerProcedure {
 							}
 						}
 					}
-					{
-						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minecraft:block.note_block.bell master @s ~ ~ ~ 2 1.3");
-						}
-					}
 				}
-				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 200) {
-					{
-						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:menu_switch master @s ~ ~ ~ 1 1");
-						}
-					}
-				}
-				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 280) {
-					{
-						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:menu_switch master @s ~ ~ ~ 1 1");
-						}
-					}
-				}
-				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 360) {
-					{
-						Entity _ent = entity;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:menu_switch master @s ~ ~ ~ 1 1");
-						}
-					}
-				}
-				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef >= 400) {
+				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 399) {
 					if (entity.getY() >= (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100) {
 						{
 							Entity _ent = entity;

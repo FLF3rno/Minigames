@@ -12,6 +12,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 
+import net.mcreator.minigames.procedures.HypnoticPendulumRightclickedProcedure;
+
 import java.util.function.Consumer;
 
 public class HypnoticPendulumItem extends Item {
@@ -21,7 +23,7 @@ public class HypnoticPendulumItem extends Item {
 
 	@Override
 	public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-		return ItemUseAnimation.CROSSBOW;
+		return ItemUseAnimation.DRINK;
 	}
 
 	@Override
@@ -40,6 +42,7 @@ public class HypnoticPendulumItem extends Item {
 	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 		InteractionResult ar = super.use(world, entity, hand);
 		entity.startUsingItem(hand);
+		HypnoticPendulumRightclickedProcedure.execute(world, entity, entity.getItemInHand(hand));
 		return ar;
 	}
 }

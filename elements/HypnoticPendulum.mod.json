@@ -32,7 +32,7 @@
     "specialInformation": {
       "fixedValue": [
         "On §6right click:",
-        "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision for 20s"
+        "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision"
       ]
     },
     "glowCondition": {
@@ -43,6 +43,9 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
+    "onRightClickedInAir": {
+      "name": "HypnoticPendulumRightclicked"
+    },
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
@@ -58,7 +61,7 @@
     },
     "isMeat": false,
     "isAlwaysEdible": false,
-    "animation": "crossbow",
+    "animation": "drink",
     "isMusicDisc": false,
     "musicDiscMusic": {
       "value": ""

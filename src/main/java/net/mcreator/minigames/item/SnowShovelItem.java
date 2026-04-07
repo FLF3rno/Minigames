@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 public class SnowShovelItem extends Item {
 	public SnowShovelItem(Item.Properties properties) {
-		super(properties.durability(4));
+		super(properties.durability(9));
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.mcreator.minigames.item;
 
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.ItemStack;
@@ -11,6 +12,11 @@ import java.util.function.Consumer;
 public class SymmetricalShovelItem extends Item {
 	public SymmetricalShovelItem(Item.Properties properties) {
 		super(properties.durability(14));
+	}
+
+	@Override
+	public float getDestroySpeed(ItemStack itemstack, BlockState state) {
+		return 20000f;
 	}
 
 	@Override

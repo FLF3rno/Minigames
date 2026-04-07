@@ -44,6 +44,10 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			if (blockstate.is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SYMMETRICAL_SHOVEL.get()) {
+					if (world instanceof ServerLevel _level) {
+						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
+						});
+					}
 					world.setBlock(BlockPos.containing(x, 100, z), Blocks.AIR.defaultBlockState(), 3);
 					layer = 0;
 					for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index0++) {

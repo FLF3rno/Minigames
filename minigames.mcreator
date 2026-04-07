@@ -4975,7 +4975,7 @@
       "name": "GrapplingHitbox",
       "type": "livingentity",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "grappling_hitbox",
       "metadata": {
         "files": [

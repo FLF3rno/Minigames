@@ -36,6 +36,7 @@ public class StartSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/gamemode survival @a");
+		MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef = 5;
 		MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef = 5;
 		MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 0;
 		MinigamesModVariables.MapVariables.get(world).playingSpleef = true;

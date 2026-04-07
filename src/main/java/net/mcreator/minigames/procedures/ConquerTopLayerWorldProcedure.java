@@ -37,7 +37,8 @@ public class ConquerTopLayerWorldProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef > 1) {
 				playerNumber = 0;
-				for (Entity entityiterator : world.getEntities(null, new AABB((-100), (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * 5 + 95), (-100), 100, 140, 100))) {
+				for (Entity entityiterator : world.getEntities(null,
+						new AABB((-100), ((MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100), (-100), 100, 140, 100))) {
 					if (entityiterator instanceof Player) {
 						playerNumber = playerNumber + 1;
 					}
@@ -52,7 +53,9 @@ public class ConquerTopLayerWorldProcedure {
 				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef >= 405) {
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-								("execute in minigames:spleef_dimension run fill -20 " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * 5 + 95) + " -20 20 140 20 air"));
+								("execute in minigames:spleef_dimension run fill -20 "
+										+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100)
+										+ " -20 20 140 20 air"));
 					MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 0;
 					MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef = MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1;
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();

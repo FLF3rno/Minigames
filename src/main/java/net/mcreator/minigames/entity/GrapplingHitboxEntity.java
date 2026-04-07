@@ -44,6 +44,7 @@ public class GrapplingHitboxEntity extends Monster {
 	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<String> DATA_owner = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<String> DATA_target = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.STRING);
+	// Required by GrappleEntity and GrapplingHookRightclickedProcedure.
 	public static final EntityDataAccessor<Integer> DATA_pullTicks = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.INT);
 
 	public GrapplingHitboxEntity(EntityType<GrapplingHitboxEntity> type, Level world) {

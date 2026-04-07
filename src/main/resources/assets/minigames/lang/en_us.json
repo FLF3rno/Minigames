@@ -123,5 +123,8 @@
   "entity.minigames.grappling_hitbox": "Grappling Hitbox",
   "gui.minigames.start_game.tooltip_change_player_name": "Change player name",
   "item.minigames.replay_spleef.description_0": "Replay spleef with the same settings",
-  "item.minigames.replay_spleef": "Replay Spleef"
+  "item.minigames.replay_spleef": "Replay Spleef",
+  "item.minigames.symmetrical_shovel": "Symmetrical Shovel",
+  "item.minigames.symmetrical_shovel.description_1": "    §2Break a block in that coordinate in every layer",
+  "item.minigames.symmetrical_shovel.description_0": "On §6block break:"
 }

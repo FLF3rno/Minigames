@@ -30,6 +30,7 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SNOWBOMB;
 	public static final DeferredItem<Item> GRAPPLING_HOOK;
 	public static final DeferredItem<Item> REPLAY_SPLEEF;
+	public static final DeferredItem<Item> SYMMETRICAL_SHOVEL;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -43,6 +44,7 @@ public class MinigamesModItems {
 		SNOWBOMB = register("snowbomb", SnowbombItem::new);
 		GRAPPLING_HOOK = register("grappling_hook", GrapplingHookItem::new);
 		REPLAY_SPLEEF = register("replay_spleef", ReplaySpleefItem::new);
+		SYMMETRICAL_SHOVEL = register("symmetrical_shovel", SymmetricalShovelItem::new);
 	}
 
 	// Start of user code block custom items

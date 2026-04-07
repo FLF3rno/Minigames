@@ -34,7 +34,7 @@ public class ConquerTopLayerProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef > 1) {
 				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 5) {
-					if (entity.getY() >= MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * 5 + 95) {
+					if (entity.getY() >= (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100) {
 						{
 							Entity _ent = entity;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
@@ -82,7 +82,7 @@ public class ConquerTopLayerProcedure {
 					}
 				}
 				if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef >= 400) {
-					if (entity.getY() >= MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * 5 + 95) {
+					if (entity.getY() >= (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100) {
 						{
 							Entity _ent = entity;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

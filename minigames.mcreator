@@ -5387,6 +5387,25 @@
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "HypnotizedEffectStartedapplied",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hypnotized_effect_startedapplied",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HypnotizedEffectStartedappliedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
     }
   ],
   "variable_elements": [

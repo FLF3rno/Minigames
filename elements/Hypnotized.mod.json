@@ -16,6 +16,9 @@
     "renderStatusInInventory": false,
     "renderStatusInHUD": false,
     "isCuredbyHoney": false,
-    "modifiers": []
+    "modifiers": [],
+    "onStarted": {
+      "name": "HypnotizedEffectStartedapplied"
+    }
   }
 }

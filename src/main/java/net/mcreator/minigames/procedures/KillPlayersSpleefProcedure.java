@@ -52,7 +52,7 @@ public class KillPlayersSpleefProcedure {
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:teameliminated master @p ~ ~ ~ 2 1");
 						}
 					}
-					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 1) {
+					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
@@ -60,10 +60,10 @@ public class KillPlayersSpleefProcedure {
 										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
 										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
-												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers + 1) + "nd\"}]"));
+												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "nd\"}]"));
 							}
 						}
-					} else if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
+					} else if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 3) {
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
@@ -71,7 +71,7 @@ public class KillPlayersSpleefProcedure {
 										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
 										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
-												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers + 1) + "rd\"}]"));
+												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "rd\"}]"));
 							}
 						}
 						{
@@ -89,7 +89,7 @@ public class KillPlayersSpleefProcedure {
 										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
 										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
-												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers + 1) + "th\"}]"));
+												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "th\"}]"));
 							}
 						}
 						{

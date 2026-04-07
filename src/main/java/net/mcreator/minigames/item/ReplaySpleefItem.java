@@ -3,6 +3,7 @@ package net.mcreator.minigames.item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +17,7 @@ import java.util.function.Consumer;
 
 public class ReplaySpleefItem extends Item {
 	public ReplaySpleefItem(Item.Properties properties) {
-		super(properties);
+		super(properties.rarity(Rarity.EPIC));
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class ConquerTopLayerWorldProcedure {
 					}
 				}
 				if (playerNumber <= 1) {
-					MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef + 1;
+					MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef + 0.25;
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				} else {
 					MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 0;

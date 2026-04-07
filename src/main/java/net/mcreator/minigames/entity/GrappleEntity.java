@@ -113,19 +113,19 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 	@Override
 	public void tick() {
 		super.tick();
+		Entity owner = this.getOwner();
 		if (!this.level().isClientSide()) {
-			Entity owner = this.getOwner();
 			if (owner != null && this.distanceTo(owner) >= 30.0) {
 				releaseAndBreak(owner);
 			}
-			if (owner != null) {
-				GrapplingHitboxEntity hitbox = this.level().getEntitiesOfClass(GrapplingHitboxEntity.class, this.getBoundingBox().inflate(32)).stream()
-						.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner))).findFirst().orElse(null);
-				if (hitbox != null) {
-					if (hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target).isEmpty()) {
-						hitbox.setPos(this.getX(), this.getY(), this.getZ());
-						hitbox.setDeltaMovement(0, 0, 0);
-					}
+		}
+		if (owner != null) {
+			GrapplingHitboxEntity hitbox = this.level().getEntitiesOfClass(GrapplingHitboxEntity.class, this.getBoundingBox().inflate(32)).stream()
+					.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner))).findFirst().orElse(null);
+			if (hitbox != null) {
+				if (hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target).isEmpty()) {
+					hitbox.setPos(this.getX(), this.getY(), this.getZ());
+					hitbox.setDeltaMovement(0, 0, 0);
 				}
 			}
 		}

@@ -5008,9 +5008,9 @@
       "registry_name": "replay_spleef",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/item/ReplaySpleefItem.java",
           "src/main/resources/assets/minigames/models/item/replay_spleef.json",
-          "src/main/resources/assets/minigames/items/replay_spleef.json",
-          "src/main/java/net/mcreator/minigames/item/ReplaySpleefItem.java"
+          "src/main/resources/assets/minigames/items/replay_spleef.json"
         ]
       },
       "path": "~/Spleef"
@@ -5029,6 +5029,36 @@
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "FirstTimeJoin",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "first_time_join",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FirstTimeJoinProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [

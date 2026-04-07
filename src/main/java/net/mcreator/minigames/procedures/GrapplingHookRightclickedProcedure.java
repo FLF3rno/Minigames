@@ -39,7 +39,7 @@ public class GrapplingHookRightclickedProcedure {
 				if (!projectileLevel.isClientSide()) {
 					Projectile _entityToSpawn = initArrowProjectile(new GrappleEntity(MinigamesModEntities.GRAPPLE.get(), projectileLevel), _shootFrom, 0, true, false, false, AbstractArrow.Pickup.DISALLOWED);
 					_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
-					_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) 0.95, 0);
+					_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) 1.95, 0);
 					projectileLevel.addFreshEntity(_entityToSpawn);
 				}
 			}

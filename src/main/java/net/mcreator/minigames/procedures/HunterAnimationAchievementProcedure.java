@@ -37,6 +37,9 @@ public class HunterAnimationAchievementProcedure {
 				MinigamesModVariables.MapVariables.get(world).animateHunterState = MinigamesModVariables.MapVariables.get(world).animateHunterState + 1;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (MinigamesModVariables.MapVariables.get(world).achievmentType == 1) {
+					if (world instanceof ServerLevel _level)
+						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								"execute as @a at @s run playsound minigames:rollaudioclean master @s ~ ~ ~ 1 1");
 					MinigamesModVariables.MapVariables.get(world).displayHunterPlayerAnimation = Mth.nextInt(RandomSource.create(), 1, (int) MinigamesModVariables.MapVariables.get(world).players);
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				}

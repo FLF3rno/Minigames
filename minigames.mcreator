@@ -5685,7 +5685,8 @@
       "CUSTOM:Thrusters",
       "CUSTOM:InflatableWall",
       "CUSTOM:Snowbomb",
-      "CUSTOM:GrapplingHook"
+      "CUSTOM:GrapplingHook",
+      "CUSTOM:SymmetricalShovel"
     ],
     "BLOCKS:mod:spleefables": [
       "Blocks.SNOW",

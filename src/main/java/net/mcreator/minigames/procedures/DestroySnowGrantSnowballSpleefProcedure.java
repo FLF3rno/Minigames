@@ -46,10 +46,12 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			targetX = x;
 			targetZ = z;
-			if (event instanceof ICancellableEvent _cancellable) {
-				_cancellable.setCanceled(true);
+			if (blockstate.is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
+				if (event instanceof ICancellableEvent _cancellable) {
+					_cancellable.setCanceled(true);
+				}
 			}
-			if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
+			if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
 				rng = Mth.nextInt(RandomSource.create(), 1, 4);
 				if (rng == 1) {
 					targetX = targetX + 1;

@@ -162,5 +162,10 @@
   "gui.minigames.minigame_gui_spleef.tooltip_modify_the_map_pool": "Modify the map pool",
   "gui.minigames.minigame_gui_spleef.label_maps": "Maps",
   "gui.minigames.minigame_gui_spleef.button_modify": "Modify",
-  "gui.minigames.minigame_gui_spleef.button_no_maps_selected": "No maps chosen"
+  "gui.minigames.minigame_gui_spleef.button_no_maps_selected": "No maps chosen",
+  "subtitles.hypnotized": "Player is hypnotized",
+  "item.minigames.glue_dart": "Glue Dart",
+  "item.minigames.glue_dart.description_0": "On §6right click:",
+  "item.minigames.glue_dart.description_1": "    §2Fire a dart that fills all gaps in the layer for 10 seconds",
+  "item.minigames.spreading_glue": "Spreading Glue"
 }

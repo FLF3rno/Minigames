@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minecraft:block/powder_snow",
+    "particle": "minecraft:block/powder_snow"
+  },
+  "render_type": "solid"
+}

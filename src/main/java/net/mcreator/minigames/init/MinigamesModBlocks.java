@@ -22,6 +22,7 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SPREADING_ICE;
 	public static final DeferredBlock<Block> INFLATABLE_WALL_BLOCK;
 	public static final DeferredBlock<Block> EXPLODING_MAGMA;
+	public static final DeferredBlock<Block> SPREADING_GLUE;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -29,6 +30,7 @@ public class MinigamesModBlocks {
 		SPREADING_ICE = register("spreading_ice", SpreadingIceBlock::new);
 		INFLATABLE_WALL_BLOCK = register("inflatable_wall_block", InflatableWallBlockBlock::new);
 		EXPLODING_MAGMA = register("exploding_magma", ExplodingMagmaBlock::new);
+		SPREADING_GLUE = register("spreading_glue", SpreadingGlueBlock::new);
 	}
 
 	// Start of user code block custom blocks

@@ -20,7 +20,7 @@ public class HypnotizedOverlay {
 	private static final float TEXTURE_WIDTH = 958f;
 	private static final float TEXTURE_HEIGHT = 538f;
 	private static final float LAYER_DURATION = 52f;
-	private static final float OVERSCAN = 1.15f;
+	private static final float OVERSCAN = 1.28f;
 	private static final float SCALE_MIN = 1.02f;
 	private static final float SCALE_MAX = 2.35f;
 	private static final float[] PHASES = new float[] { 0f, 1f / 3f, 2f / 3f };

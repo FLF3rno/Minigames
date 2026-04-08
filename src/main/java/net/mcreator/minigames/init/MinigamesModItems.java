@@ -34,6 +34,7 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> MAGMA_DART;
 	public static final DeferredItem<Item> SNOW_SHOVEL;
 	public static final DeferredItem<Item> HYPNOTIC_PENDULUM;
+	public static final DeferredItem<Item> GLUE_DART;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -51,6 +52,7 @@ public class MinigamesModItems {
 		MAGMA_DART = register("magma_dart", MagmaDartItem::new);
 		SNOW_SHOVEL = register("snow_shovel", SnowShovelItem::new);
 		HYPNOTIC_PENDULUM = register("hypnotic_pendulum", HypnoticPendulumItem::new);
+		GLUE_DART = register("glue_dart", GlueDartItem::new);
 	}
 
 	// Start of user code block custom items

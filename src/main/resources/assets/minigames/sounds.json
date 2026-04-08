@@ -139,5 +139,14 @@
         "stream": false
       }
     ]
+  },
+  "hypnotized": {
+    "subtitle": "subtitles.hypnotized",
+    "sounds": [
+      {
+        "name": "minigames:hypnotize",
+        "stream": false
+      }
+    ]
   }
 }

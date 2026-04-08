@@ -43,6 +43,8 @@ public class MinigamesModEntities {
 			EntityType.Builder.<MagmaHitboxEntity>of(MagmaHitboxEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 0.6f));
 	public static final DeferredHolder<EntityType<?>, EntityType<MagmaDartProjectileEntity>> MAGMA_DART_PROJECTILE = register("magma_dart_projectile",
 			EntityType.Builder.<MagmaDartProjectileEntity>of(MagmaDartProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<GlueProjectileEntity>> GLUE_PROJECTILE = register("glue_projectile",
+			EntityType.Builder.<GlueProjectileEntity>of(GlueProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities

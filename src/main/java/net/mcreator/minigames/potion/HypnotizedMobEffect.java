@@ -5,18 +5,25 @@ import net.neoforged.neoforge.client.extensions.common.IClientMobEffectExtension
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.GuiGraphics;
 
+import net.mcreator.minigames.procedures.HypnotizedEffectStartedProcedure;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 @EventBusSubscriber
 public class HypnotizedMobEffect extends MobEffect {
 	public HypnotizedMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -16777216);
+	}
+
+	@Override
+	public void onEffectStarted(LivingEntity entity, int amplifier) {
+		HypnotizedEffectStartedProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ());
 	}
 
 	@SubscribeEvent

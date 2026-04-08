@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.core.Direction;
@@ -14,6 +15,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.init.MinigamesModBlocks;
+
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InflatableWallAddedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Direction clickedFace, Entity entity, ItemStack itemstack) {
@@ -182,36 +187,26 @@ public class InflatableWallAddedProcedure {
 	}
 
 	private static void clearWall(LevelAccessor world, BlockPos origin) {
-		clearIfInflatable(world, origin);
-		clearLine(world, origin, Direction.UP, (int) Math.abs(getBlockNBTNumber(world, origin, "inflateY")));
-		clearLine(world, origin, Direction.DOWN, (int) Math.abs(getBlockNBTNumber(world, origin, "inflateY")));
-		clearLine(world, origin, Direction.EAST, (int) getBlockNBTNumber(world, origin, "inflateX"));
-		clearLine(world, origin, Direction.WEST, (int) getBlockNBTNumber(world, origin, "inflateX"));
-		clearLine(world, origin, Direction.SOUTH, (int) getBlockNBTNumber(world, origin, "inflateZ"));
-		clearLine(world, origin, Direction.NORTH, (int) getBlockNBTNumber(world, origin, "inflateZ"));
-		clearLine(world, origin, Direction.EAST, (int) Math.max(0, getBlockNBTNumber(world, origin, "inflateXonce")));
-		clearLine(world, origin, Direction.WEST, (int) Math.max(0, -getBlockNBTNumber(world, origin, "inflateXonce")));
-		clearLine(world, origin, Direction.SOUTH, (int) Math.max(0, getBlockNBTNumber(world, origin, "inflateZonce")));
-		clearLine(world, origin, Direction.NORTH, (int) Math.max(0, -getBlockNBTNumber(world, origin, "inflateZonce")));
-	}
+		ArrayDeque<BlockPos> queue = new ArrayDeque<>();
+		Set<BlockPos> visited = new HashSet<>();
+		queue.add(origin);
 
-	private static void clearLine(LevelAccessor world, BlockPos origin, Direction direction, int length) {
-		for (int step = 1; step <= length; step++) {
-			clearIfInflatable(world, origin.relative(direction, step));
-		}
-	}
+		while (!queue.isEmpty() && visited.size() < 128) {
+			BlockPos current = queue.removeFirst();
+			if (!visited.add(current)) {
+				continue;
+			}
+			if (!world.getBlockState(current).is(MinigamesModBlocks.INFLATABLE_WALL_BLOCK.get())) {
+				continue;
+			}
 
-	private static void clearIfInflatable(LevelAccessor world, BlockPos pos) {
-		if (world.getBlockState(pos).is(MinigamesModBlocks.INFLATABLE_WALL_BLOCK.get())) {
-			world.setBlock(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+			world.setBlock(current, Blocks.AIR.defaultBlockState(), 3);
+			for (Direction direction : Direction.values()) {
+				BlockPos neighbor = current.relative(direction);
+				if (!visited.contains(neighbor) && world.getBlockState(neighbor).is(MinigamesModBlocks.INFLATABLE_WALL_BLOCK.get())) {
+					queue.add(neighbor);
+				}
+			}
 		}
-	}
-
-	private static double getBlockNBTNumber(LevelAccessor world, BlockPos pos, String tag) {
-		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity != null) {
-			return blockEntity.getPersistentData().getDoubleOr(tag, 0);
-		}
-		return 0;
 	}
 }

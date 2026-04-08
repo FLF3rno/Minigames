@@ -31,4 +31,5 @@ public class MinigamesModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> THRUSTER = REGISTRY.register("thruster", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "thruster")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> INFLATE = REGISTRY.register("inflate", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "inflate")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> POP = REGISTRY.register("pop", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "pop")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> HYPNOTIZED = REGISTRY.register("hypnotized", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "hypnotized")));
 }

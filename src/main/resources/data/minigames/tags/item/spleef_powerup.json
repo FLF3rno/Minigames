@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minigames:thrusters",
+    "minigames:glue_dart",
     "minigames:grappling_hook",
     "minigames:magma_dart",
     "minigames:snow_shovel",

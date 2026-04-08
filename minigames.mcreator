@@ -5393,29 +5393,6 @@
       "path": "~/Spleef/Snowballs/Items"
     },
     {
-      "name": "HypnotizedEffectStartedapplied",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "hypnotized_effect_startedapplied",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/HypnotizedEffectStartedappliedProcedure.java"
-        ]
-      },
-      "path": "~/Spleef/Snowballs/Items"
-    },
-    {
       "name": "PlaceRandomMapSpleef",
       "type": "procedure",
       "compiles": true,
@@ -5648,6 +5625,232 @@
         ]
       },
       "path": "~/Spleef/Settings"
+    },
+    {
+      "name": "HypnotizedEffectStarted",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hypnotized_effect_started",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HypnotizedEffectStartedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GlueDart",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "glue_dart",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/glue_dart.json",
+          "src/main/java/net/mcreator/minigames/item/GlueDartItem.java",
+          "src/main/resources/assets/minigames/items/glue_dart.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GlueProjectile",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "glue_projectile",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/GlueProjectileEntity.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GlueDartRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "glue_dart_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GlueDartRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GlueFlying",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "glue_flying",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GlueFlyingProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SpreadingGlueBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spreading_glue_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpreadingGlueBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SpreadingGlue",
+      "type": "block",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spreading_glue",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/spreading_glue.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spreading_glue.json",
+          "src/main/java/net/mcreator/minigames/block/SpreadingGlueBlock.java",
+          "src/main/resources/assets/minigames/models/block/spreading_glue.json"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "GlueHitsBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "glue_hits_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GlueHitsBlockProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "SpreadingGlueOnTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spreading_glue_on_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpreadingGlueOnTickUpdateProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
     }
   ],
   "variable_elements": [
@@ -6256,6 +6459,14 @@
       ],
       "category": "block",
       "subtitle": "Inflatable pops"
+    },
+    {
+      "name": "hypnotized",
+      "files": [
+        "hypnotize"
+      ],
+      "category": "player",
+      "subtitle": "Player is hypnotized"
     }
   ],
   "tag_elements": {
@@ -6314,7 +6525,8 @@
       "CUSTOM:SymmetricalShovel",
       "CUSTOM:MagmaDart",
       "CUSTOM:SnowShovel",
-      "CUSTOM:HypnoticPendulum"
+      "CUSTOM:HypnoticPendulum",
+      "CUSTOM:GlueDart"
     ],
     "BLOCKS:mod:spleefables": [
       "Blocks.SNOW",
@@ -6338,7 +6550,8 @@
       "Blocks.WOOL#12",
       "Blocks.WOOL#13",
       "Blocks.WOOL#14",
-      "Blocks.WOOL#15"
+      "Blocks.WOOL#15",
+      "CUSTOM:SpreadingGlue"
     ],
     "ITEMS:minecraft:enchantable/durability": [
       "~CUSTOM:SnowShovel",
@@ -6512,7 +6725,12 @@
       "gui.minigames.minigame_gui_spleef.tooltip_modify_the_map_pool": "Modify the map pool",
       "gui.minigames.minigame_gui_spleef.label_maps": "Maps",
       "gui.minigames.minigame_gui_spleef.button_modify": "Modify",
-      "gui.minigames.minigame_gui_spleef.button_no_maps_selected": "No maps chosen"
+      "gui.minigames.minigame_gui_spleef.button_no_maps_selected": "No maps chosen",
+      "subtitles.hypnotized": "Player is hypnotized",
+      "item.minigames.glue_dart": "Glue Dart",
+      "item.minigames.glue_dart.description_0": "On §6right click:",
+      "item.minigames.glue_dart.description_1": "    §2Fire a dart that fills all gaps in the layer for 10 seconds",
+      "item.minigames.spreading_glue": "Spreading Glue"
     }
   },
   "metadata": {

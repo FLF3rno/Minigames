@@ -36,29 +36,6 @@ public class StartSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/gamemode survival @a");
-		MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef = 5;
-		MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef = 5;
-		MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 0;
-		MinigamesModVariables.MapVariables.get(world).playingSpleef = true;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run forceload add 0 0");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run place template minigames:spleef -15 100 -15");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run fill 15 149 15 -15 170 -15 air");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run tp @a 0 121 0");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run spreadplayers 0 0 30 30 false @a");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @a at @s run tp @s ~ ~ ~ facing 0 120 0");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/clear @a");
 		if (world instanceof ServerLevel _level)
@@ -79,6 +56,17 @@ public class StartSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/effect give @a minigames:immobilized 1 1 true");
+		MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 0;
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/execute in minigames:spleef_dimension run forceload add -100 -100 100 100");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/execute in minigames:spleef_dimension run tp @a 0 121 0");
+		PlaceRandomMapSpleefProcedure.execute(world, x, y, z);
+		MinigamesModVariables.MapVariables.get(world).playingSpleef = true;
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(10, () -> {
 			GameCountdownProcedure.execute(world, x, y, z);
 		});

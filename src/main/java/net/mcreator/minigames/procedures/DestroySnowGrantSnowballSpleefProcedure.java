@@ -58,11 +58,11 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 				rng = Mth.nextInt(RandomSource.create(), 1, 4);
 				if (rng == 1) {
 					targetX = targetX + 1;
-				} else if (true) {
+				} else if (rng == 2) {
 					targetX = targetX - 1;
-				} else if (true) {
+				} else if (rng == 3) {
 					targetZ = targetZ + 1;
-				} else if (true) {
+				} else if (rng == 4) {
 					targetZ = targetZ - 1;
 				}
 				world.setBlock(BlockPos.containing(targetX, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
@@ -79,10 +79,13 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						layer = layer + 1;
 						world.setBlock(BlockPos.containing(targetX, 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					}
-					{
-						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-						_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 1.25;
-						_vars.markSyncDirty();
+					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef, targetZ))).getBlock() && entity instanceof LivingEntity _livEnt13
+							&& _livEnt13.hasEffect(MinigamesModMobEffects.HYPNOTIZED))) {
+						{
+							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 1.25;
+							_vars.markSyncDirty();
+						}
 					}
 					SpleefPowerupProcedure.execute(world, entity);
 					if (world instanceof ServerLevel _level)
@@ -109,10 +112,12 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 								"/kill @e[type=item]");
 				} else {
-					{
-						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-						_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.75;
-						_vars.markSyncDirty();
+					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, y, targetZ))).getBlock() && entity instanceof LivingEntity _livEnt28 && _livEnt28.hasEffect(MinigamesModMobEffects.HYPNOTIZED))) {
+						{
+							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.75;
+							_vars.markSyncDirty();
+						}
 					}
 					SpleefPowerupProcedure.execute(world, entity);
 					if (world instanceof ServerLevel _level)

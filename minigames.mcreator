@@ -5397,6 +5397,10 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -5406,6 +5410,68 @@
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "PlaceRandomMapSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "place_random_map_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlaceRandomMapSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "PlaceBalloonsSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "place_balloons_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlaceBalloonsSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
     }
   ],
   "variable_elements": [
@@ -6359,6 +6425,10 @@
           },
           {
             "name": "Settings",
+            "children": []
+          },
+          {
+            "name": "Maps",
             "children": []
           }
         ]

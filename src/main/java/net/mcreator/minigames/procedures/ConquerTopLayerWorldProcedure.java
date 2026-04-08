@@ -52,8 +52,8 @@ public class ConquerTopLayerWorldProcedure {
 								playerNumber = playerNumber + 1;
 							}
 						}
-						for (Entity entityiterator : world.getEntities(null,
-								new AABB((-100), ((MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 2) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100), (-100), 100, 140, 100))) {
+						for (Entity entityiterator : world.getEntities(null, new AABB((-100), ((MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 2) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef + 100),
+								(-100), 100, ((MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef - 1) * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef - 1 + 100), 100))) {
 							if (entityiterator instanceof Player) {
 								playerNumberLayerBottom = playerNumberLayerBottom + 1;
 							}
@@ -67,12 +67,12 @@ public class ConquerTopLayerWorldProcedure {
 											new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 											"/execute as @a at @s run playsound minigames:menu_switch master @s ~ ~ ~ 1 1");
 							}
+							if (playerNumberLayerBottom == 0) {
+								MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 400;
+								MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+							}
 						} else {
 							MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 0;
-							MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-						}
-						if (playerNumberLayerBottom <= 1) {
-							MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = 400;
 							MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 						}
 						if (MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef == 280) {

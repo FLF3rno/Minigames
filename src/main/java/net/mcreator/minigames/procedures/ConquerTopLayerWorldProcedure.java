@@ -58,12 +58,6 @@ public class ConquerTopLayerWorldProcedure {
 								playerNumberLayerBottom = playerNumberLayerBottom + 1;
 							}
 						}
-						if (world instanceof ServerLevel _level) {
-							_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("" + playerNumberLayerBottom)), false);
-						}
-						if (world instanceof ServerLevel _level) {
-							_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("" + playerNumber)), false);
-						}
 						if (playerNumber <= 1) {
 							MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef = MinigamesModVariables.MapVariables.get(world).layerCountdownSpleef + 0.25;
 							MinigamesModVariables.MapVariables.get(world).markSyncDirty();

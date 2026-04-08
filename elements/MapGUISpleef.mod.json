@@ -1,0 +1,129 @@
+{
+  "_fv": 85,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 180,
+    "height": 168,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "spleefwindow.png",
+          "use1Xscale": false,
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_achievement_run",
+          "text": {
+            "fixedValue": "Maps (Spleef)"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 36,
+          "y": 17,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_start_normal",
+          "text": "Confirm",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "SelectSpleef"
+          },
+          "width": 98,
+          "height": 20,
+          "x": 164,
+          "y": 200,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "selectedoverlay.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "BalloonsSelected"
+          },
+          "x": 160,
+          "y": 36,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hotairballoons.png",
+          "use1Xscale": true,
+          "x": 170,
+          "y": 47,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "mapmargin.png",
+          "use1Xscale": true,
+          "x": 166,
+          "y": 43,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_hot_air_balloons",
+          "text": {
+            "fixedValue": "Hot Air Balloons"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 173,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_maphovered",
+          "image": "nothing.png",
+          "hoveredImage": "maphovered.png",
+          "onClick": {
+            "name": "ActivateBalloons"
+          },
+          "x": 170,
+          "y": 47,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

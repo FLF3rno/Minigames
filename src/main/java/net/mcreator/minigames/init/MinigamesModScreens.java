@@ -22,6 +22,7 @@ public class MinigamesModScreens {
 		event.register(MinigamesModMenus.CUSTOMIZE_GUI.get(), CustomizeGUIScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_CROWN_HUNT.get(), MinigameGUICrownHuntScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_SPLEEF.get(), MinigameGUISpleefScreen::new);
+		event.register(MinigamesModMenus.MAP_GUI_SPLEEF.get(), MapGUISpleefScreen::new);
 	}
 
 	public interface ScreenAccessor {

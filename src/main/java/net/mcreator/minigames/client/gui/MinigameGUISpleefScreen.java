@@ -17,6 +17,7 @@ import net.minecraft.client.gui.GuiGraphics;
 
 import net.mcreator.minigames.world.inventory.MinigameGUISpleefMenu;
 import net.mcreator.minigames.procedures.KeepInventoryCheckedProcedure;
+import net.mcreator.minigames.procedures.HideNoMapsSelectedProcedure;
 import net.mcreator.minigames.network.MinigameGUISpleefButtonMessage;
 import net.mcreator.minigames.init.MinigamesModScreens;
 
@@ -27,12 +28,14 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	private boolean menuStateUpdateActive = false;
 	private Checkbox powerup;
 	private Button button_start_normal;
+	private Button button_modify;
 	private ImageButton imagebutton_compass_16;
 	private ImageButton imagebutton_bucket;
 	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/spleefwindow.png");
 	private static final ResourceLocation IMAGE_1 = ResourceLocation.parse("minigames:textures/screens/symmetrical_shovel.png");
 	private static final ResourceLocation IMAGE_2 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
 	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
+	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/map_icon.png");
 
 	public MinigameGUISpleefScreen(MinigameGUISpleefMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -65,6 +68,10 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_spleef.tooltip_keep_inventory"), mouseX, mouseY);
 			customTooltipShown = true;
 		}
+		if (mouseX > leftPos + 168 && mouseX < leftPos + 213 && mouseY > topPos + 41 && mouseY < topPos + 115) {
+			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_spleef.tooltip_modify_the_map_pool"), mouseX, mouseY);
+			customTooltipShown = true;
+		}
 		if (!customTooltipShown)
 			this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
@@ -75,6 +82,7 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 74, this.topPos + 47, 0, 0, 32, 32, 32, 32);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 231, this.topPos + 167, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 175, this.topPos + 48, 0, 0, 32, 32, 32, 32);
 	}
 
 	@Override
@@ -89,6 +97,8 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_achievement_run"), -90, -20, -12829636, false);
+		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_powerups"), 69, 33, -12829636, false);
+		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_maps"), 180, 35, -12829636, false);
 	}
 
 	@Override
@@ -97,19 +107,28 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		button_start_normal = Button.builder(Component.translatable("gui.minigames.minigame_gui_spleef.button_start_normal"), e -> {
 			int x = MinigameGUISpleefScreen.this.x;
 			int y = MinigameGUISpleefScreen.this.y;
-			if (true) {
+			if (HideNoMapsSelectedProcedure.execute(world, entity)) {
 				ClientPacketDistributor.sendToServer(new MinigameGUISpleefButtonMessage(0, x, y, z));
 				MinigameGUISpleefButtonMessage.handleButtonAction(entity, 0, x, y, z);
 			}
 		}).bounds(this.leftPos + 38, this.topPos + 163, 98, 20).build();
 		this.addRenderableWidget(button_start_normal);
+		button_modify = Button.builder(Component.translatable("gui.minigames.minigame_gui_spleef.button_modify"), e -> {
+			int x = MinigameGUISpleefScreen.this.x;
+			int y = MinigameGUISpleefScreen.this.y;
+			if (true) {
+				ClientPacketDistributor.sendToServer(new MinigameGUISpleefButtonMessage(1, x, y, z));
+				MinigameGUISpleefButtonMessage.handleButtonAction(entity, 1, x, y, z);
+			}
+		}).bounds(this.leftPos + 169, this.topPos + 87, 43, 20).build();
+		this.addRenderableWidget(button_modify);
 		imagebutton_compass_16 = new ImageButton(this.leftPos + -95, this.topPos + 182, 36, 36,
 				new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/compass_16.png"), ResourceLocation.parse("minigames:textures/screens/selectedgamecompass.png")), e -> {
 					int x = MinigameGUISpleefScreen.this.x;
 					int y = MinigameGUISpleefScreen.this.y;
 					if (true) {
-						ClientPacketDistributor.sendToServer(new MinigameGUISpleefButtonMessage(1, x, y, z));
-						MinigameGUISpleefButtonMessage.handleButtonAction(entity, 1, x, y, z);
+						ClientPacketDistributor.sendToServer(new MinigameGUISpleefButtonMessage(2, x, y, z));
+						MinigameGUISpleefButtonMessage.handleButtonAction(entity, 2, x, y, z);
 					}
 				}) {
 			@Override
@@ -123,8 +142,8 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 					int x = MinigameGUISpleefScreen.this.x;
 					int y = MinigameGUISpleefScreen.this.y;
 					if (true) {
-						ClientPacketDistributor.sendToServer(new MinigameGUISpleefButtonMessage(2, x, y, z));
-						MinigameGUISpleefButtonMessage.handleButtonAction(entity, 2, x, y, z);
+						ClientPacketDistributor.sendToServer(new MinigameGUISpleefButtonMessage(3, x, y, z));
+						MinigameGUISpleefButtonMessage.handleButtonAction(entity, 3, x, y, z);
 					}
 				}) {
 			@Override
@@ -141,5 +160,11 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		if (powerupSelected)
 			menu.sendMenuStateUpdate(entity, 1, "powerup", true, false);
 		this.addRenderableWidget(powerup);
+	}
+
+	@Override
+	protected void containerTick() {
+		super.containerTick();
+		this.button_start_normal.visible = HideNoMapsSelectedProcedure.execute(world, entity);
 	}
 }

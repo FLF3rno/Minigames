@@ -46,6 +46,9 @@
           "onClick": {
             "name": "SpleefSettingsChosen"
           },
+          "displayCondition": {
+            "name": "HideNoMapsSelected"
+          },
           "width": 98,
           "height": 20,
           "x": 164,
@@ -135,6 +138,80 @@
           },
           "x": 361,
           "y": 218,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_powerups",
+          "text": {
+            "fixedValue": "Powerups"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 195,
+          "y": 70,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "map_icon.png",
+          "use1Xscale": false,
+          "x": 301,
+          "y": 85,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_maps",
+          "text": {
+            "fixedValue": "Maps"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 306,
+          "y": 72,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_modify_the_map_pool",
+          "text": {
+            "fixedValue": "Modify the map pool"
+          },
+          "width": 45,
+          "height": 74,
+          "x": 294,
+          "y": 78,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_modify",
+          "text": "Modify",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "OpenMapSettingsSpleef"
+          },
+          "width": 43,
+          "height": 20,
+          "x": 295,
+          "y": 124,
           "locked": false
         }
       }

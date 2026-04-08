@@ -154,9 +154,9 @@
       "registry_name": "view_achievment",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentScreen.java",
+          "src/main/java/net/mcreator/minigames/network/ViewAchievmentButtonMessage.java",
           "src/main/java/net/mcreator/minigames/world/inventory/ViewAchievmentMenu.java",
-          "src/main/java/net/mcreator/minigames/network/ViewAchievmentButtonMessage.java"
+          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentScreen.java"
         ]
       },
       "path": "~/Achievement Run"
@@ -1246,9 +1246,9 @@
       "registry_name": "minigame_gui_achievement_run",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementRunScreen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementRunMenu.java",
           "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementRunButtonMessage.java",
-          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementRunMenu.java"
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementRunScreen.java"
         ]
       },
       "path": "~/Achievement Run/settings"
@@ -1296,9 +1296,9 @@
       "registry_name": "game_compass",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/item/GameCompassItem.java",
+          "src/main/resources/assets/minigames/items/game_compass.json",
           "src/main/resources/assets/minigames/models/item/game_compass.json",
-          "src/main/resources/assets/minigames/items/game_compass.json"
+          "src/main/java/net/mcreator/minigames/item/GameCompassItem.java"
         ]
       }
     },
@@ -1826,8 +1826,8 @@
       "registry_name": "view_achievment_hunter",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentHunterScreen.java",
-          "src/main/java/net/mcreator/minigames/world/inventory/ViewAchievmentHunterMenu.java"
+          "src/main/java/net/mcreator/minigames/world/inventory/ViewAchievmentHunterMenu.java",
+          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentHunterScreen.java"
         ]
       },
       "path": "~/Achievement Run"
@@ -2267,9 +2267,9 @@
       "registry_name": "customize_gui",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/CustomizeGUIScreen.java",
           "src/main/java/net/mcreator/minigames/network/CustomizeGUIButtonMessage.java",
-          "src/main/java/net/mcreator/minigames/world/inventory/CustomizeGUIMenu.java",
-          "src/main/java/net/mcreator/minigames/client/gui/CustomizeGUIScreen.java"
+          "src/main/java/net/mcreator/minigames/world/inventory/CustomizeGUIMenu.java"
         ]
       }
     },
@@ -3096,14 +3096,14 @@
       "registry_name": "crown_helmet",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/renderer/item/CrownHelmetArmor.java",
-          "src/main/resources/assets/minigames/items/crown_helmet_helmet.json",
-          "src/main/resources/assets/minigames/models/item/crown_helmet_helmet.json",
-          "src/main/resources/assets/minigames/items/crown_helmet_leggings.json",
-          "src/main/resources/assets/minigames/items/crown_helmet_boots.json",
           "src/main/resources/assets/minigames/items/crown_helmet_chestplate.json",
           "src/main/java/net/mcreator/minigames/item/CrownHelmetItem.java",
-          "src/main/resources/assets/minigames/equipment/crown_helmet.json"
+          "src/main/resources/assets/minigames/items/crown_helmet_helmet.json",
+          "src/main/resources/assets/minigames/models/item/crown_helmet_helmet.json",
+          "src/main/resources/assets/minigames/equipment/crown_helmet.json",
+          "src/main/resources/assets/minigames/items/crown_helmet_leggings.json",
+          "src/main/resources/assets/minigames/items/crown_helmet_boots.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/item/CrownHelmetArmor.java"
         ]
       },
       "path": "~/Crown Hunt"
@@ -3536,9 +3536,9 @@
       "registry_name": "minigame_gui_crown_hunt",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUICrownHuntScreen.java",
           "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUICrownHuntMenu.java",
-          "src/main/java/net/mcreator/minigames/network/MinigameGUICrownHuntButtonMessage.java",
-          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUICrownHuntScreen.java"
+          "src/main/java/net/mcreator/minigames/network/MinigameGUICrownHuntButtonMessage.java"
         ]
       },
       "path": "~/Crown Hunt/settings"
@@ -3644,12 +3644,12 @@
       "registry_name": "crown_hunt_capture",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/crown_hunt_capture.json",
+          "src/main/resources/assets/minigames/items/crown_hunt_capture.json",
           "src/main/java/net/mcreator/minigames/block/CrownHuntCaptureBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/crown_hunt_capture.json",
           "src/main/resources/assets/minigames/blockstates/crown_hunt_capture.json",
-          "src/main/resources/assets/minigames/items/crown_hunt_capture.json",
-          "src/main/resources/assets/minigames/models/item/crown_hunt_capture.json"
+          "src/main/resources/assets/minigames/models/item/crown_hunt_capture.json",
+          "src/main/resources/assets/minigames/models/block/crown_hunt_capture.json"
         ]
       },
       "path": "~/Crown Hunt"
@@ -3685,11 +3685,11 @@
       "registry_name": "castle_bricks",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/block/CastleBricksBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/castle_bricks.json",
           "src/main/resources/assets/minigames/models/item/castle_bricks.json",
           "src/main/resources/assets/minigames/blockstates/castle_bricks.json",
-          "src/main/java/net/mcreator/minigames/block/CastleBricksBlock.java",
           "src/main/resources/assets/minigames/items/castle_bricks.json",
-          "src/main/resources/data/minigames/loot_table/blocks/castle_bricks.json",
           "src/main/resources/assets/minigames/models/block/castle_bricks.json"
         ]
       },
@@ -3768,14 +3768,14 @@
       "registry_name": "castle_stairs",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/castle_stairs_outer.json",
-          "src/main/resources/assets/minigames/models/block/castle_stairs_inner.json",
-          "src/main/resources/assets/minigames/models/block/castle_stairs.json",
-          "src/main/java/net/mcreator/minigames/block/CastleStairsBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/castle_stairs.json",
           "src/main/resources/assets/minigames/blockstates/castle_stairs.json",
-          "src/main/resources/assets/minigames/models/item/castle_stairs.json",
-          "src/main/resources/assets/minigames/items/castle_stairs.json"
+          "src/main/resources/assets/minigames/models/block/castle_stairs_inner.json",
+          "src/main/resources/data/minigames/loot_table/blocks/castle_stairs.json",
+          "src/main/resources/assets/minigames/models/block/castle_stairs.json",
+          "src/main/resources/assets/minigames/models/block/castle_stairs_outer.json",
+          "src/main/java/net/mcreator/minigames/block/CastleStairsBlock.java",
+          "src/main/resources/assets/minigames/items/castle_stairs.json",
+          "src/main/resources/assets/minigames/models/item/castle_stairs.json"
         ]
       },
       "path": "~/Crown Hunt"
@@ -4012,8 +4012,8 @@
       "registry_name": "golden_spider",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/renderer/GoldenSpiderRenderer.java",
           "src/main/java/net/mcreator/minigames/entity/GoldenSpiderEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/GoldenSpiderRenderer.java",
           "src/main/resources/assets/minigames/items/golden_spider_spawn_egg.json"
         ]
       },
@@ -4042,6 +4042,10 @@
       "registry_name": "start_spleef",
       "metadata": {
         "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
           {
             "name": "x",
             "type": "number"
@@ -4137,9 +4141,9 @@
       "registry_name": "spleef_shovel",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/item/SpleefShovelItem.java",
           "src/main/resources/assets/minigames/models/item/spleef_shovel.json",
-          "src/main/resources/assets/minigames/items/spleef_shovel.json"
+          "src/main/resources/assets/minigames/items/spleef_shovel.json",
+          "src/main/java/net/mcreator/minigames/item/SpleefShovelItem.java"
         ]
       },
       "path": "~/Spleef"
@@ -4481,8 +4485,8 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/items/thrusters.json",
-          "src/main/resources/assets/minigames/models/item/thrusters.json",
-          "src/main/java/net/mcreator/minigames/item/ThrustersItem.java"
+          "src/main/java/net/mcreator/minigames/item/ThrustersItem.java",
+          "src/main/resources/assets/minigames/models/item/thrusters.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4727,9 +4731,9 @@
       "registry_name": "snowbomb",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/models/item/snowbomb.json",
           "src/main/java/net/mcreator/minigames/item/SnowbombItem.java",
-          "src/main/resources/assets/minigames/items/snowbomb.json",
-          "src/main/resources/assets/minigames/models/item/snowbomb.json"
+          "src/main/resources/assets/minigames/items/snowbomb.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -5420,6 +5424,10 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
             "name": "x",
             "type": "number"
           },
@@ -5472,6 +5480,174 @@
         ]
       },
       "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "MapGUISpleef",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "map_gui_spleef",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/MapGUISpleefButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/MapGUISpleefScreen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/MapGUISpleefMenu.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "BalloonsSelected",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "balloons_selected",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BalloonsSelectedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "BalloonsNotSelected",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "balloons_not_selected",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BalloonsNotSelectedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "ActivateBalloons",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "activate_balloons",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ActivateBalloonsProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "DeactivateBalloons",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "deactivate_balloons",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DeactivateBalloonsProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "OpenMapSettingsSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "open_map_settings_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OpenMapSettingsSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Settings"
+    },
+    {
+      "name": "HideNoMapsSelected",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hide_no_maps_selected",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HideNoMapsSelectedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Settings"
     }
   ],
   "variable_elements": [
@@ -5936,6 +6112,12 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
+    },
+    {
+      "name": "mapsSpleef",
+      "type": "number",
+      "scope": "map",
+      "value": "1.0"
     }
   ],
   "sound_elements": [
@@ -6160,8 +6342,8 @@
     ],
     "ITEMS:minecraft:enchantable/durability": [
       "~CUSTOM:SnowShovel",
-      "~CUSTOM:GrapplingHook",
-      "~CUSTOM:SymmetricalShovel"
+      "~CUSTOM:SymmetricalShovel",
+      "~CUSTOM:GrapplingHook"
     ]
   },
   "tab_element_order": {},
@@ -6320,7 +6502,17 @@
       "item.minigames.hypnotic_pendulum": "Hypnotic Pendulum",
       "item.minigames.hypnotic_pendulum.description_1": "    §2Hypnotize a player making them break blocks with less precision and slightly obscuring their vision",
       "item.minigames.hypnotic_pendulum.description_0": "On §6right click:",
-      "effect.minigames.hypnotized": "Hypnotized"
+      "effect.minigames.hypnotized": "Hypnotized",
+      "gui.minigames.map_gui_spleef.powerup": "",
+      "gui.minigames.map_gui_spleef.button_start_normal": "Confirm",
+      "gui.minigames.map_gui_spleef.tooltip_keep_inventory": "Enable powerups",
+      "gui.minigames.map_gui_spleef.label_achievement_run": "Maps (Spleef)",
+      "gui.minigames.map_gui_spleef.label_hot_air_balloons": "Hot Air Balloons",
+      "gui.minigames.minigame_gui_spleef.label_powerups": "Powerups",
+      "gui.minigames.minigame_gui_spleef.tooltip_modify_the_map_pool": "Modify the map pool",
+      "gui.minigames.minigame_gui_spleef.label_maps": "Maps",
+      "gui.minigames.minigame_gui_spleef.button_modify": "Modify",
+      "gui.minigames.minigame_gui_spleef.button_no_maps_selected": "No maps chosen"
     }
   },
   "metadata": {

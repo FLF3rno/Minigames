@@ -22,11 +22,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
 
-public class MinigameGUISpleefMenu extends AbstractContainerMenu implements MinigamesModMenus.MenuAccessor {
+public class MapGUISpleefMenu extends AbstractContainerMenu implements MinigamesModMenus.MenuAccessor {
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override
 		public Object put(String key, Object value) {
-			if (!this.containsKey(key) && this.size() >= 15)
+			if (!this.containsKey(key) && this.size() >= 8)
 				return null;
 			return super.put(key, value);
 		}
@@ -42,8 +42,8 @@ public class MinigameGUISpleefMenu extends AbstractContainerMenu implements Mini
 	private Entity boundEntity = null;
 	private BlockEntity boundBlockEntity = null;
 
-	public MinigameGUISpleefMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-		super(MinigamesModMenus.MINIGAME_GUI_SPLEEF.get(), id);
+	public MapGUISpleefMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+		super(MinigamesModMenus.MAP_GUI_SPLEEF.get(), id);
 		this.entity = inv.player;
 		this.world = inv.player.level();
 		this.internal = new ItemStackHandler(0);

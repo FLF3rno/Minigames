@@ -6,8 +6,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.Event;
 
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,10 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -51,10 +46,10 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			targetX = x;
 			targetZ = z;
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
+			}
 			if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
-				if (event instanceof ICancellableEvent _cancellable) {
-					_cancellable.setCanceled(true);
-				}
 				rng = Mth.nextInt(RandomSource.create(), 1, 4);
 				if (rng == 1) {
 					targetX = targetX + 1;
@@ -73,14 +68,7 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
 						});
 					}
-					world.setBlock(BlockPos.containing(targetX, 100, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					layer = 0;
-					for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index0++) {
-						layer = layer + 1;
-						world.setBlock(BlockPos.containing(targetX, 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					}
-					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef, targetZ))).getBlock() && entity instanceof LivingEntity _livEnt13
-							&& _livEnt13.hasEffect(MinigamesModMobEffects.HYPNOTIZED))) {
+					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, y, targetZ))).getBlock())) {
 						{
 							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 1.25;
@@ -88,9 +76,12 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						}
 					}
 					SpleefPowerupProcedure.execute(world, entity);
-					if (world instanceof ServerLevel _level)
-						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-								"/kill @e[type=item]");
+					world.setBlock(BlockPos.containing(targetX, 100, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					layer = 0;
+					for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index0++) {
+						layer = layer + 1;
+						world.setBlock(BlockPos.containing(targetX, 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					}
 				} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SNOW_SHOVEL.get()) {
 					if (world instanceof ServerLevel _level) {
 						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
@@ -102,17 +93,15 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						_vars.markSyncDirty();
 					}
 					SpleefPowerupProcedure.execute(world, entity);
+					world.setBlock(BlockPos.containing(targetX, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					world.setBlock(BlockPos.containing(targetX + 1, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					world.setBlock(BlockPos.containing(targetX - 1, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					world.setBlock(BlockPos.containing(targetX, y, targetZ + 1), Blocks.AIR.defaultBlockState(), 3);
 					world.setBlock(BlockPos.containing(targetX, y, targetZ - 1), Blocks.AIR.defaultBlockState(), 3);
 					world.setBlock(BlockPos.containing(targetX, y + 1, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					world.setBlock(BlockPos.containing(targetX, y - 1, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					if (world instanceof ServerLevel _level)
-						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-								"/kill @e[type=item]");
 				} else {
-					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, y, targetZ))).getBlock() && entity instanceof LivingEntity _livEnt28 && _livEnt28.hasEffect(MinigamesModMobEffects.HYPNOTIZED))) {
+					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, y, targetZ))).getBlock())) {
 						{
 							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.75;
@@ -120,9 +109,7 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						}
 					}
 					SpleefPowerupProcedure.execute(world, entity);
-					if (world instanceof ServerLevel _level)
-						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-								"/kill @e[type=item]");
+					world.setBlock(BlockPos.containing(targetX, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
 				}
 			}
 		}

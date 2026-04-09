@@ -26,17 +26,18 @@ public class PlaceRandomMapSpleefProcedure {
 			if (world instanceof ServerLevel _level) {
 				_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal("No map was selected!").withColor(0xcc1919), false);
 			}
-		}
-		if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 1) == 1) {
-			currentIndex = currentIndex + 1;
-			if (rng == currentIndex) {
-				PlaceBalloonsSpleefProcedure.execute(world, x, y, z);
+		} else {
+			if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 1) == 1) {
+				currentIndex = currentIndex + 1;
+				if (rng == currentIndex) {
+					PlaceBalloonsSpleefProcedure.execute(world, x, y, z);
+				}
 			}
-		}
-		if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 2) == 2) {
-			currentIndex = currentIndex + 1;
-			if (rng == currentIndex) {
-				PlaceSolarSystemSpleefProcedure.execute(world, x, y, z);
+			if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 2) == 2) {
+				currentIndex = currentIndex + 1;
+				if (rng == currentIndex) {
+					PlaceSolarSystemSpleefProcedure.execute(world, x, y, z);
+				}
 			}
 		}
 	}

@@ -23,7 +23,7 @@ public class PlaceBalloonsSpleefProcedure {
 					"/execute in minigames:spleef_dimension run fill -150 200 -150 150 70 150 air");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run place template minigames:balloon_spleef -60 99 -50");
+					"/execute in minigames:spleef_dimension run place template minigames:spleef_balloons -60 99 -50");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run fill -30 85 -30 30 123 30 air");
@@ -32,7 +32,7 @@ public class PlaceBalloonsSpleefProcedure {
 					"/execute in minigames:spleef_dimension run spreadplayers 0 0 3 15 false @a");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run place template minigames:balloon_spleef -60 99 -50");
+					"/execute in minigames:spleef_dimension run place template minigames:spleef_balloons -60 99 -50");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute as @a at @s run tp @s ~ ~ ~ facing 0 124 0");

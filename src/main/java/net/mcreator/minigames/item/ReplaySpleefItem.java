@@ -29,7 +29,7 @@ public class ReplaySpleefItem extends Item {
 	@Override
 	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 		InteractionResult ar = super.use(world, entity, hand);
-		StartSpleefProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
+		StartSpleefProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ());
 		return ar;
 	}
 }

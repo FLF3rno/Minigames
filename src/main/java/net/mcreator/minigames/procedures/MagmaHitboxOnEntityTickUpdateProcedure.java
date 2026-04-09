@@ -36,7 +36,7 @@ public class MagmaHitboxOnEntityTickUpdateProcedure {
 					"/execute as @e[type=minigames:magma_hitbox,limit=1,sort=nearest] at @s run tp @s ^ ^ ^2");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @e[type=minigames:magma_hitbox,limit=1,sort=nearest] at @s run fill ^1 ^3 ^1 ^-1 ^-1 ^-1 minigames:exploding_magma replace #minigames:spleefables");
+					"/execute as @e[type=minigames:magma_hitbox,limit=1,sort=nearest] at @s run fill ^1 ^2 ^1 ^-1 ^-3 ^-1 minigames:exploding_magma replace #minigames:spleefables");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/playsound minecraft:block.lava.extinguish block @a ~ ~ ~ 0.3 1.2");

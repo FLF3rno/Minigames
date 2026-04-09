@@ -10,11 +10,7 @@ import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
-import net.mcreator.minigames.client.renderer.MagmaHitboxRenderer;
-import net.mcreator.minigames.client.renderer.GrapplingHitboxRenderer;
-import net.mcreator.minigames.client.renderer.GoldenZombieRenderer;
-import net.mcreator.minigames.client.renderer.GoldenSpiderRenderer;
-import net.mcreator.minigames.client.renderer.GoldenSkeletonRenderer;
+import net.mcreator.minigames.client.renderer.*;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class MinigamesModEntityRenderers {
@@ -29,6 +25,6 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.GRAPPLING_HITBOX.get(), GrapplingHitboxRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_HITBOX.get(), MagmaHitboxRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_DART_PROJECTILE.get(), ThrownItemRenderer::new);
-		event.registerEntityRenderer(MinigamesModEntities.GLUE_PROJECTILE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.GLUE_PROJECTILE.get(), GlueProjectileRenderer::new);
 	}
 }

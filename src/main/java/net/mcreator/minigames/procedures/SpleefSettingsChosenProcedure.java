@@ -20,6 +20,6 @@ public class SpleefSettingsChosenProcedure {
 		}
 		if (entity instanceof Player _player)
 			_player.closeContainer();
-		StartSpleefProcedure.execute(world, x, y, z, entity);
+		StartSpleefProcedure.execute(world, x, y, z);
 	}
 }

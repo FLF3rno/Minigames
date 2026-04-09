@@ -6,8 +6,29 @@
     "texture": "magmadart",
     "customModelName": "Normal",
     "guiTexture": "",
-    "customProperties": {},
-    "states": [],
+    "customProperties": {
+      "shockwave": {
+        "name": "MagmaDartPropertyValueProvider"
+      }
+    },
+    "states": [
+      {
+        "renderType": 0,
+        "texture": "magmashockwave",
+        "customModelName": "Normal",
+        "stateMap": [
+          {
+            "property": {
+              "min": -1.7976931348623157E308,
+              "max": 1.7976931348623157E308,
+              "name": "CUSTOM:shockwave",
+              "type": "number"
+            },
+            "value": 1.0
+          }
+        ]
+      }
+    ],
     "animations": [],
     "name": "Magma Dart",
     "rarity": "COMMON",

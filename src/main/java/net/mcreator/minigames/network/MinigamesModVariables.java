@@ -251,7 +251,7 @@ public class MinigamesModVariables {
 		public double spleefAlivePlayers = 0;
 		public double gapBetweenLayersSpleef = 0;
 		public boolean spleefPowerups = false;
-		public double mapsSpleef = 0.0;
+		public double mapsSpleef = 3.0;
 		public String sky = "normal";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {

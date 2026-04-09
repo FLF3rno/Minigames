@@ -4042,10 +4042,6 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
             "name": "x",
             "type": "number"
           },
@@ -5019,13 +5015,14 @@
       "name": "MagmaDart",
       "type": "item",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "magma_dart",
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/models/item/magma_dart.json",
           "src/main/java/net/mcreator/minigames/item/MagmaDartItem.java",
-          "src/main/resources/assets/minigames/items/magma_dart.json"
+          "src/main/resources/assets/minigames/items/magma_dart.json",
+          "src/main/resources/assets/minigames/models/item/magma_dart_0.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -5120,7 +5117,7 @@
       "name": "MagmaDartProjectileProjectileHitsBlock",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "magma_dart_projectile_projectile_hits_block",
       "metadata": {
         "dependencies": [
@@ -5400,10 +5397,6 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
             "name": "x",
             "type": "number"
           },
@@ -5481,10 +5474,6 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
             "name": "world",
             "type": "world"
           }
@@ -5492,30 +5481,6 @@
         "return_type": "logic",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BalloonsSelectedProcedure.java"
-        ]
-      },
-      "path": "~/Spleef/Maps"
-    },
-    {
-      "name": "BalloonsNotSelected",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "balloons_not_selected",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/BalloonsNotSelectedProcedure.java"
         ]
       },
       "path": "~/Spleef/Maps"
@@ -5529,39 +5494,12 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
             "name": "world",
             "type": "world"
           }
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ActivateBalloonsProcedure.java"
-        ]
-      },
-      "path": "~/Spleef/Maps"
-    },
-    {
-      "name": "DeactivateBalloons",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "deactivate_balloons",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DeactivateBalloonsProcedure.java"
         ]
       },
       "path": "~/Spleef/Maps"
@@ -5675,10 +5613,11 @@
       "name": "GlueProjectile",
       "type": "projectile",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "glue_projectile",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/GlueProjectileRenderer.java",
           "src/main/java/net/mcreator/minigames/entity/GlueProjectileEntity.java"
         ]
       },
@@ -5906,6 +5845,91 @@
           "src/main/java/net/mcreator/minigames/procedures/DebugSetSkyProcedure.java"
         ]
       }
+    },
+    {
+      "name": "MagmaDartPropertyValueProvider",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "magma_dart_property_value_provider",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MagmaDartPropertyValueProviderProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "PlaceSolarSystemSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "place_solar_system_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlaceSolarSystemSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "SolarSystemSelected",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "solar_system_selected",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SolarSystemSelectedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "ActivateSolarSystem",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "activate_solar_system",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ActivateSolarSystemProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
     }
   ],
   "variable_elements": [
@@ -6375,7 +6399,7 @@
       "name": "mapsSpleef",
       "type": "number",
       "scope": "map",
-      "value": "0.0"
+      "value": "3.0"
     },
     {
       "name": "sky",
@@ -6612,7 +6636,11 @@
       "Blocks.WOOL#13",
       "Blocks.WOOL#14",
       "Blocks.WOOL#15",
-      "CUSTOM:SpreadingGlue"
+      "CUSTOM:SpreadingGlue",
+      "Blocks.RESIN_BLOCK",
+      "Blocks.RESIN_BRICKS",
+      "Blocks.CHISELED_RESIN_BRICKS",
+      "Blocks.CONCRETE#1"
     ],
     "ITEMS:minecraft:enchantable/durability": [
       "~CUSTOM:SnowShovel",
@@ -6791,7 +6819,8 @@
       "item.minigames.glue_dart": "Glue Dart",
       "item.minigames.glue_dart.description_0": "On §6right click:",
       "item.minigames.glue_dart.description_1": "    §2Fire a dart that fills all gaps in the layer for 10 seconds",
-      "item.minigames.spreading_glue": "Spreading Glue"
+      "item.minigames.spreading_glue": "Spreading Glue",
+      "gui.minigames.map_gui_spleef.label_solar_system": "Solar System"
     }
   },
   "metadata": {

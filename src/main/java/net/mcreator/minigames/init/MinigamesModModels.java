@@ -9,6 +9,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.api.distmarker.Dist;
 
 import net.mcreator.minigames.client.model.Modelspider;
+import net.mcreator.minigames.client.model.Modeldart;
 import net.mcreator.minigames.client.model.Modelcrown;
 
 @EventBusSubscriber(Dist.CLIENT)
@@ -17,5 +18,6 @@ public class MinigamesModModels {
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(Modelcrown.LAYER_LOCATION, Modelcrown::createBodyLayer);
 		event.registerLayerDefinition(Modelspider.LAYER_LOCATION, Modelspider::createBodyLayer);
+		event.registerLayerDefinition(Modeldart.LAYER_LOCATION, Modeldart::createBodyLayer);
 	}
 }

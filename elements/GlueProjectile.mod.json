@@ -15,8 +15,8 @@
     "power": 1.0,
     "damage": 0.0,
     "knockback": 0,
-    "entityModel": "Default",
-    "customModelTexture": "",
+    "entityModel": "Modeldart",
+    "customModelTexture": "gluedartproj.png",
     "modelWidth": 0.5,
     "modelHeight": 0.5,
     "onHitsBlock": {

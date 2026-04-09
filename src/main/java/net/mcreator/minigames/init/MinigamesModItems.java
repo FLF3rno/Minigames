@@ -6,10 +6,15 @@ package net.mcreator.minigames.init;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.resources.ResourceLocation;
 
 import net.mcreator.minigames.item.*;
 import net.mcreator.minigames.MinigamesMod;
@@ -67,5 +72,13 @@ public class MinigamesModItems {
 
 	private static DeferredItem<Item> block(DeferredHolder<Block, Block> block, Item.Properties properties) {
 		return REGISTRY.registerItem(block.getId().getPath(), prop -> new BlockItem(block.get(), prop), properties);
+	}
+
+	@EventBusSubscriber(Dist.CLIENT)
+	public static class ItemsClientSideHandler {
+		@SubscribeEvent
+		public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event) {
+			event.register(ResourceLocation.parse("minigames:magma_dart/shockwave"), MagmaDartItem.ShockwaveProperty.MAP_CODEC);
+		}
 	}
 }

@@ -15,9 +15,7 @@ import net.mcreator.minigames.MinigamesMod;
 import java.util.ArrayList;
 
 public class StartSpleefProcedure {
-	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
-		if (entity == null)
-			return;
+	public static void execute(LevelAccessor world, double x, double y, double z) {
 		MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers = world.players().size();
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
@@ -68,7 +66,7 @@ public class StartSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run tp @a 0 121 0");
-		PlaceRandomMapSpleefProcedure.execute(world, x, y, z, entity);
+		PlaceRandomMapSpleefProcedure.execute(world, x, y, z);
 		MinigamesModVariables.MapVariables.get(world).playingSpleef = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(10, () -> {

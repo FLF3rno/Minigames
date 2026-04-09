@@ -167,5 +167,6 @@
   "item.minigames.glue_dart": "Glue Dart",
   "item.minigames.glue_dart.description_0": "On §6right click:",
   "item.minigames.glue_dart.description_1": "    §2Fire a dart that fills all gaps in the layer for 10 seconds",
-  "item.minigames.spreading_glue": "Spreading Glue"
+  "item.minigames.spreading_glue": "Spreading Glue",
+  "gui.minigames.map_gui_spleef.label_solar_system": "Solar System"
 }

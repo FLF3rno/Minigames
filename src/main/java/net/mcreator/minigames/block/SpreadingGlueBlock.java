@@ -6,31 +6,15 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.util.RandomSource;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
 
 public class SpreadingGlueBlock extends Block {
-	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 14, 16);
-
 	public SpreadingGlueBlock(BlockBehaviour.Properties properties) {
 		super(properties.sound(SoundType.SLIME_BLOCK).strength(1f, 0f).friction(0.8f).speedFactor(0.85f).jumpFactor(0.7f));
-	}
-
-	@Override
-	protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return SHAPE;
-	}
-
-	@Override
-	protected VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return SHAPE;
 	}
 
 	@Override

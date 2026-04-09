@@ -3967,8 +3967,7 @@
         "files": [
           "src/main/java/net/mcreator/minigames/command/PhasmophobiaCommand.java"
         ]
-      },
-      "path": "~/Phasmophobia"
+      }
     },
     {
       "name": "GoldenSkeleton",
@@ -5851,6 +5850,62 @@
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "Skybox",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "skybox",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "skyRenderEvent",
+            "type": "skyRenderEvent"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SkyboxProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "Sky",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sky",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/SkyCommand.java"
+        ]
+      }
+    },
+    {
+      "name": "DebugSetSky",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debug_set_sky",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DebugSetSkyProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [
@@ -6320,7 +6375,13 @@
       "name": "mapsSpleef",
       "type": "number",
       "scope": "map",
-      "value": "1.0"
+      "value": "0.0"
+    },
+    {
+      "name": "sky",
+      "type": "string",
+      "scope": "map",
+      "value": "normal"
     }
   ],
   "sound_elements": [
@@ -6816,10 +6877,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "name": "Phasmophobia",
-        "children": []
       },
       {
         "name": "Spleef",

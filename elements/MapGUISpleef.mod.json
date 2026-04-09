@@ -87,6 +87,20 @@
         }
       },
       {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_maphovered",
+          "image": "nothing.png",
+          "hoveredImage": "maphovered.png",
+          "onClick": {
+            "name": "ActivateBalloons"
+          },
+          "x": 170,
+          "y": 47,
+          "locked": false
+        }
+      },
+      {
         "type": "label",
         "data": {
           "name": "label_hot_air_balloons",
@@ -98,22 +112,58 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "x": 173,
-          "y": 108,
+          "x": 172,
+          "y": 107,
           "locked": false
         }
       },
       {
-        "type": "imagebutton",
+        "type": "image",
         "data": {
-          "name": "imagebutton_maphovered",
-          "image": "nothing.png",
-          "hoveredImage": "maphovered.png",
-          "onClick": {
-            "name": "ActivateBalloons"
-          },
-          "x": 170,
-          "y": 47,
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 166,
+          "y": 121,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 121,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 43,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 278,
+          "y": 121,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 278,
+          "y": 43,
           "locked": false
         }
       }

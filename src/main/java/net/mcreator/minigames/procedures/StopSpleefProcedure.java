@@ -37,5 +37,7 @@ public class StopSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run forceload remove -100 -100 100 100");
+		MinigamesModVariables.MapVariables.get(world).sky = "normal";
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}
 }

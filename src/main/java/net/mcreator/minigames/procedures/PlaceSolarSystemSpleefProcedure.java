@@ -54,5 +54,11 @@ public class PlaceSolarSystemSpleefProcedure {
 					"/execute as @a at @s run tp @s ~ ~ ~ facing 0 120 0");
 		MinigamesModVariables.MapVariables.get(world).sky = "space";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/fill -1 124 -41 11 132 -41 minecraft:barrier");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/fill -48 103 -2 -48 127 -23 minecraft:barrier");
 	}
 }

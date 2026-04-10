@@ -4,14 +4,20 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 public class ThrustersRightclickedProcedure {
+	private static final double SPLEEF_MAX_COORD = 30;
+
 	public static void execute(Entity entity, ItemStack itemstack) {
 		if (entity == null)
+			return;
+		if (isOutOfBoundsInSpleef(entity))
 			return;
 		if (!entity.level().isClientSide()) {
 			itemstack.shrink(1);
@@ -29,5 +35,12 @@ public class ThrustersRightclickedProcedure {
 				}
 			}
 		}
+	}
+
+	private static boolean isOutOfBoundsInSpleef(Entity entity) {
+		ResourceLocation spleefDimension = ResourceLocation.parse("minigames:spleef_dimension");
+		if (!entity.level().dimension().location().equals(spleefDimension))
+			return false;
+		return Math.abs(entity.getX()) > SPLEEF_MAX_COORD || Math.abs(entity.getZ()) > SPLEEF_MAX_COORD;
 	}
 }

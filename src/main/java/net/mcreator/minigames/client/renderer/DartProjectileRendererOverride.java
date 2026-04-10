@@ -15,5 +15,6 @@ public class DartProjectileRendererOverride {
 		event.registerEntityRenderer(MinigamesModEntities.ICE_DART_PROJECTILE.get(), IceDartProjectileRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_DART_PROJECTILE.get(), MagmaDartProjectileRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.GLUE_PROJECTILE.get(), GlueProjectileRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.GRAPPLE.get(), GrappleProjectileRenderer::new);
 	}
 }

@@ -22,7 +22,7 @@ public class Modeldart<T extends dart> extends EntityModel<T> {
 						.addBox(0.0F, -0.525F, -5.85F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).texOffs(0, 0)
 						.addBox(-0.5F, -0.525F, -3.85F, 1.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)).texOffs(8, 8)
 						.addBox(0.0F, -1.525F, 0.85F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)),
-				PartPose.offsetAndRotation(0.0F, 16.125F, -0.95F, 3.1416F, 0.0F, 1.5708F));
+				PartPose.offsetAndRotation(0.5F, 24.125F, -0.05F, 0.0F, 1.5708F, 0.0F));
 
 		PartDefinition cube_r1 = bone.addOrReplaceChild("cube_r1",
 				CubeListBuilder.create().texOffs(8, 8).addBox(-0.5F, -1.5F, -3.0F, 0.0F, 3.0F, 4.0F,

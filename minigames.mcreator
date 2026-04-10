@@ -5813,40 +5813,6 @@
       }
     },
     {
-      "name": "Sky",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sky",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/SkyCommand.java"
-        ]
-      }
-    },
-    {
-      "name": "DebugSetSky",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debug_set_sky",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "arguments",
-            "type": "cmdcontext"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DebugSetSkyProcedure.java"
-        ]
-      }
-    },
-    {
       "name": "MagmaDartPropertyValueProvider",
       "type": "procedure",
       "compiles": true,

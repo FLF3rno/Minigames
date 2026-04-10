@@ -8,25 +8,25 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.MultiBufferSource;
 
-import net.mcreator.minigames.entity.IceDartProjectileEntity;
-import net.mcreator.minigames.client.model.Modeldart;
+import net.mcreator.minigames.entity.GrappleEntity;
+import net.mcreator.minigames.client.model.Modelgrapple;
 
 import com.mojang.math.Axis;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 
-public class IceDartProjectileRenderer extends EntityRenderer<IceDartProjectileEntity, LivingEntityRenderState> {
-	private static final ResourceLocation texture = ResourceLocation.parse("minigames:textures/entities/icedartproj.png");
-	private final Modeldart model;
+public class GrappleProjectileRenderer extends EntityRenderer<GrappleEntity, LivingEntityRenderState> {
+	private static final ResourceLocation TEXTURE = ResourceLocation.parse("minigames:textures/entities/grapple.png");
+	private final Modelgrapple model;
 
-	public IceDartProjectileRenderer(EntityRendererProvider.Context context) {
+	public GrappleProjectileRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		model = new Modeldart(context.bakeLayer(Modeldart.LAYER_LOCATION));
+		model = new Modelgrapple(context.bakeLayer(Modelgrapple.LAYER_LOCATION));
 	}
 
 	@Override
 	public void render(LivingEntityRenderState state, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
-		VertexConsumer vb = bufferIn.getBuffer(RenderType.entityCutout(texture));
+		VertexConsumer vb = bufferIn.getBuffer(RenderType.entityCutout(TEXTURE));
 		poseStack.pushPose();
 		poseStack.translate(0, -0.75, 0);
 		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 90));
@@ -43,7 +43,7 @@ public class IceDartProjectileRenderer extends EntityRenderer<IceDartProjectileE
 	}
 
 	@Override
-	public void extractRenderState(IceDartProjectileEntity entity, LivingEntityRenderState state, float partialTicks) {
+	public void extractRenderState(GrappleEntity entity, LivingEntityRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.xRot = entity.getXRot(partialTicks);
 		state.yRot = entity.getYRot(partialTicks);

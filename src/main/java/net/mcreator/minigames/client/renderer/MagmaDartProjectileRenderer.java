@@ -28,8 +28,9 @@ public class MagmaDartProjectileRenderer extends EntityRenderer<MagmaDartProject
 	public void render(LivingEntityRenderState state, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
 		VertexConsumer vb = bufferIn.getBuffer(RenderType.entityCutout(texture));
 		poseStack.pushPose();
-		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot));
-		poseStack.mulPose(Axis.XP.rotationDegrees(-state.xRot));
+		poseStack.translate(0, -0.75, 0);
+		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 90));
+		poseStack.mulPose(Axis.ZP.rotationDegrees(state.xRot));
 		model.setupAnim(state);
 		model.renderToBuffer(poseStack, vb, packedLightIn, OverlayTexture.NO_OVERLAY);
 		poseStack.popPose();

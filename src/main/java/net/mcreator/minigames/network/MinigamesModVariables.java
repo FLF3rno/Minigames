@@ -250,9 +250,10 @@ public class MinigamesModVariables {
 		public double layerCountdownSpleef = 0;
 		public double spleefAlivePlayers = 0;
 		public double gapBetweenLayersSpleef = 0;
-		public boolean spleefPowerups = false;
+		public boolean spleefPowerups = true;
 		public double mapsSpleef = 3.0;
 		public String sky = "normal";
+		public String currentMapSpleef = "\"\"";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -320,6 +321,7 @@ public class MinigamesModVariables {
 			spleefPowerups = nbt.getBooleanOr("spleefPowerups", false);
 			mapsSpleef = nbt.getDoubleOr("mapsSpleef", 0);
 			sky = nbt.getStringOr("sky", "");
+			currentMapSpleef = nbt.getStringOr("currentMapSpleef", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -388,6 +390,7 @@ public class MinigamesModVariables {
 			nbt.putBoolean("spleefPowerups", spleefPowerups);
 			nbt.putDouble("mapsSpleef", mapsSpleef);
 			nbt.putString("sky", sky);
+			nbt.putString("currentMapSpleef", currentMapSpleef);
 			return nbt;
 		}
 

@@ -44,6 +44,10 @@ public class RemoveVanishingKeepInvCrownProcedure {
 					_vars.markSyncDirty();
 				}
 			}
+		} else if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).helmet.getItem() == Blocks.AIR.asItem()) {
+			if (entity instanceof LivingEntity _living) {
+				_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Blocks.AIR));
+			}
 		}
 	}
 }

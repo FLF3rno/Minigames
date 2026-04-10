@@ -16,7 +16,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.GuiGraphics;
 
 import net.mcreator.minigames.world.inventory.MinigameGUISpleefMenu;
-import net.mcreator.minigames.procedures.KeepInventoryCheckedProcedure;
+import net.mcreator.minigames.procedures.PowerupChecklistProcedure;
 import net.mcreator.minigames.procedures.HideNoMapsSelectedProcedure;
 import net.mcreator.minigames.network.MinigameGUISpleefButtonMessage;
 import net.mcreator.minigames.init.MinigamesModScreens;
@@ -152,7 +152,7 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 			}
 		};
 		this.addRenderableWidget(imagebutton_bucket);
-		boolean powerupSelected = KeepInventoryCheckedProcedure.execute();
+		boolean powerupSelected = PowerupChecklistProcedure.execute(world);
 		powerup = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_spleef.powerup"), this.font).pos(this.leftPos + 80, this.topPos + 92).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "powerup", value, false);

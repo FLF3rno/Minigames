@@ -23,12 +23,6 @@ public class PlaceBalloonsSpleefProcedure {
 					"/execute in minigames:spleef_dimension run fill -150 200 -150 150 70 150 air");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run place template minigames:spleef_balloons -60 99 -50");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run fill -30 85 -30 30 123 30 air");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run spreadplayers 0 0 3 15 false @a");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
@@ -42,5 +36,7 @@ public class PlaceBalloonsSpleefProcedure {
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"time set midnight");
 		}
+		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "balloons";
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}
 }

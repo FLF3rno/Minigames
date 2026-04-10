@@ -8,6 +8,7 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -43,9 +45,12 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 		double targetX = 0;
 		double targetZ = 0;
 		double rng = 0;
+		double targetY = 0;
+		BlockState block = Blocks.AIR.defaultBlockState();
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			targetX = x;
 			targetZ = z;
+			targetY = y;
 			if (blockstate.is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);
@@ -62,7 +67,12 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 				} else if (rng == 4) {
 					targetZ = targetZ - 1;
 				}
-				world.setBlock(BlockPos.containing(targetX, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
+				world.levelEvent(2001, BlockPos.containing(targetX, targetY, targetZ), Block.getId((world.getBlockState(BlockPos.containing(targetX, targetY, targetZ)))));
+				block = world.getBlockState(BlockPos.containing(targetX, targetY, targetZ));
+				if (!(entity instanceof ServerPlayer)) {
+					world.playSound(null, BlockPos.containing(targetX, targetY, targetZ), block.getSoundType().getBreakSound(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+				}
+				world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 			}
 			if (blockstate.is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SYMMETRICAL_SHOVEL.get()) {
@@ -70,7 +80,7 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
 						});
 					}
-					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, y, targetZ))).getBlock())) {
+					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, targetY, targetZ))).getBlock())) {
 						{
 							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 1.25;
@@ -78,11 +88,23 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						}
 					}
 					SpleefPowerupProcedure.execute(world, entity);
-					world.setBlock(BlockPos.containing(targetX, 100, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					targetY = 100;
+					world.levelEvent(2001, BlockPos.containing(targetX, targetY, targetZ), Block.getId((world.getBlockState(BlockPos.containing(targetX, targetY, targetZ)))));
+					block = world.getBlockState(BlockPos.containing(targetX, targetY, targetZ));
+					if (!(entity instanceof ServerPlayer)) {
+						world.playSound(null, BlockPos.containing(targetX, targetY, targetZ), block.getSoundType().getBreakSound(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+					}
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					layer = 0;
 					for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index0++) {
 						layer = layer + 1;
-						world.setBlock(BlockPos.containing(targetX, 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef, targetZ), Blocks.AIR.defaultBlockState(), 3);
+						targetY = 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef;
+						world.levelEvent(2001, BlockPos.containing(targetX, targetY, targetZ), Block.getId((world.getBlockState(BlockPos.containing(targetX, targetY, targetZ)))));
+						block = world.getBlockState(BlockPos.containing(targetX, targetY, targetZ));
+						if (!(entity instanceof ServerPlayer)) {
+							world.playSound(null, BlockPos.containing(targetX, targetY, targetZ), block.getSoundType().getBreakSound(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+						}
+						world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					}
 				} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SNOW_SHOVEL.get()) {
 					if (world instanceof ServerLevel _level) {
@@ -95,15 +117,22 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						_vars.markSyncDirty();
 					}
 					SpleefPowerupProcedure.execute(world, entity);
-					world.setBlock(BlockPos.containing(targetX, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					world.setBlock(BlockPos.containing(targetX + 1, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					world.setBlock(BlockPos.containing(targetX - 1, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					world.setBlock(BlockPos.containing(targetX, y, targetZ + 1), Blocks.AIR.defaultBlockState(), 3);
-					world.setBlock(BlockPos.containing(targetX, y, targetZ - 1), Blocks.AIR.defaultBlockState(), 3);
-					world.setBlock(BlockPos.containing(targetX, y + 1, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					world.setBlock(BlockPos.containing(targetX, y - 1, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					world.levelEvent(2001, BlockPos.containing(targetX, y, targetZ), Block.getId((world.getBlockState(BlockPos.containing(targetX, targetY, targetZ)))));
+					block = world.getBlockState(BlockPos.containing(targetX, targetY, targetZ));
+					if (!(entity instanceof ServerPlayer)) {
+						world.playSound(null, BlockPos.containing(targetX, targetY, targetZ), block.getSoundType().getBreakSound(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+					}
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					world.setBlock(BlockPos.containing(targetX + 1, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					world.setBlock(BlockPos.containing(targetX - 1, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ + 1), Blocks.AIR.defaultBlockState(), 3);
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ - 1), Blocks.AIR.defaultBlockState(), 3);
+					targetY = y + 1;
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					targetY = y - 1;
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 				} else {
-					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, y, targetZ))).getBlock())) {
+					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, targetY, targetZ))).getBlock())) {
 						{
 							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.75;
@@ -111,7 +140,12 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 						}
 					}
 					SpleefPowerupProcedure.execute(world, entity);
-					world.setBlock(BlockPos.containing(targetX, y, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					world.levelEvent(2001, BlockPos.containing(targetX, targetY, targetZ), Block.getId((world.getBlockState(BlockPos.containing(targetX, targetY, targetZ)))));
+					block = world.getBlockState(BlockPos.containing(targetX, targetY, targetZ));
+					if (!(entity instanceof ServerPlayer)) {
+						world.playSound(null, BlockPos.containing(targetX, targetY, targetZ), block.getSoundType().getBreakSound(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+					}
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 				}
 			}
 		}

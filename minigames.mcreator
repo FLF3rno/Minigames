@@ -5896,6 +5896,26 @@
         ]
       },
       "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "PowerupChecklist",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "powerup_checklist",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PowerupChecklistProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Settings"
     }
   ],
   "variable_elements": [
@@ -6359,7 +6379,7 @@
       "name": "spleefPowerups",
       "type": "logic",
       "scope": "map",
-      "value": "false"
+      "value": "true"
     },
     {
       "name": "mapsSpleef",
@@ -6372,6 +6392,12 @@
       "type": "string",
       "scope": "map",
       "value": "normal"
+    },
+    {
+      "name": "currentMapSpleef",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
     }
   ],
   "sound_elements": [

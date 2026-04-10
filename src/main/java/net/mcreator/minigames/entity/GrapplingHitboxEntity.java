@@ -40,6 +40,8 @@ import net.mcreator.minigames.init.MinigamesModItems;
 import net.mcreator.minigames.entity.GrappleEntity;
 
 public class GrapplingHitboxEntity extends Monster {
+	private static final double LEAD_BACK_OFFSET = 1.0;
+	private static final double LEAD_VERTICAL_OFFSET = -0.1;
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<String> DATA_owner = SynchedEntityData.defineId(GrapplingHitboxEntity.class, EntityDataSerializers.STRING);
@@ -86,6 +88,26 @@ public class GrapplingHitboxEntity extends Monster {
 	@Override
 	public Vec3 getPassengerRidingPosition(Entity entity) {
 		return super.getPassengerRidingPosition(entity).add(0, -0.35F, 0);
+	}
+
+	@Override
+	public Vec3 getLeashOffset(float partialTick) {
+		String ownerId = this.entityData.get(DATA_owner);
+		if (!ownerId.isEmpty() && this.level() instanceof ServerLevel serverLevel) {
+			try {
+				Entity owner = serverLevel.getEntity(UUID.fromString(ownerId));
+				if (owner != null) {
+					GrappleEntity grapple = serverLevel.getEntitiesOfClass(GrappleEntity.class, this.getBoundingBox().inflate(64)).stream()
+							.filter(g -> g.getOwner() != null && g.getOwner().getStringUUID().equals(owner.getStringUUID())).findFirst().orElse(null);
+					if (grapple != null && this.entityData.get(DATA_target).isEmpty()) {
+						Vec3 backwards = grapple.getLookAngle().scale(-LEAD_BACK_OFFSET);
+						return new Vec3(backwards.x, LEAD_VERTICAL_OFFSET, backwards.z);
+					}
+				}
+			} catch (IllegalArgumentException ignored) {
+			}
+		}
+		return super.getLeashOffset(partialTick);
 	}
 
 	@Override

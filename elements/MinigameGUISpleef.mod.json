@@ -86,7 +86,7 @@
           "name": "powerup",
           "text": "",
           "isCheckedProcedure": {
-            "name": "KeepInventoryChecked"
+            "name": "PowerupChecklist"
           },
           "x": 206,
           "y": 129,

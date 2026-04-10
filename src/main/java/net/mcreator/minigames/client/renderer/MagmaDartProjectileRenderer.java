@@ -30,7 +30,7 @@ public class MagmaDartProjectileRenderer extends EntityRenderer<MagmaDartProject
 		poseStack.pushPose();
 		poseStack.translate(0, -0.75, 0);
 		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 90));
-		poseStack.mulPose(Axis.ZP.rotationDegrees(state.xRot));
+		poseStack.mulPose(Axis.ZP.rotationDegrees(-state.xRot));
 		model.setupAnim(state);
 		model.renderToBuffer(poseStack, vb, packedLightIn, OverlayTexture.NO_OVERLAY);
 		poseStack.popPose();

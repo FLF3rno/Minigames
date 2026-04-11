@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;
@@ -58,8 +59,8 @@ public class ConquerTopLayerWorldProcedure {
 			return;
 		}
 
-		double topLayerY = getLayerY(mapVariables.layersRemainingSpleef - 1, mapVariables.gapBetweenLayersSpleef);
-		double belowLayerMinY = getLayerY(mapVariables.layersRemainingSpleef - 2, mapVariables.gapBetweenLayersSpleef);
+		double topLayerY = getLayerY(mapVariables.layersRemainingSpleef, mapVariables.gapBetweenLayersSpleef);
+		double belowLayerMinY = getLayerY(mapVariables.layersRemainingSpleef - 1, mapVariables.gapBetweenLayersSpleef);
 		double belowLayerMaxY = topLayerY - 1;
 
 		List<ServerPlayer> playersOnTopLayer = getPlayersInRange(level, topLayerY, 140);
@@ -118,7 +119,8 @@ public class ConquerTopLayerWorldProcedure {
 	private static List<ServerPlayer> getPlayersInRange(ServerLevel level, double minY, double maxY) {
 		List<ServerPlayer> players = new ArrayList<>();
 		for (Player player : level.players()) {
-			if (player instanceof ServerPlayer serverPlayer && serverPlayer.getY() >= minY && serverPlayer.getY() <= maxY && isInsideArena(serverPlayer)) {
+			if (player instanceof ServerPlayer serverPlayer && serverPlayer.gameMode.getGameModeForPlayer() != GameType.SPECTATOR && serverPlayer.getY() >= minY && serverPlayer.getY() <= maxY
+					&& isInsideArena(serverPlayer)) {
 				players.add(serverPlayer);
 			}
 		}

@@ -5970,6 +5970,33 @@
         ]
       },
       "path": "~/Spleef/Maps/SpawnMaps"
+    },
+    {
+      "name": "SymmetricalShovelItemInInventoryTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "symmetrical_shovel_item_in_inventory_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SymmetricalShovelItemInInventoryTickProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs/Items"
     }
   ],
   "variable_elements": [

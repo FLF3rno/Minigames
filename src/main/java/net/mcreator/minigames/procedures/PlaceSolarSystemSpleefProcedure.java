@@ -19,6 +19,9 @@ public class PlaceSolarSystemSpleefProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/execute in minigames:spleef_dimension run forceload add 970 -30 1030 30");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run place template minigames:spleef_sun 985 100 -15");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
@@ -26,6 +29,9 @@ public class PlaceSolarSystemSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute as @a at @s run tp @s ~ ~ ~ facing 1000 120 0");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/execute in minigames:spleef_dimension run forceload remove 970 -30 1030 30");
 		MinigamesModVariables.MapVariables.get(world).sky = "space";
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "solar system";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();

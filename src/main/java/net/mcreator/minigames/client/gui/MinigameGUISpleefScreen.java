@@ -79,7 +79,7 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	@Override
 	protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + -102, this.topPos + -29, 0, 0, 384, 384, 384, 384);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 74, this.topPos + 47, 0, 0, 32, 32, 32, 32);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 74, this.topPos + 49, 0, 0, 32, 32, 32, 32);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 231, this.topPos + 167, 0, 0, 41, 51, 41, 51);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 175, this.topPos + 48, 0, 0, 32, 32, 32, 32);
@@ -153,7 +153,7 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		};
 		this.addRenderableWidget(imagebutton_bucket);
 		boolean powerupSelected = PowerupChecklistProcedure.execute(world);
-		powerup = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_spleef.powerup"), this.font).pos(this.leftPos + 80, this.topPos + 92).onValueChange((checkbox, value) -> {
+		powerup = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_spleef.powerup"), this.font).pos(this.leftPos + 80, this.topPos + 87).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "powerup", value, false);
 		}).selected(powerupSelected).build();

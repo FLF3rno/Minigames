@@ -22,10 +22,10 @@ public class StopSpleefProcedure {
 					"/effect give @a minecraft:weakness infinite 100 true");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run place template minigames:spleef_lobby -4 149 -4");
+					("/execute in minigames:spleef_dimension run place template minigames:spleef_lobby " + (-4 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " 149 -4"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"execute in minigames:spleef_dimension run tp @a 0 150 0");
+					("execute in minigames:spleef_dimension run tp @a " + (0 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " 150 0"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "clear @a");
 		if (world instanceof ServerLevel _level)
@@ -34,9 +34,6 @@ public class StopSpleefProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"give @a minigames:replay_spleef");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run forceload remove -100 -100 100 100");
 		MinigamesModVariables.MapVariables.get(world).sky = "normal";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}

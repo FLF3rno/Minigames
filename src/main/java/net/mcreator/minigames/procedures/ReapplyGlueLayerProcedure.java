@@ -7,8 +7,10 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import net.mcreator.minigames.MinigamesMod;
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModBlocks;
 
 @EventBusSubscriber
@@ -28,9 +30,14 @@ public class ReapplyGlueLayerProcedure {
 	}
 
 	private static boolean isInsideActiveGlueLayer(LevelAccessor world, BlockPos pos) {
-		BlockPos minAnchor = BlockPos.containing(-15, pos.getY(), -15);
-		BlockPos maxAnchor = BlockPos.containing(15, pos.getY(), 15);
-		return pos.getX() >= -15 && pos.getX() <= 15 && pos.getZ() >= -15 && pos.getZ() <= 15
+		Vec3 arenaCenter = MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX;
+		int minX = (int) arenaCenter.x() - 15;
+		int maxX = (int) arenaCenter.x() + 15;
+		int minZ = (int) arenaCenter.z() - 15;
+		int maxZ = (int) arenaCenter.z() + 15;
+		BlockPos minAnchor = BlockPos.containing(minX, pos.getY(), minZ);
+		BlockPos maxAnchor = BlockPos.containing(maxX, pos.getY(), maxZ);
+		return pos.getX() >= minX && pos.getX() <= maxX && pos.getZ() >= minZ && pos.getZ() <= maxZ
 				&& (world.getBlockState(minAnchor).is(MinigamesModBlocks.SPREADING_GLUE.get()) || world.getBlockState(maxAnchor).is(MinigamesModBlocks.SPREADING_GLUE.get()));
 	}
 }

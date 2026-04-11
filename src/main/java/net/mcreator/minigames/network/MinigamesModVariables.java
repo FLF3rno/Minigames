@@ -34,6 +34,7 @@ import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
 
@@ -254,6 +255,7 @@ public class MinigamesModVariables {
 		public double mapsSpleef = 3.0;
 		public String sky = "normal";
 		public String currentMapSpleef = "\"\"";
+		public Vec3 spleefMapMiddleX = Vec3.ZERO;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -322,6 +324,7 @@ public class MinigamesModVariables {
 			mapsSpleef = nbt.getDoubleOr("mapsSpleef", 0);
 			sky = nbt.getStringOr("sky", "");
 			currentMapSpleef = nbt.getStringOr("currentMapSpleef", "");
+			spleefMapMiddleX = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("spleefMapMiddleX")).result().orElse(Vec3.ZERO);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -391,6 +394,7 @@ public class MinigamesModVariables {
 			nbt.putDouble("mapsSpleef", mapsSpleef);
 			nbt.putString("sky", sky);
 			nbt.putString("currentMapSpleef", currentMapSpleef);
+			nbt.put("spleefMapMiddleX", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, spleefMapMiddleX).result().orElseGet(CompoundTag::new));
 			return nbt;
 		}
 

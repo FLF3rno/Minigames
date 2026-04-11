@@ -41,6 +41,7 @@ public class ThrustersRightclickedProcedure {
 		ResourceLocation spleefDimension = ResourceLocation.parse("minigames:spleef_dimension");
 		if (!entity.level().dimension().location().equals(spleefDimension))
 			return false;
-		return Math.abs(entity.getX()) > SPLEEF_MAX_COORD || Math.abs(entity.getZ()) > SPLEEF_MAX_COORD;
+		Vec3 arenaCenter = MinigamesModVariables.MapVariables.get(entity.level()).spleefMapMiddleX;
+		return Math.abs(entity.getX() - arenaCenter.x()) > SPLEEF_MAX_COORD || Math.abs(entity.getZ() - arenaCenter.z()) > SPLEEF_MAX_COORD;
 	}
 }

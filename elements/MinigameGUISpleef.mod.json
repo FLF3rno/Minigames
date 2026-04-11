@@ -76,7 +76,7 @@
           "image": "symmetrical_shovel.png",
           "use1Xscale": false,
           "x": 200,
-          "y": 84,
+          "y": 86,
           "locked": false
         }
       },
@@ -89,7 +89,7 @@
             "name": "PowerupChecklist"
           },
           "x": 206,
-          "y": 129,
+          "y": 124,
           "locked": false
         }
       },

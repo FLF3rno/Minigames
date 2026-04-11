@@ -42,46 +42,49 @@ public class SpawnMapsProcedure {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/execute in minigames:spleef_dimension run forceload remove -100 -100 100 100");
-			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						("/execute in minigames:spleef_dimension run forceload add  " + (-100 + 1000) + " -100 " + (100 + 1000) + " 100"));
 			MinigamesMod.queueServerWork(10, () -> {
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_mercury " + (0 + 1000) + " 106 -51"));
+							"/execute in minigames:spleef_dimension run forceload add 900 -100 1100 100");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_venus " + (-63 + 1000) + " 103 -20"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_mercury 1000 106 -51");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_earth " + (-49 + 1000) + " 93 -79"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_venus 937 103 -20");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_mars " + (70 + 1000) + " 90 20"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_earth 951 93 -79");
+				if (world instanceof ServerLevel _level)
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_mars 1070 90 20");
 			});
 			MinigamesMod.queueServerWork(20, () -> {
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_jupiter " + (-70 + 1000) + " 95 57"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_sun 985 99 -15");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_saturn " + (8 + 1000) + " 89 62"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_jupiter 930 95 57");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_uranus " + (90 + 1000) + " 72 -76"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_saturn 1008 89 62");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							("/execute in minigames:spleef_dimension run place template minigames:spleef_neptune " + (-103 + 1000) + " 90 25"));
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_uranus 1090 72 -76");
+				if (world instanceof ServerLevel _level)
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_neptune 897 90 25");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"/execute in minigames:spleef_dimension run fill 999 124 -41 1011 132 -41 minecraft:barrier");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"/execute in minigames:spleef_dimension run fill 952 103 -2 952 127 -23 minecraft:barrier");
+				if (world instanceof ServerLevel _level)
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							"/execute in minigames:spleef_dimension run forceload remove 900 -100 1100 100");
 			});
-			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						("/execute in minigames:spleef_dimension run forceload remove " + (-100 + 1000) + " -100 " + (100 + 1000) + " 100"));
 		}
 	}
 }

@@ -37,8 +37,8 @@ public class KillPlayersSpleefProcedure {
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
-			for (Entity entityiterator : world.getEntities(null, new AABB((-100), 0, (-100), 100, 85, 100))) {
-				if (entityiterator instanceof Player _plr0 && _plr0.gameMode() == GameType.SURVIVAL) {
+			for (Entity entityiterator : world.getEntities(null, new AABB((-100 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()), 0, (-100), (100 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()), 85, 100))) {
+				if (entityiterator instanceof Player _plr2 && _plr2.gameMode() == GameType.SURVIVAL) {
 					if (entityiterator instanceof ServerPlayer _player)
 						_player.setGameMode(GameType.SPECTATOR);
 					{
@@ -109,7 +109,7 @@ public class KillPlayersSpleefProcedure {
 			}
 			if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 1) {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
-					if (entityiterator instanceof Player _plr10 && _plr10.gameMode() == GameType.SURVIVAL) {
+					if (entityiterator instanceof Player _plr12 && _plr12.gameMode() == GameType.SURVIVAL) {
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
@@ -141,7 +141,7 @@ public class KillPlayersSpleefProcedure {
 							}
 						}
 					}
-					if (entityiterator instanceof Player _plr16 && _plr16.gameMode() == GameType.SPECTATOR) {
+					if (entityiterator instanceof Player _plr18 && _plr18.gameMode() == GameType.SPECTATOR) {
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

@@ -19,13 +19,13 @@ public class PlaceSolarSystemSpleefProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					("/execute in minigames:spleef_dimension run place template minigames:spleef_sun " + (-15 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " 100 -15"));
+					"/execute in minigames:spleef_dimension run place template minigames:spleef_sun 985 100 -15");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					("/execute in minigames:spleef_dimension run spreadplayers " + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() + " 0 3 15 false @a"));
+					"/execute in minigames:spleef_dimension run spreadplayers 1000 0 3 15 false @a");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					("/execute as @a at @s run tp @s ~ ~ ~ facing " + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() + " 120 0"));
+					"/execute as @a at @s run tp @s ~ ~ ~ facing 1000 120 0");
 		MinigamesModVariables.MapVariables.get(world).sky = "space";
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "solar system";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();

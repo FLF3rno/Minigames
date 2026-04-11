@@ -8,6 +8,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.BlockPos;
 
+import net.mcreator.minigames.network.MinigamesModVariables;
+
 public class MagmaDartPropertyValueProviderProcedure {
 	private static final int MIN_ARENA_COORD = -20;
 	private static final int MAX_ARENA_COORD = 20;
@@ -29,13 +31,15 @@ public class MagmaDartPropertyValueProviderProcedure {
 		if (hitResult.getType() == HitResult.Type.MISS)
 			return true;
 		BlockPos hitPos = hitResult.getBlockPos();
-		if (!isInsideArenaBounds(hitPos))
+		if (!isInsideArenaBounds(entity, hitPos))
 			return true;
 		BlockState hitState = entity.level().getBlockState(hitPos);
 		return hitState.isAir();
 	}
 
-	private static boolean isInsideArenaBounds(BlockPos blockPos) {
-		return blockPos.getX() >= MIN_ARENA_COORD && blockPos.getX() <= MAX_ARENA_COORD && blockPos.getZ() >= MIN_ARENA_COORD && blockPos.getZ() <= MAX_ARENA_COORD;
+	private static boolean isInsideArenaBounds(Entity entity, BlockPos blockPos) {
+		Vec3 arenaCenter = MinigamesModVariables.MapVariables.get(entity.level()).spleefMapMiddleX;
+		return blockPos.getX() >= arenaCenter.x() + MIN_ARENA_COORD && blockPos.getX() <= arenaCenter.x() + MAX_ARENA_COORD && blockPos.getZ() >= arenaCenter.z() + MIN_ARENA_COORD
+				&& blockPos.getZ() <= arenaCenter.z() + MAX_ARENA_COORD;
 	}
 }

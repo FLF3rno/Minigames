@@ -26,7 +26,7 @@ public class DebugSnowballProcedure {
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
 		if (world instanceof ServerLevel _level) {
-			_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("" + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef)), false);
+			_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("" + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef)).withColor(0xffff33), false);
 		}
 	}
 }

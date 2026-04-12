@@ -4547,7 +4547,7 @@
     {
       "name": "ConquerTopLayerWorld",
       "type": "procedure",
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "conquer_top_layer_world",
       "metadata": {
@@ -6485,6 +6485,12 @@
       "type": "vector",
       "scope": "map",
       "value": "Vec3.ZERO"
+    },
+    {
+      "name": "layerConquestCooldownSpleef",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [

@@ -5997,6 +5997,25 @@
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
+    },
+    {
+      "name": "DebugSnowball",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debug_snowball",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DebugSnowballProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
     }
   ],
   "variable_elements": [

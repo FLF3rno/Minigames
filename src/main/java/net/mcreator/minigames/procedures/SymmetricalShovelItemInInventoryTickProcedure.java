@@ -20,7 +20,7 @@ public class SymmetricalShovelItemInInventoryTickProcedure {
 		if (entity == null)
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
-			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef == 1) {
+			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef <= 1) {
 				itemstack.shrink(1);
 				if (entity instanceof Player _player) {
 					ItemStack _setstack = new ItemStack(

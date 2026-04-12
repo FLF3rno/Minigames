@@ -119,7 +119,7 @@ public class ConquerTopLayerWorldProcedure {
 			clearTopLayer(level, topLayerY);
 			mapVariables.layerCountdownSpleef = 0;
 			mapVariables.layerConquestCooldownSpleef = RESET_COOLDOWN_TICKS;
-			mapVariables.layersRemainingSpleef = mapVariables.layersRemainingSpleef - 1;
+			mapVariables.layersRemainingSpleef = Math.max(1, mapVariables.layersRemainingSpleef - 1);
 			mapVariables.markSyncDirty();
 		}
 	}

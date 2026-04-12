@@ -29,13 +29,13 @@ public class PassiveSnowballGainProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.05;
+				_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef;
 				_vars.markSyncDirty();
 			}
 			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef == 1) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-					_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.05 * 2;
+					_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef;
 					_vars.markSyncDirty();
 				}
 			}

@@ -257,6 +257,8 @@ public class MinigamesModVariables {
 		public String currentMapSpleef = "\"\"";
 		public Vec3 spleefMapMiddleX = Vec3.ZERO;
 		public double layerConquestCooldownSpleef = 0;
+		public String activeGlueLayersSpleef = "\"\"";
+		public double passiveSnowballsSpleef = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -327,6 +329,8 @@ public class MinigamesModVariables {
 			currentMapSpleef = nbt.getStringOr("currentMapSpleef", "");
 			spleefMapMiddleX = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("spleefMapMiddleX")).result().orElse(Vec3.ZERO);
 			layerConquestCooldownSpleef = nbt.getDoubleOr("layerConquestCooldownSpleef", 0);
+			activeGlueLayersSpleef = nbt.getStringOr("activeGlueLayersSpleef", "");
+			passiveSnowballsSpleef = nbt.getDoubleOr("passiveSnowballsSpleef", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -398,6 +402,8 @@ public class MinigamesModVariables {
 			nbt.putString("currentMapSpleef", currentMapSpleef);
 			nbt.put("spleefMapMiddleX", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, spleefMapMiddleX).result().orElseGet(CompoundTag::new));
 			nbt.putDouble("layerConquestCooldownSpleef", layerConquestCooldownSpleef);
+			nbt.putString("activeGlueLayersSpleef", activeGlueLayersSpleef);
+			nbt.putDouble("passiveSnowballsSpleef", passiveSnowballsSpleef);
 			return nbt;
 		}
 

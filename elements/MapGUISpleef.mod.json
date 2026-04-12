@@ -71,16 +71,6 @@
         "data": {
           "image": "hotairballoons.png",
           "use1Xscale": true,
-          "x": 170,
-          "y": 47,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "mapmargin.png",
-          "use1Xscale": true,
           "x": 166,
           "y": 43,
           "locked": false

@@ -5999,23 +5999,27 @@
       "path": "~/Spleef/Snowballs/Items"
     },
     {
-      "name": "DebugSnowball",
+      "name": "SaveSpleefSettings",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "debug_snowball",
+      "registry_name": "save_spleef_settings",
       "metadata": {
         "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
           {
             "name": "world",
             "type": "world"
           }
         ],
         "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DebugSnowballProcedure.java"
+          "src/main/java/net/mcreator/minigames/procedures/SaveSpleefSettingsProcedure.java"
         ]
       },
-      "path": "~/Spleef/Snowballs"
+      "path": "~/Spleef/Settings"
     }
   ],
   "variable_elements": [
@@ -6510,6 +6514,18 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "activeGlueLayersSpleef",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "passiveSnowballsSpleef",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [
@@ -6924,7 +6940,10 @@
       "item.minigames.glue_dart.description_0": "On §6right click:",
       "item.minigames.glue_dart.description_1": "    §2Fire a dart that fills all gaps in the layer for 10 seconds",
       "item.minigames.spreading_glue": "Spreading Glue",
-      "gui.minigames.map_gui_spleef.label_solar_system": "Solar System"
+      "gui.minigames.map_gui_spleef.label_solar_system": "Solar System",
+      "gui.minigames.minigame_gui_spleef.label_passive_snowballs": "Passive snowballs",
+      "gui.minigames.minigame_gui_spleef.passive": "1",
+      "gui.minigames.minigame_gui_spleef.tooltip_passive_snowball_gain_per_second": "Passive snowball gain per second (can contain decimals)"
     }
   },
   "metadata": {

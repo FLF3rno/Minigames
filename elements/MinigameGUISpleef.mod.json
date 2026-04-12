@@ -214,6 +214,69 @@
           "y": 124,
           "locked": false
         }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "snowball2x.png",
+          "use1Xscale": false,
+          "x": 98,
+          "y": 87,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "clock.png",
+          "use1Xscale": true,
+          "x": 114,
+          "y": 102,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_passive_snowballs",
+          "text": {
+            "fixedValue": "Passive snowballs"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 73,
+          "y": 73,
+          "locked": false
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "1",
+          "name": "passive",
+          "width": 33,
+          "height": 20,
+          "x": 99,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_passive_snowball_gain_per_second",
+          "text": {
+            "fixedValue": "Passive snowball gain per second (can contain decimals)"
+          },
+          "width": 88,
+          "height": 77,
+          "x": 74,
+          "y": 84,
+          "locked": false
+        }
       }
     ],
     "gridSettings": {

@@ -31,13 +31,12 @@ public class MapGUISpleefScreen extends AbstractContainerScreen<MapGUISpleefMenu
 	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/spleefwindow.png");
 	private static final ResourceLocation IMAGE_1 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
 	private static final ResourceLocation IMAGE_2 = ResourceLocation.parse("minigames:textures/screens/hotairballoons.png");
-	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/mapmargin.png");
-	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
-	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/solarsystemmap.png");
+	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
+	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/solarsystemmap.png");
+	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
 	private static final ResourceLocation IMAGE_6 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
 	private static final ResourceLocation IMAGE_7 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
 	private static final ResourceLocation IMAGE_8 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
-	private static final ResourceLocation IMAGE_9 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
 
 	public MapGUISpleefScreen(MapGUISpleefMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -68,16 +67,15 @@ public class MapGUISpleefScreen extends AbstractContainerScreen<MapGUISpleefMenu
 		if (BalloonsSelectedProcedure.execute(world)) {
 			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 36, this.topPos + 0, 0, 0, 107, 75, 107, 75);
 		}
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + 46, this.topPos + 11, 0, 0, 87, 54, 87, 54);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 42, this.topPos + 7, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + 42, this.topPos + 7, 0, 0, 95, 62, 95, 62);
 		if (SolarSystemSelectedProcedure.execute(world)) {
-			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 36, this.topPos + 78, 0, 0, 107, 75, 107, 75);
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 36, this.topPos + 78, 0, 0, 107, 75, 107, 75);
 		}
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + 42, this.topPos + 85, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -70, this.topPos + 85, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_7, this.leftPos + -70, this.topPos + 7, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_8, this.leftPos + 154, this.topPos + 85, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_9, this.leftPos + 154, this.topPos + 7, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 42, this.topPos + 85, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + -70, this.topPos + 85, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -70, this.topPos + 7, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_7, this.leftPos + 154, this.topPos + 85, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_8, this.leftPos + 154, this.topPos + 7, 0, 0, 95, 62, 95, 62);
 	}
 
 	@Override

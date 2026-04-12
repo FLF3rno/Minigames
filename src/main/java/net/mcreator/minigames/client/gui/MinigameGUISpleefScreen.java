@@ -11,9 +11,11 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.world.inventory.MinigameGUISpleefMenu;
 import net.mcreator.minigames.procedures.PowerupChecklistProcedure;
@@ -26,6 +28,7 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	private final int x, y, z;
 	private final Player entity;
 	private boolean menuStateUpdateActive = false;
+	private EditBox passive;
 	private Checkbox powerup;
 	private Button button_start_normal;
 	private Button button_modify;
@@ -36,6 +39,8 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	private static final ResourceLocation IMAGE_2 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
 	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
 	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/map_icon.png");
+	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/snowball2x.png");
+	private static final ResourceLocation IMAGE_6 = ResourceLocation.parse("minigames:textures/screens/clock.png");
 
 	public MinigameGUISpleefScreen(MinigameGUISpleefMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -51,6 +56,10 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	@Override
 	public void updateMenuState(int elementType, String name, Object elementState) {
 		menuStateUpdateActive = true;
+		if (elementType == 0 && elementState instanceof String stringState) {
+			if (name.equals("passive"))
+				passive.setValue(stringState);
+		}
 		if (elementType == 1 && elementState instanceof Boolean logicState) {
 			if (name.equals("powerup")) {
 				if (powerup.selected() != logicState)
@@ -63,6 +72,7 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
+		passive.render(guiGraphics, mouseX, mouseY, partialTicks);
 		boolean customTooltipShown = false;
 		if (mouseX > leftPos + 69 && mouseX < leftPos + 114 && mouseY > topPos + 45 && mouseY < topPos + 115) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_spleef.tooltip_keep_inventory"), mouseX, mouseY);
@@ -70,6 +80,10 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		}
 		if (mouseX > leftPos + 168 && mouseX < leftPos + 213 && mouseY > topPos + 41 && mouseY < topPos + 115) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_spleef.tooltip_modify_the_map_pool"), mouseX, mouseY);
+			customTooltipShown = true;
+		}
+		if (mouseX > leftPos + -52 && mouseX < leftPos + 36 && mouseY > topPos + 47 && mouseY < topPos + 124) {
+			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_spleef.tooltip_passive_snowball_gain_per_second"), mouseX, mouseY);
 			customTooltipShown = true;
 		}
 		if (!customTooltipShown)
@@ -83,6 +97,8 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 231, this.topPos + 167, 0, 0, 41, 51, 41, 51);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 175, this.topPos + 48, 0, 0, 32, 32, 32, 32);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + -28, this.topPos + 50, 0, 0, 32, 32, 32, 32);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -12, this.topPos + 65, 0, 0, 16, 16, 16, 16);
 	}
 
 	@Override
@@ -91,7 +107,16 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 			this.minecraft.player.closeContainer();
 			return true;
 		}
+		if (passive.isFocused())
+			return passive.keyPressed(key, b, c);
 		return super.keyPressed(key, b, c);
+	}
+
+	@Override
+	public void resize(Minecraft minecraft, int width, int height) {
+		String passiveValue = passive.getValue();
+		super.resize(minecraft, width, height);
+		passive.setValue(passiveValue);
 	}
 
 	@Override
@@ -99,11 +124,20 @@ public class MinigameGUISpleefScreen extends AbstractContainerScreen<MinigameGUI
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_achievement_run"), -90, -20, -12829636, false);
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_powerups"), 69, 33, -12829636, false);
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_maps"), 180, 35, -12829636, false);
+		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_spleef.label_passive_snowballs"), -53, 36, -12829636, false);
 	}
 
 	@Override
 	public void init() {
 		super.init();
+		passive = new EditBox(this.font, this.leftPos + -26, this.topPos + 88, 31, 18, Component.translatable("gui.minigames.minigame_gui_spleef.passive"));
+		passive.setMaxLength(8192);
+		passive.setResponder(content -> {
+			if (!menuStateUpdateActive)
+				menu.sendMenuStateUpdate(entity, 0, "passive", content, false);
+		});
+		passive.setHint(Component.translatable("gui.minigames.minigame_gui_spleef.passive"));
+		this.addWidget(this.passive);
 		button_start_normal = Button.builder(Component.translatable("gui.minigames.minigame_gui_spleef.button_start_normal"), e -> {
 			int x = MinigameGUISpleefScreen.this.x;
 			int y = MinigameGUISpleefScreen.this.y;

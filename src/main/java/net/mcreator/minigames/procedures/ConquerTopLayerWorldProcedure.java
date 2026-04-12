@@ -33,6 +33,7 @@ public class ConquerTopLayerWorldProcedure {
 	private static final int COUNTDOWN_SOUND_2 = 320;
 	private static final int COUNTDOWN_SOUND_3 = 360;
 	private static final int COUNTDOWN_COMPLETE = 400;
+	private static final int RESET_COOLDOWN_TICKS = 20;
 	private static final int CLEAR_MIN = -20;
 	private static final int CLEAR_MAX = 20;
 	private static final int BASE_Y = 100;
@@ -63,23 +64,33 @@ public class ConquerTopLayerWorldProcedure {
 		double belowLayerMinY = getLayerY(mapVariables.layersRemainingSpleef - 1, mapVariables.gapBetweenLayersSpleef);
 		double belowLayerMaxY = topLayerY - 1;
 
-		List<ServerPlayer> playersOnTopLayer = getPlayersInRange(level, topLayerY, 140);
+		List<ServerPlayer> playersOnTopLayer = getPlayersAboveY(level, topLayerY);
 		int playersBelowTopLayer = getPlayersInRange(level, belowLayerMinY, belowLayerMaxY).size();
 
 		int previousCountdown = (int) mapVariables.layerCountdownSpleef;
 		int nextCountdown = previousCountdown;
+		int previousCooldown = (int) mapVariables.layerConquestCooldownSpleef;
+		int nextCooldown = previousCooldown;
 
-		if (playersOnTopLayer.size() <= 1) {
+		if (nextCooldown > 0) {
+			nextCooldown--;
+		}
+
+		if (nextCooldown > 0) {
+			nextCountdown = 0;
+		} else if (playersOnTopLayer.size() <= 1) {
 			nextCountdown = previousCountdown + 1;
 			if (playersBelowTopLayer == 0) {
 				nextCountdown = COUNTDOWN_COMPLETE;
 			}
 		} else {
 			nextCountdown = 0;
+			nextCooldown = RESET_COOLDOWN_TICKS;
 		}
 
-		if (nextCountdown != previousCountdown) {
+		if (nextCountdown != previousCountdown || nextCooldown != previousCooldown) {
 			mapVariables.layerCountdownSpleef = nextCountdown;
+			mapVariables.layerConquestCooldownSpleef = nextCooldown;
 			mapVariables.markSyncDirty();
 		}
 
@@ -107,6 +118,7 @@ public class ConquerTopLayerWorldProcedure {
 
 			clearTopLayer(level, topLayerY);
 			mapVariables.layerCountdownSpleef = 0;
+			mapVariables.layerConquestCooldownSpleef = RESET_COOLDOWN_TICKS;
 			mapVariables.layersRemainingSpleef = mapVariables.layersRemainingSpleef - 1;
 			mapVariables.markSyncDirty();
 		}
@@ -121,6 +133,16 @@ public class ConquerTopLayerWorldProcedure {
 		for (Player player : level.players()) {
 			if (player instanceof ServerPlayer serverPlayer && serverPlayer.gameMode.getGameModeForPlayer() != GameType.SPECTATOR && serverPlayer.getY() >= minY && serverPlayer.getY() <= maxY
 					&& isInsideArena(serverPlayer)) {
+				players.add(serverPlayer);
+			}
+		}
+		return players;
+	}
+
+	private static List<ServerPlayer> getPlayersAboveY(ServerLevel level, double minY) {
+		List<ServerPlayer> players = new ArrayList<>();
+		for (Player player : level.players()) {
+			if (player instanceof ServerPlayer serverPlayer && serverPlayer.gameMode.getGameModeForPlayer() != GameType.SPECTATOR && serverPlayer.getY() >= minY && isInsideArena(serverPlayer)) {
 				players.add(serverPlayer);
 			}
 		}

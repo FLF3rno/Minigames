@@ -31,10 +31,10 @@ public class ReapplyGlueLayerProcedure {
 
 	private static boolean isInsideActiveGlueLayer(LevelAccessor world, BlockPos pos) {
 		Vec3 arenaCenter = MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX;
-		int minX = (int) arenaCenter.x() - 15;
-		int maxX = (int) arenaCenter.x() + 15;
-		int minZ = (int) arenaCenter.z() - 15;
-		int maxZ = (int) arenaCenter.z() + 15;
+		int minX = (int) arenaCenter.x() - 20;
+		int maxX = (int) arenaCenter.x() + 20;
+		int minZ = (int) arenaCenter.z() - 20;
+		int maxZ = (int) arenaCenter.z() + 20;
 		BlockPos minAnchor = BlockPos.containing(minX, pos.getY(), minZ);
 		BlockPos maxAnchor = BlockPos.containing(maxX, pos.getY(), maxZ);
 		return pos.getX() >= minX && pos.getX() <= maxX && pos.getZ() >= minZ && pos.getZ() <= maxZ

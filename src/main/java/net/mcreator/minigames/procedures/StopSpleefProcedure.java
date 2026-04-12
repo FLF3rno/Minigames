@@ -26,8 +26,8 @@ public class StopSpleefProcedure {
 						"/execute in minigames:spleef_dimension run place template minigames:spleef_lobby -4  149 -4");
 		} else if ((MinigamesModVariables.MapVariables.get(world).currentMapSpleef).equals("solar system")) {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/execute in minigames:spleef_dimension run place template minigames:spleef_lobby 996 149 -4 ");
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(1000, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"/execute in minigames:spleef_dimension run place template minigames:spleef_lobby 996 149 -4");
 		}
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),

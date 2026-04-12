@@ -4547,7 +4547,7 @@
     {
       "name": "ConquerTopLayerWorld",
       "type": "procedure",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "conquer_top_layer_world",
       "metadata": {

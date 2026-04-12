@@ -256,6 +256,7 @@ public class MinigamesModVariables {
 		public String sky = "normal";
 		public String currentMapSpleef = "\"\"";
 		public Vec3 spleefMapMiddleX = Vec3.ZERO;
+		public double layerConquestCooldownSpleef = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -325,6 +326,7 @@ public class MinigamesModVariables {
 			sky = nbt.getStringOr("sky", "");
 			currentMapSpleef = nbt.getStringOr("currentMapSpleef", "");
 			spleefMapMiddleX = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("spleefMapMiddleX")).result().orElse(Vec3.ZERO);
+			layerConquestCooldownSpleef = nbt.getDoubleOr("layerConquestCooldownSpleef", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -395,6 +397,7 @@ public class MinigamesModVariables {
 			nbt.putString("sky", sky);
 			nbt.putString("currentMapSpleef", currentMapSpleef);
 			nbt.put("spleefMapMiddleX", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, spleefMapMiddleX).result().orElseGet(CompoundTag::new));
+			nbt.putDouble("layerConquestCooldownSpleef", layerConquestCooldownSpleef);
 			return nbt;
 		}
 

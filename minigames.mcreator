@@ -4246,7 +4246,7 @@
       "name": "DestroySnowGrantSnowballSpleef",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "destroy_snow_grant_snowball_spleef",
       "metadata": {
         "dependencies": [

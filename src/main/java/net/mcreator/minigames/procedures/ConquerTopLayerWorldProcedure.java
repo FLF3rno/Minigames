@@ -125,7 +125,7 @@ public class ConquerTopLayerWorldProcedure {
 	}
 
 	private static double getLayerY(double layerIndex, double gap) {
-		return BASE_Y + layerIndex * gap;
+		return BASE_Y + (layerIndex - 1) * gap;
 	}
 
 	private static List<ServerPlayer> getPlayersInRange(ServerLevel level, double minY, double maxY) {

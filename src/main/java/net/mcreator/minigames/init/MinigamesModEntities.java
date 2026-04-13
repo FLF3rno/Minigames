@@ -45,6 +45,10 @@ public class MinigamesModEntities {
 			EntityType.Builder.<MagmaDartProjectileEntity>of(MagmaDartProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GlueProjectileEntity>> GLUE_PROJECTILE = register("glue_projectile",
 			EntityType.Builder.<GlueProjectileEntity>of(GlueProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<SpleefPodiumPlayerEntity>> SPLEEF_PODIUM_PLAYER = register("spleef_podium_player",
+			EntityType.Builder.<SpleefPodiumPlayerEntity>of(SpleefPodiumPlayerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
+
+					.ridingOffset(-0.6f).sized(0.6f, 1.8f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -59,6 +63,7 @@ public class MinigamesModEntities {
 		GoldenZombieEntity.init(event);
 		GrapplingHitboxEntity.init(event);
 		MagmaHitboxEntity.init(event);
+		SpleefPodiumPlayerEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -68,5 +73,6 @@ public class MinigamesModEntities {
 		event.put(GOLDEN_ZOMBIE.get(), GoldenZombieEntity.createAttributes().build());
 		event.put(GRAPPLING_HITBOX.get(), GrapplingHitboxEntity.createAttributes().build());
 		event.put(MAGMA_HITBOX.get(), MagmaHitboxEntity.createAttributes().build());
+		event.put(SPLEEF_PODIUM_PLAYER.get(), SpleefPodiumPlayerEntity.createAttributes().build());
 	}
 }

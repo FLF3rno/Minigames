@@ -6020,6 +6020,44 @@
         ]
       },
       "path": "~/Spleef/Settings"
+    },
+    {
+      "name": "SpleefPodiumPlayer",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spleef_podium_player",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/SpleefPodiumPlayerRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/SpleefPodiumPlayerEntity.java",
+          "src/main/resources/assets/minigames/items/spleef_podium_player_spawn_egg.json"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "SetPassiveSnowballSettings",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "set_passive_snowball_settings",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SetPassiveSnowballSettingsProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Settings"
     }
   ],
   "variable_elements": [
@@ -6525,7 +6563,25 @@
       "name": "passiveSnowballsSpleef",
       "type": "number",
       "scope": "map",
-      "value": "0"
+      "value": "1.0"
+    },
+    {
+      "name": "firstSpleef",
+      "type": "entity",
+      "scope": "global",
+      "value": "null"
+    },
+    {
+      "name": "secondSpleef",
+      "type": "entity",
+      "scope": "global",
+      "value": "null"
+    },
+    {
+      "name": "thirdSpleef",
+      "type": "entity",
+      "scope": "global",
+      "value": "null"
     }
   ],
   "sound_elements": [
@@ -6943,7 +6999,8 @@
       "gui.minigames.map_gui_spleef.label_solar_system": "Solar System",
       "gui.minigames.minigame_gui_spleef.label_passive_snowballs": "Passive snowballs",
       "gui.minigames.minigame_gui_spleef.passive": "1",
-      "gui.minigames.minigame_gui_spleef.tooltip_passive_snowball_gain_per_second": "Passive snowball gain per second (can contain decimals)"
+      "gui.minigames.minigame_gui_spleef.tooltip_passive_snowball_gain_per_second": "Passive snowball gain per second (can contain decimals)",
+      "entity.minigames.spleef_podium_player": "Spleef Podium Player"
     }
   },
   "metadata": {

@@ -49,6 +49,9 @@ public class MinigamesModVariables {
 	public static double health = 20.0;
 	public static double winAnimation = -1.0;
 	public static ResourceLocation crown = null;
+	public static Entity firstSpleef = null;
+	public static Entity secondSpleef = null;
+	public static Entity thirdSpleef = null;
 
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {
@@ -258,7 +261,7 @@ public class MinigamesModVariables {
 		public Vec3 spleefMapMiddleX = Vec3.ZERO;
 		public double layerConquestCooldownSpleef = 0;
 		public String activeGlueLayersSpleef = "\"\"";
-		public double passiveSnowballsSpleef = 0;
+		public double passiveSnowballsSpleef = 1.0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);

@@ -41,7 +41,8 @@ public class StartSpleefProcedure {
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "time set day");
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"execute in minigames:spleef_dimension run time set day");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/gamerule locatorBar false");
@@ -73,5 +74,8 @@ public class StartSpleefProcedure {
 		MinigamesMod.queueServerWork(10, () -> {
 			GameCountdownProcedure.execute(world, x, y, z);
 		});
+		MinigamesModVariables.firstSpleef = null;
+		MinigamesModVariables.secondSpleef = null;
+		MinigamesModVariables.thirdSpleef = null;
 	}
 }

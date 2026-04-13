@@ -1,5 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import org.checkerframework.checker.units.qual.s;
+
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
@@ -18,7 +20,16 @@ public class SaveSpleefSettingsProcedure {
 			MinigamesModVariables.MapVariables.get(world).spleefPowerups = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}
-		MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef = ((entity instanceof Player _entity1 && _entity1.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu1) ? _menu1.getMenuState(2, "passive", 0.0) : 0.0) / 20;
+		MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef = parseDouble((entity instanceof Player _entity1 && _entity1.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu1) ? _menu1.getMenuState(0, "passive", "") : "")
+				/ 20;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+	}
+
+	private static double parseDouble(String s) {
+		try {
+			return Double.parseDouble(s.trim());
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 }

@@ -34,7 +34,7 @@ public class PlaceBalloonsSpleefProcedure {
 		if (Math.random() < 0.3) {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"time set midnight");
+						"/execute in minigames:spleef_dimension run time set midnight");
 		}
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "balloons";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();

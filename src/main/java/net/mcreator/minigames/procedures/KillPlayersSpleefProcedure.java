@@ -66,6 +66,7 @@ public class KillPlayersSpleefProcedure {
 												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "nd\"}]"));
 							}
 						}
+						MinigamesModVariables.secondSpleef = entityiterator;
 					} else if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 3) {
 						{
 							Entity _ent = entityiterator;
@@ -84,6 +85,7 @@ public class KillPlayersSpleefProcedure {
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You died!\"}");
 							}
 						}
+						MinigamesModVariables.thirdSpleef = entityiterator;
 					} else {
 						{
 							Entity _ent = entityiterator;
@@ -110,6 +112,7 @@ public class KillPlayersSpleefProcedure {
 			if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 1) {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					if (entityiterator instanceof Player _plr12 && _plr12.gameMode() == GameType.SURVIVAL) {
+						MinigamesModVariables.firstSpleef = entityiterator;
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

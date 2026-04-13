@@ -26,5 +26,6 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_HITBOX.get(), MagmaHitboxRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_DART_PROJECTILE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.GLUE_PROJECTILE.get(), GlueProjectileRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.SPLEEF_PODIUM_PLAYER.get(), SpleefPodiumPlayerRenderer::new);
 	}
 }

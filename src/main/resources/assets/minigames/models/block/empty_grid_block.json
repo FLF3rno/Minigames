@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/emptygrid",
+    "particle": "minigames:block/emptygrid"
+  },
+  "render_type": "solid"
+}

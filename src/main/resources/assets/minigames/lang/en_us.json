@@ -172,5 +172,7 @@
   "gui.minigames.minigame_gui_spleef.label_passive_snowballs": "Passive snowballs",
   "gui.minigames.minigame_gui_spleef.passive": "1",
   "gui.minigames.minigame_gui_spleef.tooltip_passive_snowball_gain_per_second": "Passive snowball gain per second (can contain decimals)",
-  "entity.minigames.spleef_podium_player": "Spleef Podium Player"
+  "entity.minigames.spleef_podium_player": "Spleef Podium Player",
+  "item.minigames.empty_grid_block": "Empty Grid Block",
+  "item.minigames.room_grid_block": "Room Grid Block"
 }

@@ -55,10 +55,6 @@ public class KillPlayersSpleefProcedure {
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "execute as @a at @s run playsound minigames:teameliminated master @s ~ ~ ~ 2 1");
 						}
 					}
-					int placementOnDeath = (int) MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers;
-					if (placementOnDeath == 3 || placementOnDeath == 2) {
-						ChangePodiumTextureProcedure.execute(world, placementOnDeath, entityiterator.getStringUUID());
-					}
 					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
 						{
 							Entity _ent = entityiterator;
@@ -124,7 +120,6 @@ public class KillPlayersSpleefProcedure {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					if (entityiterator instanceof Player _plr14 && _plr14.gameMode() == GameType.SURVIVAL) {
 						MinigamesModVariables.firstSpleef = entityiterator;
-						ChangePodiumTextureProcedure.execute(world, 1, entityiterator.getStringUUID());
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

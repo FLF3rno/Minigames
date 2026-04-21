@@ -24,8 +24,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.core.registries.BuiltInRegistries;
 
-import net.mcreator.minigames.procedures.SpleefPodiumPlayerOnInitialEntitySpawnProcedure;
-
 import javax.annotation.Nullable;
 
 public class SpleefPodiumPlayerEntity extends Monster {
@@ -80,9 +78,7 @@ public class SpleefPodiumPlayerEntity extends Monster {
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData livingdata) {
-		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
-		SpleefPodiumPlayerOnInitialEntitySpawnProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
-		return retval;
+		return super.finalizeSpawn(world, difficulty, reason, livingdata);
 	}
 
 	@Override

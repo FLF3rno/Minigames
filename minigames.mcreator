@@ -4170,7 +4170,7 @@
       "name": "KillPlayersSpleef",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "kill_players_spleef",
       "metadata": {
         "dependencies": [
@@ -6898,41 +6898,6 @@
         ]
       },
       "path": "~/Dungeon/Inventory"
-    },
-    {
-      "name": "SpleefPodiumPlayerOnInitialEntitySpawn",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "spleef_podium_player_on_initial_entity_spawn",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SpleefPodiumPlayerOnInitialEntitySpawnProcedure.java"
-        ]
-      },
-      "path": "~/Spleef"
     },
     {
       "name": "ChangePodiumTexture",

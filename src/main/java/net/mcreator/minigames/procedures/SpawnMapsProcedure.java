@@ -41,13 +41,13 @@ public class SpawnMapsProcedure {
 						"/execute in minigames:spleef_dimension run place template minigames:spleef_lobby -970 98 0");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/execute in minigames:spleef_dimension run summon minigames:spleef_podium_player -960 104 16 {NoAI:1b,Rotation:[-90F,0F]}");
+						"/execute in minigames:spleef_dimension run summon minigames:spleef_podium_player -960 104 16 {NoAI:1b,Rotation:[-90F,0F],Dataposition:1}");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/execute in minigames:spleef_dimension run summon minigames:spleef_podium_player -962 102 22 {NoAI:1b,Rotation:[-90F,0F]}");
+						"/execute in minigames:spleef_dimension run summon minigames:spleef_podium_player -962 103 10 {NoAI:1b,Rotation:[-90F,0F],Dataposition:2}");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/execute in minigames:spleef_dimension run summon minigames:spleef_podium_player -962 103 10 {NoAI:1b,Rotation:[-90F,0F]}");
+						"/execute in minigames:spleef_dimension run summon minigames:spleef_podium_player -962 102 22 {NoAI:1b,Rotation:[-90F,0F],Dataposition:3}");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/execute in minigames:spleef_dimension run forceload remove -950 -0 -925 32");

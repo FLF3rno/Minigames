@@ -1,5 +1,7 @@
 package net.mcreator.minigames.client.renderer;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
@@ -9,6 +11,8 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.HumanoidModel;
 
 import net.mcreator.minigames.entity.SpleefPodiumPlayerEntity;
+
+import java.util.UUID;
 
 public class SpleefPodiumPlayerRenderer extends HumanoidMobRenderer<SpleefPodiumPlayerEntity, HumanoidRenderState, HumanoidModel<HumanoidRenderState>> {
 	private SpleefPodiumPlayerEntity entity = null;
@@ -32,7 +36,21 @@ public class SpleefPodiumPlayerRenderer extends HumanoidMobRenderer<SpleefPodium
 
 	@Override
 	public ResourceLocation getTextureLocation(HumanoidRenderState state) {
-		if (entity != null && entity.getTexture() != "empty")
+		if (entity != null) {
+			String displayUuid = entity.getEntityData().get(SpleefPodiumPlayerEntity.DATA_display_uuid);
+			if (!displayUuid.isBlank()) {
+				try {
+					UUID uuid = UUID.fromString(displayUuid);
+					if (Minecraft.getInstance().level != null) {
+						if (Minecraft.getInstance().level.getPlayerByUUID(uuid) instanceof AbstractClientPlayer player) {
+							return player.getSkin().texture();
+						}
+					}
+				} catch (IllegalArgumentException ignored) {
+				}
+			}
+		}
+		if (entity != null && !"empty".equals(entity.getTexture()))
 			return ResourceLocation.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;
 	}

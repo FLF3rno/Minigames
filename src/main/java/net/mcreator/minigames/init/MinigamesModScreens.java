@@ -23,6 +23,7 @@ public class MinigamesModScreens {
 		event.register(MinigamesModMenus.MINIGAME_GUI_CROWN_HUNT.get(), MinigameGUICrownHuntScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_SPLEEF.get(), MinigameGUISpleefScreen::new);
 		event.register(MinigamesModMenus.MAP_GUI_SPLEEF.get(), MapGUISpleefScreen::new);
+		event.register(MinigamesModMenus.DUNGEON_INVENTORY.get(), DungeonInventoryScreen::new);
 	}
 
 	public interface ScreenAccessor {

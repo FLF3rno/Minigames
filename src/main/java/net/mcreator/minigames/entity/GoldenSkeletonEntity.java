@@ -90,7 +90,7 @@ public class GoldenSkeletonEntity extends Skeleton implements RangedAttackMob {
 		this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(5, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25, 15, 15f) {
+		this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25, 30, 15f) {
 			@Override
 			public boolean canContinueToUse() {
 				return this.canUse();

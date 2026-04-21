@@ -49,6 +49,10 @@ public class MinigamesModEntities {
 			EntityType.Builder.<SpleefPodiumPlayerEntity>of(SpleefPodiumPlayerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
 
 					.ridingOffset(-0.6f).sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<StunnedEffectEntity>> STUNNED_EFFECT = register("stunned_effect",
+			EntityType.Builder.<StunnedEffectEntity>of(StunnedEffectEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune()
+
+					.sized(0.6f, 0.2f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -64,6 +68,7 @@ public class MinigamesModEntities {
 		GrapplingHitboxEntity.init(event);
 		MagmaHitboxEntity.init(event);
 		SpleefPodiumPlayerEntity.init(event);
+		StunnedEffectEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -74,5 +79,6 @@ public class MinigamesModEntities {
 		event.put(GRAPPLING_HITBOX.get(), GrapplingHitboxEntity.createAttributes().build());
 		event.put(MAGMA_HITBOX.get(), MagmaHitboxEntity.createAttributes().build());
 		event.put(SPLEEF_PODIUM_PLAYER.get(), SpleefPodiumPlayerEntity.createAttributes().build());
+		event.put(STUNNED_EFFECT.get(), StunnedEffectEntity.createAttributes().build());
 	}
 }

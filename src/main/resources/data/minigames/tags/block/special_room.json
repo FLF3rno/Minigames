@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minigames:secret_room_grid_block",
+    "minigames:starting_room_grid_block",
+    "minigames:boss_room_grid_block"
+  ]
+}

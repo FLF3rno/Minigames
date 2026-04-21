@@ -52,9 +52,10 @@ public class KillPlayersSpleefProcedure {
 						Entity _ent = entityiterator;
 						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
 							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:teameliminated master @p ~ ~ ~ 2 1");
+									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "execute as @a at @s run playsound minigames:teameliminated master @s ~ ~ ~ 2 1");
 						}
 					}
+					ChangePodiumTextureProcedure.execute(world, MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers, entityiterator.getStringUUID());
 					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
 						{
 							Entity _ent = entityiterator;
@@ -105,13 +106,20 @@ public class KillPlayersSpleefProcedure {
 							}
 						}
 					}
+					{
+						Entity _ent = entityiterator;
+						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/tellraw @a[distance=1..] [{\"selector\":\"@p\"},{\"color\":\"red\",\"text\":\" died!\"}]");
+						}
+					}
 					MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers = MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers - 1;
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				}
 			}
 			if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 1) {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
-					if (entityiterator instanceof Player _plr12 && _plr12.gameMode() == GameType.SURVIVAL) {
+					if (entityiterator instanceof Player _plr14 && _plr14.gameMode() == GameType.SURVIVAL) {
 						MinigamesModVariables.firstSpleef = entityiterator;
 						{
 							Entity _ent = entityiterator;
@@ -144,7 +152,7 @@ public class KillPlayersSpleefProcedure {
 							}
 						}
 					}
-					if (entityiterator instanceof Player _plr18 && _plr18.gameMode() == GameType.SPECTATOR) {
+					if (entityiterator instanceof Player _plr20 && _plr20.gameMode() == GameType.SPECTATOR) {
 						{
 							Entity _ent = entityiterator;
 							if (!_ent.level().isClientSide() && _ent.getServer() != null) {

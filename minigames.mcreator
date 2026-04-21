@@ -6025,7 +6025,7 @@
       "name": "SpleefPodiumPlayer",
       "type": "livingentity",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spleef_podium_player",
       "metadata": {
         "files": [
@@ -6099,6 +6099,46 @@
       "registry_name": "spawn_grid",
       "metadata": {
         "dependencies": [
+          {
+            "name": "loot",
+            "type": "number"
+          },
+          {
+            "name": "maximumRooms",
+            "type": "number"
+          },
+          {
+            "name": "miniboss",
+            "type": "number"
+          },
+          {
+            "name": "minimumRooms",
+            "type": "number"
+          },
+          {
+            "name": "roomX",
+            "type": "number"
+          },
+          {
+            "name": "roomZ",
+            "type": "number"
+          },
+          {
+            "name": "secret",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
           {
             "name": "world",
             "type": "world"
@@ -6184,6 +6224,742 @@
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "EndRoomGridBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "end_room_grid_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/end_room_grid_block.json",
+          "src/main/resources/assets/minigames/models/block/end_room_grid_block.json",
+          "src/main/java/net/mcreator/minigames/block/EndRoomGridBlockBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/end_room_grid_block.json"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "StartingRoomGridBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "starting_room_grid_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/starting_room_grid_block.json",
+          "src/main/resources/assets/minigames/blockstates/starting_room_grid_block.json",
+          "src/main/resources/assets/minigames/models/block/starting_room_grid_block.json",
+          "src/main/java/net/mcreator/minigames/block/StartingRoomGridBlockBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "EndRoomGridBlockBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "end_room_grid_block_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/EndRoomGridBlockBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "LootRoomGridBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "loot_room_grid_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/loot_room_grid_block.json",
+          "src/main/resources/data/minigames/loot_table/blocks/loot_room_grid_block.json",
+          "src/main/java/net/mcreator/minigames/block/LootRoomGridBlockBlock.java",
+          "src/main/resources/assets/minigames/blockstates/loot_room_grid_block.json"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "MinibossRoomGridBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "miniboss_room_grid_block",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/MinibossRoomGridBlockBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/miniboss_room_grid_block.json",
+          "src/main/resources/assets/minigames/models/block/miniboss_room_grid_block.json",
+          "src/main/resources/assets/minigames/blockstates/miniboss_room_grid_block.json"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "BossRoomGridBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "boss_room_grid_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/boss_room_grid_block.json",
+          "src/main/java/net/mcreator/minigames/block/BossRoomGridBlockBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/boss_room_grid_block.json",
+          "src/main/resources/assets/minigames/models/block/boss_room_grid_block.json"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "CommandGrid",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "command_grid",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CommandGridProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "DungeonCheck",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dungeon_check",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DungeonCheckProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "SpawnFloor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_floor",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnFloorProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "SecretRoomGridBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "secret_room_grid_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/secret_room_grid_block.json",
+          "src/main/java/net/mcreator/minigames/block/SecretRoomGridBlockBlock.java",
+          "src/main/resources/assets/minigames/models/block/secret_room_grid_block.json",
+          "src/main/resources/assets/minigames/blockstates/secret_room_grid_block.json"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "Clas",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "clas",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/ClasCommand.java"
+        ]
+      },
+      "path": "~/Dungeon/Item Description"
+    },
+    {
+      "name": "ClassDebug",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "class_debug",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ClassDebugProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Item Description"
+    },
+    {
+      "name": "BlankDagger",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blank_dagger",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/blank_dagger.json",
+          "src/main/java/net/mcreator/minigames/item/BlankDaggerItem.java",
+          "src/main/resources/assets/minigames/items/blank_dagger.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons"
+    },
+    {
+      "name": "SalvageValue",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "salvage_value",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlankSword",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blank_sword",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/blank_sword.json",
+          "src/main/resources/assets/minigames/models/item/blank_sword.json",
+          "src/main/java/net/mcreator/minigames/item/BlankSwordItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons"
+    },
+    {
+      "name": "CoinsOnKill",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "coins_on_kill",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlankLongSword",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blank_long_sword",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/BlankLongSwordItem.java",
+          "src/main/resources/assets/minigames/items/blank_long_sword.json",
+          "src/main/resources/assets/minigames/models/item/blank_long_sword.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Blank Longsword"
+    },
+    {
+      "name": "StunnableEntityTint",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "stunnable_entity_tint",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/StunnableEntityTint.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "ShowFullHealthMobs",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_full_health_mobs",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "IsMobFullHp",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_mob_full_hp",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "MobFullHPCheck",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mob_full_hp_check",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MobFullHPCheckProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlankLongswordInHand",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blank_longsword_in_hand",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlankLongswordInHandProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Blank Longsword"
+    },
+    {
+      "name": "Stunned",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stunned",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/StunnedMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "StunnedEffectStartedapplied",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "stunned_effect_startedapplied",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StunnedEffectStartedappliedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "StunnedEffectExpires",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "stunned_effect_expires",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StunnedEffectExpiresProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlankLongSwordHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "blank_long_sword_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlankLongSwordHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Blank Longsword"
+    },
+    {
+      "name": "StunFullHealthMobs",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stun_full_health_mobs",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "StunnedOnEffectActiveTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "stunned_on_effect_active_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StunnedOnEffectActiveTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "StunnedEffect",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "stunned_effect",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/stunned_effect_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/StunnedEffectEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/StunnedEffectRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "StunnedEffectOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stunned_effect_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StunnedEffectOnEntityTickUpdateProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "LockSlots",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "lock_slots",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/LockSlots.java"
+        ]
+      },
+      "path": "~/Dungeon/Inventory"
+    },
+    {
+      "name": "PlayerSlots",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "player_slots",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/PlayerSlotsOverlay.java"
+        ]
+      },
+      "path": "~/Dungeon/Inventory"
+    },
+    {
+      "name": "Slot",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slot",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/SlotCommand.java"
+        ]
+      },
+      "path": "~/Dungeon/Inventory"
+    },
+    {
+      "name": "SlotDebug",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slot_debug",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SlotDebugProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Inventory"
+    },
+    {
+      "name": "DungeonInventory",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "dungeon_inventory",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/DungeonInventoryScreen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/DungeonInventoryMenu.java"
+        ]
+      },
+      "path": "~/Dungeon/Inventory"
+    },
+    {
+      "name": "DisplayYourself",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "display_yourself",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisplayYourselfProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Inventory"
+    },
+    {
+      "name": "SpleefPodiumPlayerOnInitialEntitySpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spleef_podium_player_on_initial_entity_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpleefPodiumPlayerOnInitialEntitySpawnProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
+    },
+    {
+      "name": "ChangePodiumTexture",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "change_podium_texture",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "position",
+            "type": "number"
+          },
+          {
+            "name": "uuid",
+            "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChangePodiumTextureProcedure.java"
+        ]
+      },
+      "path": "~/Spleef"
     }
   ],
   "variable_elements": [
@@ -6708,6 +7484,120 @@
       "type": "entity",
       "scope": "global",
       "value": "null"
+    },
+    {
+      "name": "dungeonSize",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "lootRoomsDungeon",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "lootRoomPlacedDungeon",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "minibossRoomsDungeon",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "minibossRoomPlacedDungeon",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "dungeonSpawn",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "dungeonBoss",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "roomLimitDungeon",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "secretRoomDungeon",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "secretRoomPlacedDungeon",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "classDungeon",
+      "type": "string",
+      "scope": "player_persistent",
+      "value": ""
+    },
+    {
+      "name": "dungeonCoins",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "dungeonFloor",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "dungeonRoomSize",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "dungeonStartLocation",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "playerSlots",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "9.0"
+    },
+    {
+      "name": "playerInInventory",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "showOnlyHearts",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "backpackSlots",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "3.0"
     }
   ],
   "sound_elements": [
@@ -6948,6 +7838,35 @@
       "~CUSTOM:SnowShovel",
       "~CUSTOM:SymmetricalShovel",
       "~CUSTOM:GrapplingHook"
+    ],
+    "BLOCKS:mod:room": [
+      "CUSTOM:RoomGridBlock",
+      "CUSTOM:EndRoomGridBlock",
+      "CUSTOM:LootRoomGridBlock",
+      "CUSTOM:MinibossRoomGridBlock",
+      "CUSTOM:BossRoomGridBlock",
+      "CUSTOM:StartingRoomGridBlock",
+      "CUSTOM:SecretRoomGridBlock"
+    ],
+    "BLOCKS:mod:special_room": [
+      "CUSTOM:StartingRoomGridBlock",
+      "CUSTOM:BossRoomGridBlock",
+      "CUSTOM:SecretRoomGridBlock"
+    ],
+    "ITEMS:mod:dungeon_mage": [
+      "Blocks.BEDROCK"
+    ],
+    "ITEMS:mod:dungeon_support": [
+      "CUSTOM:BlankLongSword"
+    ],
+    "ITEMS:mod:dungeon_thief": [
+      "CUSTOM:BlankDagger"
+    ],
+    "ITEMS:mod:dungeon_warrior": [
+      "CUSTOM:BlankSword"
+    ],
+    "ITEMS:mod:dungeon_type_relic": [
+      "Blocks.BEDROCK"
     ]
   },
   "tab_element_order": {},
@@ -6961,14 +7880,6 @@
       "gui.minigames.view_achievment.tooltip_weather_will_permanently_be_thun": "Weather will permanently be Thunder",
       "effect.minigames.immobilized": "Freeze game",
       "gui.minigames.view_achievment.tooltip_match_settings": "Match Settings:",
-      "subtitles.rollaudio": "",
-      "subtitles.netherbreak": "",
-      "subtitles.sandbreak": "",
-      "subtitles.stonebreak": "",
-      "subtitles.dirtbreak": "",
-      "subtitles.pvp_swordshit": "",
-      "subtitles.pvp_swind": "",
-      "subtitles.menu_switch": "",
       "gui.minigames.start_game.tooltip_achievement_run": "First player to obtain a randomly chosen achievement wins",
       "gui.minigames.start_game.label_minigames": "Minigames",
       "gui.minigames.minigame_gui_achievement_run.label_achievement_run": "Achievement Run",
@@ -6985,7 +7896,6 @@
       "subtitles.rolldice": "",
       "effect.minigames.crowned": "Crowned",
       "gui.minigames.achievement_reminder.label_obtain_this_achievement": "Obtain this achievement:",
-      "gui.minigames.achievement_reminder.label_adventure_time": "Adventure Time",
       "gui.minigames.minigame_gui_achievement_run.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
       "gui.minigames.minigame_gui_achievement_run.crown": "",
       "gui.minigames.minigame_gui_achievement_run.tooltip_dont_reset_world_on_game_start": "Don\u0027t reset world on game start",
@@ -7010,7 +7920,6 @@
       "gui.minigames.view_achievment_hunter.tooltip_reroll_achievement": "Reroll Achievement",
       "gui.minigames.view_achievment_hunter.tooltip_pvp_enables_after_5_minutes": "PVP enables after 5 minutes",
       "gui.minigames.view_achievment_hunter.button_im_ready": "I\u0027m Ready",
-      "subtitles.rollaudioclean": "",
       "gui.minigames.start_game.label_achievement": "Achievement",
       "gui.minigames.start_game.label_run": "Run",
       "effect.minigames.nerf_hunters": "Nerf Hunters",
@@ -7128,11 +8037,34 @@
       "gui.minigames.minigame_gui_spleef.tooltip_passive_snowball_gain_per_second": "Passive snowball gain per second (can contain decimals)",
       "entity.minigames.spleef_podium_player": "Spleef Podium Player",
       "item.minigames.empty_grid_block": "Empty Grid Block",
-      "item.minigames.room_grid_block": "Room Grid Block"
+      "item.minigames.room_grid_block": "Room Grid Block",
+      "item.minigames.end_room_grid_block": "End Room Grid Block",
+      "item.minigames.starting_room_grid_block": "Starting Room Grid Block",
+      "item.minigames.loot_room_grid_block": "Loot Room Grid Block",
+      "item.minigames.miniboss_room_grid_block": "Miniboss Room Grid Block",
+      "item.minigames.boss_room_grid_block": "Boss Room Grid Block",
+      "item.minigames.secret_room_grid_block": "Boss Room Grid Block",
+      "item.minigames.blank_dagger": "Blank Dagger",
+      "attribute.minigames.salvage_value": "Salvage Value",
+      "item.minigames.blank_sword": "Blank Sword",
+      "attribute.minigames.coins_on_kill": "Coins On Kill",
+      "item.minigames.blank_dagger.description_2": "Gain§2 15%§f more§6 coins§f from killing monsters.",
+      "item.minigames.blank_dagger.description_1": "§6§lPASSIVE ABILITY",
+      "item.minigames.blank_dagger.description_0": "",
+      "item.minigames.blank_long_sword": "Blank Longsword",
+      "item.minigames.blank_long_sword.description_0": "",
+      "item.minigames.blank_long_sword.description_2": "§eStun§f monsters for§2 3s§f if they are full HP",
+      "item.minigames.blank_long_sword.description_1": "§6§lON HIT",
+      "attribute.minigames.show_full_health_mobs": "Show Full Health Mobs",
+      "attribute.minigames.is_mob_full_hp": "Is Mob Full Hp",
+      "effect.minigames.stunned": "Stunned",
+      "attribute.minigames.stun_full_health_mobs": "Stun Full Health Mobs",
+      "entity.minigames.stunned_effect": "Stunned Effect"
     }
   },
   "metadata": {
     "files": [
+      "src/main/java/net/mcreator/minigames/init/MinigamesModAttributes.java",
       "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMenus.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
@@ -7247,6 +8179,83 @@
         "children": [
           {
             "name": "Floor Spawning",
+            "children": []
+          },
+          {
+            "name": "Item Description",
+            "children": []
+          },
+          {
+            "name": "Floors",
+            "children": []
+          },
+          {
+            "name": "Items",
+            "children": [
+              {
+                "name": "Thief",
+                "children": [
+                  {
+                    "name": "Weapons",
+                    "children": []
+                  },
+                  {
+                    "name": "Utilities",
+                    "children": []
+                  },
+                  {
+                    "name": "Equipment",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Warrior",
+                "children": [
+                  {
+                    "name": "Weapons",
+                    "children": []
+                  },
+                  {
+                    "name": "Utilities",
+                    "children": []
+                  },
+                  {
+                    "name": "Equipment",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Support",
+                "children": [
+                  {
+                    "name": "Weapons",
+                    "children": [
+                      {
+                        "name": "Blank Longsword",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Utility",
+                    "children": []
+                  },
+                  {
+                    "name": "Equiment",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Mage",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Inventory",
             "children": []
           }
         ]

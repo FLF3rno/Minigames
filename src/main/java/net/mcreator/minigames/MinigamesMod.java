@@ -58,7 +58,9 @@ public class MinigamesMod {
 		MinigamesModVariables.ATTACHMENT_TYPES.register(modEventBus);
 		MinigamesModMobEffects.REGISTRY.register(modEventBus);
 		MinigamesModMenus.REGISTRY.register(modEventBus);
+		MinigamesModAttributes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
+		new StunnableEntityTint(modEventBus);
 		// End of user code block mod init
 	}
 

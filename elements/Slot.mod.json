@@ -1,0 +1,10 @@
+{
+  "_fv": 85,
+  "_type": "command",
+  "definition": {
+    "commandName": "slot",
+    "type": "STANDARD",
+    "permissionLevel": "No requirement",
+    "argsxml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"args_start\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"number_default\"><field name=\"name\">name</field><statement name=\"args\"><block type=\"number_default\"><field name=\"name\">backpack</field><statement name=\"args\"><block type=\"call_procedure\"><field name=\"procedure\">SlotDebug</field></block></statement></block></statement></block></next></block></xml>"
+  }
+}

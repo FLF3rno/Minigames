@@ -112,6 +112,11 @@ public class MinigamesModVariables {
 		clone.snowballCountSpleef = original.snowballCountSpleef;
 		clone.thrusterDirection = original.thrusterDirection;
 		clone.thrusterTicks = original.thrusterTicks;
+		clone.classDungeon = original.classDungeon;
+		clone.playerSlots = original.playerSlots;
+		clone.playerInInventory = original.playerInInventory;
+		clone.showOnlyHearts = original.showOnlyHearts;
+		clone.backpackSlots = original.backpackSlots;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -262,6 +267,20 @@ public class MinigamesModVariables {
 		public double layerConquestCooldownSpleef = 0;
 		public String activeGlueLayersSpleef = "\"\"";
 		public double passiveSnowballsSpleef = 1.0;
+		public Vec3 dungeonSize = Vec3.ZERO;
+		public double lootRoomsDungeon = 0;
+		public double lootRoomPlacedDungeon = 0;
+		public double minibossRoomsDungeon = 0;
+		public double minibossRoomPlacedDungeon = 0;
+		public double dungeonSpawn = 0;
+		public double dungeonBoss = 0;
+		public Vec3 roomLimitDungeon = Vec3.ZERO;
+		public double secretRoomDungeon = 0.0;
+		public double secretRoomPlacedDungeon = 0.0;
+		public double dungeonCoins = 0;
+		public double dungeonFloor = 0;
+		public Vec3 dungeonRoomSize = Vec3.ZERO;
+		public Vec3 dungeonStartLocation = Vec3.ZERO;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -334,6 +353,20 @@ public class MinigamesModVariables {
 			layerConquestCooldownSpleef = nbt.getDoubleOr("layerConquestCooldownSpleef", 0);
 			activeGlueLayersSpleef = nbt.getStringOr("activeGlueLayersSpleef", "");
 			passiveSnowballsSpleef = nbt.getDoubleOr("passiveSnowballsSpleef", 0);
+			dungeonSize = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonSize")).result().orElse(Vec3.ZERO);
+			lootRoomsDungeon = nbt.getDoubleOr("lootRoomsDungeon", 0);
+			lootRoomPlacedDungeon = nbt.getDoubleOr("lootRoomPlacedDungeon", 0);
+			minibossRoomsDungeon = nbt.getDoubleOr("minibossRoomsDungeon", 0);
+			minibossRoomPlacedDungeon = nbt.getDoubleOr("minibossRoomPlacedDungeon", 0);
+			dungeonSpawn = nbt.getDoubleOr("dungeonSpawn", 0);
+			dungeonBoss = nbt.getDoubleOr("dungeonBoss", 0);
+			roomLimitDungeon = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("roomLimitDungeon")).result().orElse(Vec3.ZERO);
+			secretRoomDungeon = nbt.getDoubleOr("secretRoomDungeon", 0);
+			secretRoomPlacedDungeon = nbt.getDoubleOr("secretRoomPlacedDungeon", 0);
+			dungeonCoins = nbt.getDoubleOr("dungeonCoins", 0);
+			dungeonFloor = nbt.getDoubleOr("dungeonFloor", 0);
+			dungeonRoomSize = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonRoomSize")).result().orElse(Vec3.ZERO);
+			dungeonStartLocation = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonStartLocation")).result().orElse(Vec3.ZERO);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -407,6 +440,20 @@ public class MinigamesModVariables {
 			nbt.putDouble("layerConquestCooldownSpleef", layerConquestCooldownSpleef);
 			nbt.putString("activeGlueLayersSpleef", activeGlueLayersSpleef);
 			nbt.putDouble("passiveSnowballsSpleef", passiveSnowballsSpleef);
+			nbt.put("dungeonSize", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonSize).result().orElseGet(CompoundTag::new));
+			nbt.putDouble("lootRoomsDungeon", lootRoomsDungeon);
+			nbt.putDouble("lootRoomPlacedDungeon", lootRoomPlacedDungeon);
+			nbt.putDouble("minibossRoomsDungeon", minibossRoomsDungeon);
+			nbt.putDouble("minibossRoomPlacedDungeon", minibossRoomPlacedDungeon);
+			nbt.putDouble("dungeonSpawn", dungeonSpawn);
+			nbt.putDouble("dungeonBoss", dungeonBoss);
+			nbt.put("roomLimitDungeon", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, roomLimitDungeon).result().orElseGet(CompoundTag::new));
+			nbt.putDouble("secretRoomDungeon", secretRoomDungeon);
+			nbt.putDouble("secretRoomPlacedDungeon", secretRoomPlacedDungeon);
+			nbt.putDouble("dungeonCoins", dungeonCoins);
+			nbt.putDouble("dungeonFloor", dungeonFloor);
+			nbt.put("dungeonRoomSize", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonRoomSize).result().orElseGet(CompoundTag::new));
+			nbt.put("dungeonStartLocation", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonStartLocation).result().orElseGet(CompoundTag::new));
 			return nbt;
 		}
 
@@ -481,6 +528,11 @@ public class MinigamesModVariables {
 		public double snowballCountSpleef = 0;
 		public Vec3 thrusterDirection = Vec3.ZERO;
 		public double thrusterTicks = 0;
+		public String classDungeon = "";
+		public double playerSlots = 9.0;
+		public boolean playerInInventory = false;
+		public boolean showOnlyHearts = false;
+		public double backpackSlots = 3.0;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -495,6 +547,11 @@ public class MinigamesModVariables {
 			output.putDouble("snowballCountSpleef", snowballCountSpleef);
 			output.store("thrusterDirection", Vec3.CODEC, thrusterDirection);
 			output.putDouble("thrusterTicks", thrusterTicks);
+			output.putString("classDungeon", classDungeon);
+			output.putDouble("playerSlots", playerSlots);
+			output.putBoolean("playerInInventory", playerInInventory);
+			output.putBoolean("showOnlyHearts", showOnlyHearts);
+			output.putDouble("backpackSlots", backpackSlots);
 		}
 
 		@Override
@@ -510,6 +567,11 @@ public class MinigamesModVariables {
 			snowballCountSpleef = input.getDoubleOr("snowballCountSpleef", 0);
 			thrusterDirection = input.read("thrusterDirection", Vec3.CODEC).orElse(Vec3.ZERO);
 			thrusterTicks = input.getDoubleOr("thrusterTicks", 0);
+			classDungeon = input.getStringOr("classDungeon", "");
+			playerSlots = input.getDoubleOr("playerSlots", 0);
+			playerInInventory = input.getBooleanOr("playerInInventory", false);
+			showOnlyHearts = input.getBooleanOr("showOnlyHearts", false);
+			backpackSlots = input.getDoubleOr("backpackSlots", 0);
 		}
 
 		public void markSyncDirty() {

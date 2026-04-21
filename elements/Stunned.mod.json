@@ -1,0 +1,33 @@
+{
+  "_fv": 85,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Stunned",
+    "icon": "stunned",
+    "color": {
+      "value": -256,
+      "falpha": 0.0
+    },
+    "onAddedSound": {
+      "value": ""
+    },
+    "isInstant": false,
+    "mobEffectCategory": "NEUTRAL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [],
+    "onStarted": {
+      "name": "StunnedEffectStartedapplied"
+    },
+    "onActiveTick": {
+      "name": "StunnedOnEffectActiveTick"
+    },
+    "onExpired": {
+      "name": "StunnedEffectExpires"
+    },
+    "onMobRemoved": {
+      "name": "StunnedEffectExpires"
+    }
+  }
+}

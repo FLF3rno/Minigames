@@ -25,6 +25,12 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SPREADING_GLUE;
 	public static final DeferredBlock<Block> EMPTY_GRID_BLOCK;
 	public static final DeferredBlock<Block> ROOM_GRID_BLOCK;
+	public static final DeferredBlock<Block> END_ROOM_GRID_BLOCK;
+	public static final DeferredBlock<Block> STARTING_ROOM_GRID_BLOCK;
+	public static final DeferredBlock<Block> LOOT_ROOM_GRID_BLOCK;
+	public static final DeferredBlock<Block> MINIBOSS_ROOM_GRID_BLOCK;
+	public static final DeferredBlock<Block> BOSS_ROOM_GRID_BLOCK;
+	public static final DeferredBlock<Block> SECRET_ROOM_GRID_BLOCK;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -35,6 +41,12 @@ public class MinigamesModBlocks {
 		SPREADING_GLUE = register("spreading_glue", SpreadingGlueBlock::new);
 		EMPTY_GRID_BLOCK = register("empty_grid_block", EmptyGridBlockBlock::new);
 		ROOM_GRID_BLOCK = register("room_grid_block", RoomGridBlockBlock::new);
+		END_ROOM_GRID_BLOCK = register("end_room_grid_block", EndRoomGridBlockBlock::new);
+		STARTING_ROOM_GRID_BLOCK = register("starting_room_grid_block", StartingRoomGridBlockBlock::new);
+		LOOT_ROOM_GRID_BLOCK = register("loot_room_grid_block", LootRoomGridBlockBlock::new);
+		MINIBOSS_ROOM_GRID_BLOCK = register("miniboss_room_grid_block", MinibossRoomGridBlockBlock::new);
+		BOSS_ROOM_GRID_BLOCK = register("boss_room_grid_block", BossRoomGridBlockBlock::new);
+		SECRET_ROOM_GRID_BLOCK = register("secret_room_grid_block", SecretRoomGridBlockBlock::new);
 	}
 
 	// Start of user code block custom blocks

@@ -11,7 +11,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.commands.Commands;
 
-import net.mcreator.minigames.procedures.SpawnGridProcedure;
+import net.mcreator.minigames.procedures.CommandGridProcedure;
+
+import com.mojang.brigadier.arguments.DoubleArgumentType;
 
 @EventBusSubscriber
 public class GridCommand {
@@ -19,21 +21,24 @@ public class GridCommand {
 	public static void registerCommand(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal("grid")
 
-				.executes(arguments -> {
-					Level world = arguments.getSource().getUnsidedLevel();
-					double x = arguments.getSource().getPosition().x();
-					double y = arguments.getSource().getPosition().y();
-					double z = arguments.getSource().getPosition().z();
-					Entity entity = arguments.getSource().getEntity();
-					if (entity == null && world instanceof ServerLevel _servLevel)
-						entity = FakePlayerFactory.getMinecraft(_servLevel);
-					Direction direction = Direction.DOWN;
-					if (entity != null)
-						direction = entity.getDirection();
+				.then(Commands.argument("roomX", DoubleArgumentType.doubleArg(1, 64))
+						.then(Commands.argument("roomZ", DoubleArgumentType.doubleArg(1, 64))
+								.then(Commands.argument("loot", DoubleArgumentType.doubleArg(0, 64)).then(Commands.argument("miniboss", DoubleArgumentType.doubleArg(0, 64)).then(Commands.argument("secret", DoubleArgumentType.doubleArg(0, 64))
+										.then(Commands.argument("minimumRooms", DoubleArgumentType.doubleArg(0, 500)).then(Commands.argument("maximumRooms", DoubleArgumentType.doubleArg(0, 500)).executes(arguments -> {
+											Level world = arguments.getSource().getUnsidedLevel();
+											double x = arguments.getSource().getPosition().x();
+											double y = arguments.getSource().getPosition().y();
+											double z = arguments.getSource().getPosition().z();
+											Entity entity = arguments.getSource().getEntity();
+											if (entity == null && world instanceof ServerLevel _servLevel)
+												entity = FakePlayerFactory.getMinecraft(_servLevel);
+											Direction direction = Direction.DOWN;
+											if (entity != null)
+												direction = entity.getDirection();
 
-					SpawnGridProcedure.execute(world);
-					return 0;
-				}));
+											CommandGridProcedure.execute(world, x, y, z, arguments);
+											return 0;
+										})))))))));
 	}
 
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "minigames:block/end_room_grid_block"
+    }
+  }
+}

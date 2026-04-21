@@ -1,0 +1,14 @@
+{
+  "_fv": 85,
+  "_type": "attribute",
+  "definition": {
+    "name": "Is Mob Full Hp",
+    "minValue": 0.0,
+    "maxValue": 1.0,
+    "defaultValue": 0.0,
+    "sentiment": "POSITIVE",
+    "addToAllEntities": true,
+    "addToPlayers": false,
+    "entities": []
+  }
+}

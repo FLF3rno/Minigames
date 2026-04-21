@@ -5,14 +5,18 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -20,10 +24,15 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.core.registries.BuiltInRegistries;
 
+import net.mcreator.minigames.procedures.SpleefPodiumPlayerOnInitialEntitySpawnProcedure;
+
+import javax.annotation.Nullable;
+
 public class SpleefPodiumPlayerEntity extends Monster {
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(SpleefPodiumPlayerEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(SpleefPodiumPlayerEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_position = SynchedEntityData.defineId(SpleefPodiumPlayerEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<String> DATA_display_uuid = SynchedEntityData.defineId(SpleefPodiumPlayerEntity.class, EntityDataSerializers.STRING);
 
 	public SpleefPodiumPlayerEntity(EntityType<SpleefPodiumPlayerEntity> type, Level world) {
 		super(type, world);
@@ -38,6 +47,7 @@ public class SpleefPodiumPlayerEntity extends Monster {
 		builder.define(TEXTURE, "empty");
 		builder.define(ANIM, 0);
 		builder.define(DATA_position, 0);
+		builder.define(DATA_display_uuid, "");
 	}
 
 	public void setTexture(String texture) {
@@ -69,10 +79,18 @@ public class SpleefPodiumPlayerEntity extends Monster {
 	}
 
 	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData livingdata) {
+		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
+		SpleefPodiumPlayerOnInitialEntitySpawnProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
+		return retval;
+	}
+
+	@Override
 	public void addAdditionalSaveData(ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putInt("Dataposition", this.entityData.get(DATA_position));
+		valueOutput.putString("Datadisplay_uuid", this.entityData.get(DATA_display_uuid));
 	}
 
 	@Override
@@ -80,6 +98,7 @@ public class SpleefPodiumPlayerEntity extends Monster {
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "empty"));
 		this.entityData.set(DATA_position, valueInput.getIntOr("Dataposition", 0));
+		this.entityData.set(DATA_display_uuid, valueInput.getStringOr("Datadisplay_uuid", ""));
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {

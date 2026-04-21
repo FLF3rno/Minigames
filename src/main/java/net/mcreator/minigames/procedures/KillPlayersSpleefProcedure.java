@@ -55,7 +55,10 @@ public class KillPlayersSpleefProcedure {
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "execute as @a at @s run playsound minigames:teameliminated master @s ~ ~ ~ 2 1");
 						}
 					}
-					ChangePodiumTextureProcedure.execute(world, MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers, entityiterator.getStringUUID());
+					int placementOnDeath = (int) MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers;
+					if (placementOnDeath == 3 || placementOnDeath == 2) {
+						ChangePodiumTextureProcedure.execute(world, placementOnDeath, entityiterator.getStringUUID());
+					}
 					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
 						{
 							Entity _ent = entityiterator;

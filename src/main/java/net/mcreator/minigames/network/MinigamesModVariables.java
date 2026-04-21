@@ -266,7 +266,7 @@ public class MinigamesModVariables {
 		public Vec3 spleefMapMiddleX = Vec3.ZERO;
 		public double layerConquestCooldownSpleef = 0;
 		public String activeGlueLayersSpleef = "\"\"";
-		public double passiveSnowballsSpleef = 1.0;
+		public double passiveSnowballsSpleef = 0.05;
 		public Vec3 dungeonSize = Vec3.ZERO;
 		public double lootRoomsDungeon = 0;
 		public double lootRoomPlacedDungeon = 0;

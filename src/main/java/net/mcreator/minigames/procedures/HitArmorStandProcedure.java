@@ -5,6 +5,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.ICancellableEvent;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
@@ -61,12 +62,15 @@ public class HitArmorStandProcedure {
 			return;
 		if (entity.level().isClientSide())
 			return;
-		if (MinigamesModVariables.MapVariables.get(world).canGrabCrown == true) {
-			if (!(entity instanceof Player))
-				return;
-			if (!(target instanceof ArmorStand))
-				return;
-			if ((target instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
+		if (!(entity instanceof Player))
+			return;
+		if (!(target instanceof ArmorStand))
+			return;
+		if ((target instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
+			}
+			if (MinigamesModVariables.MapVariables.get(world).canGrabCrown == true) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.helmet = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).copy();

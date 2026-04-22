@@ -281,6 +281,7 @@ public class MinigamesModVariables {
 		public double dungeonFloor = 0;
 		public Vec3 dungeonRoomSize = Vec3.ZERO;
 		public Vec3 dungeonStartLocation = Vec3.ZERO;
+		public boolean playingDungeons = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -367,6 +368,7 @@ public class MinigamesModVariables {
 			dungeonFloor = nbt.getDoubleOr("dungeonFloor", 0);
 			dungeonRoomSize = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonRoomSize")).result().orElse(Vec3.ZERO);
 			dungeonStartLocation = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonStartLocation")).result().orElse(Vec3.ZERO);
+			playingDungeons = nbt.getBooleanOr("playingDungeons", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -454,6 +456,7 @@ public class MinigamesModVariables {
 			nbt.putDouble("dungeonFloor", dungeonFloor);
 			nbt.put("dungeonRoomSize", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonRoomSize).result().orElseGet(CompoundTag::new));
 			nbt.put("dungeonStartLocation", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonStartLocation).result().orElseGet(CompoundTag::new));
+			nbt.putBoolean("playingDungeons", playingDungeons);
 			return nbt;
 		}
 

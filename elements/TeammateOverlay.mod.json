@@ -1,0 +1,76 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "teammateoverlay.png",
+          "use1Xscale": false,
+          "anchorPoint": "TOP_LEFT",
+          "x": 0,
+          "y": 3,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_name",
+          "text": {
+            "fixedValue": "[NAME]"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_LEFT",
+          "x": 4,
+          "y": 9,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_class",
+          "text": {
+            "fixedValue": "[CLASS]"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "CENTER",
+          "x": 4,
+          "y": 20,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "health_boost.png",
+          "use1Xscale": true,
+          "anchorPoint": "TOP_LEFT",
+          "x": 3,
+          "y": 35,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

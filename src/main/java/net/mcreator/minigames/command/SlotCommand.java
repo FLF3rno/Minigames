@@ -33,7 +33,7 @@ public class SlotCommand {
 					if (entity != null)
 						direction = entity.getDirection();
 
-					SlotDebugProcedure.execute(arguments, entity);
+					SlotDebugProcedure.execute(world, arguments, entity);
 					return 0;
 				}))));
 	}

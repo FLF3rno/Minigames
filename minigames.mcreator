@@ -3182,7 +3182,7 @@
       "name": "SummonNoOwnerCrown",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "summon_no_owner_crown",
       "metadata": {
         "dependencies": [
@@ -6857,6 +6857,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -6925,6 +6929,19 @@
         ]
       },
       "path": "~/Spleef"
+    },
+    {
+      "name": "TeammateOverlay",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "teammate_overlay",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/TeammateOverlayOverlay.java"
+        ]
+      },
+      "path": "~/Dungeon/Team Overlay"
     }
   ],
   "variable_elements": [
@@ -7563,6 +7580,12 @@
       "type": "number",
       "scope": "player_persistent",
       "value": "3.0"
+    },
+    {
+      "name": "playingDungeons",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -8024,7 +8047,9 @@
       "attribute.minigames.is_mob_full_hp": "Is Mob Full Hp",
       "effect.minigames.stunned": "Stunned",
       "attribute.minigames.stun_full_health_mobs": "Stun Full Health Mobs",
-      "entity.minigames.stunned_effect": "Stunned Effect"
+      "entity.minigames.stunned_effect": "Stunned Effect",
+      "gui.minigames.teammate_overlay.label_name": "[NAME]",
+      "gui.minigames.teammate_overlay.label_class": "[CLASS]"
     }
   },
   "metadata": {
@@ -8221,6 +8246,10 @@
           },
           {
             "name": "Inventory",
+            "children": []
+          },
+          {
+            "name": "Team Overlay",
             "children": []
           }
         ]

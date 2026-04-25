@@ -20,6 +20,9 @@ import net.minecraft.world.scores.PlayerTeam;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.network.TeammateHealthSync;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 @EventBusSubscriber(Dist.CLIENT)
 public class TeammateOverlayOverlay {
 	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/teammateoverlay.png");
@@ -32,6 +35,9 @@ public class TeammateOverlayOverlay {
 	private static final ResourceLocation HEART_WITHERED_HALF = ResourceLocation.withDefaultNamespace("hud/heart/withered_half");
 	private static final ResourceLocation HEART_ABSORBING_FULL = ResourceLocation.withDefaultNamespace("hud/heart/absorbing_full");
 	private static final ResourceLocation HEART_ABSORBING_HALF = ResourceLocation.withDefaultNamespace("hud/heart/absorbing_half");
+	private static final int DAMAGE_FLASH_DURATION_TICKS = 20;
+	private static final int HEAL_FLASH_DURATION_TICKS = 10;
+	private static final int FLASH_INTERVAL_TICKS = 3;
 	private static final int ROW_X = 0;
 	private static final int ROW_Y = 3;
 	private static final int ROW_WIDTH = 141;
@@ -54,6 +60,7 @@ public class TeammateOverlayOverlay {
 	private static final int SUPPORT_COLOR = 0x55FFFF;
 	private static final int MAGE_COLOR = 0xFF55FF;
 	private static final int DEAD_TEXT_COLOR = 0xFF808080;
+	private static final Map<Integer, FlashState> FLASH_STATES = new ConcurrentHashMap<>();
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public static void eventHandler(RenderGuiEvent.Pre event) {
@@ -111,20 +118,28 @@ public class TeammateOverlayOverlay {
 	}
 
 	private static void drawHealthBar(RenderGuiEvent.Pre event, Player teammate, int rowY) {
+		Minecraft minecraft = Minecraft.getInstance();
 		int heartsX = HEALTH_BAR_X;
 		int heartsY = rowY + (HEALTH_BAR_Y - ROW_Y);
 		if (teammate.isSpectator()) {
-			Minecraft minecraft = Minecraft.getInstance();
 			String deadText = "Dead";
 			int centerX = HEALTH_BAR_X + HEALTH_BAR_WIDTH / 2;
 			int textX = centerX - minecraft.font.width(deadText) / 2;
 			event.getGuiGraphics().drawString(minecraft.font, Component.literal(deadText), textX, heartsY, DEAD_TEXT_COLOR, false);
+			FLASH_STATES.remove(teammate.getId());
 			return;
 		}
 		TeammateHealthSync.HealthSnapshot snapshot = TeammateHealthSync.get(teammate)
 				.orElseGet(() -> new TeammateHealthSync.HealthSnapshot(teammate.getHealth(), teammate.getMaxHealth(), teammate.getAbsorptionAmount()));
 
-		int maxHalfHearts = Math.max(2, (int) Math.ceil(Math.max(1.0F, snapshot.maxHealth())));
+		long nowTick = teammate.level().getGameTime();
+		FlashState flashState = FLASH_STATES.compute(teammate.getId(), (id, state) -> updateFlashState(state, snapshot, nowTick));
+		boolean shouldFlash = flashState != null && nowTick < flashState.flashUntilTick() && ((flashState.flashUntilTick() - nowTick) / FLASH_INTERVAL_TICKS) % 2L == 1L;
+		if (snapshot.hurtFlashTicks() > 0 && (snapshot.hurtFlashTicks() / 2) % 2 == 0) {
+			shouldFlash = true;
+		}
+
+		int maxHalfHearts = Math.max(2, (int) Math.ceil(Math.max(1.0F, snapshot.maxHealth()) * 2.0F));
 		int healthHalfHearts = Math.max(0, Math.min(maxHalfHearts, (int) Math.ceil(Math.max(0.0F, snapshot.health()) * 2.0F)));
 		int absorptionHalfHearts = Math.max(0, (int) Math.ceil(Math.max(0.0F, snapshot.absorption()) * 2.0F));
 		int totalIcons = Math.min(MAX_HEART_ICONS, Math.max(1, (int) Math.ceil((maxHalfHearts + absorptionHalfHearts) / 2.0)));
@@ -139,9 +154,9 @@ public class TeammateOverlayOverlay {
 			int slotStart = i * 2;
 			int healthInSlot = Math.max(0, Math.min(2, healthHalfHearts - slotStart));
 			if (healthInSlot >= 2) {
-				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, fullHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
+				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, shouldFlash ? HEART_FULL : fullHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
 			} else if (healthInSlot == 1) {
-				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, halfHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
+				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, shouldFlash ? HEART_HALF : halfHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
 			}
 
 			int absorbInSlot = Math.max(0, Math.min(2, absorptionHalfHearts - Math.max(0, slotStart - maxHalfHearts)));
@@ -149,19 +164,22 @@ public class TeammateOverlayOverlay {
 				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, absorbInSlot >= 2 ? HEART_ABSORBING_FULL : HEART_ABSORBING_HALF, x, heartsY, HEART_SIZE, HEART_SIZE);
 			}
 		}
+	}
 
-		// Vanilla-like damage feedback: blink a white overlay while hurt timer is active.
-		if (snapshot.hurtFlashTicks() > 0 && ((snapshot.hurtFlashTicks() / 2) % 2 == 0)) {
-			for (int i = 0; i < totalIcons; i++) {
-				int slotStart = i * 2;
-				int healthInSlot = Math.max(0, Math.min(2, healthHalfHearts - slotStart));
-				if (healthInSlot > 0) {
-					int x = heartsX + i * HEART_SIZE;
-					event.getGuiGraphics().fill(x, heartsY, x + HEART_SIZE, heartsY + HEART_SIZE, 0x66FFFFFF);
-				}
-			}
+	private static FlashState updateFlashState(FlashState state, TeammateHealthSync.HealthSnapshot snapshot, long nowTick) {
+		if (state == null) {
+			return new FlashState(snapshot.health(), nowTick, snapshot.hurtFlashTicks());
 		}
-
+		long flashUntilTick = state.flashUntilTick();
+		if (snapshot.health() < state.lastHealth()) {
+			flashUntilTick = nowTick + DAMAGE_FLASH_DURATION_TICKS;
+		} else if (snapshot.health() > state.lastHealth()) {
+			flashUntilTick = nowTick + HEAL_FLASH_DURATION_TICKS;
+		}
+		if (snapshot.hurtFlashTicks() > state.lastHurtTicks()) {
+			flashUntilTick = Math.max(flashUntilTick, nowTick + DAMAGE_FLASH_DURATION_TICKS);
+		}
+		return new FlashState(snapshot.health(), flashUntilTick, snapshot.hurtFlashTicks());
 	}
 
 	private static ResourceLocation getNormalHeartFull(TeammateHealthSync.HealthSnapshot snapshot) {
@@ -214,5 +232,8 @@ public class TeammateOverlayOverlay {
 	}
 
 	private record ClassDisplay(String label, int color) {
+	}
+
+	private record FlashState(float lastHealth, long flashUntilTick, int lastHurtTicks) {
 	}
 }

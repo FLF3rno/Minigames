@@ -7008,6 +7008,19 @@
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "Rougelike",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rougelike",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/RougelikeCommand.java"
+        ]
+      },
+      "path": "~/Dungeon"
     }
   ],
   "variable_elements": [

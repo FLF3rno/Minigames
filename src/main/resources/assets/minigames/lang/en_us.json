@@ -188,5 +188,6 @@
   "attribute.minigames.stun_full_health_mobs": "Stun Full Health Mobs",
   "entity.minigames.stunned_effect": "Stunned Effect",
   "gui.minigames.teammate_overlay.label_name": "[NAME]",
-  "gui.minigames.teammate_overlay.label_class": "[CLASS]"
+  "gui.minigames.teammate_overlay.label_class": "[CLASS]",
+  "attribute.minigames.repair_value": "Repair Value"
 }

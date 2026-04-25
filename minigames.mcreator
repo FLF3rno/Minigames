@@ -6754,7 +6754,7 @@
       "name": "StunnedOnEffectActiveTick",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "stunned_on_effect_active_tick",
       "metadata": {
         "dependencies": [
@@ -6825,46 +6825,6 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/client/screens/PlayerSlotsOverlay.java"
-        ]
-      },
-      "path": "~/Dungeon/Inventory"
-    },
-    {
-      "name": "Slot",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "slot",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/SlotCommand.java"
-        ]
-      },
-      "path": "~/Dungeon/Inventory"
-    },
-    {
-      "name": "SlotDebug",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "slot_debug",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "arguments",
-            "type": "cmdcontext"
-          },
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SlotDebugProcedure.java"
         ]
       },
       "path": "~/Dungeon/Inventory"
@@ -6942,6 +6902,112 @@
         ]
       },
       "path": "~/Dungeon/Team Overlay"
+    },
+    {
+      "name": "RepairValue",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "repair_value",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BreakWeapon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "break_weapon",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BreakWeaponProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "DungeonDimension",
+      "type": "dimension",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "dungeon_dimension",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/dimension/DungeonDimensionDimension.java",
+          "src/main/resources/data/minigames/dimension_type/dungeon_dimension.json",
+          "src/main/resources/data/minigames/dimension/dungeon_dimension.json"
+        ]
+      },
+      "path": "~/Dungeon/Dimension"
+    },
+    {
+      "name": "StartDungeon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_dungeon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartDungeonProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "SpawnStructureDungeon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_structure_dungeon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "structureX",
+            "type": "number"
+          },
+          {
+            "name": "structureY",
+            "type": "number"
+          },
+          {
+            "name": "structureZ",
+            "type": "number"
+          },
+          {
+            "name": "structure",
+            "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnStructureDungeonProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
     }
   ],
   "variable_elements": [
@@ -7855,6 +7921,9 @@
     ],
     "ITEMS:mod:dungeon_type_relic": [
       "Blocks.BEDROCK"
+    ],
+    "BLOCKS:minecraft:overworld_carver_replaceables": [
+      "~CUSTOM:StartingRoomGridBlock"
     ]
   },
   "tab_element_order": {},
@@ -8049,7 +8118,8 @@
       "attribute.minigames.stun_full_health_mobs": "Stun Full Health Mobs",
       "entity.minigames.stunned_effect": "Stunned Effect",
       "gui.minigames.teammate_overlay.label_name": "[NAME]",
-      "gui.minigames.teammate_overlay.label_class": "[CLASS]"
+      "gui.minigames.teammate_overlay.label_class": "[CLASS]",
+      "attribute.minigames.repair_value": "Repair Value"
     }
   },
   "metadata": {
@@ -8194,7 +8264,7 @@
                     "children": []
                   },
                   {
-                    "name": "Equipment",
+                    "name": "Relic",
                     "children": []
                   }
                 ]
@@ -8211,7 +8281,7 @@
                     "children": []
                   },
                   {
-                    "name": "Equipment",
+                    "name": "Relic",
                     "children": []
                   }
                 ]
@@ -8233,7 +8303,7 @@
                     "children": []
                   },
                   {
-                    "name": "Equiment",
+                    "name": "Relic",
                     "children": []
                   }
                 ]
@@ -8250,6 +8320,10 @@
           },
           {
             "name": "Team Overlay",
+            "children": []
+          },
+          {
+            "name": "Dimension",
             "children": []
           }
         ]

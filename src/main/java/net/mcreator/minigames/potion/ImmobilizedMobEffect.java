@@ -26,9 +26,8 @@ public class ImmobilizedMobEffect extends MobEffect {
 		this.addAttributeModifier(Attributes.FLYING_SPEED, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_2"), -10, AttributeModifier.Operation.ADD_VALUE);
 		this.addAttributeModifier(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_3"), 10, AttributeModifier.Operation.ADD_VALUE);
 		this.addAttributeModifier(Attributes.JUMP_STRENGTH, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_4"), -1000, AttributeModifier.Operation.ADD_VALUE);
-		this.addAttributeModifier(Attributes.ARMOR, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_5"), 1000, AttributeModifier.Operation.ADD_VALUE);
-		this.addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_6"), 1000, AttributeModifier.Operation.ADD_VALUE);
-		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_7"), -1000, AttributeModifier.Operation.ADD_VALUE);
+		this.addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_5"), 1000, AttributeModifier.Operation.ADD_VALUE);
+		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_6"), -1000, AttributeModifier.Operation.ADD_VALUE);
 	}
 
 	@SubscribeEvent

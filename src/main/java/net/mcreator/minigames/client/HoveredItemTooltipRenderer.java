@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.LightTexture;
@@ -374,10 +375,23 @@ public class HoveredItemTooltipRenderer {
 	private static void removeVanillaAttributeLines(List<Component> tooltip) {
 		tooltip.removeIf(line -> {
 			String text = line.getString().trim().toLowerCase(Locale.ROOT);
-			return text.startsWith("when in ") || text.startsWith("+") || text.startsWith("-") 
-				|| text.endsWith(" attack damage") || text.endsWith(" attack speed") 
+			return hasTranslatableKey(line, "item.modifiers.") || hasTranslatableKey(line, "attribute.modifier.")
+				|| text.startsWith("when in ") || text.startsWith("when equipped") || text.startsWith("+") || text.startsWith("-")
+				|| text.endsWith(" attack damage") || text.endsWith(" attack speed")
 				|| text.endsWith(" salvage value") || text.endsWith(" coins on kill");
 		});
+	}
+
+	private static boolean hasTranslatableKey(Component component, String prefix) {
+		if (component.getContents() instanceof TranslatableContents translatable && translatable.getKey().startsWith(prefix)) {
+			return true;
+		}
+		for (Component sibling : component.getSiblings()) {
+			if (hasTranslatableKey(sibling, prefix)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static Double getDisplayedDamage(ItemStack stack) {

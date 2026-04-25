@@ -14,9 +14,9 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 
 import org.joml.Matrix4f;
 
-public class SpleefDimensionDimension {
+public class DungeonDimensionDimension {
 	@EventBusSubscriber(Dist.CLIENT)
-	public static class SpleefDimensionSpecialEffectsHandler {
+	public static class DungeonDimensionSpecialEffectsHandler {
 		@SubscribeEvent
 		public static void registerDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
 			DimensionSpecialEffects customEffect = new DimensionSpecialEffects(DimensionSpecialEffects.SkyType.OVERWORLD, false, false) {
@@ -35,7 +35,7 @@ public class SpleefDimensionDimension {
 					return "space".equals(MinigamesModVariables.MapVariables.get(level).sky);
 				}
 			};
-			event.register(ResourceLocation.parse("minigames:spleef_dimension"), customEffect);
+			event.register(ResourceLocation.parse("minigames:dungeon_dimension"), customEffect);
 		}
 	}
 }

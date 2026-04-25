@@ -60,14 +60,6 @@
       {
         "equipmentSlot": "any",
         "attribute": {
-          "value": "ARMOR"
-        },
-        "amount": 1000.0,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "any",
-        "attribute": {
           "value": "KNOCKBACK_RESISTANCE"
         },
         "amount": 1000.0,

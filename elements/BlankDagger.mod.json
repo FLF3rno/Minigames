@@ -44,6 +44,9 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
+    "onItemInInventoryTick": {
+      "name": "BreakWeapon"
+    },
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
@@ -97,6 +100,14 @@
         "equipmentSlot": "mainhand",
         "attribute": {
           "value": "CUSTOM:CoinsOnKill"
+        },
+        "amount": 15.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "CUSTOM:RepairValue"
         },
         "amount": 15.0,
         "operation": "ADD_VALUE"

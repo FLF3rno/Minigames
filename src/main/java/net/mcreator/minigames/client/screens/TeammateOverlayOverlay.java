@@ -16,10 +16,9 @@ import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.scores.PlayerTeam;
-import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffects;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.network.TeammateHealthSync;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class TeammateOverlayOverlay {
@@ -54,6 +53,7 @@ public class TeammateOverlayOverlay {
 	private static final int THIEF_COLOR = 0xFFAA00;
 	private static final int SUPPORT_COLOR = 0x55FFFF;
 	private static final int MAGE_COLOR = 0xFF55FF;
+	private static final int DEAD_TEXT_COLOR = 0xFF808080;
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public static void eventHandler(RenderGuiEvent.Pre event) {
@@ -113,14 +113,24 @@ public class TeammateOverlayOverlay {
 	private static void drawHealthBar(RenderGuiEvent.Pre event, Player teammate, int rowY) {
 		int heartsX = HEALTH_BAR_X;
 		int heartsY = rowY + (HEALTH_BAR_Y - ROW_Y);
+		if (teammate.isSpectator()) {
+			Minecraft minecraft = Minecraft.getInstance();
+			String deadText = "Dead";
+			int centerX = HEALTH_BAR_X + HEALTH_BAR_WIDTH / 2;
+			int textX = centerX - minecraft.font.width(deadText) / 2;
+			event.getGuiGraphics().drawString(minecraft.font, Component.literal(deadText), textX, heartsY, DEAD_TEXT_COLOR, false);
+			return;
+		}
+		TeammateHealthSync.HealthSnapshot snapshot = TeammateHealthSync.get(teammate)
+				.orElseGet(() -> new TeammateHealthSync.HealthSnapshot(teammate.getHealth(), teammate.getMaxHealth(), teammate.getAbsorptionAmount()));
 
-		int maxHalfHearts = Math.max(2, (int) Math.ceil(Math.max(1.0F, teammate.getMaxHealth())));
-		int healthHalfHearts = Math.max(0, Math.min(maxHalfHearts, (int) Math.ceil(teammate.getHealth() * 2.0F)));
-		int absorptionHalfHearts = Math.max(0, (int) Math.ceil(teammate.getAbsorptionAmount() * 2.0F));
+		int maxHalfHearts = Math.max(2, (int) Math.ceil(Math.max(1.0F, snapshot.maxHealth())));
+		int healthHalfHearts = Math.max(0, Math.min(maxHalfHearts, (int) Math.ceil(Math.max(0.0F, snapshot.health()) * 2.0F)));
+		int absorptionHalfHearts = Math.max(0, (int) Math.ceil(Math.max(0.0F, snapshot.absorption()) * 2.0F));
 		int totalIcons = Math.min(MAX_HEART_ICONS, Math.max(1, (int) Math.ceil((maxHalfHearts + absorptionHalfHearts) / 2.0)));
 
-		ResourceLocation fullHeart = getNormalHeartFull(teammate);
-		ResourceLocation halfHeart = getNormalHeartHalf(teammate);
+		ResourceLocation fullHeart = getNormalHeartFull(snapshot);
+		ResourceLocation halfHeart = getNormalHeartHalf(snapshot);
 
 		for (int i = 0; i < totalIcons; i++) {
 			int x = heartsX + i * HEART_SIZE;
@@ -140,37 +150,42 @@ public class TeammateOverlayOverlay {
 			}
 		}
 
+		// Vanilla-like damage feedback: blink a white overlay while hurt timer is active.
+		if (snapshot.hurtFlashTicks() > 0 && ((snapshot.hurtFlashTicks() / 2) % 2 == 0)) {
+			for (int i = 0; i < totalIcons; i++) {
+				int slotStart = i * 2;
+				int healthInSlot = Math.max(0, Math.min(2, healthHalfHearts - slotStart));
+				if (healthInSlot > 0) {
+					int x = heartsX + i * HEART_SIZE;
+					event.getGuiGraphics().fill(x, heartsY, x + HEART_SIZE, heartsY + HEART_SIZE, 0x66FFFFFF);
+				}
+			}
+		}
+
 	}
 
-	private static ResourceLocation getNormalHeartFull(Player player) {
-		if (player.hasEffect(MobEffects.WITHER)) {
+	private static ResourceLocation getNormalHeartFull(TeammateHealthSync.HealthSnapshot snapshot) {
+		if (snapshot.withered()) {
 			return HEART_WITHERED_FULL;
 		}
-		if (player.hasEffect(MobEffects.POISON)) {
+		if (snapshot.poisoned()) {
 			return HEART_POISONED_FULL;
 		}
-
-		// Fallback for future effects: harmful effects use a darker red tint.
-		for (var effectInstance : player.getActiveEffects()) {
-			if (effectInstance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
-				return HEART_WITHERED_FULL;
-			}
+		if (snapshot.hasHarmfulEffect()) {
+			return HEART_WITHERED_FULL;
 		}
 		return HEART_FULL;
 	}
 
-	private static ResourceLocation getNormalHeartHalf(Player player) {
-		if (player.hasEffect(MobEffects.WITHER)) {
+	private static ResourceLocation getNormalHeartHalf(TeammateHealthSync.HealthSnapshot snapshot) {
+		if (snapshot.withered()) {
 			return HEART_WITHERED_HALF;
 		}
-		if (player.hasEffect(MobEffects.POISON)) {
+		if (snapshot.poisoned()) {
 			return HEART_POISONED_HALF;
 		}
-
-		for (var effectInstance : player.getActiveEffects()) {
-			if (effectInstance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
-				return HEART_WITHERED_HALF;
-			}
+		if (snapshot.hasHarmfulEffect()) {
+			return HEART_WITHERED_HALF;
 		}
 		return HEART_HALF;
 	}

@@ -88,6 +88,14 @@
         },
         "amount": 15.0,
         "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "CUSTOM:RepairValue"
+        },
+        "amount": 15.0,
+        "operation": "ADD_VALUE"
       }
     ]
   }

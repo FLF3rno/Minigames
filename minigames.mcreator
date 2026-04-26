@@ -3958,18 +3958,6 @@
       "path": "~/Crown Hunt"
     },
     {
-      "name": "Phasmophobia",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "phasmophobia",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/PhasmophobiaCommand.java"
-        ]
-      }
-    },
-    {
       "name": "GoldenSkeleton",
       "type": "livingentity",
       "compiles": true,

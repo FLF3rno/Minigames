@@ -29,10 +29,16 @@ public class TeammateOverlayOverlay {
 	private static final ResourceLocation HEART_CONTAINER = ResourceLocation.withDefaultNamespace("hud/heart/container");
 	private static final ResourceLocation HEART_FULL = ResourceLocation.withDefaultNamespace("hud/heart/full");
 	private static final ResourceLocation HEART_HALF = ResourceLocation.withDefaultNamespace("hud/heart/half");
+	private static final ResourceLocation HEART_FULL_BLINKING = ResourceLocation.withDefaultNamespace("hud/heart/full_blinking");
+	private static final ResourceLocation HEART_HALF_BLINKING = ResourceLocation.withDefaultNamespace("hud/heart/half_blinking");
 	private static final ResourceLocation HEART_POISONED_FULL = ResourceLocation.withDefaultNamespace("hud/heart/poisoned_full");
 	private static final ResourceLocation HEART_POISONED_HALF = ResourceLocation.withDefaultNamespace("hud/heart/poisoned_half");
+	private static final ResourceLocation HEART_POISONED_FULL_BLINKING = ResourceLocation.withDefaultNamespace("hud/heart/poisoned_full_blinking");
+	private static final ResourceLocation HEART_POISONED_HALF_BLINKING = ResourceLocation.withDefaultNamespace("hud/heart/poisoned_half_blinking");
 	private static final ResourceLocation HEART_WITHERED_FULL = ResourceLocation.withDefaultNamespace("hud/heart/withered_full");
 	private static final ResourceLocation HEART_WITHERED_HALF = ResourceLocation.withDefaultNamespace("hud/heart/withered_half");
+	private static final ResourceLocation HEART_WITHERED_FULL_BLINKING = ResourceLocation.withDefaultNamespace("hud/heart/withered_full_blinking");
+	private static final ResourceLocation HEART_WITHERED_HALF_BLINKING = ResourceLocation.withDefaultNamespace("hud/heart/withered_half_blinking");
 	private static final ResourceLocation HEART_ABSORBING_FULL = ResourceLocation.withDefaultNamespace("hud/heart/absorbing_full");
 	private static final ResourceLocation HEART_ABSORBING_HALF = ResourceLocation.withDefaultNamespace("hud/heart/absorbing_half");
 	private static final int DAMAGE_FLASH_DURATION_TICKS = 20;
@@ -139,13 +145,13 @@ public class TeammateOverlayOverlay {
 			shouldFlash = true;
 		}
 
-		int maxHalfHearts = Math.max(2, (int) Math.ceil(Math.max(1.0F, snapshot.maxHealth()) * 2.0F));
-		int healthHalfHearts = Math.max(0, Math.min(maxHalfHearts, (int) Math.ceil(Math.max(0.0F, snapshot.health()) * 2.0F)));
-		int absorptionHalfHearts = Math.max(0, (int) Math.ceil(Math.max(0.0F, snapshot.absorption()) * 2.0F));
+		int maxHalfHearts = Math.max(2, (int) Math.ceil(Math.max(1.0F, snapshot.maxHealth())));
+		int healthHalfHearts = Math.max(0, Math.min(maxHalfHearts, (int) Math.ceil(Math.max(0.0F, snapshot.health()))));
+		int absorptionHalfHearts = Math.max(0, (int) Math.ceil(Math.max(0.0F, snapshot.absorption())));
 		int totalIcons = Math.min(MAX_HEART_ICONS, Math.max(1, (int) Math.ceil((maxHalfHearts + absorptionHalfHearts) / 2.0)));
 
-		ResourceLocation fullHeart = getNormalHeartFull(snapshot);
-		ResourceLocation halfHeart = getNormalHeartHalf(snapshot);
+		ResourceLocation fullHeart = getNormalHeartFull(snapshot, shouldFlash);
+		ResourceLocation halfHeart = getNormalHeartHalf(snapshot, shouldFlash);
 
 		for (int i = 0; i < totalIcons; i++) {
 			int x = heartsX + i * HEART_SIZE;
@@ -154,9 +160,9 @@ public class TeammateOverlayOverlay {
 			int slotStart = i * 2;
 			int healthInSlot = Math.max(0, Math.min(2, healthHalfHearts - slotStart));
 			if (healthInSlot >= 2) {
-				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, shouldFlash ? HEART_FULL : fullHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
+				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, fullHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
 			} else if (healthInSlot == 1) {
-				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, shouldFlash ? HEART_HALF : halfHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
+				event.getGuiGraphics().blitSprite(RenderPipelines.GUI_TEXTURED, halfHeart, x, heartsY, HEART_SIZE, HEART_SIZE);
 			}
 
 			int absorbInSlot = Math.max(0, Math.min(2, absorptionHalfHearts - Math.max(0, slotStart - maxHalfHearts)));
@@ -182,30 +188,30 @@ public class TeammateOverlayOverlay {
 		return new FlashState(snapshot.health(), flashUntilTick, snapshot.hurtFlashTicks());
 	}
 
-	private static ResourceLocation getNormalHeartFull(TeammateHealthSync.HealthSnapshot snapshot) {
+	private static ResourceLocation getNormalHeartFull(TeammateHealthSync.HealthSnapshot snapshot, boolean flashing) {
 		if (snapshot.withered()) {
-			return HEART_WITHERED_FULL;
+			return flashing ? HEART_WITHERED_FULL_BLINKING : HEART_WITHERED_FULL;
 		}
 		if (snapshot.poisoned()) {
-			return HEART_POISONED_FULL;
+			return flashing ? HEART_POISONED_FULL_BLINKING : HEART_POISONED_FULL;
 		}
 		if (snapshot.hasHarmfulEffect()) {
-			return HEART_WITHERED_FULL;
+			return flashing ? HEART_FULL_BLINKING : HEART_FULL;
 		}
-		return HEART_FULL;
+		return flashing ? HEART_FULL_BLINKING : HEART_FULL;
 	}
 
-	private static ResourceLocation getNormalHeartHalf(TeammateHealthSync.HealthSnapshot snapshot) {
+	private static ResourceLocation getNormalHeartHalf(TeammateHealthSync.HealthSnapshot snapshot, boolean flashing) {
 		if (snapshot.withered()) {
-			return HEART_WITHERED_HALF;
+			return flashing ? HEART_WITHERED_HALF_BLINKING : HEART_WITHERED_HALF;
 		}
 		if (snapshot.poisoned()) {
-			return HEART_POISONED_HALF;
+			return flashing ? HEART_POISONED_HALF_BLINKING : HEART_POISONED_HALF;
 		}
 		if (snapshot.hasHarmfulEffect()) {
-			return HEART_WITHERED_HALF;
+			return flashing ? HEART_HALF_BLINKING : HEART_HALF;
 		}
-		return HEART_HALF;
+		return flashing ? HEART_HALF_BLINKING : HEART_HALF;
 	}
 
 	private static int getPlayerNameColor(Player player) {

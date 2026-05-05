@@ -16,7 +16,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.core.SectionPos;
 
 import net.mcreator.minigames.procedures.SelectSpleefProcedure;
+import net.mcreator.minigames.procedures.ActivateSteampunkProcedure;
 import net.mcreator.minigames.procedures.ActivateSolarSystemProcedure;
+import net.mcreator.minigames.procedures.ActivateChristmasProcedure;
 import net.mcreator.minigames.procedures.ActivateBalloonsProcedure;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -60,6 +62,14 @@ public record MapGUISpleefButtonMessage(int buttonID, int x, int y, int z) imple
 		if (buttonID == 2) {
 
 			ActivateSolarSystemProcedure.execute(world);
+		}
+		if (buttonID == 3) {
+
+			ActivateSteampunkProcedure.execute(world);
+		}
+		if (buttonID == 4) {
+
+			ActivateChristmasProcedure.execute(world);
 		}
 	}
 

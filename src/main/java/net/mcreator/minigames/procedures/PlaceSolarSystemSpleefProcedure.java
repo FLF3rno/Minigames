@@ -19,19 +19,35 @@ public class PlaceSolarSystemSpleefProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run forceload add 970 -30 1030 30");
+					("execute in minigames:spleef_dimension run forceload add " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z())));
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					("execute in minigames:spleef_dimension run fill " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(100 + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef) + " "
+							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " 100 "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " air"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run place template minigames:spleef_sun 985 100 -15");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run spreadplayers 1000 0 3 15 false @a");
+					("execute in minigames:spleef_dimension run spreadplayers " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " 3 15 false @a"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @a at @s run tp @s ~ ~ ~ facing 1000 120 0");
+					("execute as @a at @s run tp @s ~ ~ ~ facing " + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() + " "
+							+ (100 + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef) + " "
+							+ MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run forceload remove 970 -30 1030 30");
+					("execute in minigames:spleef_dimension run forceload remove " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z())));
 		MinigamesModVariables.MapVariables.get(world).sky = "space";
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "solar system";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();

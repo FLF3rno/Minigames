@@ -2,8 +2,8 @@
   "_fv": 85,
   "_type": "humanoidmodel",
   "definition": {
-    "modelName": "Modelcrown",
-    "helmetModelPart": "Crown",
+    "modelName": "Modelwinnercrown",
+    "helmetModelPart": "crown",
     "bodyModelPart": "Empty",
     "armsModelPartL": "Empty",
     "armsModelPartR": "Empty",

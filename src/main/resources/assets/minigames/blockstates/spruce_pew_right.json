@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/spruce_pew_right"
+    },
+    "facing=east": {
+      "model": "minigames:block/spruce_pew_right",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/spruce_pew_right",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/spruce_pew_right",
+      "y": 270
+    }
+  }
+}

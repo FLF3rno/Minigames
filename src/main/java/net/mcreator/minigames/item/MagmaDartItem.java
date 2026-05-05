@@ -63,7 +63,7 @@ public class MagmaDartItem extends Item {
 
 		@Override
 		public float get(ItemStack itemStackToRender, @Nullable ClientLevel clientWorld, @Nullable LivingEntity entity, int seed) {
-			return (float) MagmaDartPropertyValueProviderProcedure.execute(entity);
+			return (float) MagmaDartPropertyValueProviderProcedure.execute(entity, itemStackToRender);
 		}
 
 		@Override

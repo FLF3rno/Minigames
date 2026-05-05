@@ -148,5 +148,22 @@
         "stream": false
       }
     ]
+  },
+  "volcanic_spew_land": {
+    "subtitle": "subtitles.volcanic_spew_land",
+    "sounds": [
+      {
+        "name": "minigames:volcanic_spew_land_3",
+        "stream": false
+      },
+      {
+        "name": "minigames:volcanic_spew_land_2",
+        "stream": false
+      },
+      {
+        "name": "minigames:volcanic_spew_land_1",
+        "stream": false
+      }
+    ]
   }
 }

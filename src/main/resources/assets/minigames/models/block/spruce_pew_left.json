@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/spruce_board",
+    "particle": "minigames:block/spruce_board"
+  },
+  "render_type": "solid"
+}

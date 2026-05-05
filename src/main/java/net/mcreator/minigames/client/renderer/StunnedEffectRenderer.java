@@ -15,7 +15,7 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.world.entity.AnimationState;
 
 import net.mcreator.minigames.entity.StunnedEffectEntity;
-import net.mcreator.minigames.client.model.animations.stunnedAnimation;
+import net.mcreator.minigames.client.model.animations.worshipperAnimation;
 import net.mcreator.minigames.client.model.Modelstunned;
 
 import java.util.Map;
@@ -68,7 +68,7 @@ public class StunnedEffectRenderer extends MobRenderer<StunnedEffectEntity, Stun
 		public AnimatedModel(ModelPart root) {
 			super(root);
 			this.root = root;
-			this.keyframeAnimation0 = safeBake(stunnedAnimation.idle);
+			this.keyframeAnimation0 = safeBake(worshipperAnimation.idle);
 		}
 
 		private KeyframeAnimation safeBake(AnimationDefinition source) {

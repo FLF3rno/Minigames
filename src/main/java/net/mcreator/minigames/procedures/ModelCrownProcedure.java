@@ -24,6 +24,6 @@ public class ModelCrownProcedure {
 	}
 
 	private static void execute(@Nullable Event event) {
-		MinigamesModVariables.crown = ResourceLocation.fromNamespaceAndPath("minigames", "textures/entities/crown.png");
+		MinigamesModVariables.crown = ResourceLocation.fromNamespaceAndPath("minigames", "textures/entities/winnercrown.png");
 	}
 }

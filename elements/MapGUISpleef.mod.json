@@ -131,46 +131,6 @@
         }
       },
       {
-        "type": "image",
-        "data": {
-          "image": "emptymap.png",
-          "use1Xscale": true,
-          "x": 54,
-          "y": 121,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "emptymap.png",
-          "use1Xscale": true,
-          "x": 54,
-          "y": 43,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "emptymap.png",
-          "use1Xscale": true,
-          "x": 278,
-          "y": 121,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "emptymap.png",
-          "use1Xscale": true,
-          "x": 278,
-          "y": 43,
-          "locked": false
-        }
-      },
-      {
         "type": "label",
         "data": {
           "name": "label_solar_system",
@@ -188,6 +148,89 @@
         }
       },
       {
+        "type": "image",
+        "data": {
+          "image": "selectedoverlay.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "SteampunkSelected"
+          },
+          "x": 49,
+          "y": 37,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_steampunk",
+          "text": {
+            "fixedValue": "Steampunk"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 77,
+          "y": 107,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "selectedoverlay.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "ChristmasSelected"
+          },
+          "x": 49,
+          "y": 115,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "christmas.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 121,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "steampunk.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 43,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 278,
+          "y": 121,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "emptymap.png",
+          "use1Xscale": true,
+          "x": 278,
+          "y": 43,
+          "locked": false
+        }
+      },
+      {
         "type": "imagebutton",
         "data": {
           "name": "imagebutton_nothing",
@@ -197,6 +240,51 @@
             "name": "ActivateSolarSystem"
           },
           "x": 170,
+          "y": 125,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_nothing1",
+          "image": "nothing.png",
+          "hoveredImage": "nothing.png",
+          "onClick": {
+            "name": "ActivateSteampunk"
+          },
+          "x": 58,
+          "y": 47,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_christmas",
+          "text": {
+            "fixedValue": "Christmas!"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 76,
+          "y": 185,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_nothing2",
+          "image": "nothing.png",
+          "hoveredImage": "nothing.png",
+          "onClick": {
+            "name": "ActivateChristmas"
+          },
+          "x": 58,
           "y": 125,
           "locked": false
         }

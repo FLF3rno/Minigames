@@ -271,7 +271,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/PlayerAssignmentProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "DisplayEntity2",
@@ -748,7 +749,7 @@
       "name": "ResetAchievementRun",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "reset_achievement_run",
       "metadata": {
         "dependencies": [
@@ -1296,43 +1297,10 @@
       "registry_name": "game_compass",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/item/inventory/GameCompassInventoryCapability.java",
           "src/main/resources/assets/minigames/items/game_compass.json",
           "src/main/resources/assets/minigames/models/item/game_compass.json",
           "src/main/java/net/mcreator/minigames/item/GameCompassItem.java"
-        ]
-      }
-    },
-    {
-      "name": "GameCompassRightclicked",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "game_compass_rightclicked",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/GameCompassRightclickedProcedure.java"
         ]
       }
     },
@@ -1380,7 +1348,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Achievement Run/win animation"
+      "path": "~/General/Crown"
     },
     {
       "name": "ModelCrown",
@@ -1394,7 +1362,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ModelCrownProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/win animation"
+      "path": "~/General/Crown"
     },
     {
       "name": "RenderCrownOnPlayer",
@@ -1417,7 +1385,7 @@
           "src/main/java/net/mcreator/minigames/procedures/RenderCrownOnPlayerProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/win animation"
+      "path": "~/General/Crown"
     },
     {
       "name": "GiveGameCompass",
@@ -1555,7 +1523,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/CustomizeNameColorProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "Customize",
@@ -1567,7 +1536,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/command/CustomizeCommand.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "Crowned",
@@ -1579,7 +1549,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/potion/CrownedMobEffect.java"
         ]
-      }
+      },
+      "path": "~/General/Crown"
     },
     {
       "name": "StopPVP",
@@ -1745,7 +1716,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SyncCrownedApplyProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Crown"
     },
     {
       "name": "SyncCrownedRemove",
@@ -1767,7 +1739,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SyncCrownedRemoveProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Crown"
     },
     {
       "name": "SelectAchievementHunt",
@@ -2235,7 +2208,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ManageMinimapProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Xaero"
     },
     {
       "name": "ManageWaypoints",
@@ -2257,7 +2231,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ManageWaypointsProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Xaero"
     },
     {
       "name": "CustomizeGUI",
@@ -2271,7 +2246,8 @@
           "src/main/java/net/mcreator/minigames/network/CustomizeGUIButtonMessage.java",
           "src/main/java/net/mcreator/minigames/world/inventory/CustomizeGUIMenu.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "GetDisplayName",
@@ -2290,7 +2266,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/GetDisplayNameProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameWhite",
@@ -2309,7 +2286,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameWhiteProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotWhite",
@@ -2328,7 +2306,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotWhiteProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameAqua",
@@ -2347,7 +2326,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameAquaProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotAqua",
@@ -2366,7 +2346,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotAquaProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameDarkAqua",
@@ -2385,7 +2366,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameDarkAquaProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotDarkAqua",
@@ -2404,7 +2386,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkAquaProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameBlue",
@@ -2423,7 +2406,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameBlueProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotBlue",
@@ -2442,7 +2426,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotBlueProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameDarkBlue",
@@ -2461,7 +2446,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameDarkBlueProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotDarkBlue",
@@ -2480,7 +2466,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkBlueProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameGreen",
@@ -2499,7 +2486,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameGreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotGreen",
@@ -2518,7 +2506,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotGreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameDarkGreen",
@@ -2537,7 +2526,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameDarkGreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotDarkGreen",
@@ -2556,7 +2546,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkGreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameLightPurple",
@@ -2575,7 +2566,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameLightPurpleProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotLightPurple",
@@ -2594,7 +2586,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotLightPurpleProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameDarkPurple",
@@ -2613,7 +2606,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameDarkPurpleProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotDarkPurple",
@@ -2632,7 +2626,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkPurpleProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameRed",
@@ -2651,7 +2646,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameRedProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotRed",
@@ -2670,7 +2666,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotRedProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameDarkRed",
@@ -2689,7 +2686,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameDarkRedProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotDarkRed",
@@ -2708,7 +2706,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkRedProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameYellow",
@@ -2727,7 +2726,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameYellowProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotYellow",
@@ -2746,7 +2746,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotYellowProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameGold",
@@ -2765,7 +2766,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameGoldProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "IsNameNotGold",
@@ -2784,7 +2786,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IsNameNotGoldProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameWhite",
@@ -2802,7 +2805,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameWhiteProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameAqua",
@@ -2820,7 +2824,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameAquaProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameDarkAqua",
@@ -2838,7 +2843,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameDarkAquaProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameBlue",
@@ -2856,7 +2862,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameBlueProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameDarkBlue",
@@ -2874,7 +2881,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameDarkBlueProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameGreen",
@@ -2892,7 +2900,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameGreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameDarkGreen",
@@ -2910,7 +2919,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameDarkGreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameLightPurple",
@@ -2928,7 +2938,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameLightPurpleProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameDarkPurple",
@@ -2946,7 +2957,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameDarkPurpleProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameRed",
@@ -2964,7 +2976,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameRedProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameDarkRed",
@@ -2982,7 +2995,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameDarkRedProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameYellow",
@@ -3000,7 +3014,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameYellowProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "SetNameGold",
@@ -3018,7 +3033,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SetNameGoldProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "OpenCustomizationScreen",
@@ -3052,7 +3068,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/OpenCustomizationScreenProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "GoBack",
@@ -3327,7 +3344,7 @@
       "name": "ResetCrownHunt",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "reset_crown_hunt",
       "metadata": {
         "dependencies": [
@@ -3602,41 +3619,6 @@
       "path": "~/Crown Hunt/settings"
     },
     {
-      "name": "PressedStartCrownHunt",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "pressed_start_crown_hunt",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/PressedStartCrownHuntProcedure.java"
-        ]
-      },
-      "path": "~/Crown Hunt/settings"
-    },
-    {
       "name": "CrownHuntCapture",
       "type": "block",
       "compiles": true,
@@ -3848,7 +3830,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/NameColorApplyProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "RemoveVanishingKeepInvCrown",
@@ -3924,7 +3907,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ChangeNameColorProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Name Color"
     },
     {
       "name": "RepickAnimateCrown",
@@ -5798,7 +5782,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SkyboxProcedure.java"
         ]
-      }
+      },
+      "path": "~/General/Skybox"
     },
     {
       "name": "MagmaDartPropertyValueProvider",
@@ -6399,6 +6384,18 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -6966,10 +6963,14 @@
       "name": "SpawnStructureDungeon",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spawn_structure_dungeon",
       "metadata": {
         "dependencies": [
+          {
+            "name": "ID",
+            "type": "number"
+          },
           {
             "name": "structureX",
             "type": "number"
@@ -6981,6 +6982,10 @@
           {
             "name": "structureZ",
             "type": "number"
+          },
+          {
+            "name": "rotation",
+            "type": "string"
           },
           {
             "name": "structure",
@@ -6995,7 +7000,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnStructureDungeonProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floor Spawning"
+      "path": "~/Dungeon/Floors/Rooms"
     },
     {
       "name": "Rougelike",
@@ -7009,6 +7014,1209 @@
         ]
       },
       "path": "~/Dungeon"
+    },
+    {
+      "name": "SpawnStartingRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_starting_room",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_starting_room.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_starting_room.json",
+          "src/main/resources/assets/minigames/models/block/spawn_starting_room.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnStartingRoomBlockEntity.java",
+          "src/main/java/net/mcreator/minigames/block/SpawnStartingRoomBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnLootRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_loot_room",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/spawn_loot_room.json",
+          "src/main/resources/assets/minigames/models/block/spawn_loot_room.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnLootRoomBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_loot_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnLootRoomBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnMinibossRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_miniboss_room",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/SpawnMinibossRoomBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_miniboss_room.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnMinibossRoomBlockEntity.java",
+          "src/main/resources/assets/minigames/models/block/spawn_miniboss_room.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_miniboss_room.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnBossRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_boss_room",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/spawn_boss_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnBossRoomBlock.java",
+          "src/main/resources/assets/minigames/blockstates/spawn_boss_room.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnBossRoomBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_boss_room.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnSecretRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_secret_room",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/SpawnSecretRoomBlock.java",
+          "src/main/resources/assets/minigames/models/block/spawn_secret_room.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_secret_room.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnSecretRoomBlockEntity.java",
+          "src/main/resources/assets/minigames/blockstates/spawn_secret_room.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnOneDoorRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_one_door_room",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_one_door_room.json",
+          "src/main/resources/assets/minigames/models/block/spawn_one_door_room.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnOneDoorRoomBlockEntity.java",
+          "src/main/resources/assets/minigames/blockstates/spawn_one_door_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnOneDoorRoomBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnTwoDoorRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_two_door_room",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/spawn_two_door_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnTwoDoorRoomBlock.java",
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnTwoDoorRoomBlockEntity.java",
+          "src/main/resources/assets/minigames/models/block/spawn_two_door_room.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_two_door_room.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnFourDoorRoom",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_four_door_room",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnFourDoorRoomBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_four_door_room.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_four_door_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnFourDoorRoomBlock.java",
+          "src/main/resources/assets/minigames/models/block/spawn_four_door_room.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "SpawnStartingRoomProcedure",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_starting_room_procedure",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnStartingRoomProcedureProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "PlaceSteampunkSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "place_steampunk_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlaceSteampunkSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "SteampunkSelected",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "steampunk_selected",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SteampunkSelectedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "ActivateSteampunk",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "activate_steampunk",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ActivateSteampunkProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "QuartzChains",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "quartz_chains",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/quartz_chains.json",
+          "src/main/java/net/mcreator/minigames/block/QuartzChainsBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/quartz_chains.json",
+          "src/main/java/net/mcreator/minigames/block/entity/QuartzChainsBlockEntity.java",
+          "src/main/resources/assets/minigames/models/block/quartz_chains.json",
+          "src/main/resources/assets/minigames/blockstates/quartz_chains.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/QuartzChainsRenderer.java",
+          "src/main/resources/assets/minigames/items/quartz_chains.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "CustomBlocks",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "custom_blocks",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "ChiseledQuartzWall",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "chiseled_quartz_wall",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_side_tall.json",
+          "src/main/resources/assets/minigames/blockstates/chiseled_quartz_wall.json",
+          "src/main/java/net/mcreator/minigames/block/ChiseledQuartzWallBlock.java",
+          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_inventory.json",
+          "src/main/resources/assets/minigames/items/chiseled_quartz_wall.json",
+          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall.json",
+          "src/main/resources/assets/minigames/models/item/chiseled_quartz_wall.json",
+          "src/main/resources/data/minigames/loot_table/blocks/chiseled_quartz_wall.json",
+          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_post.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "SpruceBoard",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spruce_board",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/spruce_board.json",
+          "src/main/resources/assets/minigames/models/block/spruce_board.json",
+          "src/main/resources/assets/minigames/blockstates/spruce_board.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SpruceBoardRenderer.java",
+          "src/main/resources/assets/minigames/items/spruce_board.json",
+          "src/main/java/net/mcreator/minigames/block/SpruceBoardBlock.java",
+          "src/main/java/net/mcreator/minigames/block/entity/SpruceBoardBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_board.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "SprucePew",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spruce_pew",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewRenderer.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew.json",
+          "src/main/resources/assets/minigames/models/block/spruce_pew.json",
+          "src/main/java/net/mcreator/minigames/block/SprucePewBlock.java",
+          "src/main/resources/assets/minigames/blockstates/spruce_pew.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SprucePewBlockEntity.java",
+          "src/main/resources/assets/minigames/models/item/spruce_pew.json",
+          "src/main/resources/assets/minigames/items/spruce_pew.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "SprucePewRight",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spruce_pew_right",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/spruce_pew_right.json",
+          "src/main/java/net/mcreator/minigames/block/SprucePewRightBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew_right.json",
+          "src/main/resources/assets/minigames/blockstates/spruce_pew_right.json",
+          "src/main/resources/assets/minigames/items/spruce_pew_right.json",
+          "src/main/resources/assets/minigames/models/block/spruce_pew_right.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewRightRenderer.java",
+          "src/main/java/net/mcreator/minigames/block/entity/SprucePewRightBlockEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "SprucePewLeft",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spruce_pew_left",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewLeftRenderer.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew_left.json",
+          "src/main/resources/assets/minigames/blockstates/spruce_pew_left.json",
+          "src/main/resources/assets/minigames/models/block/spruce_pew_left.json",
+          "src/main/java/net/mcreator/minigames/block/SprucePewLeftBlock.java",
+          "src/main/java/net/mcreator/minigames/block/entity/SprucePewLeftBlockEntity.java",
+          "src/main/resources/assets/minigames/items/spruce_pew_left.json",
+          "src/main/resources/assets/minigames/models/item/spruce_pew_left.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "SpruceShortBoard",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spruce_short_board",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/entity/SpruceShortBoardBlockEntity.java",
+          "src/main/resources/assets/minigames/models/item/spruce_short_board.json",
+          "src/main/resources/assets/minigames/models/block/spruce_short_board.json",
+          "src/main/resources/assets/minigames/items/spruce_short_board.json",
+          "src/main/java/net/mcreator/minigames/block/SpruceShortBoardBlock.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SpruceShortBoardRenderer.java",
+          "src/main/resources/assets/minigames/blockstates/spruce_short_board.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_short_board.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Blocks"
+    },
+    {
+      "name": "CustomMobs",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "custom_mobs",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "SpawnWorshipper",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_worshipper",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/spawn_worshipper.json",
+          "src/main/resources/assets/minigames/models/item/spawn_worshipper.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_worshipper.json",
+          "src/main/resources/assets/minigames/items/spawn_worshipper.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_worshipper.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnWorshipperBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "SpawnWorshipperBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_worshipper_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnWorshipperBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "Worshipper",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "worshipper",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/WorshipperEntity.java",
+          "src/main/resources/assets/minigames/items/worshipper_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/WorshipperRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "HealthMultiplier",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "health_multiplier",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HealthMultiplierProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "SpawnCandlehead",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_candlehead",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_candlehead.json",
+          "src/main/resources/assets/minigames/models/item/spawn_candlehead.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_candlehead.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnCandleheadBlock.java",
+          "src/main/resources/assets/minigames/models/block/spawn_candlehead.json",
+          "src/main/resources/assets/minigames/items/spawn_candlehead.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "SpawnCandleheadBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_candlehead_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnCandleheadBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "Candlehead",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "candlehead",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/candlehead_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/CandleheadRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/CandleheadEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "SpawnShieldAngel",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_shield_angel",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/spawn_shield_angel.json",
+          "src/main/resources/assets/minigames/models/item/spawn_shield_angel.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnShieldAngelBlock.java",
+          "src/main/resources/assets/minigames/blockstates/spawn_shield_angel.json",
+          "src/main/resources/assets/minigames/items/spawn_shield_angel.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_shield_angel.json"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "SpawnShieldAngelBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_shield_angel_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnShieldAngelBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "ShieldAngel",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shield_angel",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/ShieldAngelRenderer.java",
+          "src/main/resources/assets/minigames/items/shield_angel_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/ShieldAngelEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "SpawnTwoRoomProcedure",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_two_room_procedure",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnTwoRoomProcedureProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "AnimationWalking",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "animation_walking",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AnimationWalkingProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "AnimationAttack",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "animation_attack",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AnimationAttackProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "ApplyHealthMultiplayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "apply_health_multiplayer",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyHealthMultiplayerProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "OnDungeonDeath",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "on_dungeon_death",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OnDungeonDeathProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "DroppedCoins",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dropped_coins",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "DungeonCoins",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "dungeon_coins",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/DungeonCoinsOverlay.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "DungeonCoinsDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "dungeon_coins_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DungeonCoinsDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "ShowDungeonCoins",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_dungeon_coins",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowDungeonCoinsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors"
+    },
+    {
+      "name": "PlayerLeavesDuringGUI",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_leaves_during_gui",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayerLeavesDuringGUIProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "PlaceChristmasSpleef",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "place_christmas_spleef",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlaceChristmasSpleefProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "ChristmasSelected",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "christmas_selected",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChristmasSelectedProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "ActivateChristmas",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "activate_christmas",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ActivateChristmasProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Maps"
+    },
+    {
+      "name": "SaveCrownHuntSettings",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "save_crown_hunt_settings",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SaveCrownHuntSettingsProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt/settings"
+    },
+    {
+      "name": "MovingBlock",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "moving_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/moving_block_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/MovingBlockEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/MovingBlockRenderer.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "MovingBlockRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "moving_block_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MovingBlockRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "BreakMovingBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "break_moving_block",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BreakMovingBlockProcedure.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "MovingBlockTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "moving_block_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MovingBlockTickProcedure.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "Jumping",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "jumping",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/JumpingProcedure.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "MovingOnMovingBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "moving_on_moving_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MovingOnMovingBlockProcedure.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "MovingBlockSpawn",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "moving_block_spawn",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/moving_block_spawn.json",
+          "src/main/java/net/mcreator/minigames/block/MovingBlockSpawnBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/moving_block_spawn.json",
+          "src/main/resources/assets/minigames/models/block/moving_block_spawn.json",
+          "src/main/resources/assets/minigames/blockstates/moving_block_spawn.json",
+          "src/main/resources/assets/minigames/models/item/moving_block_spawn.json"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "MovingBlockSpawnBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "moving_block_spawn_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MovingBlockSpawnBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/General/Moving Block"
+    },
+    {
+      "name": "CandleheadOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "candlehead_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CandleheadOnEntityTickUpdateProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "DungeonItems",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dungeon_items",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "VolcanicSpew",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "volcanic_spew",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/VolcanicSpewEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "VolcanicSpewFlying",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volcanic_spew_flying",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VolcanicSpewFlyingProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
     }
   ],
   "variable_elements": [
@@ -7235,12 +8443,6 @@
       "value": "false"
     },
     {
-      "name": "nerfWinner",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
       "name": "randomizeSpawn",
       "type": "logic",
       "scope": "map",
@@ -7382,13 +8584,13 @@
       "name": "crownMinutes",
       "type": "number",
       "scope": "map",
-      "value": "0"
+      "value": "3.0"
     },
     {
       "name": "graceMinutes",
       "type": "number",
       "scope": "map",
-      "value": "0"
+      "value": "6.0"
     },
     {
       "name": "applyCustomNameColor",
@@ -7478,7 +8680,7 @@
       "name": "mapsSpleef",
       "type": "number",
       "scope": "map",
-      "value": "3.0"
+      "value": "15.0"
     },
     {
       "name": "sky",
@@ -7653,6 +8855,24 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
+    },
+    {
+      "name": "showCoins",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "playingAchievement",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "jumps",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -7799,6 +9019,16 @@
       ],
       "category": "player",
       "subtitle": "Player is hypnotized"
+    },
+    {
+      "name": "volcanic_spew_land",
+      "files": [
+        "volcanic_spew_land_3",
+        "volcanic_spew_land_2",
+        "volcanic_spew_land_1"
+      ],
+      "category": "block",
+      "subtitle": "Volcanic Spew lands"
     }
   ],
   "tag_elements": {
@@ -7887,7 +9117,29 @@
       "Blocks.RESIN_BLOCK",
       "Blocks.RESIN_BRICKS",
       "Blocks.CHISELED_RESIN_BRICKS",
-      "Blocks.CONCRETE#1"
+      "Blocks.CONCRETE#1",
+      "Blocks.WAXED_COPPER_BLOCK",
+      "Blocks.WAXED_EXPOSED_COPPER",
+      "Blocks.WAXED_WEATHERED_COPPER",
+      "Blocks.WAXED_OXIDIZED_COPPER",
+      "Blocks.WAXED_CUT_COPPER",
+      "Blocks.WAXED_EXPOSED_CUT_COPPER",
+      "Blocks.WAXED_WEATHERED_CUT_COPPER",
+      "Blocks.WAXED_OXIDIZED_CUT_COPPER",
+      "Blocks.WAXED_CHISELED_COPPER",
+      "Blocks.WAXED_EXPOSED_CHISELED_COPPER",
+      "Blocks.WAXED_WEATHERED_CHISELED_COPPER",
+      "Blocks.WAXED_OXIDIZED_CHISELED_COPPER",
+      "Blocks.WAXED_COPPER_GRATE",
+      "Blocks.WAXED_EXPOSED_COPPER_GRATE",
+      "Blocks.WAXED_WEATHERED_COPPER_GRATE",
+      "Blocks.WAXED_OXIDIZED_COPPER_GRATE",
+      "Blocks.WAXED_COPPER_BULB",
+      "Blocks.WAXED_EXPOSED_COPPER_BULB",
+      "Blocks.WAXED_WEATHERED_COPPER_BULB",
+      "Blocks.WAXED_OXIDIZED_COPPER_BULB",
+      "Blocks.IRON_BLOCK",
+      "Blocks.STAINED_GLASS#0"
     ],
     "ITEMS:minecraft:enchantable/durability": [
       "~CUSTOM:SnowShovel",
@@ -7925,6 +9177,14 @@
     ],
     "BLOCKS:minecraft:overworld_carver_replaceables": [
       "~CUSTOM:StartingRoomGridBlock"
+    ],
+    "BLOCKS:minecraft:walls": [
+      "~CUSTOM:ChiseledQuartzWall"
+    ],
+    "ENTITIES:mod:dungeon": [
+      "CUSTOM:Worshipper",
+      "CUSTOM:Candlehead",
+      "CUSTOM:ShieldAngel"
     ]
   },
   "tab_element_order": {},
@@ -8000,7 +9260,7 @@
       "gui.minigames.minigame_gui_crown_hunt.label_achievement_run": "Crown Hunt",
       "gui.minigames.minigame_gui_crown_hunt.spawn": "",
       "gui.minigames.minigame_gui_crown_hunt.returncrown": "",
-      "gui.minigames.minigame_gui_crown_hunt.minutes": "8",
+      "gui.minigames.minigame_gui_crown_hunt.minutes": "3",
       "gui.minigames.minigame_gui_crown_hunt.hours": "00",
       "item.minigames.crown_hunt_capture": "Crown Hunt Capture Zone",
       "item.minigames.castle_bricks": "Castle Bricks",
@@ -8041,7 +9301,7 @@
       "entity.minigames.grappling_hitbox": "Grappling Hitbox",
       "gui.minigames.start_game.tooltip_change_player_name": "Change player name",
       "item.minigames.replay_spleef.description_0": "Replay spleef with the same settings",
-      "item.minigames.replay_spleef": "Replay Spleef",
+      "item.minigames.replay_spleef": "Play Again",
       "item.minigames.symmetrical_shovel": "Symmetrical Shovel",
       "item.minigames.symmetrical_shovel.description_1": "    §2Break a block in that coordinate in every layer",
       "item.minigames.symmetrical_shovel.description_0": "On §6block break:",
@@ -8120,7 +9380,38 @@
       "entity.minigames.stunned_effect": "Stunned Effect",
       "gui.minigames.teammate_overlay.label_name": "[NAME]",
       "gui.minigames.teammate_overlay.label_class": "[CLASS]",
-      "attribute.minigames.repair_value": "Repair Value"
+      "attribute.minigames.repair_value": "Repair Value",
+      "item.minigames.spawn_starting_room": "Spawn Starting Room",
+      "item.minigames.spawn_loot_room": "Spawn Loot Room",
+      "item.minigames.spawn_miniboss_room": "Spawn Miniboss Room",
+      "item.minigames.spawn_boss_room": "Spawn Boss Room",
+      "item.minigames.spawn_secret_room": "Spawn Secret Room",
+      "item.minigames.spawn_one_door_room": "Spawn Room (1)",
+      "item.minigames.spawn_two_door_room": "Spawn Room (2)",
+      "item.minigames.spawn_four_door_room": "Spawn Room (4)",
+      "gui.minigames.map_gui_spleef.label_steampunk": "Steampunk",
+      "item.minigames.quartz_chains": "Quartz Chains",
+      "item_group.minigames.custom_blocks": "Dungeon Blocks",
+      "item.minigames.chiseled_quartz_wall": "Chiseled Quartz Wall",
+      "item.minigames.spruce_board": "Spruce Board",
+      "item.minigames.spruce_pew": "Spruce Pew",
+      "item.minigames.spruce_pew_right": "Spruce Pew (Right)",
+      "item.minigames.spruce_pew_left": "Spruce Pew (Left)",
+      "item.minigames.spruce_short_board": "Spruce Board (Short)",
+      "item_group.minigames.custom_mobs": "Dungeon Mobs",
+      "item.minigames.spawn_worshipper": "Spawn Worshipper",
+      "entity.minigames.worshipper": "Worshipper",
+      "item.minigames.spawn_candlehead": "Spawn Candlehead",
+      "entity.minigames.candlehead": "Candlehead",
+      "item.minigames.spawn_shield_angel": "Spawn Shield Angel",
+      "entity.minigames.shield_angel": "Candlehead",
+      "attribute.minigames.dropped_coins": "Dropped Coins",
+      "gui.minigames.dungeon_coins.label_empty": "",
+      "gui.minigames.map_gui_spleef.label_christmas": "Christmas!",
+      "entity.minigames.moving_block": "Moving Block",
+      "item.minigames.moving_block_spawn": "Moving Block",
+      "item_group.minigames.dungeon_items": "Dungeon Items",
+      "subtitles.volcanic_spew_land": "Volcanic Spew lands"
     }
   },
   "metadata": {
@@ -8163,7 +9454,6 @@
     ],
     "betteranimations_models": {},
     "betteranimations_perspectives": {
-      "GameCompass": "All perspectives",
       "SpleefShovel": "All perspectives"
     }
   },
@@ -8248,7 +9538,25 @@
           },
           {
             "name": "Floors",
-            "children": []
+            "children": [
+              {
+                "name": "Church",
+                "children": [
+                  {
+                    "name": "Blocks",
+                    "children": []
+                  },
+                  {
+                    "name": "Monsters",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Rooms",
+                "children": []
+              }
+            ]
           },
           {
             "name": "Items",
@@ -8325,6 +9633,31 @@
           },
           {
             "name": "Dimension",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "General",
+        "children": [
+          {
+            "name": "Name Color",
+            "children": []
+          },
+          {
+            "name": "Moving Block",
+            "children": []
+          },
+          {
+            "name": "Skybox",
+            "children": []
+          },
+          {
+            "name": "Crown",
+            "children": []
+          },
+          {
+            "name": "Xaero",
             "children": []
           }
         ]

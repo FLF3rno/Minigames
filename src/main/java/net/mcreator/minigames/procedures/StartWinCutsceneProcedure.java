@@ -32,10 +32,9 @@ public class StartWinCutsceneProcedure {
 		String hour = "";
 		MinigamesModVariables.MapVariables.get(world).minimap = true;
 		MinigamesModVariables.MapVariables.get(world).displayTimer = false;
-		MinigamesModVariables.MapVariables.get(world).nerfWinner = false;
-		MinigamesModVariables.MapVariables.get(world).nightVision = false;
 		MinigamesModVariables.MapVariables.get(world).randomizeSpawn = false;
 		MinigamesModVariables.MapVariables.get(world).headStart = false;
+		MinigamesModVariables.MapVariables.get(world).playingAchievement = false;
 		MinigamesModVariables.MapVariables.get(world).achievement = -1;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof Level _level) {

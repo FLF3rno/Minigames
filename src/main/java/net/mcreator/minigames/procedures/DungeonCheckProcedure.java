@@ -67,7 +67,7 @@ public class DungeonCheckProcedure {
 				spawnRoomZ = spawnRoomZ - 1;
 			}
 			if (MinigamesModVariables.MapVariables.get(world).secretRoomDungeon == MinigamesModVariables.MapVariables.get(world).secretRoomPlacedDungeon) {
-				SpawnFloorProcedure.execute(world);
+				SpawnFloorProcedure.execute(world, x, y, z);
 			} else {
 				SpawnGridProcedure.execute(world, x, y, z, MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon, MinigamesModVariables.MapVariables.get(world).roomLimitDungeon.z(),
 						MinigamesModVariables.MapVariables.get(world).minibossRoomsDungeon, MinigamesModVariables.MapVariables.get(world).roomLimitDungeon.x(), MinigamesModVariables.MapVariables.get(world).dungeonSize.x(),

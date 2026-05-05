@@ -23,10 +23,10 @@ public class SettingsDisplayProcedure {
 		} else {
 			line2 = "Keep Inventory is active";
 		}
-		if (MinigamesModVariables.MapVariables.get(world).nerfWinner == true) {
-			line4 = "Last winner takes 1.5x damage";
+		if (MinigamesModVariables.MapVariables.get(world).minimap == true) {
+			line4 = "Minimap is shown";
 		} else {
-			line4 = "Last winner takes a normal amount of damage";
+			line4 = "Minimap is not shown";
 		}
 		if (MinigamesModVariables.MapVariables.get(world).randomizeSpawn == true) {
 			line5 = "Items and location is kept on game start ";

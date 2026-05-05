@@ -43,7 +43,6 @@ public class StartRollTypeProcedure {
 			});
 			MinigamesModVariables.MapVariables.get(world).winAnimationTick = -1;
 			MinigamesModVariables.MapVariables.get(world).winAnimationStart = false;
-			MinigamesModVariables.MapVariables.get(world).nerfWinner = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else {
 			if (world instanceof ServerLevel _level) {

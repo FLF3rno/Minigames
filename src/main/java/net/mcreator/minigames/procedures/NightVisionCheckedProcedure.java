@@ -6,9 +6,6 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 
 public class NightVisionCheckedProcedure {
 	public static boolean execute(LevelAccessor world) {
-		if (MinigamesModVariables.MapVariables.get(world).nightVision == true) {
-			return true;
-		}
-		return false;
+		return MinigamesModVariables.MapVariables.get(world).nightVision;
 	}
 }

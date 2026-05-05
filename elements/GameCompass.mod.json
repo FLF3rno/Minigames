@@ -39,14 +39,12 @@
     "glowCondition": {
       "fixedValue": false
     },
+    "guiBoundTo": "StartGame",
     "openGUIOnRightClick": {
-      "fixedValue": false
+      "fixedValue": true
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
-    "onRightClickedInAir": {
-      "name": "GameCompassRightclicked"
-    },
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,

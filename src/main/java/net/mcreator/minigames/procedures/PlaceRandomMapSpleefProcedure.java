@@ -20,6 +20,12 @@ public class PlaceRandomMapSpleefProcedure {
 		if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 2) == 2) {
 			selectedIndex = selectedIndex + 1;
 		}
+		if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 4) == 4) {
+			selectedIndex = selectedIndex + 1;
+		}
+		if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 8) == 8) {
+			selectedIndex = selectedIndex + 1;
+		}
 		rng = Mth.nextInt(RandomSource.create(), 1, (int) selectedIndex);
 		if (selectedIndex == 0) {
 			StopSpleefProcedure.execute(world);
@@ -37,6 +43,18 @@ public class PlaceRandomMapSpleefProcedure {
 				currentIndex = currentIndex + 1;
 				if (rng == currentIndex) {
 					PlaceSolarSystemSpleefProcedure.execute(world, x, y, z);
+				}
+			}
+			if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 4) == 4) {
+				currentIndex = currentIndex + 1;
+				if (rng == currentIndex) {
+					PlaceSteampunkSpleefProcedure.execute(world, x, y, z);
+				}
+			}
+			if (((int) MinigamesModVariables.MapVariables.get(world).mapsSpleef & 8) == 8) {
+				currentIndex = currentIndex + 1;
+				if (rng == currentIndex) {
+					PlaceChristmasSpleefProcedure.execute(world, x, y, z);
 				}
 			}
 		}

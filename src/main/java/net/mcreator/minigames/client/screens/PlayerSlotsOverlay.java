@@ -58,6 +58,9 @@ public class PlayerSlotsOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		Player entity = mc.player;
 		if (entity != null) {
+			if (entity.isSpectator()) {
+				return;
+			}
 			MinigamesModVariables.PlayerVariables vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 			double playerSlots = vars.playerSlots;
 			boolean showOnlyHearts = vars.showOnlyHearts;
@@ -99,6 +102,9 @@ public class PlayerSlotsOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		Player entity = mc.player;
 		if (entity != null) {
+			if (entity.isSpectator()) {
+				return;
+			}
 			MinigamesModVariables.PlayerVariables vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 			boolean showOnlyHearts = vars.showOnlyHearts;
 			String path = event.getName().getPath();
@@ -114,6 +120,9 @@ public class PlayerSlotsOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		Player entity = mc.player;
 		if (entity != null) {
+			if (entity.isSpectator()) {
+				return;
+			}
 			if (!(mc.screen instanceof AbstractContainerScreen)) {
 				double playerSlots = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
 				int nSlots = Math.max(0, Math.min(9, (int) playerSlots));
@@ -133,6 +142,9 @@ public class PlayerSlotsOverlay {
 			Minecraft mc = Minecraft.getInstance();
 			Player player = mc.player;
 			if (player != null) {
+				if (player.isSpectator()) {
+					return;
+				}
 				double playerSlots = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
 				int nSlots = Math.max(0, Math.min(9, (int) playerSlots));
 				if (nSlots < 9) {
@@ -148,6 +160,9 @@ public class PlayerSlotsOverlay {
 			Minecraft mc = Minecraft.getInstance();
 			Player player = mc.player;
 			if (player != null) {
+				if (player.isSpectator()) {
+					return;
+				}
 				double playerSlots = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
 				int nSlots = Math.max(0, Math.min(9, (int) playerSlots));
 				if (nSlots < 9) {

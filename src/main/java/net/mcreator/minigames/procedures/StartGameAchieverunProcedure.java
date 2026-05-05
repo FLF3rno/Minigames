@@ -87,6 +87,8 @@ public class StartGameAchieverunProcedure {
 						"/effect give @a saturation 20 20 true");
 		});
 		MinigamesMod.queueServerWork(80, () -> {
+			MinigamesModVariables.MapVariables.get(world).playingAchievement = true;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/effect clear @a minigames:immobilized");

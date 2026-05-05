@@ -44,13 +44,13 @@
           "text": "Start",
           "isUndecorated": false,
           "onClick": {
-            "name": "PressedStartCrownHunt"
+            "name": "MinigameGUICrownHuntThisGUIIsClosed"
           },
           "width": 98,
           "height": 20,
           "x": 164,
           "y": 200,
-          "locked": false
+          "locked": true
         }
       },
       {
@@ -200,7 +200,7 @@
       {
         "type": "textfield",
         "data": {
-          "placeholder": "8",
+          "placeholder": "3",
           "name": "minutes",
           "width": 25,
           "height": 20,
@@ -286,8 +286,8 @@
         }
       }
     ],
-    "onClosed": {
-      "name": "MinigameGUICrownHuntThisGUIIsClosed"
+    "onOpen": {
+      "name": "SaveCrownHuntSettings"
     },
     "gridSettings": {
       "sx": 18,

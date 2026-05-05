@@ -15,8 +15,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.core.SectionPos;
 
-import net.mcreator.minigames.procedures.PressedStartCrownHuntProcedure;
 import net.mcreator.minigames.procedures.OpenCustomizationScreenProcedure;
+import net.mcreator.minigames.procedures.MinigameGUICrownHuntThisGUIIsClosedProcedure;
 import net.mcreator.minigames.procedures.GoBackProcedure;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -51,7 +51,7 @@ public record MinigameGUICrownHuntButtonMessage(int buttonID, int x, int y, int 
 			return;
 		if (buttonID == 0) {
 
-			PressedStartCrownHuntProcedure.execute(world, x, y, z, entity);
+			MinigameGUICrownHuntThisGUIIsClosedProcedure.execute(world, x, y, z, entity);
 		}
 		if (buttonID == 1) {
 

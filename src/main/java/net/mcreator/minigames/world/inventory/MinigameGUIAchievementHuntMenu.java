@@ -15,7 +15,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
 
-import net.mcreator.minigames.procedures.MinigameGUIAchievementRunThisGUIIsClosedProcedure;
 import net.mcreator.minigames.init.MinigamesModMenus;
 
 import java.util.function.Supplier;
@@ -74,12 +73,6 @@ public class MinigameGUIAchievementHuntMenu extends AbstractContainerMenu implem
 	@Override
 	public ItemStack quickMoveStack(Player playerIn, int index) {
 		return ItemStack.EMPTY;
-	}
-
-	@Override
-	public void removed(Player playerIn) {
-		super.removed(playerIn);
-		MinigameGUIAchievementRunThisGUIIsClosedProcedure.execute(world, x, y, z, entity);
 	}
 
 	@Override

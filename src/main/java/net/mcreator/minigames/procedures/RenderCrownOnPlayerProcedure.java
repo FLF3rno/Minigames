@@ -8,6 +8,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.api.distmarker.Dist;
 
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.nbt.CompoundTag;
@@ -20,6 +23,7 @@ import net.minecraft.client.model.EntityModel;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModRenderStateModifiers;
+import net.mcreator.minigames.init.MinigamesModItems;
 import net.mcreator.minigames.init.MinigamesModHumanoidModels;
 
 import javax.annotation.Nullable;
@@ -107,7 +111,8 @@ public class RenderCrownOnPlayerProcedure {
 	private static void execute(@Nullable Event event, Entity entity, RenderPlayerEvent playerRenderEvent) {
 		if (entity == null || playerRenderEvent == null)
 			return;
-		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned == true) {
+		if (entity.getData(
+				MinigamesModVariables.PLAYER_VARIABLES).isCrowned == !((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get())) {
 			{
 				ResourceLocation texture = MinigamesModVariables.crown;
 				renderHumanoid(playerRenderEvent, MinigamesModHumanoidModels.CROWN, playerRenderEvent.getMultiBufferSource().getBuffer(RenderType.armorCutoutNoCull(texture)), playerRenderEvent.getRenderState());

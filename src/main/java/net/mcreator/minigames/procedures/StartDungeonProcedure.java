@@ -26,6 +26,7 @@ public class StartDungeonProcedure {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.showOnlyHearts = true;
+				_vars.playerInInventory = true;
 				_vars.playerSlots = 4;
 				_vars.backpackSlots = 3;
 				_vars.markSyncDirty();
@@ -33,11 +34,16 @@ public class StartDungeonProcedure {
 		}
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/effect give @a minecraft:saturation 10 100 true");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"execute in minigames:dungeon_dimension run forceload add 10 10 -10 -10");
 		if (world instanceof ServerLevel _origLevel) {
 			LevelAccessor _worldorig = world;
 			world = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("minigames:dungeon_dimension")));
 			if (world != null) {
+				MinigamesModVariables.MapVariables.get(world).dungeonRoomSize = new Vec3((28 + 1), 20, (28 + 1));
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				SpawnGridProcedure.execute(world, x, y, z, 1, 13, 1, 9, 5, 5, 1);
 			}
 			world = _worldorig;

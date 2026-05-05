@@ -39,6 +39,16 @@ public class NameColorApplyProcedure {
 			return;
 		if (!MinigamesModVariables.MapVariables.get(world).applyCustomNameColor)
 			return;
+		applyColor(world, entity);
+		MinigamesModVariables.MapVariables.get(world).applyCustomNameColor = false;
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+	}
+
+	public static void applyColor(LevelAccessor world, Entity entity) {
+		if (entity == null)
+			return;
+		if (!(world instanceof ServerLevel _level))
+			return;
 		String color = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
 		if (color == null || color.isEmpty())
 			return;
@@ -61,7 +71,5 @@ public class NameColorApplyProcedure {
 				}
 			}
 		}
-		MinigamesModVariables.MapVariables.get(world).applyCustomNameColor = false;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}
 }

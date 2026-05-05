@@ -8,20 +8,25 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.api.distmarker.Dist;
 
-import net.mcreator.minigames.client.model.Modelstunned;
-import net.mcreator.minigames.client.model.Modelspider;
-import net.mcreator.minigames.client.model.Modelgrapple;
-import net.mcreator.minigames.client.model.Modeldart;
-import net.mcreator.minigames.client.model.Modelcrown;
+import net.mcreator.minigames.client.model.*;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class MinigamesModModels {
 	@SubscribeEvent
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(Modelwinnercrown.LAYER_LOCATION, Modelwinnercrown::createBodyLayer);
+		event.registerLayerDefinition(Modelpewseat_right.LAYER_LOCATION, Modelpewseat_right::createBodyLayer);
+		event.registerLayerDefinition(Modelboard.LAYER_LOCATION, Modelboard::createBodyLayer);
 		event.registerLayerDefinition(Modelcrown.LAYER_LOCATION, Modelcrown::createBodyLayer);
 		event.registerLayerDefinition(Modelgrapple.LAYER_LOCATION, Modelgrapple::createBodyLayer);
+		event.registerLayerDefinition(Modelshortboard.LAYER_LOCATION, Modelshortboard::createBodyLayer);
+		event.registerLayerDefinition(Modelpewseat.LAYER_LOCATION, Modelpewseat::createBodyLayer);
+		event.registerLayerDefinition(Modelchain.LAYER_LOCATION, Modelchain::createBodyLayer);
+		event.registerLayerDefinition(Modelworshipper.LAYER_LOCATION, Modelworshipper::createBodyLayer);
 		event.registerLayerDefinition(Modelstunned.LAYER_LOCATION, Modelstunned::createBodyLayer);
 		event.registerLayerDefinition(Modelspider.LAYER_LOCATION, Modelspider::createBodyLayer);
+		event.registerLayerDefinition(Modelpewseat_left.LAYER_LOCATION, Modelpewseat_left::createBodyLayer);
 		event.registerLayerDefinition(Modeldart.LAYER_LOCATION, Modeldart::createBodyLayer);
+		event.registerLayerDefinition(Modelcandlehead.LAYER_LOCATION, Modelcandlehead::createBodyLayer);
 	}
 }

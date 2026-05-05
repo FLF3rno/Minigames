@@ -1,0 +1,11 @@
+{
+  "_fv": 85,
+  "_type": "tab",
+  "definition": {
+    "name": "Dungeon Items",
+    "icon": {
+      "value": "CUSTOM:BlankLongSword"
+    },
+    "showSearch": true
+  }
+}

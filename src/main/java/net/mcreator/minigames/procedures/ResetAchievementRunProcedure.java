@@ -4,6 +4,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -11,6 +12,8 @@ import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.MinigamesMod;
+
+import java.util.ArrayList;
 
 public class ResetAchievementRunProcedure {
 	public static void execute(LevelAccessor world) {
@@ -63,6 +66,9 @@ public class ResetAchievementRunProcedure {
 		MinigamesModVariables.MapVariables.get(world).gameMinutes = 0;
 		MinigamesModVariables.MapVariables.get(world).gameHours = 0;
 		MinigamesModVariables.MapVariables.get(world).pvpstate = -1;
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			NameColorApplyProcedure.applyColor(world, entityiterator);
+		}
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		RemoveWinAnimationProcedure.execute(world);
 	}

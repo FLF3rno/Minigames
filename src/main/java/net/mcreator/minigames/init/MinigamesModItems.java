@@ -7,20 +7,25 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.resources.ResourceLocation;
 
+import net.mcreator.minigames.item.inventory.GameCompassInventoryCapability;
 import net.mcreator.minigames.item.*;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.function.Function;
 
+@EventBusSubscriber
 public class MinigamesModItems {
 	public static final DeferredRegister.Items REGISTRY = DeferredRegister.createItems(MinigamesMod.MODID);
 	public static final DeferredItem<Item> GAME_COMPASS;
@@ -43,6 +48,17 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> BLANK_DAGGER;
 	public static final DeferredItem<Item> BLANK_SWORD;
 	public static final DeferredItem<Item> BLANK_LONG_SWORD;
+	public static final DeferredItem<Item> QUARTZ_CHAINS;
+	public static final DeferredItem<Item> CHISELED_QUARTZ_WALL;
+	public static final DeferredItem<Item> SPRUCE_BOARD;
+	public static final DeferredItem<Item> SPRUCE_PEW;
+	public static final DeferredItem<Item> SPRUCE_PEW_RIGHT;
+	public static final DeferredItem<Item> SPRUCE_PEW_LEFT;
+	public static final DeferredItem<Item> SPRUCE_SHORT_BOARD;
+	public static final DeferredItem<Item> SPAWN_WORSHIPPER;
+	public static final DeferredItem<Item> SPAWN_CANDLEHEAD;
+	public static final DeferredItem<Item> SPAWN_SHIELD_ANGEL;
+	public static final DeferredItem<Item> MOVING_BLOCK_SPAWN;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -64,6 +80,17 @@ public class MinigamesModItems {
 		BLANK_DAGGER = register("blank_dagger", BlankDaggerItem::new);
 		BLANK_SWORD = register("blank_sword", BlankSwordItem::new);
 		BLANK_LONG_SWORD = register("blank_long_sword", BlankLongSwordItem::new);
+		QUARTZ_CHAINS = block(MinigamesModBlocks.QUARTZ_CHAINS);
+		CHISELED_QUARTZ_WALL = block(MinigamesModBlocks.CHISELED_QUARTZ_WALL);
+		SPRUCE_BOARD = block(MinigamesModBlocks.SPRUCE_BOARD);
+		SPRUCE_PEW = block(MinigamesModBlocks.SPRUCE_PEW);
+		SPRUCE_PEW_RIGHT = block(MinigamesModBlocks.SPRUCE_PEW_RIGHT);
+		SPRUCE_PEW_LEFT = block(MinigamesModBlocks.SPRUCE_PEW_LEFT);
+		SPRUCE_SHORT_BOARD = block(MinigamesModBlocks.SPRUCE_SHORT_BOARD);
+		SPAWN_WORSHIPPER = block(MinigamesModBlocks.SPAWN_WORSHIPPER);
+		SPAWN_CANDLEHEAD = block(MinigamesModBlocks.SPAWN_CANDLEHEAD);
+		SPAWN_SHIELD_ANGEL = block(MinigamesModBlocks.SPAWN_SHIELD_ANGEL);
+		MOVING_BLOCK_SPAWN = block(MinigamesModBlocks.MOVING_BLOCK_SPAWN, new Item.Properties().rarity(Rarity.EPIC));
 	}
 
 	// Start of user code block custom items
@@ -78,6 +105,11 @@ public class MinigamesModItems {
 
 	private static DeferredItem<Item> block(DeferredHolder<Block, Block> block, Item.Properties properties) {
 		return REGISTRY.registerItem(block.getId().getPath(), prop -> new BlockItem(block.get(), prop), properties);
+	}
+
+	@SubscribeEvent
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new GameCompassInventoryCapability(stack), GAME_COMPASS.get());
 	}
 
 	@EventBusSubscriber(Dist.CLIENT)

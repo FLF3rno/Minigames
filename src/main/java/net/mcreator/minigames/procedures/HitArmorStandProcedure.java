@@ -24,6 +24,8 @@ import javax.annotation.Nullable;
 
 @EventBusSubscriber
 public class HitArmorStandProcedure {
+	private static final String CROWN_STAND_CLAIMED_KEY = "minigames.crown_stand_claimed";
+
 	@SubscribeEvent
 	public static void onLeftClickEntity(AttackEntityEvent event) {
 		if (event.getEntity() != null && event.getTarget() != null) {
@@ -66,11 +68,17 @@ public class HitArmorStandProcedure {
 			return;
 		if (!(target instanceof ArmorStand))
 			return;
+		if (target.getPersistentData().getBoolean(CROWN_STAND_CLAIMED_KEY).orElse(false))
+			return;
 		if ((target instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
 			}
 			if (MinigamesModVariables.MapVariables.get(world).canGrabCrown == true) {
+				if (!target.level().isClientSide()) {
+					target.getPersistentData().putBoolean(CROWN_STAND_CLAIMED_KEY, true);
+					target.discard();
+				}
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.helmet = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).copy();
@@ -95,8 +103,6 @@ public class HitArmorStandProcedure {
 						_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((entity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
 					}
 				}
-				if (!target.level().isClientSide())
-					target.discard();
 			}
 		}
 	}

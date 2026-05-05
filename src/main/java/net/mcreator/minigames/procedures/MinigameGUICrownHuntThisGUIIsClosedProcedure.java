@@ -25,7 +25,7 @@ public class MinigameGUICrownHuntThisGUIIsClosedProcedure {
 			MinigamesModVariables.MapVariables.get(world).crownMinutes = 8;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else if (parseDouble((entity instanceof Player _entity1 && _entity1.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu1) ? _menu1.getMenuState(0, "minutes", "") : "") > 59) {
-			MinigamesModVariables.MapVariables.get(world).crownMinutes = 8;
+			MinigamesModVariables.MapVariables.get(world).crownMinutes = 3;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else {
 			MinigamesModVariables.MapVariables.get(world).crownMinutes = Math
@@ -80,6 +80,9 @@ public class MinigameGUICrownHuntThisGUIIsClosedProcedure {
 			MinigamesModVariables.MapVariables.get(world).returnToCastle = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}
+		if (entity instanceof Player _player)
+			_player.closeContainer();
+		ResetCrownHuntProcedure.execute(world, x, y, z);
 	}
 
 	private static double parseDouble(String s) {

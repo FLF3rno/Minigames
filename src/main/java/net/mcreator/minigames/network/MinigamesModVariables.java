@@ -117,6 +117,7 @@ public class MinigamesModVariables {
 		clone.playerInInventory = original.playerInInventory;
 		clone.showOnlyHearts = original.showOnlyHearts;
 		clone.backpackSlots = original.backpackSlots;
+		clone.jumps = original.jumps;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -225,7 +226,6 @@ public class MinigamesModVariables {
 		public double p6state = 0;
 		public double rerollingPlayers = 0;
 		public double respawningPlayers = 0;
-		public boolean nerfWinner = false;
 		public boolean randomizeSpawn = false;
 		public boolean achievementHunterMode = false;
 		public boolean randomHunterAchievement = false;
@@ -248,8 +248,8 @@ public class MinigamesModVariables {
 		public boolean crownHuntWinDisplay = false;
 		public boolean canGrabCrown = false;
 		public boolean returnToCastle = false;
-		public double crownMinutes = 0;
-		public double graceMinutes = 0;
+		public double crownMinutes = 3.0;
+		public double graceMinutes = 6.0;
 		public boolean applyCustomNameColor = false;
 		public boolean inGracePeriod = false;
 		public boolean showRedTimer = false;
@@ -260,7 +260,7 @@ public class MinigamesModVariables {
 		public double spleefAlivePlayers = 0;
 		public double gapBetweenLayersSpleef = 0;
 		public boolean spleefPowerups = true;
-		public double mapsSpleef = 3.0;
+		public double mapsSpleef = 15.0;
 		public String sky = "normal";
 		public String currentMapSpleef = "\"\"";
 		public Vec3 spleefMapMiddleX = Vec3.ZERO;
@@ -282,6 +282,8 @@ public class MinigamesModVariables {
 		public Vec3 dungeonRoomSize = Vec3.ZERO;
 		public Vec3 dungeonStartLocation = Vec3.ZERO;
 		public boolean playingDungeons = false;
+		public boolean showCoins = false;
+		public boolean playingAchievement = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -312,7 +314,6 @@ public class MinigamesModVariables {
 			p6state = nbt.getDoubleOr("p6state", 0);
 			rerollingPlayers = nbt.getDoubleOr("rerollingPlayers", 0);
 			respawningPlayers = nbt.getDoubleOr("respawningPlayers", 0);
-			nerfWinner = nbt.getBooleanOr("nerfWinner", false);
 			randomizeSpawn = nbt.getBooleanOr("randomizeSpawn", false);
 			achievementHunterMode = nbt.getBooleanOr("achievementHunterMode", false);
 			randomHunterAchievement = nbt.getBooleanOr("randomHunterAchievement", false);
@@ -369,6 +370,8 @@ public class MinigamesModVariables {
 			dungeonRoomSize = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonRoomSize")).result().orElse(Vec3.ZERO);
 			dungeonStartLocation = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonStartLocation")).result().orElse(Vec3.ZERO);
 			playingDungeons = nbt.getBooleanOr("playingDungeons", false);
+			showCoins = nbt.getBooleanOr("showCoins", false);
+			playingAchievement = nbt.getBooleanOr("playingAchievement", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -400,7 +403,6 @@ public class MinigamesModVariables {
 			nbt.putDouble("p6state", p6state);
 			nbt.putDouble("rerollingPlayers", rerollingPlayers);
 			nbt.putDouble("respawningPlayers", respawningPlayers);
-			nbt.putBoolean("nerfWinner", nerfWinner);
 			nbt.putBoolean("randomizeSpawn", randomizeSpawn);
 			nbt.putBoolean("achievementHunterMode", achievementHunterMode);
 			nbt.putBoolean("randomHunterAchievement", randomHunterAchievement);
@@ -457,6 +459,8 @@ public class MinigamesModVariables {
 			nbt.put("dungeonRoomSize", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonRoomSize).result().orElseGet(CompoundTag::new));
 			nbt.put("dungeonStartLocation", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonStartLocation).result().orElseGet(CompoundTag::new));
 			nbt.putBoolean("playingDungeons", playingDungeons);
+			nbt.putBoolean("showCoins", showCoins);
+			nbt.putBoolean("playingAchievement", playingAchievement);
 			return nbt;
 		}
 
@@ -536,6 +540,7 @@ public class MinigamesModVariables {
 		public boolean playerInInventory = false;
 		public boolean showOnlyHearts = false;
 		public double backpackSlots = 3.0;
+		public boolean jumps = false;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -555,6 +560,7 @@ public class MinigamesModVariables {
 			output.putBoolean("playerInInventory", playerInInventory);
 			output.putBoolean("showOnlyHearts", showOnlyHearts);
 			output.putDouble("backpackSlots", backpackSlots);
+			output.putBoolean("jumps", jumps);
 		}
 
 		@Override
@@ -575,6 +581,7 @@ public class MinigamesModVariables {
 			playerInInventory = input.getBooleanOr("playerInInventory", false);
 			showOnlyHearts = input.getBooleanOr("showOnlyHearts", false);
 			backpackSlots = input.getDoubleOr("backpackSlots", 0);
+			jumps = input.getBooleanOr("jumps", false);
 		}
 
 		public void markSyncDirty() {

@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/quartz_chains"
+    },
+    "facing=east": {
+      "model": "minigames:block/quartz_chains",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/quartz_chains",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/quartz_chains",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "minigames:block/quartz_chains",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "minigames:block/quartz_chains",
+      "x": 90
+    }
+  }
+}

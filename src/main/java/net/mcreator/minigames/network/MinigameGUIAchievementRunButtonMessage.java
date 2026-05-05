@@ -15,8 +15,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.core.SectionPos;
 
-import net.mcreator.minigames.procedures.StartRollTypeProcedure;
 import net.mcreator.minigames.procedures.OpenCustomizationScreenProcedure;
+import net.mcreator.minigames.procedures.MinigameGUIAchievementRunThisGUIIsClosedProcedure;
 import net.mcreator.minigames.procedures.GoBackProcedure;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -51,7 +51,7 @@ public record MinigameGUIAchievementRunButtonMessage(int buttonID, int x, int y,
 			return;
 		if (buttonID == 0) {
 
-			StartRollTypeProcedure.execute(world, x, y, z, entity);
+			MinigameGUIAchievementRunThisGUIIsClosedProcedure.execute(world, x, y, z, entity);
 		}
 		if (buttonID == 1) {
 

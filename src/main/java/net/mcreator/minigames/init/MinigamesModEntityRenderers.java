@@ -28,5 +28,10 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.GLUE_PROJECTILE.get(), GlueProjectileRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.SPLEEF_PODIUM_PLAYER.get(), SpleefPodiumPlayerRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.STUNNED_EFFECT.get(), StunnedEffectRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.WORSHIPPER.get(), WorshipperRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.CANDLEHEAD.get(), CandleheadRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.SHIELD_ANGEL.get(), ShieldAngelRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.MOVING_BLOCK.get(), MovingBlockRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.VOLCANIC_SPEW.get(), ThrownItemRenderer::new);
 	}
 }

@@ -44,7 +44,7 @@
           "text": "Start",
           "isUndecorated": false,
           "onClick": {
-            "name": "StartRollType"
+            "name": "MinigameGUIAchievementRunThisGUIIsClosed"
           },
           "width": 98,
           "height": 20,
@@ -346,9 +346,6 @@
         }
       }
     ],
-    "onClosed": {
-      "name": "MinigameGUIAchievementRunThisGUIIsClosed"
-    },
     "gridSettings": {
       "sx": 18,
       "sy": 18,

@@ -2,7 +2,7 @@
   "_fv": 85,
   "_type": "procedure",
   "definition": {
-    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">after_model_registration</field><next><block type=\"variables_set_texturelocation\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">global:crown</field><value name=\"VAL\"><block type=\"texture_from_workspace\"><field name=\"texture\">crown</field></block></value></block></next></block></xml>",
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">after_model_registration</field><next><block type=\"variables_set_texturelocation\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">global:crown</field><value name=\"VAL\"><block type=\"texture_from_workspace\"><field name=\"texture\">winnercrown</field></block></value></block></next></block></xml>",
     "skipDependencyNullCheck": false
   }
 }

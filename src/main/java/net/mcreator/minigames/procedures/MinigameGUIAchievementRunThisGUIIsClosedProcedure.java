@@ -95,6 +95,7 @@ public class MinigameGUIAchievementRunThisGUIIsClosedProcedure {
 			MinigamesModVariables.MapVariables.get(world).headStart = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}
+		StartRollTypeProcedure.execute(world, x, y, z, entity);
 	}
 
 	private static double parseDouble(String s) {

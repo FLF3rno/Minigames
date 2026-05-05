@@ -15,7 +15,9 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.GuiGraphics;
 
 import net.mcreator.minigames.world.inventory.MapGUISpleefMenu;
+import net.mcreator.minigames.procedures.SteampunkSelectedProcedure;
 import net.mcreator.minigames.procedures.SolarSystemSelectedProcedure;
+import net.mcreator.minigames.procedures.ChristmasSelectedProcedure;
 import net.mcreator.minigames.procedures.BalloonsSelectedProcedure;
 import net.mcreator.minigames.network.MapGUISpleefButtonMessage;
 import net.mcreator.minigames.init.MinigamesModScreens;
@@ -28,15 +30,19 @@ public class MapGUISpleefScreen extends AbstractContainerScreen<MapGUISpleefMenu
 	private Button button_start_normal;
 	private ImageButton imagebutton_maphovered;
 	private ImageButton imagebutton_nothing;
+	private ImageButton imagebutton_nothing1;
+	private ImageButton imagebutton_nothing2;
 	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/spleefwindow.png");
 	private static final ResourceLocation IMAGE_1 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
 	private static final ResourceLocation IMAGE_2 = ResourceLocation.parse("minigames:textures/screens/hotairballoons.png");
 	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
 	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/solarsystemmap.png");
-	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
-	private static final ResourceLocation IMAGE_6 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
-	private static final ResourceLocation IMAGE_7 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
-	private static final ResourceLocation IMAGE_8 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
+	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
+	private static final ResourceLocation IMAGE_6 = ResourceLocation.parse("minigames:textures/screens/selectedoverlay.png");
+	private static final ResourceLocation IMAGE_7 = ResourceLocation.parse("minigames:textures/screens/christmas.png");
+	private static final ResourceLocation IMAGE_8 = ResourceLocation.parse("minigames:textures/screens/steampunk.png");
+	private static final ResourceLocation IMAGE_9 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
+	private static final ResourceLocation IMAGE_10 = ResourceLocation.parse("minigames:textures/screens/emptymap.png");
 
 	public MapGUISpleefScreen(MapGUISpleefMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -72,10 +78,16 @@ public class MapGUISpleefScreen extends AbstractContainerScreen<MapGUISpleefMenu
 			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 36, this.topPos + 78, 0, 0, 107, 75, 107, 75);
 		}
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 42, this.topPos + 85, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + -70, this.topPos + 85, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -70, this.topPos + 7, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_7, this.leftPos + 154, this.topPos + 85, 0, 0, 95, 62, 95, 62);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_8, this.leftPos + 154, this.topPos + 7, 0, 0, 95, 62, 95, 62);
+		if (SteampunkSelectedProcedure.execute(world)) {
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + -75, this.topPos + 1, 0, 0, 107, 75, 107, 75);
+		}
+		if (ChristmasSelectedProcedure.execute(world)) {
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -75, this.topPos + 79, 0, 0, 107, 75, 107, 75);
+		}
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_7, this.leftPos + -70, this.topPos + 85, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_8, this.leftPos + -70, this.topPos + 7, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_9, this.leftPos + 154, this.topPos + 85, 0, 0, 95, 62, 95, 62);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_10, this.leftPos + 154, this.topPos + 7, 0, 0, 95, 62, 95, 62);
 	}
 
 	@Override
@@ -92,6 +104,8 @@ public class MapGUISpleefScreen extends AbstractContainerScreen<MapGUISpleefMenu
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.map_gui_spleef.label_achievement_run"), -88, -19, -12829636, false);
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.map_gui_spleef.label_hot_air_balloons"), 48, 71, -16777216, false);
 		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.map_gui_spleef.label_solar_system"), 59, 149, -16777216, false);
+		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.map_gui_spleef.label_steampunk"), -47, 71, -16777216, false);
+		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.map_gui_spleef.label_christmas"), -48, 149, -16777216, false);
 	}
 
 	@Override
@@ -135,5 +149,33 @@ public class MapGUISpleefScreen extends AbstractContainerScreen<MapGUISpleefMenu
 			}
 		};
 		this.addRenderableWidget(imagebutton_nothing);
+		imagebutton_nothing1 = new ImageButton(this.leftPos + -66, this.topPos + 11, 87, 54, new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/nothing.png"), ResourceLocation.parse("minigames:textures/screens/nothing.png")), e -> {
+			int x = MapGUISpleefScreen.this.x;
+			int y = MapGUISpleefScreen.this.y;
+			if (true) {
+				ClientPacketDistributor.sendToServer(new MapGUISpleefButtonMessage(3, x, y, z));
+				MapGUISpleefButtonMessage.handleButtonAction(entity, 3, x, y, z);
+			}
+		}) {
+			@Override
+			public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprites.get(isActive(), isHoveredOrFocused()), getX(), getY(), 0, 0, width, height, width, height);
+			}
+		};
+		this.addRenderableWidget(imagebutton_nothing1);
+		imagebutton_nothing2 = new ImageButton(this.leftPos + -66, this.topPos + 89, 87, 54, new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/nothing.png"), ResourceLocation.parse("minigames:textures/screens/nothing.png")), e -> {
+			int x = MapGUISpleefScreen.this.x;
+			int y = MapGUISpleefScreen.this.y;
+			if (true) {
+				ClientPacketDistributor.sendToServer(new MapGUISpleefButtonMessage(4, x, y, z));
+				MapGUISpleefButtonMessage.handleButtonAction(entity, 4, x, y, z);
+			}
+		}) {
+			@Override
+			public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprites.get(isActive(), isHoveredOrFocused()), getX(), getY(), 0, 0, width, height, width, height);
+			}
+		};
+		this.addRenderableWidget(imagebutton_nothing2);
 	}
 }

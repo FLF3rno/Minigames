@@ -32,7 +32,7 @@ public class ExplodingMagmaBlockAddedProcedure {
 		MinigamesMod.queueServerWork(7, () -> {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			if (world instanceof Level _level && !_level.isClientSide())
-				_level.explode(null, x, (y + 1), z, 1, Level.ExplosionInteraction.NONE);
+				_level.explode(null, x, (y + 1), z, 0, Level.ExplosionInteraction.NONE);
 		});
 	}
 }

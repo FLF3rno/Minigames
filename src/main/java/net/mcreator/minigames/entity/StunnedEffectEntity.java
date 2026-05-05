@@ -28,7 +28,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
-import net.mcreator.minigames.client.model.animations.stunnedAnimation;
+import net.mcreator.minigames.client.model.animations.worshipperAnimation;
 
 public class StunnedEffectEntity extends Monster {
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(StunnedEffectEntity.class, EntityDataSerializers.STRING);
@@ -117,8 +117,8 @@ public class StunnedEffectEntity extends Monster {
 		if (this.level().isClientSide()) {
 			if (this.animationState0.isStarted()) {
 				float elapsedSeconds = this.animationState0.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= stunnedAnimation.idle.lengthInSeconds()) {
-					if (!stunnedAnimation.idle.looping())
+				if (elapsedSeconds >= worshipperAnimation.idle.lengthInSeconds()) {
+					if (!worshipperAnimation.idle.looping())
 						this.animationState0.stop();
 					else
 						this.animationState0.start(this.tickCount);

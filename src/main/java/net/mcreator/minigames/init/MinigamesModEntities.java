@@ -53,6 +53,24 @@ public class MinigamesModEntities {
 			EntityType.Builder.<StunnedEffectEntity>of(StunnedEffectEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune()
 
 					.sized(0.6f, 0.2f));
+	public static final DeferredHolder<EntityType<?>, EntityType<WorshipperEntity>> WORSHIPPER = register("worshipper",
+			EntityType.Builder.<WorshipperEntity>of(WorshipperEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
+
+					.sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<CandleheadEntity>> CANDLEHEAD = register("candlehead",
+			EntityType.Builder.<CandleheadEntity>of(CandleheadEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(32).setUpdateInterval(3).fireImmune()
+
+					.sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<ShieldAngelEntity>> SHIELD_ANGEL = register("shield_angel",
+			EntityType.Builder.<ShieldAngelEntity>of(ShieldAngelEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(32).setUpdateInterval(3)
+
+					.ridingOffset(-0.6f).sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<MovingBlockEntity>> MOVING_BLOCK = register("moving_block",
+			EntityType.Builder.<MovingBlockEntity>of(MovingBlockEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
+
+					.sized(1f, 1f));
+	public static final DeferredHolder<EntityType<?>, EntityType<VolcanicSpewEntity>> VOLCANIC_SPEW = register("volcanic_spew",
+			EntityType.Builder.<VolcanicSpewEntity>of(VolcanicSpewEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.2f, 0.2f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -69,6 +87,10 @@ public class MinigamesModEntities {
 		MagmaHitboxEntity.init(event);
 		SpleefPodiumPlayerEntity.init(event);
 		StunnedEffectEntity.init(event);
+		WorshipperEntity.init(event);
+		CandleheadEntity.init(event);
+		ShieldAngelEntity.init(event);
+		MovingBlockEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -80,5 +102,9 @@ public class MinigamesModEntities {
 		event.put(MAGMA_HITBOX.get(), MagmaHitboxEntity.createAttributes().build());
 		event.put(SPLEEF_PODIUM_PLAYER.get(), SpleefPodiumPlayerEntity.createAttributes().build());
 		event.put(STUNNED_EFFECT.get(), StunnedEffectEntity.createAttributes().build());
+		event.put(WORSHIPPER.get(), WorshipperEntity.createAttributes().build());
+		event.put(CANDLEHEAD.get(), CandleheadEntity.createAttributes().build());
+		event.put(SHIELD_ANGEL.get(), ShieldAngelEntity.createAttributes().build());
+		event.put(MOVING_BLOCK.get(), MovingBlockEntity.createAttributes().build());
 	}
 }

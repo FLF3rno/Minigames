@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "minigames:block/moving_block_spawn"
+    }
+  }
+}

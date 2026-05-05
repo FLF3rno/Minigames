@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "minigames:item/pewright"
+  },
+  "render_type": "translucent"
+}

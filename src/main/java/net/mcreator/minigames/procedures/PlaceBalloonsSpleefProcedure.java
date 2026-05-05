@@ -18,25 +18,44 @@ public class PlaceBalloonsSpleefProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run forceload add -30 -30 30 30");
+					("execute in minigames:spleef_dimension run forceload add " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z())));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run place template minigames:spleef_balloons_arena -21 100 -14");
+					("execute in minigames:spleef_dimension run fill " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(100 + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef) + " "
+							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " 100 "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " air"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run spreadplayers 0 0 3 15 false @a");
+					"execute in minigames:spleef_dimension run place template minigames:spleef_balloons_arena -21 100 -14");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @a at @s run tp @s ~ ~ ~ facing 0 124 0");
+					("execute in minigames:spleef_dimension run spreadplayers " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " 3 15 false @a"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute in minigames:spleef_dimension run forceload remove -30 -30 30 30");
-		if (Math.random() < 0.3) {
-			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/execute in minigames:spleef_dimension run time set midnight");
-		}
+					("execute as @a at @s run tp @s ~ ~ ~ facing " + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() + " "
+							+ (100 + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef) + " "
+							+ MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()));
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					("execute in minigames:spleef_dimension run forceload remove " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z())));
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "balloons";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		if (Math.random() < 0.2) {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"time set midnight");
+		} else {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "time set day");
+		}
 	}
 }

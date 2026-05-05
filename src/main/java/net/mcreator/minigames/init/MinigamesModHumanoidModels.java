@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.Minecraft;
 
-import net.mcreator.minigames.client.model.Modelcrown;
+import net.mcreator.minigames.client.model.Modelwinnercrown;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -21,9 +21,9 @@ public class MinigamesModHumanoidModels {
 
 	@SubscribeEvent
 	public static void initModels(EntityRenderersEvent.AddLayers event) {
-		Modelcrown crown_temp = new Modelcrown(Minecraft.getInstance().getEntityModels().bakeLayer(Modelcrown.LAYER_LOCATION));
+		Modelwinnercrown crown_temp = new Modelwinnercrown(Minecraft.getInstance().getEntityModels().bakeLayer(Modelwinnercrown.LAYER_LOCATION));
 		CROWN = new PlayerModel(new ModelPart(Collections.emptyList(),
-				Map.of("head", new ModelPart(Collections.emptyList(), Map.of("head", crown_temp.Crown, "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()))), "body",
+				Map.of("head", new ModelPart(Collections.emptyList(), Map.of("head", crown_temp.crown, "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()))), "body",
 						getPlayerPart(new ModelPart(Collections.emptyList(), Collections.emptyMap()), "jacket"), "left_arm", getPlayerPart(new ModelPart(Collections.emptyList(), Collections.emptyMap()), "left_sleeve"), "right_arm",
 						getPlayerPart(new ModelPart(Collections.emptyList(), Collections.emptyMap()), "right_sleeve"), "left_leg", getPlayerPart(new ModelPart(Collections.emptyList(), Collections.emptyMap()), "left_pants"), "right_leg",
 						getPlayerPart(new ModelPart(Collections.emptyList(), Collections.emptyMap()), "right_pants"))),

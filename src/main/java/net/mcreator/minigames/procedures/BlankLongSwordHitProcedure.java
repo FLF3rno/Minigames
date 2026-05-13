@@ -43,7 +43,7 @@ public class BlankLongSwordHitProcedure {
 			if (sourceentity instanceof LivingEntity _livingSource && _livingSource.getAttributes().hasAttribute(MinigamesModAttributes.STUN_FULL_HEALTH_MOBS) && _livingSource.getAttribute(MinigamesModAttributes.STUN_FULL_HEALTH_MOBS).getValue() >= 1) {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) >= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) {
 					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.STUNNED, 60, 0, false, false));
+						_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.STUNNED, (int) Math.round(_livingSource.getAttributeValue(MinigamesModAttributes.EFFECT_LENGTH)), 0, false, false));
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 								"/playsound minecraft:entity.zombie_villager.cure hostile @a ~ ~ ~ 0.5 1");

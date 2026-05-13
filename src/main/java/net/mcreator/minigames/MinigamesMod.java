@@ -61,6 +61,7 @@ public class MinigamesMod {
 		MinigamesModAttributes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
 		new StunnableEntityTint(modEventBus);
+		new BlessedEntityTint(modEventBus);
 		// End of user code block mod init
 	}
 

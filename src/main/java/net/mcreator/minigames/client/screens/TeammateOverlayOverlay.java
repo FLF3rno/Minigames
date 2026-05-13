@@ -15,7 +15,6 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.scores.PlayerTeam;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.network.TeammateHealthSync;
@@ -215,11 +214,11 @@ public class TeammateOverlayOverlay {
 	}
 
 	private static int getPlayerNameColor(Player player) {
-		PlayerTeam team = player.level().getScoreboard().getPlayersTeam(player.getScoreboardName());
-		if (team == null || team.getColor() == null || team.getColor().getColor() == null) {
+		String color = player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+		if (color == null || !color.matches("^#?[0-9a-fA-F]{6}$"))
 			return DEFAULT_TEXT_COLOR;
-		}
-		return team.getColor().getColor();
+		String normalized = color.startsWith("#") ? color.substring(1) : color;
+		return Integer.parseInt(normalized, 16);
 	}
 
 	private static int withFullAlpha(int color) {

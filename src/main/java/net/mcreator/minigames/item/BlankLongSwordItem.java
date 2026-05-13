@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.procedures.BlankLongswordInHandProcedure;
+import net.mcreator.minigames.procedures.BlankLongswordDescriptionProcedure;
 import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -30,15 +31,20 @@ public class BlankLongSwordItem extends Item {
 				.add(MinigamesModAttributes.SALVAGE_VALUE, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blank_long_sword_2"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.add(MinigamesModAttributes.SHOW_FULL_HEALTH_MOBS, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blank_long_sword_3"), 1, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.add(MinigamesModAttributes.STUN_FULL_HEALTH_MOBS, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blank_long_sword_4"), 1, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(MinigamesModAttributes.REPAIR_VALUE, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blank_long_sword_5"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
+				.add(MinigamesModAttributes.REPAIR_VALUE, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blank_long_sword_5"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(MinigamesModAttributes.EFFECT_LENGTH, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blank_long_sword_6"), 60, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
 	}
 
 	@Override
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> componentConsumer, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, tooltipDisplay, componentConsumer, flag);
-		componentConsumer.accept(Component.translatable("item.minigames.blank_long_sword.description_0"));
-		componentConsumer.accept(Component.translatable("item.minigames.blank_long_sword.description_1"));
-		componentConsumer.accept(Component.translatable("item.minigames.blank_long_sword.description_2"));
+		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : MinigamesMod.clientPlayer();
+		String hoverText = BlankLongswordDescriptionProcedure.execute(itemstack);
+		if (hoverText != null) {
+			for (String line : hoverText.split("\n")) {
+				componentConsumer.accept(Component.literal(line));
+			}
+		}
 	}
 
 	@Override

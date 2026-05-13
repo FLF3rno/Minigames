@@ -11,6 +11,6 @@ public class SpleefShovelItem extends Item {
 
 	@Override
 	public float getDestroySpeed(ItemStack itemstack, BlockState state) {
-		return 2000f;
+		return 100000f;
 	}
 }

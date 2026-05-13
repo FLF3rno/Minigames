@@ -118,6 +118,11 @@ public class MinigamesModVariables {
 		clone.showOnlyHearts = original.showOnlyHearts;
 		clone.backpackSlots = original.backpackSlots;
 		clone.jumps = original.jumps;
+		clone.canDash = original.canDash;
+		clone.dashCooldown = original.dashCooldown;
+		clone.maxDashCooldown = original.maxDashCooldown;
+		clone.dashLength = original.dashLength;
+		clone.showCustomNameColor = original.showCustomNameColor;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -541,6 +546,11 @@ public class MinigamesModVariables {
 		public boolean showOnlyHearts = false;
 		public double backpackSlots = 3.0;
 		public boolean jumps = false;
+		public boolean canDash = false;
+		public double dashCooldown = 0;
+		public double maxDashCooldown = 0;
+		public double dashLength = 0;
+		public boolean showCustomNameColor = true;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -561,6 +571,11 @@ public class MinigamesModVariables {
 			output.putBoolean("showOnlyHearts", showOnlyHearts);
 			output.putDouble("backpackSlots", backpackSlots);
 			output.putBoolean("jumps", jumps);
+			output.putBoolean("canDash", canDash);
+			output.putDouble("dashCooldown", dashCooldown);
+			output.putDouble("maxDashCooldown", maxDashCooldown);
+			output.putDouble("dashLength", dashLength);
+			output.putBoolean("showCustomNameColor", showCustomNameColor);
 		}
 
 		@Override
@@ -582,6 +597,11 @@ public class MinigamesModVariables {
 			showOnlyHearts = input.getBooleanOr("showOnlyHearts", false);
 			backpackSlots = input.getDoubleOr("backpackSlots", 0);
 			jumps = input.getBooleanOr("jumps", false);
+			canDash = input.getBooleanOr("canDash", false);
+			dashCooldown = input.getDoubleOr("dashCooldown", 0);
+			maxDashCooldown = input.getDoubleOr("maxDashCooldown", 0);
+			dashLength = input.getDoubleOr("dashLength", 0);
+			showCustomNameColor = input.getBooleanOr("showCustomNameColor", false);
 		}
 
 		public void markSyncDirty() {

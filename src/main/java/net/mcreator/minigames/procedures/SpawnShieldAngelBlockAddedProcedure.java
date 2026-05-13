@@ -25,7 +25,7 @@ public class SpawnShieldAngelBlockAddedProcedure {
 		if (spawn == true) {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = MinigamesModEntities.SHIELD_ANGEL.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
+				Entity entityToSpawn = MinigamesModEntities.SHIELD_ANGEL.get().spawn(_level, BlockPos.containing(x, y + 1.5, z), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setDeltaMovement(0, 0, 0);
 				}

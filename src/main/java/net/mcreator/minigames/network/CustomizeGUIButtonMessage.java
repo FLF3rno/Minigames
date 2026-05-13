@@ -48,61 +48,55 @@ public record CustomizeGUIButtonMessage(int buttonID, int x, int y, int z) imple
 		if (!world.getChunkSource().hasChunk(SectionPos.blockToSectionCoord(x), SectionPos.blockToSectionCoord(z)))
 			return;
 		if (buttonID == 0) {
-
-			SetNameWhiteProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 1) {
-
-			SetNameAquaProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 2) {
-
-			SetNameDarkAquaProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 3) {
-
-			SetNameBlueProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 4) {
-
-			SetNameDarkBlueProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 5) {
-
-			SetNameGreenProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 6) {
-
-			SetNameDarkGreenProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 7) {
-
-			SetNameLightPurpleProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 8) {
-
-			SetNameDarkPurpleProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 9) {
-
-			SetNameRedProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 10) {
-
-			SetNameDarkRedProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 11) {
-
-			SetNameYellowProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 12) {
-
-			SetNameGoldProcedure.execute(entity);
+			CustomizeNameColorProcedure.executeDirectColor(world, entity, hsvButtonColor(buttonID));
 		}
 		if (buttonID == 13) {
 
 			GoBackProcedure.execute(world, x, y, z, entity);
 		}
+	}
+
+	private static String hsvButtonColor(int buttonID) {
+		int steps = 13;
+		float hue = (buttonID % steps) / (float) steps;
+		int rgb = java.awt.Color.HSBtoRGB(hue, 0.9f, 1.0f) & 0xFFFFFF;
+		return String.format("#%06X", rgb);
 	}
 
 	@SubscribeEvent

@@ -165,5 +165,13 @@
         "stream": false
       }
     ]
+  },
+  "dash": {
+    "sounds": [
+      {
+        "name": "minigames:dash",
+        "stream": false
+      }
+    ]
   }
 }

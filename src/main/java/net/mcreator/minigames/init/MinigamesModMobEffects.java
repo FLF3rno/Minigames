@@ -17,6 +17,7 @@ import net.minecraft.core.registries.Registries;
 import net.mcreator.minigames.procedures.SyncCrownedRemoveProcedure;
 import net.mcreator.minigames.procedures.StunnedEffectExpiresProcedure;
 import net.mcreator.minigames.procedures.StartPVPProcedure;
+import net.mcreator.minigames.procedures.BlessedEffectExpiresProcedure;
 import net.mcreator.minigames.potion.*;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -29,6 +30,7 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> BLOCK_LEFT_CLICK = REGISTRY.register("block_left_click", () -> new BlockLeftClickMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> HYPNOTIZED = REGISTRY.register("hypnotized", () -> new HypnotizedMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> STUNNED = REGISTRY.register("stunned", () -> new StunnedMobEffect());
+	public static final DeferredHolder<MobEffect, MobEffect> BLESSED = REGISTRY.register("blessed", () -> new BlessedMobEffect());
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {
@@ -53,6 +55,8 @@ public class MinigamesModMobEffects {
 			StartPVPProcedure.execute(entity.level());
 		} else if (effectInstance.getEffect().is(STUNNED)) {
 			StunnedEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+		} else if (effectInstance.getEffect().is(BLESSED)) {
+			BlessedEffectExpiresProcedure.execute(entity);
 		}
 	}
 }

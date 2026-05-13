@@ -38,7 +38,8 @@
         "",
         "§6§lON HIT",
         "§eStun§f monsters for§2 3s§f if they are full HP"
-      ]
+      ],
+      "name": "BlankLongswordDescription"
     },
     "glowCondition": {
       "fixedValue": false
@@ -122,6 +123,14 @@
           "value": "CUSTOM:RepairValue"
         },
         "amount": 15.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "CUSTOM:EffectLength"
+        },
+        "amount": 60.0,
         "operation": "ADD_VALUE"
       }
     ]

@@ -21,15 +21,15 @@ public class PlaceSteampunkSpleefProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					("execute in minigames:spleef_dimension run forceload add " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
 							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
-							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
-							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z())));
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() - 30) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 30)));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					("execute in minigames:spleef_dimension run fill " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
 							+ new java.text.DecimalFormat("##").format(100 + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef) + " "
 							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
-							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " 100 "
-							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " air"));
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() - 30) + " 100 "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 30) + " air"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute in minigames:spleef_dimension run place template minigames:spleef_steampunk 1984 100 -16");
@@ -46,8 +46,8 @@ public class PlaceSteampunkSpleefProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					("execute in minigames:spleef_dimension run forceload remove " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
 							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
-							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
-							+ new java.text.DecimalFormat("##").format(30 - MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z())));
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() - 30) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 30)));
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "steampunk";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)

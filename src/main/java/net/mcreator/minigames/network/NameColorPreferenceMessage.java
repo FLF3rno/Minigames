@@ -5,39 +5,33 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.loading.FMLPaths;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.scores.PlayerTeam;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.Vec2;
-
-import net.neoforged.fml.loading.FMLPaths;
 
 import net.mcreator.minigames.MinigamesMod;
-import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.procedures.NameColorApplyProcedure;
 
-import java.util.Set;
-import java.util.UUID;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.UUID;
 
 @EventBusSubscriber
 public record NameColorPreferenceMessage(String color) implements CustomPacketPayload {
 	public static final Type<NameColorPreferenceMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "name_color_preference"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, NameColorPreferenceMessage> STREAM_CODEC = StreamCodec.of(NameColorPreferenceMessage::write, NameColorPreferenceMessage::read);
-	private static final Set<String> ALLOWED_COLORS = Set.of("white", "aqua", "dark_aqua", "blue", "dark_blue", "green", "dark_green", "light_purple", "dark_purple", "red", "dark_red", "yellow", "gold");
 
 	public static void write(FriendlyByteBuf buffer, NameColorPreferenceMessage message) {
 		buffer.writeUtf(message.color == null ? "" : message.color);
@@ -64,30 +58,34 @@ public record NameColorPreferenceMessage(String color) implements CustomPacketPa
 			if (!(sender instanceof ServerPlayer serverPlayer))
 				return;
 			String color = message.color == null ? "" : message.color;
-			if (!ALLOWED_COLORS.contains(color))
+			if (!color.matches("^#?[0-9a-fA-F]{6}$"))
 				return;
-			ServerLevel level = serverPlayer.level();
-			String teamName = serverPlayer.getGameProfile().getName();
-			if (level.getScoreboard().getPlayerTeam(teamName) == null)
-				level.getScoreboard().addPlayerTeam(teamName);
-			PlayerTeam team = level.getScoreboard().getPlayerTeam(teamName);
-			if (team != null) {
-				level.getScoreboard().addPlayerToTeam(serverPlayer.getGameProfile().getName(), team);
-				if (team.getColor() == null || !team.getColor().getName().equals(color)) {
-					level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ()), Vec2.ZERO, level, 4, "", Component.literal(""), level.getServer(), null)
-									.withSuppressedOutput(),
-							"/team modify " + teamName + " color " + color);
-				}
-			}
+			color = color.startsWith("#") ? color : "#" + color;
 			MinigamesModVariables.PlayerVariables vars = serverPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES);
 			vars.color = color;
+			vars.showCustomNameColor = true;
 			vars.markSyncDirty();
+			NameColorApplyProcedure.applyColor(serverPlayer.level(), serverPlayer);
+			applyCustomNameColorNow(serverPlayer, color);
+			serverPlayer.refreshTabListName();
+			if (serverPlayer.getServer() != null) {
+				serverPlayer.getServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, serverPlayer));
+			}
+			MinigamesModVariables.MapVariables.get(serverPlayer.level()).applyCustomNameColor = true;
+			MinigamesModVariables.MapVariables.get(serverPlayer.level()).markSyncDirty();
 			PacketDistributor.sendToPlayer(serverPlayer, new NameColorPreferenceMessage(color));
 		}).exceptionally(e -> {
 			context.connection().disconnect(Component.literal(e.getMessage()));
 			return null;
 		});
+	}
+
+	private static void applyCustomNameColorNow(ServerPlayer player, String hexColor) {
+		TextColor parsedColor = TextColor.parseColor(hexColor).result().orElse(null);
+		if (parsedColor == null)
+			return;
+		player.setCustomName(Component.literal(player.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor)));
+		player.setCustomNameVisible(true);
 	}
 
 	private static void writeClientColor(UUID playerId, String color) {
@@ -103,9 +101,8 @@ public record NameColorPreferenceMessage(String color) implements CustomPacketPa
 					jsonstringbuilder.append(line);
 				}
 				com.google.gson.JsonObject parsed = new com.google.gson.Gson().fromJson(jsonstringbuilder.toString(), com.google.gson.JsonObject.class);
-				if (parsed != null) {
+				if (parsed != null)
 					mainObj = parsed;
-				}
 			} catch (Exception exception) {
 				exception.printStackTrace();
 			}

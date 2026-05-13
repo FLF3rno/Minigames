@@ -15,7 +15,7 @@
     "stackSize": 1,
     "enchantability": 0,
     "useDuration": 0,
-    "toolType": 2000.0,
+    "toolType": 100000.0,
     "damageCount": 0,
     "recipeRemainder": {
       "value": ""

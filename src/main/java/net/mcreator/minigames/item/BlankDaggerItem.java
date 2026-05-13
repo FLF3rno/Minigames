@@ -14,7 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-import net.mcreator.minigames.procedures.BreakWeaponProcedure;
+import net.mcreator.minigames.procedures.BlankDaggerDescriptionProcedure;
 import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -36,14 +36,17 @@ public class BlankDaggerItem extends Item {
 	@Override
 	public void appendHoverText(ItemStack itemstack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> componentConsumer, TooltipFlag flag) {
 		super.appendHoverText(itemstack, context, tooltipDisplay, componentConsumer, flag);
-		componentConsumer.accept(Component.translatable("item.minigames.blank_dagger.description_0"));
-		componentConsumer.accept(Component.translatable("item.minigames.blank_dagger.description_1"));
-		componentConsumer.accept(Component.translatable("item.minigames.blank_dagger.description_2"));
+		Entity entity = itemstack.getEntityRepresentation() != null ? itemstack.getEntityRepresentation() : MinigamesMod.clientPlayer();
+		String hoverText = BlankDaggerDescriptionProcedure.execute(itemstack);
+		if (hoverText != null) {
+			for (String line : hoverText.split("\n")) {
+				componentConsumer.accept(Component.literal(line));
+			}
+		}
 	}
 
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
-		BreakWeaponProcedure.execute();
 	}
 }

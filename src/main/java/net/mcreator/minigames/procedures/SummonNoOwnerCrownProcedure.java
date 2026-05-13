@@ -9,6 +9,7 @@ import net.neoforged.bus.api.Event;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -24,6 +25,7 @@ import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModItems;
+import net.mcreator.minigames.GlowColorSync;
 import net.mcreator.minigames.MinigamesMod;
 
 import javax.annotation.Nullable;
@@ -100,14 +102,23 @@ public class SummonNoOwnerCrownProcedure {
 			}
 		}
 		MinigamesMod.queueServerWork(1, () -> {
-			{
-				Entity _ent = entity;
-				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-					_ent.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
-									_ent.getDisplayName(), _ent.level().getServer(), _ent),
-							("/team join " + entity.getDisplayName().getString() + " @e[type=armor_stand,nbt={equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}]"));
+			ArmorStand nearest = null;
+			double bestDist = Double.MAX_VALUE;
+			for (Entity e : entity.level().getEntities(entity, entity.getBoundingBox().inflate(8.0))) {
+				if (e instanceof ArmorStand stand) {
+					ItemStack head = stand.getItemBySlot(EquipmentSlot.HEAD);
+					if (head.getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
+						double d = stand.distanceToSqr(entity);
+						if (d < bestDist) {
+							bestDist = d;
+							nearest = stand;
+						}
+					}
 				}
+			}
+			if (nearest != null) {
+				String ownerColor = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+				GlowColorSync.applyGlowTeam(nearest, ownerColor);
 			}
 		});
 	}

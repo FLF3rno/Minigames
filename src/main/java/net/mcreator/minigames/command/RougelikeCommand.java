@@ -17,7 +17,7 @@ import net.mcreator.minigames.procedures.StartDungeonProcedure;
 public class RougelikeCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("rougelike")
+		event.getDispatcher().register(Commands.literal("roguelike")
 
 				.executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();

@@ -38,7 +38,8 @@
         "",
         "§6§lPASSIVE ABILITY",
         "Gain§2 15%§f more§6 coins§f from killing monsters."
-      ]
+      ],
+      "name": "BlankDaggerDescription"
     },
     "glowCondition": {
       "fixedValue": false

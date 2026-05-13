@@ -1,9 +1,6 @@
 package net.mcreator.minigames.procedures;
 
-import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
@@ -15,23 +12,6 @@ public class ReadyUpProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (world instanceof ServerLevel _origLevel) {
-			LevelAccessor _worldorig = world;
-			world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-			if (world != null) {
-				{
-					Entity _entityTeam = entity;
-					PlayerTeam _pt = _entityTeam.level().getScoreboard().getPlayerTeam((entity.getDisplayName().getString()));
-					if (_pt != null) {
-						if (_entityTeam instanceof Player _player)
-							_entityTeam.level().getScoreboard().addPlayerToTeam(_player.getGameProfile().getName(), _pt);
-						else
-							_entityTeam.level().getScoreboard().addPlayerToTeam(_entityTeam.getStringUUID(), _pt);
-					}
-				}
-			}
-			world = _worldorig;
-		}
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).wantsToReroll == true) {
 			MinigamesModVariables.MapVariables.get(world).rerollingPlayers = MinigamesModVariables.MapVariables.get(world).rerollingPlayers - 1;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();

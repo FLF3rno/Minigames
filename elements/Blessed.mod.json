@@ -1,0 +1,27 @@
+{
+  "_fv": 85,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Blessed",
+    "icon": "blessed",
+    "color": {
+      "value": -3342337,
+      "falpha": 0.0
+    },
+    "onAddedSound": {
+      "value": ""
+    },
+    "isInstant": false,
+    "mobEffectCategory": "NEUTRAL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [],
+    "onStarted": {
+      "name": "BlessedEffectStarted"
+    },
+    "onExpired": {
+      "name": "BlessedEffectExpires"
+    }
+  }
+}

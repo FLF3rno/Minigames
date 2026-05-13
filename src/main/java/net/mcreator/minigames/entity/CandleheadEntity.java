@@ -95,9 +95,14 @@ public class CandleheadEntity extends Monster {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false) {
 			@Override
-			protected boolean canPerformAttack(LivingEntity entity) {
-				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < (this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth()) && this.mob.getSensing().hasLineOfSight(entity);
-			}
+protected boolean canPerformAttack(LivingEntity entity) {
+    double distanceSqr = this.mob.distanceToSqr(entity.getX(), entity.getY(), entity.getZ());
+    double defaultReach = this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth();
+    double extraReach = 1.75; 
+    return this.isTimeToAttack() 
+        && distanceSqr <= (defaultReach + extraReach) 
+        && this.mob.getSensing().hasLineOfSight(entity);
+}
 		});
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true) {
         @Override
@@ -132,12 +137,12 @@ public class CandleheadEntity extends Monster {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.generic.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.skeleton.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.skeleton.death"));
 	}
 
 	@Override

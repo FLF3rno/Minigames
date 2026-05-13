@@ -4,8 +4,8 @@
   "definition": {
     "mobName": "Candlehead",
     "mobLabel": "",
-    "mobModelName": "Biped",
-    "mobModelTexture": "icedartproj.png",
+    "mobModelName": "Modelshieldagent",
+    "mobModelTexture": "empty.png",
     "transparentModelCondition": {
       "fixedValue": false
     },
@@ -13,18 +13,40 @@
       "fixedValue": false
     },
     "solidBoundingBox": {
-      "fixedValue": false
+      "fixedValue": true
     },
     "visualScale": {
-      "fixedValue": 1.0
+      "fixedValue": 0.9
     },
     "boundingBoxScale": {
-      "fixedValue": 1.0
+      "fixedValue": 0.9
     },
-    "modelLayers": [],
-    "animations": [],
-    "modelWidth": 0.6,
-    "modelHeight": 1.8,
+    "modelLayers": [
+      {
+        "model": "Modelshieldagent",
+        "texture": "shieldangel.png",
+        "disableHurtOverlay": true,
+        "glow": false
+      },
+      {
+        "model": "Modelshieldagent",
+        "texture": "shieldangel_emissive.png",
+        "disableHurtOverlay": true,
+        "glow": true
+      }
+    ],
+    "animations": [
+      {
+        "animation": {
+          "value": "CUSTOM:shieldagentAnimation.rotate"
+        },
+        "speed": 0.85,
+        "walking": false,
+        "amplitude": 1.0
+      }
+    ],
+    "modelWidth": 1.6,
+    "modelHeight": 2.2,
     "modelShadowSize": 0.5,
     "mountedYOffset": 0.0,
     "hasSpawnEgg": false,
@@ -67,13 +89,13 @@
     "mobCreatureType": "UNDEFINED",
     "attackStrength": 3,
     "attackKnockback": 0.0,
-    "knockbackResistance": 0.0,
-    "movementSpeed": 0.3,
+    "knockbackResistance": 10.0,
+    "movementSpeed": 0.0,
     "stepHeight": 0.6,
     "armorBaseValue": 0.0,
     "trackingRange": 32,
     "followRange": 32,
-    "health": 10,
+    "health": 1000,
     "xpAmount": 0,
     "waterMob": false,
     "breatheUnderwater": {
@@ -82,26 +104,26 @@
     "pushedByFluids": {
       "fixedValue": true
     },
-    "flyingMob": false,
+    "flyingMob": true,
     "inventorySize": 9,
     "inventoryStackSize": 99,
     "disableCollisions": false,
     "ridable": false,
     "canControlForward": false,
     "canControlStrafe": false,
-    "immuneToFire": false,
-    "immuneToArrows": false,
-    "immuneToFallDamage": false,
-    "immuneToCactus": false,
-    "immuneToDrowning": false,
-    "immuneToLightning": false,
-    "immuneToPotions": false,
+    "immuneToFire": true,
+    "immuneToArrows": true,
+    "immuneToFallDamage": true,
+    "immuneToCactus": true,
+    "immuneToDrowning": true,
+    "immuneToLightning": true,
+    "immuneToPotions": true,
     "immuneToPlayer": false,
-    "immuneToExplosion": false,
-    "immuneToTrident": false,
-    "immuneToAnvil": false,
-    "immuneToWither": false,
-    "immuneToDragonBreath": false,
+    "immuneToExplosion": true,
+    "immuneToTrident": true,
+    "immuneToAnvil": true,
+    "immuneToWither": true,
+    "immuneToDragonBreath": true,
     "mobDrop": {
       "value": ""
     },
@@ -109,10 +131,10 @@
       "value": ""
     },
     "hurtSound": {
-      "value": "entity.generic.hurt"
+      "value": "block.amethyst_block.break"
     },
     "deathSound": {
-      "value": "entity.generic.death"
+      "value": ""
     },
     "stepSound": {
       "value": ""
@@ -127,11 +149,41 @@
         "name": "ID",
         "type": "integer",
         "value": 0
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "cooldown",
+        "type": "integer",
+        "value": 10
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "HP",
+        "type": "integer",
+        "value": 1
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "timeSinceLastHit",
+        "type": "integer",
+        "value": 0
       }
     ],
+    "whenMobIsHurt": {
+      "name": "ShieldAngelHurt"
+    },
+    "onMobTickUpdate": {
+      "name": "ShieldAngelTick"
+    },
+    "onInitialSpawn": {
+      "name": "ShieldAngelSpawn"
+    },
     "hasAI": true,
     "aiBase": "(none)",
-    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"attack_on_collide\"><field name=\"speed\">1.2</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">null,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"swim_in_water\"><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></next></block></xml>",
+    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"></block></xml>",
     "breedable": false,
     "tameable": false,
     "breedTriggerItems": [],

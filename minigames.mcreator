@@ -272,7 +272,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PlayerAssignmentProcedure.java"
         ]
       },
-      "path": "~/General/Name Color"
+      "path": "~/General/Player Numeration"
     },
     {
       "name": "DisplayEntity2",
@@ -1527,19 +1527,6 @@
       "path": "~/General/Name Color"
     },
     {
-      "name": "Customize",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "customize",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/CustomizeCommand.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
       "name": "Crowned",
       "type": "potioneffect",
       "compiles": true,
@@ -2238,7 +2225,7 @@
       "name": "CustomizeGUI",
       "type": "gui",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "customize_gui",
       "metadata": {
         "files": [
@@ -2265,773 +2252,6 @@
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/GetDisplayNameProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameWhite",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_white",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameWhiteProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotWhite",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_white",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotWhiteProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameAqua",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_aqua",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameAquaProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotAqua",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_aqua",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotAquaProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameDarkAqua",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_dark_aqua",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkAquaProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotDarkAqua",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_dark_aqua",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkAquaProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameBlue",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_blue",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameBlueProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotBlue",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_blue",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotBlueProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameDarkBlue",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_dark_blue",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkBlueProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotDarkBlue",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_dark_blue",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkBlueProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameGreen",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_green",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameGreenProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotGreen",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_green",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotGreenProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameDarkGreen",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_dark_green",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkGreenProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotDarkGreen",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_dark_green",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkGreenProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameLightPurple",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_light_purple",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameLightPurpleProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotLightPurple",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_light_purple",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotLightPurpleProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameDarkPurple",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_dark_purple",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkPurpleProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotDarkPurple",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_dark_purple",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkPurpleProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameRed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_red",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameRedProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotRed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_red",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotRedProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameDarkRed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_dark_red",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameDarkRedProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotDarkRed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_dark_red",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotDarkRedProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameYellow",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_yellow",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameYellowProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotYellow",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_yellow",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotYellowProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameGold",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_gold",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameGoldProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "IsNameNotGold",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "is_name_not_gold",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/IsNameNotGoldProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameWhite",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_white",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameWhiteProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameAqua",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_aqua",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameAquaProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameDarkAqua",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_dark_aqua",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkAquaProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameBlue",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_blue",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameBlueProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameDarkBlue",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_dark_blue",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkBlueProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameGreen",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_green",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameGreenProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameDarkGreen",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_dark_green",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkGreenProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameLightPurple",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_light_purple",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameLightPurpleProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameDarkPurple",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_dark_purple",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkPurpleProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameRed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_red",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameRedProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameDarkRed",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_dark_red",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameDarkRedProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameYellow",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_yellow",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameYellowProcedure.java"
-        ]
-      },
-      "path": "~/General/Name Color"
-    },
-    {
-      "name": "SetNameGold",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "set_name_gold",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/SetNameGoldProcedure.java"
         ]
       },
       "path": "~/General/Name Color"
@@ -6462,7 +5682,7 @@
       "name": "BlankDagger",
       "type": "item",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "blank_dagger",
       "metadata": {
         "files": [
@@ -6514,7 +5734,7 @@
       "name": "BlankLongSword",
       "type": "item",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "blank_long_sword",
       "metadata": {
         "files": [
@@ -7614,7 +6834,7 @@
       "name": "ShieldAngel",
       "type": "livingentity",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "shield_angel",
       "metadata": {
         "files": [
@@ -8214,6 +7434,264 @@
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/VolcanicSpewFlyingProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "Dash",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dash",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/DashMessage.java"
+        ]
+      },
+      "path": "~/Dungeon/Dash"
+    },
+    {
+      "name": "PerformDash",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "perform_dash",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PerformDashProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Dash"
+    },
+    {
+      "name": "RefreshDash",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "refresh_dash",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RefreshDashProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Dash"
+    },
+    {
+      "name": "Blessed",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessed",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/BlessedMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlessedEffectStarted",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessed_effect_started",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlessedEffectStartedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlessedEffectExpires",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessed_effect_expires",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlessedEffectExpiresProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "CancelDamage",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cancel_damage",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CancelDamageProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "DungeonMobSpawned",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dungeon_mob_spawned",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DungeonMobSpawnedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "BlankLongswordDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "blank_longsword_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlankLongswordDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Blank Longsword"
+    },
+    {
+      "name": "EffectLength",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "effect_length",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlankDaggerDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "blank_dagger_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlankDaggerDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons"
+    },
+    {
+      "name": "ShieldAngelSpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shield_angel_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShieldAngelSpawnProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "ShieldAngelTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shield_angel_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShieldAngelTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "ShieldAngelHurt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "shield_angel_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShieldAngelHurtProcedure.java"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -8873,6 +8351,36 @@
       "type": "logic",
       "scope": "player_persistent",
       "value": "false"
+    },
+    {
+      "name": "canDash",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "dashCooldown",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "maxDashCooldown",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "dashLength",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "showCustomNameColor",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "true"
     }
   ],
   "sound_elements": [
@@ -9029,6 +8537,14 @@
       ],
       "category": "block",
       "subtitle": "Volcanic Spew lands"
+    },
+    {
+      "name": "dash",
+      "files": [
+        "dash"
+      ],
+      "category": "player",
+      "subtitle": ""
     }
   ],
   "tag_elements": {
@@ -9185,6 +8701,9 @@
       "CUSTOM:Worshipper",
       "CUSTOM:Candlehead",
       "CUSTOM:ShieldAngel"
+    ],
+    "ENTITIES:mod:blesser": [
+      "CUSTOM:ShieldAngel"
     ]
   },
   "tab_element_order": {},
@@ -9242,7 +8761,7 @@
       "gui.minigames.start_game.label_run": "Run",
       "effect.minigames.nerf_hunters": "Nerf Hunters",
       "gui.minigames.minigame_gui_achievement_hunt.headstart": "",
-      "gui.minigames.customize_gui.label_customize_player_name": "Customize player name",
+      "gui.minigames.customize_gui.label_customize_player_name": "Customize your name!",
       "gui.minigames.start_game.label_crown": "Crown",
       "gui.minigames.start_game.label_hunt": "Hunt",
       "item.minigames.crown_helmet_helmet": "Crown",
@@ -9411,7 +8930,11 @@
       "entity.minigames.moving_block": "Moving Block",
       "item.minigames.moving_block_spawn": "Moving Block",
       "item_group.minigames.dungeon_items": "Dungeon Items",
-      "subtitles.volcanic_spew_land": "Volcanic Spew lands"
+      "subtitles.volcanic_spew_land": "Volcanic Spew lands",
+      "key.minigames.dash": "Dash",
+      "effect.minigames.blessed": "Blessed",
+      "subtitles.dash": "",
+      "attribute.minigames.effect_length": "Effect Length"
     }
   },
   "metadata": {
@@ -9422,6 +8945,7 @@
       "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
       "src/main/java/net/mcreator/minigames/client/renderer/item/LegacyOverrideSelectItemModel.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModKeyMappings.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMobEffects.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
@@ -9453,9 +8977,7 @@
       "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java"
     ],
     "betteranimations_models": {},
-    "betteranimations_perspectives": {
-      "SpleefShovel": "All perspectives"
-    }
+    "betteranimations_perspectives": {}
   },
   "foldersRoot": {
     "name": "~",
@@ -9634,6 +9156,10 @@
           {
             "name": "Dimension",
             "children": []
+          },
+          {
+            "name": "Dash",
+            "children": []
           }
         ]
       },
@@ -9658,6 +9184,10 @@
           },
           {
             "name": "Xaero",
+            "children": []
+          },
+          {
+            "name": "Player Numeration",
             "children": []
           }
         ]

@@ -62,9 +62,9 @@ public class MinigamesModEntities {
 
 					.sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<ShieldAngelEntity>> SHIELD_ANGEL = register("shield_angel",
-			EntityType.Builder.<ShieldAngelEntity>of(ShieldAngelEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(32).setUpdateInterval(3)
+			EntityType.Builder.<ShieldAngelEntity>of(ShieldAngelEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(32).setUpdateInterval(3).fireImmune()
 
-					.ridingOffset(-0.6f).sized(0.6f, 1.8f));
+					.sized(1.6f, 2.2f));
 	public static final DeferredHolder<EntityType<?>, EntityType<MovingBlockEntity>> MOVING_BLOCK = register("moving_block",
 			EntityType.Builder.<MovingBlockEntity>of(MovingBlockEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
 

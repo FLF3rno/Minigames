@@ -26,7 +26,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
 public class StunnableEntityTint {
-	private static final int DEFAULT_TINT_COLOR = 0xD0F3FF2A; // ARGB (alpha first)
+	private static final int DEFAULT_TINT_COLOR = 0xD0F3FF2A;
 
     public StunnableEntityTint(IEventBus modBus) {
         modBus.addListener(this::registerLayers);
@@ -85,7 +85,6 @@ public class StunnableEntityTint {
 			if (raw.isEmpty()) return DEFAULT_TINT_COLOR;
 
 			try {
-				// Supports "0xAARRGGBB" as in your example: 0xD0F3FF2A
 				return Integer.decode(raw);
 			} catch (Exception ignored) {
 				return DEFAULT_TINT_COLOR;

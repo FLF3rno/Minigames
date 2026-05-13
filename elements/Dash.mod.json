@@ -1,0 +1,12 @@
+{
+  "_fv": 85,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "F",
+    "keyBindingName": "Dash",
+    "keyBindingCategoryKey": "movement",
+    "onKeyPressed": {
+      "name": "PerformDash"
+    }
+  }
+}

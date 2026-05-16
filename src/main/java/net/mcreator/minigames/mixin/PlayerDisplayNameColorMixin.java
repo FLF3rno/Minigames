@@ -18,7 +18,7 @@ public abstract class PlayerDisplayNameColorMixin {
 	private void minigames$applyCustomHexName(CallbackInfoReturnable<Component> cir) {
 		Player player = (Player) (Object) this;
 		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		if (vars == null || vars.color == null || vars.color.isEmpty())
+		if (vars == null || !vars.showCustomNameColor || vars.color == null || vars.color.isEmpty())
 			return;
 		String hex = vars.color.startsWith("#") ? vars.color : "#" + vars.color;
 		TextColor parsedColor = TextColor.parseColor(hex).result().orElse(null);
@@ -31,7 +31,7 @@ public abstract class PlayerDisplayNameColorMixin {
 	private void minigames$applyCustomHexDisplayName(CallbackInfoReturnable<Component> cir) {
 		Player player = (Player) (Object) this;
 		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		if (vars == null || vars.color == null || vars.color.isEmpty())
+		if (vars == null || !vars.showCustomNameColor || vars.color == null || vars.color.isEmpty())
 			return;
 		String hex = vars.color.startsWith("#") ? vars.color : "#" + vars.color;
 		TextColor parsedColor = TextColor.parseColor(hex).result().orElse(null);

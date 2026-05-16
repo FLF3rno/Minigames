@@ -85,8 +85,13 @@ public class VotePopupOverlay {
 			return;
 		}
 		List<Player> others = new ArrayList<>();
+		Player caller = MinigamesModVariables.VotingEntity instanceof Player p ? p : null;
 		for (Player player : self.level().players()) {
-			if (player != self) {
+			if (caller != null) {
+				if (player != caller) {
+					others.add(player);
+				}
+			} else if (player != self) {
 				others.add(player);
 			}
 		}

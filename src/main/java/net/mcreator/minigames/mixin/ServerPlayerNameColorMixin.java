@@ -41,7 +41,7 @@ public abstract class ServerPlayerNameColorMixin {
 
 	private Component coloredName(ServerPlayer player) {
 		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		if (vars == null || vars.color == null || vars.color.isEmpty())
+		if (vars == null || !vars.showCustomNameColor || vars.color == null || vars.color.isEmpty())
 			return null;
 		String hex = vars.color.startsWith("#") ? vars.color : "#" + vars.color;
 		TextColor parsed = TextColor.parseColor(hex).result().orElse(null);

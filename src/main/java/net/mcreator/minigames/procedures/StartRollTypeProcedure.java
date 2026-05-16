@@ -11,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
-import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.MinigamesMod;
@@ -34,7 +33,7 @@ public class StartRollTypeProcedure {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/team modify teamold nametagVisibility never");
-			MinigamesModVariables.MapVariables.get(world).players = world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount();
+			MinigamesModVariables.MapVariables.get(world).players = ServerLifecycleHooks.getCurrentServer().getPlayerCount();
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			ResetAchievementRunProcedure.execute(world);
 			MinigamesMod.queueServerWork(45, () -> {

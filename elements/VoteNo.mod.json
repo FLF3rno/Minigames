@@ -4,6 +4,9 @@
   "definition": {
     "triggerKey": "F12",
     "keyBindingName": "Vote No",
-    "keyBindingCategoryKey": "vote"
+    "keyBindingCategoryKey": "vote",
+    "onKeyPressed": {
+      "name": "VoteNoPressed"
+    }
   }
 }

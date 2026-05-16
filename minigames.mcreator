@@ -36,7 +36,7 @@
       "name": "StartRollType",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "start_roll_type",
       "metadata": {
         "dependencies": [
@@ -9363,6 +9363,7 @@
       "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
       "src/main/resources/minigames.mixins.json",
       "src/main/resources/META-INF/neoforge.mods.toml",
+      "src/main/java/net/mcreator/minigames/network/NbtArrayLists.java",
       "src/main/resources/pack.mcmeta",
       "src/main/java/net/mcreator/minigames/network/PlayPlayerAnimationMessage.java",
       "src/main/java/net/mcreator/minigames/MinigamesMod.java",

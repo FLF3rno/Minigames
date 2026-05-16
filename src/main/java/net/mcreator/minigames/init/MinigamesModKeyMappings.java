@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 
 import net.mcreator.minigames.network.VoteYesMessage;
+import net.mcreator.minigames.network.VoteNoMessage;
 import net.mcreator.minigames.network.DashMessage;
 
 @EventBusSubscriber(Dist.CLIENT)
@@ -46,7 +47,19 @@ public class MinigamesModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping VOTE_NO = new KeyMapping("key.minigames.vote_no", GLFW.GLFW_KEY_F12, "key.categories.vote");
+	public static final KeyMapping VOTE_NO = new KeyMapping("key.minigames.vote_no", GLFW.GLFW_KEY_F12, "key.categories.vote") {
+		private boolean isDownOld = false;
+
+		@Override
+		public void setDown(boolean isDown) {
+			super.setDown(isDown);
+			if (isDownOld != isDown && isDown) {
+				ClientPacketDistributor.sendToServer(new VoteNoMessage(0, 0));
+				VoteNoMessage.pressAction(Minecraft.getInstance().player, 0, 0);
+			}
+			isDownOld = isDown;
+		}
+	};
 
 	@SubscribeEvent
 	public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
@@ -62,6 +75,7 @@ public class MinigamesModKeyMappings {
 			if (Minecraft.getInstance().screen == null) {
 				DASH.consumeClick();
 				VOTE_YES.consumeClick();
+				VOTE_NO.consumeClick();
 			}
 		}
 	}

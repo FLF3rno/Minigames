@@ -27,9 +27,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class WinOverlayHuntersOverlay {
+	private static final Set<UUID> CACHED_HUNTER_WINNERS = new LinkedHashSet<>();
+
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void eventHandler(RenderGuiEvent.Pre event) {
 		int w = event.getGuiGraphics().guiWidth();
@@ -52,6 +56,8 @@ public class WinOverlayHuntersOverlay {
 
 			List<LivingEntity> winners = getHunterWinners();
 			renderDynamicWinners(event, winners, w, h);
+		} else {
+			CACHED_HUNTER_WINNERS.clear();
 		}
 	}
 
@@ -63,19 +69,32 @@ public class WinOverlayHuntersOverlay {
 		}
 		List<PlayerInfo> infos = new ArrayList<>(minecraft.getConnection().getListedOnlinePlayers());
 		infos.sort(Comparator.comparing(info -> info.getProfile().getName(), String.CASE_INSENSITIVE_ORDER));
+
+		// Refresh cache from concrete, synced local entities only.
 		for (PlayerInfo info : infos) {
-			if (winners.size() >= 6) {
-				break;
-			}
 			UUID id = info.getProfile().getId();
 			Player localPlayer = minecraft.level.getPlayerByUUID(id);
 			if (localPlayer != null) {
 				if (localPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).winner && localPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1 && !localPlayer.isSpectator()
 						&& localPlayer.isAlive()) {
-					winners.add(localPlayer);
+					CACHED_HUNTER_WINNERS.add(id);
 				}
 			}
 		}
+
+		// Resolve render list from stable cache to avoid per-frame flicker/order changes.
+		for (UUID id : CACHED_HUNTER_WINNERS) {
+			Player localPlayer = minecraft.level.getPlayerByUUID(id);
+			if (localPlayer != null) {
+				winners.add(localPlayer);
+				continue;
+			}
+			PlayerInfo info = minecraft.getConnection().getPlayerInfo(id);
+			if (info != null) {
+				winners.add(new RemotePlayer(minecraft.level, info.getProfile()));
+			}
+		}
+		winners.sort(Comparator.comparing(entity -> entity.getName().getString(), String.CASE_INSENSITIVE_ORDER));
 		return winners;
 	}
 

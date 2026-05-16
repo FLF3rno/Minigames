@@ -60,8 +60,10 @@ public class MinigamesMod {
 		MinigamesModMenus.REGISTRY.register(modEventBus);
 		MinigamesModAttributes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
-		new StunnableEntityTint(modEventBus);
-		new BlessedEntityTint(modEventBus);
+		if (FMLEnvironment.dist.isClient()) {
+			new StunnableEntityTint(modEventBus);
+			new BlessedEntityTint(modEventBus);
+		}
 		// End of user code block mod init
 	}
 

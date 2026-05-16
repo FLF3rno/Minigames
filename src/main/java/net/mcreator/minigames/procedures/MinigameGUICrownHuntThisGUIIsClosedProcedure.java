@@ -82,7 +82,7 @@ public class MinigameGUICrownHuntThisGUIIsClosedProcedure {
 		}
 		if (entity instanceof Player _player)
 			_player.closeContainer();
-		ResetCrownHuntProcedure.execute(world, x, y, z);
+		StartVoteProcedure.execute(world, entity, entity, "crown hunt");
 	}
 
 	private static double parseDouble(String s) {

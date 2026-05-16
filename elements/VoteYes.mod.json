@@ -1,0 +1,12 @@
+{
+  "_fv": 85,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "F9",
+    "keyBindingName": "Vote Yes",
+    "keyBindingCategoryKey": "vote",
+    "onKeyPressed": {
+      "name": "VoteYesPressed"
+    }
+  }
+}

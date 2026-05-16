@@ -95,7 +95,11 @@ public class MinigameGUIAchievementRunThisGUIIsClosedProcedure {
 			MinigamesModVariables.MapVariables.get(world).headStart = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}
-		StartRollTypeProcedure.execute(world, x, y, z, entity);
+		if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode) {
+			StartVoteProcedure.execute(world, entity, entity, "achievement hunt");
+		} else {
+			StartVoteProcedure.execute(world, entity, entity, "achievement run");
+		}
 	}
 
 	private static double parseDouble(String s) {

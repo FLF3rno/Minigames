@@ -52,7 +52,7 @@ public record MinigameGUISpleefButtonMessage(int buttonID, int x, int y, int z) 
 			return;
 		if (buttonID == 0) {
 
-			SpleefSettingsChosenProcedure.execute(world, x, y, z, entity);
+			SpleefSettingsChosenProcedure.execute(world, entity);
 		}
 		if (buttonID == 1) {
 

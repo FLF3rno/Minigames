@@ -224,5 +224,14 @@
   "key.minigames.dash": "Dash",
   "effect.minigames.blessed": "Blessed",
   "subtitles.dash": "",
-  "attribute.minigames.effect_length": "Effect Length"
+  "attribute.minigames.effect_length": "Effect Length",
+  "gui.minigames.vote_popup.label_playername": "PlayerName",
+  "gui.minigames.vote_popup.label_wants_to_bone": "Wants to bone",
+  "key.minigames.vote_yes": "Vote Yes",
+  "key.category.vote": "Vote",
+  "key.minigames.vote_no": "Vote No",
+  "gui.minigames.vote_popup.label_proc_vote_no_keybind": "",
+  "gui.minigames.vote_popup.label_proc_vote_yes_keybind": "",
+  "gui.minigames.vote_popup.label_gg": "nah",
+  "gui.minigames.vote_popup.label_ye": "YE"
 }

@@ -1,0 +1,168 @@
+{
+  "_fv": 85,
+  "_type": "overlay",
+  "definition": {
+    "priority": "HIGHEST",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_playername",
+          "text": {
+            "fixedValue": "PlayerName",
+            "name": "VotingPlayerName"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 171,
+          "y": 31,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "voteicons.png",
+          "spritesCount": 1,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "VoteIcon"
+          },
+          "anchorPoint": "TOP_CENTER",
+          "x": 197,
+          "y": 1,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_wants_to_bone",
+          "text": {
+            "fixedValue": "Wants to bone",
+            "name": "VotingMessage"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 181,
+          "y": 47,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_vote_no_keybind",
+          "text": {
+            "fixedValue": ""
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 176,
+          "y": 41,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voteno.png",
+          "use1Xscale": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 169,
+          "y": 66,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voteyes.png",
+          "use1Xscale": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 232,
+          "y": 66,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_vote_yes_keybind",
+          "text": {
+            "fixedValue": ""
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": 251,
+          "y": 41,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_gg",
+          "text": {
+            "fixedValue": "nah"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "CENTER",
+          "x": 175,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_ye",
+          "text": {
+            "fixedValue": "YE"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "anchorPoint": "CENTER",
+          "x": 242,
+          "y": 68,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "ShowVote"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

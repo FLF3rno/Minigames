@@ -52,6 +52,8 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	private float selectedValue = 1.0f;
 	private boolean draggingMap = false;
 	private boolean draggingHue = false;
+	private long lastNetworkColorSendAt = 0L;
+	private static final long DRAG_NETWORK_SEND_INTERVAL_MS = 120L;
 
 	public CustomizeGUIScreen(CustomizeGUIMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -170,8 +172,6 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		if (button == 0 && tryPickColor(mouseX, mouseY)) {
-			if (this.minecraft != null && this.minecraft.player != null)
-				NameColorPreferenceClient.sendCurrentVariableColorNow(this.minecraft.player);
 			draggingMap = isInMap(mouseX, mouseY);
 			draggingHue = isInHue(mouseX, mouseY);
 			return true;
@@ -182,8 +182,6 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	@Override
 	public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
 		if (button == 0 && (draggingMap || draggingHue) && tryPickColor(mouseX, mouseY, true)) {
-			if (this.minecraft != null && this.minecraft.player != null)
-				NameColorPreferenceClient.sendCurrentVariableColorNow(this.minecraft.player);
 			return true;
 		}
 		return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
@@ -225,16 +223,17 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	private void sendSelectedColor(boolean fromDrag) {
 		int rgb = java.awt.Color.HSBtoRGB(selectedHue, selectedSaturation, selectedValue) & 0xFFFFFF;
 		String hex = String.format("#%06X", rgb);
-		String colorToSend = hex;
 		if (this.minecraft != null && this.minecraft.player != null) {
 			MinigamesModVariables.PlayerVariables localVars = this.minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES);
 			localVars.color = hex;
 			localVars.markSyncDirty();
-			colorToSend = localVars.color;
 			this.minecraft.player.setCustomName(Component.literal(this.minecraft.player.getName().getString()).withColor(previewRgbToHexInt(hex)));
 			this.minecraft.player.setCustomNameVisible(true);
-			NameColorPreferenceClient.sendCurrentVariableColorNow(this.minecraft.player);
-			colorToSend = localVars.color;
+			long now = System.currentTimeMillis();
+			if (!fromDrag || now - lastNetworkColorSendAt >= DRAG_NETWORK_SEND_INTERVAL_MS) {
+				NameColorPreferenceClient.sendCurrentVariableColorNow(this.minecraft.player);
+				lastNetworkColorSendAt = now;
+			}
 		}
 	}
 

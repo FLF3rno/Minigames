@@ -4503,18 +4503,6 @@
             "type": "entity"
           },
           {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
             "name": "world",
             "type": "world"
           }
@@ -7695,6 +7683,348 @@
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "VotePopup",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "vote_popup",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/VotePopupOverlay.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VotingPlayerName",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "voting_player_name",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VotingPlayerNameProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VotingMessage",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "voting_message",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VotingMessageProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteIcon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_icon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VoteIconProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "ShowVote",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_vote",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowVoteProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteYes",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_yes",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/VoteYesMessage.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteNo",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_no",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/VoteNoMessage.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "StartVote",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_vote",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "voting_player",
+            "type": "entity"
+          },
+          {
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartVoteProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "StartDebugVote",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_debug_vote",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartDebugVoteProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "Vote",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/VoteCommand.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteYesPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_yes_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VoteYesPressedProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteNoPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_no_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VoteNoPressedProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "WonVote",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "won_vote",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WonVoteProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "LostVote",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "lost_vote",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/LostVoteProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteBanManager",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_ban_manager",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VoteBanManagerProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "VoteManager",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_manager",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VoteManagerProcedure.java"
+        ]
+      },
+      "path": "~/General/Vote"
+    },
+    {
+      "name": "AchievementHuntSettings",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_hunt_settings",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementHuntSettingsProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/settings"
     }
   ],
   "variable_elements": [
@@ -8381,6 +8711,60 @@
       "type": "logic",
       "scope": "player_persistent",
       "value": "true"
+    },
+    {
+      "name": "VotingEntity",
+      "type": "entity",
+      "scope": "global",
+      "value": "null"
+    },
+    {
+      "name": "VotingMessage",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "voteType",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "ActiveVote",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "votedYes",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "voted",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "voteCooldown",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "winnerUUID",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "randomHunterCheckboxClicked",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -8934,7 +9318,16 @@
       "key.minigames.dash": "Dash",
       "effect.minigames.blessed": "Blessed",
       "subtitles.dash": "",
-      "attribute.minigames.effect_length": "Effect Length"
+      "attribute.minigames.effect_length": "Effect Length",
+      "gui.minigames.vote_popup.label_playername": "PlayerName",
+      "gui.minigames.vote_popup.label_wants_to_bone": "Wants to bone",
+      "key.minigames.vote_yes": "Vote Yes",
+      "key.category.vote": "Vote",
+      "key.minigames.vote_no": "Vote No",
+      "gui.minigames.vote_popup.label_proc_vote_no_keybind": "",
+      "gui.minigames.vote_popup.label_proc_vote_yes_keybind": "",
+      "gui.minigames.vote_popup.label_gg": "nah",
+      "gui.minigames.vote_popup.label_ye": "YE"
     }
   },
   "metadata": {
@@ -9188,6 +9581,10 @@
           },
           {
             "name": "Player Numeration",
+            "children": []
+          },
+          {
+            "name": "Vote",
             "children": []
           }
         ]

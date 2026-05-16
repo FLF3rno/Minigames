@@ -92,6 +92,7 @@ public class StartWinCutsceneProcedure {
 			_vars.winner = true;
 			_vars.markSyncDirty();
 		}
+		MinigamesModVariables.MapVariables.get(world).winnerUUID = entity.getStringUUID();
 		MinigamesModVariables.MapVariables.get(world).winningTeam = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).team;
 		MinigamesModVariables.MapVariables.get(world).achievement = -1;
 		MinigamesModVariables.MapVariables.get(world).winAnimationStart = true;

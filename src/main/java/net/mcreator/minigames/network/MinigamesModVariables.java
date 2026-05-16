@@ -52,6 +52,7 @@ public class MinigamesModVariables {
 	public static Entity firstSpleef = null;
 	public static Entity secondSpleef = null;
 	public static Entity thirdSpleef = null;
+	public static Entity VotingEntity = null;
 
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {
@@ -123,6 +124,10 @@ public class MinigamesModVariables {
 		clone.maxDashCooldown = original.maxDashCooldown;
 		clone.dashLength = original.dashLength;
 		clone.showCustomNameColor = original.showCustomNameColor;
+		clone.votedYes = original.votedYes;
+		clone.voted = original.voted;
+		clone.voteCooldown = original.voteCooldown;
+		clone.randomHunterCheckboxClicked = original.randomHunterCheckboxClicked;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -289,6 +294,10 @@ public class MinigamesModVariables {
 		public boolean playingDungeons = false;
 		public boolean showCoins = false;
 		public boolean playingAchievement = false;
+		public String VotingMessage = "\"\"";
+		public double voteType = 0;
+		public boolean ActiveVote = false;
+		public String winnerUUID = "\"\"";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -377,6 +386,10 @@ public class MinigamesModVariables {
 			playingDungeons = nbt.getBooleanOr("playingDungeons", false);
 			showCoins = nbt.getBooleanOr("showCoins", false);
 			playingAchievement = nbt.getBooleanOr("playingAchievement", false);
+			VotingMessage = nbt.getStringOr("VotingMessage", "");
+			voteType = nbt.getDoubleOr("voteType", 0);
+			ActiveVote = nbt.getBooleanOr("ActiveVote", false);
+			winnerUUID = nbt.getStringOr("winnerUUID", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -466,6 +479,10 @@ public class MinigamesModVariables {
 			nbt.putBoolean("playingDungeons", playingDungeons);
 			nbt.putBoolean("showCoins", showCoins);
 			nbt.putBoolean("playingAchievement", playingAchievement);
+			nbt.putString("VotingMessage", VotingMessage);
+			nbt.putDouble("voteType", voteType);
+			nbt.putBoolean("ActiveVote", ActiveVote);
+			nbt.putString("winnerUUID", winnerUUID);
 			return nbt;
 		}
 
@@ -551,6 +568,10 @@ public class MinigamesModVariables {
 		public double maxDashCooldown = 0;
 		public double dashLength = 0;
 		public boolean showCustomNameColor = true;
+		public boolean votedYes = false;
+		public boolean voted = false;
+		public double voteCooldown = 0;
+		public boolean randomHunterCheckboxClicked = false;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -576,6 +597,10 @@ public class MinigamesModVariables {
 			output.putDouble("maxDashCooldown", maxDashCooldown);
 			output.putDouble("dashLength", dashLength);
 			output.putBoolean("showCustomNameColor", showCustomNameColor);
+			output.putBoolean("votedYes", votedYes);
+			output.putBoolean("voted", voted);
+			output.putDouble("voteCooldown", voteCooldown);
+			output.putBoolean("randomHunterCheckboxClicked", randomHunterCheckboxClicked);
 		}
 
 		@Override
@@ -602,6 +627,10 @@ public class MinigamesModVariables {
 			maxDashCooldown = input.getDoubleOr("maxDashCooldown", 0);
 			dashLength = input.getDoubleOr("dashLength", 0);
 			showCustomNameColor = input.getBooleanOr("showCustomNameColor", false);
+			votedYes = input.getBooleanOr("votedYes", false);
+			voted = input.getBooleanOr("voted", false);
+			voteCooldown = input.getDoubleOr("voteCooldown", 0);
+			randomHunterCheckboxClicked = input.getBooleanOr("randomHunterCheckboxClicked", false);
 		}
 
 		public void markSyncDirty() {

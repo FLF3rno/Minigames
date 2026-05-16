@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -34,6 +33,9 @@ public class VoteManagerProcedure {
 		double numberOfPlayersThatAreWillingToParticipateInYourBuffoonery = 0;
 		double numberOfPlayersThatFuckingHateYourIdea = 0;
 		double requiredNumberOfPlayers = 0;
+		if (world.isClientSide()) {
+			return;
+		}
 		if (MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 			numberOfPlayersThatAreWillingToParticipateInYourBuffoonery = 0;
 			numberOfPlayersThatFuckingHateYourIdea = 0;
@@ -49,8 +51,8 @@ public class VoteManagerProcedure {
 					}
 				}
 			}
-			requiredNumberOfPlayers = (world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount())
-					- Math.floor((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) / 3d);
+			int onlinePlayers = ServerLifecycleHooks.getCurrentServer().getPlayerCount();
+			requiredNumberOfPlayers = onlinePlayers - Math.floor(onlinePlayers / 3d);
 			if (numberOfPlayersThatAreWillingToParticipateInYourBuffoonery >= requiredNumberOfPlayers) {
 				if (!(MinigamesModVariables.VotingEntity == null)) {
 					MinigamesModVariables.MapVariables.get(world).ActiveVote = false;

@@ -12,6 +12,8 @@ public class WonVoteProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).voteType == 0) {
 			StartRollTypeProcedure.execute(world, x, y, z, entity);
 		} else if (MinigamesModVariables.MapVariables.get(world).voteType == 1) {
+			MinigamesModVariables.MapVariables.get(world).achievementHunterMode = true;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			StartRollTypeProcedure.execute(world, x, y, z, entity);
 		} else if (MinigamesModVariables.MapVariables.get(world).voteType == 2) {
 			ResetCrownHuntProcedure.execute(world, x, y, z);

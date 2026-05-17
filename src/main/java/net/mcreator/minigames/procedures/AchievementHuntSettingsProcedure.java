@@ -6,7 +6,6 @@ import net.minecraft.world.entity.Entity;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMenus;
-import net.mcreator.minigames.MinigamesMod;
 
 import java.util.ArrayList;
 
@@ -24,16 +23,14 @@ public class AchievementHuntSettingsProcedure {
 				_vars.randomHunterCheckboxClicked = true;
 				_vars.markSyncDirty();
 			}
-			MinigamesMod.queueServerWork(1, () -> {
-				{
-					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-					_vars.randomHunterCheckboxClicked = false;
-					_vars.markSyncDirty();
-				}
-			});
 		}
-		if (((entity instanceof Player _entity3 && _entity3.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu3) ? _menu3.getMenuState(0, "hunter", "") : "").equals("")
+		if (((entity instanceof Player _entity2 && _entity2.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu2) ? _menu2.getMenuState(0, "hunter", "") : "").equals("")
 				&& entity.getData(MinigamesModVariables.PLAYER_VARIABLES).randomHunterCheckboxClicked) {
+			{
+				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.randomHunterCheckboxClicked = false;
+				_vars.markSyncDirty();
+			}
 			name = "";
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				if (entityiterator instanceof Player) {

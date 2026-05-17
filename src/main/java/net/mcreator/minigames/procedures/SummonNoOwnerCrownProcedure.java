@@ -98,6 +98,9 @@ public class SummonNoOwnerCrownProcedure {
 			if (!_ent.level().isClientSide() && _ent.getServer() != null) {
 				_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
 						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
+						"/kill @e[type=armor_stand,nbt={equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}]");
+				_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
 						"/summon armor_stand ~ ~ ~ {Invulnerable:1b,Glowing:1b,equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}");
 			}
 		}

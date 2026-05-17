@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class StartSpleefProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) > 1) {
+		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) >= 2) {
 			MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers = world.players().size();
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (world instanceof ServerLevel _level)

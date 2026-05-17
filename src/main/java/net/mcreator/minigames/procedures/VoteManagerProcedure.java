@@ -33,6 +33,7 @@ public class VoteManagerProcedure {
 		double numberOfPlayersThatAreWillingToParticipateInYourBuffoonery = 0;
 		double numberOfPlayersThatFuckingHateYourIdea = 0;
 		double requiredNumberOfPlayers = 0;
+		double requiredNoVotes = 0;
 		if (world.isClientSide()) {
 			return;
 		}
@@ -53,6 +54,7 @@ public class VoteManagerProcedure {
 			}
 			int onlinePlayers = ServerLifecycleHooks.getCurrentServer().getPlayerCount();
 			requiredNumberOfPlayers = onlinePlayers - Math.floor(onlinePlayers / 3d);
+			requiredNoVotes = (onlinePlayers - requiredNumberOfPlayers) + 1;
 			if (numberOfPlayersThatAreWillingToParticipateInYourBuffoonery >= requiredNumberOfPlayers) {
 				if (!(MinigamesModVariables.VotingEntity == null)) {
 					MinigamesModVariables.MapVariables.get(world).ActiveVote = false;
@@ -63,7 +65,7 @@ public class VoteManagerProcedure {
 						_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Error: Vote Entity Null").withColor(0xe43939), false);
 					}
 				}
-			} else if (numberOfPlayersThatFuckingHateYourIdea >= requiredNumberOfPlayers) {
+			} else if (numberOfPlayersThatFuckingHateYourIdea >= requiredNoVotes) {
 				if (!(MinigamesModVariables.VotingEntity == null)) {
 					MinigamesModVariables.MapVariables.get(world).ActiveVote = false;
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();

@@ -38,6 +38,7 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SprucePewRightBlockEntity>> SPRUCE_PEW_RIGHT = register("spruce_pew_right", MinigamesModBlocks.SPRUCE_PEW_RIGHT, SprucePewRightBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SprucePewLeftBlockEntity>> SPRUCE_PEW_LEFT = register("spruce_pew_left", MinigamesModBlocks.SPRUCE_PEW_LEFT, SprucePewLeftBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpruceShortBoardBlockEntity>> SPRUCE_SHORT_BOARD = register("spruce_short_board", MinigamesModBlocks.SPRUCE_SHORT_BOARD, SpruceShortBoardBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FightDoorsBlockEntity>> FIGHT_DOORS = register("fight_doors", MinigamesModBlocks.FIGHT_DOORS, FightDoorsBlockEntity::new);
 	// Start of user code block custom block entities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpreadingIceBlockEntity>> SPREADING_ICE = register("spreading_ice", MinigamesModBlocks.SPREADING_ICE, SpreadingIceBlockEntity::new);
 
@@ -64,5 +65,6 @@ public class MinigamesModBlockEntities {
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SPRUCE_PEW_RIGHT.get(), SidedInvWrapper::new);
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SPRUCE_PEW_LEFT.get(), SidedInvWrapper::new);
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SPRUCE_SHORT_BOARD.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, FIGHT_DOORS.get(), SidedInvWrapper::new);
 	}
 }

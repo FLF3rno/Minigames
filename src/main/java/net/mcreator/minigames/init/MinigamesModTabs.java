@@ -41,6 +41,7 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_WORSHIPPER.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_CANDLEHEAD.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_SHIELD_ANGEL.get().asItem());
+				tabData.accept(MinigamesModBlocks.FIGHT_DOORS.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 
 	@SubscribeEvent

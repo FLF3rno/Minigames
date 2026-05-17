@@ -233,5 +233,6 @@
   "gui.minigames.vote_popup.label_proc_vote_no_keybind": "",
   "gui.minigames.vote_popup.label_proc_vote_yes_keybind": "",
   "gui.minigames.vote_popup.label_gg": "nah",
-  "gui.minigames.vote_popup.label_ye": "YE"
+  "gui.minigames.vote_popup.label_ye": "YE",
+  "item.minigames.fight_doors": "Fight Doors"
 }

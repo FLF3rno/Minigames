@@ -20,19 +20,13 @@ public class StartRollTypeProcedure {
 		if (entity == null)
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).respawningPlayers == 0) {
-			MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
-			MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
 			MinigamesModVariables.MapVariables.get(world).hunterAchievement = "";
-			MinigamesModVariables.MapVariables.get(world).headStart = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (entity instanceof Player _player)
 				_player.closeContainer();
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/effect give @a minigames:immobilized 3000 1 true");
-			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/team modify teamold nametagVisibility never");
 			MinigamesModVariables.MapVariables.get(world).players = ServerLifecycleHooks.getCurrentServer().getPlayerCount();
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			ResetAchievementRunProcedure.execute(world);

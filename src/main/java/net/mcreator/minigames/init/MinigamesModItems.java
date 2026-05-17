@@ -59,6 +59,7 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SPAWN_CANDLEHEAD;
 	public static final DeferredItem<Item> SPAWN_SHIELD_ANGEL;
 	public static final DeferredItem<Item> MOVING_BLOCK_SPAWN;
+	public static final DeferredItem<Item> FIGHT_DOORS;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -91,6 +92,7 @@ public class MinigamesModItems {
 		SPAWN_CANDLEHEAD = block(MinigamesModBlocks.SPAWN_CANDLEHEAD);
 		SPAWN_SHIELD_ANGEL = block(MinigamesModBlocks.SPAWN_SHIELD_ANGEL);
 		MOVING_BLOCK_SPAWN = block(MinigamesModBlocks.MOVING_BLOCK_SPAWN, new Item.Properties().rarity(Rarity.EPIC));
+		FIGHT_DOORS = block(MinigamesModBlocks.FIGHT_DOORS);
 	}
 
 	// Start of user code block custom items

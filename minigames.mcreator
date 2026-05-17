@@ -8025,6 +8025,28 @@
         ]
       },
       "path": "~/Achievement Run/settings"
+    },
+    {
+      "name": "FightDoors",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fight_doors",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/fight_doors.json",
+          "src/main/java/net/mcreator/minigames/block/entity/FightDoorsBlockEntity.java",
+          "src/main/resources/assets/minigames/items/fight_doors.json",
+          "src/main/java/net/mcreator/minigames/block/FightDoorsBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/fight_doors.json",
+          "src/main/resources/assets/minigames/models/block/fight_doors_side_tall.json",
+          "src/main/resources/assets/minigames/blockstates/fight_doors.json",
+          "src/main/resources/assets/minigames/models/block/fight_doors_post.json",
+          "src/main/resources/assets/minigames/models/block/fight_doors_inventory.json",
+          "src/main/resources/assets/minigames/models/item/fight_doors.json"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
     }
   ],
   "variable_elements": [
@@ -9079,6 +9101,7 @@
       "~CUSTOM:StartingRoomGridBlock"
     ],
     "BLOCKS:minecraft:walls": [
+      "~CUSTOM:FightDoors",
       "~CUSTOM:ChiseledQuartzWall"
     ],
     "ENTITIES:mod:dungeon": [
@@ -9327,7 +9350,8 @@
       "gui.minigames.vote_popup.label_proc_vote_no_keybind": "",
       "gui.minigames.vote_popup.label_proc_vote_yes_keybind": "",
       "gui.minigames.vote_popup.label_gg": "nah",
-      "gui.minigames.vote_popup.label_ye": "YE"
+      "gui.minigames.vote_popup.label_ye": "YE",
+      "item.minigames.fight_doors": "Fight Doors"
     }
   },
   "metadata": {
@@ -9553,6 +9577,10 @@
           },
           {
             "name": "Dash",
+            "children": []
+          },
+          {
+            "name": "Doors",
             "children": []
           }
         ]

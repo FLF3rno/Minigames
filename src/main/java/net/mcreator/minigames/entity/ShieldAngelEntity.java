@@ -39,6 +39,7 @@ import net.mcreator.minigames.client.model.animations.shieldagentAnimation;
 import javax.annotation.Nullable;
 
 import net.mcreator.minigames.init.MinigamesModAttributes;
+import net.minecraft.world.level.border.WorldBorder;
 
 
 public class ShieldAngelEntity extends Monster {
@@ -129,7 +130,7 @@ public class ShieldAngelEntity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		ShieldAngelHurtProcedure.execute(entity);
+		ShieldAngelHurtProcedure.execute(world, entity);
 		if (damagesource.is(DamageTypes.IN_FIRE))
 			return false;
 		if (damagesource.getDirectEntity() instanceof AbstractArrow)

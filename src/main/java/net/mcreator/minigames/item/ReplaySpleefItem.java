@@ -11,7 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 
-import net.mcreator.minigames.procedures.StartSpleefProcedure;
+import net.mcreator.minigames.procedures.SpleefSettingsChosenProcedure;
 
 import java.util.function.Consumer;
 
@@ -29,7 +29,7 @@ public class ReplaySpleefItem extends Item {
 	@Override
 	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 		InteractionResult ar = super.use(world, entity, hand);
-		StartSpleefProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ());
+		SpleefSettingsChosenProcedure.execute(world, entity);
 		return ar;
 	}
 }

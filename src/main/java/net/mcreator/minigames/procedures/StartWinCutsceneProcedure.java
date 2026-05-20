@@ -87,7 +87,17 @@ public class StartWinCutsceneProcedure {
 				_vars.markSyncDirty();
 			}
 		}
-		if (entity instanceof Player _winner) {
+		if (MinigamesModVariables.MapVariables.get(world).hunteraWinAnimation) {
+			if (world instanceof Level _level) {
+				for (Player player : _level.players()) {
+					if (player.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
+						MinigamesModVariables.PlayerVariables _vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						_vars.winner = true;
+						_vars.markSyncDirty();
+					}
+				}
+			}
+		} else if (entity instanceof Player _winner) {
 			MinigamesModVariables.PlayerVariables _vars = _winner.getData(MinigamesModVariables.PLAYER_VARIABLES);
 			_vars.winner = true;
 			_vars.markSyncDirty();

@@ -7676,6 +7676,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -7825,42 +7829,6 @@
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/StartVoteProcedure.java"
-        ]
-      },
-      "path": "~/General/Vote"
-    },
-    {
-      "name": "StartDebugVote",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "start_debug_vote",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/StartDebugVoteProcedure.java"
-        ]
-      },
-      "path": "~/General/Vote"
-    },
-    {
-      "name": "Vote",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "vote",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/VoteCommand.java"
         ]
       },
       "path": "~/General/Vote"
@@ -8038,15 +8006,240 @@
           "src/main/java/net/mcreator/minigames/block/entity/FightDoorsBlockEntity.java",
           "src/main/resources/assets/minigames/items/fight_doors.json",
           "src/main/java/net/mcreator/minigames/block/FightDoorsBlock.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/FightDoorsRenderer.java",
           "src/main/resources/data/minigames/loot_table/blocks/fight_doors.json",
-          "src/main/resources/assets/minigames/models/block/fight_doors_side_tall.json",
           "src/main/resources/assets/minigames/blockstates/fight_doors.json",
-          "src/main/resources/assets/minigames/models/block/fight_doors_post.json",
-          "src/main/resources/assets/minigames/models/block/fight_doors_inventory.json",
           "src/main/resources/assets/minigames/models/item/fight_doors.json"
         ]
       },
       "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "Explode",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "explode",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "OwnedBy",
+            "type": "entity"
+          },
+          {
+            "name": "DamagePlayers",
+            "type": "logic"
+          },
+          {
+            "name": "OwnerImmune",
+            "type": "logic"
+          },
+          {
+            "name": "ExplosionDamage",
+            "type": "number"
+          },
+          {
+            "name": "ExplosionSize",
+            "type": "number"
+          },
+          {
+            "name": "ExplosionType",
+            "type": "string"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExplodeProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "FightDoorsRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fight_doors_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FightDoorsRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "ChangeCurrentRoomIDValue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "change_current_room_id_value",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "ID",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChangeCurrentRoomIDValueProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "CompleteRoom",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "complete_room",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CompleteRoomProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "StartRoom",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_room",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartRoomProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "CountMonstersInRoom",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "count_monsters_in_room",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CountMonstersInRoomProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "BreakDoor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "break_door",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BreakDoorProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "Add1Player",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "add_1_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/Add1PlayerProcedure.java"
+        ]
+      },
+      "path": "~/General/Player Count"
+    },
+    {
+      "name": "Remove1Player",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "remove_1_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/Remove1PlayerProcedure.java"
+        ]
+      },
+      "path": "~/General/Player Count"
     }
   ],
   "variable_elements": [
@@ -8787,6 +8980,48 @@
       "type": "logic",
       "scope": "player_persistent",
       "value": "false"
+    },
+    {
+      "name": "inCombat",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "currentRoomID",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "DoorPosition",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "DoorOffset",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "aliveEnemies",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "startingEnemies",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "connectedPlayers",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [
@@ -9101,7 +9336,6 @@
       "~CUSTOM:StartingRoomGridBlock"
     ],
     "BLOCKS:minecraft:walls": [
-      "~CUSTOM:FightDoors",
       "~CUSTOM:ChiseledQuartzWall"
     ],
     "ENTITIES:mod:dungeon": [
@@ -9111,6 +9345,9 @@
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel"
+    ],
+    "BLOCKS:mod:door": [
+      "CUSTOM:FightDoors"
     ]
   },
   "tab_element_order": {},
@@ -9301,7 +9538,7 @@
       "item.minigames.blank_long_sword.description_1": "§6§lON HIT",
       "attribute.minigames.show_full_health_mobs": "Show Full Health Mobs",
       "attribute.minigames.is_mob_full_hp": "Is Mob Full Hp",
-      "effect.minigames.stunned": "Stunned",
+      "effect.minigames.stunned": "Stun",
       "attribute.minigames.stun_full_health_mobs": "Stun Full Health Mobs",
       "entity.minigames.stunned_effect": "Stunned Effect",
       "gui.minigames.teammate_overlay.label_name": "[NAME]",
@@ -9339,19 +9576,18 @@
       "item_group.minigames.dungeon_items": "Dungeon Items",
       "subtitles.volcanic_spew_land": "Volcanic Spew lands",
       "key.minigames.dash": "Dash",
-      "effect.minigames.blessed": "Blessed",
+      "effect.minigames.blessed": "Blessing",
       "subtitles.dash": "",
       "attribute.minigames.effect_length": "Effect Length",
       "gui.minigames.vote_popup.label_playername": "PlayerName",
       "gui.minigames.vote_popup.label_wants_to_bone": "Wants to bone",
       "key.minigames.vote_yes": "Vote Yes",
-      "key.category.vote": "Vote",
+      "key.category.vote": "Voting",
       "key.minigames.vote_no": "Vote No",
-      "gui.minigames.vote_popup.label_proc_vote_no_keybind": "",
-      "gui.minigames.vote_popup.label_proc_vote_yes_keybind": "",
       "gui.minigames.vote_popup.label_gg": "nah",
       "gui.minigames.vote_popup.label_ye": "YE",
-      "item.minigames.fight_doors": "Fight Doors"
+      "item.minigames.fight_doors": "Fight Doors",
+      "key.categories.vote": "Voting"
     }
   },
   "metadata": {
@@ -9614,6 +9850,10 @@
           },
           {
             "name": "Vote",
+            "children": []
+          },
+          {
+            "name": "Player Count",
             "children": []
           }
         ]

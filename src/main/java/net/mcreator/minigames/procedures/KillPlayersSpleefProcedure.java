@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
@@ -108,8 +109,7 @@ public class KillPlayersSpleefProcedure {
 					{
 						Entity _ent = entityiterator;
 						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/tellraw @a[distance=1..] [{\"selector\":\"@p\"},{\"color\":\"red\",\"text\":\" died!\"}]");
+							_ent.getServer().getPlayerList().broadcastSystemMessage(_ent.getDisplayName().copy().append(Component.literal(" died!").withColor(0xff5555)), false);
 						}
 					}
 					MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers = MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers - 1;

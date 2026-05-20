@@ -1,8 +1,8 @@
 {
-  "parent": "block/template_wall_side",
+  "parent": "block/cube_all",
   "textures": {
-    "wall": "minecraft:block/spruce_trapdoor",
-    "particle": "minecraft:block/spruce_trapdoor"
+    "all": "minigames:block/door",
+    "particle": "minigames:block/door"
   },
   "render_type": "solid"
 }

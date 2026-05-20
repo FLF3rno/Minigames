@@ -74,7 +74,13 @@ public class VotePopupOverlay {
 					voteIconFrameSize * 9);
 			PlayerFaceRenderer.draw(event.getGuiGraphics(), getVotingPlayerSkin(), headX, nameY - 1, 8);
 			event.getGuiGraphics().drawString(minecraft.font, Component.literal(playerName), nameBaseX, nameY, playerNameColor, false);
-			event.getGuiGraphics().drawString(minecraft.font, Component.literal(voteMessage), (w - minecraft.font.width(voteMessage)) / 2, messageY, 0xFF000000, false);
+			int messageX = (w - minecraft.font.width(voteMessage)) / 2;
+			Component voteMessageComponent = Component.literal(voteMessage);
+			event.getGuiGraphics().drawString(minecraft.font, voteMessageComponent, messageX - 1, messageY, 0xFFFFFFFF, false);
+			event.getGuiGraphics().drawString(minecraft.font, voteMessageComponent, messageX + 1, messageY, 0xFFFFFFFF, false);
+			event.getGuiGraphics().drawString(minecraft.font, voteMessageComponent, messageX, messageY - 1, 0xFFFFFFFF, false);
+			event.getGuiGraphics().drawString(minecraft.font, voteMessageComponent, messageX, messageY + 1, 0xFFFFFFFF, false);
+			event.getGuiGraphics().drawString(minecraft.font, Component.literal(voteMessage), messageX, messageY, 0xFF000000, false);
 			event.getGuiGraphics().drawString(minecraft.font, Component.translatable("gui.minigames.vote_popup.label_proc_vote_yes_keybind"), leftButtonX + (28 - minecraft.font.width(voteYesKeybind)) / 2, voteLabelY, 0xFF000000, false);
 			event.getGuiGraphics().drawString(minecraft.font, Component.translatable("gui.minigames.vote_popup.label_proc_vote_no_keybind"), rightButtonX + (28 - minecraft.font.width(voteNoKeybind)) / 2, voteLabelY, 0xFF000000, false);
 			event.getGuiGraphics().drawString(minecraft.font, voteYesKeybind, leftButtonX + (28 - minecraft.font.width(voteYesKeybind)) / 2, popupCenterY + 5, 0xFF000000, false);

@@ -1,8 +1,0 @@
-{
-  "parent": "block/wall_inventory",
-  "textures": {
-    "wall": "minecraft:block/spruce_trapdoor",
-    "particle": "minecraft:block/spruce_trapdoor"
-  },
-  "render_type": "solid"
-}

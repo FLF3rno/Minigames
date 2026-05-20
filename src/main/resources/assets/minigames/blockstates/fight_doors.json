@@ -1,90 +1,19 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "up": "true"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors_post"
-      }
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/fight_doors"
     },
-    {
-      "when": {
-        "north": "low"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors",
-        "uvlock": true
-      }
+    "facing=east": {
+      "model": "minigames:block/fight_doors",
+      "y": 90
     },
-    {
-      "when": {
-        "east": "low"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors",
-        "y": 90,
-        "uvlock": true
-      }
+    "facing=south": {
+      "model": "minigames:block/fight_doors",
+      "y": 180
     },
-    {
-      "when": {
-        "south": "low"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors",
-        "y": 180,
-        "uvlock": true
-      }
-    },
-    {
-      "when": {
-        "west": "low"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors",
-        "y": 270,
-        "uvlock": true
-      }
-    },
-    {
-      "when": {
-        "north": "tall"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors_side_tall",
-        "uvlock": true
-      }
-    },
-    {
-      "when": {
-        "east": "tall"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors_side_tall",
-        "y": 90,
-        "uvlock": true
-      }
-    },
-    {
-      "when": {
-        "south": "tall"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors_side_tall",
-        "y": 180,
-        "uvlock": true
-      }
-    },
-    {
-      "when": {
-        "west": "tall"
-      },
-      "apply": {
-        "model": "minigames:block/fight_doors_side_tall",
-        "y": 270,
-        "uvlock": true
-      }
+    "facing=west": {
+      "model": "minigames:block/fight_doors",
+      "y": 270
     }
-  ]
+  }
 }

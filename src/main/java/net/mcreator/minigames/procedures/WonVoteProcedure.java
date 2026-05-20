@@ -27,6 +27,8 @@ public class WonVoteProcedure {
 				ResetCrownHuntProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 3) {
 				StartSpleefProcedure.execute(world, x, y, z);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 4) {
+				StartRoomProcedure.execute(world);
 			}
 		} else {
 			if (entity instanceof Player _player && !_player.level().isClientSide())

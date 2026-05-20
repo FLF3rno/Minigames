@@ -298,6 +298,13 @@ public class MinigamesModVariables {
 		public double voteType = 0;
 		public boolean ActiveVote = false;
 		public String winnerUUID = "\"\"";
+		public boolean inCombat = false;
+		public double currentRoomID = 0;
+		public Vec3 DoorPosition = Vec3.ZERO;
+		public Vec3 DoorOffset = Vec3.ZERO;
+		public double aliveEnemies = 0;
+		public double startingEnemies = 0;
+		public double connectedPlayers = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -390,6 +397,13 @@ public class MinigamesModVariables {
 			voteType = nbt.getDoubleOr("voteType", 0);
 			ActiveVote = nbt.getBooleanOr("ActiveVote", false);
 			winnerUUID = nbt.getStringOr("winnerUUID", "");
+			inCombat = nbt.getBooleanOr("inCombat", false);
+			currentRoomID = nbt.getDoubleOr("currentRoomID", 0);
+			DoorPosition = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("DoorPosition")).result().orElse(Vec3.ZERO);
+			DoorOffset = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("DoorOffset")).result().orElse(Vec3.ZERO);
+			aliveEnemies = nbt.getDoubleOr("aliveEnemies", 0);
+			startingEnemies = nbt.getDoubleOr("startingEnemies", 0);
+			connectedPlayers = nbt.getDoubleOr("connectedPlayers", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -483,6 +497,13 @@ public class MinigamesModVariables {
 			nbt.putDouble("voteType", voteType);
 			nbt.putBoolean("ActiveVote", ActiveVote);
 			nbt.putString("winnerUUID", winnerUUID);
+			nbt.putBoolean("inCombat", inCombat);
+			nbt.putDouble("currentRoomID", currentRoomID);
+			nbt.put("DoorPosition", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, DoorPosition).result().orElseGet(CompoundTag::new));
+			nbt.put("DoorOffset", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, DoorOffset).result().orElseGet(CompoundTag::new));
+			nbt.putDouble("aliveEnemies", aliveEnemies);
+			nbt.putDouble("startingEnemies", startingEnemies);
+			nbt.putDouble("connectedPlayers", connectedPlayers);
 			return nbt;
 		}
 

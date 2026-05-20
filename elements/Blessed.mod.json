@@ -2,7 +2,7 @@
   "_fv": 85,
   "_type": "potioneffect",
   "definition": {
-    "effectName": "Blessed",
+    "effectName": "Blessing",
     "icon": "blessed",
     "color": {
       "value": -3342337,

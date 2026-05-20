@@ -47,7 +47,6 @@ public record VoteNoMessage(int eventType, int pressedms) implements CustomPacke
 		double x = entity.getX();
 		double y = entity.getY();
 		double z = entity.getZ();
-		// security measure to prevent arbitrary chunk generation
 		if (!world.getChunkSource().hasChunk(SectionPos.blockToSectionCoord(x), SectionPos.blockToSectionCoord(z)))
 			return;
 		if (type == 0) {

@@ -29,5 +29,6 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelpewseat_left.LAYER_LOCATION, Modelpewseat_left::createBodyLayer);
 		event.registerLayerDefinition(Modeldart.LAYER_LOCATION, Modeldart::createBodyLayer);
 		event.registerLayerDefinition(Modelcandlehead.LAYER_LOCATION, Modelcandlehead::createBodyLayer);
+		event.registerLayerDefinition(Modelhalfblock.LAYER_LOCATION, Modelhalfblock::createBodyLayer);
 	}
 }

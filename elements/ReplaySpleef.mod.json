@@ -43,7 +43,7 @@
     "inventorySize": 9,
     "inventoryStackSize": 99,
     "onRightClickedInAir": {
-      "name": "StartSpleef"
+      "name": "SpleefSettingsChosen"
     },
     "enableRanged": false,
     "shootConstantly": false,

@@ -2,7 +2,7 @@
   "_fv": 85,
   "_type": "potioneffect",
   "definition": {
-    "effectName": "Stunned",
+    "effectName": "Stun",
     "icon": "stunned",
     "color": {
       "value": -256,

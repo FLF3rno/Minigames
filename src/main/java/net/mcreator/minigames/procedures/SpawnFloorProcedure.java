@@ -34,8 +34,8 @@ public class SpawnFloorProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run fill -50 0 -50 "
-							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x()) + " 200 "
-							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()) + " air"));
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " 200 "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) + " air"));
 		spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
 		for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index0++) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();

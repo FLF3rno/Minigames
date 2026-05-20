@@ -87,6 +87,41 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 
 	@Override
 	public void clicked(int slotId, int button, ClickType clickType, Player player) {
+		if (isInCombat()) {
+			if (clickType == ClickType.THROW) {
+				if (slotId >= 0 && slotId < this.slots.size()) {
+					Slot slot = this.slots.get(slotId);
+					if (DungeonItemAccess.isDungeonItem(slot.getItem())) {
+						return;
+					}
+				}
+			}
+			if (clickType == ClickType.PICKUP || clickType == ClickType.SWAP || clickType == ClickType.QUICK_MOVE || clickType == ClickType.QUICK_CRAFT) {
+				if (slotId >= 0 && slotId < this.slots.size()) {
+					Slot slot = this.slots.get(slotId);
+					int containerSlot = slot.getContainerSlot();
+					boolean backpackSlot = isBackpackSlot(containerSlot);
+					boolean relicSlot = isRelicSlot(containerSlot);
+					ItemStack carried = this.getCarried();
+					ItemStack slotStack = slot.getItem();
+					boolean carriedIsDungeonClassItem = DungeonItemAccess.isDungeonItem(carried);
+					boolean slotIsDungeonClassItem = DungeonItemAccess.isDungeonItem(slotStack);
+					if ((backpackSlot && DungeonItemAccess.isRelic(carried)) || (backpackSlot && DungeonItemAccess.isRelic(slotStack)) || (relicSlot && DungeonItemAccess.isRelic(slotStack))) {
+						return;
+					}
+					if (backpackSlot && (carriedIsDungeonClassItem || slotIsDungeonClassItem)) {
+						return;
+					}
+				} else {
+					if (clickType == ClickType.QUICK_CRAFT && DungeonItemAccess.isRelic(this.getCarried())) {
+						return;
+					}
+					if (slotId == -999 && !this.getCarried().isEmpty() && DungeonItemAccess.isDungeonItem(this.getCarried())) {
+						return;
+					}
+				}
+			}
+		}
 		if (clickType == ClickType.SWAP && slotId >= 0 && slotId < this.slots.size()) {
 			Slot slot = this.slots.get(slotId);
 			int containerSlot = slot.getContainerSlot();
@@ -95,6 +130,18 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 			}
 		}
 		super.clicked(slotId, button, clickType, player);
+	}
+
+	private boolean isInCombat() {
+		return MinigamesModVariables.MapVariables.get(this.world).inCombat;
+	}
+
+	private static boolean isRelicSlot(int containerSlot) {
+		return containerSlot == LEFT_RELIC_SLOT_INDEX || containerSlot == RIGHT_RELIC_SLOT_INDEX;
+	}
+
+	private static boolean isBackpackSlot(int containerSlot) {
+		return containerSlot >= 9 && containerSlot <= 33;
 	}
 
 	private void addDynamicPlayerSlots(Inventory inventory, int playerSlots) {

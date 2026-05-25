@@ -9,8 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.scores.PlayerTeam;
-import net.minecraft.world.scores.Scoreboard;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -22,30 +20,13 @@ public class GlowColorSync {
 			return;
 		if (!player.hasEffect(net.minecraft.world.effect.MobEffects.GLOWING))
 			return;
-		String hex = player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
-		applyGlowTeam(player, hex);
+		// Do not assign color glow teams to players.
 	}
 
 	public static void applyGlowTeam(Entity entity, String hexColor) {
 		if (entity == null || entity.level().isClientSide())
 			return;
-		if (!(entity.level().getScoreboard() instanceof Scoreboard scoreboard))
-			return;
-		ChatFormatting fmt = nearestFormatting(hexColor);
-		String teamName = "mg_glow_" + fmt.getName();
-		PlayerTeam team = scoreboard.getPlayerTeam(teamName);
-		if (team == null) {
-			team = scoreboard.addPlayerTeam(teamName);
-			team.setColor(fmt);
-			team.setAllowFriendlyFire(true);
-			team.setSeeFriendlyInvisibles(false);
-		}
-		String member = (entity instanceof Player p) ? p.getGameProfile().getName() : entity.getStringUUID();
-		PlayerTeam current = scoreboard.getPlayersTeam(member);
-		if (current != null && current != team) {
-			scoreboard.removePlayerFromTeam(member, current);
-		}
-		scoreboard.addPlayerToTeam(member, team);
+		// Do not modify scoreboard teams for glow application.
 		if (entity instanceof LivingEntity living) {
 			living.setGlowingTag(true);
 		}

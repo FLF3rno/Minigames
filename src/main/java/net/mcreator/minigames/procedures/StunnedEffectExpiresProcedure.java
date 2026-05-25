@@ -14,8 +14,14 @@ import java.util.Comparator;
 
 public class StunnedEffectExpiresProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+		execute(world, x, y, z, entity, 0);
+	}
+
+	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, double amplifier) {
 		if (entity == null)
 			return;
+		PotionEffectExpiresProcedure.execute(entity, amplifier, "minigames:stunned");
+
 		{
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.getServer() != null) {

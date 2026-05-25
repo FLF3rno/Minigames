@@ -194,9 +194,7 @@ public class TeammateOverlayOverlay {
 		if (snapshot.poisoned()) {
 			return flashing ? HEART_POISONED_FULL_BLINKING : HEART_POISONED_FULL;
 		}
-		if (snapshot.hasHarmfulEffect()) {
-			return flashing ? HEART_FULL_BLINKING : HEART_FULL;
-		}
+		// Both harmful and non-harmful use the same heart texture, just simplified the logic
 		return flashing ? HEART_FULL_BLINKING : HEART_FULL;
 	}
 
@@ -207,9 +205,7 @@ public class TeammateOverlayOverlay {
 		if (snapshot.poisoned()) {
 			return flashing ? HEART_POISONED_HALF_BLINKING : HEART_POISONED_HALF;
 		}
-		if (snapshot.hasHarmfulEffect()) {
-			return flashing ? HEART_HALF_BLINKING : HEART_HALF;
-		}
+		// Both harmful and non-harmful use the same heart texture, just simplified the logic
 		return flashing ? HEART_HALF_BLINKING : HEART_HALF;
 	}
 

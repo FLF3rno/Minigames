@@ -199,6 +199,7 @@ public class StunnedEffectEntity extends Monster {
 		this.setNoGravity(true);
 	}
 
+
 	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 

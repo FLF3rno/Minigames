@@ -34,7 +34,7 @@ public class StunnedMobEffect extends MobEffect {
 	@Override
 	public void onMobRemoved(ServerLevel level, LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
 		if (reason == Entity.RemovalReason.KILLED) {
-			StunnedEffectExpiresProcedure.execute(level, entity.getX(), entity.getY(), entity.getZ(), entity);
+			StunnedEffectExpiresProcedure.execute(level, entity.getX(), entity.getY(), entity.getZ(), entity, amplifier);
 		}
 	}
 }

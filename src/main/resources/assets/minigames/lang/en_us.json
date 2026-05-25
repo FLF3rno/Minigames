@@ -233,5 +233,7 @@
   "gui.minigames.vote_popup.label_gg": "nah",
   "gui.minigames.vote_popup.label_ye": "YE",
   "item.minigames.fight_doors": "Fight Doors",
-  "key.categories.vote": "Voting"
+  "key.categories.vote": "Voting",
+  "effect.minigames.ascending": "Ascending",
+  "subtitles.ascending": "Player is ascending"
 }

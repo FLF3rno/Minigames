@@ -5810,7 +5810,7 @@
       "name": "Stunned",
       "type": "potioneffect",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "stunned",
       "metadata": {
         "files": [
@@ -7472,7 +7472,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PerformDashProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Dash"
+      "path": "~/Dungeon/Events"
     },
     {
       "name": "RefreshDash",
@@ -7536,6 +7536,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "amplifier",
+            "type": "number"
           }
         ],
         "files": [
@@ -8051,7 +8055,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ExplodeProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Events"
     },
     {
       "name": "FightDoorsRightclicked",
@@ -8128,7 +8132,7 @@
           "src/main/java/net/mcreator/minigames/procedures/CompleteRoomProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Doors"
+      "path": "~/Dungeon/Events"
     },
     {
       "name": "StartRoom",
@@ -8147,7 +8151,7 @@
           "src/main/java/net/mcreator/minigames/procedures/StartRoomProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Doors"
+      "path": "~/Dungeon/Events"
     },
     {
       "name": "CountMonstersInRoom",
@@ -8220,7 +8224,7 @@
           "src/main/java/net/mcreator/minigames/procedures/Add1PlayerProcedure.java"
         ]
       },
-      "path": "~/General/Player Count"
+      "path": "~/General/Player Numeration"
     },
     {
       "name": "Remove1Player",
@@ -8239,7 +8243,368 @@
           "src/main/java/net/mcreator/minigames/procedures/Remove1PlayerProcedure.java"
         ]
       },
-      "path": "~/General/Player Count"
+      "path": "~/General/Player Numeration"
+    },
+    {
+      "name": "RemoveAllEffectsButCrowned",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "remove_all_effects_but_crowned",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RemoveAllEffectsButCrownedProcedure.java"
+        ]
+      },
+      "path": "~/General/Crown"
+    },
+    {
+      "name": "DungeonHeal",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dungeon_heal",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "type",
+            "type": "string"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DungeonHealProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "PassiveHealing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "passive_healing",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PassiveHealingProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Heal"
+    },
+    {
+      "name": "ApplyEffect",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "apply_effect",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "hide",
+            "type": "logic"
+          },
+          {
+            "name": "level",
+            "type": "number"
+          },
+          {
+            "name": "ticks",
+            "type": "number"
+          },
+          {
+            "name": "effect",
+            "type": "string"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyEffectProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "PotionEffectExpires",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "potion_effect_expires",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "level",
+            "type": "number"
+          },
+          {
+            "name": "potion",
+            "type": "string"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PotionEffectExpiresProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "ChangeGravity",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "change_gravity",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/ChangeGravity.java"
+        ]
+      },
+      "path": "~/General/Gravity"
+    },
+    {
+      "name": "ChangeGravityExecute",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "change_gravity_execute",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "gravity",
+            "type": "direction"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChangeGravityExecuteProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "Gravity",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "gravity",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/GravityCommand.java"
+        ]
+      },
+      "path": "~/General/Gravity"
+    },
+    {
+      "name": "DebugGravity",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debug_gravity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DebugGravityProcedure.java"
+        ]
+      },
+      "path": "~/General/Gravity"
+    },
+    {
+      "name": "HealthBar",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "health_bar",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/HealthBar.java"
+        ]
+      },
+      "path": "~/Dungeon/HP Bar"
+    },
+    {
+      "name": "HealthBarColor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "health_bar_color",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HealthBarColorProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/HP Bar"
+    },
+    {
+      "name": "Knocked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "knocked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/KnockedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "Ascending",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ascending",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/AscendingMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "AscendingActive",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "ascending_active",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AscendingActiveProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "AscendingApplied",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "ascending_applied",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AscendingAppliedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "AscendingEffectExpires",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ascending_effect_expires",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AscendingEffectExpiresProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "FreeBeamRenderManager",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "free_beam_render_manager",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/FreeBeamRenderManager.java"
+        ]
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "ModDataAttachments",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mod_data_attachments",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/ModDataAttachments.java"
+        ]
+      }
     }
   ],
   "variable_elements": [
@@ -9022,6 +9387,42 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "roomCheckDelayTicks",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "removeEffects",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "healCD",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "PassiveHealCooldown",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "80.0"
+    },
+    {
+      "name": "PassiveHealAmount",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "1.0"
+    },
+    {
+      "name": "gravity",
+      "type": "direction",
+      "scope": "player_persistent",
+      "value": "DOWN"
     }
   ],
   "sound_elements": [
@@ -9186,6 +9587,14 @@
       ],
       "category": "player",
       "subtitle": ""
+    },
+    {
+      "name": "ascending",
+      "files": [
+        "ascending"
+      ],
+      "category": "player",
+      "subtitle": "Player is ascending"
     }
   ],
   "tag_elements": {
@@ -9587,7 +9996,9 @@
       "gui.minigames.vote_popup.label_gg": "nah",
       "gui.minigames.vote_popup.label_ye": "YE",
       "item.minigames.fight_doors": "Fight Doors",
-      "key.categories.vote": "Voting"
+      "key.categories.vote": "Voting",
+      "effect.minigames.ascending": "Ascending",
+      "subtitles.ascending": "Player is ascending"
     }
   },
   "metadata": {
@@ -9818,6 +10229,22 @@
           {
             "name": "Doors",
             "children": []
+          },
+          {
+            "name": "Heal",
+            "children": []
+          },
+          {
+            "name": "Death",
+            "children": []
+          },
+          {
+            "name": "Events",
+            "children": []
+          },
+          {
+            "name": "HP Bar",
+            "children": []
           }
         ]
       },
@@ -9853,7 +10280,7 @@
             "children": []
           },
           {
-            "name": "Player Count",
+            "name": "Gravity",
             "children": []
           }
         ]

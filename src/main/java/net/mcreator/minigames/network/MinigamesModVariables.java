@@ -37,6 +37,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Direction;
 
 import net.mcreator.minigames.MinigamesMod;
 
@@ -128,6 +129,10 @@ public class MinigamesModVariables {
 		clone.voted = original.voted;
 		clone.voteCooldown = original.voteCooldown;
 		clone.randomHunterCheckboxClicked = original.randomHunterCheckboxClicked;
+		clone.healCD = original.healCD;
+		clone.PassiveHealCooldown = original.PassiveHealCooldown;
+		clone.PassiveHealAmount = original.PassiveHealAmount;
+		clone.gravity = original.gravity;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -305,6 +310,8 @@ public class MinigamesModVariables {
 		public double aliveEnemies = 0;
 		public double startingEnemies = 0;
 		public double connectedPlayers = 0;
+		public double roomCheckDelayTicks = 0;
+		public boolean removeEffects = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -404,6 +411,8 @@ public class MinigamesModVariables {
 			aliveEnemies = nbt.getDoubleOr("aliveEnemies", 0);
 			startingEnemies = nbt.getDoubleOr("startingEnemies", 0);
 			connectedPlayers = nbt.getDoubleOr("connectedPlayers", 0);
+			roomCheckDelayTicks = nbt.getDoubleOr("roomCheckDelayTicks", 0);
+			removeEffects = nbt.getBooleanOr("removeEffects", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -504,6 +513,8 @@ public class MinigamesModVariables {
 			nbt.putDouble("aliveEnemies", aliveEnemies);
 			nbt.putDouble("startingEnemies", startingEnemies);
 			nbt.putDouble("connectedPlayers", connectedPlayers);
+			nbt.putDouble("roomCheckDelayTicks", roomCheckDelayTicks);
+			nbt.putBoolean("removeEffects", removeEffects);
 			return nbt;
 		}
 
@@ -593,6 +604,10 @@ public class MinigamesModVariables {
 		public boolean voted = false;
 		public double voteCooldown = 0;
 		public boolean randomHunterCheckboxClicked = false;
+		public double healCD = 0;
+		public double PassiveHealCooldown = 80.0;
+		public double PassiveHealAmount = 1.0;
+		public Direction gravity = Direction.DOWN;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -622,6 +637,10 @@ public class MinigamesModVariables {
 			output.putBoolean("voted", voted);
 			output.putDouble("voteCooldown", voteCooldown);
 			output.putBoolean("randomHunterCheckboxClicked", randomHunterCheckboxClicked);
+			output.putDouble("healCD", healCD);
+			output.putDouble("PassiveHealCooldown", PassiveHealCooldown);
+			output.putDouble("PassiveHealAmount", PassiveHealAmount);
+			output.putInt("gravity", gravity.get3DDataValue());
 		}
 
 		@Override
@@ -652,6 +671,10 @@ public class MinigamesModVariables {
 			voted = input.getBooleanOr("voted", false);
 			voteCooldown = input.getDoubleOr("voteCooldown", 0);
 			randomHunterCheckboxClicked = input.getBooleanOr("randomHunterCheckboxClicked", false);
+			healCD = input.getDoubleOr("healCD", 0);
+			PassiveHealCooldown = input.getDoubleOr("PassiveHealCooldown", 0);
+			PassiveHealAmount = input.getDoubleOr("PassiveHealAmount", 0);
+			gravity = Direction.from3DDataValue(input.getIntOr("gravity", 0));
 		}
 
 		public void markSyncDirty() {

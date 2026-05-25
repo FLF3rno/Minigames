@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
@@ -27,6 +28,7 @@ import net.mcreator.minigames.procedures.ShowVoteProcedure;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class VotePopupOverlay {
@@ -81,8 +83,6 @@ public class VotePopupOverlay {
 			event.getGuiGraphics().drawString(minecraft.font, voteMessageComponent, messageX, messageY - 1, 0xFFFFFFFF, false);
 			event.getGuiGraphics().drawString(minecraft.font, voteMessageComponent, messageX, messageY + 1, 0xFFFFFFFF, false);
 			event.getGuiGraphics().drawString(minecraft.font, Component.literal(voteMessage), messageX, messageY, 0xFF000000, false);
-			event.getGuiGraphics().drawString(minecraft.font, Component.translatable("gui.minigames.vote_popup.label_proc_vote_yes_keybind"), leftButtonX + (28 - minecraft.font.width(voteYesKeybind)) / 2, voteLabelY, 0xFF000000, false);
-			event.getGuiGraphics().drawString(minecraft.font, Component.translatable("gui.minigames.vote_popup.label_proc_vote_no_keybind"), rightButtonX + (28 - minecraft.font.width(voteNoKeybind)) / 2, voteLabelY, 0xFF000000, false);
 			event.getGuiGraphics().drawString(minecraft.font, voteYesKeybind, leftButtonX + (28 - minecraft.font.width(voteYesKeybind)) / 2, popupCenterY + 5, 0xFF000000, false);
 			event.getGuiGraphics().drawString(minecraft.font, voteNoKeybind, rightButtonX + (28 - minecraft.font.width(voteNoKeybind)) / 2, popupCenterY + 5, 0xFF000000, false);
 			drawOtherPlayersVoteHeads(event, entity, headsY, w);
@@ -90,20 +90,20 @@ public class VotePopupOverlay {
 	}
 
 	private static void drawOtherPlayersVoteHeads(RenderGuiEvent.Pre event, Player self, int y, int screenWidth) {
-		if (self == null || self.level() == null) {
+		Minecraft minecraft = Minecraft.getInstance();
+		if (self == null || minecraft.getConnection() == null) {
 			return;
 		}
-		List<Player> others = new ArrayList<>();
-		Player caller = MinigamesModVariables.VotingEntity instanceof Player p ? p : null;
-		for (Player player : self.level().players()) {
-			if (caller != null) {
-				if (player != caller) {
-					others.add(player);
-				}
-			} else if (player != self) {
-				others.add(player);
+		UUID callerId = MinigamesModVariables.VotingEntity != null ? MinigamesModVariables.VotingEntity.getUUID() : null;
+		List<PlayerInfo> others = new ArrayList<>();
+		for (PlayerInfo info : minecraft.getConnection().getListedOnlinePlayers()) {
+			UUID id = info.getProfile().getId();
+			if (callerId != null && callerId.equals(id)) {
+				continue;
 			}
+			others.add(info);
 		}
+		others.sort(Comparator.comparing(info -> info.getProfile().getName(), String.CASE_INSENSITIVE_ORDER));
 		if (others.isEmpty()) {
 			return;
 		}
@@ -111,11 +111,13 @@ public class VotePopupOverlay {
 		int gap = 3;
 		int totalWidth = (others.size() * votedSize) + ((others.size() - 1) * gap);
 		int x = (screenWidth - totalWidth) / 2;
-		for (Player p : others) {
-			boolean voted = p.getData(MinigamesModVariables.PLAYER_VARIABLES).voted;
-			boolean votedYes = p.getData(MinigamesModVariables.PLAYER_VARIABLES).votedYes;
+		for (PlayerInfo info : others) {
+			UUID id = info.getProfile().getId();
+			Player localEntity = self.level() != null ? self.level().getPlayerByUUID(id) : null;
+			boolean voted = localEntity != null && localEntity.getData(MinigamesModVariables.PLAYER_VARIABLES).voted;
+			boolean votedYes = localEntity != null && localEntity.getData(MinigamesModVariables.PLAYER_VARIABLES).votedYes;
 			int size = votedSize;
-			PlayerFaceRenderer.draw(event.getGuiGraphics(), getPlayerSkin(p), x, y, size);
+			PlayerFaceRenderer.draw(event.getGuiGraphics(), getPlayerSkin(localEntity, id), x, y, size);
 			if (voted) {
 				int tint = votedYes ? 0x6600FF00 : 0x66FF0000;
 				event.getGuiGraphics().fill(x, y, x + size, y + size, tint);
@@ -124,11 +126,11 @@ public class VotePopupOverlay {
 		}
 	}
 
-	private static PlayerSkin getPlayerSkin(Player player) {
+	private static PlayerSkin getPlayerSkin(Player player, UUID fallbackId) {
 		if (player instanceof AbstractClientPlayer clientPlayer) {
 			return clientPlayer.getSkin();
 		}
-		return DefaultPlayerSkin.get(player.getUUID());
+		return DefaultPlayerSkin.get(fallbackId);
 	}
 
 	private static PlayerSkin getVotingPlayerSkin() {

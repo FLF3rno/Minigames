@@ -15,24 +15,26 @@ description="A mod with a few innovative minigames"
 # End of user code block mod configuration
 
 [[mixins]]
-    config = "minigames.mixins.json"
+config = "minigames.mixins.json"
 
 # Start of user code block custom mixins
+[[mixins]]
+config = "minigames.gravity.mixins.json"
 # End of user code block custom mixins
 
 [[dependencies.minigames]]
-    modId="neoforge"
-    type="required"
-    versionRange="[21.8.31,)"
-    ordering="AFTER"
-    side="BOTH"
+modId="neoforge"
+type="required"
+versionRange="[21.8.31,)"
+ordering="AFTER"
+side="BOTH"
 
 [[dependencies.minigames]]
-    modId="minecraft"
-    type="required"
-    versionRange="[1.21.8]"
-    ordering="AFTER"
-    side="BOTH"
+modId="minecraft"
+type="required"
+versionRange="[1.21.8]"
+ordering="AFTER"
+side="BOTH"
 
 
 

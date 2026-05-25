@@ -22,6 +22,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
+import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModItems;
@@ -121,6 +122,15 @@ public class SummonNoOwnerCrownProcedure {
 			}
 			if (nearest != null) {
 				String ownerColor = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+				String normalizedColor = ownerColor == null ? "FFFFFF" : ownerColor.trim();
+				if (normalizedColor.startsWith("#")) {
+					normalizedColor = normalizedColor.substring(1);
+				}
+				if (!normalizedColor.matches("^[0-9a-fA-F]{6}$")) {
+					normalizedColor = "FFFFFF";
+				}
+				nearest.setCustomName(Component.literal("[crown:#" + normalizedColor + "]"));
+				nearest.setCustomNameVisible(false);
 				GlowColorSync.applyGlowTeam(nearest, ownerColor);
 			}
 		});

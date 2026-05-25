@@ -32,6 +32,11 @@ public class CountMonstersInRoomProcedure {
 			return;
 		if (!serverLevel.dimension().location().equals(ResourceLocation.parse("minigames:dungeon_dimension")))
 			return;
+		if (MinigamesModVariables.MapVariables.get(world).roomCheckDelayTicks > 0) {
+			MinigamesModVariables.MapVariables.get(world).roomCheckDelayTicks = MinigamesModVariables.MapVariables.get(world).roomCheckDelayTicks - 1;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			return;
+		}
 		double aliveEnemies = 0;
 		double currentRoomID = MinigamesModVariables.MapVariables.get(world).currentRoomID;
 		int currentRoomIDInt = (int) currentRoomID;

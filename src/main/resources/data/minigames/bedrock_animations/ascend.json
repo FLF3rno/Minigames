@@ -1,0 +1,28 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"ascend": {
+			"loop": true,
+			"animation_length": 10,
+			"bones": {
+				"body": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"5.0": [0, 180, 0],
+						"10.0": [0, 360, 0]
+					}
+				},
+				"head": {
+					"rotation": [-65, 0, 0],
+					"position": [0, 0, -1.1]
+				},
+				"right_arm": {
+					"rotation": [-175.0755, 0.8672, -9.9627]
+				},
+				"left_arm": {
+					"rotation": [-177.5095, -0.2178, 4.9952]
+				}
+			}
+		}
+	}
+}

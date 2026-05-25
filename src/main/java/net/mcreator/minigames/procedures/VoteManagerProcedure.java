@@ -53,7 +53,7 @@ public class VoteManagerProcedure {
 				}
 			}
 			int onlinePlayers = ServerLifecycleHooks.getCurrentServer().getPlayerCount();
-			requiredNumberOfPlayers = onlinePlayers - Math.floor(onlinePlayers / 3d);
+			requiredNumberOfPlayers = onlinePlayers - Math.floor((onlinePlayers - 1) / 3d);
 			requiredNoVotes = (onlinePlayers - requiredNumberOfPlayers) + 1;
 			if (numberOfPlayersThatAreWillingToParticipateInYourBuffoonery >= requiredNumberOfPlayers) {
 				if (!(MinigamesModVariables.VotingEntity == null)) {

@@ -173,5 +173,14 @@
         "stream": false
       }
     ]
+  },
+  "ascending": {
+    "subtitle": "subtitles.ascending",
+    "sounds": [
+      {
+        "name": "minigames:ascending",
+        "stream": false
+      }
+    ]
   }
 }

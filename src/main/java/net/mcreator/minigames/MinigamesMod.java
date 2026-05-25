@@ -60,9 +60,12 @@ public class MinigamesMod {
 		MinigamesModMenus.REGISTRY.register(modEventBus);
 		MinigamesModAttributes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
+		net.mcreator.minigames.ModDataAttachments.ATTACHMENTS.register(modEventBus);
 		if (FMLEnvironment.dist.isClient()) {
 			new StunnableEntityTint(modEventBus);
 			new BlessedEntityTint(modEventBus);
+			new CrownStandTint(modEventBus);
+			new GlowingEffectTint(modEventBus);
 		}
 		// End of user code block mod init
 	}

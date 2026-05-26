@@ -8566,7 +8566,7 @@
       "name": "AscendingEffectExpires",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "ascending_effect_expires",
       "metadata": {
         "dependencies": [
@@ -8604,7 +8604,31 @@
         "files": [
           "src/main/java/net/mcreator/minigames/ModDataAttachments.java"
         ]
-      }
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "RevivePlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "revive_player",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RevivePlayerProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
     }
   ],
   "variable_elements": [

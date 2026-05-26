@@ -29,11 +29,15 @@ public class FreeBeamRenderManager {
         PoseStack poseStack = event.getPoseStack();
         MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
 
-        for (Player player : mc.level.players()) {
+        renderBeams(poseStack, bufferSource, cameraPos, mc.level.players());
+    }
+
+    public static void renderBeams(PoseStack poseStack, MultiBufferSource bufferSource, Vec3 cameraPos, Iterable<? extends Player> players) {
+        for (Player player : players) {
             try {
                 if (player.hasData(ModDataAttachments.BEAM_DATA)) {
                     ModDataAttachments.BeamData data = player.getData(ModDataAttachments.BEAM_DATA);
-                    
+
                     if (data.hasBeam) {
                         poseStack.pushPose();
 

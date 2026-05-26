@@ -51,7 +51,7 @@ public class AscendingAppliedProcedure {
                 serverPlayer.syncData(ModDataAttachments.BEAM_DATA.get());
             }
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
-                MinigamesModSounds.ASCENDING.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+                MinigamesModSounds.ASCENDING.get(), SoundSource.PLAYERS, 2.0f, 1.0f);
         }
 
         entity.getPersistentData().putDouble("immobileX", startX);

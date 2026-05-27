@@ -20,7 +20,7 @@ public class DeathEventHandler {
     public static final TagKey<Item> KEEP_ON_DEATH = ItemTags.create(
             ResourceLocation.fromNamespaceAndPath("minigames", "keep_on_death")
     );
-    
+
     private static final Map<UUID, List<ItemStack>> keptItems = new HashMap<>();
 
     @SubscribeEvent

@@ -19,7 +19,7 @@ config = "minigames.mixins.json"
 
 # Start of user code block custom mixins
 [[mixins]]
-config = "minigames.gravity.mixins.json"
+config = "minigames.extra.mixins.json"
 # End of user code block custom mixins
 
 [[dependencies.minigames]]

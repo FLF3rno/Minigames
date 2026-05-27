@@ -4,10 +4,13 @@ import com.mojang.blaze3d.resource.CrossFrameResourcePool;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.mcreator.minigames.FreeBeamRenderManager;
+import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.PostChain;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -17,11 +20,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-@EventBusSubscriber(value = Dist.CLIENT)
+@EventBusSubscriber(modid = MinigamesMod.MODID, value = Dist.CLIENT)
 public final class AscendingWorldGrayscaleRender {
 	private static final ResourceLocation GRAYSCALE_POST_CHAIN_ID = ResourceLocation.fromNamespaceAndPath("minigames", "ascending_grayscale");
 	private static final ResourceLocation OVERSAT_POST_CHAIN_ID = ResourceLocation.fromNamespaceAndPath("minigames", "ascending_oversaturate");
 	private static final CrossFrameResourcePool RESOURCE_POOL = new CrossFrameResourcePool(3);
+	private static boolean warnedShaderFailure = false;
 
 	private AscendingWorldGrayscaleRender() {
 	}
@@ -70,6 +74,18 @@ public final class AscendingWorldGrayscaleRender {
 			postChain.process(mc.getMainRenderTarget(), RESOURCE_POOL);
 		} catch (Throwable ignored) {
 			// If shaders fail to compile/load for any reason, avoid hard-crashing the client.
+			if (!warnedShaderFailure) {
+				warnedShaderFailure = true;
+				MinigamesMod.LOGGER.warn("Ascending grayscale post effect failed to load/process; skipping effect.", ignored);
+			}
+			return;
+		}
+
+		// In third-person, re-rendering the player/beams on top of the grayscaled scene tends to look like a
+		// slightly offset duplicate (because you're seeing the original grayscale render + the color overlay).
+		// Keep third-person clean: grayscale only.
+		CameraType cameraType = mc.options.getCameraType();
+		if (cameraType != null && !cameraType.isFirstPerson()) {
 			return;
 		}
 
@@ -78,7 +94,7 @@ public final class AscendingWorldGrayscaleRender {
 		PoseStack poseStack = event.getPoseStack();
 		MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
 
-		FreeBeamRenderManager.renderBeams(poseStack, bufferSource, cameraPos, mc.level.players());
+		FreeBeamRenderManager.renderBeams(poseStack, bufferSource, cameraPos, mc.level.players(), event.getPartialTick().getGameTimeDeltaPartialTick(false));
 
 		EntityRenderDispatcher dispatcher = mc.getEntityRenderDispatcher();
 		float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
@@ -94,6 +110,8 @@ public final class AscendingWorldGrayscaleRender {
 			dispatcher.render(player, x, y, z, player.getYRot(), poseStack, bufferSource, packedLight);
 		}
 
-		bufferSource.endBatch();
+		// Avoid flushing every batched RenderType here (can break later passes / F5).
+		// Flush only the types we used in this late overlay pass.
+		bufferSource.endBatch(RenderType.beaconBeam(FreeBeamRenderManager.WHITE_TEXTURE, true));
 	}
 }

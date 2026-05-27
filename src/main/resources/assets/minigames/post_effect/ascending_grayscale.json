@@ -8,7 +8,7 @@
       "fragment_shader": "minigames:post/grayscale",
       "inputs": [
         {
-          "sampler_name": "In",
+          "sampler_name": "InSampler",
           "target": "minecraft:main"
         }
       ],
@@ -19,7 +19,7 @@
       "fragment_shader": "minecraft:post/blit",
       "inputs": [
         {
-          "sampler_name": "In",
+          "sampler_name": "InSampler",
           "target": "swap"
         }
       ],

@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
 import net.mcreator.minigames.network.PlayPlayerAnimationMessage;
 import net.mcreator.minigames.ModDataAttachments;
 import net.mcreator.minigames.init.MinigamesModSounds;
+import net.mcreator.minigames.network.MinigamesModVariables;
 
 public class AscendingAppliedProcedure {
     public static void execute(Entity entity) {
@@ -53,8 +54,14 @@ public class AscendingAppliedProcedure {
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
                 MinigamesModSounds.ASCENDING.get(), SoundSource.PLAYERS, 2.0f, 1.0f);
         }
+{
+			MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			_vars.ascendingTimer = 350;
+			_vars.markSyncDirty();
+		}
 
         entity.getPersistentData().putDouble("immobileX", startX);
         entity.getPersistentData().putDouble("immobileZ", startZ);
+        entity.getPersistentData().putFloat("lockYRot", entity.getYRot());
     }
 }

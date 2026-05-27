@@ -51,6 +51,10 @@ public class StartVoteProcedure {
 				MinigamesModVariables.MapVariables.get(world).voteType = 8;
 				MinigamesModVariables.MapVariables.get(world).VotingMessage = "Wants to start the Challenge";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			} else if ((type).equals("floor")) {
+				MinigamesModVariables.MapVariables.get(world).voteType = 9;
+				MinigamesModVariables.MapVariables.get(world).VotingMessage = "Wants to start the Floor";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				{

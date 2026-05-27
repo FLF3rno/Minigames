@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModBlocks;
 
 public class FightDoorsRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -99,7 +100,11 @@ public class FightDoorsRightclickedProcedure {
 							(MinigamesModVariables.MapVariables.get(world).DoorOffset.z() + middleOffset));
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				}
-				StartVoteProcedure.execute(world, entity, entity, "fight room");
+				if (MinigamesModBlocks.FIGHT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+					StartVoteProcedure.execute(world, entity, entity, "fight room");
+				} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+					StartVoteProcedure.execute(world, entity, entity, "floor");
+				}
 			} else {
 				if (entity instanceof Player _player && !_player.level().isClientSide())
 					_player.displayClientMessage(Component.literal("\u00A7cA vote is already active!"), true);

@@ -133,6 +133,10 @@ public class MinigamesModVariables {
 		clone.PassiveHealCooldown = original.PassiveHealCooldown;
 		clone.PassiveHealAmount = original.PassiveHealAmount;
 		clone.gravity = original.gravity;
+		clone.ascendingTimer = original.ascendingTimer;
+		clone.removeEffectsSingleTarget = original.removeEffectsSingleTarget;
+		clone.ascendingActive = original.ascendingActive;
+		clone.advancedGlowingColor = original.advancedGlowingColor;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -608,6 +612,10 @@ public class MinigamesModVariables {
 		public double PassiveHealCooldown = 80.0;
 		public double PassiveHealAmount = 1.0;
 		public Direction gravity = Direction.DOWN;
+		public double ascendingTimer = 350.0;
+		public boolean removeEffectsSingleTarget = false;
+		public boolean ascendingActive = false;
+		public String advancedGlowingColor = "";
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -641,6 +649,10 @@ public class MinigamesModVariables {
 			output.putDouble("PassiveHealCooldown", PassiveHealCooldown);
 			output.putDouble("PassiveHealAmount", PassiveHealAmount);
 			output.putInt("gravity", gravity.get3DDataValue());
+			output.putDouble("ascendingTimer", ascendingTimer);
+			output.putBoolean("removeEffectsSingleTarget", removeEffectsSingleTarget);
+			output.putBoolean("ascendingActive", ascendingActive);
+			output.putString("advancedGlowingColor", advancedGlowingColor);
 		}
 
 		@Override
@@ -675,6 +687,10 @@ public class MinigamesModVariables {
 			PassiveHealCooldown = input.getDoubleOr("PassiveHealCooldown", 0);
 			PassiveHealAmount = input.getDoubleOr("PassiveHealAmount", 0);
 			gravity = Direction.from3DDataValue(input.getIntOr("gravity", 0));
+			ascendingTimer = input.getDoubleOr("ascendingTimer", 0);
+			removeEffectsSingleTarget = input.getBooleanOr("removeEffectsSingleTarget", false);
+			ascendingActive = input.getBooleanOr("ascendingActive", false);
+			advancedGlowingColor = input.getStringOr("advancedGlowingColor", "");
 		}
 
 		public void markSyncDirty() {

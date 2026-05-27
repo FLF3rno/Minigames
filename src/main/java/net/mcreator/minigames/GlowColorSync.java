@@ -20,13 +20,11 @@ public class GlowColorSync {
 			return;
 		if (!player.hasEffect(net.minecraft.world.effect.MobEffects.GLOWING))
 			return;
-		// Do not assign color glow teams to players.
 	}
 
 	public static void applyGlowTeam(Entity entity, String hexColor) {
 		if (entity == null || entity.level().isClientSide())
 			return;
-		// Do not modify scoreboard teams for glow application.
 		if (entity instanceof LivingEntity living) {
 			living.setGlowingTag(true);
 		}

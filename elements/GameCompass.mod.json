@@ -45,6 +45,9 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
+    "onItemInUseTick": {
+      "name": "GameCompassInHand"
+    },
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,

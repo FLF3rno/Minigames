@@ -129,7 +129,7 @@ public class SummonNoOwnerCrownProcedure {
 				if (!normalizedColor.matches("^[0-9a-fA-F]{6}$")) {
 					normalizedColor = "FFFFFF";
 				}
-				nearest.setCustomName(Component.literal("[crown:#" + normalizedColor + "]"));
+				nearest.setCustomName(Component.literal("[glow:#" + normalizedColor + "]"));
 				nearest.setCustomNameVisible(false);
 				GlowColorSync.applyGlowTeam(nearest, ownerColor);
 			}

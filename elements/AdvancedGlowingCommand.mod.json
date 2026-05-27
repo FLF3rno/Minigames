@@ -1,0 +1,10 @@
+{
+  "_fv": 85,
+  "_type": "command",
+  "definition": {
+    "commandName": "effects",
+    "type": "STANDARD",
+    "permissionLevel": "4",
+    "argsxml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"args_start\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"literal\"><field name=\"name\">give</field><statement name=\"args\"><block type=\"entity\"><field name=\"name\">target</field><field name=\"type\">entities</field><statement name=\"args\"><block type=\"literal\"><field name=\"name\">advanced_glowing</field><statement name=\"args\"><block type=\"number_default\"><field name=\"name\">seconds</field><statement name=\"args\"><block type=\"number_default\"><field name=\"name\">transparency</field><statement name=\"args\"><block type=\"logic\"><field name=\"name\">hideParticles</field><statement name=\"args\"><block type=\"string\"><field name=\"type\">word</field><field name=\"name\">color</field><statement name=\"args\"><block type=\"call_procedure\"><field name=\"procedure\">CommandApplyAdvancedGlowing</field></block></statement></block></statement></block></statement></block></statement></block></statement></block></statement></block></statement></block></next></block></xml>"
+  }
+}

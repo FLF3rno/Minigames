@@ -51,6 +51,8 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SPAWN_SHIELD_ANGEL;
 	public static final DeferredBlock<Block> MOVING_BLOCK_SPAWN;
 	public static final DeferredBlock<Block> FIGHT_DOORS;
+	public static final DeferredBlock<Block> FLOOR_DOORS;
+	public static final DeferredBlock<Block> SPAWN_TP_MARKER_BLOCK;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -87,6 +89,8 @@ public class MinigamesModBlocks {
 		SPAWN_SHIELD_ANGEL = register("spawn_shield_angel", SpawnShieldAngelBlock::new);
 		MOVING_BLOCK_SPAWN = register("moving_block_spawn", MovingBlockSpawnBlock::new);
 		FIGHT_DOORS = register("fight_doors", FightDoorsBlock::new);
+		FLOOR_DOORS = register("floor_doors", FloorDoorsBlock::new);
+		SPAWN_TP_MARKER_BLOCK = register("spawn_tp_marker_block", SpawnTPMarkerBlockBlock::new);
 	}
 
 	// Start of user code block custom blocks

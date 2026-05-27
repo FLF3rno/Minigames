@@ -18,6 +18,7 @@ import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.network.TeammateHealthSync;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -65,6 +66,7 @@ public class TeammateOverlayOverlay {
 	private static final int SUPPORT_COLOR = 0x55FFFF;
 	private static final int MAGE_COLOR = 0xFF55FF;
 	private static final int DEAD_TEXT_COLOR = 0xFF808080;
+	private static final int ASCENDING_TEXT_COLOR = 0xFFFFE059; // matches the beam (1.0, 0.88, 0.35)
 	private static final Map<Integer, FlashState> FLASH_STATES = new ConcurrentHashMap<>();
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
@@ -126,6 +128,16 @@ public class TeammateOverlayOverlay {
 		Minecraft minecraft = Minecraft.getInstance();
 		int heartsX = HEALTH_BAR_X;
 		int heartsY = rowY + (HEALTH_BAR_Y - ROW_Y);
+
+		if (teammate.hasEffect(MinigamesModMobEffects.ASCENDING)) {
+			String text = "Ascending!!!";
+			int centerX = HEALTH_BAR_X + HEALTH_BAR_WIDTH / 2;
+			int textX = centerX - minecraft.font.width(text) / 2;
+			event.getGuiGraphics().drawString(minecraft.font, Component.literal(text), textX, heartsY, ASCENDING_TEXT_COLOR, false);
+			FLASH_STATES.remove(teammate.getId());
+			return;
+		}
+
 		if (teammate.isSpectator()) {
 			String deadText = "Dead";
 			int centerX = HEALTH_BAR_X + HEALTH_BAR_WIDTH / 2;

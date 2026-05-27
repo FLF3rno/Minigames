@@ -7584,7 +7584,7 @@
           "src/main/java/net/mcreator/minigames/procedures/DungeonMobSpawnedProcedure.java"
         ]
       },
-      "path": "~/Dungeon"
+      "path": "~/Dungeon/Events"
     },
     {
       "name": "BlankLongswordDescription",
@@ -8629,6 +8629,278 @@
         ]
       },
       "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "DieForever",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "die_forever",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DieForeverProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Death"
+    },
+    {
+      "name": "EndDungeon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "end_dungeon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/EndDungeonProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "LoseDungeon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "lose_dungeon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/LoseDungeonProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "FloorDoors",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "floor_doors",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/floor_doors.json",
+          "src/main/resources/assets/minigames/models/item/floor_doors.json",
+          "src/main/resources/assets/minigames/items/floor_doors.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/FloorDoorsRenderer.java",
+          "src/main/java/net/mcreator/minigames/block/FloorDoorsBlock.java",
+          "src/main/java/net/mcreator/minigames/block/entity/FloorDoorsBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/floor_doors.json",
+          "src/main/resources/assets/minigames/blockstates/floor_doors.json"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "ReplaceDoor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "replace_door",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReplaceDoorProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "SpawnTPMarkerExecute",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_tp_marker_execute",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnTPMarkerExecuteProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Spawn Room"
+    },
+    {
+      "name": "SpawnTPMarkerBlock",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_tp_marker_block",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_tp_marker_block.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnTPMarkerBlockBlock.java",
+          "src/main/resources/assets/minigames/items/spawn_tp_marker_block.json",
+          "src/main/resources/assets/minigames/models/item/spawn_tp_marker_block.json",
+          "src/main/resources/assets/minigames/models/block/spawn_tp_marker_block.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_tp_marker_block.json"
+        ]
+      },
+      "path": "~/Dungeon/Spawn Room"
+    },
+    {
+      "name": "AdvancedGlowing",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "advanced_glowing",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/AdvancedGlowingMobEffect.java"
+        ]
+      },
+      "path": "~/General/Advanced Glowing"
+    },
+    {
+      "name": "ApplyAdvancedGlowing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "apply_advanced_glowing",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "hideParticles",
+            "type": "logic"
+          },
+          {
+            "name": "amplifier",
+            "type": "number"
+          },
+          {
+            "name": "length",
+            "type": "number"
+          },
+          {
+            "name": "color",
+            "type": "string"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyAdvancedGlowingProcedure.java"
+        ]
+      },
+      "path": "~/General/Advanced Glowing"
+    },
+    {
+      "name": "Screen",
+      "type": "mixin",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "screen",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/mixin/ScreenMixin.java"
+        ]
+      },
+      "path": "~/General/Tablist"
+    },
+    {
+      "name": "AdvancedGlowingCommand",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "advanced_glowing_command",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/AdvancedGlowingCommandCommand.java"
+        ]
+      },
+      "path": "~/General/Advanced Glowing"
+    },
+    {
+      "name": "CommandApplyAdvancedGlowing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "command_apply_advanced_glowing",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CommandApplyAdvancedGlowingProcedure.java"
+        ]
+      },
+      "path": "~/General/Advanced Glowing"
+    },
+    {
+      "name": "GameCompassInHand",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "game_compass_in_hand",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GameCompassInHandProcedure.java"
+        ]
+      }
     }
   ],
   "variable_elements": [
@@ -9447,6 +9719,30 @@
       "type": "direction",
       "scope": "player_persistent",
       "value": "DOWN"
+    },
+    {
+      "name": "ascendingTimer",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "350.0"
+    },
+    {
+      "name": "removeEffectsSingleTarget",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "ascendingActive",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
+    },
+    {
+      "name": "advancedGlowingColor",
+      "type": "string",
+      "scope": "player_persistent",
+      "value": ""
     }
   ],
   "sound_elements": [
@@ -9781,6 +10077,10 @@
     ],
     "BLOCKS:mod:door": [
       "CUSTOM:FightDoors"
+    ],
+    "ITEMS:mod:keep_on_death": [
+      "CUSTOM:GameCompass",
+      "CUSTOM:ReplaySpleef"
     ]
   },
   "tab_element_order": {},
@@ -10022,7 +10322,10 @@
       "item.minigames.fight_doors": "Fight Doors",
       "key.categories.vote": "Voting",
       "effect.minigames.ascending": "Ascending",
-      "subtitles.ascending": "Player is ascending"
+      "subtitles.ascending": "Player is ascending",
+      "item.minigames.floor_doors": "Floor Doors",
+      "item.minigames.spawn_tp_marker_block": "Spawn TP Marker",
+      "effect.minigames.advanced_glowing": "Advanced Glowing"
     }
   },
   "metadata": {
@@ -10269,6 +10572,10 @@
           {
             "name": "HP Bar",
             "children": []
+          },
+          {
+            "name": "Spawn Room",
+            "children": []
           }
         ]
       },
@@ -10305,6 +10612,14 @@
           },
           {
             "name": "Gravity",
+            "children": []
+          },
+          {
+            "name": "Advanced Glowing",
+            "children": []
+          },
+          {
+            "name": "Tablist",
             "children": []
           }
         ]

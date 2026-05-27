@@ -60,6 +60,8 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SPAWN_SHIELD_ANGEL;
 	public static final DeferredItem<Item> MOVING_BLOCK_SPAWN;
 	public static final DeferredItem<Item> FIGHT_DOORS;
+	public static final DeferredItem<Item> FLOOR_DOORS;
+	public static final DeferredItem<Item> SPAWN_TP_MARKER_BLOCK;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -93,6 +95,8 @@ public class MinigamesModItems {
 		SPAWN_SHIELD_ANGEL = block(MinigamesModBlocks.SPAWN_SHIELD_ANGEL);
 		MOVING_BLOCK_SPAWN = block(MinigamesModBlocks.MOVING_BLOCK_SPAWN, new Item.Properties().rarity(Rarity.EPIC));
 		FIGHT_DOORS = block(MinigamesModBlocks.FIGHT_DOORS);
+		FLOOR_DOORS = block(MinigamesModBlocks.FLOOR_DOORS);
+		SPAWN_TP_MARKER_BLOCK = block(MinigamesModBlocks.SPAWN_TP_MARKER_BLOCK);
 	}
 
 	// Start of user code block custom items

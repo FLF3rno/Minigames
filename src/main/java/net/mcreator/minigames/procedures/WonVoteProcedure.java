@@ -29,6 +29,16 @@ public class WonVoteProcedure {
 				StartSpleefProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 4) {
 				StartRoomProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 5) {
+				StartRoomProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 6) {
+				StartRoomProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 7) {
+				StartRoomProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {
+				StartRoomProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 9) {
+				StartRoomProcedure.execute(world);
 			}
 		} else {
 			if (entity instanceof Player _player && !_player.level().isClientSide())

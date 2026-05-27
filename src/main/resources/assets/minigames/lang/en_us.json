@@ -235,5 +235,8 @@
   "item.minigames.fight_doors": "Fight Doors",
   "key.categories.vote": "Voting",
   "effect.minigames.ascending": "Ascending",
-  "subtitles.ascending": "Player is ascending"
+  "subtitles.ascending": "Player is ascending",
+  "item.minigames.floor_doors": "Floor Doors",
+  "item.minigames.spawn_tp_marker_block": "Spawn TP Marker",
+  "effect.minigames.advanced_glowing": "Advanced Glowing"
 }

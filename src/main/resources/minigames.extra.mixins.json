@@ -9,7 +9,11 @@
     "LivingEntityJumpGravityMixin"
   ],
   "client": [
-    "PlayerRendererGravityRotationMixin"
+    "PlayerRendererGravityRotationMixin",
+    "GuiAccessor",
+    "ScreenMixin",
+    "EntityTeamColorMixin",
+    "PlayerNameColorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
@@ -19,6 +20,7 @@ import org.joml.Matrix4f;
 public class FreeBeamRenderManager {
 
     public static final ResourceLocation WHITE_TEXTURE = ResourceLocation.withDefaultNamespace("textures/misc/white.png");
+    private static final float BEAM_HEIGHT = 20.0f;
 
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent.AfterParticles event) {
@@ -29,10 +31,10 @@ public class FreeBeamRenderManager {
         PoseStack poseStack = event.getPoseStack();
         MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
 
-        renderBeams(poseStack, bufferSource, cameraPos, mc.level.players());
+        renderBeams(poseStack, bufferSource, cameraPos, mc.level.players(), event.getPartialTick().getGameTimeDeltaPartialTick(false));
     }
 
-    public static void renderBeams(PoseStack poseStack, MultiBufferSource bufferSource, Vec3 cameraPos, Iterable<? extends Player> players) {
+    public static void renderBeams(PoseStack poseStack, MultiBufferSource bufferSource, Vec3 cameraPos, Iterable<? extends Player> players, float partialTick) {
         for (Player player : players) {
             try {
                 if (player.hasData(ModDataAttachments.BEAM_DATA)) {
@@ -46,7 +48,9 @@ public class FreeBeamRenderManager {
                         double renderZ = data.z - cameraPos.z;
                         poseStack.translate(renderX, renderY, renderZ);
 
+                        float tickTime = player.tickCount + partialTick;
                         renderSolidTaperingBox(poseStack, bufferSource);
+                        renderCloudCap(poseStack, bufferSource, tickTime);
 
                         poseStack.popPose();
                     }
@@ -57,7 +61,7 @@ public class FreeBeamRenderManager {
     }
 
     private static void renderSolidTaperingBox(PoseStack poseStack, MultiBufferSource bufferSource) {
-        float height = 20.0f;
+        float height = BEAM_HEIGHT;
         VertexConsumer buffer = bufferSource.getBuffer(RenderType.beaconBeam(WHITE_TEXTURE, true));
         Matrix4f matrix = poseStack.last().pose();
 
@@ -84,5 +88,55 @@ public class FreeBeamRenderManager {
         buffer.addVertex(matrix, x1Top, yTop, z1Top).setColor(r, g, b, alpha).setUv(0.0f, 0.0f).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(0, 1, 0);
         buffer.addVertex(matrix, x2Top, yTop, z2Top).setColor(r, g, b, alpha).setUv(1.0f, 0.0f).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(0, 1, 0);
         buffer.addVertex(matrix, x2Bottom, yBottom, z2Bottom).setColor(r, g, b, alpha).setUv(1.0f, 1.0f).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(0, 1, 0);
+    }
+
+    private static void renderCloudCap(PoseStack poseStack, MultiBufferSource bufferSource, float tickTime) {
+        VertexConsumer buffer = bufferSource.getBuffer(RenderType.debugQuads());
+        Matrix4f matrix = poseStack.last().pose();
+
+        float centerY = BEAM_HEIGHT + 0.35f + Mth.sin(tickTime * 0.06f) * 0.12f;
+        float baseAlpha = 0.32f + Mth.sin(tickTime * 0.08f) * 0.06f;
+
+        float r = 0.98f;
+        float g = 0.98f;
+        float b = 1.0f;
+
+        // Build mostly-horizontal cloud lobes so the cap reads as fluffy mass, not vertical card spam.
+        addHorizontalPuffQuad(matrix, buffer, centerY + 0.06f, 0.0f, 0.0f, 2.15f, r, g, b, baseAlpha * 0.82f);
+        addHorizontalPuffQuad(matrix, buffer, centerY + 0.22f, 0.52f, -0.34f, 1.55f, r, g, b, baseAlpha * 0.78f);
+        addHorizontalPuffQuad(matrix, buffer, centerY + 0.18f, -0.6f, 0.3f, 1.48f, r, g, b, baseAlpha * 0.76f);
+        addHorizontalPuffQuad(matrix, buffer, centerY + 0.34f, 0.22f, 0.62f, 1.28f, r, g, b, baseAlpha * 0.72f);
+        addHorizontalPuffQuad(matrix, buffer, centerY + 0.3f, -0.3f, -0.64f, 1.2f, r, g, b, baseAlpha * 0.70f);
+        addHorizontalPuffQuad(matrix, buffer, centerY + 0.52f, 0.0f, 0.0f, 1.04f, r, g, b, baseAlpha * 0.66f);
+
+    }
+
+    private static void addPuffLayer(Matrix4f matrix, VertexConsumer buffer, float y, float centerX, float centerZ, float radius, float thickness, float rotationDeg, float r, float g, float b, float alpha) {
+        float rot = (float) Math.toRadians(rotationDeg);
+        float cs = Mth.cos(rot);
+        float sn = Mth.sin(rot);
+
+        addVerticalPuffQuad(matrix, buffer, y, centerX, centerZ, radius, thickness, cs, sn, r, g, b, alpha);
+        addVerticalPuffQuad(matrix, buffer, y, centerX, centerZ, radius, thickness, -sn, cs, r, g, b, alpha);
+        addHorizontalPuffQuad(matrix, buffer, y, centerX, centerZ, radius * 0.95f, r, g, b, alpha * 0.82f);
+    }
+
+    private static void addVerticalPuffQuad(Matrix4f matrix, VertexConsumer buffer, float y, float centerX, float centerZ, float halfWidth, float halfHeight, float dirX, float dirZ, float r, float g, float b, float alpha) {
+        float x1 = centerX - dirX * halfWidth;
+        float z1 = centerZ - dirZ * halfWidth;
+        float x2 = centerX + dirX * halfWidth;
+        float z2 = centerZ + dirZ * halfWidth;
+
+        buffer.addVertex(matrix, x1, y - halfHeight, z1).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+        buffer.addVertex(matrix, x1, y + halfHeight, z1).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+        buffer.addVertex(matrix, x2, y + halfHeight, z2).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+        buffer.addVertex(matrix, x2, y - halfHeight, z2).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+    }
+
+    private static void addHorizontalPuffQuad(Matrix4f matrix, VertexConsumer buffer, float y, float centerX, float centerZ, float radius, float r, float g, float b, float alpha) {
+        buffer.addVertex(matrix, centerX - radius, y, centerZ - radius).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+        buffer.addVertex(matrix, centerX - radius, y, centerZ + radius).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+        buffer.addVertex(matrix, centerX + radius, y, centerZ + radius).setColor(r, g, b, alpha).setNormal(0, 1, 0);
+        buffer.addVertex(matrix, centerX + radius, y, centerZ - radius).setColor(r, g, b, alpha).setNormal(0, 1, 0);
     }
 }

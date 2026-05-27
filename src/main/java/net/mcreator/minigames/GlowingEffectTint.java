@@ -1,6 +1,7 @@
 package net.mcreator.minigames;
 
 import net.mcreator.minigames.init.MinigamesModRenderStateModifiers;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 import net.minecraft.client.model.EntityModel;
@@ -50,10 +51,23 @@ public class GlowingEffectTint {
 		@Override
 		public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, LivingEntityRenderState state, float limbSwing, float limbSwingAmount) {
 			LivingEntity entity = state.getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
-			if (entity == null || entity.isInvisible() || !entity.hasEffect(net.minecraft.world.effect.MobEffects.GLOWING)) {
+			if (entity == null || entity.isInvisible()) {
+				return;
+			}
+			var advancedGlow = entity.getEffect(MinigamesModMobEffects.ADVANCED_GLOWING);
+			if (advancedGlow == null) {
+				return;
+			}
+			int level = advancedGlow.getAmplifier() + 1;
+			if (level <= 1) {
 				return;
 			}
 			int tint = resolveTint(entity);
+			if (level == 2) {
+				tint = (0x80 << 24) | (tint & 0x00FFFFFF);
+			} else {
+				tint = (0xD0 << 24) | (tint & 0x00FFFFFF);
+			}
 			ResourceLocation texture = this.parentRenderer.getTextureLocation(state);
 			VertexConsumer buffer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
 			this.getParentModel().renderToBuffer(poseStack, buffer, packedLight, LivingEntityRenderer.getOverlayCoords(state, 0.0F), tint);

@@ -73,7 +73,7 @@ public class VotePopupOverlay {
 			int voteIconRenderHeight = 32;
 			int voteIconFrameSize = 32;
 			event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, SPRITE_0, (w / 2) - (voteIconRenderWidth / 2), iconY, 0, voteIconIndex * voteIconFrameSize, voteIconRenderWidth, voteIconRenderHeight, voteIconFrameSize, voteIconFrameSize, voteIconFrameSize,
-					voteIconFrameSize * 9);
+					voteIconFrameSize * 10);
 			PlayerFaceRenderer.draw(event.getGuiGraphics(), getVotingPlayerSkin(), headX, nameY - 1, 8);
 			event.getGuiGraphics().drawString(minecraft.font, Component.literal(playerName), nameBaseX, nameY, playerNameColor, false);
 			int messageX = (w - minecraft.font.width(voteMessage)) / 2;

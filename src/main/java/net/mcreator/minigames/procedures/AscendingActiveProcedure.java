@@ -42,7 +42,7 @@ public class AscendingActiveProcedure {
                 }
 
                 if (player.getInventory().getSelectedSlot() != 8) {
-                    player.getInventory().setSelectedSlot(8); // Slot 9 in the hotbar (0-based index)
+                    player.getInventory().setSelectedSlot(8);
                 }
             }
             
@@ -62,7 +62,8 @@ public class AscendingActiveProcedure {
             var effectInstance = livEnt.getEffect(MinigamesModMobEffects.ASCENDING);
             if (effectInstance != null) {
                 double amp = effectInstance.getAmplifier();
-                entity.setDeltaMovement(new Vec3(0, (amp / 100d), 0));
+                double up = (amp / 100d);
+                entity.setDeltaMovement(new Vec3(0, up, 0));
                 entity.hasImpulse = true;
             }
         } else if (entity instanceof Player player && nbt.getBoolean("ascendingSlotSaved").orElse(false)) {

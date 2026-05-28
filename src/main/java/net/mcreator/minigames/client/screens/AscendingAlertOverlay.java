@@ -24,12 +24,12 @@ public class AscendingAlertOverlay {
 	public static void eventHandler(RenderGuiEvent.Pre event) {
 		Minecraft mc = Minecraft.getInstance();
 		Player local = mc.player;
-		if (local == null || local.level() == null || local.hasEffect(MinigamesModMobEffects.ASCENDING))
+		if (local == null || local.level() == null)
 			return;
 
 		Player ascendingPlayer = null;
 		for (Player player : local.level().players()) {
-			if (player != null && player.getData(MinigamesModVariables.PLAYER_VARIABLES).ascendingActive) {
+			if (player != null && player.hasEffect(MinigamesModMobEffects.ASCENDING)) {
 				ascendingPlayer = player;
 				break;
 			}
@@ -47,29 +47,27 @@ public class AscendingAlertOverlay {
 		}
 
 		int w = event.getGuiGraphics().guiWidth();
-		int barY = 2;
+		int barY = 0;
 		int barHeight = 10;
-		int borderColor = 0xAA000000;
-		int bgColor = 0x66000000;
+		int bgColor = 0x44000000;
 		int fillColor = colorFromPlayer(ascendingPlayer);
 
 		event.getGuiGraphics().fill(0, barY, w, barY + barHeight, bgColor);
 		event.getGuiGraphics().fill(0, barY, Math.max(1, (int) (w * smoothedPercent)), barY + barHeight, fillColor);
-		event.getGuiGraphics().fill(0, barY - 1, w, barY, borderColor);
-		event.getGuiGraphics().fill(0, barY + barHeight, w, barY + barHeight + 1, borderColor);
 
 		String playerName = ascendingPlayer.getGameProfile().getName();
 		Component lineStart = Component.literal(playerName).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(fillColor & 0x00FFFFFF)));
-		Component lineEnd = Component.literal(" is ascending! Hit them quick!").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFD54A)));
+		int whitePulse = pulseWhite(local.tickCount, event.getPartialTick().getGameTimeDeltaPartialTick(false));
+		int pulsedTextColor = mixWithWhite(0xFFD54A, whitePulse);
+		Component lineEnd = Component.literal(" is ascending! Hit them quick!").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(pulsedTextColor & 0x00FFFFFF)));
 		Component message = Component.empty().append(lineStart).append(lineEnd);
 
-		int pulse = (int) (Math.sin((local.tickCount + event.getPartialTick().getGameTimeDeltaPartialTick(false)) * 0.3f) * 60.0f + 195.0f);
-		int glow = (pulse << 16) | (pulse << 8) | pulse;
-		int textY = barY + barHeight + 3;
+		int textY = barY + barHeight + 2;
 		int messageWidth = mc.font.width(message);
 		int x = (w - messageWidth) / 2;
-		event.getGuiGraphics().drawString(mc.font, message, x + 1, textY + 1, 0xAA000000, false);
-		event.getGuiGraphics().drawString(mc.font, message, x, textY, glow, false);
+		int nameWidth = mc.font.width(playerName);
+		event.getGuiGraphics().drawString(mc.font, lineStart, x, textY, fillColor, false);
+		event.getGuiGraphics().drawString(mc.font, lineEnd, x + nameWidth, textY, pulsedTextColor, false);
 	}
 
 	private static int colorFromPlayer(Player player) {
@@ -84,5 +82,21 @@ public class AscendingAlertOverlay {
 		} catch (Exception ignored) {
 			return 0xFFFF5555;
 		}
+	}
+
+	private static int pulseWhite(int tickCount, float partialTick) {
+		return (int) (Math.sin((tickCount + partialTick) * 0.3f) * 60.0f + 195.0f);
+	}
+
+	private static int mixWithWhite(int color, int whitePulse) {
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = color & 0xFF;
+		float t = (whitePulse - 195.0f) / 60.0f;
+		t = Mth.clamp(t, 0.0f, 1.0f);
+		int outR = (int) Mth.lerp(t, r, 255.0f);
+		int outG = (int) Mth.lerp(t, g, 255.0f);
+		int outB = (int) Mth.lerp(t, b, 255.0f);
+		return 0xFF000000 | (outR << 16) | (outG << 8) | outB;
 	}
 }

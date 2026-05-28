@@ -11,4 +11,3 @@ void main() {
     float luma = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
     fragColor = vec4(vec3(luma), color.a);
 }
-

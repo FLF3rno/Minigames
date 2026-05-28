@@ -20,7 +20,7 @@ public class PlayerNameColorMixin {
 	}
 
 	@Unique
-    private void minigames$applyColor(CallbackInfoReturnable<Component> cir) {
+	private void minigames$applyColor(CallbackInfoReturnable<Component> cir) {
 		Player player = (Player) (Object) this;
 		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
 

@@ -8,6 +8,7 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -71,5 +72,9 @@ public class NameColorApplyProcedure {
 		MutableComponent coloredName = Component.literal(entity.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor));
 		entity.setCustomName(coloredName);
 		entity.setCustomNameVisible(true);
+
+		if (entity instanceof ServerPlayer serverPlayer) {
+			serverPlayer.refreshTabListName();
+		}
 	}
 }

@@ -9743,6 +9743,12 @@
       "type": "string",
       "scope": "player_persistent",
       "value": ""
+    },
+    {
+      "name": "ascendingGlobalActive",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
     }
   ],
   "sound_elements": [

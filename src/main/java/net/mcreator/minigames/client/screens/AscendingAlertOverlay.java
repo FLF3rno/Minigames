@@ -39,8 +39,13 @@ public class AscendingAlertOverlay {
 			return;
 		}
 
-		double rawTimer = ascendingPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).ascendingTimer;
-		float targetPercent = Mth.clamp((float) (rawTimer / 350.0), 0f, 1f);
+		MinigamesModVariables.PlayerVariables ascendingVars = ascendingPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES);
+		if (ascendingVars == null) {
+			smoothedPercent = 0f;
+			return;
+		}
+
+		float targetPercent = Mth.clamp((float) (ascendingVars.ascendingTimer / 350.0f), 0f, 1f);
 		smoothedPercent = Mth.lerp(0.18f, smoothedPercent, targetPercent);
 		if (Math.abs(smoothedPercent - targetPercent) < 0.001f) {
 			smoothedPercent = targetPercent;

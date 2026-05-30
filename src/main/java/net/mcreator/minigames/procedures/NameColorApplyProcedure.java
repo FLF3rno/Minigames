@@ -75,6 +75,7 @@ public class NameColorApplyProcedure {
 
 		if (entity instanceof ServerPlayer serverPlayer) {
 			serverPlayer.refreshTabListName();
+			serverPlayer.connection.send(new net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket(net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, serverPlayer));
 		}
 	}
 }

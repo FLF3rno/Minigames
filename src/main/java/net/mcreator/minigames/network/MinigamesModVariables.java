@@ -316,6 +316,7 @@ public class MinigamesModVariables {
 		public double connectedPlayers = 0;
 		public double roomCheckDelayTicks = 0;
 		public boolean removeEffects = false;
+		public boolean ascendingGlobalActive = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -417,6 +418,7 @@ public class MinigamesModVariables {
 			connectedPlayers = nbt.getDoubleOr("connectedPlayers", 0);
 			roomCheckDelayTicks = nbt.getDoubleOr("roomCheckDelayTicks", 0);
 			removeEffects = nbt.getBooleanOr("removeEffects", false);
+			ascendingGlobalActive = nbt.getBooleanOr("ascendingGlobalActive", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -519,6 +521,7 @@ public class MinigamesModVariables {
 			nbt.putDouble("connectedPlayers", connectedPlayers);
 			nbt.putDouble("roomCheckDelayTicks", roomCheckDelayTicks);
 			nbt.putBoolean("removeEffects", removeEffects);
+			nbt.putBoolean("ascendingGlobalActive", ascendingGlobalActive);
 			return nbt;
 		}
 

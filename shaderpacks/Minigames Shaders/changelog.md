@@ -1,0 +1,861 @@
+- v1.4.0b
+  - Replaced settings 'Shadows Enabled (Overworld/End)' with 'Shadows Type (Overworld/End)'
+  - Disabled 'Fog Ignores Transparents' by default due to unexpected bugs
+  - Improved the color and shape of water caustics
+
+<br>
+
+- v1.4.0 (26/05/22)
+  - Added Story-Mode-like clouds (configurable)
+  - Added new 'Vertical' end clouds type
+  - Enabled border fog for Voxy
+  - Added setting 'Voxy Border Fog Dist Mult'
+  - Improved nether effects (Nether Clouds and Border Fog)
+  - Added fake shadows for when real-time shadows are disabled
+  - Added settings 'Nether Sky Tint Red/Green/Blue'
+  - Added settings 'Nether Clouds Tint Red/Green/Blue'
+  - Added settings 'Sunrise/Sunset Top Height' and 'Sunrise/Sunset Bottom Height'
+  - Added setting 'Water Foam Size'
+  - Fixed shader not loading with Distant Horizons enabled
+  - Fixed vanilla rain appearing and disappearing instantly
+  - Fixed particle rain looking broken against distant terrain (configurable with new 'Fog Ignores Transparents' setting)
+  - Fixed compiler warnings
+  - Tweaked many settings and effects
+
+<br>
+
+- v1.3.7b (26/05/15)
+  - Fixed shader not loading on amd gpus
+
+<br>
+
+- v1.3.7 (26/05/14)
+  - Added water caustics (configurable)
+  - Added additional vanilla-like end portal effects
+  - Introduced fix for all randomly un-shaded / double-shaded objects
+  - Significantly improved end clouds, end portal, and end sky
+  - Improved nether clouds
+  - Added settings 'End Fog Red/Green/Blue'
+  - Fixed bugs
+  - Now over 500 settings
+
+<br>
+
+- v1.3.6b (26/05/08)
+  - Improved reflections
+  - Tweaked side shading
+  - Tweaked the default green effect of night vision
+  - Tweaked many more settings and effects
+  - Fixed many bugs
+
+<br>
+
+- v1.3.6 (26/05/04)
+  - Added setting 'Reflections Brightness'
+  - Added settings 'Water Tint (Shallow) Brightness' and 'Water Tint (Deep) Brightness'
+  - Added settings 'Bloom Detect Tint Red/Green/Blue'
+  - Split blocklight colors into dark and bright variants
+  - Split setting 'Weather Brightness Mult' into day and night variants
+  - Renamed setting 'Bright Block Decrease' to 'Brightness Tweaks Strength'
+  - Added setting 'Mixed Particle Rendering'
+  - Reworked block brightness tweaks
+  - Reworked lighting calculations
+  - Reworked many default setting values
+  - Fixed full-bright bugs in mc 26.1
+  - Passed 1 million downloads!
+
+<br>
+
+- v1.3.5 (26/04/23)
+  - Added colored shadows
+  - Significantly improved bloom processing
+  - Added fancy end portals (configurable)
+  - Split setting 'Lava Noise Amount' into overworld, nether, and end variants
+  - Added setting 'Underground Fog Color Type'
+  - Renamed setting 'Water Saturation' to 'Water Biome Influence'
+
+<br>
+
+- v1.3.4b (26/04/15)
+  - Fixed bugs that caused the shader to not load
+
+<br>
+
+- v1.3.4 (26/04/14)
+  - Improved bloom processing
+  - Improved volumetric sunrays
+  - Added setting 'Night Atmospheric Fog Density'
+  - Added setting 'Sun/Moon Weather Opacity Decrease'
+  - Added setting 'Enchantment Glint Strength'
+  - Added setting 'Matrix Compatibility'
+  - Reworked water color settings
+  - Fixed fast leaves
+  - Fixed more bugs
+  - Tweaked default settings and effects
+
+<br>
+
+- v1.3.3b (26/03/19)
+  - Fixed more bugs
+
+<br>
+
+- v1.3.3 (26/03/17)
+  - Fixed several bugs
+
+<br>
+
+- v1.3.2 (26/03/10)
+  - Added setting 'Horizon Fade Strength'
+  - Added setting 'Entity Flash Strength'
+  - Split setting 'Shadow Distance' into 'Shadow Map Scale' and 'Shadow Map Distance Cutoff'
+  - Added Panini projection (configurable)
+  - Fixed reflections regression
+  - Tweaked effects
+
+<br>
+
+- v1.3.1 (26/02/26)
+  - Replaced bloom implementation
+  - Added settings 'Bloom Style' and 'Bloom Render Scale'
+  - Added settings for moon phase brightness multipliers
+  - Added settings for the brightnesses of each glowing ore
+  - Split the setting 'Glowing Ores Strength' into overworld, nether, and end variants
+  - Split setting 'Cloud Weather Darken' into 'Cloud Weather Tint Red/Green/Blue'
+  - Tweaked underground fog and added setting 'Underground Fog Condition'
+  - Tweaked settings and effects for Fantasy and Realistic styles
+  - Improved glowing ores support
+  - Fixed bugs
+
+<br>
+
+- **v1.3.0** (26/02/07)
+  - Partially discontinued OptiFine support
+  - Added foliage and lava noise/variation (configurable)
+  - Split setting 'AO Amount' into lit and shaded variants
+  - Split setting 'Shadows Enabled' into overworld and end variants
+  - Added setting 'TAA Jitter Strength'
+  - Added settings 'Cloud Fog Start' and 'Cloud Fog Curve'
+  - Split settings 'Border Fog Start' and 'Border Fog Curve' into overworld, nether, and end variants
+  - Added setting 'Sky Weather Desaturation'
+  - Added setting 'Underground Fog Altitude Impact'
+  - Improved custom skybox support
+  - Added vanilla-like AO to distant horizons terrain (same as the AO for voxy terrain)
+  - Fixed 1.17 support
+  - Many more fixes and tweaks
+  - Now includes well over 400 settings
+
+<br>
+<br>
+<br>
+
+- v1.2.2 (26/01/23)
+  - Added settings for end sky colors, end clouds colors, nether sky colors, and nether clouds colors
+  - Added settings for height-based desaturation
+  - Added settings for sun and moon opacity
+  - Many tweaks and bug fixes
+
+<br>
+
+- v1.2.1 (26/01/13)
+  - Added water foam (configurable)
+  - Added custom skybox support
+  - Added settings 'End Sky Brightness' and 'End Static Brightness'
+  - Added settings for the temporal filter
+  - Removed setting 'Depth-Based Transparency' (for water)
+  - Fixed bugs, tweaked setting and effects, etc
+
+<br>
+
+- v1.2.0c (26/01/05)
+  - Added more emissives
+  - Fixed bugs
+
+<br>
+
+- v1.2.0b (25/12/28)
+  - Fixed many bugs
+
+<br>
+
+- **v1.2.0** (25/12/22)
+  - Added PBR support
+  - Added settings:
+    - 'PBR Type'
+    - 'POM Enabled'
+    - 'PBR Normals Amount'
+    - 'Emissive Textures Enabled'
+    - 'Glowing Stems Strength'
+  - Removed setting 'Glowing Ores Enabled'
+  - Fixed misc bugs
+
+<br>
+<br>
+<br>
+
+- v1.1.3 (25/12/16)
+  - Added Voxy compatibility
+  - Added end clouds (configurable) and replaced end sky
+  - Added colorwheel support
+  - Split setting 'Brightness' into overworld, nether, and end variants
+  - Fixed motion blur
+  - Fixed misc bugs
+
+<br>
+
+- v1.1.2 (25/12/06)
+  - Added lightning flashes (configurable)
+  - Added setting 'DOF Min Blur Strength'
+  - Added settings for in-liquid fog densities
+  - Removed setting 'Vignette Noise Enabled'
+  - Improved auto exposure
+  - Fixed in-lava and in-powdered-snow fogs
+  - Fixed blocks sometimes being registered incorrectly
+
+<br>
+
+- v1.1.1 (25/11/27)
+  - Added glowing ores (configurable)
+  - Added nether clouds (configurable)
+  - Overhauled water surface rendering again
+  - Reworked some shader options menus
+  - Settings changes:
+    - Replaced 'Sunrays Min Surface' and 'Sunrays Min Underground' with 'Sunrays Underground Mult'
+    - Removed rain reflection settings (currently unused)
+    - Removed 'Use Simple Lighting' setting
+  - Improved sunrays and ambient occlusion
+  - Fixed and improved blocklight flickering
+
+<br>
+
+- **v1.1.0** (25/11/10)
+  - Enabled pixelated shadows on the vanilla style
+  - Added 'Fancy Nether Portals' setting (enabled by default)
+  - Added 'Snowy Tweaks' setting (enabled by default)
+  - Added 'Foliage Tint Red/Green/Blue' settings
+  - Split setting 'Contrast' into surface and underground variants
+  - Removed setting 'Cloud Transparency (Realistic)'
+  - Improved performance and effects quality
+    - Added separate temporal filtering for sunrays and realistic clouds
+    - Improved noise/dithering patterns
+  - Tweaked settings and effects
+
+<br>
+<br>
+<br>
+
+- v1.0.9 (25/10/24)
+  - Tweaked effects and settings
+  - Fixed bugs
+
+<br>
+
+- v1.0.8 (25/10/12)
+  - Improved reflections and sharpening
+  - Tweaked many settings
+  - Fixed bugs
+
+<br>
+
+- v1.0.7 (25/10/09)
+  - Settings changes:
+    - Added setting 'Sky Weather Brightness'
+    - Added setting 'Underground Fog Brightness'
+    - Removed setting 'Darken Sky Underground'
+  - Tweaked lighting
+  - Fixed bugs
+
+<br>
+
+- v1.0.6 (25/08/15)
+  - Added support for Blindness and Darkness effects
+  - Settings changes:
+    - Replaced setting 'Waving Fresnel Mult' with 'Waving Fresnel Surface' and 'Waving Fresnel Underground'
+    - Added settings 'Blindness Effect Fog Density' and 'Darkness Effect Fog Density'
+    - Removed setting 'Use Better Rand'
+  - Fully specified usages of copyrighted code within shader
+  - Fixed bugs
+
+<br>
+
+- v1.0.5 (25/08/09)
+  - Overhauled water surface rendering
+  - Fixed 'Rain Particle Weather' rendering
+  - Settings changes:
+    - Removed setting 'Waving Normal Amount'
+  - Fixed bugs
+
+<br>
+
+- v1.0.4 (25/08/04)
+  - Re-added OptiFine support
+  - Added support for more 1.21 blocks
+  - Tweaked fantasy style (and others)
+  - Slightly tweaked many effects
+  - Fixed bugs
+
+<br>
+
+- v1.0.3 (25/07/30)
+  - Setting changes:
+    - Added settings 'Pale Garden Fog Density' and 'Pale Garden Fog Night Density'
+    - Removed setting 'Advanced Terrain-Sky Blending' (is now always on)
+  - Added effects for the pale garden biome
+  - Significantly improved terrain-sky blending
+  - Made far-away clouds fade into sky
+  - Fixed multiple bugs
+  - Tweaked some settings
+
+<br>
+
+- v1.0.2 (25/07/12)
+  - Setting changes:
+    - Added setting 'Shadows Brightness'
+    - Added settings 'Cel Sunlight Amount', 'Cel Ambient Amount', and 'Cel Blocklight Amount'
+    - Renamed setting 'WEATHER_LIGHT_MULT' to 'WEATHER_BRIGHTNESS_MULT'
+    - More misc settings updates (reordered settings, fixed typos, etc)
+  - Overhauled cel shading
+  - Fixed player names and nametags (and possibly more) not being transparent
+  - Misc tweaks to features
+
+<br>
+
+- v1.0.1 (25/07/07)
+  - Added settings:
+    - Nether Fog Density
+    - End Fog Density
+  - Tweaked some effects
+  - Tweaked settings, especially for the nether
+
+<br>
+
+- **v1.0.0** (25/06/25)
+  - Relaunched as "I Like Vanilla" (previously "What42's Shader Base")
+  - Now trying to be more exciting in general
+  - Major performance improvements through massive internal rewrites, though balanced out with more demanding settings (better shadows, sunrays, reflections, etc)
+  - Generally looks like, feels like, and still is What42's Shader Base, but comes with countless changes across the entire shader
+
+<br>
+<br>
+<br>
+
+- b1.13.3 (25/04/19)
+  - Fixed entities on 1.21.5
+  - v1.0 soon!
+
+<br>
+
+- b1.13.2 (24/12/31)
+  - Added Distant Horizons support
+  - Slightly improved volumetric sunrays
+
+<br>
+
+- b1.13.1 (24/09/07)
+  - Fixed night vision
+  - Added settings 'Night Vision Brightness' and 'Night Vision Green Amount'
+  - Fixed vanilla brightness slider
+  - Fixed name of setting 'End Ambient Brightness'
+
+<br>
+
+- **b1.13.0** (24/08/11)
+  - Added settings for volumetric sunrays: 'Increment Amount' and 'Enter Amount'
+  - Added settings: 'Nether Ambient Brightness', 'End Ambient Brightness', and Nether Blocklight Brightness Mult'
+  - Added settings: 'Sunrays Amount Max Day' and 'Sunrays Amount Max Night' (only for volumetric sunrays)
+  - Moved settings: 'Sunrays Amount Sunrise' and 'Sunrays Amount Sunset' are now 'Sunrays Mult Sunrise' and 'Sunrays Mult Sunset'
+  - Fixed end sky
+  - Improved reflection fading
+  - Tweaked styles
+  - Improved motion blur
+  - Fixed hand jitter
+  - Fixed many setting values
+  - Maybe fixed phosphor (idk when it broke, it might've worked in b1.12.0)
+  - Tweaked sunrays amount calculations
+
+<br>
+<br>
+<br>
+
+- **b1.12.0** (24/04/20)
+  - Added style: Cartoon (made to work with Bare Bones)
+  - Added feature: black outlines
+  - Added feature: cel shading
+  - Added feature: hsv posterization
+  - Improved Reflections
+  - Swapped FXAA with Complementary's
+  - Tweaked existing styles
+
+<br>
+<br>
+<br>
+
+- b1.11.5 (24/04/05)
+  - Added block reflections (included settings: 'Blocks Ref Amount Surface', 'Blocks Ref Amount Underground', and 'Blocks Reflection Fresnel')
+  - Fixed rain reflections
+  - Disabled shadows for fire
+  - Fixed Sharpening-related bugs
+
+<br>
+
+- b1.11.4 (24/03/30)
+  - Added setting: Weather Horizontal Amount
+  - Added setting: Sunrays Amount Weather Mult
+  - Further tweaked Realistic and Fantasy styles
+  - Added fog to particles
+
+<br>
+
+- b1.11.3 (24/03/26)
+  - Added settings to control water waviness for both surface and underground
+  - Added setting: Sunrays Brightness Increase
+  - Added setting: Blocklight Flicker Amount
+  - Fixed blocklight night brightness
+  - Tweaked Realistic and Fantasy styles
+  - Settings changes:
+  - - New 'GROUND_FOG_STRENGTH' is: old 'GROUND_FOG_STRENGTH' * 0.3
+  - - Replaced 'BLOCK_NIGHT_BRIGHTNESS_INCREASE' with 'BLOCK_BRIGHTNESS_NIGHT_MULT'
+
+<br>
+
+- b1.11.2 (24/03/24)
+  - Reworked volumetric sunrays (also affects depth sunrays)
+  - Added setting Block Night Brightness Increase
+  - Added setting Block Brightness Curve (already in code, just forgot to add to menu)
+  - Tweaked Fantasy style
+  - Fixed auto exposure calculations
+  - Settings changes:
+  - - Removed 'SUNRAYS_CURVE_SURFACE', alternative is 'SUNRAYS_MIN_SURFACE'
+  - - Removed 'SUNRAYS_CURVE_UNDERGROUND', alternative is 'SUNRAYS_MIN_UNDERGROUND'
+
+- b1.11.2a (24/03/25)
+  - Reverted depth sunrays
+
+<br>
+
+- b1.11.1 (24/03/12)
+  - Added settings: Ground Fog Enabled, Ground Fog Strength, Ground Fog Slope, aGround Fog Offset
+  - Added settings: Auto Exposure Enabled, Auto Exposure Bright Mult, Auto Exposure Dark Mult
+  - Reworked Fantasy style and tweaked Realistic style
+  - Settings changes:
+  - - New 'SUNRAYS_AMOUNT' (for depth-based sunrays) is: old 'SUNRAYS_AMOUNT' * 0.625
+  - - New 'SHARPENING_AMOUNT' is: old 'SHARPENING_AMOUNT' * 1.25
+
+<br>
+
+- **b1.11.0** (24/02/25)
+  - Added setting: Anti-Aliasing Strategy (includes FXAA, TAA, and combinations)
+  - Added 'super secret settings' easter egg from 1.8-
+  - Added settings: Nether Blocklight [Red, Green, Blue] Mult
+  - Many slight tweaks
+  - Fixed many debug settings
+  - Settings changes:
+  - - New 'SUNRAYS_AMOUNT' (for depth-based sunrays) is: old 'SUNRAYS_AMOUNT' * 0.8
+  - - Removed setting 'TAA_ENABLED' (replaced with 'AA_STRATEGY')
+
+<br>
+<br>
+<br>
+
+- b1.10.1 (24/02/23)
+  - Added settings: Sun Brightness and Moon Brightness
+  - Added settings: Sunrays Curve Surface and Sunrays Curve Underground
+  - Further tweaked styles
+  - Fixed short_grass not waving
+  - Settings changes:
+  - - New 'BLOOM_AMOUNT' is: old 'BLOOM_AMOUNT' * 0.85
+  - - Fully removed setting 'SUNRAYS_COMPUTE_COUNT' (unused due to code changes)
+  - - Fully removed setting 'SUNRAYS_SATURATION' (unused due to code changes)
+
+<br>
+
+- **b1.10.0** (24/01/22)
+  - Added setting: Pixelated Shadows
+  - Improved bloom performance
+  - Fixed bug in shadow filtering
+  - Tweaked sunrise / sunset timings (and calculations)
+  - Re-tweaked styles
+  - Settings changes:
+  - - Removed setting 'WATER_REFLECTIONS_ENABLED'
+  - - Removed setting 'RAIN_REFLECTIONS_ENABLED'
+  - - Added setting 'REFLECTIONS_ENABLED'
+  - - Added setting 'BLOOM_NETHER_MULT' (already existed but forgot to add to settings screen)
+  - - Removed setting 'BLOOM_SKY_BRIGHTNESS' (unused due to code changes)
+  - - Removed setting 'BLOOM_ENTITY_BRIGHTNESS' (unused due to code changes)
+  - - Removed setting 'BLOOM_CLOUD_BRIGHTNESS' (unused due to code changes)
+  - - Removed setting 'BLOOM_HAND_BRIGHTNESS' (unused due to code changes)
+  - - Added setting 'SKY_BRIGHTNESS'
+  - - Added setting 'CLOUDS_BRIGHTNESS'
+
+<br>
+<br>
+<br>
+
+- b1.9.6 (24/01/02)
+  - Fixed isometric rendering (now with working shadows!)
+  - Fixed langs for setting 'HEIGHT_BASED_WAVING_ENABLED'
+  - Settings changes:
+  - - New 'SHADOWS_NOISE' is: old 'SHADOWS_NOISE' * 1.25
+
+<br>
+
+- b1.9.5 (23/12/30)
+  - Improved shadow filtering performance
+  - Added setting: Shadows Noise Amount
+  - Settings changes:
+  - - Setting 'SHADOW_FILTERING' now only accepts [-1 (use style value), 0 (off (pixelated)), 1 (off (smooth)), 2 (on), 3 (on (legacy version))]
+
+<br>
+
+- b1.9.4 (23/12/27)
+  - Fixed setting 'Hide Nearby Clouds'
+  - Settings changes:
+  - - Removed 'ENTITY_FOG_ENABLED' (unused due to code updates)
+  - - Removed 'CORRECTED_LIGHTING_FOG' (unused due to code updates)
+
+<br>
+
+- b1.9.3 (23/12/19)
+  - Improved volumetric sunrays quality and performance
+  - Transparency settings have been inverted so they represent transparency and not opacity
+  - Many small tweaks
+  - Updated documentation
+  - Settings changes:
+  - - New 'WATER_TRANSPARENCY' is: 1.0 - old 'WATER_TRANSPARENCY'
+  - - New 'RAIN_TRANSPARENCY' is: 1.0 - old 'RAIN_TRANSPARENCY'
+  - - New 'CLOUD_TRANSPARENCY' is: 1.0 - old 'CLOUD_TRANSPARENCY'
+  - - Renamed 'RAIN_TRANSPARENCY' to 'WEATHER_TRANSPARENCY'
+
+<br>
+
+- b1.9.2 (23/12/12)
+  - Added feature: Volumetric Sunrays
+  - Improved Fantasy style
+  - Settings changes:
+  - - Renamed 'SUNRAYS_ENABLED' to "DEPTH_SUNRAYS_ENABLED'
+
+<br>
+
+- b1.9.1 (23/12/09)
+  - Fixed lighting on fog
+  - Tweaked Realistic and Fantasy styles
+  - Removed (at least some) unused settings
+  - Fixed some setting combination crashes
+
+<br>
+
+- **b1.9.0** (23/12/07)
+  - Added 'styles' system, allowing you to choose a base style and edit any values on top of it
+  - Added styles: Added styles: Realistic and Fantasy (in addition to the default Vanilla style)
+  - Fixed some light-value-related bugs
+  - Added settings:
+  - - Stars Brightness
+  - - Darkened Stars Brightness
+  - - Water Transparency
+  - - Use Corrected Lighting Fog
+  - - Apply Fog To Reflections
+  - Improved bloom performance
+  - Started updating documentation again (finally)
+  - Updated License
+  - Many small tweaks and fixes
+
+<br>
+<br>
+<br>
+
+- b1.8.4 (23/12/02)
+  - Improved performance (overhauled fog logic)
+  - Fixed cave brightness
+  - Reworked many fog settings
+  - Tweaked rain settings
+
+<br>
+
+- b1.8.3b
+  - Added setting: Hide Nearby Clouds
+  - Added 'Rain Transparency' setting to settings menu (whoops)
+  - Fixed more light-value related bugs
+  - Added debug setting: Reflective Everything
+  - Created more example images
+
+- b1.8.3 (23/12/01)
+  - Fixed many problems related to light value detection (sometimes mods would make the moon be treated as the sun)
+  - Added smoothening to rain puddle strength
+
+<br>
+
+- b1.8.2b
+  - Improved rain reflection strength
+  - Tweaked settings more
+  - Created example image
+
+- b1.8.2 (23/11/30)
+  - 1.12 compat
+
+<br>
+
+- b1.8.1 (23/11/29)
+  - Added feature: height based waviness multiplier
+  - Added settings: cloud and rain transparency, and many reflection settings
+  - Reworked water reflection amounts
+  - Fixed lighting applied to fog with high FOV
+  - Tweaked some lighting colors
+
+<br>
+
+- **b1.8.0** (23/11/26)
+  - Improved performance (hopefully, might just apply to resolutions > 1080p, and may be nullified by next point)
+  - Increased shadowmap resolution from 512 -> 768, and distance from 96 -> 112
+  - Improved reflections
+  - Reworked lighting values due to slight shading overhaul
+  - Removed 'Ultra' profile and added 'Unplayable' profile
+
+<br>
+<br>
+<br>
+
+- b1.7.5 (23/11/23)
+  - Added feature: blocklight flickering
+  - Added feature: cloud color changed with sunlight color
+  - Added feature: simple colorblindness correction
+  - Tweaked water rendering values
+
+<br>
+
+- b1.7.4 (23/11/16)
+  - Improved water rendering (reflections & fresnel)
+  - Added setting for Shadow Distortion
+  - Added feature: decrease star brightness near blocklight
+
+<br>
+
+- b1.7.3 (23/10/18)
+  - Further improved ssao
+  - Further improved nether bloom
+  - Reverted shadow transparency to pre-b1.7.2
+  - Added settings for cave ambient color
+  - Added settings for underwater waviness
+
+<br>
+
+- b1.7.2 (23/10/07)
+  - Added underwater waviness
+  - Improved reflections (possibly just going in circles)
+  - MANY general improvements
+
+<br>
+
+- b1.7.1 (23/10/03)
+  - Massively improved SSAO
+  - Massively improved missing reflection rendering
+  - Fixed more crashes caused by non-default settings
+  - Tweaked settings
+
+<br>
+
+- **b1.7.0** (23/09/28)
+  - Reformatted entire shader for slightly better performance (300+ files updated)
+  - Added Cave Ambient color settings for consistent underground lighting
+  - Improved water waving & fresnel
+  - Improved reflections
+  - Improved particle lighting
+  - Added High and Ultra profiles and improved other profiles
+  - Fixed crash caused by non-default settings
+  - Fixed special entity colors not appearing (sheep wool color, etc)
+  - Significantly improved 'Show Dangerous Light' option
+  - Tweaked many settings
+  - Fixed settings rgb color ordering (used to be red, blue, green)
+  - Fixed waving shadows moving when the camera rotates
+  - Fixed sides of grass waving instead of top
+
+<br>
+<br>
+<br>
+
+- b1.6.5 (23/09/17)
+  - Overhauled water rendering
+  - Fixed shadow transparency
+  - Probably fixed choppy waviness bug
+
+<br>
+
+- b1.6.4.1 (23/09/15)
+  - More 1.19 tweaks
+
+- b1.6.4 (23/09/12)
+  - Added isometric rendering
+  - Improved reflection performance
+  - Added more reflection settings
+  - Improved shadow filtering when TAA is disabled
+  - Tweaks / updates for 1.19
+
+<br>
+
+- b1.6.3 (23/08/30)
+  - Updated license
+
+<br>
+
+- b1.6.2 (23/08/29)
+  - Added rain reflections
+  - Added water fresnel addition
+  - Updated license
+
+<br>
+
+- b1.6.1 (23/08/28)
+  - Added water reflections to settings
+  - Added proper waving water
+  - Tweaked water reflection colors
+
+<br>
+
+- **b1.6.0** (23/08/26)
+  - Added water reflections (more to come!)
+  - Added waving water
+
+<br>
+<br>
+<br>
+
+- b1.5.2
+  - Significantly improved close-up shadows
+  - Fixed handheld light for blocks that were too close
+  - Many small tweaks to bloom, taa, etc
+
+<br>
+
+- b1.5.1 (23/08/19)
+  - Re-added shadow filtering levels
+  - Improved handheld light (and removed 'Use Fixed Depth' option)
+  - Maybe improved performance
+
+<br>
+
+- **b1.5.0** (23/08/18)
+  - Added settings:
+  - - 'Use Gamma Correction' (no new functionality, just allows stuff to be disabled)
+  - - 'Show Sunlight'
+  - - 'Show Brightnesses'
+  - Removed settings: (to improve performance)
+  - - 'Bloom Curve'
+  - - 'Vignette Curve'
+  - Improved effects:
+  - - Shadow filtering
+  - - SSAO
+  - - Bloom
+  - Improved performance (in multiple ways)
+  - Tweaked many settings
+
+<br>
+<br>
+<br>
+
+- b1.4.4 (23/08/12)
+  - Improved DOF
+  - Exposed the 'DOF Show Blur Amounts' setting
+  - Slight optimizations
+
+<br>
+
+- b1.4.3 (23/08/10)
+  - Added profiles
+  - Switched to purely-depth-based SSAO
+  - Improved performance (mostly through new SSAO)
+
+<br>
+
+- b1.4.2 (23/08/09)
+  - Added smoothening to sharpening velocity factor
+  - Improved SSAO (probably)
+  - Slight optimizations (maybe offset by ssao though)
+
+<br>
+
+- b1.4.1 (23/08/08)
+  - Added 'Waving Night Mult' setting
+  - Added 'Use Fixed Depth' to reverse new optimization
+  - Added vines to waving blocks
+  - Tweaked many settings
+  - Optimized slightly more
+  - Fixed hand color regression
+
+<br>
+
+- **b1.4.0** (23/08/07)
+  - Improved sharpening
+  - Added more DOF settings
+  - Added 'Use Simple Light' setting
+  - Added more debug settings
+  - Optimized slightly more
+  - Kinda actually fixed debug outputs
+  - Reformatted changelog
+
+<br>
+<br>
+<br>
+
+- b1.3.2 (23/08/06)
+  - Improved shadow filtering amount
+  - Renamed all versions from alpha to beta (retroactively)
+
+<br>
+
+- b1.3.1 (23/08/05)
+  - Fixed for Iris 1.19.4
+  - Fixed and tuned sunrays color
+  - Fixed some option names
+  - Reworked lighting code
+
+<br>
+
+- **b1.3.0** (23/08/04)
+  - Improved shadow filtering (maybe worse performance)
+  - Fixed block outline and leash
+  - Made motion blur framerate-independent
+  - Slightly improved performance (in other areas)
+
+<br>
+<br>
+<br>
+
+- **b1.2.0** (23/08/03)
+  - Added Motion Blur (disabled by default)
+  - Added Depth of Field (disabled by default)
+  - Improved lighting calculations
+  - Fixed debug outputs
+
+<br>
+<br>
+<br>
+
+- b1.1.2 (23/08/02)
+  - Improved shadow sampling (better and faster!)
+
+<br>
+
+- b1.1.1 (23/08/02)
+  - More optimizations
+
+<br>
+
+- **b1.1.0** (23/08/02)
+  - Fixed performance regressions (mostly)
+  - Fixed ssao appearing over fog
+  - Fixed ssao being applied on flat surfaces
+  - Improved angled lighting
+  - Updated documentation
+
+<br>
+<br>
+<br>
+
+- **b1.0.0** (23/08/01)
+  - Added 1.12 support
+  - Improved sunrays
+  - Decreased buffers used, hopefully better performance now
+
+<br>
+<br>
+
+- **Development started (23/05/19)**

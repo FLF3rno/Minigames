@@ -1,0 +1,74 @@
+#if TONEMAPPER == 3
+	#include "/lib/aces.glsl"
+#endif
+
+
+
+void doColorCorrection(inout vec3 color) {
+	
+	// brightness
+	#ifdef OVERWORLD
+		color *= (OVERWORLD_BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#endif
+	#ifdef NETHER
+		color *= (NETHER_BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#endif
+	#ifdef END
+		color *= (END_BRIGHTNESS - 1.0) * 0.5 + 1.0;
+	#endif
+	
+	// tonemapper
+	color = max(color, 0.0);
+	#if TONEMAPPER == 0
+		// None
+		color = min(color, 1.0);
+	#elif TONEMAPPER == 1
+		// What42's Cubic
+		color = min(color, 1.5);
+		color = color - (4.0 / 27.0) * color * color * color;
+		// Reasoning: slope should be 1 near 0, 0 near 1, and generally closer to 1 than to 0, so derivative should be something like `1-x^2`
+		// Integral of `1-x^2` maxes out at 2/3
+		// Integral of `1-4/9*x^2` maxes out at 1 (because it has more area)
+		// Integral of `1-4/9*x^2` is `x-4/27*x^3`
+		// Or more generally, for any power p, `out = in - pow(in, p + 1) * pow(p / (p + 1), p) / (p + 1)`, with the derivative of this being `y = 1 - pow(px / (p + 1), p)`
+	#elif TONEMAPPER == 2
+		// Reinhard
+		float lum = getLum(color);
+		color /= 1.0 + lum * 0.5;
+	#elif TONEMAPPER == 3
+		// ACES
+		color = acesFitted(color);
+	#endif
+	
+	#if USE_GAMMA_CORRECTION == 1
+		color = sqrt(color);
+	#endif
+	
+	// contrast
+	color = mix(vec3(0.5), color, mix(UNDERGROUND_CONTRAST, SURFACE_CONTRAST, eyeBrightnessSmooth.y / 240.0) * 0.1 + 1.0);
+	color = clamp(color, 0.0, 1.0);
+	
+	// saturation & vibrance
+	float saturation = getSaturation(color);
+	float vibranceAmount = (pow3(1.0 - saturation)) * VIBRANCE * 1.5;
+	float colorLum = getLum(color);
+	vec3 lumDiff = color - colorLum;
+	float saturationAmount = (SATURATION + SATURATION_LIGHT * pow3(colorLum) + SATURATION_DARK * pow3(1.0 - colorLum) * 2.0) * 0.3;
+	color += lumDiff * (saturationAmount + vibranceAmount);
+	color = clamp(color, 0.0, 1.0);
+	
+	#if USE_GAMMA_CORRECTION == 1
+		#if GAMMA == 0
+			color = pow2(color);
+		#else
+			const float realGamma = float(GAMMA) / 10.0;
+			const float gammaMult = 1.0 - realGamma / 2.0;
+			color = pow(color, vec3(2.0 * gammaMult));
+		#endif
+	#elif GAMMA != 0
+		const float realGamma = float(GAMMA) / 10.0;
+		const float gammaMult = 1.0 - realGamma / 2.0;
+		color = pow(color, vec3(gammaMult));
+	#endif
+	
+}

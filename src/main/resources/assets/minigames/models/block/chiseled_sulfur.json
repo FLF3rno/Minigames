@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/26.2_chiseled_sulfur",
+    "particle": "minigames:block/26.2_chiseled_sulfur"
+  },
+  "render_type": "solid"
+}

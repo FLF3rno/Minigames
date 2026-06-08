@@ -20,6 +20,9 @@ import net.minecraft.util.Mth;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import net.mcreator.minigames.ModDataAttachments;
+import net.mcreator.minigames.entity.ShieldAngelEntity;
+
 import java.util.List;
 
 @EventBusSubscriber(value = Dist.CLIENT)
@@ -66,9 +69,12 @@ public class BlessedLinkRenderer {
 	private static Entity findClosestBlesser(LivingEntity source, List<Entity> candidates) {
 		Entity closest = null;
 		double bestDistanceSq = Double.MAX_VALUE;
+		int sourceId = source.hasData(ModDataAttachments.BLESSED_DATA) ? source.getData(ModDataAttachments.BLESSED_DATA).dataId : 0;
+		if (sourceId == 0) return null;
 		for (Entity candidate : candidates) {
 			if (candidate == source || !candidate.isAlive()) continue;
 			if (!isBlesser(candidate)) continue;
+			if (getBlesserDataId(candidate) != sourceId) continue;
 			double distanceSq = source.distanceToSqr(candidate);
 			if (distanceSq < bestDistanceSq) {
 				bestDistanceSq = distanceSq;
@@ -113,5 +119,12 @@ public class BlessedLinkRenderer {
 		return entity.getTags().contains(BLESSER_RUNTIME_TAG)
 			|| entity.getType().is(BLESSER_TYPE_TAG_MINIGAMES)
 			|| entity.getType().is(BLESSER_TYPE_TAG_MOD);
+	}
+
+	private static int getBlesserDataId(Entity entity) {
+		if (entity instanceof ShieldAngelEntity shieldAngel) {
+			return shieldAngel.getEntityData().get(ShieldAngelEntity.DATA_ID);
+		}
+		return entity.getPersistentData().getIntOr("DataID", 0);
 	}
 }

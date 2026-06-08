@@ -15,9 +15,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -31,9 +33,11 @@ import com.mojang.blaze3d.opengl.GlStateManager;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.mcreator.minigames.DungeonItemAccess;
+import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.network.DungeonItemPickupMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import org.lwjgl.glfw.GLFW;
@@ -42,7 +46,7 @@ import org.lwjgl.glfw.GLFW;
 public class HoveredItemTooltipRenderer {
 	private static final double MAX_DISTANCE = 8.0;
 	private static final double MAX_DISTANCE_SQR = MAX_DISTANCE * MAX_DISTANCE;
-	private static final float TEXT_SCALE = 0.02F;
+	private static final float BASE_TEXT_SCALE = 0.02F;
 	private static final int LINE_HEIGHT = 10;
 	private static final int TEXT_COLOR = 0xFFFFFFFF;
 	private static final float RIGHT_OFFSET = 30.0F;
@@ -56,10 +60,12 @@ public class HoveredItemTooltipRenderer {
 	private static final int SUPPORT_COLOR = 0x55FFFF;
 	private static final int MAGE_COLOR = 0xFF55FF;
 	private static final int DAMAGE_COLOR = 0x55FF55;
+	private static final int EXPLOSION_DAMAGE_COLOR = 0xFFAA33;
 	private static final int SPEED_COLOR = 0x55FFFF;
 	private static final int RELIC_GRADIENT_START = 0xA020F0;
 	private static final int RELIC_GRADIENT_END = 0xC77DFF;
-
+	private static final int CURSED_GRADIENT_START = 0xFF6666;
+	private static final int CURSED_GRADIENT_END = 0x7A0000;
 	private static ItemEntity currentTargetItem = null;
 
 	@SubscribeEvent
@@ -83,6 +89,10 @@ public class HoveredItemTooltipRenderer {
 		if (damage != null && damage != 0) {
 			tooltip.add(nextIndex++, Component.literal(formatDamage(damage) + " Damage").setStyle(Style.EMPTY.withColor(DAMAGE_COLOR)));
 		}
+		Double explosionDamage = getDisplayedExplosionDamage(stack);
+		if (explosionDamage != null && explosionDamage != 0) {
+			tooltip.add(nextIndex++, Component.literal(formatDamage(explosionDamage) + " Explosion Damage").setStyle(Style.EMPTY.withColor(EXPLOSION_DAMAGE_COLOR)));
+		}
 		Double speed = getDisplayedAttackSpeed(stack);
 		if (speed != null) {
 			double adjustedSpeed = speed - 1.6;
@@ -94,6 +104,12 @@ public class HoveredItemTooltipRenderer {
 		}
 		tooltip.add(Component.empty());
 		tooltip.add(Component.literal(classInfo.label()).setStyle(Style.EMPTY.withBold(true).withColor(classInfo.color())));
+		if (isCursed(stack)) {
+			tooltip.add(gradientText("CURSED", CURSED_GRADIENT_START, CURSED_GRADIENT_END, true));
+		}
+		if (isGlitched(stack)) {
+			tooltip.add(glitchedText("GLITCHED"));
+		}
 		if (DungeonItemAccess.isStolen(stack)) {
 			tooltip.add(Component.literal("STOLEN").setStyle(Style.EMPTY.withBold(true).withColor(0xFFAA00)));
 		}
@@ -187,12 +203,12 @@ public class HoveredItemTooltipRenderer {
 				return;
 			}
 			ClassInfo classInfo = getClassInfo(stack);
-			renderTooltipAtItem(event, targetItem, tooltip, minecraft);
+			renderTooltipAtItem(event, targetItem, tooltip, minecraft, classInfo);
 		}
 		currentTargetItem = targetItem;
 	}
 
-	private static void renderTooltipAtItem(RenderLevelStageEvent event, ItemEntity itemEntity, List<Component> tooltip, Minecraft minecraft) {
+	private static void renderTooltipAtItem(RenderLevelStageEvent event, ItemEntity itemEntity, List<Component> tooltip, Minecraft minecraft, ClassInfo classInfo) {
 		PoseStack poseStack = event.getPoseStack();
 		EntityRenderDispatcher dispatcher = minecraft.getEntityRenderDispatcher();
 		Font font = minecraft.font;
@@ -202,14 +218,15 @@ public class HoveredItemTooltipRenderer {
 		poseStack.pushPose();
 		poseStack.translate(itemPosition.x - cameraPosition.x, itemPosition.y - cameraPosition.y, itemPosition.z - cameraPosition.z);
 		poseStack.mulPose(dispatcher.cameraOrientation());
-		poseStack.scale(TEXT_SCALE, -TEXT_SCALE, TEXT_SCALE);
+		float tooltipScale = getTooltipScale(minecraft);
+		poseStack.scale(tooltipScale, -tooltipScale, tooltipScale);
 
 		Matrix4f matrix = poseStack.last().pose();
 		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 
 		int maxWidth = 0;
 		for (Component line : tooltip) {
-			maxWidth = Math.max(maxWidth, font.width(line));
+			maxWidth = Math.max(maxWidth, font.width(styleWorldTooltipLine(line, itemEntity.getItem(), classInfo)));
 		}
 
 		Style goldBold = Style.EMPTY.withColor(0xFFAA00).withBold(true);
@@ -218,6 +235,7 @@ public class HoveredItemTooltipRenderer {
 		boolean canPickUp = canCurrentPlayerPickUp(itemEntity.getItem(), minecraft);
 		boolean isRelic = DungeonItemAccess.isRelic(itemEntity.getItem());
 		boolean full = isFullForItem(minecraft.player, itemEntity.getItem());
+		List<WorldTooltipDefinitions.DefinitionCard> definitions = WorldTooltipDefinitions.getDefinitionCards(itemEntity.getItem());
 		
 		Style promptStyle = (canPickUp && !full) ? goldBold : redBold;
 		String fullPrompt;
@@ -257,26 +275,34 @@ public class HoveredItemTooltipRenderer {
 		int panel1Height = getContentHeight(tooltip.size()) + PADDING_Y * 2;
 		int panel2Height = (oneLine ? LINE_HEIGHT : LINE_HEIGHT * 2) + PADDING_Y * 2;
 		int gap = 4;
-		float totalHeight = panel1Height + gap + panel2Height;
+		int definitionsHeight = WorldTooltipDefinitions.getDefinitionsHeight(definitions);
+		float totalHeight = Math.max(panel1Height + gap + panel2Height, definitionsHeight);
+		int baseTop = Math.round((totalHeight - (panel1Height + gap + panel2Height)) / 2.0F);
 
 		poseStack.translate(RIGHT_OFFSET, -(totalHeight / 2.0F), 0.0F);
 		matrix = poseStack.last().pose();
 
 		GlStateManager._disableDepthTest();
 
-		renderTooltipPanel(matrix, bufferSource, 0, 0, maxWidth + PADDING_X * 2, panel1Height);
-		int secondPanelTop = panel1Height + gap;
+		renderTooltipPanel(matrix, bufferSource, 0, baseTop, maxWidth + PADDING_X * 2, baseTop + panel1Height);
+		int secondPanelTop = baseTop + panel1Height + gap;
 		renderTooltipPanel(matrix, bufferSource, 0, secondPanelTop, maxWidth + PADDING_X * 2, secondPanelTop + panel2Height);
 
 		poseStack.translate(0.0F, 0.0F, 0.01F);
 		matrix = poseStack.last().pose();
 
 		for (int i = 0; i < tooltip.size(); i++) {
-			Component line = tooltip.get(i);
+			Component line = styleWorldTooltipLine(tooltip.get(i), itemEntity.getItem(), classInfo);
 			float lineX = PADDING_X + 1;
 			float lineY = PADDING_Y + getLineY(i) + 1;
 			font.drawInBatch(line, lineX, lineY, TEXT_COLOR, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
 					LightTexture.lightCoordsWithEmission(15728880, 2));
+		}
+
+		if (!definitions.isEmpty()) {
+			int definitionLeft = maxWidth + PADDING_X * 2 + 8;
+			int definitionTop = baseTop;
+			WorldTooltipDefinitions.renderDefinitions(matrix, bufferSource, font, definitions, definitionLeft, definitionTop);
 		}
 
 		float fullWidth = maxWidth + PADDING_X * 2;
@@ -372,6 +398,17 @@ public class HoveredItemTooltipRenderer {
 		return DungeonItemAccess.canClassPickUp(stack, classDungeon);
 	}
 
+	private static float getTooltipScale(Minecraft minecraft) {
+		if (minecraft.player == null) {
+			return BASE_TEXT_SCALE * 0.8F;
+		}
+		double tooltipSize = minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).tooltipSize;
+		if (tooltipSize <= 0.0) {
+			tooltipSize = 0.8;
+		}
+		return (float) (BASE_TEXT_SCALE * tooltipSize);
+	}
+
 	private static void removeVanillaAttributeLines(List<Component> tooltip) {
 		tooltip.removeIf(line -> {
 			String text = line.getString().trim().toLowerCase(Locale.ROOT);
@@ -452,6 +489,35 @@ public class HoveredItemTooltipRenderer {
 		return speed;
 	}
 
+	private static Double getDisplayedExplosionDamage(ItemStack stack) {
+		ItemAttributeModifiers modifiers = stack.getOrDefault(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+		double addValue = 0.0;
+		double addMultipliedBase = 0.0;
+		double addMultipliedTotal = 0.0;
+		boolean hasExplosionDamage = false;
+
+		for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
+			if (entry.slot().test(net.minecraft.world.entity.EquipmentSlot.MAINHAND) && entry.attribute().is(MinigamesModAttributes.EXPLOSION_DAMAGE)) {
+				hasExplosionDamage = true;
+				double amount = entry.modifier().amount();
+				switch (entry.modifier().operation()) {
+					case ADD_VALUE -> addValue += amount;
+					case ADD_MULTIPLIED_BASE -> addMultipliedBase += amount;
+					case ADD_MULTIPLIED_TOTAL -> addMultipliedTotal += amount;
+				}
+			}
+		}
+
+		if (!hasExplosionDamage) {
+			return null;
+		}
+
+		double explosionDamage = addValue;
+		explosionDamage += explosionDamage * addMultipliedBase;
+		explosionDamage *= 1.0 + addMultipliedTotal;
+		return explosionDamage;
+	}
+
 	private static String formatDamage(double damage) {
 		if (damage == Math.rint(damage)) {
 			return Integer.toString((int) damage);
@@ -485,4 +551,81 @@ public class HoveredItemTooltipRenderer {
 
 	private record ClassInfo(String label, int color) {
 	}
+
+	private static boolean isCursed(ItemStack stack) {
+		return stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("cursed", false);
+	}
+
+	private static boolean isGlitched(ItemStack stack) {
+		return stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("glitched", false);
+	}
+
+	private static MutableComponent gradientText(String text, int startColor, int endColor, boolean bold) {
+		MutableComponent result = Component.empty();
+		int length = text.length();
+		for (int i = 0; i < length; i++) {
+			float t = length <= 1 ? 0.0f : (float) i / (float) (length - 1);
+			int color = lerpColor(startColor, endColor, t);
+			result.append(Component.literal(String.valueOf(text.charAt(i))).setStyle(Style.EMPTY.withBold(bold).withColor(color)));
+		}
+		return result;
+	}
+
+	private static MutableComponent glitchedText(String text) {
+		MutableComponent result = Component.empty();
+		int time = (int) (System.currentTimeMillis() / 90L);
+		for (int i = 0; i < text.length(); i++) {
+			if (shouldHideGlitchChar(text, i, time)) {
+				result.append(Component.literal(" ").setStyle(Style.EMPTY.withBold(true).withColor(0x66CCFF)));
+				continue;
+			}
+			int color = randomGlitchColor(text, i, time);
+			result.append(Component.literal(String.valueOf(text.charAt(i))).setStyle(Style.EMPTY.withBold(true).withColor(color)));
+		}
+		return result;
+	}
+
+	private static boolean shouldHideGlitchChar(String text, int index, int time) {
+		Random random = new Random(0xBADC0DE ^ text.hashCode() ^ (index * 53) ^ (time * 17L));
+		return random.nextInt(10) == 0;
+	}
+
+	private static int randomGlitchColor(String text, int index, int time) {
+		Random random = new Random(0xC0FFEE ^ text.hashCode() ^ (index * 31) ^ time);
+		int mix = random.nextInt(100);
+		if (mix < 45) {
+			int gray = 80 + random.nextInt(70);
+			return (gray << 16) | (gray << 8) | gray;
+		}
+		int r = 35 + random.nextInt(95);
+		int g = 70 + random.nextInt(130);
+		int b = 90 + random.nextInt(150);
+		int dominance = random.nextInt(3);
+		if (dominance == 0) {
+			r += 20;
+		} else if (dominance == 1) {
+			g += 45;
+		} else {
+			b += 55;
+		}
+		return (r << 16) | (g << 8) | b;
+	}
+
+	private static Component styleWorldTooltipLine(Component line, ItemStack stack, ClassInfo classInfo) {
+		String normalized = line.getString().replace(" ", "").trim().toUpperCase(Locale.ROOT);
+		if (classInfo != null && normalized.equals(classInfo.label().replace(" ", "").toUpperCase(Locale.ROOT))) {
+			return Component.literal(classInfo.label()).setStyle(Style.EMPTY.withBold(true).withColor(classInfo.color()));
+		}
+		if (normalized.equals("CURSED")) {
+			return gradientText("CURSED", CURSED_GRADIENT_START, CURSED_GRADIENT_END, true);
+		}
+		if (normalized.equals("GLITCHED")) {
+			return glitchedText("GLITCHED");
+		}
+		if (normalized.equals("STOLEN")) {
+			return Component.literal("STOLEN").setStyle(Style.EMPTY.withBold(true).withColor(0xFFAA00));
+		}
+		return line;
+	}
+
 }

@@ -22,12 +22,16 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelshortboard.LAYER_LOCATION, Modelshortboard::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat.LAYER_LOCATION, Modelpewseat::createBodyLayer);
 		event.registerLayerDefinition(Modelshieldagent.LAYER_LOCATION, Modelshieldagent::createBodyLayer);
+		event.registerLayerDefinition(Modelintersecting_end_rod.LAYER_LOCATION, Modelintersecting_end_rod::createBodyLayer);
 		event.registerLayerDefinition(Modelchain.LAYER_LOCATION, Modelchain::createBodyLayer);
+		event.registerLayerDefinition(Modelpreacher.LAYER_LOCATION, Modelpreacher::createBodyLayer);
 		event.registerLayerDefinition(Modelworshipper.LAYER_LOCATION, Modelworshipper::createBodyLayer);
 		event.registerLayerDefinition(Modelstunned.LAYER_LOCATION, Modelstunned::createBodyLayer);
+		event.registerLayerDefinition(Modelgravedigger.LAYER_LOCATION, Modelgravedigger::createBodyLayer);
 		event.registerLayerDefinition(Modelspider.LAYER_LOCATION, Modelspider::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat_left.LAYER_LOCATION, Modelpewseat_left::createBodyLayer);
 		event.registerLayerDefinition(Modeldart.LAYER_LOCATION, Modeldart::createBodyLayer);
+		event.registerLayerDefinition(Modelhalfblock_barred.LAYER_LOCATION, Modelhalfblock_barred::createBodyLayer);
 		event.registerLayerDefinition(Modelcandlehead.LAYER_LOCATION, Modelcandlehead::createBodyLayer);
 		event.registerLayerDefinition(Modelhalfblock.LAYER_LOCATION, Modelhalfblock::createBodyLayer);
 	}

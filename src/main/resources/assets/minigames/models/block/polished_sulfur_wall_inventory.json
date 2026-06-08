@@ -1,0 +1,8 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "minigames:block/26.2_polished_sulfur",
+    "particle": "minigames:block/26.2_polished_sulfur"
+  },
+  "render_type": "solid"
+}

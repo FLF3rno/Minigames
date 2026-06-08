@@ -27,6 +27,7 @@ public class MinigamesModAttributes {
 	public static final DeferredHolder<Attribute, Attribute> REPAIR_VALUE = REGISTRY.register("repair_value", () -> new RangedAttribute("attribute.minigames.repair_value", 0, 0, 1000000).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> DROPPED_COINS = REGISTRY.register("dropped_coins", () -> new RangedAttribute("attribute.minigames.dropped_coins", 0, 0, 1000000).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> EFFECT_LENGTH = REGISTRY.register("effect_length", () -> new RangedAttribute("attribute.minigames.effect_length", 0, 0, 1000000).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> EXPLOSION_DAMAGE = REGISTRY.register("explosion_damage", () -> new RangedAttribute("attribute.minigames.explosion_damage", 0, 0, 1000000).setSyncable(true));
 
 	@SubscribeEvent
 	public static void addAttributes(EntityAttributeModificationEvent event) {
@@ -38,5 +39,6 @@ public class MinigamesModAttributes {
 		event.add(EntityType.PLAYER, REPAIR_VALUE);
 		event.getTypes().forEach(entity -> event.add(entity, DROPPED_COINS));
 		event.add(EntityType.PLAYER, EFFECT_LENGTH);
+		event.add(EntityType.PLAYER, EXPLOSION_DAMAGE);
 	}
 }

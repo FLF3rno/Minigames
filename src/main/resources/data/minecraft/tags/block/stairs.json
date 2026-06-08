@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "minigames:castle_stairs"
+    "minigames:polished_cinnabar_stairs",
+    "minigames:polished_sulfur_stairs",
+    "minigames:castle_stairs",
+    "minigames:sulfur_brick_stairs",
+    "minigames:cinnabar_stairs",
+    "minigames:cinnabar_brick_stairs",
+    "minigames:sulfur_stairs"
   ]
 }

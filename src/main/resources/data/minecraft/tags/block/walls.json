@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "minigames:chiseled_quartz_wall"
+    "minigames:polished_cinnabar_wall",
+    "minigames:polished_sulfur_wall",
+    "minigames:chiseled_quartz_wall",
+    "minigames:cinnabar_brick_wall",
+    "minigames:cinnabar_wall",
+    "minigames:sulfur_brick_wall",
+    "minigames:sulfur_wall"
   ]
 }

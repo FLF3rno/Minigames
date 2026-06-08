@@ -13,7 +13,6 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 
-import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 @EventBusSubscriber(Dist.CLIENT)
@@ -29,7 +28,11 @@ public class AscendingAlertOverlay {
 
 		Player ascendingPlayer = null;
 		for (Player player : local.level().players()) {
-			if (player != null && player.hasEffect(MinigamesModMobEffects.ASCENDING)) {
+			if (player == null) {
+				continue;
+			}
+			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			if (vars != null && (vars.ascendingActive || vars.ascendingTimer > 0)) {
 				ascendingPlayer = player;
 				break;
 			}

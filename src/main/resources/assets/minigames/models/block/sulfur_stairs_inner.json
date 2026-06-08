@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "minigames:block/26.2_sulfur",
+    "bottom": "minigames:block/26.2_sulfur",
+    "top": "minigames:block/26.2_sulfur",
+    "side": "minigames:block/26.2_sulfur"
+  },
+  "render_type": "solid"
+}

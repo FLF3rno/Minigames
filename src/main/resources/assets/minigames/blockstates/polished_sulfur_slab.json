@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minigames:block/polished_sulfur_slab"
+    },
+    "type=top": {
+      "model": "minigames:block/polished_sulfur_slab_top"
+    },
+    "type=double": {
+      "model": "minigames:block/polished_sulfur_slab_full"
+    }
+  }
+}

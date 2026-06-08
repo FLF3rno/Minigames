@@ -12,14 +12,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 @EventBusSubscriber(modid = MinigamesMod.MODID)
 public class NameColorFormatEvents {
 	@SubscribeEvent
-	public static void onNameFormat(PlayerEvent.NameFormat event) {
-		Component colored = coloredName(event.getEntity());
-		if (colored != null) {
-			event.setDisplayname(colored);
-		}
-	}
-
-	@SubscribeEvent
 	public static void onTabListNameFormat(PlayerEvent.TabListNameFormat event) {
 		Component colored = coloredName(event.getEntity());
 		if (colored != null) {

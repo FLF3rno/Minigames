@@ -137,6 +137,7 @@ public class MinigamesModVariables {
 		clone.removeEffectsSingleTarget = original.removeEffectsSingleTarget;
 		clone.ascendingActive = original.ascendingActive;
 		clone.advancedGlowingColor = original.advancedGlowingColor;
+		clone.tooltipSize = original.tooltipSize;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -317,6 +318,7 @@ public class MinigamesModVariables {
 		public double roomCheckDelayTicks = 0;
 		public boolean removeEffects = false;
 		public boolean ascendingGlobalActive = false;
+		public String floorTypeDungeon = "\"\"";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -419,6 +421,7 @@ public class MinigamesModVariables {
 			roomCheckDelayTicks = nbt.getDoubleOr("roomCheckDelayTicks", 0);
 			removeEffects = nbt.getBooleanOr("removeEffects", false);
 			ascendingGlobalActive = nbt.getBooleanOr("ascendingGlobalActive", false);
+			floorTypeDungeon = nbt.getStringOr("floorTypeDungeon", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -522,6 +525,7 @@ public class MinigamesModVariables {
 			nbt.putDouble("roomCheckDelayTicks", roomCheckDelayTicks);
 			nbt.putBoolean("removeEffects", removeEffects);
 			nbt.putBoolean("ascendingGlobalActive", ascendingGlobalActive);
+			nbt.putString("floorTypeDungeon", floorTypeDungeon);
 			return nbt;
 		}
 
@@ -619,6 +623,7 @@ public class MinigamesModVariables {
 		public boolean removeEffectsSingleTarget = false;
 		public boolean ascendingActive = false;
 		public String advancedGlowingColor = "";
+		public double tooltipSize = 0.8;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -656,6 +661,7 @@ public class MinigamesModVariables {
 			output.putBoolean("removeEffectsSingleTarget", removeEffectsSingleTarget);
 			output.putBoolean("ascendingActive", ascendingActive);
 			output.putString("advancedGlowingColor", advancedGlowingColor);
+			output.putDouble("tooltipSize", tooltipSize);
 		}
 
 		@Override
@@ -694,6 +700,7 @@ public class MinigamesModVariables {
 			removeEffectsSingleTarget = input.getBooleanOr("removeEffectsSingleTarget", false);
 			ascendingActive = input.getBooleanOr("ascendingActive", false);
 			advancedGlowingColor = input.getStringOr("advancedGlowingColor", "");
+			tooltipSize = input.getDoubleOr("tooltipSize", 0);
 		}
 
 		public void markSyncDirty() {

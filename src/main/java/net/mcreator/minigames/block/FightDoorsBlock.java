@@ -27,6 +27,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.procedures.FightDoorsRightclickedProcedure;
+import net.mcreator.minigames.procedures.FightDoorsBlockedCheckProcedure;
 import net.mcreator.minigames.block.entity.FightDoorsBlockEntity;
 
 import java.util.function.Function;
@@ -98,6 +99,12 @@ public class FightDoorsBlock extends Block implements SimpleWaterloggedBlock, En
 			scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 		}
 		return super.updateShape(state, world, scheduledTickAccess, currentPos, facing, facingPos, facingState, random);
+	}
+
+	@Override
+	public void onPlace(BlockState blockstate, Level world, BlockPos pos, BlockState oldState, boolean moving) {
+		super.onPlace(blockstate, world, pos, oldState, moving);
+		FightDoorsBlockedCheckProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ(), blockstate);
 	}
 
 	@Override

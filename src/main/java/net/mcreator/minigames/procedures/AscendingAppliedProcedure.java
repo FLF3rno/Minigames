@@ -54,11 +54,11 @@ public class AscendingAppliedProcedure {
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
                 MinigamesModSounds.ASCENDING.get(), SoundSource.PLAYERS, 2.0f, 1.0f);
         }
-{
-			MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-			_vars.ascendingTimer = 350;
-			_vars.markSyncDirty();
-		}
+        {
+            MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+            _vars.ascendingTimer = 350;
+            _vars.markSyncDirty();
+        }
 
         entity.getPersistentData().putDouble("immobileX", startX);
         entity.getPersistentData().putDouble("immobileZ", startZ);

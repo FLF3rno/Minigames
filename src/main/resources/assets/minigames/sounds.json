@@ -182,5 +182,397 @@
         "stream": false
       }
     ]
+  },
+  "update_sulfur_step": {
+    "sounds": [
+      {
+        "name": "minigames:step1",
+        "stream": false
+      },
+      {
+        "name": "minigames:step2",
+        "stream": false
+      },
+      {
+        "name": "minigames:step3",
+        "stream": false
+      },
+      {
+        "name": "minigames:step4",
+        "stream": false
+      },
+      {
+        "name": "minigames:step5",
+        "stream": false
+      },
+      {
+        "name": "minigames:step6",
+        "stream": false
+      },
+      {
+        "name": "minigames:step7",
+        "stream": false
+      }
+    ]
+  },
+  "update_sulfur_place": {
+    "sounds": [
+      {
+        "name": "minigames:place1",
+        "stream": false
+      },
+      {
+        "name": "minigames:place2",
+        "stream": false
+      },
+      {
+        "name": "minigames:place3",
+        "stream": false
+      },
+      {
+        "name": "minigames:place4",
+        "stream": false
+      },
+      {
+        "name": "minigames:place5",
+        "stream": false
+      },
+      {
+        "name": "minigames:place6",
+        "stream": false
+      },
+      {
+        "name": "minigames:place7",
+        "stream": false
+      },
+      {
+        "name": "minigames:place8",
+        "stream": false
+      }
+    ]
+  },
+  "update_sulfur_hit": {
+    "sounds": [
+      {
+        "name": "minigames:hit1",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit2",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit3",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit4",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit5",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit6",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit7",
+        "stream": false
+      }
+    ]
+  },
+  "update_sulfur_break": {
+    "sounds": [
+      {
+        "name": "minigames:break1",
+        "stream": false
+      },
+      {
+        "name": "minigames:break2",
+        "stream": false
+      },
+      {
+        "name": "minigames:break3",
+        "stream": false
+      },
+      {
+        "name": "minigames:break4",
+        "stream": false
+      },
+      {
+        "name": "minigames:break5",
+        "stream": false
+      },
+      {
+        "name": "minigames:break6",
+        "stream": false
+      },
+      {
+        "name": "minigames:break7",
+        "stream": false
+      }
+    ]
+  },
+  "update_potent_sulfur_step": {
+    "sounds": [
+      {
+        "name": "minigames:step1",
+        "stream": false
+      },
+      {
+        "name": "minigames:step2",
+        "stream": false
+      },
+      {
+        "name": "minigames:step3",
+        "stream": false
+      },
+      {
+        "name": "minigames:step4",
+        "stream": false
+      },
+      {
+        "name": "minigames:step5",
+        "stream": false
+      },
+      {
+        "name": "minigames:step6",
+        "stream": false
+      },
+      {
+        "name": "minigames:step7",
+        "stream": false
+      }
+    ]
+  },
+  "update_potent_sulfur_hit": {
+    "sounds": [
+      {
+        "name": "minigames:hit1",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit2",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit3",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit4",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit5",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit6",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit7",
+        "stream": false
+      }
+    ]
+  },
+  "update_potent_sulfur_break": {
+    "sounds": [
+      {
+        "name": "minigames:break1",
+        "stream": false
+      },
+      {
+        "name": "minigames:break2",
+        "stream": false
+      },
+      {
+        "name": "minigames:break3",
+        "stream": false
+      },
+      {
+        "name": "minigames:break4",
+        "stream": false
+      },
+      {
+        "name": "minigames:break5",
+        "stream": false
+      },
+      {
+        "name": "minigames:break6",
+        "stream": false
+      },
+      {
+        "name": "minigames:break7",
+        "stream": false
+      }
+    ]
+  },
+  "update_potent_sulfur_place": {
+    "sounds": [
+      {
+        "name": "minigames:place1",
+        "stream": false
+      },
+      {
+        "name": "minigames:place2",
+        "stream": false
+      },
+      {
+        "name": "minigames:place3",
+        "stream": false
+      },
+      {
+        "name": "minigames:place4",
+        "stream": false
+      },
+      {
+        "name": "minigames:place5",
+        "stream": false
+      },
+      {
+        "name": "minigames:place6",
+        "stream": false
+      },
+      {
+        "name": "minigames:place7",
+        "stream": false
+      },
+      {
+        "name": "minigames:place8",
+        "stream": false
+      }
+    ]
+  },
+  "update_cinnabar_break": {
+    "sounds": [
+      {
+        "name": "minigames:break1",
+        "stream": false
+      },
+      {
+        "name": "minigames:break2",
+        "stream": false
+      },
+      {
+        "name": "minigames:break3",
+        "stream": false
+      },
+      {
+        "name": "minigames:break4",
+        "stream": false
+      },
+      {
+        "name": "minigames:break5",
+        "stream": false
+      },
+      {
+        "name": "minigames:break6",
+        "stream": false
+      },
+      {
+        "name": "minigames:break7",
+        "stream": false
+      }
+    ]
+  },
+  "update_cinnabar_hit": {
+    "sounds": [
+      {
+        "name": "minigames:hit1",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit2",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit3",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit4",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit5",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit6",
+        "stream": false
+      },
+      {
+        "name": "minigames:hit7",
+        "stream": false
+      }
+    ]
+  },
+  "update_cinnabar_place": {
+    "sounds": [
+      {
+        "name": "minigames:place1",
+        "stream": false
+      },
+      {
+        "name": "minigames:place2",
+        "stream": false
+      },
+      {
+        "name": "minigames:place3",
+        "stream": false
+      },
+      {
+        "name": "minigames:place4",
+        "stream": false
+      },
+      {
+        "name": "minigames:place5",
+        "stream": false
+      },
+      {
+        "name": "minigames:place6",
+        "stream": false
+      },
+      {
+        "name": "minigames:place7",
+        "stream": false
+      }
+    ]
+  },
+  "update_cinnabar_step": {
+    "sounds": [
+      {
+        "name": "minigames:step1",
+        "stream": false
+      },
+      {
+        "name": "minigames:step2",
+        "stream": false
+      },
+      {
+        "name": "minigames:step3",
+        "stream": false
+      },
+      {
+        "name": "minigames:step4",
+        "stream": false
+      },
+      {
+        "name": "minigames:step5",
+        "stream": false
+      },
+      {
+        "name": "minigames:step6",
+        "stream": false
+      },
+      {
+        "name": "minigames:step7",
+        "stream": false
+      }
+    ]
   }
 }

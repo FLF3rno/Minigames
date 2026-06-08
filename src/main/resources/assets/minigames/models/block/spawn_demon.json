@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/dungeonmob",
+    "particle": "minigames:block/dungeonmob"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/fight_doors_blocked"
+    },
+    "facing=east": {
+      "model": "minigames:block/fight_doors_blocked",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/fight_doors_blocked",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/fight_doors_blocked",
+      "y": 270
+    }
+  }
+}

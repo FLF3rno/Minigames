@@ -71,6 +71,16 @@ public class MinigamesModEntities {
 					.sized(1f, 1f));
 	public static final DeferredHolder<EntityType<?>, EntityType<VolcanicSpewEntity>> VOLCANIC_SPEW = register("volcanic_spew",
 			EntityType.Builder.<VolcanicSpewEntity>of(VolcanicSpewEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.2f, 0.2f));
+	public static final DeferredHolder<EntityType<?>, EntityType<GravediggerEntity>> GRAVEDIGGER = register("gravedigger",
+			EntityType.Builder.<GravediggerEntity>of(GravediggerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
+
+					.sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<PreacherEntity>> PREACHER = register("preacher",
+			EntityType.Builder.<PreacherEntity>of(PreacherEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
+
+					.sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<PreachingShotEntity>> PREACHING_SHOT = register("preaching_shot",
+			EntityType.Builder.<PreachingShotEntity>of(PreachingShotEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -91,6 +101,8 @@ public class MinigamesModEntities {
 		CandleheadEntity.init(event);
 		ShieldAngelEntity.init(event);
 		MovingBlockEntity.init(event);
+		GravediggerEntity.init(event);
+		PreacherEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -106,5 +118,7 @@ public class MinigamesModEntities {
 		event.put(CANDLEHEAD.get(), CandleheadEntity.createAttributes().build());
 		event.put(SHIELD_ANGEL.get(), ShieldAngelEntity.createAttributes().build());
 		event.put(MOVING_BLOCK.get(), MovingBlockEntity.createAttributes().build());
+		event.put(GRAVEDIGGER.get(), GravediggerEntity.createAttributes().build());
+		event.put(PREACHER.get(), PreacherEntity.createAttributes().build());
 	}
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/lootdoor",
+    "particle": "minigames:block/lootdoor"
+  },
+  "render_type": "solid"
+}

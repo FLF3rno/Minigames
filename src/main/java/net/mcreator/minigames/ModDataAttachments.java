@@ -41,10 +41,34 @@ public class ModDataAttachments {
         );
     }
 
+    public static final class BlessedData {
+        public final int dataId;
+
+        public BlessedData(int dataId) {
+            this.dataId = dataId;
+        }
+
+        public static final Codec<BlessedData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.INT.fieldOf("dataId").forGetter(d -> d.dataId)
+        ).apply(instance, BlessedData::new));
+
+        public static final StreamCodec<net.minecraft.network.FriendlyByteBuf, BlessedData> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT, d -> d.dataId,
+            BlessedData::new
+        );
+    }
+
     public static final java.util.function.Supplier<AttachmentType<BeamData>> BEAM_DATA = 
         ATTACHMENTS.register("beam_data", () -> AttachmentType.builder(() -> new BeamData(false, 0, 0, 0))
             .serialize(BeamData.CODEC.fieldOf("beam_data"))
             .sync(BeamData.STREAM_CODEC)
+            .copyOnDeath()
+            .build());
+
+    public static final java.util.function.Supplier<AttachmentType<BlessedData>> BLESSED_DATA =
+        ATTACHMENTS.register("blessed_data", () -> AttachmentType.builder(() -> new BlessedData(0))
+            .serialize(BlessedData.CODEC.fieldOf("blessed_data"))
+            .sync(BlessedData.STREAM_CODEC)
             .copyOnDeath()
             .build());
 }

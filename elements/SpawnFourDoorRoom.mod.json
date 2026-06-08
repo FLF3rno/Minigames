@@ -143,6 +143,9 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
+    "onTickUpdate": {
+      "name": "SpawnFourRoomProcedure"
+    },
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

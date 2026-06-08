@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "minigames:fight_doors"
+    "minigames:floor_doors",
+    "minigames:fight_doors",
+    "minigames:fight_doors_blocked",
+    "minigames:loot_doors",
+    "minigames:miniboss_doors",
+    "minigames:boss_doors"
   ]
 }

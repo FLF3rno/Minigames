@@ -12,25 +12,29 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
+import net.mcreator.minigames.network.MinigamesModVariables;
+
 public class SpawnStartingRoomProcedureProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate) {
-		double structureX = 0;
-		double structureZ = 0;
 		String spawnRoomName = "";
 		String rotation = "";
+		double structureX = 0;
+		double structureZ = 0;
+		double structureY = 0;
 		if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("structure") instanceof BooleanProperty _withbp2 ? blockstate.setValue(_withbp2, true) : blockstate)) {
 			spawnRoomName = "dungeon_start_generic";
 			rotation = "none";
 			structureX = x;
+			structureY = y;
 			structureZ = z;
 			if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _withbp6 ? blockstate.setValue(_withbp6, true) : blockstate)) {
-				structureX = x + 28;
+				structureX = structureX + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() - 1;
 				rotation = "clockwise_90";
-			} else if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _withbp10 ? blockstate.setValue(_withbp10, true) : blockstate)) {
-				structureZ = z + 28;
+			} else if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _withbp11 ? blockstate.setValue(_withbp11, true) : blockstate)) {
+				structureZ = structureZ + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() - 1;
 				rotation = "counterclockwise_90";
 			}
-			SpawnStructureDungeonProcedure.execute(world, Mth.nextInt(RandomSource.create(), 1, 999999999), structureX, y, structureZ, rotation, spawnRoomName);
+			SpawnStructureDungeonProcedure.execute(world, Mth.nextInt(RandomSource.create(), 1, 999999999), structureX, structureY, structureZ, rotation, spawnRoomName);
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"execute in minigames:dungeon_dimension run forceload remove 10 10 -10 -10");

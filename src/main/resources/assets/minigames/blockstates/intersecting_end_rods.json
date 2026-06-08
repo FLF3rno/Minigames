@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/intersecting_end_rods"
+    },
+    "facing=east": {
+      "model": "minigames:block/intersecting_end_rods",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/intersecting_end_rods",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/intersecting_end_rods",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "minigames:block/intersecting_end_rods",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "minigames:block/intersecting_end_rods",
+      "x": 90
+    }
+  }
+}

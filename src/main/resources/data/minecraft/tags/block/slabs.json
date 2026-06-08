@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minigames:polished_cinnabar_slab",
+    "minigames:polished_sulfur_slab",
+    "minigames:cinnabar_brick_slab",
+    "minigames:sulfur_brick_slab",
+    "minigames:cinnabar_slab",
+    "minigames:sulfur_slab"
+  ]
+}

@@ -74,7 +74,7 @@ public class PlayerSlotsOverlay {
 
 			// 1. Handle Hotbar Hiding (if slots < 9)
 			if (playerSlots < 9) {
-				if (path.contains("hotbar") || path.equals("selected_item_name")) {
+				if (path.contains("hotbar")) {
 					event.setCanceled(true);
 				}
 			}
@@ -123,6 +123,9 @@ public class PlayerSlotsOverlay {
 			if (entity.isSpectator()) {
 				return;
 			}
+			if (mc.options.hideGui) {
+				return;
+			}
 			if (!(mc.screen instanceof AbstractContainerScreen)) {
 				double playerSlots = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
 				int nSlots = Math.max(0, Math.min(9, (int) playerSlots));
@@ -143,6 +146,9 @@ public class PlayerSlotsOverlay {
 			Player player = mc.player;
 			if (player != null) {
 				if (player.isSpectator()) {
+					return;
+				}
+				if (mc.options.hideGui) {
 					return;
 				}
 				double playerSlots = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
@@ -184,7 +190,7 @@ public class PlayerSlotsOverlay {
 	private static void renderCustomHotbar(GuiGraphics guiGraphics, int nSlots) {
 		Minecraft mc = Minecraft.getInstance();
 		Player player = mc.player;
-		if (player == null || guiGraphics == null) return;
+		if (player == null || guiGraphics == null || mc.options.hideGui) return;
 
 		int w = guiGraphics.guiWidth();
 		int h = guiGraphics.guiHeight();

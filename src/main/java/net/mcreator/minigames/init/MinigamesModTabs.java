@@ -35,6 +35,7 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPRUCE_PEW_RIGHT.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPRUCE_PEW_LEFT.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPRUCE_SHORT_BOARD.get().asItem());
+				tabData.accept(MinigamesModBlocks.INTERSECTING_END_RODS.get().asItem());
 			}).withSearchBar().withTabsBefore(DUNGEON_ITEMS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_MOBS = REGISTRY.register("custom_mobs",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_mobs")).icon(() -> new ItemStack(MinigamesModBlocks.SPAWN_WORSHIPPER.get())).displayItems((parameters, tabData) -> {
@@ -44,7 +45,44 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.FIGHT_DOORS.get().asItem());
 				tabData.accept(MinigamesModBlocks.FLOOR_DOORS.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_TP_MARKER_BLOCK.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_GRAVEDIGGER.get().asItem());
+				tabData.accept(MinigamesModBlocks.EMPTY_COARSE_DIRT.get().asItem());
+				tabData.accept(MinigamesModBlocks.LOOT_DOORS.get().asItem());
+				tabData.accept(MinigamesModBlocks.MINIBOSS_DOORS.get().asItem());
+				tabData.accept(MinigamesModBlocks.BOSS_DOORS.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_PREACHER.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_DEMON.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
+			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {
+				tabData.accept(MinigamesModBlocks.SULFUR_BLOCK.get().asItem());
+				tabData.accept(MinigamesModBlocks.POTENT_SULFUR.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR.get().asItem());
+				tabData.accept(MinigamesModBlocks.CHISELED_SULFUR.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_BRICKS.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_STAIRS.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_WALL.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR_STAIRS.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR_WALL.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_BRICK_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_BRICK_STAIRS.get().asItem());
+				tabData.accept(MinigamesModBlocks.SULFUR_BRICK_WALL.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR.get().asItem());
+				tabData.accept(MinigamesModBlocks.CHISELED_CINNABAR.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_BRICKS.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_STAIRS.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_WALL.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR_STAIRS.get().asItem());
+				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR_WALL.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_BRICK_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_BRICK_STAIRS.get().asItem());
+				tabData.accept(MinigamesModBlocks.CINNABAR_BRICK_WALL.get().asItem());
+			}).withTabsBefore(CUSTOM_MOBS.getId()).build());
 
 	@SubscribeEvent
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {

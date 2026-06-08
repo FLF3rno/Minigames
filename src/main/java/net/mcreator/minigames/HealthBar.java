@@ -234,7 +234,7 @@ public class HealthBar {
                 0,
                 0,
                 180,
-                -0.0005f
+                -0.02f
         );
 
         buffers.endBatch(RenderType.debugQuads());
@@ -253,21 +253,12 @@ public class HealthBar {
                     g,
                     b,
                     255,
-                    0.0f
+                    0.02f
             );
 
             buffers.endBatch(RenderType.debugQuads());
         }
 
-        System.out.println(
-                "[HealthBar] entityId=" + entity.getId()
-                        + " uuid=" + entity.getUUID()
-                        + " rawOverride='" + rawOverride
-                        + "' normalized='" + override
-                        + "' parsed=" + parsed
-                        + (parsed ? (" hex=0x" + Integer.toHexString(parsedHex)) : "")
-                        + " healthRatio=" + healthRatio
-        );
     }
 
     private static void drawQuad(

@@ -68,7 +68,7 @@ public class StartDungeonProcedure {
 			LevelAccessor _worldorig = world;
 			world = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("minigames:dungeon_dimension")));
 			if (world != null) {
-				MinigamesModVariables.MapVariables.get(world).dungeonRoomSize = new Vec3((28 + 1), 20, (28 + 1));
+				MinigamesModVariables.MapVariables.get(world).dungeonRoomSize = new Vec3(29, 20, 29);
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				SpawnGridProcedure.execute(world, x, y, z, 1, 13, 1, 9, 5, 5, 1);
 			}

@@ -223,7 +223,7 @@ public class ShieldAngelEntity extends Monster {
 
 	@Override
 	public EntityDimensions getDefaultDimensions(Pose pose) {
-		return super.getDefaultDimensions(pose).scale(0.9f);
+		return super.getDefaultDimensions(pose).scale(1f);
 	}
 
 	@Override

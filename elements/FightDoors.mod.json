@@ -144,6 +144,9 @@
     "onRightClicked": {
       "name": "FightDoorsRightclicked"
     },
+    "onBlockAdded": {
+      "name": "FightDoorsBlockedCheck"
+    },
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

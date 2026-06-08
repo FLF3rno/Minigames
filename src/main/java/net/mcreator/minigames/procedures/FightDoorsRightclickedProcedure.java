@@ -102,6 +102,12 @@ public class FightDoorsRightclickedProcedure {
 				}
 				if (MinigamesModBlocks.FIGHT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 					StartVoteProcedure.execute(world, entity, entity, "fight room");
+				} else if (MinigamesModBlocks.LOOT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+					StartVoteProcedure.execute(world, entity, entity, "loot room");
+				} else if (MinigamesModBlocks.MINIBOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+					StartVoteProcedure.execute(world, entity, entity, "miniboss room");
+				} else if (MinigamesModBlocks.BOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+					StartVoteProcedure.execute(world, entity, entity, "boss room");
 				} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 					StartVoteProcedure.execute(world, entity, entity, "floor");
 				}

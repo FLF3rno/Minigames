@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minigames:block/cinnabar_brick_slab"
+    },
+    "type=top": {
+      "model": "minigames:block/cinnabar_brick_slab_top"
+    },
+    "type=double": {
+      "model": "minigames:block/cinnabar_brick_slab_full"
+    }
+  }
+}

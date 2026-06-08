@@ -11,14 +11,11 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
-import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.init.MinigamesModAttributes;
 
 import javax.annotation.Nullable;
@@ -42,8 +39,7 @@ public class BlankLongSwordHitProcedure {
 		if (!(entity instanceof Player)) {
 			if (sourceentity instanceof LivingEntity _livingSource && _livingSource.getAttributes().hasAttribute(MinigamesModAttributes.STUN_FULL_HEALTH_MOBS) && _livingSource.getAttribute(MinigamesModAttributes.STUN_FULL_HEALTH_MOBS).getValue() >= 1) {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) >= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) {
-					if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-						_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.STUNNED, (int) Math.round(_livingSource.getAttributeValue(MinigamesModAttributes.EFFECT_LENGTH)), 0, false, false));
+					ApplyEffectProcedure.execute(entity, true, 1, _livingSource.getAttributeValue(MinigamesModAttributes.EFFECT_LENGTH), "minigames:stunned");
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 								"/playsound minecraft:entity.zombie_villager.cure hostile @a ~ ~ ~ 0.5 1");

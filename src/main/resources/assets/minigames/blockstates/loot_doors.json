@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/loot_doors"
+    },
+    "facing=east": {
+      "model": "minigames:block/loot_doors",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/loot_doors",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/loot_doors",
+      "y": 270
+    }
+  }
+}

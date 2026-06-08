@@ -40,6 +40,11 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpruceShortBoardBlockEntity>> SPRUCE_SHORT_BOARD = register("spruce_short_board", MinigamesModBlocks.SPRUCE_SHORT_BOARD, SpruceShortBoardBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FightDoorsBlockEntity>> FIGHT_DOORS = register("fight_doors", MinigamesModBlocks.FIGHT_DOORS, FightDoorsBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FloorDoorsBlockEntity>> FLOOR_DOORS = register("floor_doors", MinigamesModBlocks.FLOOR_DOORS, FloorDoorsBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IntersectingEndRodsBlockEntity>> INTERSECTING_END_RODS = register("intersecting_end_rods", MinigamesModBlocks.INTERSECTING_END_RODS, IntersectingEndRodsBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FightDoorsBlockedBlockEntity>> FIGHT_DOORS_BLOCKED = register("fight_doors_blocked", MinigamesModBlocks.FIGHT_DOORS_BLOCKED, FightDoorsBlockedBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LootDoorsBlockEntity>> LOOT_DOORS = register("loot_doors", MinigamesModBlocks.LOOT_DOORS, LootDoorsBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MinibossDoorsBlockEntity>> MINIBOSS_DOORS = register("miniboss_doors", MinigamesModBlocks.MINIBOSS_DOORS, MinibossDoorsBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BossDoorsBlockEntity>> BOSS_DOORS = register("boss_doors", MinigamesModBlocks.BOSS_DOORS, BossDoorsBlockEntity::new);
 	// Start of user code block custom block entities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpreadingIceBlockEntity>> SPREADING_ICE = register("spreading_ice", MinigamesModBlocks.SPREADING_ICE, SpreadingIceBlockEntity::new);
 
@@ -68,5 +73,10 @@ public class MinigamesModBlockEntities {
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SPRUCE_SHORT_BOARD.get(), SidedInvWrapper::new);
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, FIGHT_DOORS.get(), SidedInvWrapper::new);
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, FLOOR_DOORS.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, INTERSECTING_END_RODS.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, FIGHT_DOORS_BLOCKED.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, LOOT_DOORS.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, MINIBOSS_DOORS.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BOSS_DOORS.get(), SidedInvWrapper::new);
 	}
 }

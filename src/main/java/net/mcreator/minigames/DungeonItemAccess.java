@@ -47,6 +47,10 @@ public final class DungeonItemAccess {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("stolen", false);
 	}
 
+	public static boolean isGlitched(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("glitched", false);
+	}
+
 	private static TagKey<Item> itemTag(String id) {
 		return TagKey.create(Registries.ITEM, ResourceLocation.parse(id));
 	}

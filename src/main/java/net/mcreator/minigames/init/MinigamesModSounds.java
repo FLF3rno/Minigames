@@ -35,4 +35,20 @@ public class MinigamesModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> VOLCANIC_SPEW_LAND = REGISTRY.register("volcanic_spew_land", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "volcanic_spew_land")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> DASH = REGISTRY.register("dash", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "dash")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> ASCENDING = REGISTRY.register("ascending", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "ascending")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_SULFUR_STEP = REGISTRY.register("update_sulfur_step", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_sulfur_step")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_SULFUR_PLACE = REGISTRY.register("update_sulfur_place", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_sulfur_place")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_SULFUR_HIT = REGISTRY.register("update_sulfur_hit", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_sulfur_hit")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_SULFUR_BREAK = REGISTRY.register("update_sulfur_break", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_sulfur_break")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_POTENT_SULFUR_STEP = REGISTRY.register("update_potent_sulfur_step",
+			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_potent_sulfur_step")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_POTENT_SULFUR_HIT = REGISTRY.register("update_potent_sulfur_hit",
+			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_potent_sulfur_hit")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_POTENT_SULFUR_BREAK = REGISTRY.register("update_potent_sulfur_break",
+			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_potent_sulfur_break")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_POTENT_SULFUR_PLACE = REGISTRY.register("update_potent_sulfur_place",
+			() -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_potent_sulfur_place")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_BREAK = REGISTRY.register("update_cinnabar_break", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_break")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_HIT = REGISTRY.register("update_cinnabar_hit", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_hit")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_PLACE = REGISTRY.register("update_cinnabar_place", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_place")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_STEP = REGISTRY.register("update_cinnabar_step", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_step")));
 }

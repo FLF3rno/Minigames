@@ -51,4 +51,6 @@ public class MinigamesModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_HIT = REGISTRY.register("update_cinnabar_hit", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_hit")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_PLACE = REGISTRY.register("update_cinnabar_place", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_place")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> UPDATE_CINNABAR_STEP = REGISTRY.register("update_cinnabar_step", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "update_cinnabar_step")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> VOLLEYBOMB_HIT = REGISTRY.register("volleybomb_hit", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "volleybomb_hit")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> RED_EXPLOSION = REGISTRY.register("red_explosion", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("minigames", "red_explosion")));
 }

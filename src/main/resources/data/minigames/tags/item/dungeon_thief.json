@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minigames:blank_dagger"
+    "minigames:blank_dagger",
+    "minigames:ghostifier"
   ]
 }

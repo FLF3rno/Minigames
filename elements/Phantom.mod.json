@@ -1,0 +1,27 @@
+{
+  "_fv": 85,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Phantom",
+    "icon": "phantom",
+    "color": {
+      "value": -11974965,
+      "falpha": 0.0
+    },
+    "onAddedSound": {
+      "value": ""
+    },
+    "isInstant": false,
+    "mobEffectCategory": "BENEFICIAL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [],
+    "onStarted": {
+      "name": "PhantomEffectApplied"
+    },
+    "onExpired": {
+      "name": "PhantomEffectEnds"
+    }
+  }
+}

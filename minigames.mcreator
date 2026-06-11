@@ -5679,7 +5679,7 @@
           "src/main/resources/assets/minigames/items/blank_dagger.json"
         ]
       },
-      "path": "~/Dungeon/Items/Thief/Weapons"
+      "path": "~/Dungeon/Items/Thief/Weapons/BlankDagger"
     },
     {
       "name": "SalvageValue",
@@ -5690,7 +5690,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "BlankSword",
@@ -5716,7 +5716,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "BlankLongSword",
@@ -5755,7 +5755,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "IsMobFullHp",
@@ -5766,7 +5766,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "MobFullHPCheck",
@@ -5941,7 +5941,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "StunnedOnEffectActiveTick",
@@ -6105,7 +6105,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "BreakWeapon",
@@ -7536,6 +7536,10 @@
           {
             "name": "amplifier",
             "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -7606,7 +7610,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "BlankDaggerDescription",
@@ -7621,7 +7625,7 @@
           "src/main/java/net/mcreator/minigames/procedures/BlankDaggerDescriptionProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Items/Thief/Weapons"
+      "path": "~/Dungeon/Items/Thief/Weapons/BlankDagger"
     },
     {
       "name": "ShieldAngelSpawn",
@@ -8039,19 +8043,39 @@
             "type": "number"
           },
           {
+            "name": "ExplosionKnockback",
+            "type": "number"
+          },
+          {
             "name": "ExplosionSize",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
             "type": "number"
           },
           {
             "name": "ExplosionType",
             "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ExplodeProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Explode"
     },
     {
       "name": "FightDoorsRightclicked",
@@ -8347,7 +8371,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ApplyEffectProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Potion"
     },
     {
       "name": "PotionEffectExpires",
@@ -8368,13 +8392,17 @@
           {
             "name": "potion",
             "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/PotionEffectExpiresProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Potion"
     },
     {
       "name": "ChangeGravity",
@@ -8639,6 +8667,18 @@
             "type": "entity"
           },
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -8658,6 +8698,18 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -8676,6 +8728,18 @@
       "registry_name": "lose_dungeon",
       "metadata": {
         "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
           {
             "name": "world",
             "type": "world"
@@ -9837,7 +9901,7 @@
       "metadata": {
         "files": []
       },
-      "path": "~/Dungeon/Items"
+      "path": "~/Dungeon/Items/Attributes"
     },
     {
       "name": "RandomLookAtPlayerGoal",
@@ -9925,6 +9989,10 @@
           {
             "name": "type",
             "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -10056,6 +10124,699 @@
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
+    },
+    {
+      "name": "VolleyBomb",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volley_bomb",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/volley_bomb.json",
+          "src/main/java/net/mcreator/minigames/item/VolleyBombItem.java",
+          "src/main/resources/assets/minigames/items/volley_bomb.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "ExtraDamage",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "extra_damage",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "VolleyBombExplode2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volley_bomb_explode_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VolleyBombExplode2Procedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "VolleyBombRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volley_bomb_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VolleyBombRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "AbilityCooldown",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ability_cooldown",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "HitVolleybomb",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hit_volleybomb",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HitVolleybombProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "VolleybombEntity",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volleybomb_entity",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/volleybomb_entity_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/VolleybombEntityEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/VolleybombEntityRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "VolleybombSpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volleybomb_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VolleybombSpawnProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "VolleybombCheckCollision",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volleybomb_check_collision",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VolleybombCheckCollisionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "RedExplosion",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "red_explosion",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/particle/RedExplosionParticle.java",
+          "src/main/resources/assets/minigames/particles/red_explosion.json"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "DoExplosionKnockback",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "do_explosion_knockback",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DoExplosionKnockbackProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Explode"
+    },
+    {
+      "name": "PlagueStarter",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "plague_starter",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/plague_starter.json",
+          "src/main/java/net/mcreator/minigames/item/PlagueStarterItem.java",
+          "src/main/resources/assets/minigames/models/item/plague_starter.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
+    },
+    {
+      "name": "PlagueMiddle",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "plague_middle",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/PlagueMiddleEntity.java",
+          "src/main/resources/assets/minigames/items/plague_middle_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/PlagueMiddleRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
+    },
+    {
+      "name": "PlagueMiddleTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "plague_middle_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlagueMiddleTickUpdateProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
+    },
+    {
+      "name": "Poison",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "poison",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/particles/poison.json",
+          "src/main/java/net/mcreator/minigames/client/particle/PoisonParticle.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "PlagueStarterRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "plague_starter_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlagueStarterRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
+    },
+    {
+      "name": "ApplyCooldown",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "apply_cooldown",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "item",
+            "type": "itemstack"
+          },
+          {
+            "name": "ticks",
+            "type": "number"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyCooldownProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "GetItemAttribute",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "get_item_attribute",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "item",
+            "type": "itemstack"
+          },
+          {
+            "name": "attribute",
+            "type": "string"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GetItemAttributeProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "AbilityRange",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ability_range",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "PlagueStarterDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "plague_starter_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlagueStarterDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
+    },
+    {
+      "name": "VolleyBombDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "volley_bomb_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VolleyBombDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
+    },
+    {
+      "name": "Phantom",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "phantom",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/PhantomMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "PhantomEffectApplied",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "phantom_effect_applied",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PhantomEffectAppliedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "PhantomEffectEnds",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "phantom_effect_ends",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PhantomEffectEndsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "Ghostifier",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ghostifier",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/ghostifier.json",
+          "src/main/resources/assets/minigames/items/ghostifier.json",
+          "src/main/java/net/mcreator/minigames/item/GhostifierItem.java",
+          "src/main/resources/assets/minigames/models/item/ghostifier_0.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Ghostifier"
+    },
+    {
+      "name": "GhostifierRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ghostifier_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GhostifierRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Ghostifier"
+    },
+    {
+      "name": "GhostifierDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ghostifier_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GhostifierDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Ghostifier"
+    },
+    {
+      "name": "CheckRelic",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "check_relic",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "item",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CheckRelicProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "CrystallizedPotion",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crystallized_potion",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/crystallized_potion.json",
+          "src/main/resources/assets/minigames/models/item/crystallized_potion.json",
+          "src/main/java/net/mcreator/minigames/item/CrystallizedPotionItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "CrystallizedPotionDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "crystallized_potion_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CrystallizedPotionDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "HealAmount",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "heal_amount",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "CheckPotionEnd",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "check_potion_end",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/CheckPotionEnd.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Potion"
     }
   ],
   "variable_elements": [
@@ -10916,6 +11677,12 @@
       "type": "number",
       "scope": "player_persistent",
       "value": "0.8"
+    },
+    {
+      "name": "performKnockback",
+      "type": "vector",
+      "scope": "player_persistent",
+      "value": "Vec3.ZERO"
     }
   ],
   "sound_elements": [
@@ -11258,6 +12025,23 @@
       ],
       "category": "block",
       "subtitle": ""
+    },
+    {
+      "name": "volleybomb_hit",
+      "files": [
+        "volleyballhit2",
+        "volleyballhit1"
+      ],
+      "category": "neutral",
+      "subtitle": "VolleyBomb hit"
+    },
+    {
+      "name": "red_explosion",
+      "files": [
+        "red_explosion"
+      ],
+      "category": "player",
+      "subtitle": "Big explosion"
     }
   ],
   "tag_elements": {
@@ -11399,16 +12183,20 @@
       "Blocks.BEDROCK"
     ],
     "ITEMS:mod:dungeon_support": [
-      "CUSTOM:BlankLongSword"
+      "CUSTOM:BlankLongSword",
+      "CUSTOM:PlagueStarter",
+      "CUSTOM:CrystallizedPotion"
     ],
     "ITEMS:mod:dungeon_thief": [
-      "CUSTOM:BlankDagger"
+      "CUSTOM:BlankDagger",
+      "CUSTOM:Ghostifier"
     ],
     "ITEMS:mod:dungeon_warrior": [
-      "CUSTOM:BlankSword"
+      "CUSTOM:BlankSword",
+      "CUSTOM:VolleyBomb"
     ],
     "ITEMS:mod:dungeon_type_relic": [
-      "Blocks.BEDROCK"
+      "CUSTOM:CrystallizedPotion"
     ],
     "BLOCKS:minecraft:overworld_carver_replaceables": [
       "~CUSTOM:StartingRoomGridBlock"
@@ -11454,6 +12242,10 @@
       "~CUSTOM:SulfurBrickSlab",
       "~CUSTOM:PolishedSulfurSlab",
       "~CUSTOM:SulfurSlab"
+    ],
+    "ENTITIES:mod:marker": [
+      "CUSTOM:PlagueMiddle",
+      "CUSTOM:StunnedEffect"
     ]
   },
   "tab_element_order": {},
@@ -11751,7 +12543,44 @@
       "item.minigames.spawn_preacher": "Spawn Preacher",
       "entity.minigames.preacher": "Preacher",
       "attribute.minigames.explosion_damage": "Explosion Damage",
-      "item.minigames.spawn_demon": "Spawn Demon"
+      "item.minigames.spawn_demon": "Spawn Demon",
+      "item.minigames.volley_bomb": "VolleyBomb",
+      "attribute.minigames.extra_damage": "Extra Damage",
+      "item.minigames.volley_bomb.description_0": "",
+      "item.minigames.volley_bomb.description_1": "§6§lON RIGHT CLICK",
+      "item.minigames.volley_bomb.description_6": "§6§l    WITH A PROJECTILE",
+      "item.minigames.volley_bomb.description_7": "     Detonates instantly dealing §250% §fmore damage",
+      "item.minigames.volley_bomb.description_4": "",
+      "item.minigames.volley_bomb.description_5": "§d§lHITTING THE BOMB",
+      "item.minigames.volley_bomb.description_8": "",
+      "item.minigames.volley_bomb.description_2": "Summon and launch a big, slow bomb foreward",
+      "item.minigames.volley_bomb.description_3": "§a (AbilityCooldown / 20)s Cooldown ",
+      "item.minigames.volley_bomb.description_10": "     Knock the bomb forward with increased speed and ",
+      "item.minigames.volley_bomb.description_9": "§6§l    WITH A MELEE ATTACK",
+      "attribute.minigames.ability_cooldown": "Ability Cooldown",
+      "item.minigames.volley_bomb.description_11": "     §20%§f more damage",
+      "subtitles.volleybomb_hit": "VolleyBomb hit",
+      "entity.minigames.volleybomb_entity": "Volleybomb",
+      "subtitles.red_explosion": "Big explosion",
+      "item.minigames.plague_starter.description_11": "     §20%§f more damage",
+      "item.minigames.plague_starter.description_7": "     Detonates instantly dealing §250% §fmore damage",
+      "item.minigames.plague_starter.description_6": "§6§l    WITH A PROJECTILE",
+      "item.minigames.plague_starter.description_5": "§210s Duration",
+      "item.minigames.plague_starter": "Plague Spreader",
+      "item.minigames.plague_starter.description_4": "§a30s Cooldown ",
+      "item.minigames.plague_starter.description_3": "§c monsters§f are shared with others in that area",
+      "item.minigames.plague_starter.description_2": "Create an area where all§b potion effects§f of",
+      "item.minigames.plague_starter.description_1": "§6§lON RIGHT CLICK",
+      "item.minigames.plague_starter.description_0": "",
+      "item.minigames.plague_starter.description_10": "     Knock the bomb forward with increased speed and ",
+      "item.minigames.plague_starter.description_9": "§6§l    WITH A MELEE ATTACK",
+      "item.minigames.plague_starter.description_8": "",
+      "entity.minigames.plague_middle": "Plague Middle",
+      "attribute.minigames.ability_range": "Ability Range",
+      "effect.minigames.phantom": "Phantom",
+      "item.minigames.ghostifier": "Ghostifier",
+      "item.minigames.crystallized_potion": "Crystallized Potion",
+      "attribute.minigames.heal_amount": "Heal Amount"
     }
   },
   "metadata": {
@@ -11763,6 +12592,8 @@
       "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
       "src/main/java/net/mcreator/minigames/client/renderer/item/LegacyOverrideSelectItemModel.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModKeyMappings.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModParticles.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModParticleTypes.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMobEffects.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
@@ -11911,11 +12742,21 @@
                 "children": [
                   {
                     "name": "Weapons",
-                    "children": []
+                    "children": [
+                      {
+                        "name": "BlankDagger",
+                        "children": []
+                      }
+                    ]
                   },
                   {
                     "name": "Utilities",
-                    "children": []
+                    "children": [
+                      {
+                        "name": "Ghostifier",
+                        "children": []
+                      }
+                    ]
                   },
                   {
                     "name": "Relic",
@@ -11932,7 +12773,12 @@
                   },
                   {
                     "name": "Utilities",
-                    "children": []
+                    "children": [
+                      {
+                        "name": "VolleyBomb",
+                        "children": []
+                      }
+                    ]
                   },
                   {
                     "name": "Relic",
@@ -11954,7 +12800,12 @@
                   },
                   {
                     "name": "Utility",
-                    "children": []
+                    "children": [
+                      {
+                        "name": "Plague Starter",
+                        "children": []
+                      }
+                    ]
                   },
                   {
                     "name": "Relic",
@@ -11982,6 +12833,10 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "name": "Attributes",
+                "children": []
               }
             ]
           },
@@ -12015,7 +12870,16 @@
           },
           {
             "name": "Events",
-            "children": []
+            "children": [
+              {
+                "name": "Explode",
+                "children": []
+              },
+              {
+                "name": "Potion",
+                "children": []
+              }
+            ]
           },
           {
             "name": "HP Bar",
@@ -12079,10 +12943,6 @@
             "children": [
               {
                 "name": "26.2",
-                "children": []
-              },
-              {
-                "name": "Shleves",
                 "children": []
               }
             ]

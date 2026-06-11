@@ -13,6 +13,6 @@ public class BlankDaggerDescriptionProcedure {
 				.mapToDouble(entry -> entry.modifier().amount()).findFirst().orElse(0.0d);
 		return "" + "\n" + "\u00A76\u00A7lPASSIVE ABILITY" + "\n" + "Gain\u00A72 "
 				+ new java.text.DecimalFormat("#.##").format(value)
-				+ "%\u00A7f more\u00A76 coins\u00A7f from killing monsters.";
+				+ "%\u00A7f more\u00A76 coins\u00A7f from killing monsters";
 	}
 }

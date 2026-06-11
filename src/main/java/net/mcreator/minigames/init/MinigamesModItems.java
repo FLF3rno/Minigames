@@ -98,6 +98,10 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> BOSS_DOORS;
 	public static final DeferredItem<Item> SPAWN_PREACHER;
 	public static final DeferredItem<Item> SPAWN_DEMON;
+	public static final DeferredItem<Item> VOLLEY_BOMB;
+	public static final DeferredItem<Item> PLAGUE_STARTER;
+	public static final DeferredItem<Item> GHOSTIFIER;
+	public static final DeferredItem<Item> CRYSTALLIZED_POTION;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -169,6 +173,10 @@ public class MinigamesModItems {
 		BOSS_DOORS = block(MinigamesModBlocks.BOSS_DOORS);
 		SPAWN_PREACHER = block(MinigamesModBlocks.SPAWN_PREACHER);
 		SPAWN_DEMON = block(MinigamesModBlocks.SPAWN_DEMON);
+		VOLLEY_BOMB = register("volley_bomb", VolleyBombItem::new);
+		PLAGUE_STARTER = register("plague_starter", PlagueStarterItem::new);
+		GHOSTIFIER = register("ghostifier", GhostifierItem::new);
+		CRYSTALLIZED_POTION = register("crystallized_potion", CrystallizedPotionItem::new);
 	}
 
 	// Start of user code block custom items

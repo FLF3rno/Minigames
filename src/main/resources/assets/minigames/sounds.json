@@ -574,5 +574,27 @@
         "stream": false
       }
     ]
+  },
+  "volleybomb_hit": {
+    "subtitle": "subtitles.volleybomb_hit",
+    "sounds": [
+      {
+        "name": "minigames:volleyballhit2",
+        "stream": false
+      },
+      {
+        "name": "minigames:volleyballhit1",
+        "stream": false
+      }
+    ]
+  },
+  "red_explosion": {
+    "subtitle": "subtitles.red_explosion",
+    "sounds": [
+      {
+        "name": "minigames:red_explosion",
+        "stream": false
+      }
+    ]
   }
 }

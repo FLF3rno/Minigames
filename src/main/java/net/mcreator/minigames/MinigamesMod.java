@@ -58,6 +58,7 @@ public class MinigamesMod {
 		MinigamesModVariables.ATTACHMENT_TYPES.register(modEventBus);
 		MinigamesModMobEffects.REGISTRY.register(modEventBus);
 		MinigamesModMenus.REGISTRY.register(modEventBus);
+		MinigamesModParticleTypes.REGISTRY.register(modEventBus);
 		MinigamesModAttributes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
 		net.mcreator.minigames.ModDataAttachments.ATTACHMENTS.register(modEventBus);

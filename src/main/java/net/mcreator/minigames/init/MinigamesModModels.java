@@ -21,6 +21,7 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelgrapple.LAYER_LOCATION, Modelgrapple::createBodyLayer);
 		event.registerLayerDefinition(Modelshortboard.LAYER_LOCATION, Modelshortboard::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat.LAYER_LOCATION, Modelpewseat::createBodyLayer);
+		event.registerLayerDefinition(Modelvolleybomb.LAYER_LOCATION, Modelvolleybomb::createBodyLayer);
 		event.registerLayerDefinition(Modelshieldagent.LAYER_LOCATION, Modelshieldagent::createBodyLayer);
 		event.registerLayerDefinition(Modelintersecting_end_rod.LAYER_LOCATION, Modelintersecting_end_rod::createBodyLayer);
 		event.registerLayerDefinition(Modelchain.LAYER_LOCATION, Modelchain::createBodyLayer);

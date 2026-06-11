@@ -138,6 +138,7 @@ public class MinigamesModVariables {
 		clone.ascendingActive = original.ascendingActive;
 		clone.advancedGlowingColor = original.advancedGlowingColor;
 		clone.tooltipSize = original.tooltipSize;
+		clone.performKnockback = original.performKnockback;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -624,6 +625,7 @@ public class MinigamesModVariables {
 		public boolean ascendingActive = false;
 		public String advancedGlowingColor = "";
 		public double tooltipSize = 0.8;
+		public Vec3 performKnockback = Vec3.ZERO;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -662,6 +664,7 @@ public class MinigamesModVariables {
 			output.putBoolean("ascendingActive", ascendingActive);
 			output.putString("advancedGlowingColor", advancedGlowingColor);
 			output.putDouble("tooltipSize", tooltipSize);
+			output.store("performKnockback", Vec3.CODEC, performKnockback);
 		}
 
 		@Override
@@ -701,6 +704,7 @@ public class MinigamesModVariables {
 			ascendingActive = input.getBooleanOr("ascendingActive", false);
 			advancedGlowingColor = input.getStringOr("advancedGlowingColor", "");
 			tooltipSize = input.getDoubleOr("tooltipSize", 0);
+			performKnockback = input.read("performKnockback", Vec3.CODEC).orElse(Vec3.ZERO);
 		}
 
 		public void markSyncDirty() {

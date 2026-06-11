@@ -14,11 +14,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.core.registries.Registries;
 
-import net.mcreator.minigames.procedures.SyncCrownedRemoveProcedure;
-import net.mcreator.minigames.procedures.StunnedEffectExpiresProcedure;
-import net.mcreator.minigames.procedures.StartPVPProcedure;
-import net.mcreator.minigames.procedures.BlessedEffectExpiresProcedure;
-import net.mcreator.minigames.procedures.AscendingEffectExpiresProcedure;
+import net.mcreator.minigames.procedures.*;
 import net.mcreator.minigames.potion.*;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -34,6 +30,7 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> BLESSED = REGISTRY.register("blessed", () -> new BlessedMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> ASCENDING = REGISTRY.register("ascending", () -> new AscendingMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> ADVANCED_GLOWING = REGISTRY.register("advanced_glowing", () -> new AdvancedGlowingMobEffect());
+	public static final DeferredHolder<MobEffect, MobEffect> PHANTOM = REGISTRY.register("phantom", () -> new PhantomMobEffect());
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {
@@ -59,9 +56,11 @@ public class MinigamesModMobEffects {
 		} else if (effectInstance.getEffect().is(STUNNED)) {
 			StunnedEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
 		} else if (effectInstance.getEffect().is(BLESSED)) {
-			BlessedEffectExpiresProcedure.execute(entity, effectInstance.getAmplifier());
+			BlessedEffectExpiresProcedure.execute(entity.level(), entity, effectInstance.getAmplifier());
 		} else if (effectInstance.getEffect().is(ASCENDING)) {
 			AscendingEffectExpiresProcedure.execute(entity);
+		} else if (effectInstance.getEffect().is(PHANTOM)) {
+			PhantomEffectEndsProcedure.execute(entity);
 		}
 	}
 }

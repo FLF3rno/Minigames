@@ -20,7 +20,6 @@ public class StunnedEffectExpiresProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, double amplifier) {
 		if (entity == null)
 			return;
-		PotionEffectExpiresProcedure.execute(entity, amplifier, "minigames:stunned");
 
 		{
 			Entity _ent = entity;

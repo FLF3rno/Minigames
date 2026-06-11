@@ -6,14 +6,16 @@
     "EntityOnGroundMixin",
     "LivingEntityFallDamageMixin",
     "LivingEntityGravityStateMixin",
-    "LivingEntityJumpGravityMixin"
+    "LivingEntityJumpGravityMixin",
+    "PhantomCollisionMixin"
   ],
   "client": [
     "PlayerRendererGravityRotationMixin",
     "GuiAccessor",
     "ScreenMixin",
     "EntityTeamColorMixin",
-    "PlayerNameColorMixin"
+    "PlayerNameColorMixin",
+    "TransparencyMixin"
   ],
   "injectors": {
     "defaultRequire": 1

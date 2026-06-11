@@ -25,6 +25,10 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.BLANK_DAGGER.get());
 				tabData.accept(MinigamesModItems.BLANK_SWORD.get());
 				tabData.accept(MinigamesModItems.BLANK_LONG_SWORD.get());
+				tabData.accept(MinigamesModItems.VOLLEY_BOMB.get());
+				tabData.accept(MinigamesModItems.PLAGUE_STARTER.get());
+				tabData.accept(MinigamesModItems.GHOSTIFIER.get());
+				tabData.accept(MinigamesModItems.CRYSTALLIZED_POTION.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {

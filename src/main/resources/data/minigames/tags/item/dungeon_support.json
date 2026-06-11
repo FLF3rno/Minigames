@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "minigames:plague_starter",
+    "minigames:crystallized_potion",
     "minigames:blank_long_sword"
   ]
 }

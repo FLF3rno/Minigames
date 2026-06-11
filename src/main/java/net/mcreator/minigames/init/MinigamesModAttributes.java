@@ -28,6 +28,10 @@ public class MinigamesModAttributes {
 	public static final DeferredHolder<Attribute, Attribute> DROPPED_COINS = REGISTRY.register("dropped_coins", () -> new RangedAttribute("attribute.minigames.dropped_coins", 0, 0, 1000000).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> EFFECT_LENGTH = REGISTRY.register("effect_length", () -> new RangedAttribute("attribute.minigames.effect_length", 0, 0, 1000000).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> EXPLOSION_DAMAGE = REGISTRY.register("explosion_damage", () -> new RangedAttribute("attribute.minigames.explosion_damage", 0, 0, 1000000).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> EXTRA_DAMAGE = REGISTRY.register("extra_damage", () -> new RangedAttribute("attribute.minigames.extra_damage", 0, 0, 1000000).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> ABILITY_COOLDOWN = REGISTRY.register("ability_cooldown", () -> new RangedAttribute("attribute.minigames.ability_cooldown", 0, 0, 1000000).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> ABILITY_RANGE = REGISTRY.register("ability_range", () -> new RangedAttribute("attribute.minigames.ability_range", 0, 0, 100).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> HEAL_AMOUNT = REGISTRY.register("heal_amount", () -> new RangedAttribute("attribute.minigames.heal_amount", 0, 0, 1000).setSyncable(true));
 
 	@SubscribeEvent
 	public static void addAttributes(EntityAttributeModificationEvent event) {
@@ -40,5 +44,9 @@ public class MinigamesModAttributes {
 		event.getTypes().forEach(entity -> event.add(entity, DROPPED_COINS));
 		event.add(EntityType.PLAYER, EFFECT_LENGTH);
 		event.add(EntityType.PLAYER, EXPLOSION_DAMAGE);
+		event.add(EntityType.PLAYER, EXTRA_DAMAGE);
+		event.add(EntityType.PLAYER, ABILITY_COOLDOWN);
+		event.add(EntityType.PLAYER, ABILITY_RANGE);
+		event.add(EntityType.PLAYER, HEAL_AMOUNT);
 	}
 }

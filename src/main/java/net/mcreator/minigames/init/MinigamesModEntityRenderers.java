@@ -36,5 +36,7 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.GRAVEDIGGER.get(), GravediggerRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.PREACHER.get(), PreacherRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.PREACHING_SHOT.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.VOLLEYBOMB_ENTITY.get(), VolleybombEntityRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.PLAGUE_MIDDLE.get(), PlagueMiddleRenderer::new);
 	}
 }

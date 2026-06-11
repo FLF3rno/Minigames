@@ -81,6 +81,12 @@ public class MinigamesModEntities {
 					.sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<PreachingShotEntity>> PREACHING_SHOT = register("preaching_shot",
 			EntityType.Builder.<PreachingShotEntity>of(PreachingShotEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<VolleybombEntityEntity>> VOLLEYBOMB_ENTITY = register("volleybomb_entity",
+			EntityType.Builder.<VolleybombEntityEntity>of(VolleybombEntityEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune()
+
+					.sized(0.8f, 0.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<PlagueMiddleEntity>> PLAGUE_MIDDLE = register("plague_middle",
+			EntityType.Builder.<PlagueMiddleEntity>of(PlagueMiddleEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.1f, 0.1f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -103,6 +109,8 @@ public class MinigamesModEntities {
 		MovingBlockEntity.init(event);
 		GravediggerEntity.init(event);
 		PreacherEntity.init(event);
+		VolleybombEntityEntity.init(event);
+		PlagueMiddleEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -120,5 +128,7 @@ public class MinigamesModEntities {
 		event.put(MOVING_BLOCK.get(), MovingBlockEntity.createAttributes().build());
 		event.put(GRAVEDIGGER.get(), GravediggerEntity.createAttributes().build());
 		event.put(PREACHER.get(), PreacherEntity.createAttributes().build());
+		event.put(VOLLEYBOMB_ENTITY.get(), VolleybombEntityEntity.createAttributes().build());
+		event.put(PLAGUE_MIDDLE.get(), PlagueMiddleEntity.createAttributes().build());
 	}
 }

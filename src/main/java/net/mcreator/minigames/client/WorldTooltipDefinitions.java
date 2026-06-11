@@ -43,6 +43,7 @@ public final class WorldTooltipDefinitions {
 							List.of(DefinitionText.staticText("Numerical values for this", Style.EMPTY.withColor(0xFFFFFFFF)),
 									DefinitionText.staticText("item are randomized", Style.EMPTY.withColor(0xFFFFFFFF))))));
 
+
 	private WorldTooltipDefinitions() {
 	}
 

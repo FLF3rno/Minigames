@@ -1,0 +1,25 @@
+{
+  "_fv": 85,
+  "_type": "particle",
+  "definition": {
+    "texture": "redexplosions",
+    "animate": true,
+    "frameDuration": 1,
+    "width": 0.6,
+    "height": 0.6,
+    "scale": {
+      "fixedValue": 6.0
+    },
+    "fixedScale": false,
+    "speedFactor": 0.0,
+    "gravity": 0.0,
+    "maxAge": 8,
+    "maxAgeDiff": 0,
+    "angularVelocity": 0.0,
+    "angularAcceleration": 0.0,
+    "canCollide": false,
+    "alwaysShow": false,
+    "emissiveRendering": false,
+    "renderType": "TRANSLUCENT"
+  }
+}

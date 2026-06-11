@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minigames:blank_sword"
+    "minigames:blank_sword",
+    "minigames:volley_bomb"
   ]
 }

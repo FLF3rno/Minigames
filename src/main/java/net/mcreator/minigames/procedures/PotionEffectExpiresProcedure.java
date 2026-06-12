@@ -28,8 +28,8 @@ public class PotionEffectExpiresProcedure {
 		Level = level - 1;
 		if (CheckRelicProcedure.execute(target, new ItemStack(MinigamesModItems.CRYSTALLIZED_POTION.get()))) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				DungeonHealProcedure.execute(entityiterator,
-						((entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) * GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.CRYSTALLIZED_POTION.get()), "minigames:heal_amount")) / 100, "relic");
+				DungeonHealProcedure.execute(entityiterator, ((entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)
+						* GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(target, new ItemStack(MinigamesModItems.CRYSTALLIZED_POTION.get())), "minigames:heal_amount")) / 100, "relic");
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {

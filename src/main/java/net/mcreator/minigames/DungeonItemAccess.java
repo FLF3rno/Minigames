@@ -43,12 +43,29 @@ public final class DungeonItemAccess {
 		return true;
 	}
 
+	//CONDITIONS per PROPERIES
 	public static boolean isStolen(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("stolen", false);
 	}
 
 	public static boolean isGlitched(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("glitched", false);
+	}
+	public static boolean isForged(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("isForged", false);
+	}
+	public static int Forged(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getIntOr("forged", 0);
+	}
+	//CONDITIONS per EFFECTS
+	public static boolean hasStun(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("stun", false);
+	}
+	public static boolean hasPhantom(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("phantom", false);
+	}
+	public static boolean hasBlessed(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("blessed", false);
 	}
 
 	private static TagKey<Item> itemTag(String id) {

@@ -102,6 +102,7 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> PLAGUE_STARTER;
 	public static final DeferredItem<Item> GHOSTIFIER;
 	public static final DeferredItem<Item> CRYSTALLIZED_POTION;
+	public static final DeferredItem<Item> BLACKSMITH_HAMMER;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -177,6 +178,7 @@ public class MinigamesModItems {
 		PLAGUE_STARTER = register("plague_starter", PlagueStarterItem::new);
 		GHOSTIFIER = register("ghostifier", GhostifierItem::new);
 		CRYSTALLIZED_POTION = register("crystallized_potion", CrystallizedPotionItem::new);
+		BLACKSMITH_HAMMER = register("blacksmith_hammer", BlacksmithHammerItem::new);
 	}
 
 	// Start of user code block custom items

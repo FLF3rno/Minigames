@@ -3,13 +3,13 @@
   "_type": "item",
   "definition": {
     "renderType": 0,
-    "texture": "blank_dagger",
-    "customModelName": "Tool",
+    "texture": "relic_blacksmith_hammer",
+    "customModelName": "Normal",
     "guiTexture": "",
     "customProperties": {},
     "states": [],
     "animations": [],
-    "name": "Blank Dagger",
+    "name": "Blacksmith Hammer",
     "rarity": "COMMON",
     "creativeTabs": [
       {
@@ -36,10 +36,13 @@
     "specialInformation": {
       "fixedValue": [
         "",
-        "§6§lPASSIVE ABILITY",
-        "Gain§2 15%§f more§6 coins§f from killing monsters."
+        "§6§lON RIGHT CLICK",
+        "Create an area where all§b potion effects§f of",
+        "§c monsters§f are shared with others in that area",
+        "§a30s Cooldown ",
+        "§210s Duration"
       ],
-      "name": "BlankDaggerDescription"
+      "name": "BlacksmithHammerDescription"
     },
     "glowCondition": {
       "fixedValue": false
@@ -49,9 +52,6 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
-    "onItemInInventoryTick": {
-      "name": "BreakWeapon"
-    },
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
@@ -80,41 +80,17 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": {
-          "value": "ATTACK_DAMAGE"
-        },
-        "amount": 2.5,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "ATTACK_SPEED"
-        },
-        "amount": -1.65,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "mainhand",
-        "attribute": {
           "value": "CUSTOM:SalvageValue"
         },
-        "amount": 15.0,
+        "amount": 35.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
         "attribute": {
-          "value": "CUSTOM:CoinsOnKill"
+          "value": "CUSTOM:ExtraDamage"
         },
-        "amount": 50.0,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:RepairValue"
-        },
-        "amount": 15.0,
+        "amount": 10.0,
         "operation": "ADD_VALUE"
       }
     ]

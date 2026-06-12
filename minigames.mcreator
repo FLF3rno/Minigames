@@ -5670,7 +5670,7 @@
       "name": "BlankDagger",
       "type": "item",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "blank_dagger",
       "metadata": {
         "files": [
@@ -5722,7 +5722,7 @@
       "name": "BlankLongSword",
       "type": "item",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "blank_long_sword",
       "metadata": {
         "files": [
@@ -5893,7 +5893,7 @@
       "name": "BlankLongSwordHit",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "blank_long_sword_hit",
       "metadata": {
         "dependencies": [
@@ -7590,10 +7590,15 @@
       "name": "BlankLongswordDescription",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "blank_longsword_description",
       "metadata": {
-        "dependencies": [],
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlankLongswordDescriptionProcedure.java"
@@ -7616,10 +7621,15 @@
       "name": "BlankDaggerDescription",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "blank_dagger_description",
       "metadata": {
-        "dependencies": [],
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlankDaggerDescriptionProcedure.java"
@@ -10757,7 +10767,7 @@
           "src/main/java/net/mcreator/minigames/procedures/CheckRelicProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Relics"
     },
     {
       "name": "CrystallizedPotion",
@@ -10817,6 +10827,182 @@
         ]
       },
       "path": "~/Dungeon/Events/Potion"
+    },
+    {
+      "name": "SpawnDungeonItem",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_dungeon_item",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnDungeonItemProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "ReturnRelicItemstack",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "return_relic_itemstack",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "target",
+            "type": "entity"
+          },
+          {
+            "name": "item",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "itemstack",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReturnRelicItemstackProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Relics"
+    },
+    {
+      "name": "BlacksmithHammer",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blacksmith_hammer",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/blacksmith_hammer.json",
+          "src/main/resources/assets/minigames/items/blacksmith_hammer.json",
+          "src/main/java/net/mcreator/minigames/item/BlacksmithHammerItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "BlacksmithHammerDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blacksmith_hammer_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlacksmithHammerDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "RelicEquipped",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "relic_equipped",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "item",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RelicEquippedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Relics"
+    },
+    {
+      "name": "RelicUnequipped",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "relic_unequipped",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "item",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RelicUnequippedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Relics"
+    },
+    {
+      "name": "RelicInventory",
+      "type": "mixin",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "relic_inventory",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/mixin/RelicInventoryMixin.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Relics"
+    },
+    {
+      "name": "ItemDroppedDungeon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "item_dropped_dungeon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ItemDroppedDungeonProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
     }
   ],
   "variable_elements": [
@@ -12193,10 +12379,12 @@
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
-      "CUSTOM:VolleyBomb"
+      "CUSTOM:VolleyBomb",
+      "CUSTOM:BlacksmithHammer"
     ],
     "ITEMS:mod:dungeon_type_relic": [
-      "CUSTOM:CrystallizedPotion"
+      "CUSTOM:CrystallizedPotion",
+      "CUSTOM:BlacksmithHammer"
     ],
     "BLOCKS:minecraft:overworld_carver_replaceables": [
       "~CUSTOM:StartingRoomGridBlock"
@@ -12246,6 +12434,11 @@
     "ENTITIES:mod:marker": [
       "CUSTOM:PlagueMiddle",
       "CUSTOM:StunnedEffect"
+    ],
+    "ITEMS:mod:dungeon_type_utility": [
+      "CUSTOM:VolleyBomb",
+      "CUSTOM:PlagueStarter",
+      "CUSTOM:Ghostifier"
     ]
   },
   "tab_element_order": {},
@@ -12580,7 +12773,8 @@
       "effect.minigames.phantom": "Phantom",
       "item.minigames.ghostifier": "Ghostifier",
       "item.minigames.crystallized_potion": "Crystallized Potion",
-      "attribute.minigames.heal_amount": "Heal Amount"
+      "attribute.minigames.heal_amount": "Heal Amount",
+      "item.minigames.blacksmith_hammer": "Blacksmith Hammer"
     }
   },
   "metadata": {
@@ -12877,6 +13071,10 @@
               },
               {
                 "name": "Potion",
+                "children": []
+              },
+              {
+                "name": "Relics",
                 "children": []
               }
             ]

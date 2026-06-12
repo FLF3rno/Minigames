@@ -113,6 +113,9 @@ public class HoveredItemTooltipRenderer {
 		if (DungeonItemAccess.isStolen(stack)) {
 			tooltip.add(Component.literal("STOLEN").setStyle(Style.EMPTY.withBold(true).withColor(0xFFAA00)));
 		}
+		if (DungeonItemAccess.Forged(stack) > 0) {
+			tooltip.add(Component.literal(DungeonItemAccess.Forged(stack)+ "% FORGED").setStyle(Style.EMPTY.withBold(true).withColor(0xFA8A05)));
+		}
 	}
 
 	@SubscribeEvent
@@ -624,6 +627,9 @@ public class HoveredItemTooltipRenderer {
 		}
 		if (normalized.equals("STOLEN")) {
 			return Component.literal("STOLEN").setStyle(Style.EMPTY.withBold(true).withColor(0xFFAA00));
+		}
+		if (normalized.equals("FORGED")) {
+			return Component.literal(DungeonItemAccess.Forged(stack) + "%FORGED").setStyle(Style.EMPTY.withBold(true).withColor(0xFA8A05));
 		}
 		return line;
 	}

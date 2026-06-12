@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntityRenderer.class)
 public class TransparencyMixin {
 
-    // FORCE TRANSLUCENT RENDERING LAYER
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Inject(
             method = "getRenderType(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;ZZZ)Lnet/minecraft/client/renderer/RenderType;",
@@ -27,15 +26,13 @@ public class TransparencyMixin {
         float nbtValue = (rawNbtTransparency != null) ? rawNbtTransparency : 0.0f;
 
         if (nbtValue > 0.0f && nbtValue <= 100.0f) {
-            // FIX: Cast directly to the raw, un-genericized LivingEntityRenderer type.
-            // This satisfies the compiler and fixes the CAP#1 conversion error instantly.
+
             LivingEntityRenderer renderer = (LivingEntityRenderer) (Object) this;
             ResourceLocation texture = renderer.getTextureLocation(state);
             cir.setReturnValue(RenderType.entityTranslucent(texture));
         }
     }
 
-    // APPLY TRANSPARENCY MULTIPLIER TO ALPHA CHANNEL
     @ModifyVariable(
             method = "render(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
             at = @At(

@@ -29,6 +29,7 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.PLAGUE_STARTER.get());
 				tabData.accept(MinigamesModItems.GHOSTIFIER.get());
 				tabData.accept(MinigamesModItems.CRYSTALLIZED_POTION.get());
+				tabData.accept(MinigamesModItems.BLACKSMITH_HAMMER.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {

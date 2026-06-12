@@ -26,31 +26,23 @@ public class CheckPotionEnd {
             return;
         }
 
-        // 1. Get current active instances
         Collection<MobEffectInstance> currentInstances = player.getActiveEffects();
         Set<MobEffect> currentEffects = currentInstances.stream()
                 .map(i -> i.getEffect().value())
                 .collect(Collectors.toSet());
 
-        // 2. Load previous state
         String lastEffectsData = player.getPersistentData().getString("last_effects").orElse("");
         Set<MobEffect> previousEffects = parseEffects(lastEffectsData);
 
-        // 3. Detect expired
         for (MobEffect effect : previousEffects) {
             if (!currentEffects.contains(effect)) {
-                // Find the instance that JUST expired to get the amplifier
-                // Note: Since it's already gone, you may need to store amp in NBT 
-                // or pass a default (0)
                 int amp = 0; 
                 String effectName = BuiltInRegistries.MOB_EFFECT.getKey(effect).toString();
                 
-                // Execute using 'player' as the target
                 PotionEffectExpiresProcedure.execute(player.level(), player, (double) amp, effectName);
             }
         }
 
-        // 4. Save state
         player.getPersistentData().putString("last_effects", serializeEffects(currentEffects));
     }
 

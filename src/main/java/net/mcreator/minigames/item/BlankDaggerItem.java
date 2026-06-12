@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
+import net.mcreator.minigames.procedures.BreakWeaponProcedure;
 import net.mcreator.minigames.procedures.BlankDaggerDescriptionProcedure;
 import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.MinigamesMod;
@@ -48,5 +49,6 @@ public class BlankDaggerItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		BreakWeaponProcedure.execute();
 	}
 }

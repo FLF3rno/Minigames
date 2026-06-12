@@ -7,7 +7,8 @@
     "LivingEntityFallDamageMixin",
     "LivingEntityGravityStateMixin",
     "LivingEntityJumpGravityMixin",
-    "PhantomCollisionMixin"
+    "PhantomCollisionMixin",
+    "RelicInventoryMixin"
   ],
   "client": [
     "PlayerRendererGravityRotationMixin",

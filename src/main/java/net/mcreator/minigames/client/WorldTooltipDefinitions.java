@@ -16,12 +16,17 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joml.Matrix4f;
 
 import net.mcreator.minigames.DungeonItemAccess;
 
 public final class WorldTooltipDefinitions {
 	private static final int THIEF_COLOR = 0xFFAA00;
+	private static final int FORGED_COLOR = 0xFA8A05;
+	private static final int MONSTER_COLOR = 0xF40B0D;
+	private static final int PHANTOM_COLOR = 0x605AA5;
+	private static final int BLESSED_COLOR = 0x84D4FF;
 	private static final int DEFINITION_TEXT = 0xEAE6D8;
 	private static final int PADDING_X = 6;
 	private static final int PADDING_Y = 6;
@@ -32,16 +37,64 @@ public final class WorldTooltipDefinitions {
 	private static final int DEFINITION_BORDER_DARK = 0xA028007F;
 	private static final int DEFINITION_TITLE_COLOR = 0xC77DFF;
 	private static final int DEFINITION_GAP = 5;
-
 	private static final List<DefinitionRule> DEFINITION_RULES = List.of(
-			new DefinitionRule(10, stack -> DungeonItemAccess.isStolen(stack),
-					new DefinitionCard(10, DefinitionText.staticText("STOLEN", Style.EMPTY.withBold(true).withColor(THIEF_COLOR)),
+			//DEFINITION DI PROPRIERTIES
+			new DefinitionRule(10,
+					stack -> DungeonItemAccess.isStolen(stack),
+					stack -> 0,
+					(stack, val) -> new DefinitionCard(10,
+							DefinitionText.staticText("STOLEN", Style.EMPTY.withBold(true).withColor(THIEF_COLOR)),
 							List.of(DefinitionText.fromComponent(centeredLine(partialColorText("Thief", THIEF_COLOR),
-									partialColorText(" can use this item", 0xFFFFFFFF)))))),
-			new DefinitionRule(9, stack -> DungeonItemAccess.isGlitched(stack),
-					new DefinitionCard(9, DefinitionText.animatedGlitch("GLITCHED"),
-							List.of(DefinitionText.staticText("Numerical values for this", Style.EMPTY.withColor(0xFFFFFFFF)),
-									DefinitionText.staticText("item are randomized", Style.EMPTY.withColor(0xFFFFFFFF))))));
+									partialColorText(" can use this item", 0xFFFFFFFF))))
+					)
+			),
+			new DefinitionRule(11,
+					stack -> DungeonItemAccess.Forged(stack) > 0 || DungeonItemAccess.isForged(stack),
+					stack -> DungeonItemAccess.Forged(stack),
+					(stack, amount) -> new DefinitionCard(11,
+							DefinitionText.staticText("FORGED", Style.EMPTY.withBold(true).withColor(FORGED_COLOR)),
+							List.of(
+									DefinitionText.staticText("Numerical values for this", Style.EMPTY.withColor(0xFFFFFFFF)),
+									DefinitionText.fromComponent(centeredLine(partialColorText("are buffed by ", 0xFFFFFFFF),
+											partialColorText(amount + "%", FORGED_COLOR)))
+							)
+					)
+			),
+			new DefinitionRule(9,
+					stack -> DungeonItemAccess.isGlitched(stack),
+					stack -> 0,
+					(stack, val) -> new DefinitionCard(9,
+							DefinitionText.animatedGlitch("GLITCHED"),
+							List.of(
+									DefinitionText.staticText("Numerical values for this", Style.EMPTY.withColor(0xFFFFFFFF)),
+									DefinitionText.staticText("item are randomized", Style.EMPTY.withColor(0xFFFFFFFF))
+							)
+					)
+			),
+			//DEFINITION DI STATUS EFFECTS
+			new DefinitionRule(5,
+					stack -> DungeonItemAccess.hasPhantom(stack),
+					stack -> 0,
+					(stack, val) -> new DefinitionCard(10,
+							DefinitionText.staticText("PHANTOM", Style.EMPTY.withBold(true).withColor(PHANTOM_COLOR)),
+							List.of(DefinitionText.fromComponent(centeredLine(partialColorText("Phase through entities", 0xFFFFFFFF))))
+					)
+			),
+			new DefinitionRule(6,
+					stack -> DungeonItemAccess.hasBlessed(stack),
+					stack -> 0,
+					(stack, val) -> new DefinitionCard(6,
+							DefinitionText.staticText("BLESSED", Style.EMPTY.withBold(true).withColor(BLESSED_COLOR)),
+							List.of(
+									DefinitionText.fromComponent(Component.literal("Take no damage").withStyle(Style.EMPTY.withColor(0xFFFFFFFF))),
+									DefinitionText.fromComponent(centeredLine(
+											partialColorText("Monsters", MONSTER_COLOR),
+											partialColorText(" cannot target you", 0xFFFFFFFF)
+									))
+							)
+					)
+			)
+	);
 
 
 	private WorldTooltipDefinitions() {
@@ -51,7 +104,7 @@ public final class WorldTooltipDefinitions {
 		List<DefinitionCard> definitions = new ArrayList<>();
 		for (DefinitionRule rule : DEFINITION_RULES) {
 			if (rule.matches(stack)) {
-				definitions.add(rule.createCard());
+				definitions.add(rule.createCard(stack));
 			}
 		}
 		definitions.sort(Comparator.comparingInt(DefinitionCard::priority));
@@ -158,14 +211,16 @@ public final class WorldTooltipDefinitions {
 		}
 		return (r << 16) | (g << 8) | b;
 	}
+	private record DefinitionRule(int priority, Predicate<ItemStack> matcher,
+								  java.util.function.Function<ItemStack, Integer> valueProvider,
+								  java.util.function.BiFunction<ItemStack, Integer, DefinitionCard> cardFactory) {
 
-	private record DefinitionRule(int priority, Predicate<ItemStack> matcher, DefinitionCard card) {
 		boolean matches(ItemStack stack) {
 			return matcher.test(stack);
 		}
 
-		DefinitionCard createCard() {
-			return card;
+		DefinitionCard createCard(ItemStack stack) {
+			return cardFactory.apply(stack, valueProvider.apply(stack));
 		}
 	}
 
@@ -224,6 +279,7 @@ public final class WorldTooltipDefinitions {
 			return new StaticDefinitionText(component);
 		}
 	}
+
 
 	private record StaticDefinitionText(Component component) implements DefinitionText {
 		@Override

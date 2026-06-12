@@ -73,6 +73,9 @@ public class StunnedEffectEntity extends Monster {
 		this.parentEntity = parent;
 		this.entityData.set(PARENT_ID, parent.getId());
 	}
+	public int getParentId() {
+		return this.entityData.get(PARENT_ID);
+	}
 
 	@Override
 	public void handleEntityEvent(byte id) {

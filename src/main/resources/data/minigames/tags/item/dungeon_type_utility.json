@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minigames:blacksmith_hammer",
-    "minigames:blank_sword",
+    "minigames:plague_starter",
+    "minigames:ghostifier",
     "minigames:volley_bomb"
   ]
 }

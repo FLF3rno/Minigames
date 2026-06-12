@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minigames:blacksmith_hammer",
     "minigames:crystallized_potion"
   ]
 }

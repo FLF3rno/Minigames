@@ -31,8 +31,9 @@ public class RevivePlayerProcedure {
 	private static void execute(@Nullable Event event, Entity entity, Entity immediatesourceentity) {
 		if (entity == null || immediatesourceentity == null)
 			return;
-		if ((BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:server_player") || (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:player")) {
-			if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.ASCENDING)) {
+		if ((BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:server_player") || (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:player")
+				|| immediatesourceentity.getPersistentData().getBooleanOr("blessed", false)) {
+			if (entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MinigamesModMobEffects.ASCENDING)) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.removeEffectsSingleTarget = true;

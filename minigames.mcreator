@@ -9977,6 +9977,18 @@
             "type": "number"
           },
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "type",
             "type": "string"
           },
@@ -11218,7 +11230,12 @@
       "locked_code": false,
       "registry_name": "blessed_cursed_crossbow_description",
       "metadata": {
-        "dependencies": [],
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlessedCursedCrossbowDescriptionProcedure.java"
@@ -11246,6 +11263,19 @@
         "return_type": "number",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ReturnLoadstateProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "SelfDamage",
+      "type": "damagetype",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "self_damage",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/damage_type/self_damage.json"
         ]
       },
       "path": "~/Dungeon/Items"
@@ -12693,6 +12723,10 @@
     "ITEMS:mod:dungeon_type_weapon": [
       "CUSTOM:WindScythe",
       "CUSTOM:BlessedCursedCrossbow"
+    ],
+    "BIOMES:minecraft:is_overworld": [],
+    "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
+      "CUSTOM:SelfDamage"
     ]
   },
   "tab_element_order": {},
@@ -13033,7 +13067,10 @@
       "item.minigames.wind_scythe": "Wind Scythe",
       "item.minigames.blessed_cursed_crossbow": "Blessed Cursed Crossbow",
       "attribute.minigames.load_time": "Load Time",
-      "attribute.minigames.ranged_damage": "Ranged Damage"
+      "attribute.minigames.ranged_damage": "Ranged Damage",
+      "death.attack.self_damage.item": "%1$s killed themselves",
+      "death.attack.self_damage": "%1$s killed themselves",
+      "death.attack.self_damage.player": "%1$s killed themselves"
     }
   },
   "metadata": {

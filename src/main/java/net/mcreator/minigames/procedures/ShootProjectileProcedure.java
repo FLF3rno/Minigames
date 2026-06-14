@@ -1,5 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -9,17 +11,23 @@ import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.init.MinigamesModEntities;
 
+import java.util.Comparator;
+
 public class ShootProjectileProcedure {
-	public static void execute(LevelAccessor world, Entity shooter, double damage, double inaccuracy, double knockback, double piercing, double speed, String type) {
+	public static void execute(LevelAccessor world, double x, double y, double z, Entity shooter, double damage, double inaccuracy, double knockback, double piercing, double speed, String type) {
 		if (shooter == null || type == null)
 			return;
 		if ((type).equals("arrow")) {
@@ -59,6 +67,22 @@ public class ShootProjectileProcedure {
 					entityToSpawn.setDeltaMovement((shooter.getLookAngle().x * speed), (shooter.getLookAngle().y * speed), (shooter.getLookAngle().z * speed));
 				}
 			}
+		} else if ((type).equals("blessed_cursed_crossbow")) {
+			{
+				Entity _shootFrom = shooter;
+				Level projectileLevel = _shootFrom.level();
+				if (!projectileLevel.isClientSide()) {
+					Projectile _entityToSpawn = initArrowProjectile(
+							new SpectralArrow(projectileLevel, 0, 0, 0, new SpectralArrow(EntityType.SPECTRAL_ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
+							(float) (damage / speed), false, false, false, AbstractArrow.Pickup.DISALLOWED);
+					_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
+					_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);
+					projectileLevel.addFreshEntity(_entityToSpawn);
+				}
+			}
+			shooter.hurt(new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:self_damage")))),
+					(float) GetItemAttributeProcedure.execute(shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage"));
+			(findEntityInWorldRange(world, SpectralArrow.class, x, y, z, 2)).getPersistentData().putBoolean("blessed", true);
 		}
 	}
 
@@ -82,5 +106,9 @@ public class ShootProjectileProcedure {
 		if (piercing > 0)
 			weapon.enchant(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.PIERCING), piercing);
 		return weapon;
+	}
+
+	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range) {
+		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), e -> true).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
 	}
 }

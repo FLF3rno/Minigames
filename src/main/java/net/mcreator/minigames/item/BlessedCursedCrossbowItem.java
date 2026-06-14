@@ -44,36 +44,48 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
     private boolean midSoundPlayed = false;
     public BlessedCursedCrossbowItem(Item.Properties properties) {
         super(properties.stacksTo(1).fireResistant().attributes(ItemAttributeModifiers.builder()
+        
                 .add(Attributes.ATTACK_SPEED,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_0"),
                                 -2.4,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
+                        
                 .add(MinigamesModAttributes.SALVAGE_VALUE,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_1"),
                                 35,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
+                        
                 .add(MinigamesModAttributes.REPAIR_VALUE,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_2"),
                                 50,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
+                        
                 .add(MinigamesModAttributes.LOAD_TIME,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_3"),
                                 50,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
+                        
                 .add(MinigamesModAttributes.RANGED_DAMAGE,
                         new AttributeModifier(
                                 ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_4"),
                                 4,
                                 AttributeModifier.Operation.ADD_VALUE),
-                        EquipmentSlotGroup.ANY)
+                        EquipmentSlotGroup.MAINHAND)
+
+                .add(MinigamesModAttributes.EXTRA_DAMAGE,
+                        new AttributeModifier(
+                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_5"),
+                                4,
+                                AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND)
                 .build()));
     }
 
@@ -99,7 +111,7 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
             TooltipFlag flag
     ) {
         String hoverText =
-                BlessedCursedCrossbowDescriptionProcedure.execute();
+                BlessedCursedCrossbowDescriptionProcedure.execute(stack);
 
         if (hoverText != null) {
             for (String line : hoverText.split("\n")) {
@@ -221,7 +233,7 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
                     0.6,
                     0,
                     2.5,
-                    "spectral_arrow"
+                    "blessed_cursed_crossbow"
             );
         }
 

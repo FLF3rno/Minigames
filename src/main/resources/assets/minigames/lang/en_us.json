@@ -334,5 +334,8 @@
   "item.minigames.wind_scythe": "Wind Scythe",
   "item.minigames.blessed_cursed_crossbow": "Blessed Cursed Crossbow",
   "attribute.minigames.load_time": "Load Time",
-  "attribute.minigames.ranged_damage": "Ranged Damage"
+  "attribute.minigames.ranged_damage": "Ranged Damage",
+  "death.attack.self_damage.item": "%1$s killed themselves",
+  "death.attack.self_damage": "%1$s killed themselves",
+  "death.attack.self_damage.player": "%1$s killed themselves"
 }

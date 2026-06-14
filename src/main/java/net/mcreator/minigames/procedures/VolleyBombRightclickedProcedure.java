@@ -20,7 +20,7 @@ public class VolleyBombRightclickedProcedure {
 		if (entity == null)
 			return;
 		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
-		ShootProjectileProcedure.execute(world, x, y, z, entity, 0, 0, 0, 0, 0.4, "volleybomb");
+		ShootProjectileProcedure.execute(world, entity, 0, 0, 0, 0, 0.4, "volleybomb");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/playsound minigames:volleybomb_hit player @a ~ ~ ~ 0.4 1.1");

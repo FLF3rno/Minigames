@@ -27,7 +27,7 @@ import net.mcreator.minigames.init.MinigamesModEntities;
 import java.util.Comparator;
 
 public class ShootProjectileProcedure {
-	public static void execute(LevelAccessor world, double x, double y, double z, Entity shooter, double damage, double inaccuracy, double knockback, double piercing, double speed, String type) {
+	public static void execute(LevelAccessor world, Entity shooter, double damage, double inaccuracy, double knockback, double piercing, double speed, String type) {
 		if (shooter == null || type == null)
 			return;
 		if ((type).equals("arrow")) {
@@ -82,7 +82,7 @@ public class ShootProjectileProcedure {
 			}
 			shooter.hurt(new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:self_damage")))),
 					(float) GetItemAttributeProcedure.execute(shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage"));
-			(findEntityInWorldRange(world, SpectralArrow.class, x, y, z, 2)).getPersistentData().putBoolean("blessed", true);
+			(findEntityInWorldRange(world, SpectralArrow.class, (shooter.getX()), (shooter.getY()), (shooter.getZ()), 2)).getPersistentData().putBoolean("blessed", true);
 		}
 	}
 

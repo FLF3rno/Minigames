@@ -3,14 +3,14 @@
   "_type": "item",
   "definition": {
     "renderType": 0,
-    "texture": "ghostifier",
+    "texture": "utility_ghostifier",
     "customModelName": "Normal",
     "guiTexture": "",
     "customProperties": {},
     "states": [
       {
         "renderType": 0,
-        "texture": "ghostifier_active",
+        "texture": "utility_ghostifier",
         "customModelName": "Normal",
         "stateMap": [
           {
@@ -21,6 +21,22 @@
               "type": "number"
             },
             "value": 0.0
+          }
+        ]
+      },
+      {
+        "renderType": 0,
+        "texture": "utility_ghostifier_active",
+        "customModelName": "Normal",
+        "stateMap": [
+          {
+            "property": {
+              "min": 0.0,
+              "max": 1.0,
+              "name": "cooldown",
+              "type": "number"
+            },
+            "value": 1.0
           }
         ]
       }

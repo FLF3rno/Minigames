@@ -103,6 +103,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> GHOSTIFIER;
 	public static final DeferredItem<Item> CRYSTALLIZED_POTION;
 	public static final DeferredItem<Item> BLACKSMITH_HAMMER;
+	public static final DeferredItem<Item> PHASE_CLOAK;
+	public static final DeferredItem<Item> WIND_SCYTHE;
+	public static final DeferredItem<Item> BLESSED_CURSED_CROSSBOW;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -179,6 +182,9 @@ public class MinigamesModItems {
 		GHOSTIFIER = register("ghostifier", GhostifierItem::new);
 		CRYSTALLIZED_POTION = register("crystallized_potion", CrystallizedPotionItem::new);
 		BLACKSMITH_HAMMER = register("blacksmith_hammer", BlacksmithHammerItem::new);
+		PHASE_CLOAK = register("phase_cloak", PhaseCloakItem::new);
+		WIND_SCYTHE = register("wind_scythe", WindScytheItem::new);
+		BLESSED_CURSED_CROSSBOW = register("blessed_cursed_crossbow", BlessedCursedCrossbowItem::new);
 	}
 
 	// Start of user code block custom items
@@ -205,6 +211,7 @@ public class MinigamesModItems {
 		@SubscribeEvent
 		public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event) {
 			event.register(ResourceLocation.parse("minigames:magma_dart/shockwave"), MagmaDartItem.ShockwaveProperty.MAP_CODEC);
+			event.register(ResourceLocation.parse("minigames:blessed_cursed_crossbow/loadstate"), BlessedCursedCrossbowItem.LoadstateProperty.MAP_CODEC);
 		}
 	}
 }

@@ -37,7 +37,6 @@ public class RollTypeProcedure {
 			MinigamesModVariables.MapVariables.get(world).achivementTypeTimer = MinigamesModVariables.MapVariables.get(world).achivementTypeTimer + 1;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (MinigamesModVariables.MapVariables.get(world).achivementTypeTimer == 1) {
-				PlayerAssignmentProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).achievmentType = MinigamesModVariables.MapVariables.get(world).achievmentType + 1;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (world instanceof ServerLevel _level)

@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minigames:blank_dagger",
+    "minigames:phase_cloak",
     "minigames:ghostifier"
   ]
 }

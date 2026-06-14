@@ -49,7 +49,7 @@ public final class WorldTooltipDefinitions {
 					)
 			),
 			new DefinitionRule(11,
-					stack -> DungeonItemAccess.Forged(stack) > 0 || DungeonItemAccess.isForged(stack),
+					stack -> DungeonItemAccess.Forged(stack) != 0 || DungeonItemAccess.isForged(stack),
 					stack -> DungeonItemAccess.Forged(stack),
 					(stack, amount) -> new DefinitionCard(11,
 							DefinitionText.staticText("FORGED", Style.EMPTY.withBold(true).withColor(FORGED_COLOR)),

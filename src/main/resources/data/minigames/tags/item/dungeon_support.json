@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minigames:blessed_cursed_crossbow",
     "minigames:plague_starter",
     "minigames:crystallized_potion",
     "minigames:blank_long_sword"

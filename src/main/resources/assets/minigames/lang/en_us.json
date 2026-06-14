@@ -329,5 +329,10 @@
   "item.minigames.ghostifier": "Ghostifier",
   "item.minigames.crystallized_potion": "Crystallized Potion",
   "attribute.minigames.heal_amount": "Heal Amount",
-  "item.minigames.blacksmith_hammer": "Blacksmith Hammer"
+  "item.minigames.blacksmith_hammer": "Blacksmith Hammer",
+  "item.minigames.phase_cloak": "Phase Cloak",
+  "item.minigames.wind_scythe": "Wind Scythe",
+  "item.minigames.blessed_cursed_crossbow": "Blessed Cursed Crossbow",
+  "attribute.minigames.load_time": "Load Time",
+  "attribute.minigames.ranged_damage": "Ranged Damage"
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "minigames:item/volleybomb"
+    "layer0": "minigames:item/utility_volleybomb"
   }
 }

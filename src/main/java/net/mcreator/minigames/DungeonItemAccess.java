@@ -51,6 +51,9 @@ public final class DungeonItemAccess {
 	public static boolean isGlitched(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("glitched", false);
 	}
+	public static int Glitched(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getIntOr("glitched", 0);
+	}
 	public static boolean isForged(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("isForged", false);
 	}
@@ -58,9 +61,6 @@ public final class DungeonItemAccess {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getIntOr("forged", 0);
 	}
 	//CONDITIONS per EFFECTS
-	public static boolean hasStun(ItemStack stack) {
-		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("stun", false);
-	}
 	public static boolean hasPhantom(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("phantom", false);
 	}

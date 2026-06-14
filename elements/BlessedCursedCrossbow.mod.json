@@ -1,0 +1,210 @@
+{
+  "_fv": 85,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "weapon_blessed_cursed_crossbow_standby",
+    "customModelName": "Tool",
+    "guiTexture": "",
+    "customProperties": {
+      "loadstate": {
+        "name": "VoteIcon"
+      }
+    },
+    "states": [
+      {
+        "renderType": 0,
+        "texture": "weapon_blessed_cursed_crossbow_standby",
+        "customModelName": "Tool",
+        "stateMap": [
+          {
+            "property": {
+              "min": -1.7976931348623157E308,
+              "max": 1.7976931348623157E308,
+              "name": "CUSTOM:loadstate",
+              "type": "number"
+            },
+            "value": 0.0
+          }
+        ]
+      },
+      {
+        "renderType": 0,
+        "texture": "weapon_blessed_cursed_crossbow_load_0",
+        "customModelName": "Tool",
+        "stateMap": [
+          {
+            "property": {
+              "min": -1.7976931348623157E308,
+              "max": 1.7976931348623157E308,
+              "name": "CUSTOM:loadstate",
+              "type": "number"
+            },
+            "value": 1.0
+          }
+        ]
+      },
+      {
+        "renderType": 0,
+        "texture": "weapon_blessed_cursed_crossbow_load_1",
+        "customModelName": "Tool",
+        "stateMap": [
+          {
+            "property": {
+              "min": -1.7976931348623157E308,
+              "max": 1.7976931348623157E308,
+              "name": "CUSTOM:loadstate",
+              "type": "number"
+            },
+            "value": 2.0
+          }
+        ]
+      },
+      {
+        "renderType": 0,
+        "texture": "weapon_blessed_cursed_crossbow_load_2",
+        "customModelName": "Tool",
+        "stateMap": [
+          {
+            "property": {
+              "min": -1.7976931348623157E308,
+              "max": 1.7976931348623157E308,
+              "name": "CUSTOM:loadstate",
+              "type": "number"
+            },
+            "value": 3.0
+          }
+        ]
+      },
+      {
+        "renderType": 0,
+        "texture": "weapon_blessed_cursed_crossbow_loaded",
+        "customModelName": "Tool",
+        "stateMap": [
+          {
+            "property": {
+              "min": -1.7976931348623157E308,
+              "max": 1.7976931348623157E308,
+              "name": "CUSTOM:loadstate",
+              "type": "number"
+            },
+            "value": 4.0
+          }
+        ]
+      }
+    ],
+    "animations": [],
+    "name": "Blessed Cursed Crossbow",
+    "rarity": "COMMON",
+    "creativeTabs": [
+      {
+        "value": "CUSTOM:DungeonItems"
+      }
+    ],
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 35,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": true,
+    "isPiglinCurrency": false,
+    "repairItems": [],
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 4.0,
+    "attackSpeed": 1.2,
+    "specialInformation": {
+      "fixedValue": [
+        "",
+        "§6§lON HIT",
+        "§eStun§f monsters for§2 3s§f if they are full HP"
+      ],
+      "name": "BlessedCursedCrossbowDescription"
+    },
+    "glowCondition": {
+      "fixedValue": false
+    },
+    "openGUIOnRightClick": {
+      "fixedValue": false
+    },
+    "inventorySize": 9,
+    "inventoryStackSize": 99,
+    "onRightClickedInAir": {
+      "name": "BlessedCursedCrossbowRightclicked"
+    },
+    "onFinishUsingItem": {
+      "name": "BlessedCursedCrossbowPlayerFinishesUsingItem"
+    },
+    "enableRanged": false,
+    "shootConstantly": false,
+    "rangedItemChargesPower": false,
+    "projectile": {
+      "value": "CUSTOM:IceDartProjectile"
+    },
+    "projectileDisableAmmoCheck": false,
+    "isFood": false,
+    "nutritionalValue": 4,
+    "saturation": 0.3,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "crossbow",
+    "isMusicDisc": false,
+    "musicDiscMusic": {
+      "value": ""
+    },
+    "musicDiscDescription": "",
+    "musicDiscLengthInTicks": 100,
+    "musicDiscAnalogOutput": 0,
+    "providedBannerPatterns": [],
+    "attributeModifiers": [
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "ATTACK_SPEED"
+        },
+        "amount": -2.4,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "CUSTOM:SalvageValue"
+        },
+        "amount": 35.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "CUSTOM:RepairValue"
+        },
+        "amount": 50.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": {
+          "value": "CUSTOM:LoadTime"
+        },
+        "amount": 35.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "any",
+        "attribute": {
+          "value": "CUSTOM:RangedDamage"
+        },
+        "amount": 4.0,
+        "operation": "ADD_VALUE"
+      }
+    ]
+  }
+}

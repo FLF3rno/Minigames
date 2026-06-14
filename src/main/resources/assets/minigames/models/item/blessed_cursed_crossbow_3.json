@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/crossbow",
+  "textures": {
+    "layer0": "minigames:item/weapon_blessed_cursed_crossbow_load_2"
+  }
+}

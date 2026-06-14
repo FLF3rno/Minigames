@@ -32,6 +32,8 @@ public class MinigamesModAttributes {
 	public static final DeferredHolder<Attribute, Attribute> ABILITY_COOLDOWN = REGISTRY.register("ability_cooldown", () -> new RangedAttribute("attribute.minigames.ability_cooldown", 0, 0, 1000000).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> ABILITY_RANGE = REGISTRY.register("ability_range", () -> new RangedAttribute("attribute.minigames.ability_range", 0, 0, 100).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> HEAL_AMOUNT = REGISTRY.register("heal_amount", () -> new RangedAttribute("attribute.minigames.heal_amount", 0, 0, 1000).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> LOAD_TIME = REGISTRY.register("load_time", () -> new RangedAttribute("attribute.minigames.load_time", 0, 0, 1000000).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> RANGED_DAMAGE = REGISTRY.register("ranged_damage", () -> new RangedAttribute("attribute.minigames.ranged_damage", 0, 0, 1000000).setSyncable(true));
 
 	@SubscribeEvent
 	public static void addAttributes(EntityAttributeModificationEvent event) {
@@ -48,5 +50,7 @@ public class MinigamesModAttributes {
 		event.add(EntityType.PLAYER, ABILITY_COOLDOWN);
 		event.add(EntityType.PLAYER, ABILITY_RANGE);
 		event.add(EntityType.PLAYER, HEAL_AMOUNT);
+		event.add(EntityType.PLAYER, LOAD_TIME);
+		event.add(EntityType.PLAYER, RANGED_DAMAGE);
 	}
 }

@@ -620,7 +620,7 @@ public class MinigamesModVariables {
 		public double PassiveHealCooldown = 80.0;
 		public double PassiveHealAmount = 1.0;
 		public Direction gravity = Direction.DOWN;
-		public double ascendingTimer = 350.0;
+		public double ascendingTimer = 0.0;
 		public boolean removeEffectsSingleTarget = false;
 		public boolean ascendingActive = false;
 		public String advancedGlowingColor = "";

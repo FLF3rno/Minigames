@@ -15,6 +15,20 @@
           "type": "minecraft:model",
           "model": "minigames:item/ghostifier_0"
         }
+      },
+      {
+        "predicate": [
+          {
+            "property": {
+              "property": "minecraft:cooldown"
+            },
+            "value": 1
+          }
+        ],
+        "model": {
+          "type": "minecraft:model",
+          "model": "minigames:item/ghostifier_1"
+        }
       }
     ],
     "fallback": {

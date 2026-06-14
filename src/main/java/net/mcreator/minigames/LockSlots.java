@@ -73,7 +73,6 @@ public class LockSlots {
 		if (slots < 9 && slots > 0) {
 			int currentSelected = getSelectedSlot(inventory);
 			if (currentSelected >= slots) {
-				// Wrapping logic: if we hit 8 (left scroll from 0), go to slots-1. Otherwise go to 0.
 				if (currentSelected == 8) {
 					setSelectedSlot(inventory, slots - 1);
 				} else {

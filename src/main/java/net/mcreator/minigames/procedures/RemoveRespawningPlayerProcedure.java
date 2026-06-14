@@ -23,7 +23,9 @@ public class RemoveRespawningPlayerProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
-		MinigamesModVariables.MapVariables.get(world).respawningPlayers = MinigamesModVariables.MapVariables.get(world).respawningPlayers - 1;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		if (!MinigamesModVariables.MapVariables.get(world).playingDungeons) {
+			MinigamesModVariables.MapVariables.get(world).respawningPlayers = MinigamesModVariables.MapVariables.get(world).respawningPlayers - 1;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		}
 	}
 }

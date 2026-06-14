@@ -39,14 +39,14 @@ public class SpawnDungeonItemProcedure {
 				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
 			}
 		}
-		if (item.getItem() == MinigamesModItems.GHOSTIFIER.get()) {
+		if (item.getItem() == MinigamesModItems.GHOSTIFIER.get() || item.getItem() == MinigamesModItems.PHASE_CLOAK.get()) {
 			{
 				final String _tagName = "phantom";
 				final boolean _tagValue = true;
 				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
 			}
 		}
-		if (item.getItem() == MinigamesModItems.GHOSTIFIER.get()) {
+		if (item.getItem() == MinigamesModItems.GHOSTIFIER.get() || item.getItem() == MinigamesModItems.PHASE_CLOAK.get()) {
 			{
 				final String _tagName = "blessed";
 				final boolean _tagValue = true;

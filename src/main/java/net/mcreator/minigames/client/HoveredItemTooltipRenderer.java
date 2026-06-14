@@ -102,6 +102,14 @@ public class HoveredItemTooltipRenderer {
 				tooltip.add(nextIndex++, Component.literal(prefix + formatDamage(adjustedSpeed) + " Attack Speed").setStyle(Style.EMPTY.withColor(speedColor)));
 			}
 		}
+		Double rangedDamage = getDisplayedRangedDamage(stack);
+		if (rangedDamage != null && rangedDamage != 0) {
+			tooltip.add(nextIndex++, Component.literal(formatDamage(rangedDamage) + " Damage").setStyle(Style.EMPTY.withColor(DAMAGE_COLOR)));
+		}
+		Double loadTime = getDisplayedLoadTime(stack);
+		if (loadTime != null && loadTime != 0) {
+			tooltip.add(nextIndex++, Component.literal(formatDamage(loadTime) + "s Load Time").setStyle(Style.EMPTY.withColor(0xFF5555)));
+		}
 		tooltip.add(Component.empty());
 		tooltip.add(Component.literal(classInfo.label()).setStyle(Style.EMPTY.withBold(true).withColor(classInfo.color())));
 		if (isCursed(stack)) {
@@ -439,6 +447,8 @@ public class HoveredItemTooltipRenderer {
 		double addValue = 0.0;
 		double addMultipliedBase = 0.0;
 		double addMultipliedTotal = 0.0;
+		double forgedMultiplier = DungeonItemAccess.Forged(stack);
+		double glitchedMultiplier = DungeonItemAccess.Glitched(stack);
 		boolean hasDamage = false;
 
 		for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
@@ -457,7 +467,7 @@ public class HoveredItemTooltipRenderer {
 			return null;
 		}
 
-		double damage = 1.0 + addValue;
+		double damage = (1.0 + addValue) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
 		damage += damage * addMultipliedBase;
 		damage *= 1.0 + addMultipliedTotal;
 		return damage;
@@ -497,6 +507,8 @@ public class HoveredItemTooltipRenderer {
 		double addValue = 0.0;
 		double addMultipliedBase = 0.0;
 		double addMultipliedTotal = 0.0;
+		double forgedMultiplier = DungeonItemAccess.Forged(stack);
+		double glitchedMultiplier = DungeonItemAccess.Glitched(stack);
 		boolean hasExplosionDamage = false;
 
 		for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
@@ -517,8 +529,69 @@ public class HoveredItemTooltipRenderer {
 
 		double explosionDamage = addValue;
 		explosionDamage += explosionDamage * addMultipliedBase;
-		explosionDamage *= 1.0 + addMultipliedTotal;
+		explosionDamage *= (1.0 + addMultipliedTotal) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
 		return explosionDamage;
+	}
+	private static Double getDisplayedRangedDamage(ItemStack stack) {
+		ItemAttributeModifiers modifiers = stack.getOrDefault(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+		double addValue = 0.0;
+		double addMultipliedBase = 0.0;
+		double addMultipliedTotal = 0.0;
+		double forgedMultiplier = DungeonItemAccess.Forged(stack);
+		double glitchedMultiplier = DungeonItemAccess.Glitched(stack);
+		boolean hasRangedDamage = false;
+
+		for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
+			if (entry.slot().test(net.minecraft.world.entity.EquipmentSlot.MAINHAND) && entry.attribute().is(MinigamesModAttributes.RANGED_DAMAGE)) {
+				hasRangedDamage = true;
+				double amount = entry.modifier().amount();
+				switch (entry.modifier().operation()) {
+					case ADD_VALUE -> addValue += amount;
+					case ADD_MULTIPLIED_BASE -> addMultipliedBase += amount;
+					case ADD_MULTIPLIED_TOTAL -> addMultipliedTotal += amount;
+				}
+			}
+		}
+
+		if (!hasRangedDamage) {
+			return null;
+		}
+
+		double rangedDamage = addValue;
+		rangedDamage += rangedDamage * addMultipliedBase;
+		rangedDamage *= (1.0 + addMultipliedTotal) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
+		return rangedDamage;
+	}
+	private static Double getDisplayedLoadTime(ItemStack stack) {
+		ItemAttributeModifiers modifiers = stack.getOrDefault(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+		double addValue = 0.0;
+		double addMultipliedBase = 0.0;
+		double addMultipliedTotal = 0.0;
+		double forgedMultiplier = DungeonItemAccess.Forged(stack);
+		double glitchedMultiplier = DungeonItemAccess.Glitched(stack);
+		boolean hasLoadTime = false;
+
+		for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
+			if (entry.slot().test(net.minecraft.world.entity.EquipmentSlot.MAINHAND) && entry.attribute().is(MinigamesModAttributes.LOAD_TIME)) {
+				hasLoadTime = true;
+				double amount = entry.modifier().amount();
+				switch (entry.modifier().operation()) {
+					case ADD_VALUE -> addValue += amount;
+					case ADD_MULTIPLIED_BASE -> addMultipliedBase += amount;
+					case ADD_MULTIPLIED_TOTAL -> addMultipliedTotal += amount;
+				}
+			}
+		}
+
+		if (!hasLoadTime) {
+			return null;
+		}
+
+		double loadTime = addValue;
+		loadTime += loadTime * addMultipliedBase;
+		loadTime *= (1.0 + addMultipliedTotal) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
+		loadTime /= 20;
+		return loadTime;
 	}
 
 	private static String formatDamage(double damage) {

@@ -28,8 +28,8 @@ public class ShootProjectileProcedure {
 				Level projectileLevel = _shootFrom.level();
 				if (!projectileLevel.isClientSide()) {
 					Projectile _entityToSpawn = initArrowProjectile(
-							new Arrow(projectileLevel, 0, 0, 0, new Arrow(EntityType.ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter, (float) damage, false,
-							false, false, AbstractArrow.Pickup.DISALLOWED);
+							new Arrow(projectileLevel, 0, 0, 0, new Arrow(EntityType.ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
+							(float) (damage / speed), false, false, false, AbstractArrow.Pickup.DISALLOWED);
 					_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 					_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);
 					projectileLevel.addFreshEntity(_entityToSpawn);
@@ -42,7 +42,7 @@ public class ShootProjectileProcedure {
 				if (!projectileLevel.isClientSide()) {
 					Projectile _entityToSpawn = initArrowProjectile(
 							new SpectralArrow(projectileLevel, 0, 0, 0, new SpectralArrow(EntityType.SPECTRAL_ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
-							(float) damage, false, false, false, AbstractArrow.Pickup.DISALLOWED);
+							(float) (damage / speed), false, false, false, AbstractArrow.Pickup.DISALLOWED);
 					_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 					_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);
 					projectileLevel.addFreshEntity(_entityToSpawn);

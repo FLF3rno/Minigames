@@ -1,5 +1,9 @@
 package net.mcreator.minigames.network;
 
+import net.mcreator.minigames.init.MinigamesModItems;
+import net.mcreator.minigames.procedures.CheckRelicProcedure;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -55,17 +59,30 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		if (!itemEntity.isAlive() || player.distanceToSqr(itemEntity) > 64.0D) {
 			return;
 		}
-		if (!DungeonItemAccess.isDungeonItem(itemEntity.getItem())) {
-			return;
-		}
-		String classDungeon = player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
-		if (!DungeonItemAccess.canClassPickUp(itemEntity.getItem(), classDungeon)) {
+
+		ItemStack entityStack = itemEntity.getItem();
+
+		if (!DungeonItemAccess.isDungeonItem(entityStack)) {
 			return;
 		}
 
-		ItemStack entityStack = itemEntity.getItem();
+		String classDungeon = player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+		if (!DungeonItemAccess.canClassPickUp(entityStack, classDungeon)) {
+			return;
+		}
+
+		boolean isRelic = DungeonItemAccess.isRelic(entityStack);
+
+		if (MinigamesModVariables.MapVariables.get(player.level()).playingDungeons) {
+			if (!isRelic && CheckRelicProcedure.execute(player, new ItemStack(MinigamesModItems.BLACKSMITH_HAMMER.get()))) {
+				CustomData.update(DataComponents.CUSTOM_DATA, entityStack,
+						tag -> tag.putDouble("forged", tag.getDoubleOr("forged", 0) + 10));
+			}
+		}
+
 		int inserted;
-		if (DungeonItemAccess.isRelic(entityStack)) {
+
+		if (isRelic) {
 			inserted = tryInsertRelic(player.getInventory(), entityStack.copy());
 			if (inserted <= 0) {
 				player.displayClientMessage(Component.literal("§cRELIC SLOTS FULL"), true);
@@ -76,6 +93,7 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 				player.displayClientMessage(Component.literal("§cInventory is full!"), true);
 				return;
 			}
+
 			ItemStack remaining = entityStack.copy();
 			player.getInventory().add(remaining);
 			inserted = entityStack.getCount() - remaining.getCount();
@@ -84,15 +102,19 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		if (inserted <= 0) {
 			return;
 		}
+
 		if (inserted >= entityStack.getCount()) {
 			itemEntity.discard();
 		} else {
 			entityStack.shrink(inserted);
 			itemEntity.setItem(entityStack);
 		}
+
 		player.containerMenu.broadcastChanges();
+
 		float pitch = ((player.level().random.nextFloat() - player.level().random.nextFloat()) * 0.7F + 1.0F) * 2.0F;
-		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F, pitch);
+		player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+				SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F, pitch);
 	}
 
 	private static boolean isInventoryFull(ServerPlayer player) {

@@ -3,7 +3,7 @@
   "_type": "item",
   "definition": {
     "renderType": 0,
-    "texture": "plague_starter",
+    "texture": "utility_plague_spreader",
     "customModelName": "Normal",
     "guiTexture": "",
     "customProperties": {},

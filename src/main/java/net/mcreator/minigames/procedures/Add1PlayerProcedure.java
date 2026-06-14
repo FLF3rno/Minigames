@@ -23,7 +23,9 @@ public class Add1PlayerProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
+		double team = 0;
 		MinigamesModVariables.MapVariables.get(world).connectedPlayers = MinigamesModVariables.MapVariables.get(world).connectedPlayers + 1;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		team = MinigamesModVariables.MapVariables.get(world).connectedPlayers;
 	}
 }

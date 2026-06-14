@@ -39,6 +39,11 @@ public class RevivePlayerProcedure {
 					_vars.markSyncDirty();
 				}
 				entity.setDeltaMovement(new Vec3((immediatesourceentity.getLookAngle().x * 2), (immediatesourceentity.getLookAngle().y * 2), (immediatesourceentity.getLookAngle().z * 2)));
+				{
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.ascendingTimer = 0;
+					_vars.markSyncDirty();
+				}
 			}
 		}
 	}

@@ -40,8 +40,6 @@ public class KnockedProcedure {
 			if (event instanceof ICancellableEvent _cancellable) {
 				_cancellable.setCanceled(true);
 			}
-			MinigamesModVariables.MapVariables.get(world).respawningPlayers = MinigamesModVariables.MapVariables.get(world).respawningPlayers - 1;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.getServer() != null) {

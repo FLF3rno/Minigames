@@ -3,7 +3,7 @@
   "_type": "item",
   "definition": {
     "renderType": 0,
-    "texture": "volleybomb",
+    "texture": "utility_volleybomb",
     "customModelName": "Normal",
     "guiTexture": "",
     "customProperties": {},

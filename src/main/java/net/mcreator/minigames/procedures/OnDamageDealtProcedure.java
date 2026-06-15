@@ -7,8 +7,10 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.component.DataComponents;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -31,7 +33,7 @@ public class OnDamageDealtProcedure {
 	private static void execute(@Nullable Event event, Entity entity, Entity sourceentity, double amount) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED)) {
+		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED) || (entity instanceof Player || entity instanceof ServerPlayer) && (sourceentity instanceof Player || sourceentity instanceof ServerPlayer)) {
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount(0);
 			}

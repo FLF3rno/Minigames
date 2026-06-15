@@ -1,0 +1,23 @@
+{
+  "_fv": 85,
+  "_type": "projectile",
+  "definition": {
+    "projectileItem": {
+      "value": "Blocks.AIR"
+    },
+    "showParticles": true,
+    "actionSound": {
+      "value": ""
+    },
+    "igniteFire": false,
+    "disableGravity": true,
+    "disableDiscarding": false,
+    "power": 1.0,
+    "damage": 5.0,
+    "knockback": 5,
+    "entityModel": "Default",
+    "customModelTexture": "skeleton.png",
+    "modelWidth": 0.5,
+    "modelHeight": 0.5
+  }
+}

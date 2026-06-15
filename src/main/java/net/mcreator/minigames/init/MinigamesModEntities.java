@@ -87,6 +87,8 @@ public class MinigamesModEntities {
 					.sized(0.8f, 0.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<PlagueMiddleEntity>> PLAGUE_MIDDLE = register("plague_middle",
 			EntityType.Builder.<PlagueMiddleEntity>of(PlagueMiddleEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.1f, 0.1f));
+	public static final DeferredHolder<EntityType<?>, EntityType<BlessedArrowEntity>> BLESSED_ARROW = register("blessed_arrow",
+			EntityType.Builder.<BlessedArrowEntity>of(BlessedArrowEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities

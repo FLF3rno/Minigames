@@ -3011,7 +3011,7 @@
           "src/main/java/net/mcreator/minigames/potion/BlockLeftClickMobEffect.java"
         ]
       },
-      "path": "~/Crown Hunt"
+      "path": "~/General/Block Clicks"
     },
     {
       "name": "NameColorApply",
@@ -8428,7 +8428,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ChangeGravityExecuteProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/General/Gravity"
     },
     {
       "name": "Gravity",
@@ -11267,6 +11267,76 @@
         ]
       },
       "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BlessedArrow",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessed_arrow",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/BlessedArrowEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Blessed Cursed Crossbow"
+    },
+    {
+      "name": "BlockRightClick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "block_right_click",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlockRightClickProcedure.java"
+        ]
+      },
+      "path": "~/General/Block Clicks"
+    },
+    {
+      "name": "BlockRightClickWithItem",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "block_right_click_with_item",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlockRightClickWithItemProcedure.java"
+        ]
+      },
+      "path": "~/General/Block Clicks"
+    },
+    {
+      "name": "BlockRightClickEntity",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "block_right_click_entity",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlockRightClickEntityProcedure.java"
+        ]
+      },
+      "path": "~/General/Block Clicks"
     }
   ],
   "variable_elements": [
@@ -13440,6 +13510,10 @@
           },
           {
             "name": "Particles",
+            "children": []
+          },
+          {
+            "name": "Block Clicks",
             "children": []
           }
         ]

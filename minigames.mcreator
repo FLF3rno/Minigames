@@ -154,9 +154,9 @@
       "registry_name": "view_achievment",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/network/ViewAchievmentButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentScreen.java",
           "src/main/java/net/mcreator/minigames/world/inventory/ViewAchievmentMenu.java",
-          "src/main/java/net/mcreator/minigames/client/gui/ViewAchievmentScreen.java"
+          "src/main/java/net/mcreator/minigames/network/ViewAchievmentButtonMessage.java"
         ]
       },
       "path": "~/Achievement Run"
@@ -1180,8 +1180,8 @@
       "registry_name": "start_game",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/network/StartGameButtonMessage.java",
           "src/main/java/net/mcreator/minigames/client/gui/StartGameScreen.java",
+          "src/main/java/net/mcreator/minigames/network/StartGameButtonMessage.java",
           "src/main/java/net/mcreator/minigames/world/inventory/StartGameMenu.java"
         ]
       }
@@ -1278,10 +1278,10 @@
       "registry_name": "game_compass",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/item/GameCompassItem.java",
           "src/main/java/net/mcreator/minigames/item/inventory/GameCompassInventoryCapability.java",
-          "src/main/resources/assets/minigames/items/game_compass.json",
           "src/main/resources/assets/minigames/models/item/game_compass.json",
-          "src/main/java/net/mcreator/minigames/item/GameCompassItem.java"
+          "src/main/resources/assets/minigames/items/game_compass.json"
         ]
       }
     },
@@ -2316,14 +2316,14 @@
       "registry_name": "crown_helmet",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/crown_helmet_chestplate.json",
           "src/main/java/net/mcreator/minigames/item/CrownHelmetItem.java",
           "src/main/resources/assets/minigames/items/crown_helmet_helmet.json",
-          "src/main/resources/assets/minigames/models/item/crown_helmet_helmet.json",
-          "src/main/resources/assets/minigames/equipment/crown_helmet.json",
           "src/main/resources/assets/minigames/items/crown_helmet_leggings.json",
+          "src/main/resources/assets/minigames/models/item/crown_helmet_helmet.json",
           "src/main/resources/assets/minigames/items/crown_helmet_boots.json",
-          "src/main/java/net/mcreator/minigames/client/renderer/item/CrownHelmetArmor.java"
+          "src/main/resources/assets/minigames/items/crown_helmet_chestplate.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/item/CrownHelmetArmor.java",
+          "src/main/resources/assets/minigames/equipment/crown_helmet.json"
         ]
       },
       "path": "~/Crown Hunt"
@@ -2756,9 +2756,9 @@
       "registry_name": "minigame_gui_crown_hunt",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUICrownHuntScreen.java",
+          "src/main/java/net/mcreator/minigames/network/MinigameGUICrownHuntButtonMessage.java",
           "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUICrownHuntMenu.java",
-          "src/main/java/net/mcreator/minigames/network/MinigameGUICrownHuntButtonMessage.java"
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUICrownHuntScreen.java"
         ]
       },
       "path": "~/Crown Hunt/settings"
@@ -2830,11 +2830,11 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/items/crown_hunt_capture.json",
-          "src/main/java/net/mcreator/minigames/block/CrownHuntCaptureBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/crown_hunt_capture.json",
-          "src/main/resources/assets/minigames/blockstates/crown_hunt_capture.json",
+          "src/main/java/net/mcreator/minigames/block/CrownHuntCaptureBlock.java",
           "src/main/resources/assets/minigames/models/item/crown_hunt_capture.json",
-          "src/main/resources/assets/minigames/models/block/crown_hunt_capture.json"
+          "src/main/resources/assets/minigames/models/block/crown_hunt_capture.json",
+          "src/main/resources/assets/minigames/blockstates/crown_hunt_capture.json"
         ]
       },
       "path": "~/Crown Hunt"
@@ -2871,11 +2871,11 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/block/CastleBricksBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/castle_bricks.json",
-          "src/main/resources/assets/minigames/models/item/castle_bricks.json",
           "src/main/resources/assets/minigames/blockstates/castle_bricks.json",
-          "src/main/resources/assets/minigames/items/castle_bricks.json",
-          "src/main/resources/assets/minigames/models/block/castle_bricks.json"
+          "src/main/resources/assets/minigames/models/item/castle_bricks.json",
+          "src/main/resources/data/minigames/loot_table/blocks/castle_bricks.json",
+          "src/main/resources/assets/minigames/models/block/castle_bricks.json",
+          "src/main/resources/assets/minigames/items/castle_bricks.json"
         ]
       },
       "path": "~/Crown Hunt"
@@ -2953,14 +2953,14 @@
       "registry_name": "castle_stairs",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/castle_stairs.json",
-          "src/main/resources/assets/minigames/models/block/castle_stairs_inner.json",
-          "src/main/resources/data/minigames/loot_table/blocks/castle_stairs.json",
-          "src/main/resources/assets/minigames/models/block/castle_stairs.json",
           "src/main/resources/assets/minigames/models/block/castle_stairs_outer.json",
+          "src/main/resources/data/minigames/loot_table/blocks/castle_stairs.json",
+          "src/main/resources/assets/minigames/models/block/castle_stairs_inner.json",
           "src/main/java/net/mcreator/minigames/block/CastleStairsBlock.java",
           "src/main/resources/assets/minigames/items/castle_stairs.json",
-          "src/main/resources/assets/minigames/models/item/castle_stairs.json"
+          "src/main/resources/assets/minigames/models/item/castle_stairs.json",
+          "src/main/resources/assets/minigames/models/block/castle_stairs.json",
+          "src/main/resources/assets/minigames/blockstates/castle_stairs.json"
         ]
       },
       "path": "~/Crown Hunt"
@@ -3186,9 +3186,9 @@
       "registry_name": "golden_spider",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/entity/GoldenSpiderEntity.java",
+          "src/main/resources/assets/minigames/items/golden_spider_spawn_egg.json",
           "src/main/java/net/mcreator/minigames/client/renderer/GoldenSpiderRenderer.java",
-          "src/main/resources/assets/minigames/items/golden_spider_spawn_egg.json"
+          "src/main/java/net/mcreator/minigames/entity/GoldenSpiderEntity.java"
         ]
       },
       "path": "~/Crown Hunt/golden mobs"
@@ -3311,9 +3311,9 @@
       "registry_name": "spleef_shovel",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/item/SpleefShovelItem.java",
           "src/main/resources/assets/minigames/models/item/spleef_shovel.json",
-          "src/main/resources/assets/minigames/items/spleef_shovel.json",
-          "src/main/java/net/mcreator/minigames/item/SpleefShovelItem.java"
+          "src/main/resources/assets/minigames/items/spleef_shovel.json"
         ]
       },
       "path": "~/Spleef"
@@ -3487,8 +3487,8 @@
       "registry_name": "ice_dart",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/item/IceDartItem.java",
           "src/main/resources/assets/minigames/models/item/ice_dart.json",
+          "src/main/java/net/mcreator/minigames/item/IceDartItem.java",
           "src/main/resources/assets/minigames/items/ice_dart.json"
         ]
       },
@@ -3654,8 +3654,8 @@
       "registry_name": "thrusters",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/thrusters.json",
           "src/main/java/net/mcreator/minigames/item/ThrustersItem.java",
+          "src/main/resources/assets/minigames/items/thrusters.json",
           "src/main/resources/assets/minigames/models/item/thrusters.json"
         ]
       },
@@ -3902,8 +3902,8 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/models/item/snowbomb.json",
-          "src/main/java/net/mcreator/minigames/item/SnowbombItem.java",
-          "src/main/resources/assets/minigames/items/snowbomb.json"
+          "src/main/resources/assets/minigames/items/snowbomb.json",
+          "src/main/java/net/mcreator/minigames/item/SnowbombItem.java"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4014,10 +4014,10 @@
       "registry_name": "grappling_hook",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/grappling_hook.json",
-          "src/main/resources/assets/minigames/items/grappling_hook.json",
           "src/main/resources/assets/minigames/models/item/grappling_hook_0.json",
-          "src/main/java/net/mcreator/minigames/item/GrapplingHookItem.java"
+          "src/main/java/net/mcreator/minigames/item/GrapplingHookItem.java",
+          "src/main/resources/assets/minigames/items/grappling_hook.json",
+          "src/main/resources/assets/minigames/models/item/grappling_hook.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4112,8 +4112,8 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/item/ReplaySpleefItem.java",
-          "src/main/resources/assets/minigames/models/item/replay_spleef.json",
-          "src/main/resources/assets/minigames/items/replay_spleef.json"
+          "src/main/resources/assets/minigames/items/replay_spleef.json",
+          "src/main/resources/assets/minigames/models/item/replay_spleef.json"
         ]
       },
       "path": "~/Spleef"
@@ -4126,9 +4126,9 @@
       "registry_name": "symmetrical_shovel",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/symmetrical_shovel.json",
+          "src/main/java/net/mcreator/minigames/item/SymmetricalShovelItem.java",
           "src/main/resources/assets/minigames/items/symmetrical_shovel.json",
-          "src/main/java/net/mcreator/minigames/item/SymmetricalShovelItem.java"
+          "src/main/resources/assets/minigames/models/item/symmetrical_shovel.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4233,9 +4233,9 @@
       "registry_name": "magma_hitbox",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/renderer/MagmaHitboxRenderer.java",
+          "src/main/resources/assets/minigames/items/magma_hitbox_spawn_egg.json",
           "src/main/java/net/mcreator/minigames/entity/MagmaHitboxEntity.java",
-          "src/main/resources/assets/minigames/items/magma_hitbox_spawn_egg.json"
+          "src/main/java/net/mcreator/minigames/client/renderer/MagmaHitboxRenderer.java"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4418,8 +4418,8 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/item/SnowShovelItem.java",
-          "src/main/resources/assets/minigames/models/item/snow_shovel.json",
-          "src/main/resources/assets/minigames/items/snow_shovel.json"
+          "src/main/resources/assets/minigames/items/snow_shovel.json",
+          "src/main/resources/assets/minigames/models/item/snow_shovel.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4466,8 +4466,8 @@
       "registry_name": "minigame_gui_spleef",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUISpleefScreen.java",
           "src/main/java/net/mcreator/minigames/network/MinigameGUISpleefButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUISpleefScreen.java",
           "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUISpleefMenu.java"
         ]
       },
@@ -4504,8 +4504,8 @@
       "registry_name": "hypnotic_pendulum",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/hypnotic_pendulum.json",
           "src/main/java/net/mcreator/minigames/item/HypnoticPendulumItem.java",
+          "src/main/resources/assets/minigames/models/item/hypnotic_pendulum.json",
           "src/main/resources/assets/minigames/items/hypnotic_pendulum.json"
         ]
       },
@@ -4621,9 +4621,9 @@
       "registry_name": "map_gui_spleef",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/network/MapGUISpleefButtonMessage.java",
           "src/main/java/net/mcreator/minigames/client/gui/MapGUISpleefScreen.java",
-          "src/main/java/net/mcreator/minigames/world/inventory/MapGUISpleefMenu.java"
+          "src/main/java/net/mcreator/minigames/world/inventory/MapGUISpleefMenu.java",
+          "src/main/java/net/mcreator/minigames/network/MapGUISpleefButtonMessage.java"
         ]
       },
       "path": "~/Spleef/Maps"
@@ -4765,9 +4765,9 @@
       "registry_name": "glue_dart",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/glue_dart.json",
           "src/main/java/net/mcreator/minigames/item/GlueDartItem.java",
-          "src/main/resources/assets/minigames/items/glue_dart.json"
+          "src/main/resources/assets/minigames/items/glue_dart.json",
+          "src/main/resources/assets/minigames/models/item/glue_dart.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -5231,10 +5231,10 @@
       "registry_name": "empty_grid_block",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/EmptyGridBlockBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/empty_grid_block.json",
           "src/main/resources/assets/minigames/models/block/empty_grid_block.json",
-          "src/main/resources/assets/minigames/blockstates/empty_grid_block.json"
+          "src/main/resources/assets/minigames/blockstates/empty_grid_block.json",
+          "src/main/java/net/mcreator/minigames/block/EmptyGridBlockBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/empty_grid_block.json"
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
@@ -5248,9 +5248,9 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/block/RoomGridBlockBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/room_grid_block.json",
+          "src/main/resources/assets/minigames/blockstates/room_grid_block.json",
           "src/main/resources/assets/minigames/models/block/room_grid_block.json",
-          "src/main/resources/assets/minigames/blockstates/room_grid_block.json"
+          "src/main/resources/data/minigames/loot_table/blocks/room_grid_block.json"
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
@@ -5397,10 +5397,10 @@
       "registry_name": "end_room_grid_block",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/end_room_grid_block.json",
-          "src/main/resources/assets/minigames/models/block/end_room_grid_block.json",
           "src/main/java/net/mcreator/minigames/block/EndRoomGridBlockBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/end_room_grid_block.json"
+          "src/main/resources/data/minigames/loot_table/blocks/end_room_grid_block.json",
+          "src/main/resources/assets/minigames/models/block/end_room_grid_block.json",
+          "src/main/resources/assets/minigames/blockstates/end_room_grid_block.json"
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
@@ -5460,10 +5460,10 @@
       "registry_name": "loot_room_grid_block",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/loot_room_grid_block.json",
-          "src/main/resources/data/minigames/loot_table/blocks/loot_room_grid_block.json",
           "src/main/java/net/mcreator/minigames/block/LootRoomGridBlockBlock.java",
-          "src/main/resources/assets/minigames/blockstates/loot_room_grid_block.json"
+          "src/main/resources/data/minigames/loot_table/blocks/loot_room_grid_block.json",
+          "src/main/resources/assets/minigames/blockstates/loot_room_grid_block.json",
+          "src/main/resources/assets/minigames/models/block/loot_room_grid_block.json"
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
@@ -5476,10 +5476,10 @@
       "registry_name": "miniboss_room_grid_block",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/blockstates/miniboss_room_grid_block.json",
           "src/main/java/net/mcreator/minigames/block/MinibossRoomGridBlockBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/miniboss_room_grid_block.json",
-          "src/main/resources/assets/minigames/models/block/miniboss_room_grid_block.json",
-          "src/main/resources/assets/minigames/blockstates/miniboss_room_grid_block.json"
+          "src/main/resources/assets/minigames/models/block/miniboss_room_grid_block.json"
         ]
       },
       "path": "~/Dungeon/Floor Spawning"
@@ -5492,9 +5492,9 @@
       "registry_name": "boss_room_grid_block",
       "metadata": {
         "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/boss_room_grid_block.json",
           "src/main/resources/assets/minigames/blockstates/boss_room_grid_block.json",
           "src/main/java/net/mcreator/minigames/block/BossRoomGridBlockBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/boss_room_grid_block.json",
           "src/main/resources/assets/minigames/models/block/boss_room_grid_block.json"
         ]
       },
@@ -5605,9 +5605,9 @@
       "registry_name": "secret_room_grid_block",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/models/block/secret_room_grid_block.json",
           "src/main/resources/data/minigames/loot_table/blocks/secret_room_grid_block.json",
           "src/main/java/net/mcreator/minigames/block/SecretRoomGridBlockBlock.java",
-          "src/main/resources/assets/minigames/models/block/secret_room_grid_block.json",
           "src/main/resources/assets/minigames/blockstates/secret_room_grid_block.json"
         ]
       },
@@ -5657,9 +5657,9 @@
       "registry_name": "blank_dagger",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/blank_dagger.json",
           "src/main/java/net/mcreator/minigames/item/BlankDaggerItem.java",
-          "src/main/resources/assets/minigames/items/blank_dagger.json"
+          "src/main/resources/assets/minigames/items/blank_dagger.json",
+          "src/main/resources/assets/minigames/models/item/blank_dagger.json"
         ]
       },
       "path": "~/Dungeon/Items/Thief/Weapons/BlankDagger"
@@ -5683,9 +5683,9 @@
       "registry_name": "blank_sword",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/blank_sword.json",
+          "src/main/java/net/mcreator/minigames/item/BlankSwordItem.java",
           "src/main/resources/assets/minigames/models/item/blank_sword.json",
-          "src/main/java/net/mcreator/minigames/item/BlankSwordItem.java"
+          "src/main/resources/assets/minigames/items/blank_sword.json"
         ]
       },
       "path": "~/Dungeon/Items/Warrior/Weapons"
@@ -5709,9 +5709,9 @@
       "registry_name": "blank_long_sword",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/item/BlankLongSwordItem.java",
+          "src/main/resources/assets/minigames/models/item/blank_long_sword.json",
           "src/main/resources/assets/minigames/items/blank_long_sword.json",
-          "src/main/resources/assets/minigames/models/item/blank_long_sword.json"
+          "src/main/java/net/mcreator/minigames/item/BlankLongSwordItem.java"
         ]
       },
       "path": "~/Dungeon/Items/Support/Weapons/Blank Longsword"
@@ -6214,11 +6214,11 @@
       "registry_name": "spawn_starting_room",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_starting_room.json",
-          "src/main/resources/assets/minigames/blockstates/spawn_starting_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnStartingRoomBlock.java",
           "src/main/resources/assets/minigames/models/block/spawn_starting_room.json",
           "src/main/java/net/mcreator/minigames/block/entity/SpawnStartingRoomBlockEntity.java",
-          "src/main/java/net/mcreator/minigames/block/SpawnStartingRoomBlock.java"
+          "src/main/resources/assets/minigames/blockstates/spawn_starting_room.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_starting_room.json"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6231,11 +6231,11 @@
       "registry_name": "spawn_loot_room",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/spawn_loot_room.json",
-          "src/main/resources/assets/minigames/models/block/spawn_loot_room.json",
           "src/main/java/net/mcreator/minigames/block/entity/SpawnLootRoomBlockEntity.java",
+          "src/main/java/net/mcreator/minigames/block/SpawnLootRoomBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/spawn_loot_room.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnLootRoomBlock.java"
+          "src/main/resources/assets/minigames/blockstates/spawn_loot_room.json",
+          "src/main/resources/assets/minigames/models/block/spawn_loot_room.json"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6248,11 +6248,11 @@
       "registry_name": "spawn_miniboss_room",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/SpawnMinibossRoomBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_miniboss_room.json",
           "src/main/java/net/mcreator/minigames/block/entity/SpawnMinibossRoomBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_miniboss_room.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_miniboss_room.json",
           "src/main/resources/assets/minigames/models/block/spawn_miniboss_room.json",
-          "src/main/resources/assets/minigames/blockstates/spawn_miniboss_room.json"
+          "src/main/java/net/mcreator/minigames/block/SpawnMinibossRoomBlock.java"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6266,10 +6266,10 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/models/block/spawn_boss_room.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnBossRoomBlock.java",
-          "src/main/resources/assets/minigames/blockstates/spawn_boss_room.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_boss_room.json",
           "src/main/java/net/mcreator/minigames/block/entity/SpawnBossRoomBlockEntity.java",
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_boss_room.json"
+          "src/main/resources/assets/minigames/blockstates/spawn_boss_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnBossRoomBlock.java"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6283,10 +6283,10 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/block/SpawnSecretRoomBlock.java",
-          "src/main/resources/assets/minigames/models/block/spawn_secret_room.json",
           "src/main/resources/data/minigames/loot_table/blocks/spawn_secret_room.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_secret_room.json",
           "src/main/java/net/mcreator/minigames/block/entity/SpawnSecretRoomBlockEntity.java",
-          "src/main/resources/assets/minigames/blockstates/spawn_secret_room.json"
+          "src/main/resources/assets/minigames/models/block/spawn_secret_room.json"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6299,10 +6299,10 @@
       "registry_name": "spawn_one_door_room",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_one_door_room.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_one_door_room.json",
           "src/main/resources/assets/minigames/models/block/spawn_one_door_room.json",
           "src/main/java/net/mcreator/minigames/block/entity/SpawnOneDoorRoomBlockEntity.java",
-          "src/main/resources/assets/minigames/blockstates/spawn_one_door_room.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_one_door_room.json",
           "src/main/java/net/mcreator/minigames/block/SpawnOneDoorRoomBlock.java"
         ]
       },
@@ -6316,11 +6316,11 @@
       "registry_name": "spawn_two_door_room",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/spawn_two_door_room.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnTwoDoorRoomBlock.java",
-          "src/main/java/net/mcreator/minigames/block/entity/SpawnTwoDoorRoomBlockEntity.java",
           "src/main/resources/assets/minigames/models/block/spawn_two_door_room.json",
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_two_door_room.json"
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnTwoDoorRoomBlockEntity.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_two_door_room.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnTwoDoorRoomBlock.java",
+          "src/main/resources/assets/minigames/blockstates/spawn_two_door_room.json"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6333,11 +6333,11 @@
       "registry_name": "spawn_four_door_room",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/entity/SpawnFourDoorRoomBlockEntity.java",
           "src/main/resources/data/minigames/loot_table/blocks/spawn_four_door_room.json",
+          "src/main/resources/assets/minigames/models/block/spawn_four_door_room.json",
           "src/main/resources/assets/minigames/blockstates/spawn_four_door_room.json",
           "src/main/java/net/mcreator/minigames/block/SpawnFourDoorRoomBlock.java",
-          "src/main/resources/assets/minigames/models/block/spawn_four_door_room.json"
+          "src/main/java/net/mcreator/minigames/block/entity/SpawnFourDoorRoomBlockEntity.java"
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
@@ -6456,13 +6456,13 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/models/item/quartz_chains.json",
-          "src/main/java/net/mcreator/minigames/block/QuartzChainsBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/quartz_chains.json",
-          "src/main/java/net/mcreator/minigames/block/entity/QuartzChainsBlockEntity.java",
-          "src/main/resources/assets/minigames/models/block/quartz_chains.json",
           "src/main/resources/assets/minigames/blockstates/quartz_chains.json",
+          "src/main/java/net/mcreator/minigames/block/QuartzChainsBlock.java",
+          "src/main/java/net/mcreator/minigames/block/entity/QuartzChainsBlockEntity.java",
+          "src/main/resources/assets/minigames/items/quartz_chains.json",
+          "src/main/resources/data/minigames/loot_table/blocks/quartz_chains.json",
           "src/main/java/net/mcreator/minigames/client/renderer/block/QuartzChainsRenderer.java",
-          "src/main/resources/assets/minigames/items/quartz_chains.json"
+          "src/main/resources/assets/minigames/models/block/quartz_chains.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Blocks"
@@ -6486,14 +6486,14 @@
       "registry_name": "chiseled_quartz_wall",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_side_tall.json",
-          "src/main/resources/assets/minigames/blockstates/chiseled_quartz_wall.json",
           "src/main/java/net/mcreator/minigames/block/ChiseledQuartzWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_inventory.json",
           "src/main/resources/assets/minigames/items/chiseled_quartz_wall.json",
           "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall.json",
-          "src/main/resources/assets/minigames/models/item/chiseled_quartz_wall.json",
+          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_inventory.json",
+          "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_side_tall.json",
           "src/main/resources/data/minigames/loot_table/blocks/chiseled_quartz_wall.json",
+          "src/main/resources/assets/minigames/blockstates/chiseled_quartz_wall.json",
+          "src/main/resources/assets/minigames/models/item/chiseled_quartz_wall.json",
           "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_post.json"
         ]
       },
@@ -6507,14 +6507,14 @@
       "registry_name": "spruce_board",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/block/entity/SpruceBoardBlockEntity.java",
           "src/main/resources/assets/minigames/models/item/spruce_board.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SpruceBoardRenderer.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_board.json",
           "src/main/resources/assets/minigames/models/block/spruce_board.json",
           "src/main/resources/assets/minigames/blockstates/spruce_board.json",
-          "src/main/java/net/mcreator/minigames/client/renderer/block/SpruceBoardRenderer.java",
-          "src/main/resources/assets/minigames/items/spruce_board.json",
           "src/main/java/net/mcreator/minigames/block/SpruceBoardBlock.java",
-          "src/main/java/net/mcreator/minigames/block/entity/SpruceBoardBlockEntity.java",
-          "src/main/resources/data/minigames/loot_table/blocks/spruce_board.json"
+          "src/main/resources/assets/minigames/items/spruce_board.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Blocks"
@@ -6527,13 +6527,13 @@
       "registry_name": "spruce_pew",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewRenderer.java",
           "src/main/resources/data/minigames/loot_table/blocks/spruce_pew.json",
-          "src/main/resources/assets/minigames/models/block/spruce_pew.json",
-          "src/main/java/net/mcreator/minigames/block/SprucePewBlock.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewRenderer.java",
           "src/main/resources/assets/minigames/blockstates/spruce_pew.json",
+          "src/main/java/net/mcreator/minigames/block/SprucePewBlock.java",
           "src/main/java/net/mcreator/minigames/block/entity/SprucePewBlockEntity.java",
           "src/main/resources/assets/minigames/models/item/spruce_pew.json",
+          "src/main/resources/assets/minigames/models/block/spruce_pew.json",
           "src/main/resources/assets/minigames/items/spruce_pew.json"
         ]
       },
@@ -6547,14 +6547,14 @@
       "registry_name": "spruce_pew_right",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/spruce_pew_right.json",
-          "src/main/java/net/mcreator/minigames/block/SprucePewRightBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew_right.json",
-          "src/main/resources/assets/minigames/blockstates/spruce_pew_right.json",
           "src/main/resources/assets/minigames/items/spruce_pew_right.json",
           "src/main/resources/assets/minigames/models/block/spruce_pew_right.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SprucePewRightBlockEntity.java",
+          "src/main/resources/assets/minigames/models/item/spruce_pew_right.json",
+          "src/main/resources/assets/minigames/blockstates/spruce_pew_right.json",
           "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewRightRenderer.java",
-          "src/main/java/net/mcreator/minigames/block/entity/SprucePewRightBlockEntity.java"
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew_right.json",
+          "src/main/java/net/mcreator/minigames/block/SprucePewRightBlock.java"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Blocks"
@@ -6567,14 +6567,14 @@
       "registry_name": "spruce_pew_left",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewLeftRenderer.java",
-          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew_left.json",
-          "src/main/resources/assets/minigames/blockstates/spruce_pew_left.json",
-          "src/main/resources/assets/minigames/models/block/spruce_pew_left.json",
           "src/main/java/net/mcreator/minigames/block/SprucePewLeftBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_pew_left.json",
+          "src/main/resources/assets/minigames/models/item/spruce_pew_left.json",
+          "src/main/resources/assets/minigames/models/block/spruce_pew_left.json",
+          "src/main/resources/assets/minigames/blockstates/spruce_pew_left.json",
           "src/main/java/net/mcreator/minigames/block/entity/SprucePewLeftBlockEntity.java",
-          "src/main/resources/assets/minigames/items/spruce_pew_left.json",
-          "src/main/resources/assets/minigames/models/item/spruce_pew_left.json"
+          "src/main/java/net/mcreator/minigames/client/renderer/block/SprucePewLeftRenderer.java",
+          "src/main/resources/assets/minigames/items/spruce_pew_left.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Blocks"
@@ -6587,14 +6587,14 @@
       "registry_name": "spruce_short_board",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/entity/SpruceShortBoardBlockEntity.java",
-          "src/main/resources/assets/minigames/models/item/spruce_short_board.json",
-          "src/main/resources/assets/minigames/models/block/spruce_short_board.json",
-          "src/main/resources/assets/minigames/items/spruce_short_board.json",
           "src/main/java/net/mcreator/minigames/block/SpruceShortBoardBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spruce_short_board.json",
+          "src/main/resources/assets/minigames/models/item/spruce_short_board.json",
+          "src/main/java/net/mcreator/minigames/block/entity/SpruceShortBoardBlockEntity.java",
+          "src/main/resources/assets/minigames/models/block/spruce_short_board.json",
           "src/main/java/net/mcreator/minigames/client/renderer/block/SpruceShortBoardRenderer.java",
           "src/main/resources/assets/minigames/blockstates/spruce_short_board.json",
-          "src/main/resources/data/minigames/loot_table/blocks/spruce_short_board.json"
+          "src/main/resources/assets/minigames/items/spruce_short_board.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Blocks"
@@ -6618,12 +6618,12 @@
       "registry_name": "spawn_worshipper",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/block/SpawnWorshipperBlock.java",
           "src/main/resources/assets/minigames/models/block/spawn_worshipper.json",
-          "src/main/resources/assets/minigames/models/item/spawn_worshipper.json",
-          "src/main/resources/assets/minigames/blockstates/spawn_worshipper.json",
-          "src/main/resources/assets/minigames/items/spawn_worshipper.json",
           "src/main/resources/data/minigames/loot_table/blocks/spawn_worshipper.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnWorshipperBlock.java"
+          "src/main/resources/assets/minigames/items/spawn_worshipper.json",
+          "src/main/resources/assets/minigames/models/item/spawn_worshipper.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_worshipper.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -6696,12 +6696,12 @@
       "registry_name": "spawn_candlehead",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_candlehead.json",
           "src/main/resources/assets/minigames/models/item/spawn_candlehead.json",
           "src/main/resources/assets/minigames/blockstates/spawn_candlehead.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnCandleheadBlock.java",
           "src/main/resources/assets/minigames/models/block/spawn_candlehead.json",
-          "src/main/resources/assets/minigames/items/spawn_candlehead.json"
+          "src/main/resources/assets/minigames/items/spawn_candlehead.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_candlehead.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnCandleheadBlock.java"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -6760,12 +6760,12 @@
       "registry_name": "spawn_shield_angel",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/spawn_shield_angel.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_shield_angel.json",
           "src/main/resources/assets/minigames/models/item/spawn_shield_angel.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnShieldAngelBlock.java",
-          "src/main/resources/assets/minigames/blockstates/spawn_shield_angel.json",
           "src/main/resources/assets/minigames/items/spawn_shield_angel.json",
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_shield_angel.json"
+          "src/main/resources/assets/minigames/models/block/spawn_shield_angel.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_shield_angel.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnShieldAngelBlock.java"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -7290,12 +7290,12 @@
       "registry_name": "moving_block_spawn",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/models/item/moving_block_spawn.json",
           "src/main/resources/assets/minigames/items/moving_block_spawn.json",
-          "src/main/java/net/mcreator/minigames/block/MovingBlockSpawnBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/moving_block_spawn.json",
-          "src/main/resources/assets/minigames/models/block/moving_block_spawn.json",
+          "src/main/java/net/mcreator/minigames/block/MovingBlockSpawnBlock.java",
           "src/main/resources/assets/minigames/blockstates/moving_block_spawn.json",
-          "src/main/resources/assets/minigames/models/item/moving_block_spawn.json"
+          "src/main/resources/assets/minigames/models/block/moving_block_spawn.json"
         ]
       },
       "path": "~/General/Moving Block"
@@ -7996,14 +7996,14 @@
       "registry_name": "fight_doors",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/fight_doors.json",
-          "src/main/java/net/mcreator/minigames/block/entity/FightDoorsBlockEntity.java",
-          "src/main/resources/assets/minigames/items/fight_doors.json",
           "src/main/java/net/mcreator/minigames/block/FightDoorsBlock.java",
-          "src/main/java/net/mcreator/minigames/client/renderer/block/FightDoorsRenderer.java",
           "src/main/resources/data/minigames/loot_table/blocks/fight_doors.json",
-          "src/main/resources/assets/minigames/blockstates/fight_doors.json",
-          "src/main/resources/assets/minigames/models/item/fight_doors.json"
+          "src/main/resources/assets/minigames/items/fight_doors.json",
+          "src/main/resources/assets/minigames/models/block/fight_doors.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/FightDoorsRenderer.java",
+          "src/main/java/net/mcreator/minigames/block/entity/FightDoorsBlockEntity.java",
+          "src/main/resources/assets/minigames/models/item/fight_doors.json",
+          "src/main/resources/assets/minigames/blockstates/fight_doors.json"
         ]
       },
       "path": "~/Dungeon/Doors"
@@ -8749,14 +8749,14 @@
       "registry_name": "floor_doors",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/block/entity/FloorDoorsBlockEntity.java",
           "src/main/resources/assets/minigames/models/block/floor_doors.json",
-          "src/main/resources/assets/minigames/models/item/floor_doors.json",
-          "src/main/resources/assets/minigames/items/floor_doors.json",
+          "src/main/resources/data/minigames/loot_table/blocks/floor_doors.json",
           "src/main/java/net/mcreator/minigames/client/renderer/block/FloorDoorsRenderer.java",
           "src/main/java/net/mcreator/minigames/block/FloorDoorsBlock.java",
-          "src/main/java/net/mcreator/minigames/block/entity/FloorDoorsBlockEntity.java",
-          "src/main/resources/data/minigames/loot_table/blocks/floor_doors.json",
-          "src/main/resources/assets/minigames/blockstates/floor_doors.json"
+          "src/main/resources/assets/minigames/blockstates/floor_doors.json",
+          "src/main/resources/assets/minigames/models/item/floor_doors.json",
+          "src/main/resources/assets/minigames/items/floor_doors.json"
         ]
       },
       "path": "~/Dungeon/Doors"
@@ -8831,12 +8831,12 @@
       "registry_name": "spawn_tp_marker_block",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_tp_marker_block.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnTPMarkerBlockBlock.java",
           "src/main/resources/assets/minigames/items/spawn_tp_marker_block.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnTPMarkerBlockBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_tp_marker_block.json",
           "src/main/resources/assets/minigames/models/item/spawn_tp_marker_block.json",
-          "src/main/resources/assets/minigames/models/block/spawn_tp_marker_block.json",
-          "src/main/resources/assets/minigames/blockstates/spawn_tp_marker_block.json"
+          "src/main/resources/assets/minigames/blockstates/spawn_tp_marker_block.json",
+          "src/main/resources/assets/minigames/models/block/spawn_tp_marker_block.json"
         ]
       },
       "path": "~/Dungeon/Spawn Room"
@@ -8995,12 +8995,12 @@
       "registry_name": "spawn_gravedigger",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/spawn_gravedigger.json",
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_gravedigger.json",
-          "src/main/resources/assets/minigames/blockstates/spawn_gravedigger.json",
           "src/main/java/net/mcreator/minigames/block/SpawnGravediggerBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_gravedigger.json",
+          "src/main/resources/assets/minigames/models/block/spawn_gravedigger.json",
+          "src/main/resources/assets/minigames/items/spawn_gravedigger.json",
           "src/main/resources/assets/minigames/models/item/spawn_gravedigger.json",
-          "src/main/resources/assets/minigames/items/spawn_gravedigger.json"
+          "src/main/resources/assets/minigames/blockstates/spawn_gravedigger.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -9045,11 +9045,11 @@
       "metadata": {
         "files": [
           "src/main/resources/data/minigames/loot_table/blocks/empty_coarse_dirt.json",
-          "src/main/resources/assets/minigames/models/block/empty_coarse_dirt.json",
           "src/main/java/net/mcreator/minigames/block/EmptyCoarseDirtBlock.java",
-          "src/main/resources/assets/minigames/items/empty_coarse_dirt.json",
+          "src/main/resources/assets/minigames/blockstates/empty_coarse_dirt.json",
           "src/main/resources/assets/minigames/models/item/empty_coarse_dirt.json",
-          "src/main/resources/assets/minigames/blockstates/empty_coarse_dirt.json"
+          "src/main/resources/assets/minigames/items/empty_coarse_dirt.json",
+          "src/main/resources/assets/minigames/models/block/empty_coarse_dirt.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -9062,13 +9062,13 @@
       "registry_name": "intersecting_end_rods",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/entity/IntersectingEndRodsBlockEntity.java",
-          "src/main/resources/assets/minigames/models/item/intersecting_end_rods.json",
-          "src/main/resources/assets/minigames/models/block/intersecting_end_rods.json",
-          "src/main/resources/assets/minigames/blockstates/intersecting_end_rods.json",
-          "src/main/java/net/mcreator/minigames/client/renderer/block/IntersectingEndRodsRenderer.java",
-          "src/main/resources/data/minigames/loot_table/blocks/intersecting_end_rods.json",
           "src/main/resources/assets/minigames/items/intersecting_end_rods.json",
+          "src/main/java/net/mcreator/minigames/block/entity/IntersectingEndRodsBlockEntity.java",
+          "src/main/resources/assets/minigames/models/block/intersecting_end_rods.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/IntersectingEndRodsRenderer.java",
+          "src/main/resources/assets/minigames/models/item/intersecting_end_rods.json",
+          "src/main/resources/assets/minigames/blockstates/intersecting_end_rods.json",
+          "src/main/resources/data/minigames/loot_table/blocks/intersecting_end_rods.json",
           "src/main/java/net/mcreator/minigames/block/IntersectingEndRodsBlock.java"
         ]
       },
@@ -9123,11 +9123,11 @@
       "registry_name": "sulfur_block",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/sulfur_block.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurBlockBlock.java",
-          "src/main/resources/assets/minigames/models/item/sulfur_block.json",
           "src/main/resources/assets/minigames/items/sulfur_block.json",
+          "src/main/java/net/mcreator/minigames/block/SulfurBlockBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/sulfur_block.json",
+          "src/main/resources/assets/minigames/models/item/sulfur_block.json",
+          "src/main/resources/assets/minigames/blockstates/sulfur_block.json",
           "src/main/resources/assets/minigames/models/block/sulfur_block.json"
         ]
       },
@@ -9152,12 +9152,12 @@
       "registry_name": "potent_sulfur",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/blockstates/potent_sulfur.json",
           "src/main/java/net/mcreator/minigames/block/PotentSulfurBlock.java",
-          "src/main/resources/assets/minigames/models/block/potent_sulfur.json",
-          "src/main/resources/data/minigames/loot_table/blocks/potent_sulfur.json",
           "src/main/resources/assets/minigames/models/item/potent_sulfur.json",
           "src/main/resources/assets/minigames/items/potent_sulfur.json",
-          "src/main/resources/assets/minigames/blockstates/potent_sulfur.json"
+          "src/main/resources/assets/minigames/models/block/potent_sulfur.json",
+          "src/main/resources/data/minigames/loot_table/blocks/potent_sulfur.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9170,12 +9170,12 @@
       "registry_name": "polished_sulfur",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/blockstates/polished_sulfur.json",
+          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur.json",
           "src/main/resources/assets/minigames/models/item/polished_sulfur.json",
           "src/main/resources/assets/minigames/items/polished_sulfur.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurBlock.java",
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur.json"
+          "src/main/resources/assets/minigames/models/block/polished_sulfur.json",
+          "src/main/java/net/mcreator/minigames/block/PolishedSulfurBlock.java"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9188,11 +9188,11 @@
       "registry_name": "chiseled_sulfur",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/chiseled_sulfur.json",
-          "src/main/java/net/mcreator/minigames/block/ChiseledSulfurBlock.java",
           "src/main/resources/assets/minigames/models/block/chiseled_sulfur.json",
           "src/main/resources/data/minigames/loot_table/blocks/chiseled_sulfur.json",
+          "src/main/resources/assets/minigames/models/item/chiseled_sulfur.json",
           "src/main/resources/assets/minigames/blockstates/chiseled_sulfur.json",
+          "src/main/java/net/mcreator/minigames/block/ChiseledSulfurBlock.java",
           "src/main/resources/assets/minigames/items/chiseled_sulfur.json"
         ]
       },
@@ -9207,11 +9207,11 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/block/SulfurBricksBlock.java",
-          "src/main/resources/assets/minigames/models/block/sulfur_bricks.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_bricks.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_bricks.json",
           "src/main/resources/assets/minigames/items/sulfur_bricks.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_bricks.json"
+          "src/main/resources/assets/minigames/models/item/sulfur_bricks.json",
+          "src/main/resources/assets/minigames/blockstates/sulfur_bricks.json",
+          "src/main/resources/data/minigames/loot_table/blocks/sulfur_bricks.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_bricks.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9224,14 +9224,14 @@
       "registry_name": "sulfur_slab",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_slab.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_slab_full.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_slab_top.json",
           "src/main/java/net/mcreator/minigames/block/SulfurSlabBlock.java",
           "src/main/resources/assets/minigames/models/item/sulfur_slab.json",
-          "src/main/resources/assets/minigames/items/sulfur_slab.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_slab_full.json",
+          "src/main/resources/data/minigames/loot_table/blocks/sulfur_slab.json",
           "src/main/resources/assets/minigames/models/block/sulfur_slab.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_slab.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_slab_top.json"
+          "src/main/resources/assets/minigames/items/sulfur_slab.json",
+          "src/main/resources/assets/minigames/blockstates/sulfur_slab.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9244,14 +9244,14 @@
       "registry_name": "sulfur_stairs",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/models/item/sulfur_stairs.json",
           "src/main/java/net/mcreator/minigames/block/SulfurStairsBlock.java",
+          "src/main/resources/assets/minigames/items/sulfur_stairs.json",
+          "src/main/resources/assets/minigames/blockstates/sulfur_stairs.json",
           "src/main/resources/assets/minigames/models/block/sulfur_stairs.json",
           "src/main/resources/assets/minigames/models/block/sulfur_stairs_inner.json",
-          "src/main/resources/assets/minigames/items/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_stairs.json"
+          "src/main/resources/data/minigames/loot_table/blocks/sulfur_stairs.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_stairs_outer.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9265,14 +9265,14 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/items/sulfur_wall.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_wall.json",
           "src/main/resources/data/minigames/loot_table/blocks/sulfur_wall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_wall.json",
           "src/main/resources/assets/minigames/models/block/sulfur_wall_side_tall.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurWallBlock.java",
           "src/main/resources/assets/minigames/models/block/sulfur_wall_post.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_wall.json"
+          "src/main/resources/assets/minigames/models/item/sulfur_wall.json",
+          "src/main/java/net/mcreator/minigames/block/SulfurWallBlock.java",
+          "src/main/resources/assets/minigames/blockstates/sulfur_wall.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_wall.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_wall_inventory.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9285,14 +9285,14 @@
       "registry_name": "polished_sulfur_slab",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab_full.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurSlabBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab_top.json",
           "src/main/resources/assets/minigames/models/item/polished_sulfur_slab.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_slab.json",
+          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab_top.json",
+          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab_full.json",
           "src/main/resources/assets/minigames/items/polished_sulfur_slab.json",
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur_slab.json"
+          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab.json",
+          "src/main/java/net/mcreator/minigames/block/PolishedSulfurSlabBlock.java",
+          "src/main/resources/assets/minigames/blockstates/polished_sulfur_slab.json",
+          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_slab.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9305,14 +9305,14 @@
       "registry_name": "polished_sulfur_stairs",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs_inner.json",
-          "src/main/resources/assets/minigames/items/polished_sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/item/polished_sulfur_stairs.json",
           "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs.json",
           "src/main/java/net/mcreator/minigames/block/PolishedSulfurStairsBlock.java",
           "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_stairs.json"
+          "src/main/resources/assets/minigames/blockstates/polished_sulfur_stairs.json",
+          "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs_inner.json",
+          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_stairs.json",
+          "src/main/resources/assets/minigames/models/item/polished_sulfur_stairs.json",
+          "src/main/resources/assets/minigames/items/polished_sulfur_stairs.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9325,15 +9325,15 @@
       "registry_name": "polished_sulfur_wall",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/polished_sulfur_wall.json",
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur_wall.json",
+          "src/main/java/net/mcreator/minigames/block/PolishedSulfurWallBlock.java",
           "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_post.json",
+          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_side_tall.json",
           "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_wall.json",
           "src/main/resources/assets/minigames/models/item/polished_sulfur_wall.json",
           "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_side_tall.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall.json"
+          "src/main/resources/assets/minigames/blockstates/polished_sulfur_wall.json",
+          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall.json",
+          "src/main/resources/assets/minigames/items/polished_sulfur_wall.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9346,14 +9346,14 @@
       "registry_name": "sulfur_brick_slab",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_slab_full.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_brick_slab.json",
           "src/main/resources/assets/minigames/models/block/sulfur_brick_slab.json",
           "src/main/resources/assets/minigames/models/block/sulfur_brick_slab_top.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_slab.json",
           "src/main/resources/assets/minigames/models/item/sulfur_brick_slab.json",
           "src/main/java/net/mcreator/minigames/block/SulfurBrickSlabBlock.java",
-          "src/main/resources/assets/minigames/items/sulfur_brick_slab.json"
+          "src/main/resources/assets/minigames/items/sulfur_brick_slab.json",
+          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_slab.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_brick_slab_full.json",
+          "src/main/resources/assets/minigames/blockstates/sulfur_brick_slab.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9366,14 +9366,14 @@
       "registry_name": "sulfur_brick_stairs",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/items/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs_outer.json",
           "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs_inner.json",
           "src/main/java/net/mcreator/minigames/block/SulfurBrickStairsBlock.java",
-          "src/main/resources/assets/minigames/blockstates/sulfur_brick_stairs.json"
+          "src/main/resources/assets/minigames/items/sulfur_brick_stairs.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs_inner.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs_outer.json",
+          "src/main/resources/assets/minigames/models/item/sulfur_brick_stairs.json",
+          "src/main/resources/assets/minigames/blockstates/sulfur_brick_stairs.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9386,15 +9386,15 @@
       "registry_name": "sulfur_brick_wall",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/SulfurBrickWallBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_wall.json",
           "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_side_tall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall.json",
-          "src/main/resources/assets/minigames/items/sulfur_brick_wall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_post.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_brick_wall.json",
           "src/main/resources/assets/minigames/blockstates/sulfur_brick_wall.json",
+          "src/main/resources/assets/minigames/models/item/sulfur_brick_wall.json",
           "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_inventory.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_wall.json"
+          "src/main/resources/assets/minigames/items/sulfur_brick_wall.json",
+          "src/main/java/net/mcreator/minigames/block/SulfurBrickWallBlock.java",
+          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_post.json",
+          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9407,12 +9407,12 @@
       "registry_name": "cinnabar",
       "metadata": {
         "files": [
+          "src/main/java/net/mcreator/minigames/block/CinnabarBlock.java",
           "src/main/resources/assets/minigames/models/item/cinnabar.json",
-          "src/main/resources/assets/minigames/items/cinnabar.json",
-          "src/main/resources/assets/minigames/blockstates/cinnabar.json",
           "src/main/resources/data/minigames/loot_table/blocks/cinnabar.json",
+          "src/main/resources/assets/minigames/items/cinnabar.json",
           "src/main/resources/assets/minigames/models/block/cinnabar.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBlock.java"
+          "src/main/resources/assets/minigames/blockstates/cinnabar.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9425,11 +9425,11 @@
       "registry_name": "polished_cinnabar",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar.json",
-          "src/main/resources/assets/minigames/items/polished_cinnabar.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar.json",
           "src/main/resources/assets/minigames/blockstates/polished_cinnabar.json",
+          "src/main/resources/assets/minigames/models/item/polished_cinnabar.json",
+          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarBlock.java",
+          "src/main/resources/assets/minigames/items/polished_cinnabar.json",
           "src/main/resources/assets/minigames/models/block/polished_cinnabar.json"
         ]
       },
@@ -9444,11 +9444,11 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/blockstates/chiseled_cinnabar.json",
-          "src/main/resources/assets/minigames/items/chiseled_cinnabar.json",
           "src/main/resources/assets/minigames/models/item/chiseled_cinnabar.json",
-          "src/main/java/net/mcreator/minigames/block/ChiseledCinnabarBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/chiseled_cinnabar.json",
-          "src/main/resources/assets/minigames/models/block/chiseled_cinnabar.json"
+          "src/main/resources/assets/minigames/models/block/chiseled_cinnabar.json",
+          "src/main/java/net/mcreator/minigames/block/ChiseledCinnabarBlock.java",
+          "src/main/resources/assets/minigames/items/chiseled_cinnabar.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9461,12 +9461,12 @@
       "registry_name": "cinnabar_bricks",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/cinnabar_bricks.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_bricks.json",
+          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_bricks.json",
           "src/main/resources/assets/minigames/models/item/cinnabar_bricks.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBricksBlock.java",
           "src/main/resources/assets/minigames/blockstates/cinnabar_bricks.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_bricks.json"
+          "src/main/java/net/mcreator/minigames/block/CinnabarBricksBlock.java",
+          "src/main/resources/assets/minigames/items/cinnabar_bricks.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9479,14 +9479,14 @@
       "registry_name": "cinnabar_slab",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/blockstates/cinnabar_slab.json",
+          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_slab.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_slab_top.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_slab_full.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_slab.json",
           "src/main/java/net/mcreator/minigames/block/CinnabarSlabBlock.java",
-          "src/main/resources/assets/minigames/models/block/cinnabar_slab.json",
           "src/main/resources/assets/minigames/items/cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_slab.json"
+          "src/main/resources/assets/minigames/models/item/cinnabar_slab.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_slab.json",
+          "src/main/resources/assets/minigames/blockstates/cinnabar_slab.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9499,14 +9499,14 @@
       "registry_name": "cinnabar_stairs",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/cinnabar_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_stairs.json",
           "src/main/java/net/mcreator/minigames/block/CinnabarStairsBlock.java",
-          "src/main/resources/assets/minigames/items/cinnabar_stairs.json",
+          "src/main/resources/assets/minigames/blockstates/cinnabar_stairs.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_stairs_inner.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_stairs.json"
+          "src/main/resources/assets/minigames/models/block/cinnabar_stairs_outer.json",
+          "src/main/resources/assets/minigames/models/item/cinnabar_stairs.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_stairs.json",
+          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_stairs.json",
+          "src/main/resources/assets/minigames/items/cinnabar_stairs.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9519,15 +9519,15 @@
       "registry_name": "cinnabar_wall",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall.json",
           "src/main/java/net/mcreator/minigames/block/CinnabarWallBlock.java",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_wall.json",
           "src/main/resources/assets/minigames/items/cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall_post.json",
           "src/main/resources/assets/minigames/models/item/cinnabar_wall.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_wall_side_tall.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_wall.json",
+          "src/main/resources/assets/minigames/blockstates/cinnabar_wall.json",
           "src/main/resources/data/minigames/loot_table/blocks/cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall_inventory.json"
+          "src/main/resources/assets/minigames/models/block/cinnabar_wall_inventory.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_wall_post.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9540,14 +9540,14 @@
       "registry_name": "polished_cinnabar_slab",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab_full.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarSlabBlock.java",
           "src/main/resources/assets/minigames/items/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_slab.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_slab.json",
           "src/main/resources/assets/minigames/models/item/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab_top.json"
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab_top.json",
+          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarSlabBlock.java",
+          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_slab.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab_full.json",
+          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_slab.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9560,13 +9560,13 @@
       "registry_name": "polished_cinnabar_stairs",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/items/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar_stairs.json",
           "src/main/resources/assets/minigames/blockstates/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs_outer.json",
           "src/main/java/net/mcreator/minigames/block/PolishedCinnabarStairsBlock.java",
+          "src/main/resources/assets/minigames/models/item/polished_cinnabar_stairs.json",
+          "src/main/resources/assets/minigames/items/polished_cinnabar_stairs.json",
+          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_stairs.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs.json",
           "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs_inner.json"
         ]
       },
@@ -9580,15 +9580,15 @@
       "registry_name": "polished_cinnabar_wall",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_post.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/items/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_side_tall.json",
           "src/main/java/net/mcreator/minigames/block/PolishedCinnabarWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall.json"
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall.json",
+          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_wall.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_side_tall.json",
+          "src/main/resources/assets/minigames/items/polished_cinnabar_wall.json",
+          "src/main/resources/assets/minigames/models/item/polished_cinnabar_wall.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_post.json",
+          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_inventory.json",
+          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_wall.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9601,14 +9601,14 @@
       "registry_name": "cinnabar_brick_slab",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBrickSlabBlock.java",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_brick_slab.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab_top.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab_full.json",
+          "src/main/resources/assets/minigames/models/item/cinnabar_brick_slab.json",
+          "src/main/resources/assets/minigames/blockstates/cinnabar_brick_slab.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab.json",
           "src/main/resources/assets/minigames/items/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab_top.json"
+          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_slab.json",
+          "src/main/java/net/mcreator/minigames/block/CinnabarBrickSlabBlock.java"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -9621,13 +9621,13 @@
       "registry_name": "cinnabar_brick_stairs",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/CinnabarBrickStairsBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/items/cinnabar_brick_stairs.json",
           "src/main/resources/assets/minigames/blockstates/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs.json",
           "src/main/resources/assets/minigames/models/item/cinnabar_brick_stairs.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs_outer.json",
+          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_stairs.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs.json",
+          "src/main/java/net/mcreator/minigames/block/CinnabarBrickStairsBlock.java",
+          "src/main/resources/assets/minigames/items/cinnabar_brick_stairs.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs_inner.json"
         ]
       },
@@ -9641,14 +9641,14 @@
       "registry_name": "cinnabar_brick_wall",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/models/item/cinnabar_brick_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_post.json",
           "src/main/resources/assets/minigames/items/cinnabar_brick_wall.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_post.json",
           "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_wall.json",
           "src/main/java/net/mcreator/minigames/block/CinnabarBrickWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall.json",
+          "src/main/resources/assets/minigames/models/item/cinnabar_brick_wall.json",
           "src/main/resources/assets/minigames/blockstates/cinnabar_brick_wall.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall.json",
+          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_inventory.json",
           "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_side_tall.json"
         ]
       },
@@ -9662,14 +9662,14 @@
       "registry_name": "fight_doors_blocked",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/entity/FightDoorsBlockedBlockEntity.java",
-          "src/main/resources/assets/minigames/blockstates/fight_doors_blocked.json",
           "src/main/resources/assets/minigames/models/block/fight_doors_blocked.json",
-          "src/main/java/net/mcreator/minigames/block/FightDoorsBlockedBlock.java",
-          "src/main/resources/assets/minigames/items/fight_doors_blocked.json",
           "src/main/java/net/mcreator/minigames/client/renderer/block/FightDoorsBlockedRenderer.java",
+          "src/main/resources/assets/minigames/blockstates/fight_doors_blocked.json",
+          "src/main/java/net/mcreator/minigames/block/entity/FightDoorsBlockedBlockEntity.java",
+          "src/main/java/net/mcreator/minigames/block/FightDoorsBlockedBlock.java",
           "src/main/resources/data/minigames/loot_table/blocks/fight_doors_blocked.json",
-          "src/main/resources/assets/minigames/models/item/fight_doors_blocked.json"
+          "src/main/resources/assets/minigames/models/item/fight_doors_blocked.json",
+          "src/main/resources/assets/minigames/items/fight_doors_blocked.json"
         ]
       },
       "path": "~/Dungeon/Doors"
@@ -9718,13 +9718,13 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/models/item/loot_doors.json",
-          "src/main/java/net/mcreator/minigames/client/renderer/block/LootDoorsRenderer.java",
           "src/main/resources/data/minigames/loot_table/blocks/loot_doors.json",
-          "src/main/resources/assets/minigames/items/loot_doors.json",
           "src/main/java/net/mcreator/minigames/block/entity/LootDoorsBlockEntity.java",
-          "src/main/java/net/mcreator/minigames/block/LootDoorsBlock.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/LootDoorsRenderer.java",
+          "src/main/resources/assets/minigames/blockstates/loot_doors.json",
+          "src/main/resources/assets/minigames/items/loot_doors.json",
           "src/main/resources/assets/minigames/models/block/loot_doors.json",
-          "src/main/resources/assets/minigames/blockstates/loot_doors.json"
+          "src/main/java/net/mcreator/minigames/block/LootDoorsBlock.java"
         ]
       },
       "path": "~/Dungeon/Doors"
@@ -9737,14 +9737,14 @@
       "registry_name": "miniboss_doors",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/miniboss_doors.json",
           "src/main/resources/assets/minigames/models/item/miniboss_doors.json",
           "src/main/resources/assets/minigames/blockstates/miniboss_doors.json",
           "src/main/java/net/mcreator/minigames/block/MinibossDoorsBlock.java",
           "src/main/resources/assets/minigames/models/block/miniboss_doors.json",
-          "src/main/java/net/mcreator/minigames/client/renderer/block/MinibossDoorsRenderer.java",
+          "src/main/java/net/mcreator/minigames/block/entity/MinibossDoorsBlockEntity.java",
           "src/main/resources/data/minigames/loot_table/blocks/miniboss_doors.json",
-          "src/main/java/net/mcreator/minigames/block/entity/MinibossDoorsBlockEntity.java"
+          "src/main/java/net/mcreator/minigames/client/renderer/block/MinibossDoorsRenderer.java",
+          "src/main/resources/assets/minigames/items/miniboss_doors.json"
         ]
       },
       "path": "~/Dungeon/Doors"
@@ -9757,14 +9757,14 @@
       "registry_name": "boss_doors",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/entity/BossDoorsBlockEntity.java",
-          "src/main/resources/data/minigames/loot_table/blocks/boss_doors.json",
-          "src/main/resources/assets/minigames/models/item/boss_doors.json",
           "src/main/resources/assets/minigames/blockstates/boss_doors.json",
+          "src/main/java/net/mcreator/minigames/block/entity/BossDoorsBlockEntity.java",
+          "src/main/resources/assets/minigames/models/item/boss_doors.json",
           "src/main/resources/assets/minigames/items/boss_doors.json",
+          "src/main/resources/assets/minigames/models/block/boss_doors.json",
           "src/main/java/net/mcreator/minigames/block/BossDoorsBlock.java",
-          "src/main/java/net/mcreator/minigames/client/renderer/block/BossDoorsRenderer.java",
-          "src/main/resources/assets/minigames/models/block/boss_doors.json"
+          "src/main/resources/data/minigames/loot_table/blocks/boss_doors.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/BossDoorsRenderer.java"
         ]
       },
       "path": "~/Dungeon/Doors"
@@ -9812,12 +9812,12 @@
       "registry_name": "spawn_preacher",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_preacher.json",
           "src/main/java/net/mcreator/minigames/block/SpawnPreacherBlock.java",
-          "src/main/resources/assets/minigames/models/block/spawn_preacher.json",
+          "src/main/resources/assets/minigames/models/item/spawn_preacher.json",
           "src/main/resources/assets/minigames/items/spawn_preacher.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_preacher.json",
           "src/main/resources/assets/minigames/blockstates/spawn_preacher.json",
-          "src/main/resources/assets/minigames/models/item/spawn_preacher.json"
+          "src/main/resources/assets/minigames/models/block/spawn_preacher.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -10074,12 +10074,12 @@
       "registry_name": "spawn_demon",
       "metadata": {
         "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/spawn_demon.json",
-          "src/main/resources/assets/minigames/blockstates/spawn_demon.json",
           "src/main/resources/assets/minigames/models/block/spawn_demon.json",
-          "src/main/java/net/mcreator/minigames/block/SpawnDemonBlock.java",
+          "src/main/resources/assets/minigames/items/spawn_demon.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_demon.json",
           "src/main/resources/assets/minigames/models/item/spawn_demon.json",
-          "src/main/resources/assets/minigames/items/spawn_demon.json"
+          "src/main/java/net/mcreator/minigames/block/SpawnDemonBlock.java",
+          "src/main/resources/assets/minigames/blockstates/spawn_demon.json"
         ]
       },
       "path": "~/Dungeon/Floors/Church/Monsters"
@@ -10277,9 +10277,9 @@
       "registry_name": "volleybomb_entity",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/volleybomb_entity_spawn_egg.json",
           "src/main/java/net/mcreator/minigames/entity/VolleybombEntityEntity.java",
-          "src/main/java/net/mcreator/minigames/client/renderer/VolleybombEntityRenderer.java"
+          "src/main/java/net/mcreator/minigames/client/renderer/VolleybombEntityRenderer.java",
+          "src/main/resources/assets/minigames/items/volleybomb_entity_spawn_egg.json"
         ]
       },
       "path": "~/Dungeon/Items/Warrior/Utilities/VolleyBomb"
@@ -10387,9 +10387,9 @@
       "registry_name": "plague_starter",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/plague_starter.json",
           "src/main/java/net/mcreator/minigames/item/PlagueStarterItem.java",
-          "src/main/resources/assets/minigames/models/item/plague_starter.json"
+          "src/main/resources/assets/minigames/models/item/plague_starter.json",
+          "src/main/resources/assets/minigames/items/plague_starter.json"
         ]
       },
       "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
@@ -10403,8 +10403,8 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/entity/PlagueMiddleEntity.java",
-          "src/main/resources/assets/minigames/items/plague_middle_spawn_egg.json",
-          "src/main/java/net/mcreator/minigames/client/renderer/PlagueMiddleRenderer.java"
+          "src/main/java/net/mcreator/minigames/client/renderer/PlagueMiddleRenderer.java",
+          "src/main/resources/assets/minigames/items/plague_middle_spawn_egg.json"
         ]
       },
       "path": "~/Dungeon/Items/Support/Utility/Plague Starter"
@@ -10659,10 +10659,10 @@
       "metadata": {
         "files": [
           "src/main/resources/assets/minigames/models/item/ghostifier.json",
+          "src/main/resources/assets/minigames/models/item/ghostifier_0.json",
           "src/main/resources/assets/minigames/items/ghostifier.json",
           "src/main/resources/assets/minigames/models/item/ghostifier_1.json",
-          "src/main/java/net/mcreator/minigames/item/GhostifierItem.java",
-          "src/main/resources/assets/minigames/models/item/ghostifier_0.json"
+          "src/main/java/net/mcreator/minigames/item/GhostifierItem.java"
         ]
       },
       "path": "~/Dungeon/Items/Thief/Utilities/Ghostifier"
@@ -11024,9 +11024,9 @@
       "registry_name": "phase_cloak",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/item/PhaseCloakItem.java",
+          "src/main/resources/assets/minigames/models/item/phase_cloak.json",
           "src/main/resources/assets/minigames/items/phase_cloak.json",
-          "src/main/resources/assets/minigames/models/item/phase_cloak.json"
+          "src/main/java/net/mcreator/minigames/item/PhaseCloakItem.java"
         ]
       },
       "path": "~/Dungeon/Items/Thief/Relic"
@@ -11054,9 +11054,9 @@
       "registry_name": "wind_scythe",
       "metadata": {
         "files": [
+          "src/main/resources/assets/minigames/items/wind_scythe.json",
           "src/main/java/net/mcreator/minigames/item/WindScytheItem.java",
-          "src/main/resources/assets/minigames/models/item/wind_scythe.json",
-          "src/main/resources/assets/minigames/items/wind_scythe.json"
+          "src/main/resources/assets/minigames/models/item/wind_scythe.json"
         ]
       },
       "path": "~/Dungeon/Items/Warrior/Weapons/Wind Scythe"
@@ -11352,9 +11352,9 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/item/DungeonCompassItem.java",
+          "src/main/java/net/mcreator/minigames/item/inventory/DungeonCompassInventoryCapability.java",
           "src/main/resources/assets/minigames/models/item/dungeon_compass.json",
-          "src/main/resources/assets/minigames/items/dungeon_compass.json",
-          "src/main/java/net/mcreator/minigames/item/inventory/DungeonCompassInventoryCapability.java"
+          "src/main/resources/assets/minigames/items/dungeon_compass.json"
         ]
       }
     },
@@ -11367,8 +11367,8 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/item/ComboDaggerItem.java",
-          "src/main/resources/assets/minigames/models/item/combo_dagger.json",
-          "src/main/resources/assets/minigames/items/combo_dagger.json"
+          "src/main/resources/assets/minigames/items/combo_dagger.json",
+          "src/main/resources/assets/minigames/models/item/combo_dagger.json"
         ]
       },
       "path": "~/Dungeon/Items/Thief/Weapons/Combo Dagger"
@@ -12794,15 +12794,13 @@
       "CUSTOM:BlacksmithHammer",
       "CUSTOM:PhaseCloak"
     ],
-    "BLOCKS:minecraft:overworld_carver_replaceables": [
-      "~CUSTOM:StartingRoomGridBlock"
-    ],
+    "BLOCKS:minecraft:overworld_carver_replaceables": [],
     "BLOCKS:minecraft:walls": [
-      "~CUSTOM:PolishedSulfurWall",
       "~CUSTOM:CinnabarBrickWall",
       "~CUSTOM:PolishedCinnabarWall",
       "~CUSTOM:CinnabarWall",
       "~CUSTOM:SulfurBrickWall",
+      "~CUSTOM:PolishedSulfurWall",
       "~CUSTOM:SulfurWall",
       "~CUSTOM:ChiseledQuartzWall"
     ],
@@ -13214,9 +13212,9 @@
   "metadata": {
     "files": [
       "src/main/java/net/mcreator/minigames/init/MinigamesModAttributes.java",
-      "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMenus.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
+      "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
       "src/main/java/net/mcreator/minigames/client/renderer/item/LegacyOverrideSelectItemModel.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModKeyMappings.java",
@@ -13226,32 +13224,32 @@
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModItems.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModEntityRenderers.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModEntities.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModRenderStateModifiers.java",
-      "src/main/java/net/mcreator/minigames/network/MinigamesModVariables.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModEntityRenderers.java",
+      "src/main/resources/pack.mcmeta",
       "src/main/java/net/mcreator/minigames/mixin/CameraAccessor.java",
+      "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
+      "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/client/RenderUtils.java",
+      "src/main/java/net/mcreator/minigames/mixin/EntityRenderDispatcherMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
+      "src/main/java/net/mcreator/minigames/network/MinigamesModVariables.java",
+      "src/main/java/net/mcreator/minigames/client/ItemArms.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModRenderStateModifiers.java",
       "src/main/resources/assets/minigames/sounds.json",
       "src/main/java/net/mcreator/minigames/init/MinigamesModTabs.java",
-      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/mixin/EntityRenderDispatcherMixin.java",
-      "src/main/resources/META-INF/accesstransformer.cfg",
-      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationMixin.java",
-      "src/main/java/net/mcreator/minigames/client/RenderUtils.java",
-      "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
-      "src/main/java/net/mcreator/minigames/client/ItemArms.java",
-      "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
-      "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
-      "src/main/resources/minigames.mixins.json",
+      "src/main/java/net/mcreator/minigames/mixin/EntityRendererMixin.java",
       "src/main/resources/META-INF/neoforge.mods.toml",
-      "src/main/java/net/mcreator/minigames/network/NbtArrayLists.java",
-      "src/main/resources/pack.mcmeta",
-      "src/main/java/net/mcreator/minigames/network/PlayPlayerAnimationMessage.java",
+      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationMixin.java",
       "src/main/java/net/mcreator/minigames/MinigamesMod.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
+      "src/main/resources/minigames.mixins.json",
       "src/main/java/net/mcreator/minigames/mixin/LivingEntityRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java"
+      "src/main/resources/META-INF/accesstransformer.cfg",
+      "src/main/java/net/mcreator/minigames/network/PlayPlayerAnimationMessage.java",
+      "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java"
     ],
     "betteranimations_models": {},
     "betteranimations_perspectives": {}
@@ -13621,5 +13619,5 @@
     "credits": "FL_F3rno",
     "modElementsPackage": "net.mcreator.minigames"
   },
-  "mcreatorVersion": 202600113616
+  "mcreatorVersion": 202600114619
 }

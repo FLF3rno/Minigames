@@ -9,11 +9,13 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Direction;
 import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -62,6 +64,7 @@ public class RenderCrownOnPlayerProcedure {
 	}
 
 	public static void renderHumanoid(RenderPlayerEvent playerRenderEvent, PlayerModel model, VertexConsumer vertexConsumer, PlayerRenderState state) {
+		LivingEntity eventEntity_ = (LivingEntity) playerRenderEvent.getRenderState().getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
 		PoseStack poseStack = playerRenderEvent.getPoseStack();
 		poseStack.pushPose();
 		CompoundTag playerData = state.getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY).getPersistentData();
@@ -77,6 +80,13 @@ public class RenderCrownOnPlayerProcedure {
 			playerData.putFloat("LastTickTime", oldAgeInTicks);
 		} else if (oldAnimationProgress > 0) {
 			model.setupAnim(state);
+		}
+		if (eventEntity_.hasPose(Pose.SLEEPING)) {
+			Direction direction = eventEntity_.getBedOrientation();
+			if (direction != null) {
+				float eyeHeightOffset = eventEntity_.getEyeHeight(Pose.STANDING) - 0.1F;
+				poseStack.translate((float) (-direction.getStepX()) * eyeHeightOffset, 0.0F, (float) (-direction.getStepZ()) * eyeHeightOffset);
+			}
 		}
 		playerRenderEvent.getRenderer().setupRotations(state, poseStack, state.bodyRot, 0);
 		poseStack.scale(-0.938f, -0.938f, 0.938f);
@@ -94,9 +104,17 @@ public class RenderCrownOnPlayerProcedure {
 	}
 
 	public static void renderEntity(RenderPlayerEvent playerRenderEvent, EntityModel model, VertexConsumer vertexConsumer, LivingEntityRenderState state) {
+		LivingEntity eventEntity_ = (LivingEntity) playerRenderEvent.getRenderState().getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
 		PoseStack poseStack = playerRenderEvent.getPoseStack();
 		poseStack.pushPose();
-		playerRenderEvent.getRenderer().setupRotations((PlayerRenderState) state, poseStack, state.bodyRot, 0);
+		if (eventEntity_.hasPose(Pose.SLEEPING)) {
+			Direction direction = eventEntity_.getBedOrientation();
+			if (direction != null) {
+				float eyeHeightOffset = eventEntity_.getEyeHeight(Pose.STANDING) - 0.1F;
+				poseStack.translate((float) (-direction.getStepX()) * eyeHeightOffset, 0.0F, (float) (-direction.getStepZ()) * eyeHeightOffset);
+			}
+		}
+		playerRenderEvent.getRenderer().setupRotations((PlayerRenderState) state, poseStack, state.bodyRot, 69);
 		poseStack.scale(-0.938f, -0.938f, 0.938f);
 		poseStack.translate(0.0D, -1.501, 0.0D);
 		model.setupAnim(state);

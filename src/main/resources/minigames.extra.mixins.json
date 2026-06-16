@@ -16,8 +16,7 @@
     "GuiAccessor",
     "ScreenMixin",
     "EntityTeamColorMixin",
-    "PlayerNameColorMixin",
-    "TransparencyMixin"
+    "PlayerNameColorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

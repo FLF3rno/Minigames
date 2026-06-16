@@ -84,9 +84,6 @@ public class BlessedArrowEntity extends AbstractArrow implements ItemSupplier {
     
     this.setXRot((float) (Math.atan2(movement.y, horizontalDistance) * 180.0D / Math.PI));
     this.setYRot((float) (Math.atan2(movement.x, movement.z) * 180.0D / Math.PI));
-    
-    this.xRotO = this.getXRot();
-    this.yRotO = this.getYRot();
 
     if (this.isInGround())
         this.discard();

@@ -32,6 +32,9 @@ public class BlessedTargetRangeBlocker {
 			applied = false;
 			return;
 		}
+		if ((minecraft.player.tickCount & 3) != 0) {
+			return;
+		}
 
 		boolean shouldBlock = false;
 		EntityHitResult entityHitResult = getLookedAtEntity(minecraft, TARGET_CHECK_RANGE);

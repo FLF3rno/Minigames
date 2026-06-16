@@ -4,11 +4,14 @@ import org.checkerframework.checker.units.qual.t;
 import org.checkerframework.checker.units.qual.min;
 
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
+import net.neoforged.neoforge.client.event.RenderArmEvent;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationLoader;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.ModList;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.phys.Vec3;
@@ -516,6 +519,22 @@ public class MinigamesModPlayerAnimationAPI {
 		@SubscribeEvent
 		public static void register(RegisterRenderStateModifiersEvent event) {
 			event.registerEntityModifier(PlayerRenderer.class, (entity, state) -> state.setRenderData(PLAYER, (Player) entity));
+		}
+	}
+
+	// Hacky shader issue fix
+	@EventBusSubscriber(Dist.CLIENT)
+	public static class RenderEvents {
+		@SubscribeEvent(priority = EventPriority.HIGHEST)
+		public static void renderArm(RenderArmEvent event) {
+			if (!Minecraft.getInstance().options.getCameraType().isFirstPerson())
+				event.setCanceled(true);
+		}
+
+		@SubscribeEvent(priority = EventPriority.HIGHEST)
+		public static void renderHand(RenderHandEvent event) {
+			if (!Minecraft.getInstance().options.getCameraType().isFirstPerson())
+				event.setCanceled(true);
 		}
 	}
 }

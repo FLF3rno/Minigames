@@ -2,7 +2,7 @@ package net.mcreator.minigames.entity;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -16,31 +16,27 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.core.registries.Registries;
 
-import net.mcreator.minigames.procedures.PreachingShotTickProcedure;
 import net.mcreator.minigames.procedures.PreachingShotHitProcedure;
 import net.mcreator.minigames.init.MinigamesModEntities;
 
 import javax.annotation.Nullable;
 
 public class PreachingShotEntity extends AbstractArrow implements ItemSupplier {
-	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.AIR);
+	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Items.ARROW);
 	private int knockback = 0;
 
 	public PreachingShotEntity(EntityType<? extends PreachingShotEntity> type, Level world) {
 		super(type, world);
-		setNoGravity(true);
 	}
 
 	public PreachingShotEntity(EntityType<? extends PreachingShotEntity> type, double x, double y, double z, Level world, @Nullable ItemStack firedFromWeapon) {
 		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
-		setNoGravity(true);
 		if (firedFromWeapon != null)
 			setKnockback(EnchantmentHelper.getItemEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.KNOCKBACK), firedFromWeapon));
 	}
 
 	public PreachingShotEntity(EntityType<? extends PreachingShotEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
 		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
-		setNoGravity(true);
 		if (firedFromWeapon != null)
 			setKnockback(EnchantmentHelper.getItemEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.KNOCKBACK), firedFromWeapon));
 	}
@@ -52,7 +48,7 @@ public class PreachingShotEntity extends AbstractArrow implements ItemSupplier {
 
 	@Override
 	protected ItemStack getDefaultPickupItem() {
-		return new ItemStack(Blocks.AIR);
+		return new ItemStack(Items.ARROW);
 	}
 
 	@Override
@@ -87,7 +83,6 @@ public class PreachingShotEntity extends AbstractArrow implements ItemSupplier {
 	@Override
 	public void tick() {
 		super.tick();
-		PreachingShotTickProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
 		if (this.isInGround())
 			this.discard();
 	}

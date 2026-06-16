@@ -39,6 +39,7 @@ public class BlessedLinkRenderer {
 	public static void onRenderLevelStage(RenderLevelStageEvent.AfterEntities event) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.level == null || mc.gameRenderer == null || mc.gameRenderer.getMainCamera() == null) return;
+		if (mc.player == null || (mc.player.tickCount & 1) != 0) return;
 
 		Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
 		MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();

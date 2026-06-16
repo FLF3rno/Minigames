@@ -17,6 +17,8 @@ import javax.annotation.Nullable;
 
 @EventBusSubscriber
 public class ManageMinimapProcedure {
+	private static final String LAST_MINIMAP_STATE = "minigames_last_minimap_state";
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		execute(event, event.getEntity().level(), event.getEntity());
@@ -29,36 +31,22 @@ public class ManageMinimapProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (MinigamesModVariables.MapVariables.get(world).minimap == false) {
-			{
-				Entity _ent = entity;
-				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-					_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-							_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect give @p xaerominimap:no_minimap infinite 1 true");
-				}
-			}
-			{
-				Entity _ent = entity;
-				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-					_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-							_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect give @p xaeroworldmap:no_world_map infinite 1 true");
-				}
-			}
+		if (entity.level().isClientSide() || entity.getServer() == null)
+			return;
+		boolean minimapEnabled = MinigamesModVariables.MapVariables.get(world).minimap;
+		boolean lastState = entity.getPersistentData().getBooleanOr(LAST_MINIMAP_STATE, !minimapEnabled);
+		if (lastState == minimapEnabled)
+			return;
+		entity.getPersistentData().putBoolean(LAST_MINIMAP_STATE, minimapEnabled);
+		Entity _ent = entity;
+		CommandSourceStack source = new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+				_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent);
+		if (!minimapEnabled) {
+			_ent.getServer().getCommands().performPrefixedCommand(source, "/effect give @s xaerominimap:no_minimap infinite 1 true");
+			_ent.getServer().getCommands().performPrefixedCommand(source, "/effect give @s xaeroworldmap:no_world_map infinite 1 true");
 		} else {
-			{
-				Entity _ent = entity;
-				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-					_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-							_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect clear @p xaerominimap:no_minimap");
-				}
-			}
-			{
-				Entity _ent = entity;
-				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-					_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-							_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect clear @p xaeroworldmap:no_world_map");
-				}
-			}
+			_ent.getServer().getCommands().performPrefixedCommand(source, "/effect clear @s xaerominimap:no_minimap");
+			_ent.getServer().getCommands().performPrefixedCommand(source, "/effect clear @s xaeroworldmap:no_world_map");
 		}
 	}
 }

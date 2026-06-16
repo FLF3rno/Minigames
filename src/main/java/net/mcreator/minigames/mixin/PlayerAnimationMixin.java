@@ -13,6 +13,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.FloatTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.client.resources.sounds.EntityBoundSoundInstance;
 import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -67,7 +68,7 @@ public abstract class PlayerAnimationMixin {
 		CompoundTag data = player.getPersistentData();
 		String playingAnimation = data.getStringOr("PlayerCurrentAnimation", "");
 		boolean overrideAnimation = data.getBooleanOr("OverrideCurrentAnimation", false);
-		boolean firstPerson = data.getBooleanOr("FirstPersonAnimation", false) && mc.options.getCameraType().isFirstPerson() && player == mc.player && (mc.screen == null || mc.screen instanceof ChatScreen);
+		boolean firstPerson = (data.getBooleanOr("FirstPersonAnimation", false) || data.contains("setNullRender")) && mc.options.getCameraType().isFirstPerson() && player == mc.player && (mc.screen == null || mc.screen instanceof ChatScreen);
 		if (data.getBooleanOr("ResetPlayerAnimation", false)) {
 			data.remove("ResetPlayerAnimation");
 			data.remove("LastTickTime");
@@ -127,6 +128,8 @@ public abstract class PlayerAnimationMixin {
 					data.remove("PlayerAnimationProgress");
 					data.remove("LastAnimationProgress");
 					data.remove("PlayedSoundTimes");
+					lastAnimationProgress = animationProgress;
+					playedSoundsTag = new ListTag();
 				}
 			}
 		}
@@ -149,7 +152,12 @@ public abstract class PlayerAnimationMixin {
 					shouldPlay = lastAnimationProgress <= soundTime || animationProgress >= soundTime;
 				}
 				if (shouldPlay && player.level() instanceof ClientLevel clientLevel) {
-					clientLevel.playLocalSound(player.getX(), player.getY(), player.getZ(), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse(soundId)), SoundSource.NEUTRAL, 1.0F, 1.0F, false);
+					mc.getSoundManager().play(new EntityBoundSoundInstance(BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse(soundId)), SoundSource.NEUTRAL, 1.0F, 1.0F, player, player.level().random.nextLong()) {
+						@Override
+						public boolean isLooping() {
+							return false;
+						}
+					});
 					playedSoundsTag.add(FloatTag.valueOf(soundTime));
 				}
 			}

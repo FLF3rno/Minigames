@@ -11004,6 +11004,10 @@
           {
             "name": "amount",
             "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -11272,11 +11276,12 @@
       "name": "BlessedArrow",
       "type": "projectile",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "blessed_arrow",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/entity/BlessedArrowEntity.java"
+          "src/main/java/net/mcreator/minigames/entity/BlessedArrowEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/BlessedArrowRenderer.java"
         ]
       },
       "path": "~/Dungeon/Items/Support/Weapons/Blessed Cursed Crossbow"
@@ -11337,6 +11342,70 @@
         ]
       },
       "path": "~/General/Block Clicks"
+    },
+    {
+      "name": "DungeonCompass",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "dungeon_compass",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/DungeonCompassItem.java",
+          "src/main/resources/assets/minigames/models/item/dungeon_compass.json",
+          "src/main/resources/assets/minigames/items/dungeon_compass.json",
+          "src/main/java/net/mcreator/minigames/item/inventory/DungeonCompassInventoryCapability.java"
+        ]
+      }
+    },
+    {
+      "name": "ComboDagger",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "combo_dagger",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/ComboDaggerItem.java",
+          "src/main/resources/assets/minigames/models/item/combo_dagger.json",
+          "src/main/resources/assets/minigames/items/combo_dagger.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Combo Dagger"
+    },
+    {
+      "name": "ComboDaggerDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "combo_dagger_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ComboDaggerDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Combo Dagger"
+    },
+    {
+      "name": "ComboDaggerHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "combo_dagger_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ComboDaggerHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
     }
   ],
   "variable_elements": [
@@ -12711,7 +12780,8 @@
     "ITEMS:mod:dungeon_thief": [
       "CUSTOM:BlankDagger",
       "CUSTOM:Ghostifier",
-      "CUSTOM:PhaseCloak"
+      "CUSTOM:PhaseCloak",
+      "CUSTOM:ComboDagger"
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
@@ -12756,7 +12826,8 @@
     ],
     "ITEMS:mod:keep_on_death": [
       "CUSTOM:GameCompass",
-      "CUSTOM:ReplaySpleef"
+      "CUSTOM:ReplaySpleef",
+      "CUSTOM:DungeonCompass"
     ],
     "ENTITIES:mod:buried": [
       "CUSTOM:Worshipper"
@@ -12780,11 +12851,18 @@
     ],
     "ITEMS:mod:dungeon_type_weapon": [
       "CUSTOM:WindScythe",
-      "CUSTOM:BlessedCursedCrossbow"
+      "CUSTOM:BlessedCursedCrossbow",
+      "CUSTOM:ComboDagger"
     ],
     "BIOMES:minecraft:is_overworld": [],
     "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
       "CUSTOM:SelfDamage"
+    ],
+    "ITEMS:mod:block_dropping": [
+      "CUSTOM:GameCompass",
+      "CUSTOM:SpleefShovel",
+      "CUSTOM:ReplaySpleef",
+      "CUSTOM:DungeonCompass"
     ]
   },
   "tab_element_order": {},
@@ -13128,7 +13206,9 @@
       "attribute.minigames.ranged_damage": "Ranged Damage",
       "death.attack.self_damage.item": "%1$s killed themselves",
       "death.attack.self_damage": "%1$s killed themselves",
-      "death.attack.self_damage.player": "%1$s killed themselves"
+      "death.attack.self_damage.player": "%1$s killed themselves",
+      "item.minigames.dungeon_compass": "Roguelike Compass",
+      "item.minigames.combo_dagger": "Combo Dagger"
     }
   },
   "metadata": {
@@ -13293,6 +13373,10 @@
                     "children": [
                       {
                         "name": "BlankDagger",
+                        "children": []
+                      },
+                      {
+                        "name": "Combo Dagger",
                         "children": []
                       }
                     ]

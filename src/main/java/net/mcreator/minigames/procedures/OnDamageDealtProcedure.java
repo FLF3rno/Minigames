@@ -5,6 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.component.DataComponents;
 
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 import javax.annotation.Nullable;
@@ -22,18 +24,19 @@ public class OnDamageDealtProcedure {
 	@SubscribeEvent
 	public static void onEntityAttacked(LivingIncomingDamageEvent event) {
 		if (event.getEntity() != null) {
-			execute(event, event.getEntity(), event.getSource().getEntity(), event.getAmount());
+			execute(event, event.getEntity().level(), event.getEntity(), event.getSource().getEntity(), event.getAmount());
 		}
 	}
 
-	public static void execute(Entity entity, Entity sourceentity, double amount) {
-		execute(null, entity, sourceentity, amount);
+	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity, double amount) {
+		execute(null, world, entity, sourceentity, amount);
 	}
 
-	private static void execute(@Nullable Event event, Entity entity, Entity sourceentity, double amount) {
+	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity, Entity sourceentity, double amount) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED) || (entity instanceof Player || entity instanceof ServerPlayer) && (sourceentity instanceof Player || sourceentity instanceof ServerPlayer)) {
+		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED)
+				|| MinigamesModVariables.MapVariables.get(world).playingDungeons && (entity instanceof Player || entity instanceof ServerPlayer) && (sourceentity instanceof Player || sourceentity instanceof ServerPlayer)) {
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount(0);
 			}

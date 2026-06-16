@@ -37,33 +37,33 @@ public class RefreshDashProcedure {
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).playingDungeons) {
 			if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).canDash) {
+				if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashCooldown == 0) {
+					if (world.isClientSide()) {
+						if (world instanceof Level _level) {
+							if (!_level.isClientSide()) {
+								_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.note_block.basedrum")), SoundSource.NEUTRAL, (float) 0.4, 2);
+							} else {
+								_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.note_block.basedrum")), SoundSource.NEUTRAL, (float) 0.4, 2, false);
+							}
+						}
+					}
+					{
+						Entity _ent = entity;
+						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
+							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "xp set @s 741");
+						}
+					}
+				} else if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashCooldown > 0) {
+					if (world.isClientSide()) {
+						if (entity instanceof Player _player)
+							_player.giveExperiencePoints((int) (741 / entity.getData(MinigamesModVariables.PLAYER_VARIABLES).maxDashCooldown));
+					}
+				}
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.dashCooldown = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashCooldown - 1;
 					_vars.markSyncDirty();
-				}
-			}
-			if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashCooldown == 0) {
-				if (world.isClientSide()) {
-					if (world instanceof Level _level) {
-						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.note_block.basedrum")), SoundSource.NEUTRAL, (float) 0.4, 2);
-						} else {
-							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.note_block.basedrum")), SoundSource.NEUTRAL, (float) 0.4, 2, false);
-						}
-					}
-				}
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "xp set @s 741");
-					}
-				}
-			} else if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashCooldown > 0) {
-				if (world.isClientSide()) {
-					if (entity instanceof Player _player)
-						_player.giveExperiencePoints((int) (741 / entity.getData(MinigamesModVariables.PLAYER_VARIABLES).maxDashCooldown));
 				}
 			}
 		}

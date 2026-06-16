@@ -33,6 +33,7 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.PHASE_CLOAK.get());
 				tabData.accept(MinigamesModItems.WIND_SCYTHE.get());
 				tabData.accept(MinigamesModItems.BLESSED_CURSED_CROSSBOW.get());
+				tabData.accept(MinigamesModItems.COMBO_DAGGER.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {
@@ -98,6 +99,7 @@ public class MinigamesModTabs {
 			if (tabData.hasPermissions()) {
 				tabData.accept(MinigamesModItems.GAME_COMPASS.get());
 				tabData.accept(MinigamesModBlocks.MOVING_BLOCK_SPAWN.get().asItem());
+				tabData.accept(MinigamesModItems.DUNGEON_COMPASS.get());
 			}
 		}
 	}

@@ -32,7 +32,7 @@ public class RevivePlayerProcedure {
 		if (entity == null || immediatesourceentity == null)
 			return;
 		if ((BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:server_player") || (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:player")
-				|| immediatesourceentity.getPersistentData().getBooleanOr("blessed", false)) {
+				|| (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minigames:blessed_arrow")) {
 			if (entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MinigamesModMobEffects.ASCENDING)) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);

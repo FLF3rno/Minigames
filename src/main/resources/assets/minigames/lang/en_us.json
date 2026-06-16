@@ -337,5 +337,7 @@
   "attribute.minigames.ranged_damage": "Ranged Damage",
   "death.attack.self_damage.item": "%1$s killed themselves",
   "death.attack.self_damage": "%1$s killed themselves",
-  "death.attack.self_damage.player": "%1$s killed themselves"
+  "death.attack.self_damage.player": "%1$s killed themselves",
+  "item.minigames.dungeon_compass": "Roguelike Compass",
+  "item.minigames.combo_dagger": "Combo Dagger"
 }

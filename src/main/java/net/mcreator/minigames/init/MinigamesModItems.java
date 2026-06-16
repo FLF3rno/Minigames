@@ -20,6 +20,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.resources.ResourceLocation;
 
 import net.mcreator.minigames.item.inventory.GameCompassInventoryCapability;
+import net.mcreator.minigames.item.inventory.DungeonCompassInventoryCapability;
 import net.mcreator.minigames.item.*;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -106,6 +107,8 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> PHASE_CLOAK;
 	public static final DeferredItem<Item> WIND_SCYTHE;
 	public static final DeferredItem<Item> BLESSED_CURSED_CROSSBOW;
+	public static final DeferredItem<Item> DUNGEON_COMPASS;
+	public static final DeferredItem<Item> COMBO_DAGGER;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -185,6 +188,8 @@ public class MinigamesModItems {
 		PHASE_CLOAK = register("phase_cloak", PhaseCloakItem::new);
 		WIND_SCYTHE = register("wind_scythe", WindScytheItem::new);
 		BLESSED_CURSED_CROSSBOW = register("blessed_cursed_crossbow", BlessedCursedCrossbowItem::new);
+		DUNGEON_COMPASS = register("dungeon_compass", DungeonCompassItem::new);
+		COMBO_DAGGER = register("combo_dagger", ComboDaggerItem::new);
 	}
 
 	// Start of user code block custom items
@@ -204,6 +209,7 @@ public class MinigamesModItems {
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new GameCompassInventoryCapability(stack), GAME_COMPASS.get());
+		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new DungeonCompassInventoryCapability(stack), DUNGEON_COMPASS.get());
 	}
 
 	@EventBusSubscriber(Dist.CLIENT)

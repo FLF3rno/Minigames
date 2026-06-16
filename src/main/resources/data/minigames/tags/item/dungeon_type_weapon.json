@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minigames:blessed_cursed_crossbow",
-    "minigames:wind_scythe"
+    "minigames:wind_scythe",
+    "minigames:combo_dagger"
   ]
 }

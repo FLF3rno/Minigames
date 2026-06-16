@@ -1,7 +1,5 @@
 package net.mcreator.minigames.procedures;
 
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -23,8 +21,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.init.MinigamesModEntities;
-
-import java.util.Comparator;
+import net.mcreator.minigames.entity.BlessedArrowEntity;
 
 public class ShootProjectileProcedure {
 	public static void execute(LevelAccessor world, Entity shooter, double damage, double inaccuracy, double knockback, double piercing, double speed, String type) {
@@ -72,9 +69,8 @@ public class ShootProjectileProcedure {
 				Entity _shootFrom = shooter;
 				Level projectileLevel = _shootFrom.level();
 				if (!projectileLevel.isClientSide()) {
-					Projectile _entityToSpawn = initArrowProjectile(
-							new SpectralArrow(projectileLevel, 0, 0, 0, new SpectralArrow(EntityType.SPECTRAL_ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
-							(float) (damage / speed), false, false, false, AbstractArrow.Pickup.DISALLOWED);
+					Projectile _entityToSpawn = initArrowProjectile(new BlessedArrowEntity(MinigamesModEntities.BLESSED_ARROW.get(), 0, 0, 0, projectileLevel, createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
+							(float) (damage / speed), true, false, false, AbstractArrow.Pickup.DISALLOWED);
 					_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 					_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);
 					projectileLevel.addFreshEntity(_entityToSpawn);
@@ -82,7 +78,6 @@ public class ShootProjectileProcedure {
 			}
 			shooter.hurt(new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:self_damage")))),
 					(float) GetItemAttributeProcedure.execute(shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage"));
-			(findEntityInWorldRange(world, SpectralArrow.class, (shooter.getX()), (shooter.getY()), (shooter.getZ()), 2)).getPersistentData().putBoolean("blessed", true);
 		}
 	}
 
@@ -106,9 +101,5 @@ public class ShootProjectileProcedure {
 		if (piercing > 0)
 			weapon.enchant(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.PIERCING), piercing);
 		return weapon;
-	}
-
-	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range) {
-		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), e -> true).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
 	}
 }

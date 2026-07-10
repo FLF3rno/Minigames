@@ -17,7 +17,9 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.MutableComponent;
 
+import net.mcreator.minigames.DungeonItemAccess;
 import net.mcreator.minigames.client.gui.DungeonInventoryScreen;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -62,16 +64,21 @@ public class PlayerSlotsOverlay {
 				return;
 			}
 			MinigamesModVariables.PlayerVariables vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			boolean playingDungeons = MinigamesModVariables.MapVariables.get(entity.level()).playingDungeons;
 			double playerSlots = vars.playerSlots;
 			boolean showOnlyHearts = vars.showOnlyHearts;
 			String path = event.getName().getPath();
 			String layerName = event.getName().toString().toLowerCase(Locale.ROOT);
 			boolean dungeonInventoryOpen = mc.screen instanceof DungeonInventoryScreen;
+			ItemStack selectedStack = entity.getInventory().getItem(getSelectedSlot(entity.getInventory()));
+			boolean selectedDungeonItem = !selectedStack.isEmpty() && DungeonItemAccess.isDungeonItem(selectedStack);
 
-			if (dungeonInventoryOpen && (path.contains("hotbar") || path.equals("selected_item_name") || path.equals("selected_item_tooltip"))) {
+			if (dungeonInventoryOpen && (path.contains("hotbar") || path.equals("selected_item_tooltip"))) {
 				event.setCanceled(true);
 			}
-
+			if (playingDungeons && path.equals("selected_item_name")) {
+				event.setCanceled(true);
+			}
 			// 1. Handle Hotbar Hiding (if slots < 9)
 			if (playerSlots < 9) {
 				if (path.contains("hotbar")) {
@@ -125,6 +132,12 @@ public class PlayerSlotsOverlay {
 			}
 			if (mc.options.hideGui) {
 				return;
+			}
+			boolean playingDungeons = MinigamesModVariables.MapVariables.get(entity.level()).playingDungeons;
+			ItemStack selectedStack = entity.getInventory().getItem(getSelectedSlot(entity.getInventory()));
+			boolean selectedDungeonItem = !selectedStack.isEmpty() && DungeonItemAccess.isDungeonItem(selectedStack);
+			if (playingDungeons && selectedDungeonItem) {
+				renderColoredSelectedItemName(event.getGuiGraphics(), entity, selectedStack);
 			}
 			if (!(mc.screen instanceof AbstractContainerScreen)) {
 				double playerSlots = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
@@ -220,5 +233,45 @@ public class PlayerSlotsOverlay {
 				guiGraphics.renderItemDecorations(mc.font, stack, x, itemY);
 			}
 		}
+	}
+
+	private static void renderColoredSelectedItemName(GuiGraphics guiGraphics, Player player, ItemStack stack) {
+		if (guiGraphics == null || player == null || stack == null || stack.isEmpty()) {
+			return;
+		}
+
+		ClassInfo classInfo = getClassInfo(stack);
+		MutableComponent displayName = stack.getHoverName().copy();
+		if (classInfo != null) {
+			displayName = displayName.withStyle(style -> style.withColor(classInfo.color()).withBold(false));
+		}
+
+		Minecraft mc = Minecraft.getInstance();
+		guiGraphics.pose().pushMatrix();
+		guiGraphics.pose().translate(0.0F, 2.0F);
+		guiGraphics.pose().scale(0.96F, 0.96F);
+		int x = Math.round((guiGraphics.guiWidth() / 2.134F) / 0.9F);
+		int y = Math.round(((guiGraphics.guiHeight() - 74) / 0.9F));
+		guiGraphics.drawCenteredString(mc.font, displayName, x, y, 0xFFFFFFFF);
+		guiGraphics.pose().popMatrix();
+	}
+
+	private static ClassInfo getClassInfo(ItemStack stack) {
+		if (stack.is(DungeonItemAccess.DUNGEON_WARRIOR)) {
+			return new ClassInfo(0xFF5555);
+		}
+		if (stack.is(DungeonItemAccess.DUNGEON_THIEF)) {
+			return new ClassInfo(0xFFAA00);
+		}
+		if (stack.is(DungeonItemAccess.DUNGEON_SUPPORT)) {
+			return new ClassInfo(0x55FFFF);
+		}
+		if (stack.is(DungeonItemAccess.DUNGEON_MAGE)) {
+			return new ClassInfo(0xFF55FF);
+		}
+		return null;
+	}
+
+	private record ClassInfo(int color) {
 	}
 }

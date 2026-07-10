@@ -31,6 +31,7 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> ASCENDING = REGISTRY.register("ascending", () -> new AscendingMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> ADVANCED_GLOWING = REGISTRY.register("advanced_glowing", () -> new AdvancedGlowingMobEffect());
 	public static final DeferredHolder<MobEffect, MobEffect> PHANTOM = REGISTRY.register("phantom", () -> new PhantomMobEffect());
+	public static final DeferredHolder<MobEffect, MobEffect> DAMAGE_BOOST = REGISTRY.register("damage_boost", () -> new DamageBoostMobEffect());
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {

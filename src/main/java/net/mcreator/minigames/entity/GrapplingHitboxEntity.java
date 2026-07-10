@@ -202,15 +202,6 @@ public class GrapplingHitboxEntity extends Monster {
 		this.setNoGravity(true);
 		if (!this.level().isClientSide()) {
 			String ownerId = this.entityData.get(DATA_owner);
-			if (!ownerId.isEmpty()) {
-				try {
-					Entity owner = ((ServerLevel) this.level()).getEntity(UUID.fromString(ownerId));
-					if (owner != null) {
-						this.setLeashedTo(owner, true);
-					}
-				} catch (IllegalArgumentException ignored) {
-				}
-			}
 			String targetId = this.entityData.get(DATA_target);
 			if (!targetId.isEmpty()) {
 				try {
@@ -241,12 +232,10 @@ public class GrapplingHitboxEntity extends Monster {
 
 	@Override
 	public void leashTooFarBehaviour() {
-		// Prevent the leash from snapping due to distance.
 	}
 
 	@Override
 	public void onLeashRemoved() {
-		// Prevent lead item drop and leash break sound spam.
 	}
 
 	@Override

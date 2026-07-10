@@ -55,7 +55,7 @@ public class SpawnTwoDoorRoomBlock extends Block implements EntityBlock {
 	@Override
 	public void tick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(blockstate, world, pos, random);
-		SpawnTwoRoomProcedureProcedure.execute(world, pos.getX(), pos.getZ(), blockstate);
+		SpawnTwoRoomProcedureProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ(), blockstate);
 		world.scheduleTick(pos, this, 1);
 	}
 

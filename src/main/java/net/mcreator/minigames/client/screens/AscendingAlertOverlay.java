@@ -11,9 +11,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class AscendingAlertOverlay {
@@ -32,7 +34,8 @@ public class AscendingAlertOverlay {
 				continue;
 			}
 			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-			if (vars != null && (vars.ascendingActive || vars.ascendingTimer > 0)) {
+			MobEffectInstance ascendingEffect = player.getEffect(MinigamesModMobEffects.ASCENDING);
+			if (vars != null && (vars.ascendingActive || vars.ascendingTimer > 0 || ascendingEffect != null)) {
 				ascendingPlayer = player;
 				break;
 			}
@@ -49,6 +52,9 @@ public class AscendingAlertOverlay {
 		}
 
 		float targetPercent = Mth.clamp((float) (ascendingVars.ascendingTimer / 350.0f), 0f, 1f);
+		if (targetPercent <= 0f && ascendingPlayer.hasEffect(MinigamesModMobEffects.ASCENDING)) {
+			targetPercent = 1f;
+		}
 		smoothedPercent = Mth.lerp(0.18f, smoothedPercent, targetPercent);
 		if (Math.abs(smoothedPercent - targetPercent) < 0.001f) {
 			smoothedPercent = targetPercent;

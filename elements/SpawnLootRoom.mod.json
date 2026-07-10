@@ -158,6 +158,9 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
+    "onTickUpdate": {
+      "name": "SpawnLootRoomProcedure"
+    },
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

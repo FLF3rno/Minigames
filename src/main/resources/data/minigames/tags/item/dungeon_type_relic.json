@@ -3,6 +3,9 @@
   "values": [
     "minigames:blacksmith_hammer",
     "minigames:phase_cloak",
-    "minigames:crystallized_potion"
+    "minigames:reaction_time",
+    "minigames:crystallized_potion",
+    "minigames:cluster_bomb",
+    "minigames:plug"
   ]
 }

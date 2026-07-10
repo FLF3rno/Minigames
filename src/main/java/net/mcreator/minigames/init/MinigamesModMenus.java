@@ -34,6 +34,7 @@ public class MinigamesModMenus {
 	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUISpleefMenu>> MINIGAME_GUI_SPLEEF = REGISTRY.register("minigame_gui_spleef", () -> IMenuTypeExtension.create(MinigameGUISpleefMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<MapGUISpleefMenu>> MAP_GUI_SPLEEF = REGISTRY.register("map_gui_spleef", () -> IMenuTypeExtension.create(MapGUISpleefMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<DungeonInventoryMenu>> DUNGEON_INVENTORY = REGISTRY.register("dungeon_inventory", () -> IMenuTypeExtension.create(DungeonInventoryMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<BattleBoxMenu>> BATTLE_BOX = REGISTRY.register("battle_box", () -> IMenuTypeExtension.create(BattleBoxMenu::new));
 
 	public interface MenuAccessor {
 		Map<String, Object> getMenuState();

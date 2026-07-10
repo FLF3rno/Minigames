@@ -109,6 +109,25 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> BLESSED_CURSED_CROSSBOW;
 	public static final DeferredItem<Item> DUNGEON_COMPASS;
 	public static final DeferredItem<Item> COMBO_DAGGER;
+	public static final DeferredItem<Item> WARRIOR_ITEM_PEDESTAL;
+	public static final DeferredItem<Item> SUPPORT_ITEM_PEDESTAL;
+	public static final DeferredItem<Item> THIEF_ITEM_PEDESTAL;
+	public static final DeferredItem<Item> MAGE_ITEM_PEDESTAL;
+	public static final DeferredItem<Item> TUFF_PEDESTAL;
+	public static final DeferredItem<Item> BLANK_PEDESTAL_P_1;
+	public static final DeferredItem<Item> BLANK_PEDESTAL_P_2;
+	public static final DeferredItem<Item> BLANK_PEDESTAL_P_3;
+	public static final DeferredItem<Item> BLANK_PEDESTAL_P_4;
+	public static final DeferredItem<Item> SPAWN_SCULKLING;
+	public static final DeferredItem<Item> STOP_SIGN;
+	public static final DeferredItem<Item> HAMMER;
+	public static final DeferredItem<Item> THE_FINISHER;
+	public static final DeferredItem<Item> HUMAN_CANNONBALL;
+	public static final DeferredItem<Item> TIME_CLOCK;
+	public static final DeferredItem<Item> SNATCHING_CLAW;
+	public static final DeferredItem<Item> PLUG;
+	public static final DeferredItem<Item> CLUSTER_BOMB;
+	public static final DeferredItem<Item> REACTION_TIME;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -190,6 +209,25 @@ public class MinigamesModItems {
 		BLESSED_CURSED_CROSSBOW = register("blessed_cursed_crossbow", BlessedCursedCrossbowItem::new);
 		DUNGEON_COMPASS = register("dungeon_compass", DungeonCompassItem::new);
 		COMBO_DAGGER = register("combo_dagger", ComboDaggerItem::new);
+		WARRIOR_ITEM_PEDESTAL = block(MinigamesModBlocks.WARRIOR_ITEM_PEDESTAL);
+		SUPPORT_ITEM_PEDESTAL = block(MinigamesModBlocks.SUPPORT_ITEM_PEDESTAL);
+		THIEF_ITEM_PEDESTAL = block(MinigamesModBlocks.THIEF_ITEM_PEDESTAL);
+		MAGE_ITEM_PEDESTAL = block(MinigamesModBlocks.MAGE_ITEM_PEDESTAL);
+		TUFF_PEDESTAL = block(MinigamesModBlocks.TUFF_PEDESTAL);
+		BLANK_PEDESTAL_P_1 = block(MinigamesModBlocks.BLANK_PEDESTAL_P_1);
+		BLANK_PEDESTAL_P_2 = block(MinigamesModBlocks.BLANK_PEDESTAL_P_2);
+		BLANK_PEDESTAL_P_3 = block(MinigamesModBlocks.BLANK_PEDESTAL_P_3);
+		BLANK_PEDESTAL_P_4 = block(MinigamesModBlocks.BLANK_PEDESTAL_P_4);
+		SPAWN_SCULKLING = block(MinigamesModBlocks.SPAWN_SCULKLING);
+		STOP_SIGN = register("stop_sign", StopSignItem::new);
+		HAMMER = register("hammer", HammerItem::new);
+		THE_FINISHER = register("the_finisher", TheFinisherItem::new);
+		HUMAN_CANNONBALL = register("human_cannonball", HumanCannonballItem::new);
+		TIME_CLOCK = register("time_clock", TimeClockItem::new);
+		SNATCHING_CLAW = register("snatching_claw", SnatchingClawItem::new);
+		PLUG = register("plug", PlugItem::new);
+		CLUSTER_BOMB = register("cluster_bomb", ClusterBombItem::new);
+		REACTION_TIME = register("reaction_time", ReactionTimeItem::new);
 	}
 
 	// Start of user code block custom items

@@ -134,7 +134,7 @@
         "value": false
       }
     ],
-    "onMobTickUpdate": {
+    "onPlayerCollidesWith": {
       "name": "VolleybombCheckCollision"
     },
     "onInitialSpawn": {

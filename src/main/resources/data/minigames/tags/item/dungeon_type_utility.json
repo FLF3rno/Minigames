@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "minigames:plague_starter",
+    "minigames:time_clock",
     "minigames:ghostifier",
-    "minigames:volley_bomb"
+    "minigames:volley_bomb",
+    "minigames:snatching_claw",
+    "minigames:human_cannonball"
   ]
 }

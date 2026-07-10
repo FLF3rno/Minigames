@@ -3,7 +3,7 @@
   "_type": "projectile",
   "definition": {
     "projectileItem": {
-      "value": "Blocks.AIR"
+      "value": "CUSTOM:PotentSulfur"
     },
     "showParticles": false,
     "actionSound": {

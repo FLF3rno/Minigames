@@ -14,8 +14,11 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 
+import net.mcreator.minigames.procedures.SpawnLootRoomProcedureProcedure;
 import net.mcreator.minigames.block.entity.SpawnLootRoomBlockEntity;
 
 public class SpawnLootRoomBlock extends Block implements EntityBlock {
@@ -43,6 +46,19 @@ public class SpawnLootRoomBlock extends Block implements EntityBlock {
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData, Player entity) {
 		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public void onPlace(BlockState blockstate, Level world, BlockPos pos, BlockState oldState, boolean moving) {
+		super.onPlace(blockstate, world, pos, oldState, moving);
+		world.scheduleTick(pos, this, 1);
+	}
+
+	@Override
+	public void tick(BlockState blockstate, ServerLevel world, BlockPos pos, RandomSource random) {
+		super.tick(blockstate, world, pos, random);
+		SpawnLootRoomProcedureProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ(), blockstate);
+		world.scheduleTick(pos, this, 1);
 	}
 
 	@Override

@@ -2,8 +2,11 @@
   "replace": false,
   "values": [
     "minigames:blank_dagger",
+    "minigames:the_finisher",
     "minigames:phase_cloak",
     "minigames:combo_dagger",
-    "minigames:ghostifier"
+    "minigames:reaction_time",
+    "minigames:ghostifier",
+    "minigames:snatching_claw"
   ]
 }

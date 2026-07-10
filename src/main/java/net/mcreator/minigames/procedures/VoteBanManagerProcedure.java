@@ -29,6 +29,7 @@ public class VoteBanManagerProcedure {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.voteCooldown = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown - 1;
+				_vars.markSyncDirty();
 			}
 		}
 	}

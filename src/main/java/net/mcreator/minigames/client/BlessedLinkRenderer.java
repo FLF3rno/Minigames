@@ -39,8 +39,9 @@ public class BlessedLinkRenderer {
 	public static void onRenderLevelStage(RenderLevelStageEvent.AfterEntities event) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.level == null || mc.gameRenderer == null || mc.gameRenderer.getMainCamera() == null) return;
-		if (mc.player == null || (mc.player.tickCount & 1) != 0) return;
+		if (mc.player == null) return;
 
+		float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
 		Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
 		MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
 		VertexConsumer beamBuffer = buffers.getBuffer(RenderType.debugQuads());
@@ -53,8 +54,8 @@ public class BlessedLinkRenderer {
 			Entity blesser = findClosestBlesser(blessed, allEntities);
 			if (blesser == null) continue;
 
-			Vec3 start = new Vec3(blessed.getX(), blessed.getY() + (blessed.getBbHeight() * 0.5D), blessed.getZ()).subtract(cameraPos);
-			Vec3 end = new Vec3(blesser.getX(), blesser.getY() + 1D, blesser.getZ()).subtract(cameraPos);
+			Vec3 start = blessed.getEyePosition(partialTick).subtract(cameraPos);
+			Vec3 end = blesser.getEyePosition(partialTick).subtract(cameraPos);
 			drawQuadBeam(beamBuffer, start, end, cameraPos, 0.45F, 0.9F, 1.0F, BEAM_ALPHA, BEAM_HALF_WIDTH);
 		}
 
@@ -71,11 +72,10 @@ public class BlessedLinkRenderer {
 		Entity closest = null;
 		double bestDistanceSq = Double.MAX_VALUE;
 		int sourceId = source.hasData(ModDataAttachments.BLESSED_DATA) ? source.getData(ModDataAttachments.BLESSED_DATA).dataId : 0;
-		if (sourceId == 0) return null;
 		for (Entity candidate : candidates) {
 			if (candidate == source || !candidate.isAlive()) continue;
 			if (!isBlesser(candidate)) continue;
-			if (getBlesserDataId(candidate) != sourceId) continue;
+			if (sourceId != 0 && getBlesserDataId(candidate) != sourceId) continue;
 			double distanceSq = source.distanceToSqr(candidate);
 			if (distanceSq < bestDistanceSq) {
 				bestDistanceSq = distanceSq;

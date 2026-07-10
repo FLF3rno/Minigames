@@ -46,7 +46,7 @@ public class VotePopupOverlay {
 		}
 		if (ShowVoteProcedure.execute(world)) {
 			Minecraft minecraft = Minecraft.getInstance();
-			String playerName = VotingPlayerNameProcedure.execute();
+			String playerName = VotingPlayerNameProcedure.execute(world);
 			String voteMessage = VotingMessageProcedure.execute(world);
 			Component voteNoKeybind = MinigamesModKeyMappings.VOTE_NO.getTranslatedKeyMessage();
 			Component voteYesKeybind = MinigamesModKeyMappings.VOTE_YES.getTranslatedKeyMessage();
@@ -97,7 +97,7 @@ public class VotePopupOverlay {
 		if (self == null || minecraft.getConnection() == null) {
 			return;
 		}
-		UUID callerId = MinigamesModVariables.VotingEntity != null ? MinigamesModVariables.VotingEntity.getUUID() : null;
+		UUID callerId = getVotingPlayerUUID(self);
 		List<PlayerInfo> others = new ArrayList<>();
 		for (PlayerInfo info : minecraft.getConnection().getListedOnlinePlayers()) {
 			UUID id = info.getProfile().getId();
@@ -137,23 +137,47 @@ public class VotePopupOverlay {
 	}
 
 	private static PlayerSkin getVotingPlayerSkin() {
-		if (MinigamesModVariables.VotingEntity instanceof AbstractClientPlayer clientPlayer) {
-			return clientPlayer.getSkin();
+		Player self = Minecraft.getInstance().player;
+		UUID callerId = getVotingPlayerUUID(self);
+		if (callerId == null) {
+			return DefaultPlayerSkin.get(new UUID(0L, 0L));
 		}
-		if (MinigamesModVariables.VotingEntity != null) {
-			return DefaultPlayerSkin.get(MinigamesModVariables.VotingEntity.getUUID());
+		if (self != null && self.level() != null) {
+			Player caller = self.level().getPlayerByUUID(callerId);
+			if (caller instanceof AbstractClientPlayer clientPlayer) {
+				return clientPlayer.getSkin();
+			}
 		}
-		return DefaultPlayerSkin.get(Minecraft.getInstance().player != null ? Minecraft.getInstance().player.getUUID() : new UUID(0L, 0L));
+		return DefaultPlayerSkin.get(callerId);
 	}
 
 	private static int getVotingPlayerNameColor() {
-		if (MinigamesModVariables.VotingEntity instanceof Player votingPlayer) {
-			String color = votingPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
-			if (color != null && color.matches("^#?[0-9a-fA-F]{6}$")) {
-				String normalized = color.startsWith("#") ? color.substring(1) : color;
-				return (Integer.parseInt(normalized, 16) & 0x00FFFFFF) | 0xFF000000;
+		Player self = Minecraft.getInstance().player;
+		UUID callerId = getVotingPlayerUUID(self);
+		if (self != null && self.level() != null && callerId != null) {
+			Player votingPlayer = self.level().getPlayerByUUID(callerId);
+			if (votingPlayer != null) {
+				String color = votingPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+				if (color != null && color.matches("^#?[0-9a-fA-F]{6}$")) {
+					String normalized = color.startsWith("#") ? color.substring(1) : color;
+					return (Integer.parseInt(normalized, 16) & 0x00FFFFFF) | 0xFF000000;
+				}
 			}
 		}
 		return -1;
+	}
+
+	private static UUID getVotingPlayerUUID(Player self) {
+		if (self == null || self.level() == null) {
+			return MinigamesModVariables.VotingEntity != null ? MinigamesModVariables.VotingEntity.getUUID() : null;
+		}
+		String callerUuid = MinigamesModVariables.MapVariables.get(self.level()).VotingPlayerUUID;
+		if (callerUuid != null && !callerUuid.isEmpty()) {
+			try {
+				return UUID.fromString(callerUuid);
+			} catch (IllegalArgumentException ignored) {
+			}
+		}
+		return MinigamesModVariables.VotingEntity != null ? MinigamesModVariables.VotingEntity.getUUID() : null;
 	}
 }

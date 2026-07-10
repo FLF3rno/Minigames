@@ -43,7 +43,7 @@ public final class DungeonItemAccess {
 		return true;
 	}
 
-	//CONDITIONS per PROPERIES
+	//CONDITIONS per PROPERTIES
 	public static boolean isStolen(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("stolen", false);
 	}

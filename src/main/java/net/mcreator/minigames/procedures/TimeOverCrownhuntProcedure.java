@@ -24,25 +24,27 @@ public class TimeOverCrownhuntProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
-		if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame == true) {
-			if (MinigamesModVariables.MapVariables.get(world).canGrabCrown == false) {
-				if (MinigamesModVariables.MapVariables.get(world).gameHours == 0 && MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameSeconds == 0) {
-					MinigamesModVariables.MapVariables.get(world).MoveCrownTimer = false;
-					MinigamesModVariables.MapVariables.get(world).ShowCrownTimer = false;
-					MinigamesModVariables.MapVariables.get(world).inGracePeriod = false;
-					MinigamesModVariables.MapVariables.get(world).gameHours = 1;
-					MinigamesModVariables.MapVariables.get(world).gameMinutes = 1;
-					MinigamesModVariables.MapVariables.get(world).gameSeconds = 1;
-					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-					MinigamesMod.queueServerWork(10, () -> {
-						MinigamesModVariables.MapVariables.get(world).canGrabCrown = true;
+		if (!world.isClientSide()) {
+			if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame == true) {
+				if (MinigamesModVariables.MapVariables.get(world).canGrabCrown == false) {
+					if (MinigamesModVariables.MapVariables.get(world).gameHours == 0 && MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameSeconds == 0) {
+						MinigamesModVariables.MapVariables.get(world).MoveCrownTimer = false;
+						MinigamesModVariables.MapVariables.get(world).ShowCrownTimer = false;
+						MinigamesModVariables.MapVariables.get(world).inGracePeriod = false;
+						MinigamesModVariables.MapVariables.get(world).gameHours = 1;
+						MinigamesModVariables.MapVariables.get(world).gameMinutes = 1;
+						MinigamesModVariables.MapVariables.get(world).gameSeconds = 1;
 						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-						StartPVPProcedure.execute(world);
-					});
-				}
-			} else if (MinigamesModVariables.MapVariables.get(world).returnToCastle == false) {
-				if (MinigamesModVariables.MapVariables.get(world).gameHours == 0 && MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameSeconds == 0) {
-					OnWinCrownHuntProcedure.execute(world);
+						MinigamesMod.queueServerWork(10, () -> {
+							MinigamesModVariables.MapVariables.get(world).canGrabCrown = true;
+							MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+							StartPVPProcedure.execute(world);
+						});
+					}
+				} else if (MinigamesModVariables.MapVariables.get(world).returnToCastle == false) {
+					if (MinigamesModVariables.MapVariables.get(world).gameHours == 0 && MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameSeconds == 0) {
+						OnWinCrownHuntProcedure.execute(world);
+					}
 				}
 			}
 		}

@@ -56,7 +56,7 @@ public class SpawnMapsProcedure {
 						"/execute in minigames:spleef_dimension run forceload add -100 -100 100 100");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/execute in minigames:spleef_dimension run place template minigames:spleef_balloons -60 99 -50");
+						"/execute in minigames:spleef_dimension run place template minigames:spleef_balloons -59 100 -50");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/execute in minigames:spleef_dimension run forceload remove -100 -100 100 100");

@@ -24,11 +24,11 @@ public class PlaceBalloonsSpleefProcedure {
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 30)));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					("execute in minigames:spleef_dimension run fill " + new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
+					("execute in minigames:spleef_dimension run fill " + new java.text.DecimalFormat("##").format(22 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x()) + " "
 							+ new java.text.DecimalFormat("##").format(100 + MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef) + " "
-							+ new java.text.DecimalFormat("##").format(30 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
-							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() - 30) + " 100 "
-							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 30) + " air"));
+							+ new java.text.DecimalFormat("##").format(22 + MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z()) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.x() - 22) + " 100 "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 22) + " air"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"execute in minigames:spleef_dimension run place template minigames:spleef_balloons_arena -21 100 -14");

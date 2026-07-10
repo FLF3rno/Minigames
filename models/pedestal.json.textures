@@ -1,0 +1,40 @@
+{
+  "mappings": {
+    "mage": {
+      "name": "mage",
+      "map": {
+        "0": "magepedestal"
+      }
+    },
+    "default": {
+      "name": "default",
+      "map": {
+        "0": "minecraft:tuff"
+      }
+    },
+    "warrior": {
+      "name": "warrior",
+      "map": {
+        "0": "warriorpedestal"
+      }
+    },
+    "thief": {
+      "name": "thief",
+      "map": {
+        "0": "thiefpedestal"
+      }
+    },
+    "support": {
+      "name": "support",
+      "map": {
+        "0": "supportpedestal"
+      }
+    },
+    "blank": {
+      "name": "blank",
+      "map": {
+        "0": "minecraft:quartz_pillar"
+      }
+    }
+  }
+}

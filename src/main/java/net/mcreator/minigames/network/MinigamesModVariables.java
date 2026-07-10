@@ -139,6 +139,8 @@ public class MinigamesModVariables {
 		clone.advancedGlowingColor = original.advancedGlowingColor;
 		clone.tooltipSize = original.tooltipSize;
 		clone.performKnockback = original.performKnockback;
+		clone.openBattleBox = original.openBattleBox;
+		clone.selectedButtonBattleBox = original.selectedButtonBattleBox;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -316,10 +318,13 @@ public class MinigamesModVariables {
 		public double aliveEnemies = 0;
 		public double startingEnemies = 0;
 		public double connectedPlayers = 0;
-		public double roomCheckDelayTicks = 0;
+		public double roomCheckDelayTicks = 0.0;
 		public boolean removeEffects = false;
 		public boolean ascendingGlobalActive = false;
 		public String floorTypeDungeon = "\"\"";
+		public String VotingPlayerUUID = "\"\"";
+		public String VotingPlayerName = "";
+		public String battleBoxStatus = "\"\"";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -423,6 +428,9 @@ public class MinigamesModVariables {
 			removeEffects = nbt.getBooleanOr("removeEffects", false);
 			ascendingGlobalActive = nbt.getBooleanOr("ascendingGlobalActive", false);
 			floorTypeDungeon = nbt.getStringOr("floorTypeDungeon", "");
+			VotingPlayerUUID = nbt.getStringOr("VotingPlayerUUID", "");
+			VotingPlayerName = nbt.getStringOr("VotingPlayerName", "");
+			battleBoxStatus = nbt.getStringOr("battleBoxStatus", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -527,6 +535,9 @@ public class MinigamesModVariables {
 			nbt.putBoolean("removeEffects", removeEffects);
 			nbt.putBoolean("ascendingGlobalActive", ascendingGlobalActive);
 			nbt.putString("floorTypeDungeon", floorTypeDungeon);
+			nbt.putString("VotingPlayerUUID", VotingPlayerUUID);
+			nbt.putString("VotingPlayerName", VotingPlayerName);
+			nbt.putString("battleBoxStatus", battleBoxStatus);
 			return nbt;
 		}
 
@@ -626,6 +637,8 @@ public class MinigamesModVariables {
 		public String advancedGlowingColor = "";
 		public double tooltipSize = 0.8;
 		public Vec3 performKnockback = Vec3.ZERO;
+		public boolean openBattleBox = false;
+		public double selectedButtonBattleBox = 0;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -665,6 +678,8 @@ public class MinigamesModVariables {
 			output.putString("advancedGlowingColor", advancedGlowingColor);
 			output.putDouble("tooltipSize", tooltipSize);
 			output.store("performKnockback", Vec3.CODEC, performKnockback);
+			output.putBoolean("openBattleBox", openBattleBox);
+			output.putDouble("selectedButtonBattleBox", selectedButtonBattleBox);
 		}
 
 		@Override
@@ -705,6 +720,8 @@ public class MinigamesModVariables {
 			advancedGlowingColor = input.getStringOr("advancedGlowingColor", "");
 			tooltipSize = input.getDoubleOr("tooltipSize", 0);
 			performKnockback = input.read("performKnockback", Vec3.CODEC).orElse(Vec3.ZERO);
+			openBattleBox = input.getBooleanOr("openBattleBox", false);
+			selectedButtonBattleBox = input.getDoubleOr("selectedButtonBattleBox", 0);
 		}
 
 		public void markSyncDirty() {

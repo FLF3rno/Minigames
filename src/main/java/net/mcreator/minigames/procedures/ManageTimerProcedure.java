@@ -26,6 +26,7 @@ public class ManageTimerProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).displayTimer == true) {
 			if (MinigamesModVariables.MapVariables.get(world).achievement != 1) {
 				MinigamesModVariables.MapVariables.get(world).gameTick = MinigamesModVariables.MapVariables.get(world).gameTick + 1;
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (MinigamesModVariables.MapVariables.get(world).gameTick >= 60) {
 					MinigamesModVariables.MapVariables.get(world).gameSeconds = MinigamesModVariables.MapVariables.get(world).gameSeconds + 1;
 					MinigamesModVariables.MapVariables.get(world).gameTick = 0;
@@ -39,9 +40,6 @@ public class ManageTimerProcedure {
 				if (MinigamesModVariables.MapVariables.get(world).gameMinutes >= 60) {
 					MinigamesModVariables.MapVariables.get(world).gameHours = MinigamesModVariables.MapVariables.get(world).gameHours + 1;
 					MinigamesModVariables.MapVariables.get(world).gameMinutes = 0;
-					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				}
-				if (MinigamesModVariables.MapVariables.get(world).gameTick == 0) {
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				}
 			}

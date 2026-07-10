@@ -26,6 +26,9 @@ public class ApplyEffectProcedure {
 		} else if ((effect).equals("minecraft:strength")) {
 			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) ticks, (int) (level - 1), false, (!hide)));
+		} else if ((effect).equals("minecraft:damage_boost")) {
+			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.DAMAGE_BOOST, (int) ticks, (int) (level - 1), false, (!hide)));
 		} else {
 			{
 				Entity _ent = target;

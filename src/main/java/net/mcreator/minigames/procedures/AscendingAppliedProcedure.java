@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 
 import net.mcreator.minigames.network.PlayPlayerAnimationMessage;
-import net.mcreator.minigames.ModDataAttachments;
 import net.mcreator.minigames.init.MinigamesModSounds;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -44,19 +43,14 @@ public class AscendingAppliedProcedure {
             groundY = startY;
         }
 
-        ModDataAttachments.BeamData beamData = new ModDataAttachments.BeamData(true, startX, groundY, startZ);
-        entity.setData(ModDataAttachments.BEAM_DATA, beamData);
-
         if (!entity.level().isClientSide()) {
-            if (entity instanceof ServerPlayer serverPlayer) {
-                serverPlayer.syncData(ModDataAttachments.BEAM_DATA.get());
-            }
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
                 MinigamesModSounds.ASCENDING.get(), SoundSource.PLAYERS, 2.0f, 1.0f);
         }
         {
             MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
             _vars.ascendingTimer = 350;
+            _vars.ascendingActive = true;
             _vars.markSyncDirty();
         }
 

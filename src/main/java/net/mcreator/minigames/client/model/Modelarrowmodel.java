@@ -19,19 +19,19 @@ public class Modelarrowmodel extends EntityModel<LivingEntityRenderState> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("minigames", "modelarrowmodel"), "main");
-	public final ModelPart bb_main;
+	public final ModelPart bone;
 
 	public Modelarrowmodel(ModelPart root) {
 		super(root);
-		this.bb_main = root.getChild("bb_main");
+		this.bone = root.getChild("bone");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main",
-				CubeListBuilder.create().texOffs(-16, 16).addBox(-2.5F, -2.4F, -8.0F, 5.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)).texOffs(0, -16).addBox(0.0F, -5.0F, -8.0F, 0.0F, 5.0F, 16.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition bone = partdefinition.addOrReplaceChild("bone",
+				CubeListBuilder.create().texOffs(-16, 16).addBox(-2.5F, 0.05F, -8.0F, 5.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)).texOffs(0, -16).addBox(0.0F, -2.55F, -8.0F, 0.0F, 5.0F, 16.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(0.0F, 23.95F, 0.0F, 1.5708F, 0.0F, 3.1416F));
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 

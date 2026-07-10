@@ -1,0 +1,9 @@
+{
+  "parent": "minigames:custom/pedestal",
+  "textures": {
+    "all": "minigames:block/thiefpedestal",
+    "particle": "minigames:block/thiefpedestal",
+    "0": "minigames:block/thiefpedestal"
+  },
+  "render_type": "solid"
+}

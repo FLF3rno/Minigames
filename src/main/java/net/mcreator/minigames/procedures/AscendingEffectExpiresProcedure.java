@@ -1,24 +1,21 @@
 package net.mcreator.minigames.procedures;
 
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.nbt.CompoundTag;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.mcreator.minigames.network.PlayPlayerAnimationMessage;
-import net.mcreator.minigames.ModDataAttachments;
+import net.mcreator.minigames.network.MinigamesModVariables;
 
 public class AscendingEffectExpiresProcedure {
     public static void execute(Entity entity) {
         if (entity == null)
             return;
-
-        ModDataAttachments.BeamData emptyData = new ModDataAttachments.BeamData(false, 0, 0, 0);
-        entity.setData(ModDataAttachments.BEAM_DATA, emptyData);
 
         if (!entity.level().isClientSide() && entity.getServer() != null) {
             String command = "/execute if entity @a[nbt=!{active_effects:[{id:\"minigames:ascending\"}]}] run stopsound @a * minigames:ascending";
@@ -47,5 +44,12 @@ public class AscendingEffectExpiresProcedure {
         entity.getPersistentData().remove("immobileX");
         entity.getPersistentData().remove("immobileZ");
         entity.getPersistentData().remove("lockYRot");
+        MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+        _vars.ascendingActive = false;
+        if (_vars.ascendingTimer < 0) {
+            _vars.ascendingTimer = 0;
+        }
+        _vars.markSyncDirty();
+
     }
 }

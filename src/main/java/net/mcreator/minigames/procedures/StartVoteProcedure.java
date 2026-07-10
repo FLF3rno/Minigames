@@ -15,6 +15,9 @@ public class StartVoteProcedure {
 			return;
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown <= 0) {
 			MinigamesModVariables.VotingEntity = voting_player;
+			MinigamesModVariables.MapVariables.get(world).VotingPlayerUUID = voting_player.getStringUUID();
+			MinigamesModVariables.MapVariables.get(world).VotingPlayerName = voting_player.getDisplayName().getString();
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if ((type).equals("achievement run")) {
 				MinigamesModVariables.MapVariables.get(world).voteType = 0;
 				MinigamesModVariables.MapVariables.get(world).VotingMessage = "Wants to start a game of Achievement Run";

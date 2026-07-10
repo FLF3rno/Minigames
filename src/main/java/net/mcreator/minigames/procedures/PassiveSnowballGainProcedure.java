@@ -6,6 +6,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -27,19 +29,21 @@ public class PassiveSnowballGainProcedure {
 		if (entity == null)
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
-			{
-				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef;
-				_vars.markSyncDirty();
-			}
-			if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef == 1) {
+			if (!(entity instanceof Player _plr0 && _plr0.gameMode() == GameType.SPECTATOR)) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef;
 					_vars.markSyncDirty();
 				}
+				if (MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef == 1) {
+					{
+						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + MinigamesModVariables.MapVariables.get(world).passiveSnowballsSpleef;
+						_vars.markSyncDirty();
+					}
+				}
+				SpleefPowerupProcedure.execute(world, entity);
 			}
-			SpleefPowerupProcedure.execute(world, entity);
 		}
 	}
 }

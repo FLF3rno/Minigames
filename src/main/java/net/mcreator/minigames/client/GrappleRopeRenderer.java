@@ -8,6 +8,8 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +26,8 @@ import java.util.List;
 public class GrappleRopeRenderer {
 	private static final double SEARCH_RADIUS = 96.0D;
 	private static final float ROPE_HALF_WIDTH = 0.03F;
-	private static final float ROPE_ALPHA = 0.85F;
 	private static final float ROPE_DEPTH_BIAS = 0.0025F;
+	private static final ResourceLocation LEAD_TEXTURE = ResourceLocation.parse("minecraft:textures/entity/lead/lead.png");
 
 	@SubscribeEvent
 	public static void onRenderLevelStage(RenderLevelStageEvent.AfterEntities event) {
@@ -35,7 +37,8 @@ public class GrappleRopeRenderer {
 
 		Vec3 cameraPos = mc.gameRenderer.getMainCamera().getPosition();
 		MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
-		VertexConsumer ropeBuffer = buffers.getBuffer(RenderType.debugQuads());
+		RenderType ropeType = RenderType.entityCutoutNoCull(LEAD_TEXTURE);
+		VertexConsumer ropeBuffer = buffers.getBuffer(ropeType);
 
 		List<GrappleEntity> grapples = mc.level.getEntitiesOfClass(GrappleEntity.class, new AABB(cameraPos, cameraPos).inflate(SEARCH_RADIUS), Entity::isAlive);
 		for (GrappleEntity grapple : grapples) {
@@ -43,15 +46,16 @@ public class GrappleRopeRenderer {
 			if (!(owner instanceof Player player) || !player.isAlive())
 				continue;
 
-			Vec3 start = player.getEyePosition(event.getPartialTick().getGameTimeDeltaPartialTick(false)).subtract(cameraPos);
-			Vec3 end = grapple.getPosition(event.getPartialTick().getGameTimeDeltaPartialTick(false)).subtract(cameraPos);
-			drawQuadBeam(ropeBuffer, start, end, cameraPos, 0.95F, 0.95F, 0.95F, ROPE_ALPHA, ROPE_HALF_WIDTH);
+			float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
+			Vec3 start = player.getEyePosition(partialTick).subtract(cameraPos);
+			Vec3 end = grapple.getPosition(partialTick).subtract(cameraPos);
+			drawTexturedBeam(ropeBuffer, start, end, cameraPos, ROPE_HALF_WIDTH);
 		}
 
-		buffers.endBatch(RenderType.debugQuads());
+		buffers.endBatch(ropeType);
 	}
 
-	private static void drawQuadBeam(VertexConsumer consumer, Vec3 start, Vec3 end, Vec3 cameraWorldPos, float r, float g, float b, float a, float halfWidth) {
+	private static void drawTexturedBeam(VertexConsumer consumer, Vec3 start, Vec3 end, Vec3 cameraWorldPos, float halfWidth) {
 		Vec3 dir = end.subtract(start);
 		if (dir.lengthSqr() < 1.0E-6D)
 			return;
@@ -79,10 +83,12 @@ public class GrappleRopeRenderer {
 		float nx = Mth.clamp((float) dir.x, -1.0F, 1.0F);
 		float ny = Mth.clamp((float) dir.y, -1.0F, 1.0F);
 		float nz = Mth.clamp((float) dir.z, -1.0F, 1.0F);
+		float u0 = 0.0F;
+		float u1 = (float) (start.distanceTo(end) * 8.0D);
 
-		consumer.addVertex((float) s1.x, (float) s1.y, (float) s1.z).setColor(r, g, b, a).setNormal(nx, ny, nz);
-		consumer.addVertex((float) e1.x, (float) e1.y, (float) e1.z).setColor(r, g, b, a).setNormal(nx, ny, nz);
-		consumer.addVertex((float) e2.x, (float) e2.y, (float) e2.z).setColor(r, g, b, a).setNormal(nx, ny, nz);
-		consumer.addVertex((float) s2.x, (float) s2.y, (float) s2.z).setColor(r, g, b, a).setNormal(nx, ny, nz);
+		consumer.addVertex((float) s1.x, (float) s1.y, (float) s1.z).setColor(255, 255, 255, 255).setUv(u0, 0.0F).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(nx, ny, nz);
+		consumer.addVertex((float) e1.x, (float) e1.y, (float) e1.z).setColor(255, 255, 255, 255).setUv(u1, 0.0F).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(nx, ny, nz);
+		consumer.addVertex((float) e2.x, (float) e2.y, (float) e2.z).setColor(255, 255, 255, 255).setUv(u1, 1.0F).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(nx, ny, nz);
+		consumer.addVertex((float) s2.x, (float) s2.y, (float) s2.z).setColor(255, 255, 255, 255).setUv(u0, 1.0F).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(nx, ny, nz);
 	}
 }

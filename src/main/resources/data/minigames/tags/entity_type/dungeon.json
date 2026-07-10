@@ -3,8 +3,10 @@
   "values": [
     "minigames:worshipper",
     "minigames:shield_angel",
+    "minigames:demon",
     "minigames:candlehead",
     "minigames:gravedigger",
-    "minigames:preacher"
+    "minigames:preacher",
+    "minigames:sculkling"
   ]
 }

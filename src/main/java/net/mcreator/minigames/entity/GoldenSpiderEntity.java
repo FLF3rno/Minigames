@@ -36,6 +36,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.procedures.ApplyGlowingProcedure;
+import net.mcreator.minigames.procedures.AddCrownToKillerProcedure;
 
 import javax.annotation.Nullable;
 
@@ -140,6 +141,12 @@ public class GoldenSpiderEntity extends Spider {
 	@Override
 	public boolean ignoreExplosion(Explosion explosion) {
 		return true;
+	}
+
+	@Override
+	public void die(DamageSource source) {
+		super.die(source);
+		AddCrownToKillerProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), source.getEntity());
 	}
 
 	@Override

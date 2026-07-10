@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
+    "minigames:hammer",
     "minigames:blacksmith_hammer",
     "minigames:wind_scythe",
     "minigames:blank_sword",
-    "minigames:volley_bomb"
+    "minigames:volley_bomb",
+    "minigames:human_cannonball",
+    "minigames:plug"
   ]
 }

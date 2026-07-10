@@ -23,6 +23,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
+import net.mcreator.minigames.procedures.ItemPickedUpDungeonProcedure;
 import net.mcreator.minigames.DungeonItemAccess;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -79,6 +80,14 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 						tag -> tag.putDouble("forged", tag.getDoubleOr("forged", 0) + 10));
 			}
 		}
+		ItemPickedUpDungeonProcedure.execute(
+			player.level(),
+    		itemEntity.getX(), 
+    		itemEntity.getY(), 
+    		itemEntity.getZ(), 
+			player,
+    		entityStack
+		);
 
 		int inserted;
 

@@ -27,9 +27,9 @@ public class PassiveHealingProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (MinigamesModVariables.MapVariables.get(world).playingDungeons) {
-			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) >= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) {
-				if (!(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).healCD >= entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealCooldown)) {
+		if (MinigamesModVariables.MapVariables.get(world).playingDungeons && !world.isClientSide()) {
+			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) < (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) {
+				if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).healCD >= entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealCooldown) {
 					{
 						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 						_vars.healCD = 0;

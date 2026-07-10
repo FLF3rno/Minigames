@@ -89,6 +89,16 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> BOSS_DOORS;
 	public static final DeferredBlock<Block> SPAWN_PREACHER;
 	public static final DeferredBlock<Block> SPAWN_DEMON;
+	public static final DeferredBlock<Block> WARRIOR_ITEM_PEDESTAL;
+	public static final DeferredBlock<Block> SUPPORT_ITEM_PEDESTAL;
+	public static final DeferredBlock<Block> THIEF_ITEM_PEDESTAL;
+	public static final DeferredBlock<Block> MAGE_ITEM_PEDESTAL;
+	public static final DeferredBlock<Block> TUFF_PEDESTAL;
+	public static final DeferredBlock<Block> BLANK_PEDESTAL_P_1;
+	public static final DeferredBlock<Block> BLANK_PEDESTAL_P_2;
+	public static final DeferredBlock<Block> BLANK_PEDESTAL_P_3;
+	public static final DeferredBlock<Block> BLANK_PEDESTAL_P_4;
+	public static final DeferredBlock<Block> SPAWN_SCULKLING;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -163,6 +173,16 @@ public class MinigamesModBlocks {
 		BOSS_DOORS = register("boss_doors", BossDoorsBlock::new);
 		SPAWN_PREACHER = register("spawn_preacher", SpawnPreacherBlock::new);
 		SPAWN_DEMON = register("spawn_demon", SpawnDemonBlock::new);
+		WARRIOR_ITEM_PEDESTAL = register("warrior_item_pedestal", WarriorItemPedestalBlock::new);
+		SUPPORT_ITEM_PEDESTAL = register("support_item_pedestal", SupportItemPedestalBlock::new);
+		THIEF_ITEM_PEDESTAL = register("thief_item_pedestal", ThiefItemPedestalBlock::new);
+		MAGE_ITEM_PEDESTAL = register("mage_item_pedestal", MageItemPedestalBlock::new);
+		TUFF_PEDESTAL = register("tuff_pedestal", TuffPedestalBlock::new);
+		BLANK_PEDESTAL_P_1 = register("blank_pedestal_p_1", BlankPedestalP1Block::new);
+		BLANK_PEDESTAL_P_2 = register("blank_pedestal_p_2", BlankPedestalP2Block::new);
+		BLANK_PEDESTAL_P_3 = register("blank_pedestal_p_3", BlankPedestalP3Block::new);
+		BLANK_PEDESTAL_P_4 = register("blank_pedestal_p_4", BlankPedestalP4Block::new);
+		SPAWN_SCULKLING = register("spawn_sculkling", SpawnSculklingBlock::new);
 	}
 
 	// Start of user code block custom blocks

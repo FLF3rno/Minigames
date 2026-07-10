@@ -110,6 +110,10 @@ public class HoveredItemTooltipRenderer {
 		if (loadTime != null && loadTime != 0) {
 			tooltip.add(nextIndex++, Component.literal(formatDamage(loadTime) + "s Load Time").setStyle(Style.EMPTY.withColor(0xFF5555)));
 		}
+		Double attackCooldown = getDisplayedAttackCooldown(stack);
+		if (attackCooldown != null && attackCooldown != 0) {
+			tooltip.add(nextIndex++, Component.literal(formatDamage(attackCooldown) + "s Attack Cooldown").setStyle(Style.EMPTY.withColor(0xFF5555)));
+		}
 		tooltip.add(Component.empty());
 		tooltip.add(Component.literal(classInfo.label()).setStyle(Style.EMPTY.withBold(true).withColor(classInfo.color())));
 		if (isCursed(stack)) {
@@ -592,6 +596,37 @@ public class HoveredItemTooltipRenderer {
 		loadTime *= (1.0 + addMultipliedTotal) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
 		loadTime /= 20;
 		return loadTime;
+	}
+	private static Double getDisplayedAttackCooldown(ItemStack stack) {
+		ItemAttributeModifiers modifiers = stack.getOrDefault(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+		double addValue = 0.0;
+		double addMultipliedBase = 0.0;
+		double addMultipliedTotal = 0.0;
+		double forgedMultiplier = DungeonItemAccess.Forged(stack);
+		double glitchedMultiplier = DungeonItemAccess.Glitched(stack);
+		boolean hasAttackCooldown = false;
+
+		for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
+			if (entry.slot().test(net.minecraft.world.entity.EquipmentSlot.MAINHAND) && entry.attribute().is(MinigamesModAttributes.ATTACK_COOLDOWN)) {
+				hasAttackCooldown = true;
+				double amount = entry.modifier().amount();
+				switch (entry.modifier().operation()) {
+					case ADD_VALUE -> addValue += amount;
+					case ADD_MULTIPLIED_BASE -> addMultipliedBase += amount;
+					case ADD_MULTIPLIED_TOTAL -> addMultipliedTotal += amount;
+				}
+			}
+		}
+
+		if (!hasAttackCooldown) {
+			return null;
+		}
+
+		double attackCooldown = addValue;
+		attackCooldown += attackCooldown * addMultipliedBase;
+		attackCooldown *= (1.0 + addMultipliedTotal) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
+		attackCooldown /= 20;
+		return attackCooldown	;
 	}
 
 	private static String formatDamage(double damage) {

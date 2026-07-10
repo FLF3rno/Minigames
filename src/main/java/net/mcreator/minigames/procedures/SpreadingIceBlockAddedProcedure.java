@@ -47,19 +47,19 @@ public class SpreadingIceBlockAddedProcedure {
 			}
 		});
 		MinigamesMod.queueServerWork(1, () -> {
-			if ((world.getBlockState(BlockPos.containing(x + 1, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
+			if (!(world.getBlockState(BlockPos.containing(x + 1, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:spleef_anti_spread")))) {
 				BlockPos pos = BlockPos.containing(x + 1, y, z);
 				world.setBlock(pos, MinigamesModBlocks.SPREADING_ICE.get().defaultBlockState(), 3);
 			}
-			if ((world.getBlockState(BlockPos.containing(x - 1, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
+			if (!(world.getBlockState(BlockPos.containing(x - 1, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:spleef_anti_spread")))) {
 				BlockPos pos = BlockPos.containing(x - 1, y, z);
 				world.setBlock(pos, MinigamesModBlocks.SPREADING_ICE.get().defaultBlockState(), 3);
 			}
-			if ((world.getBlockState(BlockPos.containing(x, y, z + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
+			if (!(world.getBlockState(BlockPos.containing(x, y, z + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:spleef_anti_spread")))) {
 				BlockPos pos = BlockPos.containing(x, y, z + 1);
 				world.setBlock(pos, MinigamesModBlocks.SPREADING_ICE.get().defaultBlockState(), 3);
 			}
-			if ((world.getBlockState(BlockPos.containing(x, y, z - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:spleefables")))) {
+			if (!(world.getBlockState(BlockPos.containing(x, y, z - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:spleef_anti_spread")))) {
 				BlockPos pos = BlockPos.containing(x, y, z - 1);
 				world.setBlock(pos, MinigamesModBlocks.SPREADING_ICE.get().defaultBlockState(), 3);
 			}

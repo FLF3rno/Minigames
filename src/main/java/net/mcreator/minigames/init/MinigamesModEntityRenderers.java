@@ -39,5 +39,7 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.VOLLEYBOMB_ENTITY.get(), VolleybombEntityRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.PLAGUE_MIDDLE.get(), PlagueMiddleRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.BLESSED_ARROW.get(), BlessedArrowRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.DEMON.get(), DemonRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.SCULKLING.get(), SculklingRenderer::new);
 	}
 }

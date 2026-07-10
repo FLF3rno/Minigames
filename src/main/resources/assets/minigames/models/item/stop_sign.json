@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "minigames:item/weapon_stop_sign"
+  }
+}

@@ -121,6 +121,9 @@
       "value": ""
     },
     "entityDataEntries": [],
+    "whenMobDies": {
+      "name": "AddCrownToKiller"
+    },
     "onInitialSpawn": {
       "name": "ApplyGlowing"
     },

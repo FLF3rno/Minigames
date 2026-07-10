@@ -29,42 +29,42 @@ public class ManageCountdownProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
-		if (!(MinigamesModVariables.MapVariables.get(world).gameSeconds == 0 && MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameHours == 0)) {
-			if (MinigamesModVariables.MapVariables.get(world).ShowCrownTimer == true) {
-				if (MinigamesModVariables.MapVariables.get(world).MoveCrownTimer == true) {
-					MinigamesModVariables.MapVariables.get(world).gameTick = MinigamesModVariables.MapVariables.get(world).gameTick - 1;
-					if (MinigamesModVariables.MapVariables.get(world).gameTick < 0) {
-						MinigamesModVariables.MapVariables.get(world).gameSeconds = MinigamesModVariables.MapVariables.get(world).gameSeconds - 1;
-						MinigamesModVariables.MapVariables.get(world).gameTick = 59;
+		if (!world.isClientSide()) {
+			if (!(MinigamesModVariables.MapVariables.get(world).gameSeconds == 0 && MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameHours == 0)) {
+				if (MinigamesModVariables.MapVariables.get(world).ShowCrownTimer == true) {
+					if (MinigamesModVariables.MapVariables.get(world).MoveCrownTimer == true) {
+						MinigamesModVariables.MapVariables.get(world).gameTick = MinigamesModVariables.MapVariables.get(world).gameTick - 1;
 						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-						if ((MinigamesModVariables.MapVariables.get(world).gameSeconds == 0 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 2 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 4
-								|| MinigamesModVariables.MapVariables.get(world).gameSeconds == 6 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 8 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 10)
-								&& MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameHours == 0) {
-							if (!MinigamesModVariables.MapVariables.get(world).inGracePeriod) {
-								if (world instanceof ServerLevel _level)
-									_level.getServer().getCommands().performPrefixedCommand(
-											new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-											"/playsound minigames:clock player @a ~ ~ ~ 1000000 1");
-								MinigamesModVariables.MapVariables.get(world).showRedTimer = true;
+						if (MinigamesModVariables.MapVariables.get(world).gameTick < 0) {
+							MinigamesModVariables.MapVariables.get(world).gameSeconds = MinigamesModVariables.MapVariables.get(world).gameSeconds - 1;
+							MinigamesModVariables.MapVariables.get(world).gameTick = 99;
+							MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+							if ((MinigamesModVariables.MapVariables.get(world).gameSeconds == 0 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 2 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 4
+									|| MinigamesModVariables.MapVariables.get(world).gameSeconds == 6 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 8 || MinigamesModVariables.MapVariables.get(world).gameSeconds == 10)
+									&& MinigamesModVariables.MapVariables.get(world).gameMinutes == 0 && MinigamesModVariables.MapVariables.get(world).gameHours == 0) {
+								if (!MinigamesModVariables.MapVariables.get(world).inGracePeriod) {
+									if (world instanceof ServerLevel _level)
+										_level.getServer().getCommands().performPrefixedCommand(
+												new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+												"/playsound minigames:clock player @a ~ ~ ~ 1000000 1");
+									MinigamesModVariables.MapVariables.get(world).showRedTimer = true;
+									MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+								}
+							} else {
+								MinigamesModVariables.MapVariables.get(world).showRedTimer = false;
 								MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 							}
-						} else {
-							MinigamesModVariables.MapVariables.get(world).showRedTimer = false;
+						}
+						if (MinigamesModVariables.MapVariables.get(world).gameSeconds < 0) {
+							MinigamesModVariables.MapVariables.get(world).gameMinutes = MinigamesModVariables.MapVariables.get(world).gameMinutes - 1;
+							MinigamesModVariables.MapVariables.get(world).gameSeconds = 59;
 							MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 						}
-					}
-					if (MinigamesModVariables.MapVariables.get(world).gameSeconds < 0) {
-						MinigamesModVariables.MapVariables.get(world).gameMinutes = MinigamesModVariables.MapVariables.get(world).gameMinutes - 1;
-						MinigamesModVariables.MapVariables.get(world).gameSeconds = 59;
-						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-					}
-					if (MinigamesModVariables.MapVariables.get(world).gameMinutes < 0) {
-						MinigamesModVariables.MapVariables.get(world).gameHours = MinigamesModVariables.MapVariables.get(world).gameHours - 1;
-						MinigamesModVariables.MapVariables.get(world).gameMinutes = 59;
-						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-					}
-					if (MinigamesModVariables.MapVariables.get(world).gameTick == 59) {
-						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+						if (MinigamesModVariables.MapVariables.get(world).gameMinutes < 0) {
+							MinigamesModVariables.MapVariables.get(world).gameHours = MinigamesModVariables.MapVariables.get(world).gameHours - 1;
+							MinigamesModVariables.MapVariables.get(world).gameMinutes = 59;
+							MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+						}
 					}
 				}
 			}

@@ -12,7 +12,7 @@ import net.minecraft.commands.CommandSource;
 import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
-public class StopSpleefProcedure {
+	public class StopSpleefProcedure {
 	public static void execute(LevelAccessor world) {
 		String firstUuid = MinigamesModVariables.firstSpleef != null ? MinigamesModVariables.firstSpleef.getStringUUID() : "";
 		String secondUuid = MinigamesModVariables.secondSpleef != null ? MinigamesModVariables.secondSpleef.getStringUUID() : "";

@@ -7,11 +7,13 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
+import net.minecraft.world.effect.MobEffect;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 import javax.annotation.Nullable;
 
@@ -32,30 +34,7 @@ public class RemoveAllEffectsButCrownedProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).removeEffects) {
 			MinigamesModVariables.MapVariables.get(world).removeEffects = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned) {
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect clear @s");
-					}
-				}
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect give @s minigames:crowned infinite 1 true");
-					}
-				}
-			} else {
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect clear @s");
-					}
-				}
-			}
+			clearAllEffects(entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned);
 		}
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).removeEffectsSingleTarget) {
 			{
@@ -63,30 +42,26 @@ public class RemoveAllEffectsButCrownedProcedure {
 				_vars.removeEffectsSingleTarget = false;
 				_vars.markSyncDirty();
 			}
-			if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned) {
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect clear @s");
-					}
-				}
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect give @s minigames:crowned infinite 1 true");
-					}
-				}
-			} else {
-				{
-					Entity _ent = entity;
-					if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-						_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
-								_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect clear @s");
-					}
-				}
+			clearAllEffects(entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned);
+		}
+	}
+
+	private static void clearAllEffects(Entity entity, boolean keepCrowned) {
+		if (!(entity instanceof LivingEntity livingEntity))
+			return;
+		if (livingEntity.level().isClientSide())
+			return;
+
+		java.util.ArrayList<Holder<MobEffect>> effectsToRemove = new java.util.ArrayList<>(livingEntity.getActiveEffectsMap().keySet());
+		for (Holder<MobEffect> effect : effectsToRemove) {
+			if (keepCrowned && effect.is(MinigamesModMobEffects.CROWNED)) {
+				continue;
 			}
+			livingEntity.removeEffect(effect);
+		}
+
+		if (keepCrowned && !livingEntity.hasEffect(MinigamesModMobEffects.CROWNED)) {
+			livingEntity.addEffect(new net.minecraft.world.effect.MobEffectInstance(MinigamesModMobEffects.CROWNED, 1000000000, 0, false, false, true));
 		}
 	}
 }

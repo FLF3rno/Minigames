@@ -31,7 +31,8 @@ public class SkyboxProcedure {
 		if (skyRenderEvent == null)
 			return;
 		if ((MinigamesModVariables.MapVariables.get(world).sky).equals("normal")) {
-			return;
+			RenderUtils.swapVanillaTexture(RenderUtils.SUN_LOCATION, RenderUtils.SUN_LOCATION);
+			RenderUtils.swapVanillaTexture(RenderUtils.MOON_LOCATION, RenderUtils.MOON_LOCATION);
 		} else if ((MinigamesModVariables.MapVariables.get(world).sky).equals("space")) {
 			RenderUtils.renderCustomSkybox(skyRenderEvent, ResourceLocation.parse("minigames:textures/sky/space.png"), 0xffffff, Math.min(1, 1));
 		}

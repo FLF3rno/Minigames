@@ -129,8 +129,8 @@ public class RenderCrownOnPlayerProcedure {
 	private static void execute(@Nullable Event event, Entity entity, RenderPlayerEvent playerRenderEvent) {
 		if (entity == null || playerRenderEvent == null)
 			return;
-		if (entity.getData(
-				MinigamesModVariables.PLAYER_VARIABLES).isCrowned == !((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get())) {
+		boolean hasCrownHelmet = (entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get();
+		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned && !hasCrownHelmet) {
 			{
 				ResourceLocation texture = MinigamesModVariables.crown;
 				renderHumanoid(playerRenderEvent, MinigamesModHumanoidModels.CROWN, playerRenderEvent.getMultiBufferSource().getBuffer(RenderType.armorCutoutNoCull(texture)), playerRenderEvent.getRenderState());

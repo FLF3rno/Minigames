@@ -45,6 +45,10 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LootDoorsBlockEntity>> LOOT_DOORS = register("loot_doors", MinigamesModBlocks.LOOT_DOORS, LootDoorsBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MinibossDoorsBlockEntity>> MINIBOSS_DOORS = register("miniboss_doors", MinigamesModBlocks.MINIBOSS_DOORS, MinibossDoorsBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BossDoorsBlockEntity>> BOSS_DOORS = register("boss_doors", MinigamesModBlocks.BOSS_DOORS, BossDoorsBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WarriorItemPedestalBlockEntity>> WARRIOR_ITEM_PEDESTAL = register("warrior_item_pedestal", MinigamesModBlocks.WARRIOR_ITEM_PEDESTAL, WarriorItemPedestalBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SupportItemPedestalBlockEntity>> SUPPORT_ITEM_PEDESTAL = register("support_item_pedestal", MinigamesModBlocks.SUPPORT_ITEM_PEDESTAL, SupportItemPedestalBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThiefItemPedestalBlockEntity>> THIEF_ITEM_PEDESTAL = register("thief_item_pedestal", MinigamesModBlocks.THIEF_ITEM_PEDESTAL, ThiefItemPedestalBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MageItemPedestalBlockEntity>> MAGE_ITEM_PEDESTAL = register("mage_item_pedestal", MinigamesModBlocks.MAGE_ITEM_PEDESTAL, MageItemPedestalBlockEntity::new);
 	// Start of user code block custom block entities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpreadingIceBlockEntity>> SPREADING_ICE = register("spreading_ice", MinigamesModBlocks.SPREADING_ICE, SpreadingIceBlockEntity::new);
 
@@ -78,5 +82,9 @@ public class MinigamesModBlockEntities {
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, LOOT_DOORS.get(), SidedInvWrapper::new);
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, MINIBOSS_DOORS.get(), SidedInvWrapper::new);
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BOSS_DOORS.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, WARRIOR_ITEM_PEDESTAL.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SUPPORT_ITEM_PEDESTAL.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, THIEF_ITEM_PEDESTAL.get(), SidedInvWrapper::new);
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, MAGE_ITEM_PEDESTAL.get(), SidedInvWrapper::new);
 	}
 }

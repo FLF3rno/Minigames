@@ -89,6 +89,14 @@ public class MinigamesModEntities {
 			EntityType.Builder.<PlagueMiddleEntity>of(PlagueMiddleEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.1f, 0.1f));
 	public static final DeferredHolder<EntityType<?>, EntityType<BlessedArrowEntity>> BLESSED_ARROW = register("blessed_arrow",
 			EntityType.Builder.<BlessedArrowEntity>of(BlessedArrowEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<DemonEntity>> DEMON = register("demon",
+			EntityType.Builder.<DemonEntity>of(DemonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
+
+					.sized(1.8f, 2.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<SculklingEntity>> SCULKLING = register("sculkling",
+			EntityType.Builder.<SculklingEntity>of(SculklingEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
+
+					.sized(0.7f, 0.9f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities
@@ -113,6 +121,8 @@ public class MinigamesModEntities {
 		PreacherEntity.init(event);
 		VolleybombEntityEntity.init(event);
 		PlagueMiddleEntity.init(event);
+		DemonEntity.init(event);
+		SculklingEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -132,5 +142,7 @@ public class MinigamesModEntities {
 		event.put(PREACHER.get(), PreacherEntity.createAttributes().build());
 		event.put(VOLLEYBOMB_ENTITY.get(), VolleybombEntityEntity.createAttributes().build());
 		event.put(PLAGUE_MIDDLE.get(), PlagueMiddleEntity.createAttributes().build());
+		event.put(DEMON.get(), DemonEntity.createAttributes().build());
+		event.put(SCULKLING.get(), SculklingEntity.createAttributes().build());
 	}
 }

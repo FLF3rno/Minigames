@@ -596,5 +596,22 @@
         "stream": false
       }
     ]
+  },
+  "zap": {
+    "subtitle": "subtitles.zap",
+    "sounds": [
+      {
+        "name": "minigames:zap3",
+        "stream": false
+      },
+      {
+        "name": "minigames:zap2",
+        "stream": false
+      },
+      {
+        "name": "minigames:zap1",
+        "stream": false
+      }
+    ]
   }
 }

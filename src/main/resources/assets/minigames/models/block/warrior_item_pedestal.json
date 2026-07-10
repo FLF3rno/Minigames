@@ -1,0 +1,9 @@
+{
+  "parent": "minigames:custom/pedestal",
+  "textures": {
+    "all": "minigames:block/warriorpedestal",
+    "particle": "minigames:block/warriorpedestal",
+    "0": "minigames:block/warriorpedestal"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "minigames:custom/pedestal",
+  "textures": {
+    "all": "minecraft:block/tuff",
+    "particle": "minecraft:block/tuff",
+    "0": "minecraft:block/tuff"
+  },
+  "render_type": "solid"
+}

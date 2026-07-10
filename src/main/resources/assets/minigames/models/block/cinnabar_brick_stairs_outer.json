@@ -5,6 +5,5 @@
     "bottom": "minigames:block/26.2_cinnabar_bricks",
     "top": "minigames:block/26.2_cinnabar_bricks",
     "side": "minigames:block/26.2_cinnabar_bricks"
-  },
-  "render_type": "solid"
+  }
 }

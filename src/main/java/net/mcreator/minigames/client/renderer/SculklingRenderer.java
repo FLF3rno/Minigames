@@ -1,6 +1,12 @@
 package net.mcreator.minigames.client.renderer;
 
-import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+
+import net.minecraft.util.context.ContextKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -11,8 +17,7 @@ import net.mcreator.minigames.client.model.Modelsculklings;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 public class SculklingRenderer extends MobRenderer<SculklingEntity, LivingEntityRenderState, Modelsculklings> {
-	private SculklingEntity entity = null;
-	private final ResourceLocation entityTexture = ResourceLocation.parse("minigames:textures/entities/sculkings.png");
+	private final Identifier entityTexture = Identifier.parse("minigames:textures/entities/sculkings.png");
 
 	public SculklingRenderer(EntityRendererProvider.Context context) {
 		super(context, new Modelsculklings(context.bakeLayer(Modelsculklings.LAYER_LOCATION)), 0.4f);
@@ -26,18 +31,28 @@ public class SculklingRenderer extends MobRenderer<SculklingEntity, LivingEntity
 	@Override
 	public void extractRenderState(SculklingEntity entity, LivingEntityRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
-		this.entity = entity;
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(LivingEntityRenderState state) {
+	public Identifier getTextureLocation(LivingEntityRenderState state) {
+		SculklingEntity entity = (SculklingEntity) state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "sculkings")
-			return ResourceLocation.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
+			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;
 	}
 
 	@Override
 	protected void scale(LivingEntityRenderState state, PoseStack poseStack) {
 		poseStack.scale(0.8f, 0.8f, 0.8f);
+	}
+
+	public static final ContextKey<SculklingEntity> ENTITY_KEY = new ContextKey<>(Identifier.parse("minigames:sculkling_entity"));
+
+	@EventBusSubscriber(Dist.CLIENT)
+	public static class EntityStateAdder {
+		@SubscribeEvent
+		private static void registerRenderStateModifiersEvent(RegisterRenderStateModifiersEvent event) {
+			event.registerEntityModifier(SculklingRenderer.class, (entity, state) -> state.setRenderData(ENTITY_KEY, entity));
+		}
 	}
 }

@@ -1,13 +1,20 @@
 package net.mcreator.minigames.client.renderer;
 
-import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
+
+import net.minecraft.util.context.ContextKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.Minecraft;
 
@@ -15,24 +22,22 @@ import net.mcreator.minigames.entity.VolleybombEntityEntity;
 import net.mcreator.minigames.client.model.Modelvolleybomb;
 import net.mcreator.minigames.client.model.Modelpewseat;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 public class VolleybombEntityRenderer extends MobRenderer<VolleybombEntityEntity, LivingEntityRenderState, Modelpewseat> {
-	private VolleybombEntityEntity entity = null;
-	private final ResourceLocation entityTexture = ResourceLocation.parse("minigames:textures/entities/empty.png");
+	private final Identifier entityTexture = Identifier.parse("minigames:textures/entities/empty.png");
 
 	public VolleybombEntityRenderer(EntityRendererProvider.Context context) {
 		super(context, new Modelpewseat(context.bakeLayer(Modelpewseat.LAYER_LOCATION)), 0.5f);
 		this.addLayer(new RenderLayer<>(this) {
-			final ResourceLocation LAYER_TEXTURE = ResourceLocation.parse("minigames:textures/entities/volleybomb.png");
+			final Identifier LAYER_TEXTURE = Identifier.parse("minigames:textures/entities/volleybomb.png");
+			final RenderType RENDER_TYPE = RenderTypes.entityCutout(LAYER_TEXTURE);
 
 			@Override
-			public void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
-				VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(LAYER_TEXTURE));
+			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
 				EntityModel model = new Modelvolleybomb(Minecraft.getInstance().getEntityModels().bakeLayer(Modelvolleybomb.LAYER_LOCATION));
 				model.setupAnim(state);
-				model.renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY);
+				submitNodeCollector.submitModel(model, state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
 			}
 		});
 	}
@@ -45,18 +50,28 @@ public class VolleybombEntityRenderer extends MobRenderer<VolleybombEntityEntity
 	@Override
 	public void extractRenderState(VolleybombEntityEntity entity, LivingEntityRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
-		this.entity = entity;
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(LivingEntityRenderState state) {
+	public Identifier getTextureLocation(LivingEntityRenderState state) {
+		VolleybombEntityEntity entity = (VolleybombEntityEntity) state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "empty")
-			return ResourceLocation.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
+			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;
 	}
 
 	@Override
 	protected void scale(LivingEntityRenderState state, PoseStack poseStack) {
 		poseStack.scale(0.9f, 0.9f, 0.9f);
+	}
+
+	public static final ContextKey<VolleybombEntityEntity> ENTITY_KEY = new ContextKey<>(Identifier.parse("minigames:volleybomb_entity_entity"));
+
+	@EventBusSubscriber(Dist.CLIENT)
+	public static class EntityStateAdder {
+		@SubscribeEvent
+		private static void registerRenderStateModifiersEvent(RegisterRenderStateModifiersEvent event) {
+			event.registerEntityModifier(VolleybombEntityRenderer.class, (entity, state) -> state.setRenderData(ENTITY_KEY, entity));
+		}
 	}
 }

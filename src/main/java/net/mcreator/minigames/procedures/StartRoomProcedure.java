@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -21,7 +22,7 @@ public class StartRoomProcedure {
 			_level.getServer().getCommands()
 					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
 							new Vec3((MinigamesModVariables.MapVariables.get(world).DoorOffset.x()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.z())), Vec2.ZERO, _level,
-							4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "execute in minigames:dungeon_dimension run tp @a ~ ~ ~");
+							LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "execute in minigames:dungeon_dimension run tp @a ~ ~ ~");
 		MinigamesMod.queueServerWork(3, () -> {
 			MinigamesModVariables.MapVariables.get(world).startingEnemies = MinigamesModVariables.MapVariables.get(world).aliveEnemies;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();

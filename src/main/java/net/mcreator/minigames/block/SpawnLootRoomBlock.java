@@ -40,7 +40,10 @@ public class SpawnLootRoomBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(CLOCKWISE, false).setValue(ANTICLOCKWISE, false).setValue(FLIPPED, false).setValue(STRUCTURE, false);
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(CLOCKWISE, false).setValue(ANTICLOCKWISE, false).setValue(FLIPPED, false).setValue(STRUCTURE, false);
 	}
 
 	@Override

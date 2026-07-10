@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
@@ -56,13 +57,15 @@ public class ExplodeProcedure {
 			if (world instanceof ServerLevel _level)
 				_level.sendParticles(ParticleTypes.WHITE_SMOKE, x, y, z, (int) (ExplosionSize * 15), (ExplosionSize / 5), (ExplosionSize / 5), (ExplosionSize / 5), 0.3);
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.8 0.8");
 		} else if ((type).equals("red")) {
 			if (world instanceof ServerLevel _level)
 				_level.sendParticles((SimpleParticleType) (MinigamesModParticleTypes.RED_EXPLOSION.get()), x, y, z, (int) (ExplosionSize * 10), (ExplosionSize / 5), (ExplosionSize / 5), (ExplosionSize / 5), 0.1);
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/playsound minigames:red_explosion player @a ~ ~ ~ 0.4 1");
 		}
 		{
@@ -70,29 +73,50 @@ public class ExplodeProcedure {
 			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(ExplosionSize / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 				if (origin == entityiterator) {
 					if (!ownerImmune) {
-						entityiterator.hurt(new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)), (float) (damage * (1 - Math.min(20, Math.max(
-								(entityiterator instanceof LivingEntity _livingEntity7 && _livingEntity7.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity7.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-								(entityiterator instanceof LivingEntity _livingEntity8 && _livingEntity8.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity8.getAttribute(Attributes.ARMOR).getValue() : 0) - (4 * damage)
-										/ ((entityiterator instanceof LivingEntity _livingEntity9 && _livingEntity9.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS) ? _livingEntity9.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() : 0)
-												+ 8)))
-								/ 25)));
+						{
+							Entity _ent = entityiterator;
+							if (_ent.level() instanceof ServerLevel _serverLevel) {
+								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
+										(float) (damage * (1 - Math.min(20,
+												Math.max((entityiterator instanceof LivingEntity _livingEntity7 && _livingEntity7.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity7.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+														(entityiterator instanceof LivingEntity _livingEntity8 && _livingEntity8.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity8.getAttribute(Attributes.ARMOR).getValue() : 0)
+																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity9 && _livingEntity9.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																		? _livingEntity9.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																		: 0) + 8)))
+												/ 25)));
+							}
+						}
 					}
 				} else if (entityiterator instanceof ServerPlayer || entityiterator instanceof Player) {
 					if (canDamagePlayers) {
-						entityiterator.hurt(new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)), (float) (damage * (1 - Math.min(20, Math.max(
-								(entityiterator instanceof LivingEntity _livingEntity14 && _livingEntity14.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity14.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-								(entityiterator instanceof LivingEntity _livingEntity15 && _livingEntity15.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity15.getAttribute(Attributes.ARMOR).getValue() : 0) - (4 * damage)
-										/ ((entityiterator instanceof LivingEntity _livingEntity16 && _livingEntity16.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS) ? _livingEntity16.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() : 0)
-												+ 8)))
-								/ 25)));
+						{
+							Entity _ent = entityiterator;
+							if (_ent.level() instanceof ServerLevel _serverLevel) {
+								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
+										(float) (damage * (1 - Math.min(20,
+												Math.max((entityiterator instanceof LivingEntity _livingEntity14 && _livingEntity14.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity14.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+														(entityiterator instanceof LivingEntity _livingEntity15 && _livingEntity15.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity15.getAttribute(Attributes.ARMOR).getValue() : 0)
+																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity16 && _livingEntity16.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																		? _livingEntity16.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																		: 0) + 8)))
+												/ 25)));
+							}
+						}
 					}
 				} else {
-					entityiterator.hurt(new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)), (float) (damage * (1 - Math.min(20, Math.max(
-							(entityiterator instanceof LivingEntity _livingEntity19 && _livingEntity19.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity19.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-							(entityiterator instanceof LivingEntity _livingEntity20 && _livingEntity20.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity20.getAttribute(Attributes.ARMOR).getValue() : 0) - (4 * damage)
-									/ ((entityiterator instanceof LivingEntity _livingEntity21 && _livingEntity21.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS) ? _livingEntity21.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() : 0)
-											+ 8)))
-							/ 25)));
+					{
+						Entity _ent = entityiterator;
+						if (_ent.level() instanceof ServerLevel _serverLevel) {
+							_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
+									(float) (damage * (1 - Math.min(20,
+											Math.max((entityiterator instanceof LivingEntity _livingEntity19 && _livingEntity19.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity19.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+													(entityiterator instanceof LivingEntity _livingEntity20 && _livingEntity20.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity20.getAttribute(Attributes.ARMOR).getValue() : 0)
+															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity21 && _livingEntity21.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																	? _livingEntity21.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																	: 0) + 8)))
+											/ 25)));
+						}
+					}
 				}
 			}
 		}

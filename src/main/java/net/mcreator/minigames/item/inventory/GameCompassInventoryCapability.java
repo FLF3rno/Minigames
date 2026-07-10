@@ -1,22 +1,20 @@
 package net.mcreator.minigames.item.inventory;
 
-import net.neoforged.neoforge.items.ComponentItemHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemAccessItemHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
-import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.component.DataComponents;
 
 import net.mcreator.minigames.world.inventory.StartGameMenu;
 import net.mcreator.minigames.init.MinigamesModItems;
 
-import javax.annotation.Nonnull;
-
 @EventBusSubscriber
-public class GameCompassInventoryCapability extends ComponentItemHandler {
+public class GameCompassInventoryCapability extends ItemAccessItemHandler {
 	@SubscribeEvent
 	public static void onItemDropped(ItemTossEvent event) {
 		if (event.getEntity().getItem().getItem() == MinigamesModItems.GAME_COMPASS.get()) {
@@ -26,17 +24,12 @@ public class GameCompassInventoryCapability extends ComponentItemHandler {
 		}
 	}
 
-	public GameCompassInventoryCapability(MutableDataComponentHolder parent) {
-		super(parent, DataComponents.CONTAINER, 9);
+	public GameCompassInventoryCapability(ItemAccess access) {
+		super(access, DataComponents.CONTAINER, 9);
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-		return stack.getItem() != MinigamesModItems.GAME_COMPASS.get();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return super.getStackInSlot(slot).copy();
+	public boolean isValid(int index, ItemResource resource) {
+		return super.isValid(index, resource) && resource.getItem() != MinigamesModItems.GAME_COMPASS.get();
 	}
 }

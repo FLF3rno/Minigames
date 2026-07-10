@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/26.2_cinnabar_bricks",
     "particle": "minigames:block/26.2_cinnabar_bricks"
-  },
-  "render_type": "solid"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -40,9 +40,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameWhite"
-          },
+          "displayCondition": "IsNameWhite",
           "x": 64,
           "y": 162,
           "locked": false
@@ -61,9 +59,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameAqua"
-          },
+          "displayCondition": "IsNameAqua",
           "x": 64,
           "y": 162,
           "locked": false
@@ -82,9 +78,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameBlue"
-          },
+          "displayCondition": "IsNameBlue",
           "x": 64,
           "y": 162,
           "locked": false
@@ -103,9 +97,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameDarkAqua"
-          },
+          "displayCondition": "IsNameDarkAqua",
           "x": 64,
           "y": 162,
           "locked": false
@@ -124,9 +116,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameDarkBlue"
-          },
+          "displayCondition": "IsNameDarkBlue",
           "x": 64,
           "y": 162,
           "locked": false
@@ -145,9 +135,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameDarkGreen"
-          },
+          "displayCondition": "IsNameDarkGreen",
           "x": 64,
           "y": 162,
           "locked": false
@@ -166,9 +154,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameDarkPurple"
-          },
+          "displayCondition": "IsNameDarkPurple",
           "x": 64,
           "y": 162,
           "locked": false
@@ -187,9 +173,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameDarkRed"
-          },
+          "displayCondition": "IsNameDarkRed",
           "x": 64,
           "y": 162,
           "locked": false
@@ -208,9 +192,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameGold"
-          },
+          "displayCondition": "IsNameGold",
           "x": 64,
           "y": 162,
           "locked": false
@@ -229,9 +211,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameGreen"
-          },
+          "displayCondition": "IsNameGreen",
           "x": 64,
           "y": 162,
           "locked": false
@@ -250,9 +230,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameLightPurple"
-          },
+          "displayCondition": "IsNameLightPurple",
           "x": 64,
           "y": 162,
           "locked": false
@@ -271,9 +249,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameRed"
-          },
+          "displayCondition": "IsNameRed",
           "x": 64,
           "y": 162,
           "locked": false
@@ -292,9 +268,7 @@
             "falpha": 0.0
           },
           "hasShadow": false,
-          "displayCondition": {
-            "name": "IsNameYellow"
-          },
+          "displayCondition": "IsNameYellow",
           "x": 64,
           "y": 162,
           "locked": false
@@ -475,12 +449,8 @@
           "name": "imagebutton_colorbutton",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameWhite"
-          },
-          "displayCondition": {
-            "name": "IsNameNotWhite"
-          },
+          "onClick": "SetNameWhite",
+          "displayCondition": "IsNameNotWhite",
           "x": 73,
           "y": 110,
           "locked": false
@@ -492,12 +462,8 @@
           "name": "imagebutton_colorbutton1",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameAqua"
-          },
-          "displayCondition": {
-            "name": "IsNameNotAqua"
-          },
+          "onClick": "SetNameAqua",
+          "displayCondition": "IsNameNotAqua",
           "x": 118,
           "y": 93,
           "locked": false
@@ -509,12 +475,8 @@
           "name": "imagebutton_colorbutton2",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameDarkAqua"
-          },
-          "displayCondition": {
-            "name": "IsNameNotDarkAqua"
-          },
+          "onClick": "SetNameDarkAqua",
+          "displayCondition": "IsNameNotDarkAqua",
           "x": 158,
           "y": 93,
           "locked": false
@@ -526,12 +488,8 @@
           "name": "imagebutton_colorbutton3",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameBlue"
-          },
-          "displayCondition": {
-            "name": "IsNameNotBlue"
-          },
+          "onClick": "SetNameBlue",
+          "displayCondition": "IsNameNotBlue",
           "x": 197,
           "y": 93,
           "locked": false
@@ -543,12 +501,8 @@
           "name": "imagebutton_colorbutton4",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameDarkBlue"
-          },
-          "displayCondition": {
-            "name": "IsNameNotDarkBlue"
-          },
+          "onClick": "SetNameDarkBlue",
+          "displayCondition": "IsNameNotDarkBlue",
           "x": 239,
           "y": 93,
           "locked": false
@@ -560,12 +514,8 @@
           "name": "imagebutton_colorbutton5",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameGreen"
-          },
-          "displayCondition": {
-            "name": "IsNameNotGreen"
-          },
+          "onClick": "SetNameGreen",
+          "displayCondition": "IsNameNotGreen",
           "x": 281,
           "y": 93,
           "locked": false
@@ -577,12 +527,8 @@
           "name": "imagebutton_colorbutton6",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameDarkGreen"
-          },
-          "displayCondition": {
-            "name": "IsNameNotDarkGreen"
-          },
+          "onClick": "SetNameDarkGreen",
+          "displayCondition": "IsNameNotDarkGreen",
           "x": 322,
           "y": 93,
           "locked": false
@@ -594,12 +540,8 @@
           "name": "imagebutton_colorbutton7",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameLightPurple"
-          },
-          "displayCondition": {
-            "name": "IsNameNotLightPurple"
-          },
+          "onClick": "SetNameLightPurple",
+          "displayCondition": "IsNameNotLightPurple",
           "x": 118,
           "y": 127,
           "locked": false
@@ -611,12 +553,8 @@
           "name": "imagebutton_colorbutton8",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameDarkPurple"
-          },
-          "displayCondition": {
-            "name": "IsNameNotDarkPurple"
-          },
+          "onClick": "SetNameDarkPurple",
+          "displayCondition": "IsNameNotDarkPurple",
           "x": 158,
           "y": 127,
           "locked": false
@@ -628,12 +566,8 @@
           "name": "imagebutton_colorbutton9",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameRed"
-          },
-          "displayCondition": {
-            "name": "IsNameNotRed"
-          },
+          "onClick": "SetNameRed",
+          "displayCondition": "IsNameNotRed",
           "x": 197,
           "y": 127,
           "locked": false
@@ -645,12 +579,8 @@
           "name": "imagebutton_colorbutton10",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameDarkRed"
-          },
-          "displayCondition": {
-            "name": "IsNameNotDarkRed"
-          },
+          "onClick": "SetNameDarkRed",
+          "displayCondition": "IsNameNotDarkRed",
           "x": 239,
           "y": 127,
           "locked": false
@@ -662,12 +592,8 @@
           "name": "imagebutton_colorbutton11",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameYellow"
-          },
-          "displayCondition": {
-            "name": "IsNameNotYellow"
-          },
+          "onClick": "SetNameYellow",
+          "displayCondition": "IsNameNotYellow",
           "x": 281,
           "y": 127,
           "locked": false
@@ -679,12 +605,8 @@
           "name": "imagebutton_colorbutton12",
           "image": "colorbutton.png",
           "hoveredImage": "colorhover.png",
-          "onClick": {
-            "name": "SetNameGold"
-          },
-          "displayCondition": {
-            "name": "IsNameNotGold"
-          },
+          "onClick": "SetNameGold",
+          "displayCondition": "IsNameNotGold",
           "x": 322,
           "y": 127,
           "locked": false
@@ -726,9 +648,7 @@
           "name": "imagebutton_compass_16",
           "image": "compass_16.png",
           "hoveredImage": "selectedgamecompass.png",
-          "onClick": {
-            "name": "GoBack"
-          },
+          "onClick": "GoBack",
           "x": 64,
           "y": 177,
           "locked": false

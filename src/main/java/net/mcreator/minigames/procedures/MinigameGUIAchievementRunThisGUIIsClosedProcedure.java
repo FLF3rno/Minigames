@@ -1,14 +1,13 @@
 package net.mcreator.minigames.procedures;
 
-import org.checkerframework.checker.units.qual.s;
-
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -31,30 +30,24 @@ public class MinigameGUIAchievementRunThisGUIIsClosedProcedure {
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"effect clear @a night_vision");
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "effect clear @a night_vision");
 			MinigamesModVariables.MapVariables.get(world).nightVision = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}
 		if (((entity instanceof Player _entity4 && _entity4.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu4) && _menu4.getMenuState(1, "keepinventory", false)) == true) {
 			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _worldorig = world;
-				world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-				if (world != null) {
-					if (world instanceof ServerLevel _serverLevel)
-						_serverLevel.getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(true, world.getServer());
+				LevelAccessor _switchworld6 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+				if (_switchworld6 != null) {
+					worldSwitch6(world, x, y, z, entity);
 				}
-				world = _worldorig;
 			}
 		} else {
 			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _worldorig = world;
-				world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-				if (world != null) {
-					if (world instanceof ServerLevel _serverLevel)
-						_serverLevel.getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(false, world.getServer());
+				LevelAccessor _switchworld8 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+				if (_switchworld8 != null) {
+					worldSwitch8(world, x, y, z, entity);
 				}
-				world = _worldorig;
 			}
 		}
 		if (((entity instanceof Player _entity9 && _entity9.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu9) && _menu9.getMenuState(1, "minimap", false)) == true) {
@@ -100,6 +93,16 @@ public class MinigameGUIAchievementRunThisGUIIsClosedProcedure {
 		} else {
 			StartVoteProcedure.execute(world, entity, entity, "achievement run");
 		}
+	}
+
+	private static void worldSwitch6(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.KEEP_INVENTORY, true, world.getServer());
+	}
+
+	private static void worldSwitch8(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.KEEP_INVENTORY, false, world.getServer());
 	}
 
 	private static double parseDouble(String s) {

@@ -1,11 +1,9 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "tab",
   "definition": {
     "name": "26.2 Blocks",
-    "icon": {
-      "value": "CUSTOM:SulfurBlock"
-    },
+    "icon": "CUSTOM:SulfurBlock",
     "showSearch": false
   }
 }

@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Hypnotized",
@@ -8,17 +8,13 @@
       "value": -16777216,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "NEUTRAL",
     "renderStatusInInventory": false,
     "renderStatusInHUD": false,
     "isCuredbyHoney": false,
     "modifiers": [],
-    "onStarted": {
-      "name": "HypnotizedEffectStarted"
-    }
+    "onStarted": "HypnotizedEffectStarted"
   }
 }

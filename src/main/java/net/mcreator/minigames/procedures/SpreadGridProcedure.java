@@ -3,7 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -14,16 +14,16 @@ public class SpreadGridProcedure {
 		double neighbour = 0;
 		neighbour = 0;
 		if ((world.getBlockState(BlockPos.containing(x, y, z))).getBlock() == MinigamesModBlocks.EMPTY_GRID_BLOCK.get()) {
-			if ((world.getBlockState(BlockPos.containing(x + 1, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+			if ((world.getBlockState(BlockPos.containing(x + 1, y, z))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 				neighbour = neighbour + 1;
 			}
-			if ((world.getBlockState(BlockPos.containing(x - 1, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+			if ((world.getBlockState(BlockPos.containing(x - 1, y, z))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 				neighbour = neighbour + 1;
 			}
-			if ((world.getBlockState(BlockPos.containing(x, y, z + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+			if ((world.getBlockState(BlockPos.containing(x, y, z + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 				neighbour = neighbour + 1;
 			}
-			if ((world.getBlockState(BlockPos.containing(x, y, z - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+			if ((world.getBlockState(BlockPos.containing(x, y, z - 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 				neighbour = neighbour + 1;
 			}
 			if (neighbour <= 1) {

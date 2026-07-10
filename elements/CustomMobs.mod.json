@@ -1,11 +1,9 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "tab",
   "definition": {
     "name": "Dungeon Mobs",
-    "icon": {
-      "value": "CUSTOM:SpawnWorshipper"
-    },
+    "icon": "CUSTOM:SpawnWorshipper",
     "showSearch": true
   }
 }

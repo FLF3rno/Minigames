@@ -4,6 +4,5 @@
     "all": "minigames:block/magepedestal",
     "particle": "minigames:block/magepedestal",
     "0": "minigames:block/magepedestal"
-  },
-  "render_type": "solid"
+  }
 }

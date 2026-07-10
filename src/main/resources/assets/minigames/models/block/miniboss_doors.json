@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/minibossdoor",
     "particle": "minigames:block/minibossdoor"
-  },
-  "render_type": "solid"
+  }
 }

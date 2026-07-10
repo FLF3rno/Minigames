@@ -1,6 +1,5 @@
 package net.mcreator.minigames.procedures;
 
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -38,7 +37,7 @@ public class GiveGameCompassProcedure {
 			if (entity instanceof Player _player) {
 				ItemStack _setstack = new ItemStack(MinigamesModItems.GAME_COMPASS.get()).copy();
 				_setstack.setCount(1);
-				ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
+				_player.getInventory().placeItemBackInInventory(_setstack);
 			}
 		}
 	}

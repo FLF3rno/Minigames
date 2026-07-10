@@ -1,8 +1,8 @@
 package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -76,8 +76,8 @@ public class StartVoteProcedure {
 			MinigamesModVariables.MapVariables.get(world).ActiveVote = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else {
-			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal(("\u00A7cYou cannot call another vote for " + new java.text.DecimalFormat("##").format(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown / 20) + "s")), true);
+			if (entity instanceof ServerPlayer _player)
+				_player.sendSystemMessage(Component.literal(("\u00A7cYou cannot call another vote for " + new java.text.DecimalFormat("##").format(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown / 20) + "s")), true);
 		}
 	}
 }

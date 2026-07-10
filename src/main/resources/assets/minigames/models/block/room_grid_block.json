@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/roomgrid",
     "particle": "minigames:block/roomgrid"
-  },
-  "render_type": "solid"
+  }
 }

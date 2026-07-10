@@ -3,6 +3,5 @@
   "textures": {
     "wall": "minigames:block/26.2_sulfur",
     "particle": "minigames:block/26.2_sulfur"
-  },
-  "render_type": "solid"
+  }
 }

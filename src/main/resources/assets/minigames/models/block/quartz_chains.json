@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/chiseled_quartz_block",
     "particle": "minigames:block/chiseled_quartz_block"
-  },
-  "render_type": "solid"
+  }
 }

@@ -2,6 +2,5 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "minigames:item/stripped_spruce_log"
-  },
-  "render_type": "translucent"
+  }
 }

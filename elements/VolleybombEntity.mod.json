@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "livingentity",
   "definition": {
     "mobName": "Volleybomb",
@@ -45,31 +45,17 @@
     },
     "spawnEggTexture": "",
     "creativeTabs": [
-      {
-        "value": "MISC"
-      }
+      "MISC"
     ],
     "isBoss": false,
     "bossBarColor": "PINK",
     "bossBarType": "PROGRESS",
-    "equipmentMainHand": {
-      "value": ""
-    },
-    "equipmentOffHand": {
-      "value": ""
-    },
-    "equipmentHelmet": {
-      "value": ""
-    },
-    "equipmentBody": {
-      "value": ""
-    },
-    "equipmentLeggings": {
-      "value": ""
-    },
-    "equipmentBoots": {
-      "value": ""
-    },
+    "equipmentMainHand": "",
+    "equipmentOffHand": "",
+    "equipmentHelmet": "",
+    "equipmentBody": "",
+    "equipmentLeggings": "",
+    "equipmentBoots": "",
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEFINED",
     "attackStrength": 3,
@@ -109,24 +95,12 @@
     "immuneToAnvil": true,
     "immuneToWither": true,
     "immuneToDragonBreath": true,
-    "mobDrop": {
-      "value": ""
-    },
-    "livingSound": {
-      "value": ""
-    },
-    "hurtSound": {
-      "value": "CUSTOM:volleybomb_hit"
-    },
-    "deathSound": {
-      "value": ""
-    },
-    "stepSound": {
-      "value": ""
-    },
-    "raidCelebrationSound": {
-      "value": ""
-    },
+    "mobDrop": "",
+    "livingSound": "",
+    "hurtSound": "CUSTOM:volleybomb_hit",
+    "deathSound": "",
+    "stepSound": "",
+    "raidCelebrationSound": "",
     "entityDataEntries": [
       {
         "name": "exploding",
@@ -134,12 +108,8 @@
         "value": false
       }
     ],
-    "onPlayerCollidesWith": {
-      "name": "VolleybombCheckCollision"
-    },
-    "onInitialSpawn": {
-      "name": "VolleybombSpawn"
-    },
+    "onPlayerCollidesWith": "VolleybombCheckCollision",
+    "onInitialSpawn": "VolleybombSpawn",
     "hasAI": true,
     "aiBase": "(none)",
     "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"></block></xml>",
@@ -147,9 +117,7 @@
     "tameable": false,
     "breedTriggerItems": [],
     "ranged": false,
-    "rangedAttackItem": {
-      "value": ""
-    },
+    "rangedAttackItem": "",
     "rangedItemType": "Default item",
     "rangedAttackInterval": 20,
     "rangedAttackRadius": 10.0,

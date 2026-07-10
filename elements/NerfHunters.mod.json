@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Nerf Hunters",
@@ -8,20 +8,14 @@
       "value": -65536,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "HARMFUL",
     "renderStatusInInventory": false,
     "renderStatusInHUD": false,
     "isCuredbyHoney": false,
     "modifiers": [],
-    "onActiveTick": {
-      "name": "NerfHuntersOnEffectActiveTick"
-    },
-    "onExpired": {
-      "name": "StartPVP"
-    }
+    "onActiveTick": "NerfHuntersOnEffectActiveTick",
+    "onExpired": "StartPVP"
   }
 }

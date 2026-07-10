@@ -117,7 +117,7 @@ public class MinigamesMod {
 
 	@Nullable
 	public static Player clientPlayer() {
-		if (FMLEnvironment.dist.isClient()) {
+		if (FMLEnvironment.getDist().isClient()) {
 			try {
 				if (minecraft == null || playerHandle == null) {
 					Class<?> minecraftClass = Class.forName("net.minecraft.client.Minecraft");

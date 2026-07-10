@@ -6,8 +6,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
@@ -26,31 +27,32 @@ public class SpawnFloorProcedure {
 		double spawnRoomZ = 0;
 		double neighbour = 0;
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/kill @e[type=!player]");
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/kill @e[type=!player]");
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/gamemode @a adventure");
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/gamemode @a adventure");
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run fill -50 0 -50 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " 200 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) + " air"));
 		spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
-		for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index0++) {
+		for (int index7 = 0; index7 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index7++) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
-			for (int index1 = 0; index1 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index1++) {
+			for (int index8 = 0; index8 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index8++) {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.STARTING_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_STARTING_ROOM.get().defaultBlockState(), 3);
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
@@ -68,14 +70,14 @@ public class SpawnFloorProcedure {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.BOSS_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_BOSS_ROOM.get().defaultBlockState(), 3);
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
@@ -93,21 +95,21 @@ public class SpawnFloorProcedure {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.LOOT_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_LOOT_ROOM.get().defaultBlockState(), 3);
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
@@ -125,21 +127,21 @@ public class SpawnFloorProcedure {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.MINIBOSS_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_MINIBOSS_ROOM.get().defaultBlockState(), 3);
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
@@ -157,21 +159,21 @@ public class SpawnFloorProcedure {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.SECRET_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_SECRET_ROOM.get().defaultBlockState(), 3);
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
@@ -189,31 +191,31 @@ public class SpawnFloorProcedure {
 				neighbour = 0;
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.ROOM_GRID_BLOCK.get()
 						|| (world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.END_ROOM_GRID_BLOCK.get()) {
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						neighbour = neighbour + 1;
 					}
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						neighbour = neighbour + 1;
 					}
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						neighbour = neighbour + 1;
 					}
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						neighbour = neighbour + 1;
 					}
 					if (neighbour == 2) {
 						world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 								MinigamesModBlocks.SPAWN_TWO_DOOR_ROOM.get().defaultBlockState(), 3);
-						if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))
-								&& (world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+						if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))
+								&& (world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 							{
 								BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 								BlockState _bs = world.getBlockState(_pos);
 								if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 									world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 							}
-						} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))
-								&& (world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+						} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(Identifier.parse("minigames:room")))
+								&& (world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 							{
 								BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 								BlockState _bs = world.getBlockState(_pos);
@@ -226,21 +228,21 @@ public class SpawnFloorProcedure {
 					} else if (neighbour == 1) {
 						world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 								MinigamesModBlocks.SPAWN_ONE_DOOR_ROOM.get().defaultBlockState(), 3);
-						if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+						if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 							{
 								BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 								BlockState _bs = world.getBlockState(_pos);
 								if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 									world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 							}
-						} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+						} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 							{
 								BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 								BlockState _bs = world.getBlockState(_pos);
 								if (_bs.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _booleanProp)
 									world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 							}
-						} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
+						} else if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 							{
 								BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 								BlockState _bs = world.getBlockState(_pos);

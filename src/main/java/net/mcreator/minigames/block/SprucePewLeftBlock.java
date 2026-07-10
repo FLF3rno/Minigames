@@ -35,10 +35,10 @@ public class SprucePewLeftBlock extends Block implements EntityBlock {
 	private Function<BlockState, VoxelShape> makeShapes() {
 		return this.getShapeForEachState(state -> {
 			return switch (state.getValue(FACING)) {
-				default -> Shapes.or(box(0, 7, 0, 16, 8, 12), box(0, 0, 0, 1, 14, 13), box(0, 14, 0, 1, 26, 4));
 				case NORTH -> Shapes.or(box(0, 7, 4, 16, 8, 16), box(15, 0, 3, 16, 14, 16), box(15, 14, 12, 16, 26, 16));
 				case EAST -> Shapes.or(box(0, 7, 0, 12, 8, 16), box(0, 0, 15, 13, 14, 16), box(0, 14, 15, 4, 26, 16));
 				case WEST -> Shapes.or(box(4, 7, 0, 16, 8, 16), box(3, 0, 0, 16, 14, 1), box(12, 14, 0, 16, 26, 1));
+				default -> Shapes.or(box(0, 7, 0, 16, 8, 12), box(0, 0, 0, 1, 14, 13), box(0, 14, 0, 1, 26, 4));
 			};
 		});
 	}
@@ -59,7 +59,7 @@ public class SprucePewLeftBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 
@@ -76,7 +76,10 @@ public class SprucePewLeftBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite());
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {
@@ -116,7 +119,7 @@ public class SprucePewLeftBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos, Direction direction) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof SprucePewLeftBlockEntity be)
 			return AbstractContainerMenu.getRedstoneSignalFromContainer(be);

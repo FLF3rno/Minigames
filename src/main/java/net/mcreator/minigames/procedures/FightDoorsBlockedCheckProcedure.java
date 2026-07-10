@@ -10,8 +10,8 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.util.ProblemReporter;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.Direction;
@@ -23,8 +23,7 @@ import net.mcreator.minigames.MinigamesMod;
 public class FightDoorsBlockedCheckProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate) {
 		MinigamesMod.queueServerWork(20, () -> {
-			if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION,
-					ResourceLocation.parse("minigames:dungeon_dimension"))) {
+			if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
 				if ((getDirectionFromBlockState(blockstate)) == Direction.WEST || (getDirectionFromBlockState(blockstate)) == Direction.EAST) {
 					if (Blocks.AIR == (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() && Blocks.AIR == (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock()) {
 						{

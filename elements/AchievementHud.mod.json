@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "overlay",
   "definition": {
     "priority": "HIGHEST",
@@ -9,9 +9,7 @@
         "data": {
           "sprite": "hotbarslot.png",
           "spritesCount": 1,
-          "displayCondition": {
-            "name": "ShowCompassHunter"
-          },
+          "displayCondition": "ShowCompassHunter",
           "spriteIndex": {
             "fixedValue": 0.0
           },
@@ -26,9 +24,7 @@
         "data": {
           "sprite": "hud.png",
           "spritesCount": 3,
-          "displayCondition": {
-            "name": "HidePVPIconHunt"
-          },
+          "displayCondition": "HidePVPIconHunt",
           "spriteIndex": {
             "fixedValue": 0.0,
             "name": "PVPDisplay"
@@ -59,9 +55,7 @@
         "data": {
           "sprite": "pvpanimation.png",
           "spritesCount": 10,
-          "displayCondition": {
-            "name": "DisplayPVP"
-          },
+          "displayCondition": "DisplayPVP",
           "spriteIndex": {
             "fixedValue": 6.0,
             "name": "AnimatePVP"
@@ -77,9 +71,7 @@
         "data": {
           "sprite": "compass.png",
           "spritesCount": 32,
-          "displayCondition": {
-            "name": "ShowCompassHunter"
-          },
+          "displayCondition": "ShowCompassHunter",
           "spriteIndex": {
             "fixedValue": 0.0,
             "name": "CompassHunterSprite"
@@ -93,9 +85,7 @@
     ],
     "baseTexture": "",
     "overlayTarget": "Ingame",
-    "displayCondition": {
-      "name": "ShowDefaultTimer"
-    },
+    "displayCondition": "ShowDefaultTimer",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

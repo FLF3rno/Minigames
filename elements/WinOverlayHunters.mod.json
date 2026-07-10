@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "overlay",
   "definition": {
     "priority": "HIGHEST",
@@ -7,9 +7,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity"
-          },
+          "entityModel": "DisplayEntity",
           "scale": 40,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -37,9 +35,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity2"
-          },
+          "entityModel": "DisplayEntity2",
           "scale": 36,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -52,9 +48,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity3"
-          },
+          "entityModel": "DisplayEntity3",
           "scale": 36,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -67,9 +61,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity5"
-          },
+          "entityModel": "DisplayEntity5",
           "scale": 30,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -82,9 +74,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity4"
-          },
+          "entityModel": "DisplayEntity4",
           "scale": 30,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -97,9 +87,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity6"
-          },
+          "entityModel": "DisplayEntity6",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -112,9 +100,7 @@
     ],
     "baseTexture": "",
     "overlayTarget": "Ingame",
-    "displayCondition": {
-      "name": "HunterWinOverlayDisplay"
-    },
+    "displayCondition": "HunterWinOverlayDisplay",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

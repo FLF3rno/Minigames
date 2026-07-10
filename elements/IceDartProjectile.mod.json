@@ -1,14 +1,10 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "projectile",
   "definition": {
-    "projectileItem": {
-      "value": "Blocks.ICE"
-    },
+    "projectileItem": "Blocks.ICE",
     "showParticles": false,
-    "actionSound": {
-      "value": "entity.egg.throw"
-    },
+    "actionSound": "entity.egg.throw",
     "igniteFire": false,
     "disableGravity": false,
     "disableDiscarding": false,
@@ -19,11 +15,7 @@
     "customModelTexture": "",
     "modelWidth": 0.5,
     "modelHeight": 0.5,
-    "onHitsBlock": {
-      "name": "IceDartProjectileProjectileHitsBlock"
-    },
-    "onFlyingTick": {
-      "name": "IceDartProjectileWhileProjectileFlyingTick"
-    }
+    "onHitsBlock": "IceDartProjectileProjectileHitsBlock",
+    "onFlyingTick": "IceDartProjectileWhileProjectileFlyingTick"
   }
 }

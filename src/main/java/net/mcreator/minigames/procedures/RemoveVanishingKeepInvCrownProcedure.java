@@ -5,9 +5,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,7 +34,7 @@ public class RemoveVanishingKeepInvCrownProcedure {
 		if (entity == null)
 			return;
 		if (!(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).helmet.getItem() == Blocks.AIR.asItem() || entity.getData(MinigamesModVariables.PLAYER_VARIABLES).helmet.getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get())) {
-			if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame && world instanceof ServerLevel _serverLevelGR2 && _serverLevelGR2.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+			if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame && world instanceof ServerLevel _serverLevelGR2 && _serverLevelGR2.getGameRules().get(GameRules.KEEP_INVENTORY)) {
 				if (entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.HEAD, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).helmet);
 				}

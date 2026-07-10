@@ -1,14 +1,10 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "projectile",
   "definition": {
-    "projectileItem": {
-      "value": "Blocks.AIR"
-    },
+    "projectileItem": "Blocks.AIR",
     "showParticles": true,
-    "actionSound": {
-      "value": ""
-    },
+    "actionSound": "",
     "igniteFire": false,
     "disableGravity": true,
     "disableDiscarding": false,

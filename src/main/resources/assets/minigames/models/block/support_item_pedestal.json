@@ -4,6 +4,5 @@
     "all": "minigames:block/supportpedestal",
     "particle": "minigames:block/supportpedestal",
     "0": "minigames:block/supportpedestal"
-  },
-  "render_type": "solid"
+  }
 }

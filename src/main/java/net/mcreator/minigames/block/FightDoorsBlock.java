@@ -45,10 +45,10 @@ public class FightDoorsBlock extends Block implements SimpleWaterloggedBlock, En
 	private Function<BlockState, VoxelShape> makeShapes() {
 		return this.getShapeForEachState(state -> {
 			return switch (state.getValue(FACING)) {
-				default -> box(0, 0, 8, 16, 16, 16);
 				case NORTH -> box(0, 0, 0, 16, 16, 8);
 				case EAST -> box(8, 0, 0, 16, 16, 16);
 				case WEST -> box(0, 0, 0, 8, 16, 16);
+				default -> box(0, 0, 8, 16, 16, 16);
 			};
 		}, WATERLOGGED);
 	}
@@ -76,8 +76,11 @@ public class FightDoorsBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
 		boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-		return super.getStateForPlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, flag);
+		return state.setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, flag);
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {

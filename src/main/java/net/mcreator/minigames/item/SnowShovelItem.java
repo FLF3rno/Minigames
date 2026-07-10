@@ -25,4 +25,8 @@ public class SnowShovelItem extends Item {
 		componentConsumer.accept(Component.translatable("item.minigames.snow_shovel.description_0"));
 		componentConsumer.accept(Component.translatable("item.minigames.snow_shovel.description_1"));
 	}
+
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged && !oldStack.equals(newStack);
+	}
 }

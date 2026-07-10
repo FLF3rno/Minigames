@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "item",
   "definition": {
     "renderType": 0,
@@ -12,18 +12,14 @@
     "name": "Hammer",
     "rarity": "COMMON",
     "creativeTabs": [
-      {
-        "value": "CUSTOM:DungeonItems"
-      }
+      "CUSTOM:DungeonItems"
     ],
     "stackSize": 1,
     "enchantability": 0,
     "useDuration": 0,
     "toolType": 1.0,
     "damageCount": 0,
-    "recipeRemainder": {
-      "value": ""
-    },
+    "recipeRemainder": "",
     "destroyAnyBlock": false,
     "immuneToFire": true,
     "isPiglinCurrency": false,
@@ -45,29 +41,21 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
-    "onEntityHitWith": {
-      "name": "HammerHit"
-    },
+    "onEntityHitWith": "HammerHit",
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
-    "projectile": {
-      "value": "CUSTOM:IceDartProjectile"
-    },
+    "projectile": "CUSTOM:IceDartProjectile",
     "projectileDisableAmmoCheck": false,
     "isFood": false,
     "nutritionalValue": 4,
     "saturation": 0.3,
-    "eatResultItem": {
-      "value": ""
-    },
+    "eatResultItem": "",
     "isMeat": false,
     "isAlwaysEdible": false,
     "animation": "none",
     "isMusicDisc": false,
-    "musicDiscMusic": {
-      "value": ""
-    },
+    "musicDiscMusic": "",
     "musicDiscDescription": "",
     "musicDiscLengthInTicks": 100,
     "musicDiscAnalogOutput": 0,
@@ -75,41 +63,31 @@
     "attributeModifiers": [
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "ATTACK_DAMAGE"
-        },
+        "attribute": "ATTACK_DAMAGE",
         "amount": 12.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "ATTACK_SPEED"
-        },
+        "attribute": "ATTACK_SPEED",
         "amount": -2.8,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:SalvageValue"
-        },
+        "attribute": "CUSTOM:SalvageValue",
         "amount": 30.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:RepairValue"
-        },
+        "attribute": "CUSTOM:RepairValue",
         "amount": 50.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:EffectLength"
-        },
+        "attribute": "CUSTOM:EffectLength",
         "amount": 200.0,
         "operation": "ADD_VALUE"
       }

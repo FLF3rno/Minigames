@@ -35,12 +35,12 @@ public class QuartzChainsBlock extends Block implements EntityBlock {
 	private Function<BlockState, VoxelShape> makeShapes() {
 		return this.getShapeForEachState(state -> {
 			return switch (state.getValue(FACING)) {
-				default -> box(7, 0, 7, 9, 16, 9);
 				case NORTH -> box(7, 0, 7, 9, 16, 9);
 				case EAST -> box(7, 0, 7, 9, 16, 9);
 				case WEST -> box(7, 0, 7, 9, 16, 9);
 				case UP -> box(7, 7, 0, 9, 9, 16);
 				case DOWN -> box(7, 7, 0, 9, 9, 16);
+				default -> box(7, 0, 7, 9, 16, 9);
 			};
 		});
 	}
@@ -68,7 +68,10 @@ public class QuartzChainsBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(FACING, context.getClickedFace());
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(FACING, context.getClickedFace());
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {
@@ -108,7 +111,7 @@ public class QuartzChainsBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos, Direction direction) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof QuartzChainsBlockEntity be)
 			return AbstractContainerMenu.getRedstoneSignalFromContainer(be);

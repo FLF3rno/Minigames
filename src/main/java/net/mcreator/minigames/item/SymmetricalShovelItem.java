@@ -38,4 +38,8 @@ public class SymmetricalShovelItem extends Item {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
 		SymmetricalShovelItemInInventoryTickProcedure.execute(world, entity, itemstack);
 	}
+
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged && !oldStack.equals(newStack);
+	}
 }

@@ -2,7 +2,7 @@ package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -20,32 +20,32 @@ public class DungeonCheckProcedure {
 				&& MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon == MinigamesModVariables.MapVariables.get(world).lootRoomPlacedDungeon) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
 			spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
-			for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index0++) {
+			for (int index5 = 0; index5 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index5++) {
 				spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
-				for (int index1 = 0; index1 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index1++) {
+				for (int index6 = 0; index6 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index6++) {
 					specialRoom = false;
 					neighbour = 0;
 					if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.EMPTY_GRID_BLOCK.get()) {
-						if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
-							if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:special_room")))) {
+						if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
+							if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:special_room")))) {
 								specialRoom = true;
 							}
 							neighbour = neighbour + 1;
 						}
-						if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
-							if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(ResourceLocation.parse("minigames:special_room")))) {
+						if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
+							if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:special_room")))) {
 								specialRoom = true;
 							}
 							neighbour = neighbour + 1;
 						}
-						if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
-							if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(ResourceLocation.parse("minigames:special_room")))) {
+						if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
+							if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ + 1))).is(BlockTags.create(Identifier.parse("minigames:special_room")))) {
 								specialRoom = true;
 							}
 							neighbour = neighbour + 1;
 						}
-						if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:room")))) {
-							if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(ResourceLocation.parse("minigames:special_room")))) {
+						if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
+							if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ - 1))).is(BlockTags.create(Identifier.parse("minigames:special_room")))) {
 								specialRoom = true;
 							}
 							neighbour = neighbour + 1;

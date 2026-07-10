@@ -2,6 +2,5 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "minigames:item/pew"
-  },
-  "render_type": "translucent"
+  }
 }

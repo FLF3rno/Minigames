@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "overlay",
   "definition": {
     "priority": "HIGHEST",
@@ -7,9 +7,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayWinnerCrownHunt"
-          },
+          "entityModel": "DisplayWinnerCrownHunt",
           "scale": 100,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -24,9 +22,7 @@
         "data": {
           "sprite": "blank.png",
           "spritesCount": 1,
-          "displayCondition": {
-            "name": "DisplayBlankActuallyBlank"
-          },
+          "displayCondition": "DisplayBlankActuallyBlank",
           "spriteIndex": {
             "fixedValue": 0.0
           },
@@ -54,9 +50,7 @@
     ],
     "baseTexture": "",
     "overlayTarget": "Ingame",
-    "displayCondition": {
-      "name": "WinOverlayDisplay"
-    },
+    "displayCondition": "WinOverlayDisplay",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

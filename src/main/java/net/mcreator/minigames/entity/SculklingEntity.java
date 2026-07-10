@@ -25,7 +25,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -133,12 +133,12 @@ public class SculklingEntity extends Monster {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.sculk_catalyst.hit"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.sculk_catalyst.hit"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.sculk_catalyst.break"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.sculk_catalyst.break"));
 	}
 
 	@Override

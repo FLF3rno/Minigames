@@ -28,19 +28,19 @@ public class IntersectingEndRodsBlock extends Block implements EntityBlock {
 	private final Function<BlockState, VoxelShape> shapes = this.makeShapes();
 
 	public IntersectingEndRodsBlock(BlockBehaviour.Properties properties) {
-		super(properties.strength(1f, 10f).lightLevel(blockstate -> 14).noOcclusion().hasPostProcess((bs, br, bp) -> true).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+		super(properties.strength(1f, 10f).lightLevel(blockstate -> 14).noOcclusion().postProcess((bs, br, bp) -> bp).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 
 	private Function<BlockState, VoxelShape> makeShapes() {
 		return this.getShapeForEachState(state -> {
 			return switch (state.getValue(FACING)) {
-				default -> box(0, 7, 7, 16, 9, 9);
 				case NORTH -> box(0, 7, 7, 16, 9, 9);
 				case EAST -> box(7, 7, 0, 9, 9, 16);
 				case WEST -> box(7, 7, 0, 9, 9, 16);
 				case UP -> box(0, 7, 7, 16, 9, 9);
 				case DOWN -> box(0, 7, 7, 16, 9, 9);
+				default -> box(0, 7, 7, 16, 9, 9);
 			};
 		});
 	}
@@ -61,7 +61,7 @@ public class IntersectingEndRodsBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 
@@ -78,7 +78,10 @@ public class IntersectingEndRodsBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(FACING, context.getClickedFace());
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(FACING, context.getClickedFace());
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {
@@ -118,7 +121,7 @@ public class IntersectingEndRodsBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos, Direction direction) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof IntersectingEndRodsBlockEntity be)
 			return AbstractContainerMenu.getRedstoneSignalFromContainer(be);

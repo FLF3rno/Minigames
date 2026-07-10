@@ -7,11 +7,12 @@ import org.objectweb.asm.Opcodes;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.layers.PlayerItemInHandLayer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.Minecraft;
 
@@ -28,8 +29,8 @@ public abstract class LivingEntityRendererMixin {
 	private String master = null;
 	private Minecraft mc = Minecraft.getInstance();
 
-	@ModifyExpressionValue(method = "render(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;layers:Ljava/util/List;", opcode = Opcodes.GETFIELD))
-	private List<Object> filterLayers(List<Object> originalLayers, LivingEntityRenderState entityRenderState, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
+	@ModifyExpressionValue(method = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;layers:Ljava/util/List;", opcode = Opcodes.GETFIELD))
+	private List<Object> filterLayers(List<Object> originalLayers, LivingEntityRenderState entityRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
 		if (master == null) {
 			if (!MinigamesModPlayerAnimationAPI.animations.isEmpty())
 				master = "minigames";
@@ -39,14 +40,14 @@ public abstract class LivingEntityRendererMixin {
 		if (!master.equals("minigames")) {
 			return originalLayers;
 		}
-		if (entityRenderState instanceof PlayerRenderState renderState && mc.options.getCameraType().isFirstPerson()) {
+		if (entityRenderState instanceof AvatarRenderState renderState && mc.options.getCameraType().isFirstPerson()) {
 			Player player = (Player) renderState.getRenderData(MinigamesModPlayerAnimationAPI.ClientAttachments.PLAYER);
 			if (player == null)
 				return originalLayers;
 			if (mc.player == player && (mc.screen == null || mc.screen instanceof ChatScreen)) {
 				CompoundTag playerData = player.getPersistentData();
 				if (playerData.getBooleanOr("FirstPersonAnimation", false)) {
-					playerData.putInt("setNullRender", 4);
+					playerData.putInt("setNullRender", 1);
 					return originalLayers.stream().filter(layer -> layer instanceof PlayerItemInHandLayer).toList();
 				} else if (playerData.contains("setNullRender")) {
 					int ticks = playerData.getIntOr("setNullRender", 0);

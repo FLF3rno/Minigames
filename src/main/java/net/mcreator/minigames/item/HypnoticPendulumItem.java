@@ -45,4 +45,8 @@ public class HypnoticPendulumItem extends Item {
 		HypnoticPendulumRightclickedProcedure.execute(world, entity, entity.getItemInHand(hand));
 		return ar;
 	}
+
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged && !oldStack.equals(newStack);
+	}
 }

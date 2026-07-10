@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Crowned",
@@ -8,20 +8,14 @@
       "value": -738005,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "BENEFICIAL",
     "renderStatusInInventory": false,
     "renderStatusInHUD": false,
     "isCuredbyHoney": false,
     "modifiers": [],
-    "onStarted": {
-      "name": "SyncCrownedApply"
-    },
-    "onExpired": {
-      "name": "SyncCrownedRemove"
-    }
+    "onStarted": "SyncCrownedApply",
+    "onExpired": "SyncCrownedRemove"
   }
 }

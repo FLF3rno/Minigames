@@ -10,9 +10,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
@@ -21,8 +21,8 @@ import net.mcreator.minigames.MinigamesMod;
 public class BlockLeftClickMobEffect extends MobEffect {
 	public BlockLeftClickMobEffect() {
 		super(MobEffectCategory.NEUTRAL, -16777216);
-		this.addAttributeModifier(Attributes.ENTITY_INTERACTION_RANGE, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.block_left_click_0"), -110, AttributeModifier.Operation.ADD_VALUE);
-		this.addAttributeModifier(Attributes.BLOCK_INTERACTION_RANGE, ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "effect.block_left_click_1"), -100, AttributeModifier.Operation.ADD_VALUE);
+		this.addAttributeModifier(Attributes.ENTITY_INTERACTION_RANGE, Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "effect.block_left_click_0"), -110, AttributeModifier.Operation.ADD_VALUE);
+		this.addAttributeModifier(Attributes.BLOCK_INTERACTION_RANGE, Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "effect.block_left_click_1"), -100, AttributeModifier.Operation.ADD_VALUE);
 	}
 
 	@SubscribeEvent
@@ -34,7 +34,7 @@ public class BlockLeftClickMobEffect extends MobEffect {
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int x, int y, int blitOffset) {
+			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
 				return false;
 			}
 

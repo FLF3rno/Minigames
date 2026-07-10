@@ -1,6 +1,9 @@
 package net.mcreator.minigames.procedures;
 
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import net.neoforged.neoforge.transfer.item.ItemUtil;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.capabilities.Capabilities;
 
 import net.minecraft.world.item.component.CustomData;
@@ -18,21 +21,38 @@ public class RelicEquippedProcedure {
 		ItemStack modifieditem = ItemStack.EMPTY;
 		if (item.getItem() == MinigamesModItems.BLACKSMITH_HAMMER.get()) {
 			num = 0;
-			for (int index0 = 0; index0 < 9; index0++) {
-				modifieditem = (entity.getCapability(Capabilities.ItemHandler.ENTITY, null) instanceof IItemHandlerModifiable _modHandler1 ? _modHandler1.getStackInSlot((int) num).copy() : ItemStack.EMPTY).copy();
+			for (int index64 = 0; index64 < 9; index64++) {
+				modifieditem = (getEntitySlot(entity, (int) num)).copy();
 				{
 					final String _tagName = "forged";
-					final double _tagValue = ((entity.getCapability(Capabilities.ItemHandler.ENTITY, null) instanceof IItemHandlerModifiable _modHandler2 ? _modHandler2.getStackInSlot((int) num).copy() : ItemStack.EMPTY)
-							.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("forged", 0) + 10);
+					final double _tagValue = ((getEntitySlot(entity, (int) num)).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("forged", 0) + 10);
 					CustomData.update(DataComponents.CUSTOM_DATA, modifieditem, tag -> tag.putDouble(_tagName, _tagValue));
 				}
-				if (entity.getCapability(Capabilities.ItemHandler.ENTITY, null) instanceof IItemHandlerModifiable _modHandler) {
-					ItemStack _setstack = modifieditem.copy();
-					_setstack.setCount(1);
-					_modHandler.setStackInSlot((int) num, _setstack);
+				if (entity.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
+					setStackInSlot(_resourceHandler, (int) num, ItemResource.of(modifieditem), 1);
 				}
 				num = num + 1;
 			}
+		}
+	}
+
+	private static ItemStack getEntitySlot(Entity entity, int slot) {
+		if (entity != null) {
+			ResourceHandler<ItemResource> resourceHandler = entity.getCapability(Capabilities.Item.ENTITY, null);
+			if (resourceHandler != null) {
+				return ItemUtil.getStack(resourceHandler, slot);
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+
+	private static void setStackInSlot(ResourceHandler<ItemResource> handler, int index, ItemResource resource, int amount) {
+		try (var tx = Transaction.openRoot()) {
+			if (!handler.getResource(index).isEmpty())
+				handler.extract(index, handler.getResource(index), handler.getAmountAsInt(index), tx);
+			if (!resource.isEmpty() && amount > 0)
+				handler.insert(index, resource, amount, tx);
+			tx.commit();
 		}
 	}
 }

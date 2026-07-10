@@ -28,7 +28,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
@@ -49,7 +49,7 @@ public class MinigamesModVariables {
 	public static final Supplier<AttachmentType<PlayerVariables>> PLAYER_VARIABLES = ATTACHMENT_TYPES.register("player_variables", () -> AttachmentType.serializable(() -> new PlayerVariables()).build());
 	public static double health = 20.0;
 	public static double winAnimation = -1.0;
-	public static ResourceLocation crown = null;
+	public static Identifier crown = null;
 	public static Entity firstSpleef = null;
 	public static Entity secondSpleef = null;
 	public static Entity thirdSpleef = null;
@@ -184,11 +184,11 @@ public class MinigamesModVariables {
 	}
 
 	public static class WorldVariables extends SavedData {
-		public static final SavedDataType<WorldVariables> TYPE = new SavedDataType<>("minigames_worldvars", ctx -> new WorldVariables(), ctx -> CompoundTag.CODEC.xmap(tag -> {
+		public static final SavedDataType<WorldVariables> TYPE = new SavedDataType<>(Identifier.parse("minigames:worldvars"), level -> new WorldVariables(), level -> CompoundTag.CODEC.xmap(tag -> {
 			WorldVariables instance = new WorldVariables();
-			instance.read(tag, ctx.levelOrThrow().registryAccess());
+			instance.read(tag, level.registryAccess());
 			return instance;
-		}, instance -> instance.save(new CompoundTag(), ctx.levelOrThrow().registryAccess())));
+		}, instance -> instance.save(new CompoundTag(), level.registryAccess())));
 		boolean _syncDirty = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -215,11 +215,11 @@ public class MinigamesModVariables {
 	}
 
 	public static class MapVariables extends SavedData {
-		public static final SavedDataType<MapVariables> TYPE = new SavedDataType<>("minigames_mapvars", ctx -> new MapVariables(), ctx -> CompoundTag.CODEC.xmap(tag -> {
+		public static final SavedDataType<MapVariables> TYPE = new SavedDataType<>(Identifier.parse("minigames:mapvars"), level -> new MapVariables(), level -> CompoundTag.CODEC.xmap(tag -> {
 			MapVariables instance = new MapVariables();
-			instance.read(tag, ctx.levelOrThrow().registryAccess());
+			instance.read(tag, level.registryAccess());
 			return instance;
-		}, instance -> instance.save(new CompoundTag(), ctx.levelOrThrow().registryAccess())));
+		}, instance -> instance.save(new CompoundTag(), level.registryAccess())));
 		boolean _syncDirty = false;
 		public double achievmentType = 0.0;
 		public double achivementTypeTimer = 295.0;
@@ -558,7 +558,7 @@ public class MinigamesModVariables {
 	}
 
 	public record SavedDataSyncMessage(int dataType, SavedData data) implements CustomPacketPayload {
-		public static final Type<SavedDataSyncMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "saved_data_sync"));
+		public static final Type<SavedDataSyncMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "saved_data_sync"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, SavedDataSyncMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, SavedDataSyncMessage message) -> {
 			buffer.writeInt(message.dataType);
 			if (message.data instanceof MapVariables mapVariables)
@@ -730,9 +730,9 @@ public class MinigamesModVariables {
 	}
 
 	public record PlayerVariablesSyncMessage(PlayerVariables data, int player) implements CustomPacketPayload {
-		public static final Type<PlayerVariablesSyncMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "player_variables_sync"));
+		public static final Type<PlayerVariablesSyncMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "player_variables_sync"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, PlayerVariablesSyncMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, PlayerVariablesSyncMessage message) -> {
-			TagValueOutput output = TagValueOutput.createWithoutContext(ProblemReporter.DISCARDING);
+			TagValueOutput output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, buffer.registryAccess());
 			message.data.serialize(output);
 			buffer.writeInt(message.player());
 			buffer.writeNbt(output.buildResult());

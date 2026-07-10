@@ -60,4 +60,8 @@ public class GameCompassItem extends Item {
 		if (equipmentSlot == EquipmentSlot.MAINHAND)
 			GameCompassInHandProcedure.execute(entity);
 	}
+
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged && !oldStack.equals(newStack);
+	}
 }

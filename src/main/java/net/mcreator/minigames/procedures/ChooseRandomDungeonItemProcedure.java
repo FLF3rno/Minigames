@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.component.DataComponents;
 
@@ -40,8 +40,8 @@ public class ChooseRandomDungeonItemProcedure {
 				finalClass = "support";
 			}
 		}
-		while (!item.is(ItemTags.create(ResourceLocation.parse((("minigames:dungeon_type_" + itemtype)).toLowerCase(java.util.Locale.ENGLISH))))) {
-			item = new ItemStack((BuiltInRegistries.ITEM.getRandomElementOf(ItemTags.create(ResourceLocation.parse((("minigames:dungeon_" + finalClass)).toLowerCase(java.util.Locale.ENGLISH))), RandomSource.create())
+		while (!item.is(ItemTags.create(Identifier.parse((("minigames:dungeon_type_" + itemtype)).toLowerCase(java.util.Locale.ENGLISH))))) {
+			item = new ItemStack((BuiltInRegistries.ITEM.getRandomElementOf(ItemTags.create(Identifier.parse((("minigames:dungeon_" + finalClass)).toLowerCase(java.util.Locale.ENGLISH))), RandomSource.create())
 					.orElseGet(() -> BuiltInRegistries.ITEM.wrapAsHolder(Items.AIR)).value())).copy();
 		}
 		if (stolenrng <= stolenChance) {

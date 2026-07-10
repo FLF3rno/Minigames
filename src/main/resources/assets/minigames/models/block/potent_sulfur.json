@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/26.2_potent_sulfur",
     "particle": "minigames:block/26.2_potent_sulfur"
-  },
-  "render_type": "solid"
+  }
 }

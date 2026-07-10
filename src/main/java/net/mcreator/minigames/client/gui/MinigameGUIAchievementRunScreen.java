@@ -5,23 +5,25 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import net.mcreator.minigames.world.inventory.MinigameGUIAchievementRunMenu;
 import net.mcreator.minigames.procedures.NightVisionCheckedProcedure;
 import net.mcreator.minigames.procedures.KeepInventoryCheckedProcedure;
 import net.mcreator.minigames.network.MinigameGUIAchievementRunButtonMessage;
 import net.mcreator.minigames.init.MinigamesModScreens;
+
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<MinigameGUIAchievementRunMenu> implements MinigamesModScreens.ScreenAccessor {
 	private final Level world;
@@ -36,24 +38,22 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 	private Button button_start_normal;
 	private ImageButton imagebutton_compass_16;
 	private ImageButton imagebutton_bucket;
-	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/diamondwindow.png");
-	private static final ResourceLocation IMAGE_1 = ResourceLocation.parse("minigames:textures/screens/health_boost.png");
-	private static final ResourceLocation IMAGE_2 = ResourceLocation.parse("minigames:textures/screens/night_vision.png");
-	private static final ResourceLocation IMAGE_3 = ResourceLocation.parse("minigames:textures/screens/keepinventory.png");
-	private static final ResourceLocation IMAGE_4 = ResourceLocation.parse("minigames:textures/screens/crown.png");
-	private static final ResourceLocation IMAGE_5 = ResourceLocation.parse("minigames:textures/screens/compass_00.png");
-	private static final ResourceLocation IMAGE_6 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
-	private static final ResourceLocation IMAGE_7 = ResourceLocation.parse("minigames:textures/screens/halfextraslot.png");
+	private static final Identifier IMAGE_0 = Identifier.parse("minigames:textures/screens/diamondwindow.png");
+	private static final Identifier IMAGE_1 = Identifier.parse("minigames:textures/screens/health_boost.png");
+	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/night_vision.png");
+	private static final Identifier IMAGE_3 = Identifier.parse("minigames:textures/screens/keepinventory.png");
+	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/crown.png");
+	private static final Identifier IMAGE_5 = Identifier.parse("minigames:textures/screens/compass_00.png");
+	private static final Identifier IMAGE_6 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
+	private static final Identifier IMAGE_7 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
 
 	public MinigameGUIAchievementRunScreen(MinigameGUIAchievementRunMenu container, Inventory inventory, Component text) {
-		super(container, inventory, text);
+		super(container, inventory, text, 176, 166);
 		this.world = container.world;
 		this.x = container.x;
 		this.y = container.y;
 		this.z = container.z;
 		this.entity = container.entity;
-		this.imageWidth = 176;
-		this.imageHeight = 166;
 	}
 
 	@Override
@@ -66,52 +66,45 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		if (elementType == 1 && elementState instanceof Boolean logicState) {
 			if (name.equals("nightvision")) {
 				if (nightvision.selected() != logicState)
-					nightvision.onPress();
+					nightvision.onPress(null);
 			} else if (name.equals("keepinventory")) {
 				if (keepinventory.selected() != logicState)
-					keepinventory.onPress();
+					keepinventory.onPress(null);
 			} else if (name.equals("minimap")) {
 				if (minimap.selected() != logicState)
-					minimap.onPress();
+					minimap.onPress(null);
 			} else if (name.equals("spawn")) {
 				if (spawn.selected() != logicState)
-					spawn.onPress();
+					spawn.onPress(null);
 			}
 		}
 		menuStateUpdateActive = false;
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		super.render(guiGraphics, mouseX, mouseY, partialTicks);
-		hp.render(guiGraphics, mouseX, mouseY, partialTicks);
-		boolean customTooltipShown = false;
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		if (mouseX > leftPos + -57 && mouseX < leftPos + -5 && mouseY > topPos + 40 && mouseY < topPos + 103) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_night_vision"), mouseX, mouseY);
-			customTooltipShown = true;
 		}
 		if (mouseX > leftPos + 67 && mouseX < leftPos + 113 && mouseY > topPos + 41 && mouseY < topPos + 103) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_keep_inventory"), mouseX, mouseY);
-			customTooltipShown = true;
 		}
 		if (mouseX > leftPos + 181 && mouseX < leftPos + 235 && mouseY > topPos + 36 && mouseY < topPos + 105) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_health_amount"), mouseX, mouseY);
-			customTooltipShown = true;
 		}
 		if (mouseX > leftPos + 12 && mouseX < leftPos + 52 && mouseY > topPos + 43 && mouseY < topPos + 103) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_last_winner_takes_15x_damage"), mouseX, mouseY);
-			customTooltipShown = true;
 		}
 		if (mouseX > leftPos + 126 && mouseX < leftPos + 169 && mouseY > topPos + 40 && mouseY < topPos + 104) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_dont_reset_world_on_game_start"), mouseX, mouseY);
-			customTooltipShown = true;
 		}
-		if (!customTooltipShown)
-			this.renderTooltip(guiGraphics, mouseX, mouseY);
+		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+		hp.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 	}
 
 	@Override
-	protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + -102, this.topPos + -29, 0, 0, 384, 384, 384, 384);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 184, this.topPos + 35, 0, 0, 46, 46, 46, 46);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -58, this.topPos + 32, 0, 0, 54, 54, 54, 54);
@@ -123,32 +116,33 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 	}
 
 	@Override
-	public boolean keyPressed(int key, int b, int c) {
+	public boolean keyPressed(KeyEvent event) {
+		int key = InputConstants.getKey(event).getValue();
 		if (key == 256) {
 			this.minecraft.player.closeContainer();
 			return true;
 		}
 		if (hp.isFocused())
-			return hp.keyPressed(key, b, c);
-		return super.keyPressed(key, b, c);
+			return hp.keyPressed(event);
+		return super.keyPressed(event);
 	}
 
 	@Override
-	public void resize(Minecraft minecraft, int width, int height) {
+	public void resize(int width, int height) {
 		String hpValue = hp.getValue();
-		super.resize(minecraft, width, height);
+		super.resize(width, height);
 		hp.setValue(hpValue);
 	}
 
 	@Override
-	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		guiGraphics.drawString(this.font, Component.translatable("gui.minigames.minigame_gui_achievement_run.label_achievement_run"), -90, -20, -12829636, false);
+	protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+		guiGraphics.text(this.font, Component.translatable("gui.minigames.minigame_gui_achievement_run.label_achievement_run"), -90, -20, -12829636, false);
 	}
 
 	@Override
 	public void init() {
 		super.init();
-		hp = new EditBox(this.font, this.leftPos + 182, this.topPos + 83, 47, 18, Component.translatable("gui.minigames.minigame_gui_achievement_run.hp"));
+		hp = new EditBox(this.font, this.leftPos + 181, this.topPos + 82, 49, 20, Component.translatable("gui.minigames.minigame_gui_achievement_run.hp"));
 		hp.setMaxLength(8192);
 		hp.setResponder(content -> {
 			if (!menuStateUpdateActive)
@@ -165,8 +159,8 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 			}
 		}).bounds(this.leftPos + 38, this.topPos + 163, 98, 20).build();
 		this.addRenderableWidget(button_start_normal);
-		imagebutton_compass_16 = new ImageButton(this.leftPos + -95, this.topPos + 182, 36, 36,
-				new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/compass_16.png"), ResourceLocation.parse("minigames:textures/screens/selectedgamecompass.png")), e -> {
+		imagebutton_compass_16 = new ImageButton(this.leftPos + -95, this.topPos + 182, 36, 36, new WidgetSprites(Identifier.parse("minigames:textures/screens/compass_16.png"), Identifier.parse("minigames:textures/screens/selectedgamecompass.png")),
+				e -> {
 					int x = MinigameGUIAchievementRunScreen.this.x;
 					int y = MinigameGUIAchievementRunScreen.this.y;
 					if (true) {
@@ -175,22 +169,21 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 					}
 				}) {
 			@Override
-			public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprites.get(isActive(), isHoveredOrFocused()), getX(), getY(), 0, 0, width, height, width, height);
 			}
 		};
 		this.addRenderableWidget(imagebutton_compass_16);
-		imagebutton_bucket = new ImageButton(this.leftPos + 235, this.topPos + 181, 32, 32, new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/bucket.png"), ResourceLocation.parse("minigames:textures/screens/selectcolor.png")),
-				e -> {
-					int x = MinigameGUIAchievementRunScreen.this.x;
-					int y = MinigameGUIAchievementRunScreen.this.y;
-					if (true) {
-						ClientPacketDistributor.sendToServer(new MinigameGUIAchievementRunButtonMessage(2, x, y, z));
-						MinigameGUIAchievementRunButtonMessage.handleButtonAction(entity, 2, x, y, z);
-					}
-				}) {
+		imagebutton_bucket = new ImageButton(this.leftPos + 235, this.topPos + 181, 32, 32, new WidgetSprites(Identifier.parse("minigames:textures/screens/bucket.png"), Identifier.parse("minigames:textures/screens/selectcolor.png")), e -> {
+			int x = MinigameGUIAchievementRunScreen.this.x;
+			int y = MinigameGUIAchievementRunScreen.this.y;
+			if (true) {
+				ClientPacketDistributor.sendToServer(new MinigameGUIAchievementRunButtonMessage(2, x, y, z));
+				MinigameGUIAchievementRunButtonMessage.handleButtonAction(entity, 2, x, y, z);
+			}
+		}) {
 			@Override
-			public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprites.get(isActive(), isHoveredOrFocused()), getX(), getY(), 0, 0, width, height, width, height);
 			}
 		};

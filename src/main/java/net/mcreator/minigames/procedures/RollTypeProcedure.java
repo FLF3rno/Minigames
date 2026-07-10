@@ -10,6 +10,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -40,7 +41,8 @@ public class RollTypeProcedure {
 				MinigamesModVariables.MapVariables.get(world).achievmentType = MinigamesModVariables.MapVariables.get(world).achievmentType + 1;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"playsound minigames:rollaudio player @a ~ ~ ~ 1000000 1");
 			}
 			if (MinigamesModVariables.MapVariables.get(world).achivementTypeTimer == 3) {
@@ -99,7 +101,8 @@ public class RollTypeProcedure {
 				MinigamesModVariables.MapVariables.get(world).achievmentType = Mth.nextInt(RandomSource.create(), 1, 4);
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"playsound block.note_block.pling player @a ~ ~ ~ 1000000000000 2");
 			}
 			if (MinigamesModVariables.MapVariables.get(world).achivementTypeTimer == 240) {

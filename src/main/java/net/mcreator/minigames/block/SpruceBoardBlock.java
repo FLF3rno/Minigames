@@ -37,11 +37,6 @@ public class SpruceBoardBlock extends Block implements EntityBlock {
 	private Function<BlockState, VoxelShape> makeShapes() {
 		return this.getShapeForEachState(state -> {
 			return switch (state.getValue(FACING)) {
-				default -> switch (state.getValue(FACE)) {
-					case FLOOR -> box(0, 0, 0, 16, 1, 16);
-					case WALL -> box(0, 0, 0, 16, 16, 1);
-					case CEILING -> box(0, 15, 0, 16, 16, 16);
-				};
 				case NORTH -> switch (state.getValue(FACE)) {
 					case FLOOR -> box(0, 0, 0, 16, 1, 16);
 					case WALL -> box(0, 0, 15, 16, 16, 16);
@@ -55,6 +50,11 @@ public class SpruceBoardBlock extends Block implements EntityBlock {
 				case WEST -> switch (state.getValue(FACE)) {
 					case FLOOR -> box(0, 0, 0, 16, 1, 16);
 					case WALL -> box(15, 0, 0, 16, 16, 16);
+					case CEILING -> box(0, 15, 0, 16, 16, 16);
+				};
+				default -> switch (state.getValue(FACE)) {
+					case FLOOR -> box(0, 0, 0, 16, 1, 16);
+					case WALL -> box(0, 0, 0, 16, 16, 1);
 					case CEILING -> box(0, 15, 0, 16, 16, 16);
 				};
 			};
@@ -77,7 +77,7 @@ public class SpruceBoardBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getLightBlock(BlockState state) {
+	public int getLightDampening(BlockState state) {
 		return 0;
 	}
 
@@ -94,7 +94,10 @@ public class SpruceBoardBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(FACE, faceForDirection(context.getNearestLookingDirection())).setValue(FACING, context.getHorizontalDirection().getOpposite());
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(FACE, faceForDirection(context.getNearestLookingDirection())).setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {
@@ -141,7 +144,7 @@ public class SpruceBoardBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos, Direction direction) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof SpruceBoardBlockEntity be)
 			return AbstractContainerMenu.getRedstoneSignalFromContainer(be);

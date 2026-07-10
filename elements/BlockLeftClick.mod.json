@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Block Left Click",
@@ -8,9 +8,7 @@
       "value": -16777216,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "NEUTRAL",
     "renderStatusInInventory": false,
@@ -19,17 +17,13 @@
     "modifiers": [
       {
         "equipmentSlot": "any",
-        "attribute": {
-          "value": "ENTITY_REACH"
-        },
+        "attribute": "ENTITY_REACH",
         "amount": -110.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "any",
-        "attribute": {
-          "value": "BLOCK_REACH"
-        },
+        "attribute": "BLOCK_REACH",
         "amount": -100.0,
         "operation": "ADD_VALUE"
       }

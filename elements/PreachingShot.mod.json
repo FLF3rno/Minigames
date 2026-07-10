@@ -1,14 +1,10 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "projectile",
   "definition": {
-    "projectileItem": {
-      "value": "CUSTOM:PotentSulfur"
-    },
+    "projectileItem": "CUSTOM:PotentSulfur",
     "showParticles": false,
-    "actionSound": {
-      "value": ""
-    },
+    "actionSound": "",
     "igniteFire": false,
     "disableGravity": true,
     "disableDiscarding": false,
@@ -19,11 +15,7 @@
     "customModelTexture": "",
     "modelWidth": 0.5,
     "modelHeight": 0.5,
-    "onHitsEntity": {
-      "name": "PreachingShotHit"
-    },
-    "onFlyingTick": {
-      "name": "PreachingShotTick"
-    }
+    "onHitsEntity": "PreachingShotHit",
+    "onFlyingTick": "PreachingShotTick"
   }
 }

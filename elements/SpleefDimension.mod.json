@@ -1,20 +1,14 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "dimension",
   "definition": {
     "biomesInDimension": [
-      {
-        "value": "snowy_tundra"
-      }
+      "snowy_tundra"
     ],
     "biomesInDimensionCaves": [],
     "worldGenType": "End like gen",
-    "mainFillerBlock": {
-      "value": "Blocks.STONE#2"
-    },
-    "fluidBlock": {
-      "value": "Blocks.AIR"
-    },
+    "mainFillerBlock": "Blocks.STONE#2",
+    "fluidBlock": "Blocks.AIR",
     "seaLevel": 0,
     "generateOreVeins": true,
     "generateAquifers": true,
@@ -34,6 +28,8 @@
     "fixedTimeValue": 0,
     "coordinateScale": 1.0,
     "infiniburnTag": "minecraft:infiniburn_overworld",
+    "enableCustomSkyboxTextures": false,
+    "enableCustomSunMoonTextures": false,
     "bedWorks": false,
     "hasSkyLight": true,
     "imitateOverworldBehaviour": false,
@@ -42,16 +38,10 @@
     "minMonsterSpawnLightLimit": 0,
     "maxMonsterSpawnLightLimit": 7,
     "monsterSpawnBlockLightLimit": 0,
-    "portalFrame": {
-      "value": ""
-    },
-    "portalParticles": {
-      "value": "PORTAL"
-    },
+    "portalFrame": "",
+    "portalParticles": "PORTAL",
     "portalLuminance": 0,
-    "portalSound": {
-      "value": "block.portal.ambient"
-    },
+    "portalSound": "block.portal.ambient",
     "enableIgniter": true,
     "igniterName": "Spleef Dimension Portal Igniter",
     "igniterRarity": "COMMON",
@@ -59,9 +49,7 @@
       "fixedValue": []
     },
     "creativeTabs": [
-      {
-        "value": "TOOLS"
-      }
+      "TOOLS"
     ],
     "texture": "",
     "portalTexture": "",

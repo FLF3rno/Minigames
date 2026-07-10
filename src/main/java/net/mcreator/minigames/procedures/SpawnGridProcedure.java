@@ -25,9 +25,9 @@ public class SpawnGridProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
 		spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
-		for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index0++) {
+		for (int index3 = 0; index3 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index3++) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
-			for (int index1 = 0; index1 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index1++) {
+			for (int index4 = 0; index4 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index4++) {
 				world.setBlock(BlockPos.containing(spawnRoomX, 300, spawnRoomZ), MinigamesModBlocks.EMPTY_GRID_BLOCK.get().defaultBlockState(), 3);
 				spawnRoomX = spawnRoomX - 1;
 			}

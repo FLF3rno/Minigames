@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/lootgrid",
     "particle": "minigames:block/lootgrid"
-  },
-  "render_type": "solid"
+  }
 }

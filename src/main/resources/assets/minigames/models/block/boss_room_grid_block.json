@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/bossgrid",
     "particle": "minigames:block/bossgrid"
-  },
-  "render_type": "solid"
+  }
 }

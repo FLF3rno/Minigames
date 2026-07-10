@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import net.mcreator.minigames.item.inventory.GameCompassInventoryCapability;
 import net.mcreator.minigames.item.inventory.DungeonCompassInventoryCapability;
@@ -233,7 +233,7 @@ public class MinigamesModItems {
 	// Start of user code block custom items
 	// End of user code block custom items
 	private static <I extends Item> DeferredItem<I> register(String name, Function<Item.Properties, ? extends I> supplier) {
-		return REGISTRY.registerItem(name, supplier, new Item.Properties());
+		return REGISTRY.registerItem(name, supplier, Item.Properties::new);
 	}
 
 	private static DeferredItem<Item> block(DeferredHolder<Block, Block> block) {
@@ -241,21 +241,21 @@ public class MinigamesModItems {
 	}
 
 	private static DeferredItem<Item> block(DeferredHolder<Block, Block> block, Item.Properties properties) {
-		return REGISTRY.registerItem(block.getId().getPath(), prop -> new BlockItem(block.get(), prop), properties);
+		return REGISTRY.registerItem(block.getId().getPath(), prop -> new BlockItem(block.get(), prop), () -> properties);
 	}
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new GameCompassInventoryCapability(stack), GAME_COMPASS.get());
-		event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> new DungeonCompassInventoryCapability(stack), DUNGEON_COMPASS.get());
+		event.registerItem(Capabilities.Item.ITEM, (stack, access) -> new DungeonCompassInventoryCapability(access), DUNGEON_COMPASS.get());
+		event.registerItem(Capabilities.Item.ITEM, (stack, access) -> new GameCompassInventoryCapability(access), GAME_COMPASS.get());
 	}
 
 	@EventBusSubscriber(Dist.CLIENT)
 	public static class ItemsClientSideHandler {
 		@SubscribeEvent
 		public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event) {
-			event.register(ResourceLocation.parse("minigames:magma_dart/shockwave"), MagmaDartItem.ShockwaveProperty.MAP_CODEC);
-			event.register(ResourceLocation.parse("minigames:blessed_cursed_crossbow/loadstate"), BlessedCursedCrossbowItem.LoadstateProperty.MAP_CODEC);
+			event.register(Identifier.parse("minigames:magma_dart/shockwave"), MagmaDartItem.ShockwaveProperty.MAP_CODEC);
+			event.register(Identifier.parse("minigames:blessed_cursed_crossbow/loadstate"), BlessedCursedCrossbowItem.LoadstateProperty.MAP_CODEC);
 		}
 	}
 }

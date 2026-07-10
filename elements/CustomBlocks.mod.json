@@ -1,11 +1,9 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "tab",
   "definition": {
     "name": "Dungeon Blocks",
-    "icon": {
-      "value": "CUSTOM:ChiseledQuartzWall"
-    },
+    "icon": "CUSTOM:ChiseledQuartzWall",
     "showSearch": true
   }
 }

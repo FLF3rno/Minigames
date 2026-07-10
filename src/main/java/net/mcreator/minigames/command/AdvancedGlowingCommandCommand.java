@@ -1,7 +1,5 @@
 package net.mcreator.minigames.command;
 
-import org.checkerframework.checker.units.qual.s;
-
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,7 +22,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 public class AdvancedGlowingCommandCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("effects").requires(s -> s.hasPermission(4))
+		event.getDispatcher().register(Commands.literal("effects").requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
 				.then(Commands.literal("give").then(Commands.argument("target", EntityArgument.entities()).then(Commands.literal("advanced_glowing").then(Commands.argument("seconds", DoubleArgumentType.doubleArg())
 						.then(Commands.argument("transparency", DoubleArgumentType.doubleArg()).then(Commands.argument("hideParticles", BoolArgumentType.bool()).then(Commands.argument("color", StringArgumentType.word()).executes(arguments -> {
 							Level world = arguments.getSource().getUnsidedLevel();

@@ -7,14 +7,14 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.Minecraft;
 
@@ -29,7 +29,7 @@ public abstract class ItemInHandRendererMixin {
 	private EntityRenderDispatcher dispatcher = null;
 
 	@Inject(method = "renderHandsWithItems", at = @At("HEAD"), cancellable = true)
-	private void renderHandsWithItems(float f, PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, LocalPlayer localPlayer, int i, CallbackInfo ci) {
+	private void renderHandsWithItems(float f, PoseStack poseStack, SubmitNodeCollector collector, LocalPlayer localPlayer, int i, CallbackInfo ci) {
 		if (master == null) {
 			if (!MinigamesModPlayerAnimationAPI.animations.isEmpty())
 				master = "minigames";
@@ -44,9 +44,9 @@ public abstract class ItemInHandRendererMixin {
 			CompoundTag playerData = player.getPersistentData();
 			// Hack to make animations progress when in first person without first person mode enabled
 			if (!playerData.getStringOr("PlayerCurrentAnimation", "").isEmpty() && (!playerData.getBooleanOr("FirstPersonAnimation", false) || playerData.getBooleanOr("ResetPlayerAnimation", false))) {
-				PlayerRenderer renderer = (PlayerRenderer) dispatcher.getRenderer((AbstractClientPlayer) player);
-				PlayerModel model = renderer.getModel();
-				PlayerRenderState renderState = renderer.createRenderState((AbstractClientPlayer) player, f);
+				AvatarRenderer renderer = (AvatarRenderer) dispatcher.getRenderer((AbstractClientPlayer) player);
+				PlayerModel model = (PlayerModel) renderer.getModel();
+				AvatarRenderState renderState = (AvatarRenderState) renderer.createRenderState((AbstractClientPlayer) player, f);
 				renderState.ageInTicks = player.tickCount + f;
 				model.setupAnim(renderState);
 			}

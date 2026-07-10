@@ -1,7 +1,5 @@
 package net.mcreator.minigames.client.screens;
 
-import org.checkerframework.checker.units.qual.h;
-
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -33,19 +31,19 @@ public class NextLayerDestroyedInSpleefOverlay {
 			z = entity.getZ();
 		}
 		if (DisplaySpleefTimerProcedure.execute(world)) {
-			event.getGuiGraphics().drawString(Minecraft.getInstance().font,
+			event.getGuiGraphics().text(Minecraft.getInstance().font,
 
 					NextLayerDestroyedInDisplayProcedure.execute(world), w / 2 + -66, 4, -16777216, false);
-			event.getGuiGraphics().drawString(Minecraft.getInstance().font,
+			event.getGuiGraphics().text(Minecraft.getInstance().font,
 
 					NextLayerDestroyedInDisplayProcedure.execute(world), w / 2 + -65, 3, -16777216, false);
-			event.getGuiGraphics().drawString(Minecraft.getInstance().font,
+			event.getGuiGraphics().text(Minecraft.getInstance().font,
 
 					NextLayerDestroyedInDisplayProcedure.execute(world), w / 2 + -65, 5, -16777216, false);
-			event.getGuiGraphics().drawString(Minecraft.getInstance().font,
+			event.getGuiGraphics().text(Minecraft.getInstance().font,
 
 					NextLayerDestroyedInDisplayProcedure.execute(world), w / 2 + -64, 4, -16777216, false);
-			event.getGuiGraphics().drawString(Minecraft.getInstance().font,
+			event.getGuiGraphics().text(Minecraft.getInstance().font,
 
 					NextLayerDestroyedInDisplayProcedure.execute(world), w / 2 + -65, 4, -1, false);
 		}

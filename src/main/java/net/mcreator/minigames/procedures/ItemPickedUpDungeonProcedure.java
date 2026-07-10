@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.BlockPos;
 
@@ -29,7 +29,7 @@ public class ItemPickedUpDungeonProcedure {
 		double spawnRoomZ = 0;
 		double range = 0;
 		boolean explodeOtherPedestals = false;
-		if ((world.getBlockState(BlockPos.containing(x, y - 0.5, z))).is(BlockTags.create(ResourceLocation.parse("minigames:pedestal")))) {
+		if ((world.getBlockState(BlockPos.containing(x, y - 0.5, z))).is(BlockTags.create(Identifier.parse("minigames:pedestal")))) {
 			if (!item.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("pickedUp", false)) {
 				if (!world.isClientSide()) {
 					BlockPos _bp = BlockPos.containing(x, y - 0.5, z);
@@ -55,9 +55,9 @@ public class ItemPickedUpDungeonProcedure {
 				range = 12;
 				spawnRoomX = x + Math.round(range / 2);
 				spawnRoomZ = z + Math.round(range / 2);
-				for (int index0 = 0; index0 < (int) range; index0++) {
+				for (int index68 = 0; index68 < (int) range; index68++) {
 					spawnRoomX = x + Math.round(range / 2);
-					for (int index1 = 0; index1 < (int) range; index1++) {
+					for (int index69 = 0; index69 < (int) range; index69++) {
 						if (getBlockNBTNumber(world, BlockPos.containing(x, y - 0.5, z), "player") == getBlockNBTNumber(world, BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ), "player")) {
 							if (!getBlockNBTLogic(world, BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ), "empty")) {
 								ExplodeProcedure.execute(world, spawnRoomX, y, spawnRoomZ, entity, false, true, 0, 0, 0.5, "normal");

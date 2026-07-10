@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,7 +20,7 @@ import net.mcreator.minigames.MinigamesMod;
 
 @EventBusSubscriber
 public record VoteNoMessage(int eventType, int pressedms) implements CustomPacketPayload {
-	public static final Type<VoteNoMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "key_vote_no"));
+	public static final Type<VoteNoMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "key_vote_no"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, VoteNoMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, VoteNoMessage message) -> {
 		buffer.writeInt(message.eventType);
 		buffer.writeInt(message.pressedms);

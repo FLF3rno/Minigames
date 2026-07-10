@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "livingentity",
   "definition": {
     "mobName": "Candlehead",
@@ -37,9 +37,7 @@
     ],
     "animations": [
       {
-        "animation": {
-          "value": "CUSTOM:shieldagentAnimation.rotate"
-        },
+        "animation": "CUSTOM:shieldagentAnimation.rotate",
         "speed": 0.85,
         "walking": false,
         "amplitude": 1.0
@@ -60,31 +58,17 @@
     },
     "spawnEggTexture": "",
     "creativeTabs": [
-      {
-        "value": "MISC"
-      }
+      "MISC"
     ],
     "isBoss": false,
     "bossBarColor": "PINK",
     "bossBarType": "PROGRESS",
-    "equipmentMainHand": {
-      "value": ""
-    },
-    "equipmentOffHand": {
-      "value": ""
-    },
-    "equipmentHelmet": {
-      "value": ""
-    },
-    "equipmentBody": {
-      "value": ""
-    },
-    "equipmentLeggings": {
-      "value": ""
-    },
-    "equipmentBoots": {
-      "value": ""
-    },
+    "equipmentMainHand": "",
+    "equipmentOffHand": "",
+    "equipmentHelmet": "",
+    "equipmentBody": "",
+    "equipmentLeggings": "",
+    "equipmentBoots": "",
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEFINED",
     "attackStrength": 3,
@@ -124,24 +108,12 @@
     "immuneToAnvil": true,
     "immuneToWither": true,
     "immuneToDragonBreath": true,
-    "mobDrop": {
-      "value": ""
-    },
-    "livingSound": {
-      "value": ""
-    },
-    "hurtSound": {
-      "value": "block.amethyst_block.break"
-    },
-    "deathSound": {
-      "value": ""
-    },
-    "stepSound": {
-      "value": ""
-    },
-    "raidCelebrationSound": {
-      "value": ""
-    },
+    "mobDrop": "",
+    "livingSound": "",
+    "hurtSound": "block.amethyst_block.break",
+    "deathSound": "",
+    "stepSound": "",
+    "raidCelebrationSound": "",
     "entityDataEntries": [
       {
         "min": -2147483648,
@@ -172,15 +144,9 @@
         "value": 0
       }
     ],
-    "whenMobIsHurt": {
-      "name": "ShieldAngelHurt"
-    },
-    "onMobTickUpdate": {
-      "name": "ShieldAngelTick"
-    },
-    "onInitialSpawn": {
-      "name": "ShieldAngelSpawn"
-    },
+    "whenMobIsHurt": "ShieldAngelHurt",
+    "onMobTickUpdate": "ShieldAngelTick",
+    "onInitialSpawn": "ShieldAngelSpawn",
     "hasAI": true,
     "aiBase": "(none)",
     "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"></block></xml>",
@@ -188,9 +154,7 @@
     "tameable": false,
     "breedTriggerItems": [],
     "ranged": false,
-    "rangedAttackItem": {
-      "value": ""
-    },
+    "rangedAttackItem": "",
     "rangedItemType": "Default item",
     "rangedAttackInterval": 20,
     "rangedAttackRadius": 10.0,

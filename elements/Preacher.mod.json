@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "livingentity",
   "definition": {
     "mobName": "Preacher",
@@ -31,17 +31,13 @@
     ],
     "animations": [
       {
-        "animation": {
-          "value": "CUSTOM:preacherAnimation.read"
-        },
+        "animation": "CUSTOM:preacherAnimation.read",
         "speed": 1.0,
         "walking": false,
         "amplitude": 1.0
       },
       {
-        "animation": {
-          "value": "CUSTOM:preacherAnimation.attack"
-        },
+        "animation": "CUSTOM:preacherAnimation.attack",
         "speed": 1.0,
         "walking": false,
         "amplitude": 1.0
@@ -62,31 +58,17 @@
     },
     "spawnEggTexture": "",
     "creativeTabs": [
-      {
-        "value": "MISC"
-      }
+      "MISC"
     ],
     "isBoss": false,
     "bossBarColor": "PINK",
     "bossBarType": "PROGRESS",
-    "equipmentMainHand": {
-      "value": ""
-    },
-    "equipmentOffHand": {
-      "value": ""
-    },
-    "equipmentHelmet": {
-      "value": ""
-    },
-    "equipmentBody": {
-      "value": ""
-    },
-    "equipmentLeggings": {
-      "value": ""
-    },
-    "equipmentBoots": {
-      "value": ""
-    },
+    "equipmentMainHand": "",
+    "equipmentOffHand": "",
+    "equipmentHelmet": "",
+    "equipmentBody": "",
+    "equipmentLeggings": "",
+    "equipmentBoots": "",
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEFINED",
     "attackStrength": 3,
@@ -126,24 +108,12 @@
     "immuneToAnvil": false,
     "immuneToWither": false,
     "immuneToDragonBreath": false,
-    "mobDrop": {
-      "value": ""
-    },
-    "livingSound": {
-      "value": ""
-    },
-    "hurtSound": {
-      "value": "entity.zombie.hurt"
-    },
-    "deathSound": {
-      "value": "entity.zombie.death"
-    },
-    "stepSound": {
-      "value": "entity.zombie.step"
-    },
-    "raidCelebrationSound": {
-      "value": ""
-    },
+    "mobDrop": "",
+    "livingSound": "",
+    "hurtSound": "entity.zombie.hurt",
+    "deathSound": "entity.zombie.death",
+    "stepSound": "entity.zombie.step",
+    "raidCelebrationSound": "",
     "entityDataEntries": [
       {
         "min": -2147483648,
@@ -160,9 +130,7 @@
         "value": 0
       }
     ],
-    "onMobTickUpdate": {
-      "name": "PreacherTick"
-    },
+    "onMobTickUpdate": "PreacherTick",
     "hasAI": true,
     "aiBase": "(none)",
     "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"swim_in_water\"><field name=\"condition\">null,null</field></block></next></block></xml>",
@@ -170,9 +138,7 @@
     "tameable": false,
     "breedTriggerItems": [],
     "ranged": false,
-    "rangedAttackItem": {
-      "value": ""
-    },
+    "rangedAttackItem": "",
     "rangedItemType": "Default item",
     "rangedAttackInterval": 20,
     "rangedAttackRadius": 10.0,

@@ -1,12 +1,11 @@
 package net.mcreator.minigames;
 
-import org.checkerframework.checker.units.qual.t;
-import org.checkerframework.checker.units.qual.min;
-
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import net.neoforged.neoforge.client.renderstate.AvatarRenderStateModifier;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.event.RenderArmEvent;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationLoader;
+import net.neoforged.fml.jarcontents.JarContents;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.ModList;
@@ -16,23 +15,20 @@ import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.util.Mth;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.Minecraft;
 
-import java.util.stream.Stream;
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
-
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.nio.charset.StandardCharsets;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 
@@ -462,28 +458,23 @@ public class MinigamesModPlayerAnimationAPI {
 		private static void loadClientSideAnimations() {
 			List<JsonObject> jsons = new ArrayList<>();
 			List<String> namespaces = new ArrayList<>();
+			Gson gson = new Gson();
 			ModList.get().forEachModFile(modFile -> {
-				String modId = modFile.getModInfos().get(0).getModId();
-				Path rootPath = modFile.findResource("data");
-				if (rootPath == null || !Files.exists(rootPath)) {
-					return;
-				}
+				String modId = modFile.getId();
+				JarContents contents = modFile.getContents();
+				String animationsFolder = "data/" + modId + "/bedrock_animations";
 				try {
-					Path animationsPath = rootPath.resolve(modId).resolve("bedrock_animations");
-					if (Files.exists(animationsPath) && Files.isDirectory(animationsPath)) {
-						try (Stream<Path> paths = Files.walk(animationsPath)) {
-							paths.filter(Files::isRegularFile).filter(path -> path.toString().endsWith(".json")).forEach(animationFile -> {
-								try {
-									String content = Files.readString(animationFile, StandardCharsets.UTF_8);
-									JsonObject jsonObject = new Gson().fromJson(content, JsonObject.class);
-									jsons.add(jsonObject);
-									namespaces.add(modId);
-								} catch (Exception e) {
-									System.err.println("Failed to load animation file: " + animationFile + " - " + e.getMessage());
-								}
-							});
+					contents.visitContent(animationsFolder, (relativePath, resource) -> {
+						if (relativePath.endsWith(".json")) {
+							try (var reader = resource.bufferedReader()) {
+								JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+								jsons.add(jsonObject);
+								namespaces.add(modId);
+							} catch (Exception e) {
+								System.err.println("Failed to load animation file: " + relativePath + " - " + e.getMessage());
+							}
 						}
-					}
+					});
 				} catch (Exception e) {
 					System.err.println("Failed to process animations for mod: " + modId + " - " + e.getMessage());
 				}
@@ -514,11 +505,16 @@ public class MinigamesModPlayerAnimationAPI {
 
 	@EventBusSubscriber(value = Dist.CLIENT)
 	public static class ClientAttachments {
-		public static final ContextKey<Player> PLAYER = new ContextKey<>(ResourceLocation.parse("c:player_attachment"));
+		public static final ContextKey<Player> PLAYER = new ContextKey<>(Identifier.parse("c:player_attachment"));
 
 		@SubscribeEvent
 		public static void register(RegisterRenderStateModifiersEvent event) {
-			event.registerEntityModifier(PlayerRenderer.class, (entity, state) -> state.setRenderData(PLAYER, (Player) entity));
+			event.registerAvatarEntityModifier(new AvatarRenderStateModifier() {
+				@Override
+				public <T extends Avatar & ClientAvatarEntity> void accept(T avatar, AvatarRenderState renderState) {
+					renderState.setRenderData(PLAYER, (Player) avatar);
+				}
+			});
 		}
 	}
 

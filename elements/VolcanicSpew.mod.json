@@ -1,14 +1,10 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "projectile",
   "definition": {
-    "projectileItem": {
-      "value": "Blocks.AIR"
-    },
+    "projectileItem": "Blocks.AIR",
     "showParticles": false,
-    "actionSound": {
-      "value": ""
-    },
+    "actionSound": "",
     "igniteFire": false,
     "disableGravity": false,
     "disableDiscarding": true,
@@ -19,11 +15,7 @@
     "customModelTexture": "",
     "modelWidth": 0.19999999999999998,
     "modelHeight": 0.19999999999999998,
-    "onHitsBlock": {
-      "name": "VolcanicSpewHitsBlock"
-    },
-    "onFlyingTick": {
-      "name": "VolcanicSpewFlying"
-    }
+    "onHitsBlock": "VolcanicSpewHitsBlock",
+    "onFlyingTick": "VolcanicSpewFlying"
   }
 }

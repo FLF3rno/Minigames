@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "livingentity",
   "definition": {
     "mobName": "Churchgoer",
@@ -31,31 +31,21 @@
     ],
     "animations": [
       {
-        "animation": {
-          "value": "CUSTOM:gravediggerAnimation.walk"
-        },
+        "animation": "CUSTOM:gravediggerAnimation.walk",
         "speed": 1.0,
-        "condition": {
-          "name": "AnimationWalking"
-        },
+        "condition": "AnimationWalking",
         "walking": true,
         "amplitude": 1.0
       },
       {
-        "animation": {
-          "value": "CUSTOM:candleheadAnimation.attack"
-        },
+        "animation": "CUSTOM:candleheadAnimation.attack",
         "speed": 1.0,
-        "condition": {
-          "name": "AnimationAttack"
-        },
+        "condition": "AnimationAttack",
         "walking": false,
         "amplitude": 1.0
       },
       {
-        "animation": {
-          "value": "CUSTOM:gravediggerAnimation.dig"
-        },
+        "animation": "CUSTOM:gravediggerAnimation.dig",
         "speed": 1.0,
         "walking": false,
         "amplitude": 1.0
@@ -76,31 +66,17 @@
     },
     "spawnEggTexture": "",
     "creativeTabs": [
-      {
-        "value": "MISC"
-      }
+      "MISC"
     ],
     "isBoss": false,
     "bossBarColor": "PINK",
     "bossBarType": "PROGRESS",
-    "equipmentMainHand": {
-      "value": ""
-    },
-    "equipmentOffHand": {
-      "value": ""
-    },
-    "equipmentHelmet": {
-      "value": ""
-    },
-    "equipmentBody": {
-      "value": ""
-    },
-    "equipmentLeggings": {
-      "value": ""
-    },
-    "equipmentBoots": {
-      "value": ""
-    },
+    "equipmentMainHand": "",
+    "equipmentOffHand": "",
+    "equipmentHelmet": "",
+    "equipmentBody": "",
+    "equipmentLeggings": "",
+    "equipmentBoots": "",
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEFINED",
     "attackStrength": 3,
@@ -140,24 +116,12 @@
     "immuneToAnvil": false,
     "immuneToWither": false,
     "immuneToDragonBreath": false,
-    "mobDrop": {
-      "value": ""
-    },
-    "livingSound": {
-      "value": ""
-    },
-    "hurtSound": {
-      "value": "entity.pillager.hurt"
-    },
-    "deathSound": {
-      "value": "entity.pillager.death"
-    },
-    "stepSound": {
-      "value": ""
-    },
-    "raidCelebrationSound": {
-      "value": ""
-    },
+    "mobDrop": "",
+    "livingSound": "",
+    "hurtSound": "entity.pillager.hurt",
+    "deathSound": "entity.pillager.death",
+    "stepSound": "",
+    "raidCelebrationSound": "",
     "entityDataEntries": [
       {
         "min": -2147483648,
@@ -174,9 +138,7 @@
     "tameable": false,
     "breedTriggerItems": [],
     "ranged": false,
-    "rangedAttackItem": {
-      "value": ""
-    },
+    "rangedAttackItem": "",
     "rangedItemType": "Default item",
     "rangedAttackInterval": 20,
     "rangedAttackRadius": 10.0,

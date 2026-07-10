@@ -1,20 +1,14 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "dimension",
   "definition": {
     "biomesInDimension": [
-      {
-        "value": "void"
-      }
+      "void"
     ],
     "biomesInDimensionCaves": [],
     "worldGenType": "Normal world gen",
-    "mainFillerBlock": {
-      "value": "CUSTOM:StartingRoomGridBlock"
-    },
-    "fluidBlock": {
-      "value": "Blocks.AIR"
-    },
+    "mainFillerBlock": "CUSTOM:StartingRoomGridBlock",
+    "fluidBlock": "Blocks.AIR",
     "seaLevel": 63,
     "generateOreVeins": false,
     "generateAquifers": false,
@@ -34,6 +28,8 @@
     "fixedTimeValue": 0,
     "coordinateScale": 1.0,
     "infiniburnTag": "minecraft:infiniburn_overworld",
+    "enableCustomSkyboxTextures": false,
+    "enableCustomSunMoonTextures": false,
     "bedWorks": true,
     "hasSkyLight": true,
     "imitateOverworldBehaviour": true,
@@ -42,16 +38,10 @@
     "minMonsterSpawnLightLimit": 0,
     "maxMonsterSpawnLightLimit": 7,
     "monsterSpawnBlockLightLimit": 0,
-    "portalFrame": {
-      "value": ""
-    },
-    "portalParticles": {
-      "value": "PORTAL"
-    },
+    "portalFrame": "",
+    "portalParticles": "PORTAL",
     "portalLuminance": 0,
-    "portalSound": {
-      "value": "block.portal.ambient"
-    },
+    "portalSound": "block.portal.ambient",
     "enableIgniter": true,
     "igniterName": "Dungeon Dimension Portal Igniter",
     "igniterRarity": "COMMON",
@@ -59,9 +49,7 @@
       "fixedValue": []
     },
     "creativeTabs": [
-      {
-        "value": "TOOLS"
-      }
+      "TOOLS"
     ],
     "texture": "",
     "portalTexture": "",

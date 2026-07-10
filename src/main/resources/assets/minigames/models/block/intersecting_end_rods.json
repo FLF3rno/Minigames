@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/intersecting_end_rod",
     "particle": "minigames:block/intersecting_end_rod"
-  },
-  "render_type": "solid"
+  }
 }

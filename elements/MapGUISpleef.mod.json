@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -43,9 +43,7 @@
           "name": "button_start_normal",
           "text": "Confirm",
           "isUndecorated": false,
-          "onClick": {
-            "name": "SelectSpleef"
-          },
+          "onClick": "SelectSpleef",
           "width": 98,
           "height": 20,
           "x": 164,
@@ -58,9 +56,7 @@
         "data": {
           "image": "selectedoverlay.png",
           "use1Xscale": true,
-          "displayCondition": {
-            "name": "BalloonsSelected"
-          },
+          "displayCondition": "BalloonsSelected",
           "x": 160,
           "y": 36,
           "locked": false
@@ -82,9 +78,7 @@
           "name": "imagebutton_maphovered",
           "image": "nothing.png",
           "hoveredImage": "nothing.png",
-          "onClick": {
-            "name": "ActivateBalloons"
-          },
+          "onClick": "ActivateBalloons",
           "x": 170,
           "y": 47,
           "locked": false
@@ -95,9 +89,7 @@
         "data": {
           "image": "selectedoverlay.png",
           "use1Xscale": true,
-          "displayCondition": {
-            "name": "SolarSystemSelected"
-          },
+          "displayCondition": "SolarSystemSelected",
           "x": 160,
           "y": 114,
           "locked": false
@@ -152,9 +144,7 @@
         "data": {
           "image": "selectedoverlay.png",
           "use1Xscale": true,
-          "displayCondition": {
-            "name": "SteampunkSelected"
-          },
+          "displayCondition": "SteampunkSelected",
           "x": 49,
           "y": 37,
           "locked": false
@@ -182,9 +172,7 @@
         "data": {
           "image": "selectedoverlay.png",
           "use1Xscale": true,
-          "displayCondition": {
-            "name": "ChristmasSelected"
-          },
+          "displayCondition": "ChristmasSelected",
           "x": 49,
           "y": 115,
           "locked": false
@@ -236,9 +224,7 @@
           "name": "imagebutton_nothing",
           "image": "nothing.png",
           "hoveredImage": "nothing.png",
-          "onClick": {
-            "name": "ActivateSolarSystem"
-          },
+          "onClick": "ActivateSolarSystem",
           "x": 170,
           "y": 125,
           "locked": false
@@ -250,9 +236,7 @@
           "name": "imagebutton_nothing1",
           "image": "nothing.png",
           "hoveredImage": "nothing.png",
-          "onClick": {
-            "name": "ActivateSteampunk"
-          },
+          "onClick": "ActivateSteampunk",
           "x": 58,
           "y": 47,
           "locked": false
@@ -281,9 +265,7 @@
           "name": "imagebutton_nothing2",
           "image": "nothing.png",
           "hoveredImage": "nothing.png",
-          "onClick": {
-            "name": "ActivateChristmas"
-          },
+          "onClick": "ActivateChristmas",
           "x": 58,
           "y": 125,
           "locked": false

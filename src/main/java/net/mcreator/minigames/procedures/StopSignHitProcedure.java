@@ -4,8 +4,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 
 public class StopSignHitProcedure {
@@ -30,7 +31,12 @@ public class StopSignHitProcedure {
 			value = new Vec3((value.x()), (value.y()), (value.z() + entity.getDeltaMovement().z() * 1));
 		}
 		dmg = value.x() + value.y() + value.z();
-		entity.hurt(new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:self_damage")))), (float) (dmg * 1.2));
+		{
+			Entity _ent = entity;
+			if (_ent.level() instanceof ServerLevel _serverLevel) {
+				_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))), (float) (dmg * 1.2));
+			}
+		}
 		entity.setDeltaMovement(new Vec3(0, 0, 0));
 	}
 }

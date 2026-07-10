@@ -32,4 +32,8 @@ public class SnowbombItem extends Item {
 		SnowbombRightclickedProcedure.execute(entity, entity.getItemInHand(hand));
 		return ar;
 	}
+
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged && !oldStack.equals(newStack);
+	}
 }

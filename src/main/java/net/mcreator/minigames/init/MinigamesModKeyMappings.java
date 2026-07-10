@@ -12,6 +12,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.api.distmarker.Dist;
 
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 
@@ -21,7 +22,8 @@ import net.mcreator.minigames.network.DashMessage;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class MinigamesModKeyMappings {
-	public static final KeyMapping DASH = new KeyMapping("key.minigames.dash", GLFW.GLFW_KEY_F, "key.categories.movement") {
+	public static final KeyMapping.Category CATEGORY_VOTE = new KeyMapping.Category(Identifier.parse("minigames:vote"));
+	public static final KeyMapping DASH = new KeyMapping("key.minigames.dash", GLFW.GLFW_KEY_F, KeyMapping.Category.MOVEMENT) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -34,7 +36,7 @@ public class MinigamesModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping VOTE_YES = new KeyMapping("key.minigames.vote_yes", GLFW.GLFW_KEY_F9, "key.categories.vote") {
+	public static final KeyMapping VOTE_YES = new KeyMapping("key.minigames.vote_yes", GLFW.GLFW_KEY_F9, CATEGORY_VOTE) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -47,7 +49,7 @@ public class MinigamesModKeyMappings {
 			isDownOld = isDown;
 		}
 	};
-	public static final KeyMapping VOTE_NO = new KeyMapping("key.minigames.vote_no", GLFW.GLFW_KEY_F12, "key.categories.vote") {
+	public static final KeyMapping VOTE_NO = new KeyMapping("key.minigames.vote_no", GLFW.GLFW_KEY_F12, CATEGORY_VOTE) {
 		private boolean isDownOld = false;
 
 		@Override
@@ -63,6 +65,7 @@ public class MinigamesModKeyMappings {
 
 	@SubscribeEvent
 	public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+		event.registerCategory(CATEGORY_VOTE);
 		event.register(DASH);
 		event.register(VOTE_YES);
 		event.register(VOTE_NO);

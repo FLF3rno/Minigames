@@ -11,6 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -101,14 +102,10 @@ public class HunterAnimationAchievementProcedure {
 					MinigamesModVariables.MapVariables.get(world).animateHunterState = 0;
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 					if (world instanceof ServerLevel _origLevel) {
-						LevelAccessor _worldorig = world;
-						world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-						if (world != null) {
-							if (world instanceof ServerLevel _level)
-								_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-										"playsound block.note_block.pling player @a ~ ~ ~ 1000000000000 2");
+						LevelAccessor _switchworld3 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+						if (_switchworld3 != null) {
+							worldSwitch3(world);
 						}
-						world = _worldorig;
 					}
 				}
 				if (MinigamesModVariables.MapVariables.get(world).displayHunterPlayerAnimation > MinigamesModVariables.MapVariables.get(world).players) {
@@ -162,9 +159,17 @@ public class HunterAnimationAchievementProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).animateHunter == true) {
 			if (MinigamesModVariables.MapVariables.get(world).achievmentType == 1) {
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"execute as @a at @s run playsound minigames:rollaudioclean master @s ~ ~ ~ 1 1");
 			}
 		}
+	}
+
+	private static void worldSwitch3(LevelAccessor world) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"playsound block.note_block.pling player @a ~ ~ ~ 1000000000000 2");
 	}
 }

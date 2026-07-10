@@ -3,6 +3,5 @@
   "textures": {
     "wall": "minecraft:block/chiseled_quartz_block",
     "particle": "minecraft:block/chiseled_quartz_block"
-  },
-  "render_type": "cutout_mipped"
+  }
 }

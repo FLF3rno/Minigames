@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "procedure",
   "definition": {
     "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"call_procedure\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" inputs=\"5\"></mutation><field name=\"procedure\">ApplyAdvancedGlowing</field><field name=\"name0\">target</field><field name=\"name1\">length</field><field name=\"name2\">amplifier</field><field name=\"name3\">color</field><field name=\"name4\">hideParticles</field><value name=\"arg0\"><block type=\"get_command_parameter_entity\"><field name=\"param\">target</field></block></value><value name=\"arg1\"><block type=\"get_command_parameter_number\"><field name=\"param\">seconds</field></block></value><value name=\"arg2\"><block type=\"get_command_parameter_number\"><field name=\"param\">transparency</field></block></value><value name=\"arg3\"><block type=\"get_command_parameter_string\"><field name=\"param\">color</field></block></value><value name=\"arg4\"><block type=\"get_command_parameter_logic\"><field name=\"param\">hideParticles</field></block></value></block></next></block></xml>",

@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/floordoor",
     "particle": "minigames:block/floordoor"
-  },
-  "render_type": "solid"
+  }
 }

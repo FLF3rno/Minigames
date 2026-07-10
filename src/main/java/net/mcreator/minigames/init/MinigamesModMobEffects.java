@@ -21,17 +21,17 @@ import net.mcreator.minigames.MinigamesMod;
 @EventBusSubscriber
 public class MinigamesModMobEffects {
 	public static final DeferredRegister<MobEffect> REGISTRY = DeferredRegister.create(Registries.MOB_EFFECT, MinigamesMod.MODID);
-	public static final DeferredHolder<MobEffect, MobEffect> IMMOBILIZED = REGISTRY.register("immobilized", () -> new ImmobilizedMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> CROWNED = REGISTRY.register("crowned", () -> new CrownedMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> NERF_HUNTERS = REGISTRY.register("nerf_hunters", () -> new NerfHuntersMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> BLOCK_LEFT_CLICK = REGISTRY.register("block_left_click", () -> new BlockLeftClickMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> HYPNOTIZED = REGISTRY.register("hypnotized", () -> new HypnotizedMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> STUNNED = REGISTRY.register("stunned", () -> new StunnedMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> BLESSED = REGISTRY.register("blessed", () -> new BlessedMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> ASCENDING = REGISTRY.register("ascending", () -> new AscendingMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> ADVANCED_GLOWING = REGISTRY.register("advanced_glowing", () -> new AdvancedGlowingMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> PHANTOM = REGISTRY.register("phantom", () -> new PhantomMobEffect());
-	public static final DeferredHolder<MobEffect, MobEffect> DAMAGE_BOOST = REGISTRY.register("damage_boost", () -> new DamageBoostMobEffect());
+	public static final DeferredHolder<MobEffect, MobEffect> IMMOBILIZED = REGISTRY.register("immobilized", ImmobilizedMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> CROWNED = REGISTRY.register("crowned", CrownedMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> NERF_HUNTERS = REGISTRY.register("nerf_hunters", NerfHuntersMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> BLOCK_LEFT_CLICK = REGISTRY.register("block_left_click", BlockLeftClickMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> HYPNOTIZED = REGISTRY.register("hypnotized", HypnotizedMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> STUNNED = REGISTRY.register("stunned", StunnedMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> BLESSED = REGISTRY.register("blessed", BlessedMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> ASCENDING = REGISTRY.register("ascending", AscendingMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> ADVANCED_GLOWING = REGISTRY.register("advanced_glowing", AdvancedGlowingMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> PHANTOM = REGISTRY.register("phantom", PhantomMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> DAMAGE_BOOST = REGISTRY.register("damage_boost", DamageBoostMobEffect::new);
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {
@@ -50,17 +50,17 @@ public class MinigamesModMobEffects {
 	}
 
 	private static void expireEffects(Entity entity, MobEffectInstance effectInstance) {
-		if (effectInstance.getEffect().is(CROWNED)) {
+		if (effectInstance.is(CROWNED)) {
 			SyncCrownedRemoveProcedure.execute(entity.level(), entity);
-		} else if (effectInstance.getEffect().is(NERF_HUNTERS)) {
+		} else if (effectInstance.is(NERF_HUNTERS)) {
 			StartPVPProcedure.execute(entity.level());
-		} else if (effectInstance.getEffect().is(STUNNED)) {
+		} else if (effectInstance.is(STUNNED)) {
 			StunnedEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
-		} else if (effectInstance.getEffect().is(BLESSED)) {
+		} else if (effectInstance.is(BLESSED)) {
 			BlessedEffectExpiresProcedure.execute(entity.level(), entity, effectInstance.getAmplifier());
-		} else if (effectInstance.getEffect().is(ASCENDING)) {
+		} else if (effectInstance.is(ASCENDING)) {
 			AscendingEffectExpiresProcedure.execute(entity);
-		} else if (effectInstance.getEffect().is(PHANTOM)) {
+		} else if (effectInstance.is(PHANTOM)) {
 			PhantomEffectEndsProcedure.execute(entity);
 		}
 	}

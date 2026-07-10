@@ -4,10 +4,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
@@ -53,9 +53,9 @@ public class FightDoorsRightclickedProcedure {
 				}
 				middleOffset = 0;
 				pos = 0;
-				for (int index0 = 0; index0 < 5; index0++) {
+				for (int index19 = 0; index19 < 5; index19++) {
 					pos = pos + 1;
-					if ((world.getBlockState(BlockPos.containing(x, y - pos, z))).is(BlockTags.create(ResourceLocation.parse("minigames:door")))) {
+					if ((world.getBlockState(BlockPos.containing(x, y - pos, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 						MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((MinigamesModVariables.MapVariables.get(world).DoorOffset.x()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y() - 1),
 								(MinigamesModVariables.MapVariables.get(world).DoorOffset.z()));
 						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -65,16 +65,16 @@ public class FightDoorsRightclickedProcedure {
 				}
 				if (rotatedX) {
 					pos = 0;
-					for (int index1 = 0; index1 < 2; index1++) {
+					for (int index20 = 0; index20 < 2; index20++) {
 						pos = pos + 1;
-						if ((world.getBlockState(BlockPos.containing(x + pos, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:door")))) {
+						if ((world.getBlockState(BlockPos.containing(x + pos, y, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset + 1;
 						}
 					}
 					pos = 0;
-					for (int index2 = 0; index2 < 2; index2++) {
+					for (int index21 = 0; index21 < 2; index21++) {
 						pos = pos + 1;
-						if ((world.getBlockState(BlockPos.containing(x - pos, y, z))).is(BlockTags.create(ResourceLocation.parse("minigames:door")))) {
+						if ((world.getBlockState(BlockPos.containing(x - pos, y, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset - 1;
 						}
 					}
@@ -83,16 +83,16 @@ public class FightDoorsRightclickedProcedure {
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				} else {
 					pos = 0;
-					for (int index3 = 0; index3 < 2; index3++) {
+					for (int index22 = 0; index22 < 2; index22++) {
 						pos = pos + 1;
-						if ((world.getBlockState(BlockPos.containing(x, y, z + pos))).is(BlockTags.create(ResourceLocation.parse("minigames:door")))) {
+						if ((world.getBlockState(BlockPos.containing(x, y, z + pos))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset + 1;
 						}
 					}
 					pos = 0;
-					for (int index4 = 0; index4 < 2; index4++) {
+					for (int index23 = 0; index23 < 2; index23++) {
 						pos = pos + 1;
-						if ((world.getBlockState(BlockPos.containing(x, y, z - pos))).is(BlockTags.create(ResourceLocation.parse("minigames:door")))) {
+						if ((world.getBlockState(BlockPos.containing(x, y, z - pos))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset - 1;
 						}
 					}
@@ -112,12 +112,12 @@ public class FightDoorsRightclickedProcedure {
 					StartVoteProcedure.execute(world, entity, entity, "floor");
 				}
 			} else {
-				if (entity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal("\u00A7cA vote is already active!"), true);
+				if (entity instanceof ServerPlayer _player)
+					_player.sendSystemMessage(Component.literal("\u00A7cA vote is already active!"), true);
 			}
 		} else {
-			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal("\u00A7cFinish combat first!"), true);
+			if (entity instanceof ServerPlayer _player)
+				_player.sendSystemMessage(Component.literal("\u00A7cFinish combat first!"), true);
 		}
 	}
 

@@ -32,4 +32,8 @@ public class ThrustersItem extends Item {
 		ThrustersRightclickedProcedure.execute(entity, entity.getItemInHand(hand));
 		return ar;
 	}
+
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged && !oldStack.equals(newStack);
+	}
 }

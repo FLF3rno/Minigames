@@ -10,7 +10,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.component.DataComponents;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -34,7 +34,7 @@ public class ItemDroppedDungeonProcedure {
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).playingDungeons) {
 			if (CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.BLACKSMITH_HAMMER.get()))) {
-				if (!itemstack.is(ItemTags.create(ResourceLocation.parse("minigames:dungeon_type_relic")))) {
+				if (!itemstack.is(ItemTags.create(Identifier.parse("minigames:dungeon_type_relic")))) {
 					{
 						final String _tagName = "forged";
 						final double _tagValue = (itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("forged", 0) - 10);

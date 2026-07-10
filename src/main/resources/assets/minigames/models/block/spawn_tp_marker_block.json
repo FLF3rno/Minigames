@@ -3,6 +3,5 @@
   "textures": {
     "all": "minecraft:block/small_dripleaf_side",
     "particle": "minecraft:block/small_dripleaf_side"
-  },
-  "render_type": "solid"
+  }
 }

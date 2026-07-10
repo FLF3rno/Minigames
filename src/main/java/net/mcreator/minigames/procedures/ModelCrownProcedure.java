@@ -6,7 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.api.distmarker.Dist;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -24,6 +24,6 @@ public class ModelCrownProcedure {
 	}
 
 	private static void execute(@Nullable Event event) {
-		MinigamesModVariables.crown = ResourceLocation.fromNamespaceAndPath("minigames", "textures/entities/winnercrown.png");
+		MinigamesModVariables.crown = Identifier.fromNamespaceAndPath("minigames", "textures/entities/winnercrown.png");
 	}
 }

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.TagKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 
 import net.mcreator.minigames.init.MinigamesModItems;
@@ -36,7 +36,7 @@ public class KilledDungeonMobProcedure {
 		if (entity == null || sourceentity == null)
 			return;
 		ItemStack itemstack = ItemStack.EMPTY;
-		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("minigames:dungeon")))) {
+		if (entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon")))) {
 			itemstack = (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).copy();
 			if (itemstack.getItem() == MinigamesModItems.THE_FINISHER.get()) {
 				MinigamesMod.queueServerWork(1, () -> {

@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Blessing",
@@ -8,20 +8,14 @@
       "value": -3342337,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "NEUTRAL",
     "renderStatusInInventory": true,
     "renderStatusInHUD": true,
     "isCuredbyHoney": false,
     "modifiers": [],
-    "onStarted": {
-      "name": "BlessedEffectStarted"
-    },
-    "onExpired": {
-      "name": "BlessedEffectExpires"
-    }
+    "onStarted": "BlessedEffectStarted",
+    "onExpired": "BlessedEffectExpires"
   }
 }

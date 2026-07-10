@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -43,9 +43,7 @@
           "name": "button_start_normal",
           "text": "Start",
           "isUndecorated": false,
-          "onClick": {
-            "name": "MinigameGUIAchievementRunThisGUIIsClosed"
-          },
+          "onClick": "MinigameGUIAchievementRunThisGUIIsClosed",
           "width": 98,
           "height": 20,
           "x": 164,
@@ -142,9 +140,7 @@
         "data": {
           "name": "nightvision",
           "text": "",
-          "isCheckedProcedure": {
-            "name": "NightVisionChecked"
-          },
+          "isCheckedProcedure": "NightVisionChecked",
           "x": 85,
           "y": 109,
           "locked": false
@@ -209,9 +205,7 @@
         "data": {
           "name": "headstart",
           "text": "",
-          "isCheckedProcedure": {
-            "name": "KeepInventoryChecked"
-          },
+          "isCheckedProcedure": "KeepInventoryChecked",
           "x": 264,
           "y": 109,
           "locked": false
@@ -246,9 +240,7 @@
         "data": {
           "name": "randomhunter",
           "text": "",
-          "isCheckedProcedure": {
-            "name": "KeepInventoryChecked"
-          },
+          "isCheckedProcedure": "KeepInventoryChecked",
           "x": 114,
           "y": 159,
           "locked": false
@@ -273,9 +265,7 @@
           "text": {
             "fixedValue": "Randomize hunter"
           },
-          "displayCondition": {
-            "name": "KeepInventoryChecked"
-          },
+          "displayCondition": "KeepInventoryChecked",
           "width": 24,
           "height": 24,
           "x": 112,
@@ -323,9 +313,7 @@
           "name": "imagebutton_compass_16",
           "image": "compass_16.png",
           "hoveredImage": "selectedgamecompass.png",
-          "onClick": {
-            "name": "GoBack"
-          },
+          "onClick": "GoBack",
           "x": 31,
           "y": 219,
           "locked": false
@@ -337,18 +325,14 @@
           "name": "imagebutton_bucket",
           "image": "bucket.png",
           "hoveredImage": "selectcolor.png",
-          "onClick": {
-            "name": "OpenCustomizationScreen"
-          },
+          "onClick": "OpenCustomizationScreen",
           "x": 361,
           "y": 219,
           "locked": false
         }
       }
     ],
-    "onTick": {
-      "name": "AchievementHuntSettings"
-    },
+    "onTick": "AchievementHuntSettings",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

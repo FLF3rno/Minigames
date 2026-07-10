@@ -2207,7 +2207,7 @@
     {
       "name": "CustomizeGUI",
       "type": "gui",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "customize_gui",
       "metadata": {
@@ -3147,7 +3147,7 @@
     {
       "name": "GoldenSkeleton",
       "type": "livingentity",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "golden_skeleton",
       "metadata": {
@@ -3196,7 +3196,7 @@
     {
       "name": "GoldenZombie",
       "type": "livingentity",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "golden_zombie",
       "metadata": {
@@ -3809,7 +3809,7 @@
     {
       "name": "InflatableWallBlock",
       "type": "block",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "inflatable_wall_block",
       "metadata": {
@@ -4064,7 +4064,7 @@
     {
       "name": "Grapple",
       "type": "projectile",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "grapple",
       "metadata": {
@@ -4077,7 +4077,7 @@
     {
       "name": "GrapplingHitbox",
       "type": "livingentity",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "grappling_hitbox",
       "metadata": {
@@ -4775,7 +4775,7 @@
     {
       "name": "GlueProjectile",
       "type": "projectile",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "glue_projectile",
       "metadata": {
@@ -6008,7 +6008,7 @@
     {
       "name": "DungeonInventory",
       "type": "gui",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "dungeon_inventory",
       "metadata": {
@@ -6740,7 +6740,7 @@
     {
       "name": "Candlehead",
       "type": "livingentity",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "candlehead",
       "metadata": {
@@ -9090,7 +9090,7 @@
     {
       "name": "Gravedigger",
       "type": "livingentity",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "gravedigger",
       "metadata": {
@@ -10460,7 +10460,7 @@
     {
       "name": "Poison",
       "type": "particle",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "poison",
       "metadata": {
@@ -10812,7 +10812,7 @@
     {
       "name": "CheckPotionEnd",
       "type": "code",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "check_potion_end",
       "metadata": {
@@ -11273,7 +11273,7 @@
     {
       "name": "BlessedArrow",
       "type": "projectile",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "blessed_arrow",
       "metadata": {
@@ -11957,7 +11957,7 @@
     {
       "name": "Demon",
       "type": "livingentity",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "demon",
       "metadata": {
@@ -12926,7 +12926,7 @@
     {
       "name": "BattleBox",
       "type": "gui",
-      "compiles": true,
+      "compiles": false,
       "locked_code": true,
       "registry_name": "battle_box",
       "metadata": {
@@ -14239,18 +14239,6 @@
     }
   ],
   "tag_elements": {
-    "ITEMS:minecraft:head_armor": [
-      "~CUSTOM:CrownHelmet.helmet"
-    ],
-    "BLOCKS:minecraft:stairs": [
-      "~CUSTOM:CinnabarBrickStairs",
-      "~CUSTOM:PolishedCinnabarStairs",
-      "~CUSTOM:CinnabarStairs",
-      "~CUSTOM:SulfurBrickStairs",
-      "~CUSTOM:PolishedSulfurStairs",
-      "~CUSTOM:SulfurStairs",
-      "~CUSTOM:CastleStairs"
-    ],
     "BLOCKS:mod:replace": [
       "Blocks.AIR",
       "Blocks.TALLGRASS#1",
@@ -14355,12 +14343,6 @@
       "Blocks.STAINED_GLASS#0",
       "CUSTOM:SpreadingIce"
     ],
-    "ITEMS:minecraft:enchantable/durability": [
-      "~CUSTOM:SnatchingClaw",
-      "~CUSTOM:SnowShovel",
-      "~CUSTOM:SymmetricalShovel",
-      "~CUSTOM:GrapplingHook"
-    ],
     "BLOCKS:mod:room": [
       "CUSTOM:RoomGridBlock",
       "CUSTOM:EndRoomGridBlock",
@@ -14413,15 +14395,6 @@
       "CUSTOM:ClusterBomb",
       "CUSTOM:ReactionTime"
     ],
-    "BLOCKS:minecraft:walls": [
-      "~CUSTOM:CinnabarBrickWall",
-      "~CUSTOM:PolishedCinnabarWall",
-      "~CUSTOM:CinnabarWall",
-      "~CUSTOM:SulfurBrickWall",
-      "~CUSTOM:PolishedSulfurWall",
-      "~CUSTOM:SulfurWall",
-      "~CUSTOM:ChiseledQuartzWall"
-    ],
     "ENTITIES:mod:dungeon": [
       "CUSTOM:Worshipper",
       "CUSTOM:Candlehead",
@@ -14449,14 +14422,6 @@
     ],
     "ENTITIES:mod:buried": [
       "CUSTOM:Worshipper"
-    ],
-    "BLOCKS:minecraft:slabs": [
-      "~CUSTOM:CinnabarBrickSlab",
-      "~CUSTOM:PolishedCinnabarSlab",
-      "~CUSTOM:CinnabarSlab",
-      "~CUSTOM:SulfurBrickSlab",
-      "~CUSTOM:PolishedSulfurSlab",
-      "~CUSTOM:SulfurSlab"
     ],
     "ENTITIES:mod:marker": [
       "CUSTOM:PlagueMiddle",
@@ -14487,12 +14452,6 @@
       "CUSTOM:ReplaySpleef",
       "CUSTOM:DungeonCompass"
     ],
-    "BLOCKS:minecraft:mineable/pickaxe": [
-      "~CUSTOM:TuffPedestal"
-    ],
-    "BLOCKS:minecraft:needs_stone_tool": [
-      "~CUSTOM:TuffPedestal"
-    ],
     "BLOCKS:mod:pedestal": [
       "CUSTOM:WarriorItemPedestal",
       "CUSTOM:SupportItemPedestal",
@@ -14515,6 +14474,47 @@
       "Blocks.JIGSAW",
       "Blocks.TEST_BLOCK",
       "Blocks.TEST_INSTANCE_BLOCK"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
+    ],
+    "BLOCKS:minecraft:stairs": [
+      "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
+      "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
+      "~CinnabarStairs@CUSTOM:CinnabarStairs",
+      "~SulfurBrickStairs@CUSTOM:SulfurBrickStairs",
+      "~PolishedSulfurStairs@CUSTOM:PolishedSulfurStairs",
+      "~SulfurStairs@CUSTOM:SulfurStairs",
+      "~CastleStairs@CUSTOM:CastleStairs"
+    ],
+    "ITEMS:minecraft:enchantable/durability": [
+      "~SnatchingClaw@CUSTOM:SnatchingClaw",
+      "~SnowShovel@CUSTOM:SnowShovel",
+      "~SymmetricalShovel@CUSTOM:SymmetricalShovel",
+      "~GrapplingHook@CUSTOM:GrapplingHook"
+    ],
+    "BLOCKS:minecraft:walls": [
+      "~CinnabarBrickWall@CUSTOM:CinnabarBrickWall",
+      "~PolishedCinnabarWall@CUSTOM:PolishedCinnabarWall",
+      "~CinnabarWall@CUSTOM:CinnabarWall",
+      "~SulfurBrickWall@CUSTOM:SulfurBrickWall",
+      "~PolishedSulfurWall@CUSTOM:PolishedSulfurWall",
+      "~SulfurWall@CUSTOM:SulfurWall",
+      "~ChiseledQuartzWall@CUSTOM:ChiseledQuartzWall"
+    ],
+    "BLOCKS:minecraft:slabs": [
+      "~CinnabarBrickSlab@CUSTOM:CinnabarBrickSlab",
+      "~PolishedCinnabarSlab@CUSTOM:PolishedCinnabarSlab",
+      "~CinnabarSlab@CUSTOM:CinnabarSlab",
+      "~SulfurBrickSlab@CUSTOM:SulfurBrickSlab",
+      "~PolishedSulfurSlab@CUSTOM:PolishedSulfurSlab",
+      "~SulfurSlab@CUSTOM:SulfurSlab"
+    ],
+    "BLOCKS:minecraft:mineable/pickaxe": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "BLOCKS:minecraft:needs_stone_tool": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
     ]
   },
   "tab_element_order": {},
@@ -14922,7 +14922,6 @@
       "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
       "src/main/java/net/mcreator/minigames/mixin/EntityRendererMixin.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
-      "src/main/java/net/mcreator/minigames/client/ItemArms.java",
       "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
       "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
@@ -15355,9 +15354,9 @@
     "dependencies": [],
     "dependants": [],
     "mcreatorDependencies": [],
-    "currentGenerator": "neoforge-1.21.8",
+    "currentGenerator": "neoforge-26.1.2",
     "credits": "FL_F3rno",
     "modElementsPackage": "net.mcreator.minigames"
   },
-  "mcreatorVersion": 202600113616
+  "mcreatorVersion": 202600227711
 }

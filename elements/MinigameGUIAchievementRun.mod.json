@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -43,9 +43,7 @@
           "name": "button_start_normal",
           "text": "Start",
           "isUndecorated": false,
-          "onClick": {
-            "name": "MinigameGUIAchievementRunThisGUIIsClosed"
-          },
+          "onClick": "MinigameGUIAchievementRunThisGUIIsClosed",
           "width": 98,
           "height": 20,
           "x": 164,
@@ -142,9 +140,7 @@
         "data": {
           "name": "nightvision",
           "text": "",
-          "isCheckedProcedure": {
-            "name": "NightVisionChecked"
-          },
+          "isCheckedProcedure": "NightVisionChecked",
           "x": 85,
           "y": 120,
           "locked": false
@@ -155,9 +151,7 @@
         "data": {
           "name": "keepinventory",
           "text": "",
-          "isCheckedProcedure": {
-            "name": "KeepInventoryChecked"
-          },
+          "isCheckedProcedure": "KeepInventoryChecked",
           "x": 208,
           "y": 120,
           "locked": true
@@ -247,9 +241,7 @@
           "name": "imagebutton_compass_16",
           "image": "compass_16.png",
           "hoveredImage": "selectedgamecompass.png",
-          "onClick": {
-            "name": "GoBack"
-          },
+          "onClick": "GoBack",
           "x": 31,
           "y": 219,
           "locked": false
@@ -271,9 +263,7 @@
           "name": "imagebutton_bucket",
           "image": "bucket.png",
           "hoveredImage": "selectcolor.png",
-          "onClick": {
-            "name": "OpenCustomizationScreen"
-          },
+          "onClick": "OpenCustomizationScreen",
           "x": 361,
           "y": 218,
           "locked": false

@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
@@ -23,7 +23,7 @@ import net.mcreator.minigames.MinigamesMod;
 
 @EventBusSubscriber
 public record MinigameGUISpleefButtonMessage(int buttonID, int x, int y, int z) implements CustomPacketPayload {
-	public static final Type<MinigameGUISpleefButtonMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "minigame_gui_spleef_buttons"));
+	public static final Type<MinigameGUISpleefButtonMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "minigame_gui_spleef_buttons"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, MinigameGUISpleefButtonMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, MinigameGUISpleefButtonMessage message) -> {
 		buffer.writeInt(message.buttonID);
 		buffer.writeInt(message.x);

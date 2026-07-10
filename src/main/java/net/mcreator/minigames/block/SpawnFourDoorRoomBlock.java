@@ -37,7 +37,10 @@ public class SpawnFourDoorRoomBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(STRUCTURE, false);
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(STRUCTURE, false);
 	}
 
 	@Override

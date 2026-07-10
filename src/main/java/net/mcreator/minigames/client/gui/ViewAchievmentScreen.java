@@ -7,15 +7,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.util.Mth;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import net.mcreator.minigames.world.inventory.ViewAchievmentMenu;
 import net.mcreator.minigames.procedures.*;
@@ -25,6 +26,8 @@ import net.mcreator.minigames.init.MinigamesModScreens;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 public class ViewAchievmentScreen extends AbstractContainerScreen<ViewAchievmentMenu> implements MinigamesModScreens.ScreenAccessor {
 	private final Level world;
 	private final int x, y, z;
@@ -32,30 +35,28 @@ public class ViewAchievmentScreen extends AbstractContainerScreen<ViewAchievment
 	private boolean menuStateUpdateActive = false;
 	private Button button_im_ready;
 	private ImageButton imagebutton_reroll;
-	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/lowerhalf.png");
-	private static final ResourceLocation SPRITE_0 = ResourceLocation.parse("minigames:textures/screens/diamondwindow.png");
-	private static final ResourceLocation SPRITE_1 = ResourceLocation.parse("minigames:textures/screens/achievements.png");
-	private static final ResourceLocation SPRITE_2 = ResourceLocation.parse("minigames:textures/screens/modifiers.png");
-	private static final ResourceLocation SPRITE_3 = ResourceLocation.parse("minigames:textures/screens/modifiers.png");
-	private static final ResourceLocation SPRITE_4 = ResourceLocation.parse("minigames:textures/screens/modifiers.png");
-	private static final ResourceLocation SPRITE_5 = ResourceLocation.parse("minigames:textures/screens/lowerhalf.png");
-	private static final ResourceLocation SPRITE_6 = ResourceLocation.parse("minigames:textures/screens/blackhead.png");
-	private static final ResourceLocation SPRITE_7 = ResourceLocation.parse("minigames:textures/screens/blackhead.png");
-	private static final ResourceLocation SPRITE_8 = ResourceLocation.parse("minigames:textures/screens/blackhead.png");
-	private static final ResourceLocation SPRITE_9 = ResourceLocation.parse("minigames:textures/screens/blackhead.png");
-	private static final ResourceLocation SPRITE_10 = ResourceLocation.parse("minigames:textures/screens/blackhead.png");
-	private static final ResourceLocation SPRITE_11 = ResourceLocation.parse("minigames:textures/screens/blackhead.png");
-	private static final ResourceLocation SPRITE_12 = ResourceLocation.parse("minigames:textures/screens/clock.png");
+	private static final Identifier IMAGE_0 = Identifier.parse("minigames:textures/screens/lowerhalf.png");
+	private static final Identifier SPRITE_0 = Identifier.parse("minigames:textures/screens/diamondwindow.png");
+	private static final Identifier SPRITE_1 = Identifier.parse("minigames:textures/screens/achievements.png");
+	private static final Identifier SPRITE_2 = Identifier.parse("minigames:textures/screens/modifiers.png");
+	private static final Identifier SPRITE_3 = Identifier.parse("minigames:textures/screens/modifiers.png");
+	private static final Identifier SPRITE_4 = Identifier.parse("minigames:textures/screens/modifiers.png");
+	private static final Identifier SPRITE_5 = Identifier.parse("minigames:textures/screens/lowerhalf.png");
+	private static final Identifier SPRITE_6 = Identifier.parse("minigames:textures/screens/blackhead.png");
+	private static final Identifier SPRITE_7 = Identifier.parse("minigames:textures/screens/blackhead.png");
+	private static final Identifier SPRITE_8 = Identifier.parse("minigames:textures/screens/blackhead.png");
+	private static final Identifier SPRITE_9 = Identifier.parse("minigames:textures/screens/blackhead.png");
+	private static final Identifier SPRITE_10 = Identifier.parse("minigames:textures/screens/blackhead.png");
+	private static final Identifier SPRITE_11 = Identifier.parse("minigames:textures/screens/blackhead.png");
+	private static final Identifier SPRITE_12 = Identifier.parse("minigames:textures/screens/clock.png");
 
 	public ViewAchievmentScreen(ViewAchievmentMenu container, Inventory inventory, Component text) {
-		super(container, inventory, text);
+		super(container, inventory, text, 176, 166);
 		this.world = container.world;
 		this.x = container.x;
 		this.y = container.y;
 		this.z = container.z;
 		this.entity = container.entity;
-		this.imageWidth = 176;
-		this.imageHeight = 166;
 	}
 
 	@Override
@@ -65,8 +66,30 @@ public class ViewAchievmentScreen extends AbstractContainerScreen<ViewAchievment
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		super.render(guiGraphics, mouseX, mouseY, partialTicks);
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		if (mouseX > leftPos + -78 && mouseX < leftPos + -37 && mouseY > topPos + 125 && mouseY < topPos + 164) {
+			String hoverText = DisplayBottomLeftDescriptionProcedure.execute(world);
+			if (hoverText != null) {
+				guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
+			}
+		}
+		if (DisplayTooltipModifierProcedure.execute(world))
+			if (mouseX > leftPos + -34 && mouseX < leftPos + 8 && mouseY > topPos + 125 && mouseY < topPos + 164) {
+				String hoverText = TooltipModifierProcedure.execute(world);
+				if (hoverText != null) {
+					guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
+				}
+			}
+		if (mouseX > leftPos + 226 && mouseX < leftPos + 258 && mouseY > topPos + 131 && mouseY < topPos + 163) {
+			String hoverText = SettingsDisplayProcedure.execute(world);
+			if (hoverText != null) {
+				guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
+			}
+		}
+		if (mouseX > leftPos + 246 && mouseX < leftPos + 270 && mouseY > topPos + -27 && mouseY < topPos + -3) {
+			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.view_achievment.tooltip_reroll_achievement"), mouseX, mouseY);
+		}
+		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 		if (DisplayEntityProcedure.execute(world) instanceof LivingEntity livingEntity) {
 			InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, this.leftPos + -984, this.topPos + -811, this.leftPos + 1016, this.topPos + 1189, 25, -livingEntity.getBbHeight() / (2.0f * livingEntity.getScale()), 0f, 0, livingEntity);
 		}
@@ -85,39 +108,11 @@ public class ViewAchievmentScreen extends AbstractContainerScreen<ViewAchievment
 		if (DisplayEntity6Procedure.execute(world) instanceof LivingEntity livingEntity) {
 			InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, this.leftPos + -804, this.topPos + -811, this.leftPos + 1196, this.topPos + 1189, 25, -livingEntity.getBbHeight() / (2.0f * livingEntity.getScale()), 0f, 0, livingEntity);
 		}
-		boolean customTooltipShown = false;
-		if (mouseX > leftPos + -78 && mouseX < leftPos + -37 && mouseY > topPos + 125 && mouseY < topPos + 164) {
-			String hoverText = DisplayBottomLeftDescriptionProcedure.execute(world);
-			if (hoverText != null) {
-				guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
-			}
-			customTooltipShown = true;
-		}
-		if (DisplayTooltipModifierProcedure.execute(world))
-			if (mouseX > leftPos + -34 && mouseX < leftPos + 8 && mouseY > topPos + 125 && mouseY < topPos + 164) {
-				String hoverText = TooltipModifierProcedure.execute(world);
-				if (hoverText != null) {
-					guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
-				}
-				customTooltipShown = true;
-			}
-		if (mouseX > leftPos + 226 && mouseX < leftPos + 258 && mouseY > topPos + 131 && mouseY < topPos + 163) {
-			String hoverText = SettingsDisplayProcedure.execute(world);
-			if (hoverText != null) {
-				guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
-			}
-			customTooltipShown = true;
-		}
-		if (mouseX > leftPos + 246 && mouseX < leftPos + 270 && mouseY > topPos + -27 && mouseY < topPos + -3) {
-			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.view_achievment.tooltip_reroll_achievement"), mouseX, mouseY);
-			customTooltipShown = true;
-		}
-		if (!customTooltipShown)
-			this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
 
 	@Override
-	protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + -102, this.topPos + -29, 0, 0, 384, 384, 384, 384);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPRITE_0, this.leftPos + -102, this.topPos + -29, 0, 0, 384, 384, 384, 384);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPRITE_1, this.leftPos + -102, this.topPos + -29, 0, Mth.clamp((int) DisplayAchievementProcedure.execute(world) * 100, 0, 7700), 384, 100, 384, 7800);
@@ -139,19 +134,20 @@ public class ViewAchievmentScreen extends AbstractContainerScreen<ViewAchievment
 	}
 
 	@Override
-	public boolean keyPressed(int key, int b, int c) {
+	public boolean keyPressed(KeyEvent event) {
+		int key = InputConstants.getKey(event).getValue();
 		if (key == 256) {
 			this.minecraft.player.closeContainer();
 			return true;
 		}
-		return super.keyPressed(key, b, c);
+		return super.keyPressed(event);
 	}
 
 	@Override
-	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		guiGraphics.drawString(this.font, AchievementDescriptionProcedure.execute(world), -71, 81, -11842741, false);
-		guiGraphics.drawString(this.font, AchievementDescriptionProcedure.execute(world), -72, 81, -11842741, false);
-		guiGraphics.drawString(this.font, AchievementDescriptionProcedure.execute(world), -72, 80, -16777216, false);
+	protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+		guiGraphics.text(this.font, AchievementDescriptionProcedure.execute(world), -71, 81, -11842741, false);
+		guiGraphics.text(this.font, AchievementDescriptionProcedure.execute(world), -72, 81, -11842741, false);
+		guiGraphics.text(this.font, AchievementDescriptionProcedure.execute(world), -72, 80, -16777216, false);
 	}
 
 	@Override
@@ -166,17 +162,16 @@ public class ViewAchievmentScreen extends AbstractContainerScreen<ViewAchievment
 			}
 		}).bounds(this.leftPos + -84, this.topPos + 169, 72, 20).build();
 		this.addRenderableWidget(button_im_ready);
-		imagebutton_reroll = new ImageButton(this.leftPos + 249, this.topPos + -25, 20, 20, new WidgetSprites(ResourceLocation.parse("minigames:textures/screens/reroll.png"), ResourceLocation.parse("minigames:textures/screens/rerollhover.png")),
-				e -> {
-					int x = ViewAchievmentScreen.this.x;
-					int y = ViewAchievmentScreen.this.y;
-					if (true) {
-						ClientPacketDistributor.sendToServer(new ViewAchievmentButtonMessage(1, x, y, z));
-						ViewAchievmentButtonMessage.handleButtonAction(entity, 1, x, y, z);
-					}
-				}) {
+		imagebutton_reroll = new ImageButton(this.leftPos + 249, this.topPos + -25, 20, 20, new WidgetSprites(Identifier.parse("minigames:textures/screens/reroll.png"), Identifier.parse("minigames:textures/screens/rerollhover.png")), e -> {
+			int x = ViewAchievmentScreen.this.x;
+			int y = ViewAchievmentScreen.this.y;
+			if (true) {
+				ClientPacketDistributor.sendToServer(new ViewAchievmentButtonMessage(1, x, y, z));
+				ViewAchievmentButtonMessage.handleButtonAction(entity, 1, x, y, z);
+			}
+		}) {
 			@Override
-			public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+			public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprites.get(isActive(), isHoveredOrFocused()), getX(), getY(), 0, 0, width, height, width, height);
 			}
 		};

@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/dungeonmob",
     "particle": "minigames:block/dungeonmob"
-  },
-  "render_type": "solid"
+  }
 }

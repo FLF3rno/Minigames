@@ -1,7 +1,5 @@
 package net.mcreator.minigames.procedures;
 
-import org.checkerframework.checker.units.qual.s;
-
 import net.minecraft.world.level.LevelAccessor;
 
 import net.mcreator.minigames.network.MinigamesModVariables;

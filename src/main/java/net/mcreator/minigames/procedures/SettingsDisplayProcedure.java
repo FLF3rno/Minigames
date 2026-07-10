@@ -1,7 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.server.level.ServerLevel;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -18,7 +18,7 @@ public class SettingsDisplayProcedure {
 		} else {
 			line1 = "Permanent Night Vision is NOT active";
 		}
-		if ((world instanceof ServerLevel _serverLevelGR0 && _serverLevelGR0.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) == false) {
+		if ((world instanceof ServerLevel _serverLevelGR0 && _serverLevelGR0.getGameRules().get(GameRules.KEEP_INVENTORY)) == false) {
 			line2 = "Keep Inventory is active";
 		} else {
 			line2 = "Keep Inventory is active";

@@ -8,6 +8,8 @@ import net.neoforged.bus.api.Event;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -29,10 +31,10 @@ public class SetThunderProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world) {
-		if (!world.getLevelData().isThundering() && MinigamesModVariables.MapVariables.get(world).achievement == 39) {
+		if (!(world instanceof Level _lvl0 && _lvl0.isThundering()) && MinigamesModVariables.MapVariables.get(world).achievement == 39) {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/weather thunder");
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/weather thunder");
 		}
 	}
 }

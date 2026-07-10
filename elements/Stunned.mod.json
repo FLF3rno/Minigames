@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Stun",
@@ -8,26 +8,16 @@
       "value": -256,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "NEUTRAL",
     "renderStatusInInventory": true,
     "renderStatusInHUD": true,
     "isCuredbyHoney": false,
     "modifiers": [],
-    "onStarted": {
-      "name": "StunnedEffectStartedapplied"
-    },
-    "onActiveTick": {
-      "name": "StunnedOnEffectActiveTick"
-    },
-    "onExpired": {
-      "name": "StunnedEffectExpires"
-    },
-    "onMobRemoved": {
-      "name": "StunnedEffectExpires"
-    }
+    "onStarted": "StunnedEffectStartedapplied",
+    "onActiveTick": "StunnedOnEffectActiveTick",
+    "onExpired": "StunnedEffectExpires",
+    "onMobRemoved": "StunnedEffectExpires"
   }
 }

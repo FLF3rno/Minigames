@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "item",
   "definition": {
     "renderType": 0,
@@ -12,18 +12,14 @@
     "name": "Port Plug",
     "rarity": "COMMON",
     "creativeTabs": [
-      {
-        "value": "CUSTOM:DungeonItems"
-      }
+      "CUSTOM:DungeonItems"
     ],
     "stackSize": 1,
     "enchantability": 0,
     "useDuration": 0,
     "toolType": 1.0,
     "damageCount": 0,
-    "recipeRemainder": {
-      "value": ""
-    },
+    "recipeRemainder": "",
     "destroyAnyBlock": false,
     "immuneToFire": true,
     "isPiglinCurrency": false,
@@ -55,23 +51,17 @@
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
-    "projectile": {
-      "value": "CUSTOM:IceDartProjectile"
-    },
+    "projectile": "CUSTOM:IceDartProjectile",
     "projectileDisableAmmoCheck": false,
     "isFood": false,
     "nutritionalValue": 4,
     "saturation": 0.3,
-    "eatResultItem": {
-      "value": ""
-    },
+    "eatResultItem": "",
     "isMeat": false,
     "isAlwaysEdible": false,
     "animation": "none",
     "isMusicDisc": false,
-    "musicDiscMusic": {
-      "value": ""
-    },
+    "musicDiscMusic": "",
     "musicDiscDescription": "",
     "musicDiscLengthInTicks": 100,
     "musicDiscAnalogOutput": 0,
@@ -79,25 +69,19 @@
     "attributeModifiers": [
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:SalvageValue"
-        },
+        "attribute": "CUSTOM:SalvageValue",
         "amount": 35.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:ExtraDamage"
-        },
+        "attribute": "CUSTOM:ExtraDamage",
         "amount": 35.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": {
-          "value": "CUSTOM:AbilityRange"
-        },
+        "attribute": "CUSTOM:AbilityRange",
         "amount": 5.0,
         "operation": "ADD_VALUE"
       }

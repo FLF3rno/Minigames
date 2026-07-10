@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -43,9 +43,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayYourself"
-          },
+          "entityModel": "DisplayYourself",
           "scale": 40,
           "rotationX": -40,
           "followMouseMovement": false,

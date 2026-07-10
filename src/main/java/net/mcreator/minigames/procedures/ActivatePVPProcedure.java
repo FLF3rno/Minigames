@@ -9,6 +9,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -51,14 +52,10 @@ public class ActivatePVPProcedure {
 			}
 			if (MinigamesModVariables.MapVariables.get(world).pvpAnimationTick == 5) {
 				if (world instanceof ServerLevel _origLevel) {
-					LevelAccessor _worldorig = world;
-					world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-					if (world != null) {
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/playsound minigames:pvp_swind player @a ~ ~ ~ 100000000 1");
+					LevelAccessor _switchworld1 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+					if (_switchworld1 != null) {
+						worldSwitch1(world);
 					}
-					world = _worldorig;
 				}
 				MinigamesModVariables.MapVariables.get(world).pvpstate = 5;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -81,31 +78,20 @@ public class ActivatePVPProcedure {
 			}
 			if (MinigamesModVariables.MapVariables.get(world).pvpAnimationTick == 32) {
 				if (world instanceof ServerLevel _origLevel) {
-					LevelAccessor _worldorig = world;
-					world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-					if (world != null) {
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/playsound minigames:pvp_swordshit player @a ~ ~ ~ 10000000");
+					LevelAccessor _switchworld3 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+					if (_switchworld3 != null) {
+						worldSwitch3(world);
 					}
-					world = _worldorig;
 				}
 				MinigamesModVariables.MapVariables.get(world).pvpstate = 0;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
 			if (MinigamesModVariables.MapVariables.get(world).pvpAnimationTick == 86) {
 				if (world instanceof ServerLevel _origLevel) {
-					LevelAccessor _worldorig = world;
-					world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-					if (world != null) {
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/playsound minigames:pvp_swind player @a ~ ~ ~ 100000000 1");
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/playsound minecraft:ui.toast.in player @a ~ ~ ~ 10000000 1");
+					LevelAccessor _switchworld6 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+					if (_switchworld6 != null) {
+						worldSwitch6(world);
 					}
-					world = _worldorig;
 				}
 				MinigamesModVariables.MapVariables.get(world).pvpstate = 7;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -120,14 +106,10 @@ public class ActivatePVPProcedure {
 			}
 			if (MinigamesModVariables.MapVariables.get(world).pvpAnimationTick == 300) {
 				if (world instanceof ServerLevel _origLevel) {
-					LevelAccessor _worldorig = world;
-					world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-					if (world != null) {
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/playsound minecraft:ui.toast.out player @a ~ ~ ~ 10000000 5");
+					LevelAccessor _switchworld8 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+					if (_switchworld8 != null) {
+						worldSwitch8(world);
 					}
-					world = _worldorig;
 				}
 				MinigamesModVariables.MapVariables.get(world).pvpstate = 8;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -140,14 +122,10 @@ public class ActivatePVPProcedure {
 				MinigamesModVariables.MapVariables.get(world).pvpstate = 0;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (world instanceof ServerLevel _origLevel) {
-					LevelAccessor _worldorig = world;
-					world = _origLevel.getServer().getLevel(Level.OVERWORLD);
-					if (world != null) {
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/playsound minigames:pvp_swordshit player @a ~ ~ ~ 10000000");
+					LevelAccessor _switchworld10 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+					if (_switchworld10 != null) {
+						worldSwitch10(world);
 					}
-					world = _worldorig;
 				}
 			}
 			if (MinigamesModVariables.MapVariables.get(world).pvpAnimationTick == 340) {
@@ -157,5 +135,44 @@ public class ActivatePVPProcedure {
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
 		}
+	}
+
+	private static void worldSwitch1(LevelAccessor world) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/playsound minigames:pvp_swind player @a ~ ~ ~ 100000000 1");
+	}
+
+	private static void worldSwitch3(LevelAccessor world) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/playsound minigames:pvp_swordshit player @a ~ ~ ~ 10000000");
+	}
+
+	private static void worldSwitch6(LevelAccessor world) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/playsound minigames:pvp_swind player @a ~ ~ ~ 100000000 1");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/playsound minecraft:ui.toast.in player @a ~ ~ ~ 10000000 1");
+	}
+
+	private static void worldSwitch8(LevelAccessor world) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/playsound minecraft:ui.toast.out player @a ~ ~ ~ 10000000 5");
+	}
+
+	private static void worldSwitch10(LevelAccessor world) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/playsound minigames:pvp_swordshit player @a ~ ~ ~ 10000000");
 	}
 }

@@ -5,6 +5,5 @@
     "bottom": "minecraft:block/stone_bricks",
     "top": "minecraft:block/stone_bricks",
     "side": "minecraft:block/stone_bricks"
-  },
-  "render_type": "solid"
+  }
 }

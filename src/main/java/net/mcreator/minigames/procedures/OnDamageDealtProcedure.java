@@ -16,10 +16,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.tags.TagKey;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.component.DataComponents;
@@ -50,7 +51,7 @@ public class OnDamageDealtProcedure {
 			return;
 		double damage = 0;
 		Entity target = null;
-		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED) && !damagesource.is(TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minecraft:bypasses_cooldown")))) {
+		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED) && !damagesource.is(TagKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minecraft:bypasses_cooldown")))) {
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount(0);
 			}
@@ -67,9 +68,9 @@ public class OnDamageDealtProcedure {
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount((float) damage);
 			}
-			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:zap")))) {
+			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:zap")))) {
 				if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.PLUG.get()))) {
-					for (int index0 = 0; index0 < 3; index0++) {
+					for (int index66 = 0; index66 < 3; index66++) {
 						for (Entity entityiterator : world.getEntities(entity,
 								new AABB((x - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
 										(y - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
@@ -83,12 +84,18 @@ public class OnDamageDealtProcedure {
 						}
 					}
 					if (MinigamesModVariables.MapVariables.get(world).currentRoomID == target.getPersistentData().getDoubleOr("DataID", 0)) {
-						target.hurt(new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:zap")))),
-								(float) (damage * (GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:extra_damage") / 100)));
+						{
+							Entity _ent = target;
+							if (_ent.level() instanceof ServerLevel _serverLevel) {
+								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:zap")))),
+										(float) (damage * (GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:extra_damage") / 100)));
+							}
+						}
 						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							_level.getServer().getCommands().performPrefixedCommand(
+									new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 									"playsound minigames:zap player @a ~ ~ ~ 1 1.5");
-						RenderBeamProcedure.execute(target, entity, 2, 10, ResourceLocation.fromNamespaceAndPath("minigames", "textures/entities/zap.png"));
+						RenderBeamProcedure.execute(target, entity, 2, 10, Identifier.fromNamespaceAndPath("minigames", "textures/entities/zap.png"));
 					}
 				}
 			}

@@ -7,7 +7,7 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -31,10 +31,8 @@ public class SkyboxProcedure {
 		if (skyRenderEvent == null)
 			return;
 		if ((MinigamesModVariables.MapVariables.get(world).sky).equals("normal")) {
-			RenderUtils.swapVanillaTexture(RenderUtils.SUN_LOCATION, RenderUtils.SUN_LOCATION);
-			RenderUtils.swapVanillaTexture(RenderUtils.MOON_LOCATION, RenderUtils.MOON_LOCATION);
 		} else if ((MinigamesModVariables.MapVariables.get(world).sky).equals("space")) {
-			RenderUtils.renderCustomSkybox(skyRenderEvent, ResourceLocation.parse("minigames:textures/sky/space.png"), 0xffffff, Math.min(1, 1));
+			RenderUtils.renderCustomSkybox(skyRenderEvent, Identifier.parse("minigames:textures/sky/space.png"), 0xffffff, Math.min(1, 1));
 		}
 	}
 }

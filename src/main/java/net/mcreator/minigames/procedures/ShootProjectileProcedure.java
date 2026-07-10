@@ -7,18 +7,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.entity.projectile.SpectralArrow;
+import net.minecraft.world.entity.projectile.arrow.SpectralArrow;
+import net.minecraft.world.entity.projectile.arrow.Arrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
@@ -44,11 +45,13 @@ public class ShootProjectileProcedure {
 			}
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null)
+								.withSuppressedOutput(),
 						"/playsound minecraft:block.vault.close_shutter player @a ~ ~ ~ 1 0.7");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null)
+								.withSuppressedOutput(),
 						"/playsound minecraft:entity.dragon_fireball.explode player @a ~ ~ ~ 1 1.4");
 		} else {
 			if ((type).equals("arrow")) {
@@ -100,8 +103,13 @@ public class ShootProjectileProcedure {
 						projectileLevel.addFreshEntity(_entityToSpawn);
 					}
 				}
-				shooter.hurt(new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse("minigames:self_damage")))),
-						(float) GetItemAttributeProcedure.execute(shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage"));
+				{
+					Entity _ent = shooter;
+					if (_ent.level() instanceof ServerLevel _serverLevel) {
+						_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))),
+								(float) GetItemAttributeProcedure.execute(shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage"));
+					}
+				}
 			}
 		}
 	}

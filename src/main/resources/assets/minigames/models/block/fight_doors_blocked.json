@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/door",
     "particle": "minigames:block/door"
-  },
-  "render_type": "solid"
+  }
 }

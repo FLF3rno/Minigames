@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "livingentity",
   "definition": {
     "mobName": "King Spider",
@@ -38,31 +38,17 @@
     },
     "spawnEggTexture": "",
     "creativeTabs": [
-      {
-        "value": "MISC"
-      }
+      "MISC"
     ],
     "isBoss": true,
     "bossBarColor": "YELLOW",
     "bossBarType": "PROGRESS",
-    "equipmentMainHand": {
-      "value": ""
-    },
-    "equipmentOffHand": {
-      "value": ""
-    },
-    "equipmentHelmet": {
-      "value": ""
-    },
-    "equipmentBody": {
-      "value": ""
-    },
-    "equipmentLeggings": {
-      "value": ""
-    },
-    "equipmentBoots": {
-      "value": ""
-    },
+    "equipmentMainHand": "",
+    "equipmentOffHand": "",
+    "equipmentHelmet": "",
+    "equipmentBody": "",
+    "equipmentLeggings": "",
+    "equipmentBoots": "",
     "mobBehaviourType": "Mob",
     "mobCreatureType": "UNDEFINED",
     "attackStrength": 4,
@@ -102,31 +88,15 @@
     "immuneToAnvil": true,
     "immuneToWither": true,
     "immuneToDragonBreath": true,
-    "mobDrop": {
-      "value": ""
-    },
-    "livingSound": {
-      "value": "entity.spider.ambient"
-    },
-    "hurtSound": {
-      "value": "entity.spider.hurt"
-    },
-    "deathSound": {
-      "value": "entity.spider.death"
-    },
-    "stepSound": {
-      "value": "entity.spider.step"
-    },
-    "raidCelebrationSound": {
-      "value": ""
-    },
+    "mobDrop": "",
+    "livingSound": "entity.spider.ambient",
+    "hurtSound": "entity.spider.hurt",
+    "deathSound": "entity.spider.death",
+    "stepSound": "entity.spider.step",
+    "raidCelebrationSound": "",
     "entityDataEntries": [],
-    "whenMobDies": {
-      "name": "AddCrownToKiller"
-    },
-    "onInitialSpawn": {
-      "name": "ApplyGlowing"
-    },
+    "whenMobDies": "AddCrownToKiller",
+    "onInitialSpawn": "ApplyGlowing",
     "hasAI": true,
     "aiBase": "Spider",
     "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"attack_on_collide\"><field name=\"speed\">1.2</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">null,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"swim_in_water\"><field name=\"condition\">null,null</field></block></next></block></next></block></next></block></next></block></next></block></xml>",
@@ -134,9 +104,7 @@
     "tameable": false,
     "breedTriggerItems": [],
     "ranged": false,
-    "rangedAttackItem": {
-      "value": ""
-    },
+    "rangedAttackItem": "",
     "rangedItemType": "Default item",
     "rangedAttackInterval": 20,
     "rangedAttackRadius": 10.0,

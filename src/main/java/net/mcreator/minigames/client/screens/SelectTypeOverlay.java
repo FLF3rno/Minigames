@@ -1,7 +1,5 @@
 package net.mcreator.minigames.client.screens;
 
-import org.checkerframework.checker.units.qual.h;
-
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -11,7 +9,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.util.Mth;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
 
@@ -21,8 +19,8 @@ import net.mcreator.minigames.procedures.DisplayTypeAchievmentProcedure;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class SelectTypeOverlay {
-	private static final ResourceLocation SPRITE_0 = ResourceLocation.parse("minigames:textures/screens/windowanimation.png");
-	private static final ResourceLocation SPRITE_1 = ResourceLocation.parse("minigames:textures/screens/windowbreak.png");
+	private static final Identifier SPRITE_0 = Identifier.parse("minigames:textures/screens/windowanimation.png");
+	private static final Identifier SPRITE_1 = Identifier.parse("minigames:textures/screens/windowbreak.png");
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void eventHandler(RenderGuiEvent.Pre event) {

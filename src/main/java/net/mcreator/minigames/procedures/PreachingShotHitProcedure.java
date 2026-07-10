@@ -5,6 +5,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.server.level.ServerLevel;
 
 public class PreachingShotHitProcedure {
 	public static void execute(LevelAccessor world, Entity entity, Entity immediatesourceentity, Entity sourceentity) {
@@ -13,6 +14,11 @@ public class PreachingShotHitProcedure {
 		double force = 0;
 		force = -1.75;
 		entity.setDeltaMovement(new Vec3((immediatesourceentity.getLookAngle().x * force), (immediatesourceentity.getLookAngle().y * force), (immediatesourceentity.getLookAngle().z * force)));
-		sourceentity.hurt(new DamageSource(world.holderOrThrow(DamageTypes.MOB_PROJECTILE)), 4);
+		{
+			Entity _ent = sourceentity;
+			if (_ent.level() instanceof ServerLevel _serverLevel) {
+				_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.MOB_PROJECTILE)), 4);
+			}
+		}
 	}
 }

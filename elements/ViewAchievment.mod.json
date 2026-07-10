@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -43,12 +43,8 @@
           "name": "button_im_ready",
           "text": "I'm Ready",
           "isUndecorated": false,
-          "onClick": {
-            "name": "ReadyUp"
-          },
-          "displayCondition": {
-            "name": "ReadyDisplay"
-          },
+          "onClick": "ReadyUp",
+          "displayCondition": "ReadyDisplay",
           "width": 72,
           "height": 20,
           "x": 42,
@@ -59,9 +55,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity"
-          },
+          "entityModel": "DisplayEntity",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -73,9 +67,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity2"
-          },
+          "entityModel": "DisplayEntity2",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -97,9 +89,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity3"
-          },
+          "entityModel": "DisplayEntity3",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -111,9 +101,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity4"
-          },
+          "entityModel": "DisplayEntity4",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -125,9 +113,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity5"
-          },
+          "entityModel": "DisplayEntity5",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -139,9 +125,7 @@
       {
         "type": "entitymodel",
         "data": {
-          "entityModel": {
-            "name": "DisplayEntity6"
-          },
+          "entityModel": "DisplayEntity6",
           "scale": 25,
           "rotationX": 0,
           "followMouseMovement": false,
@@ -227,9 +211,7 @@
             "fixedValue": "Weather will permanently be Thunder",
             "name": "TooltipModifier"
           },
-          "displayCondition": {
-            "name": "DisplayTooltipModifier"
-          },
+          "displayCondition": "DisplayTooltipModifier",
           "width": 42,
           "height": 39,
           "x": 92,
@@ -270,9 +252,7 @@
         "data": {
           "sprite": "modifiers.png",
           "spritesCount": 5,
-          "displayCondition": {
-            "name": "DisplayPVPTime"
-          },
+          "displayCondition": "DisplayPVPTime",
           "spriteIndex": {
             "fixedValue": 2.0
           },
@@ -398,9 +378,7 @@
           "name": "imagebutton_reroll",
           "image": "reroll.png",
           "hoveredImage": "rerollhover.png",
-          "onClick": {
-            "name": "RerollAchievementPressed"
-          },
+          "onClick": "RerollAchievementPressed",
           "x": 375,
           "y": 12,
           "locked": false
@@ -425,9 +403,7 @@
         "data": {
           "sprite": "clock.png",
           "spritesCount": 1,
-          "displayCondition": {
-            "name": "DisplayHeadStart"
-          },
+          "displayCondition": "DisplayHeadStart",
           "spriteIndex": {
             "fixedValue": 0.0
           },
@@ -437,9 +413,7 @@
         }
       }
     ],
-    "onTick": {
-      "name": "CloseAchievementGUI"
-    },
+    "onTick": "CloseAchievementGUI",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

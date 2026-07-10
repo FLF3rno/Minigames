@@ -1,5 +1,5 @@
 {
-  "_fv": 85,
+  "_fv": 89,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Ascending",
@@ -8,20 +8,14 @@
       "value": -13261,
       "falpha": 0.0
     },
-    "onAddedSound": {
-      "value": ""
-    },
+    "onAddedSound": "",
     "isInstant": false,
     "mobEffectCategory": "NEUTRAL",
     "renderStatusInInventory": false,
     "renderStatusInHUD": false,
     "isCuredbyHoney": false,
     "modifiers": [],
-    "onStarted": {
-      "name": "AscendingApplied"
-    },
-    "onExpired": {
-      "name": "AscendingEffectExpires"
-    }
+    "onStarted": "AscendingApplied",
+    "onExpired": "AscendingEffectExpires"
   }
 }

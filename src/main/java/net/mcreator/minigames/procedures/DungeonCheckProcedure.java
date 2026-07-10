@@ -20,9 +20,9 @@ public class DungeonCheckProcedure {
 				&& MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon == MinigamesModVariables.MapVariables.get(world).lootRoomPlacedDungeon) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
 			spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
-			for (int index5 = 0; index5 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index5++) {
+			for (int index147 = 0; index147 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index147++) {
 				spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
-				for (int index6 = 0; index6 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index6++) {
+				for (int index148 = 0; index148 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index148++) {
 					specialRoom = false;
 					neighbour = 0;
 					if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.EMPTY_GRID_BLOCK.get()) {

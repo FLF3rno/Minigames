@@ -4,9 +4,9 @@ import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.init.MinigamesModRenderStateModifiers;
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.world.entity.EntityType;
@@ -62,7 +62,7 @@ public class StunnableEntityTint {
                 return;
             }
 
-            ResourceLocation texture = this.parentRenderer.getTextureLocation(state);
+            Identifier texture = this.parentRenderer.getTextureLocation(state);
             VertexConsumer buffer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
             this.getParentModel().renderToBuffer(
                 poseStack,
@@ -92,3 +92,4 @@ public class StunnableEntityTint {
 		}
     }
 }
+

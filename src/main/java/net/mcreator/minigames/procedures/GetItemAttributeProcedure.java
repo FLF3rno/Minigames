@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
@@ -19,7 +19,7 @@ public class GetItemAttributeProcedure {
             return 0.0;
 
         Optional<Holder.Reference<Attribute>> attributeHolder =
-                BuiltInRegistries.ATTRIBUTE.get(ResourceLocation.parse(attribute));
+                BuiltInRegistries.ATTRIBUTE.get(Identifier.parse(attribute));
 
         if (attributeHolder.isEmpty())
             return 0.0;

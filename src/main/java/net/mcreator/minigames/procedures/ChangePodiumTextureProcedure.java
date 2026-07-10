@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 
 import net.mcreator.minigames.entity.SpleefPodiumPlayerEntity;
@@ -19,7 +19,7 @@ public class ChangePodiumTextureProcedure {
 		MinecraftServer server = level.getServer();
 		if (server == null)
 			return;
-		ResourceKey<net.minecraft.world.level.Level> spleefDim = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("minigames:spleef_dimension"));
+		ResourceKey<net.minecraft.world.level.Level> spleefDim = ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:spleef_dimension"));
 		ServerLevel targetLevel = server.getLevel(spleefDim);
 		if (targetLevel == null)
 			return;
@@ -33,3 +33,5 @@ public class ChangePodiumTextureProcedure {
 		}
 	}
 }
+
+

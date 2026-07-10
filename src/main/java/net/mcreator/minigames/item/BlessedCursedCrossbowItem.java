@@ -14,14 +14,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -47,42 +49,42 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
         
                 .add(Attributes.ATTACK_SPEED,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_0"),
+                                Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_0"),
                                 -2.4,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
                         
                 .add(MinigamesModAttributes.SALVAGE_VALUE,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_1"),
+                                Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_1"),
                                 35,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
                         
                 .add(MinigamesModAttributes.REPAIR_VALUE,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_2"),
+                                Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_2"),
                                 50,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
                         
                 .add(MinigamesModAttributes.LOAD_TIME,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_3"),
+                                Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_3"),
                                 50,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
                         
                 .add(MinigamesModAttributes.RANGED_DAMAGE,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_4"),
+                                Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_4"),
                                 4,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
 
                 .add(MinigamesModAttributes.EXTRA_DAMAGE,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_5"),
+                                Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blessed_cursed_crossbow_5"),
                                 4,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
@@ -145,7 +147,7 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
     }
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseTicks) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
 
             float progress =
                     (float)(stack.getUseDuration(entity) - remainingUseTicks)
@@ -190,7 +192,7 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
 
                 stack.set(
                         DataComponents.CHARGED_PROJECTILES,
-                        ChargedProjectiles.of(new ItemStack(Items.ARROW))
+                        ChargedProjectiles.of(net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(new ItemStack(Items.ARROW)))
                 );
 
                 level.playSound(
@@ -221,7 +223,7 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
                 ChargedProjectiles.EMPTY
         );
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             ShootProjectileProcedure.execute(
                     level,
                     shooter,
@@ -256,16 +258,17 @@ public class BlessedCursedCrossbowItem extends CrossbowItem {
         @Override
         public float get(ItemStack itemStackToRender,
                          @Nullable ClientLevel clientWorld,
-                         @Nullable LivingEntity entity,
+                         @Nullable ItemOwner entity,
                          int seed) {
-            return entity == null
-                    ? 0
-                    : (float) ReturnLoadstateProcedure.execute(entity, itemStackToRender);
+            return entity instanceof Entity _entity
+                    ? (float) ReturnLoadstateProcedure.execute(_entity, itemStackToRender)
+                    : 0;
         }
 
         @Override
-        public MapCodec<LoadstateProperty> type() {
+        public MapCodec<? extends RangeSelectItemModelProperty> type() {
             return MAP_CODEC;
         }
     }
 }
+

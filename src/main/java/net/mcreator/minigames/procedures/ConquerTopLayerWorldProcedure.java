@@ -9,7 +9,7 @@ import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
@@ -27,7 +27,7 @@ import java.util.List;
 
 @EventBusSubscriber
 public class ConquerTopLayerWorldProcedure {
-	private static final ResourceKey<net.minecraft.world.level.Level> SPLEEF_DIMENSION = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("minigames:spleef_dimension"));
+	private static final ResourceKey<net.minecraft.world.level.Level> SPLEEF_DIMENSION = ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:spleef_dimension"));
 	private static final int COUNTDOWN_START = 1;
 	private static final int COUNTDOWN_SOUND_1 = 280;
 	private static final int COUNTDOWN_SOUND_2 = 320;
@@ -168,6 +168,10 @@ public class ConquerTopLayerWorldProcedure {
 	}
 
 	private static CommandSourceStack getSource(ServerLevel level) {
-		return new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, level, 4, "", net.minecraft.network.chat.Component.literal(""), level.getServer(), null).withSuppressedOutput();
+		return new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", net.minecraft.network.chat.Component.literal(""), level.getServer(), null).withSuppressedOutput();
 	}
 }
+
+
+
+

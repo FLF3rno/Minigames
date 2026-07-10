@@ -9,6 +9,6 @@ public class AnimationAttackProcedure {
 	public static boolean execute(Entity entity) {
 		if (entity == null)
 			return false;
-		return entity instanceof LivingEntity _livEnt0 && _livEnt0.swinging && entity.getPersistentData().getIntOr(LOCAL_ATTACK_COOLDOWN_KEY, 0) <= 0;
+		return entity instanceof LivingEntity _livEnt0 && _livEnt0.swinging && entity.getPersistentData().getInt(LOCAL_ATTACK_COOLDOWN_KEY, 0) <= 0;
 	}
 }

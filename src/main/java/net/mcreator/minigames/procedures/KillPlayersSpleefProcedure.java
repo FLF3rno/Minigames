@@ -44,24 +44,24 @@ public class KillPlayersSpleefProcedure {
 						_player.setGameMode(GameType.SPECTATOR);
 					{
 						Entity _ent = entityiterator;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p times 10 60 10");
 						}
 					}
 					{
 						Entity _ent = entityiterator;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 									_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "execute as @a at @s run playsound minigames:teameliminated master @s ~ ~ ~ 2 1");
 						}
 					}
 					if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 2) {
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(
-										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
 										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
 												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "nd\"}]"));
@@ -71,9 +71,9 @@ public class KillPlayersSpleefProcedure {
 					} else if (MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers == 3) {
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(
-										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
 										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
 												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "rd\"}]"));
@@ -81,8 +81,8 @@ public class KillPlayersSpleefProcedure {
 						}
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You died!\"}");
 							}
 						}
@@ -90,9 +90,9 @@ public class KillPlayersSpleefProcedure {
 					} else {
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(
-										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
 										("/title @p subtitle [{\"color\":\"gold\",\"text\":\"You were \"},{\"color\":\"red\",\"text\":\"" + ""
 												+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers) + "th\"}]"));
@@ -100,16 +100,16 @@ public class KillPlayersSpleefProcedure {
 						}
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You died!\"}");
 							}
 						}
 					}
 					{
 						Entity _ent = entityiterator;
-						if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-							_ent.getServer().getPlayerList().broadcastSystemMessage(_ent.getDisplayName().copy().append(Component.literal(" died!").withColor(0xff5555)), false);
+						if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+							_ent.level().getServer().getPlayerList().broadcastSystemMessage(_ent.getDisplayName().copy().append(Component.literal(" died!").withColor(0xff5555)), false);
 						}
 					}
 					MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers = MinigamesModVariables.MapVariables.get(world).spleefAlivePlayers - 1;
@@ -122,37 +122,37 @@ public class KillPlayersSpleefProcedure {
 						MinigamesModVariables.firstSpleef = entityiterator;
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "effect clear @a minigames:crowned");
 							}
 						}
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect give @p minigames:crowned infinite 1 true");
 							}
 						}
 
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @a times 10 60 10");
 							}
 						}
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"gold\",\"text\":\"You won!\"}");
 							}
 						}
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minecraft:ui.toast.challenge_complete player @s ~ ~ ~ 0.6 1.2");
 							}
 						}
@@ -160,15 +160,15 @@ public class KillPlayersSpleefProcedure {
 					if (entityiterator instanceof Player _plr20 && _plr20.gameMode() == GameType.SPECTATOR) {
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @a times 10 60 10");
 							}
 						}
 						{
 							Entity _ent = entityiterator;
-							if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-								_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/title @p title {\"bold\":true,\"color\":\"red\",\"text\":\"You lost!\"}");
 							}
 						}
@@ -179,3 +179,7 @@ public class KillPlayersSpleefProcedure {
 		}
 	}
 }
+
+
+
+

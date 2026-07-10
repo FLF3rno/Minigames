@@ -8,7 +8,7 @@ import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 
@@ -16,7 +16,7 @@ import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class HypnotizedOverlay {
-	private static final ResourceLocation RINGS = ResourceLocation.parse("minigames:textures/screens/hypnosis_rings_overlay.png");
+	private static final Identifier RINGS = Identifier.parse("minigames:textures/screens/hypnosis_rings_overlay.png");
 	private static final float TEXTURE_WIDTH = 958f;
 	private static final float TEXTURE_HEIGHT = 538f;
 	private static final float LAYER_DURATION = 52f;

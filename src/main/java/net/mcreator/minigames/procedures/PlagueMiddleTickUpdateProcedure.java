@@ -13,7 +13,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.core.Holder;
 import net.mcreator.minigames.init.MinigamesModParticleTypes;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class PlagueMiddleTickUpdateProcedure {
 	public static final TagKey<EntityType<?>> IS_MARKER = TagKey.create(
 			Registries.ENTITY_TYPE,
-			ResourceLocation.fromNamespaceAndPath("minigames", "marker"));
+			Identifier.fromNamespaceAndPath("minigames", "marker"));
 
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
@@ -67,7 +67,7 @@ public class PlagueMiddleTickUpdateProcedure {
 						&& source instanceof PathfinderMob
 						&& livingSource.isAlive()
 						&& !(source instanceof PlagueMiddleEntity)
-						&& !source.getType().is(IS_MARKER)) {
+						&& !source.is(IS_MARKER)) {
 
 					List<MobEffectInstance> effects =
 							new ArrayList<>(livingSource.getActiveEffects());
@@ -81,7 +81,7 @@ public class PlagueMiddleTickUpdateProcedure {
 									&& target instanceof PathfinderMob
 									&& livingTarget.isAlive()
 									&& !(target instanceof PlagueMiddleEntity)
-									&& !target.getType().is(IS_MARKER)) {
+									&& !target.is(IS_MARKER)) {
 
 								ApplyEffectProcedure.execute(
 										livingTarget,

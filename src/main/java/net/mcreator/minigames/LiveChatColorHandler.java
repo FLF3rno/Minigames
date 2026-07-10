@@ -25,12 +25,15 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 //		TextColor parsed = TextColor.parseColor(hex).result().orElse(null);
 //		if (parsed == null)
 //			return;
-//		Component name = Component.literal(player.getGameProfile().getName()).setStyle(Style.EMPTY.withColor(parsed));
+//		Component name = Component.literal(player.getName().getString()).setStyle(Style.EMPTY.withColor(parsed));
 //		Component message = Component.literal(event.getRawText());
 //		Component full = Component.empty().append(Component.literal("<")).append(name).append(Component.literal("> ")).append(message);
 //		event.setCanceled(true);
-//		if (player.getServer() != null) {
-//			player.getServer().getPlayerList().broadcastSystemMessage(full, false);
+//		if (player.level().getServer() != null) {
+//			player.level().getServer().getPlayerList().broadcastSystemMessage(full, false);
 //		}
 //	}
 //}
+
+
+

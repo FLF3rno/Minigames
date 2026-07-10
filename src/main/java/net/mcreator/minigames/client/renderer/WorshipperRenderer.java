@@ -1,6 +1,6 @@
 package net.mcreator.minigames.client.renderer;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class WorshipperRenderer extends MobRenderer<WorshipperEntity, LivingEntityRenderState, Modelworshipper> {
 	private WorshipperEntity entity = null;
-	private final ResourceLocation entityTexture = ResourceLocation.parse("minigames:textures/entities/worshipper.png");
+	private final Identifier entityTexture = Identifier.parse("minigames:textures/entities/worshipper.png");
 
 	public WorshipperRenderer(EntityRendererProvider.Context context) {
 		super(context, new AnimatedModel(context.bakeLayer(Modelworshipper.LAYER_LOCATION)), 0.5f);
@@ -38,9 +38,9 @@ public class WorshipperRenderer extends MobRenderer<WorshipperEntity, LivingEnti
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(LivingEntityRenderState state) {
+	public Identifier getTextureLocation(LivingEntityRenderState state) {
 		if (entity != null && entity.getTexture() != "worshipper")
-			return ResourceLocation.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
+			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;
 	}
 

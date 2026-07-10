@@ -10,7 +10,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 
 import net.mcreator.minigames.entity.MovingBlockEntity;
@@ -45,7 +45,7 @@ public class MovingOnMovingBlockProcedure {
 		double friction = 0.91;
 		if (supportBlock != null) {
 			String blockId = supportBlock.getEntityData().get(MovingBlockEntity.DATA_block_id);
-			var block = BuiltInRegistries.BLOCK.getOptional(ResourceLocation.tryParse(blockId)).orElse(Blocks.STONE);
+			var block = BuiltInRegistries.BLOCK.getOptional(Identifier.tryParse(blockId)).orElse(Blocks.STONE);
 			// Vanilla block friction uses 0.6 as normal, up to ~0.98 for ice.
 			// Convert it to this procedure's damping scale (0.91 normal baseline).
 			double vanillaFriction = block.defaultBlockState().getFriction(world, supportBlock.blockPosition(), supportBlock);

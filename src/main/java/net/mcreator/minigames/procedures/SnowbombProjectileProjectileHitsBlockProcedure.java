@@ -20,11 +20,11 @@ public class SnowbombProjectileProjectileHitsBlockProcedure {
 		double sz = 0;
 		sx = -2;
 		found = false;
-		for (int index0 = 0; index0 < 4; index0++) {
+		for (int index142 = 0; index142 < 4; index142++) {
 			sy = -2;
-			for (int index1 = 0; index1 < 4; index1++) {
+			for (int index143 = 0; index143 < 4; index143++) {
 				sz = -2;
-				for (int index2 = 0; index2 < 4; index2++) {
+				for (int index144 = 0; index144 < 4; index144++) {
 					world.setBlock(BlockPos.containing(x + sx, y + sy, z + sz), Blocks.AIR.defaultBlockState(), 3);
 					sz = sz + 1;
 				}

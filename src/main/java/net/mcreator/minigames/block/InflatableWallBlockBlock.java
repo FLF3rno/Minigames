@@ -15,7 +15,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 
@@ -29,9 +29,9 @@ public class InflatableWallBlockBlock extends Block implements EntityBlock {
 	public static final IntegerProperty STATE = IntegerProperty.create("state", 0, 3);
 
 	public InflatableWallBlockBlock(BlockBehaviour.Properties properties) {
-		super(properties.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:pop")), () -> BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.moss.step")),
-				() -> BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:inflate")), () -> BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.grass.hit")),
-				() -> BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("block.cherry_leaves.fall")))).strength(1f, 0f));
+		super(properties.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:pop")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.moss.step")),
+				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:inflate")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.grass.hit")),
+				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.cherry_leaves.fall")))).strength(1f, 0f));
 		this.registerDefaultState(this.stateDefinition.any().setValue(STATE, 0));
 	}
 

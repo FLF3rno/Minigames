@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -20,11 +20,11 @@ import net.minecraft.world.entity.player.Player;
 import java.util.List;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.Holder.Reference;
 
 import net.mcreator.minigames.procedures.VolcanicSpewFlyingProcedure;
@@ -91,7 +91,7 @@ public class VolcanicSpewEntity extends AbstractArrow implements ItemSupplier {
         VolcanicSpewFlyingProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
 
         if (this.isInGround()) {
-            if (!this.level().isClientSide && this.tickCount % 5 == 0) {
+            if (!this.level().isClientSide() && this.tickCount % 5 == 0) {
                 
                 // This creates a 3x2x3 block area centered on the projectile
                 AABB damageZone = new AABB(
@@ -150,6 +150,6 @@ public class VolcanicSpewEntity extends AbstractArrow implements ItemSupplier {
 
 	@Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("minigames:volcanic_spew_land")).map(Reference::value).orElse(SoundEvents.ARROW_HIT);
+        return BuiltInRegistries.SOUND_EVENT.get(Identifier.parse("minigames:volcanic_spew_land")).map(Reference::value).orElse(SoundEvents.ARROW_HIT);
     }
 }

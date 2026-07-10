@@ -7,7 +7,7 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.TagKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 
 import javax.annotation.Nullable;
@@ -26,8 +26,9 @@ public class ApplyHealthMultiplayerProcedure {
 	private static void execute(@Nullable Event event, Entity entity) {
 		if (entity == null)
 			return;
-		if (entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("minigames:dungeon")))) {
+		if (entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon")))) {
 			HealthMultiplierProcedure.execute(entity.level(), entity);
 		}
 	}
 }
+

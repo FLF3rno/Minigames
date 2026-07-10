@@ -7,12 +7,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.server.level.ServerLevel;
 
 import net.mcreator.minigames.procedures.MagmaDartRightclickedProcedure;
@@ -62,12 +64,12 @@ public class MagmaDartItem extends Item {
 		public static final MapCodec<ShockwaveProperty> MAP_CODEC = MapCodec.unit(new ShockwaveProperty());
 
 		@Override
-		public float get(ItemStack itemStackToRender, @Nullable ClientLevel clientWorld, @Nullable LivingEntity entity, int seed) {
-			return (float) MagmaDartPropertyValueProviderProcedure.execute(entity, itemStackToRender);
+		public float get(ItemStack itemStackToRender, @Nullable ClientLevel clientWorld, @Nullable ItemOwner entity, int seed) {
+			return entity instanceof Entity _entity ? (float) MagmaDartPropertyValueProviderProcedure.execute(_entity, itemStackToRender) : 0;
 		}
 
 		@Override
-		public MapCodec<ShockwaveProperty> type() {
+		public MapCodec<? extends RangeSelectItemModelProperty> type() {
 			return MAP_CODEC;
 		}
 	}

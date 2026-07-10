@@ -55,9 +55,9 @@ public class ItemPickedUpDungeonProcedure {
 				range = 12;
 				spawnRoomX = x + Math.round(range / 2);
 				spawnRoomZ = z + Math.round(range / 2);
-				for (int index68 = 0; index68 < (int) range; index68++) {
+				for (int index210 = 0; index210 < (int) range; index210++) {
 					spawnRoomX = x + Math.round(range / 2);
-					for (int index69 = 0; index69 < (int) range; index69++) {
+					for (int index211 = 0; index211 < (int) range; index211++) {
 						if (getBlockNBTNumber(world, BlockPos.containing(x, y - 0.5, z), "player") == getBlockNBTNumber(world, BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ), "player")) {
 							if (!getBlockNBTLogic(world, BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ), "empty")) {
 								ExplodeProcedure.execute(world, spawnRoomX, y, spawnRoomZ, entity, false, true, 0, 0, 0.5, "normal");

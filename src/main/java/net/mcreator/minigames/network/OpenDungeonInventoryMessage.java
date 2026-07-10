@@ -15,7 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.world.inventory.DungeonInventoryMenu;
@@ -26,7 +26,7 @@ import net.minecraft.network.FriendlyByteBuf;
 
 @EventBusSubscriber
 public record OpenDungeonInventoryMessage() implements CustomPacketPayload {
-	public static final Type<OpenDungeonInventoryMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "open_dungeon_inventory"));
+	public static final Type<OpenDungeonInventoryMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "open_dungeon_inventory"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, OpenDungeonInventoryMessage> STREAM_CODEC = StreamCodec.unit(new OpenDungeonInventoryMessage());
 
 	@Override

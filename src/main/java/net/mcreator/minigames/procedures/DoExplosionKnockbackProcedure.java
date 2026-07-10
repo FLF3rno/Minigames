@@ -36,7 +36,7 @@ public class DoExplosionKnockbackProcedure {
     if (kb.x() != 0 || kb.y() != 0 || kb.z() != 0) {
         
         entity.setDeltaMovement(kb);
-        entity.hasImpulse = true; 
+        entity.setDeltaMovement(entity.getDeltaMovement()); 
 
 
         if (entity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {

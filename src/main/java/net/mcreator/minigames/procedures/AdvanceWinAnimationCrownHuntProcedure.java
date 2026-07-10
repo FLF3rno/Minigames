@@ -70,7 +70,7 @@ public class AdvanceWinAnimationCrownHuntProcedure {
 					world = _origLevel.getServer().getLevel(Level.OVERWORLD);
 					if (world != null) {
 						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 									"/playsound minigames:teameliminated player @a ~ ~ ~ 1000000 1");
 					}
 					world = _worldorig;
@@ -97,7 +97,7 @@ public class AdvanceWinAnimationCrownHuntProcedure {
 			if (MinigamesModVariables.MapVariables.get(world).winAnimationTick >= 283) {
 				MinigamesModVariables.winAnimation = -1;
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"give @a minigames:game_compass");
 				MinigamesModVariables.MapVariables.get(world).crownHuntWinDisplay = false;
 				MinigamesModVariables.MapVariables.get(world).winAnimationTick = 0;
@@ -115,7 +115,7 @@ public class AdvanceWinAnimationCrownHuntProcedure {
 					}
 				}
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"/clear @a minigames:crown_helmet_helmet");
 			}
 			if (MinigamesModVariables.MapVariables.get(world).winAnimationState != MinigamesModVariables.winAnimation) {
@@ -125,3 +125,8 @@ public class AdvanceWinAnimationCrownHuntProcedure {
 		}
 	}
 }
+
+
+
+
+

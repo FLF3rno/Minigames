@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,7 +29,7 @@ import net.mcreator.minigames.MinigamesMod;
 
 @EventBusSubscriber
 public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayload {
-	public static final Type<DungeonItemPickupMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "dungeon_item_pickup"));
+	public static final Type<DungeonItemPickupMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "dungeon_item_pickup"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, DungeonItemPickupMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, DungeonItemPickupMessage message) -> {
 		buffer.writeInt(message.entityId);
 	}, buffer -> new DungeonItemPickupMessage(buffer.readInt()));
@@ -94,12 +94,12 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		if (isRelic) {
 			inserted = tryInsertRelic(player.getInventory(), entityStack.copy());
 			if (inserted <= 0) {
-				player.displayClientMessage(Component.literal("§cRELIC SLOTS FULL"), true);
+				player.sendSystemMessage(Component.literal("§cRELIC SLOTS FULL"), true);
 				return;
 			}
 		} else {
 			if (isInventoryFull(player)) {
-				player.displayClientMessage(Component.literal("§cInventory is full!"), true);
+				player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
 				return;
 			}
 
@@ -121,7 +121,7 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 
 		player.containerMenu.broadcastChanges();
 
-		float pitch = ((player.level().random.nextFloat() - player.level().random.nextFloat()) * 0.7F + 1.0F) * 2.0F;
+		float pitch = ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F;
 		player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F, pitch);
 	}
@@ -154,3 +154,6 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		MinigamesMod.addNetworkMessage(DungeonItemPickupMessage.TYPE, DungeonItemPickupMessage.STREAM_CODEC, DungeonItemPickupMessage::handleData);
 	}
 }
+
+
+

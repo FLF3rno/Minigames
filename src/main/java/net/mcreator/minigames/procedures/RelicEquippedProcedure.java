@@ -21,7 +21,7 @@ public class RelicEquippedProcedure {
 		ItemStack modifieditem = ItemStack.EMPTY;
 		if (item.getItem() == MinigamesModItems.BLACKSMITH_HAMMER.get()) {
 			num = 0;
-			for (int index64 = 0; index64 < 9; index64++) {
+			for (int index206 = 0; index206 < 9; index206++) {
 				modifieditem = (getEntitySlot(entity, (int) num)).copy();
 				{
 					final String _tagName = "forged";

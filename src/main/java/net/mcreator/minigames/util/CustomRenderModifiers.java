@@ -2,7 +2,7 @@ package net.mcreator.minigames.util;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.util.context.ContextKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 @EventBusSubscriber(value = Dist.CLIENT)
 public class CustomRenderModifiers {
 
-    public static final ContextKey<Float> TRANSPARENCY = new ContextKey<>(ResourceLocation.parse("minigames:transparency"));
+    public static final ContextKey<Float> TRANSPARENCY = new ContextKey<>(Identifier.parse("minigames:transparency"));
 
     @SuppressWarnings("unchecked")
     @SubscribeEvent

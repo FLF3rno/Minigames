@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.Direction;
 
@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class InflatableWallItem extends Item {
 	public InflatableWallItem(Item.Properties properties) {
 		super(properties.stacksTo(1).attributes(ItemAttributeModifiers.builder()
-				.add(Attributes.BLOCK_INTERACTION_RANGE, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "inflatable_wall_0"), 1000, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.ANY).build()));
+				.add(Attributes.BLOCK_INTERACTION_RANGE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "inflatable_wall_0"), 1000, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.ANY).build()));
 	}
 
 	@Override

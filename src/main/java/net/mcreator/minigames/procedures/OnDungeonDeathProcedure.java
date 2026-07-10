@@ -10,7 +10,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.TagKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -38,7 +38,7 @@ public class OnDungeonDeathProcedure {
 			return;
 
 		String registryName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
-		boolean isDungeonMob = entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.parse("minigames:dungeon"))) || registryName.contains("worshipper") || registryName.contains("candlehead")
+		boolean isDungeonMob = entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"))) || registryName.contains("worshipper") || registryName.contains("candlehead")
 				|| registryName.contains("shield_angel");
 
 		if (isDungeonMob) {
@@ -80,3 +80,4 @@ public class OnDungeonDeathProcedure {
 		}
 	}
 }
+

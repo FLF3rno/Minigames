@@ -2,7 +2,7 @@ package net.mcreator.minigames;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -69,6 +69,7 @@ public final class DungeonItemAccess {
 	}
 
 	private static TagKey<Item> itemTag(String id) {
-		return TagKey.create(Registries.ITEM, ResourceLocation.parse(id));
+		return TagKey.create(Registries.ITEM, Identifier.parse(id));
 	}
 }
+

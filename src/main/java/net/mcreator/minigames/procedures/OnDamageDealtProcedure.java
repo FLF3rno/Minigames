@@ -70,7 +70,7 @@ public class OnDamageDealtProcedure {
 			}
 			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:zap")))) {
 				if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.PLUG.get()))) {
-					for (int index66 = 0; index66 < 3; index66++) {
+					for (int index208 = 0; index208 < 3; index208++) {
 						for (Entity entityiterator : world.getEntities(entity,
 								new AABB((x - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
 										(y - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),

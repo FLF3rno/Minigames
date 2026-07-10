@@ -25,7 +25,7 @@ public class StartRollTypeProcedure {
 			if (entity instanceof Player _player)
 				_player.closeContainer();
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/effect give @a minigames:immobilized 3000 1 true");
 			MinigamesModVariables.MapVariables.get(world).players = ServerLifecycleHooks.getCurrentServer().getPlayerCount();
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -44,3 +44,8 @@ public class StartRollTypeProcedure {
 		}
 	}
 }
+
+
+
+
+

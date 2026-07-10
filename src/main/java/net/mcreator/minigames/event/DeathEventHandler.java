@@ -1,6 +1,6 @@
 package net.mcreator.minigames.event;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -18,7 +18,7 @@ import java.util.*;
 public class DeathEventHandler {
 
     public static final TagKey<Item> KEEP_ON_DEATH = ItemTags.create(
-            ResourceLocation.fromNamespaceAndPath("minigames", "keep_on_death")
+            Identifier.fromNamespaceAndPath("minigames", "keep_on_death")
     );
 
     private static final Map<UUID, List<ItemStack>> keptItems = new HashMap<>();

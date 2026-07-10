@@ -2,8 +2,8 @@ package net.mcreator.minigames.entity;
 
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
@@ -68,7 +68,7 @@ public class MovingBlockEntity extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(ValueOutput valueOutput) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putString("Datablock_id", this.entityData.get(DATA_block_id));
@@ -81,7 +81,7 @@ public class MovingBlockEntity extends Monster {
 	}
 
 	@Override
-	public void readAdditionalSaveData(ValueInput valueInput) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput valueInput) {
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "crown"));
 		this.entityData.set(DATA_block_id, valueInput.getStringOr("Datablock_id", ""));

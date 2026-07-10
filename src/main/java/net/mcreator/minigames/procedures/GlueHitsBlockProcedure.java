@@ -60,7 +60,7 @@ public class GlueHitsBlockProcedure {
 	private static void playGlueSound(LevelAccessor world, double x, double y, double z, float pitch) {
 		if (world instanceof ServerLevel level) {
 			level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, level, 4, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(),
 					"/playsound minecraft:block.slime_block.break block @a ~ ~ ~ 2 " + pitch);
 		}
 	}
@@ -87,3 +87,7 @@ public class GlueHitsBlockProcedure {
 		return state.isAir() || state.canBeReplaced();
 	}
 }
+
+
+
+

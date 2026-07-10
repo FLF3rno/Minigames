@@ -19,8 +19,8 @@ public class StunnedEffectStartedappliedProcedure {
 
 		{
 			Entity _ent = entity;
-			if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-				_ent.getServer().getCommands().performPrefixedCommand(
+			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+				_ent.level().getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(
 						CommandSource.NULL,
 						_ent.position(),
@@ -66,3 +66,6 @@ if (alreadyHasOverlay)
 		}
 	}
 }
+
+
+

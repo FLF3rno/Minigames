@@ -3,8 +3,8 @@ package net.mcreator.minigames.entity;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.monster.Monster;
@@ -18,7 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -68,12 +68,12 @@ public class SpleefPodiumPlayerEntity extends Monster {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.generic.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.generic.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.death"));
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class SpleefPodiumPlayerEntity extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(ValueOutput valueOutput) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putInt("Dataposition", this.entityData.get(DATA_position));
@@ -90,7 +90,7 @@ public class SpleefPodiumPlayerEntity extends Monster {
 	}
 
 	@Override
-	public void readAdditionalSaveData(ValueInput valueInput) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput valueInput) {
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "empty"));
 		this.entityData.set(DATA_position, valueInput.getIntOr("Dataposition", 0));

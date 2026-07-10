@@ -26,9 +26,10 @@ public class DungeonMobNoHitCooldownProcedure {
 	private static void execute(@Nullable Event event, Entity entity) {
 		if (!(entity instanceof LivingEntity livingEntity))
 			return;
-		PlayerTeam team = livingEntity.level().getScoreboard().getPlayersTeam(livingEntity instanceof Player player ? player.getGameProfile().getName() : livingEntity.getStringUUID());
+		PlayerTeam team = livingEntity.level().getScoreboard().getPlayersTeam(livingEntity instanceof Player player ? player.getName().getString() : livingEntity.getStringUUID());
 		if (team != null && "dungeon_mobs".equals(team.getName())) {
 			livingEntity.invulnerableTime = 0;
 		}
 	}
 }
+

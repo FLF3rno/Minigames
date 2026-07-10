@@ -16,7 +16,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
@@ -85,9 +85,9 @@ public class SummonNoOwnerCrownProcedure {
 		if (announceDrop) {
 			if (entity.level() instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
+					_level.playSound(null, BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
 				} else {
-					_level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
+					_level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
 				}
 			}
 			if (entity.level() instanceof ServerLevel _level) {
@@ -96,11 +96,11 @@ public class SummonNoOwnerCrownProcedure {
 		}
 		{
 			Entity _ent = entity;
-			if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-				_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+				_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
 						"/kill @e[type=armor_stand,nbt={equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}]");
-				_ent.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4,
+				_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
 						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
 						"/summon armor_stand ~ ~ ~ {Invulnerable:1b,Glowing:1b,equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}");
 			}
@@ -136,3 +136,9 @@ public class SummonNoOwnerCrownProcedure {
 		});
 	}
 }
+
+
+
+
+
+

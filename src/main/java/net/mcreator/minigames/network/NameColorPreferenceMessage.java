@@ -7,7 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.loading.FMLPaths;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.codec.StreamCodec;
@@ -30,7 +30,7 @@ import java.util.UUID;
 
 @EventBusSubscriber
 public record NameColorPreferenceMessage(String color) implements CustomPacketPayload {
-	public static final Type<NameColorPreferenceMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MinigamesMod.MODID, "name_color_preference"));
+	public static final Type<NameColorPreferenceMessage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "name_color_preference"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, NameColorPreferenceMessage> STREAM_CODEC = StreamCodec.of(NameColorPreferenceMessage::write, NameColorPreferenceMessage::read);
 
 	public static void write(FriendlyByteBuf buffer, NameColorPreferenceMessage message) {
@@ -68,8 +68,8 @@ public record NameColorPreferenceMessage(String color) implements CustomPacketPa
 			NameColorApplyProcedure.applyColor(serverPlayer.level(), serverPlayer);
 			applyCustomNameColorNow(serverPlayer, color);
 			serverPlayer.refreshTabListName();
-			if (serverPlayer.getServer() != null) {
-				serverPlayer.getServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, serverPlayer));
+			if (serverPlayer.level().getServer() != null) {
+				serverPlayer.level().getServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, serverPlayer));
 			}
 			MinigamesModVariables.MapVariables.get(serverPlayer.level()).applyCustomNameColor = true;
 			MinigamesModVariables.MapVariables.get(serverPlayer.level()).markSyncDirty();
@@ -130,3 +130,6 @@ public record NameColorPreferenceMessage(String color) implements CustomPacketPa
 		MinigamesMod.addNetworkMessage(NameColorPreferenceMessage.TYPE, NameColorPreferenceMessage.STREAM_CODEC, NameColorPreferenceMessage::handle);
 	}
 }
+
+
+

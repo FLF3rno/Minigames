@@ -35,6 +35,7 @@ public class NameColorFormatEvents {
 			return null;
 		}
 
-		return Component.literal(player.getGameProfile().getName()).setStyle(Style.EMPTY.withColor(parsedColor));
+		return Component.literal(player.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor));
 	}
 }
+

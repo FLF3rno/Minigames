@@ -69,7 +69,7 @@ public class AscendingAlertOverlay {
 		event.getGuiGraphics().fill(0, barY, w, barY + barHeight, bgColor);
 		event.getGuiGraphics().fill(0, barY, Math.max(1, (int) (w * smoothedPercent)), barY + barHeight, fillColor);
 
-		String playerName = ascendingPlayer.getGameProfile().getName();
+		String playerName = ascendingPlayer.getName().getString();
 		Component lineStart = Component.literal(playerName).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(fillColor & 0x00FFFFFF)));
 		int whitePulse = pulseWhite(local.tickCount, event.getPartialTick().getGameTimeDeltaPartialTick(false));
 		int pulsedTextColor = mixWithWhite(0xFFD54A, whitePulse);
@@ -80,8 +80,8 @@ public class AscendingAlertOverlay {
 		int messageWidth = mc.font.width(message);
 		int x = (w - messageWidth) / 2;
 		int nameWidth = mc.font.width(playerName);
-		event.getGuiGraphics().drawString(mc.font, lineStart, x, textY, fillColor, false);
-		event.getGuiGraphics().drawString(mc.font, lineEnd, x + nameWidth, textY, pulsedTextColor, false);
+		event.getGuiGraphics().text(mc.font, lineStart, x, textY, fillColor, false);
+		event.getGuiGraphics().text(mc.font, lineEnd, x + nameWidth, textY, pulsedTextColor, false);
 	}
 
 	private static int colorFromPlayer(Player player) {
@@ -114,3 +114,4 @@ public class AscendingAlertOverlay {
 		return 0xFF000000 | (outR << 16) | (outG << 8) | outB;
 	}
 }
+

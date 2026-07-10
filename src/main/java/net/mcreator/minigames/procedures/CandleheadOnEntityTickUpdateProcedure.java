@@ -1,6 +1,6 @@
 package net.mcreator.minigames.procedures;
 
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -10,7 +10,7 @@ import net.minecraft.commands.CommandSource;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import net.mcreator.minigames.entity.CandleheadEntity;
 import net.mcreator.minigames.entity.VolcanicSpewEntity;
@@ -26,10 +26,9 @@ public class CandleheadOnEntityTickUpdateProcedure {
         double z = entity.getZ();
 
         if (entity instanceof CandleheadEntity _datEntL0 && _datEntL0.getEntityData().get(CandleheadEntity.DATA_ready)) {
-            if (!world.isClientSide() && entity.getServer() != null) {
-                entity.getServer().getCommands().performPrefixedCommand(
-                    new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), 
-                    world instanceof ServerLevel ? (ServerLevel) world : null, 4,
+            if (!world.isClientSide() && entity.level().getServer() != null) {
+                entity.level().getServer().getCommands().performPrefixedCommand(
+                    new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), world instanceof ServerLevel ? (ServerLevel) world : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
                     entity.getName().getString(), entity.getDisplayName(), entity.level().getServer(), entity), 
                     "particle minecraft:flame ~ ~2.5 ~ 0.1 0.1 0.1 0 3 normal @a"
                 );
@@ -70,3 +69,6 @@ public class CandleheadOnEntityTickUpdateProcedure {
         }
     }
 }
+
+
+

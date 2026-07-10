@@ -9,7 +9,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -20,7 +20,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class BlessedTargetRangeBlocker {
-	private static final ResourceLocation MODIFIER_ID = ResourceLocation.fromNamespaceAndPath("minigames", "blessed_target_no_hit");
+	private static final Identifier MODIFIER_ID = Identifier.fromNamespaceAndPath("minigames", "blessed_target_no_hit");
 	private static final AttributeModifier BLOCK_HIT_RANGE = new AttributeModifier(MODIFIER_ID, -1000.0, AttributeModifier.Operation.ADD_VALUE);
 	private static final double TARGET_CHECK_RANGE = 6.0;
 	private static boolean applied = false;

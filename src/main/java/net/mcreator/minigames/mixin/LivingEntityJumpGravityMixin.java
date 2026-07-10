@@ -25,7 +25,8 @@ public abstract class LivingEntityJumpGravityMixin {
 		Vec3 jumpVec = GravityMath.up(gravity).scale(0.42D);
 		Vec3 motion = living.getDeltaMovement();
 		living.setDeltaMovement(motion.add(jumpVec));
-		living.hasImpulse = true;
+		living.setDeltaMovement(living.getDeltaMovement());
 		ci.cancel();
 	}
 }
+

@@ -4,7 +4,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
@@ -53,7 +53,7 @@ public class CheckPotionEnd {
     private static Set<MobEffect> parseEffects(String data) {
         if (data == null || data.isEmpty()) return new HashSet<>();
         return Arrays.stream(data.split(",")).filter(s -> !s.isEmpty())
-                .map(id -> BuiltInRegistries.MOB_EFFECT.get(ResourceLocation.parse(id)).get().value())
+                .map(id -> BuiltInRegistries.MOB_EFFECT.get(Identifier.parse(id)).get().value())
                 .collect(Collectors.toSet());
     }
 }

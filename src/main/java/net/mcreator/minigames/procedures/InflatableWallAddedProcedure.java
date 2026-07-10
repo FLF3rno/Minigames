@@ -10,7 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.minigames.MinigamesMod;
@@ -27,9 +27,9 @@ public class InflatableWallAddedProcedure {
 		itemstack.shrink(1);
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
-				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:inflate")), SoundSource.BLOCKS, (float) 0.1, 1);
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:inflate")), SoundSource.BLOCKS, (float) 0.1, 1);
 			} else {
-				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:inflate")), SoundSource.BLOCKS, (float) 0.1, 1, false);
+				_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:inflate")), SoundSource.BLOCKS, (float) 0.1, 1, false);
 			}
 		}
 		if (clickedFace == Direction.UP) {
@@ -183,7 +183,7 @@ public class InflatableWallAddedProcedure {
 	}
 
 	private static void playDeflateSound(Level level, BlockPos pos) {
-		level.playSound(null, pos, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("minigames:pop")), SoundSource.BLOCKS, 0.3f, 1f);
+		level.playSound(null, pos, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:pop")), SoundSource.BLOCKS, 0.3f, 1f);
 	}
 
 	private static void clearWall(LevelAccessor world, BlockPos origin) {

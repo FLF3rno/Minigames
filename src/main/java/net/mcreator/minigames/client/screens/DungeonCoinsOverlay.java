@@ -8,7 +8,7 @@ import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
 
@@ -17,7 +17,7 @@ import net.mcreator.minigames.procedures.DungeonCoinsDisplayProcedure;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class DungeonCoinsOverlay {
-	private static final ResourceLocation IMAGE_0 = ResourceLocation.parse("minigames:textures/screens/dungeoncoins.png");
+	private static final Identifier IMAGE_0 = Identifier.parse("minigames:textures/screens/dungeoncoins.png");
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public static void eventHandler(RenderGuiEvent.Pre event) {
@@ -36,8 +36,9 @@ public class DungeonCoinsOverlay {
 			event.getGuiGraphics().pose().pushMatrix();
 			event.getGuiGraphics().pose().translate(40, h - 30);
 			event.getGuiGraphics().pose().scale(2.0F, 2.0F);
-			event.getGuiGraphics().drawString(Minecraft.getInstance().font, DungeonCoinsDisplayProcedure.execute(world), 0, 0, -409536, true);
+			event.getGuiGraphics().text(Minecraft.getInstance().font, DungeonCoinsDisplayProcedure.execute(world), 0, 0, -409536, true);
 			event.getGuiGraphics().pose().popMatrix();
 		}
 	}
 }
+

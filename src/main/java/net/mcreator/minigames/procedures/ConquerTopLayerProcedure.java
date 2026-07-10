@@ -32,20 +32,20 @@ public class ConquerTopLayerProcedure {
 	}
 
 	public static void announcePotentialWinner(ServerPlayer player) {
-		if (player.getServer() == null) {
+		if (player.level().getServer() == null) {
 			return;
 		}
-		player.getServer().getPlayerList().broadcastSystemMessage(
+		player.level().getServer().getPlayerList().broadcastSystemMessage(
 				Component.literal(player.getName().getString()).withStyle(style -> style.withBold(true).withColor(net.minecraft.ChatFormatting.GOLD))
 						.append(Component.literal(" is about to win the layer!").withStyle(style -> style.withColor(net.minecraft.ChatFormatting.GREEN))),
 				false);
 	}
 
 	public static void awardLayerWin(LevelAccessor world, ServerPlayer player) {
-		if (player.getServer() == null) {
+		if (player.level().getServer() == null) {
 			return;
 		}
-		player.getServer().getPlayerList().broadcastSystemMessage(
+		player.level().getServer().getPlayerList().broadcastSystemMessage(
 				Component.literal(player.getName().getString()).withStyle(style -> style.withBold(true).withColor(net.minecraft.ChatFormatting.GOLD))
 						.append(Component.literal(" won the layer!").withStyle(style -> style.withColor(net.minecraft.ChatFormatting.LIGHT_PURPLE))),
 				false);
@@ -57,3 +57,6 @@ public class ConquerTopLayerProcedure {
 		SpleefPowerupProcedure.execute(world, player);
 	}
 }
+
+
+

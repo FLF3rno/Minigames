@@ -40,3 +40,4 @@ public abstract class LivingEntityTransparencyDataMixin implements LivingEntityT
 		((LivingEntity) (Object) this).getEntityData().set(minigames$TRANSPARENCY, transparency);
 	}
 }
+

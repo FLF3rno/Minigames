@@ -2,8 +2,7 @@ package net.mcreator.minigames.entity;
 
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -21,7 +20,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -137,12 +136,12 @@ protected boolean canPerformAttack(LivingEntity entity) {
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.skeleton.hurt"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.skeleton.hurt"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.skeleton.death"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.skeleton.death"));
 	}
 
 	@Override
@@ -153,7 +152,7 @@ protected boolean canPerformAttack(LivingEntity entity) {
 	}
 
 	@Override
-	public void addAdditionalSaveData(ValueOutput valueOutput) {
+	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putInt("DataID", this.entityData.get(DATA_ID));
@@ -162,7 +161,7 @@ protected boolean canPerformAttack(LivingEntity entity) {
 	}
 
 	@Override
-	public void readAdditionalSaveData(ValueInput valueInput) {
+	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput valueInput) {
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "candlehead"));
 		this.entityData.set(DATA_ID, valueInput.getIntOr("DataID", 0));

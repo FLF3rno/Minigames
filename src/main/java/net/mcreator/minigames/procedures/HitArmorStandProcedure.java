@@ -87,11 +87,11 @@ public class HitArmorStandProcedure {
 				if (entity instanceof LivingEntity _living) {
 					_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
 				}
-				if ((target instanceof LivingEntity _teamEnt && _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()) != null
-						? _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()).getName()
+				if ((target instanceof LivingEntity _teamEnt && _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getName().getString() : _teamEnt.getStringUUID()) != null
+						? _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getName().getString() : _teamEnt.getStringUUID()).getName()
 						: "")
-						.equals(entity instanceof LivingEntity _teamEnt && _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()) != null
-								? _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getGameProfile().getName() : _teamEnt.getStringUUID()).getName()
+						.equals(entity instanceof LivingEntity _teamEnt && _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getName().getString() : _teamEnt.getStringUUID()) != null
+								? _teamEnt.level().getScoreboard().getPlayersTeam(_teamEnt instanceof Player _pl ? _pl.getName().getString() : _teamEnt.getStringUUID()).getName()
 								: "")) {
 					RepickAnimateCrownProcedure.execute(world, x, y, z);
 					if (world instanceof ServerLevel _level) {
@@ -107,3 +107,7 @@ public class HitArmorStandProcedure {
 		}
 	}
 }
+
+
+
+

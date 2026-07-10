@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.entity.player.Player;
@@ -86,9 +86,9 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 	}
 
 	@Override
-	public void clicked(int slotId, int button, ClickType clickType, Player player) {
+	public void clicked(int slotId, int button, ContainerInput clickType, Player player) {
 		if (isInCombat()) {
-			if (clickType == ClickType.THROW) {
+			if (clickType == ContainerInput.THROW) {
 				if (slotId >= 0 && slotId < this.slots.size()) {
 					Slot slot = this.slots.get(slotId);
 					if (DungeonItemAccess.isDungeonItem(slot.getItem())) {
@@ -96,7 +96,7 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 					}
 				}
 			}
-			if (clickType == ClickType.PICKUP || clickType == ClickType.SWAP || clickType == ClickType.QUICK_MOVE || clickType == ClickType.QUICK_CRAFT) {
+			if (clickType == ContainerInput.PICKUP || clickType == ContainerInput.SWAP || clickType == ContainerInput.QUICK_MOVE || clickType == ContainerInput.QUICK_CRAFT) {
 				if (slotId >= 0 && slotId < this.slots.size()) {
 					Slot slot = this.slots.get(slotId);
 					int containerSlot = slot.getContainerSlot();
@@ -113,7 +113,7 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 						return;
 					}
 				} else {
-					if (clickType == ClickType.QUICK_CRAFT && DungeonItemAccess.isRelic(this.getCarried())) {
+					if (clickType == ContainerInput.QUICK_CRAFT && DungeonItemAccess.isRelic(this.getCarried())) {
 						return;
 					}
 					if (slotId == -999 && !this.getCarried().isEmpty() && DungeonItemAccess.isDungeonItem(this.getCarried())) {
@@ -122,7 +122,7 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 				}
 			}
 		}
-		if (clickType == ClickType.SWAP && slotId >= 0 && slotId < this.slots.size()) {
+		if (clickType == ContainerInput.SWAP && slotId >= 0 && slotId < this.slots.size()) {
 			Slot slot = this.slots.get(slotId);
 			int containerSlot = slot.getContainerSlot();
 			if (containerSlot == LEFT_RELIC_SLOT_INDEX || containerSlot == RIGHT_RELIC_SLOT_INDEX) {

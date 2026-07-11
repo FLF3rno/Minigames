@@ -325,6 +325,8 @@ public class MinigamesModVariables {
 		public String VotingPlayerUUID = "\"\"";
 		public String VotingPlayerName = "";
 		public String battleBoxStatus = "\"\"";
+		public double Achievement = 0;
+		public double AchievementCategory = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -431,6 +433,8 @@ public class MinigamesModVariables {
 			VotingPlayerUUID = nbt.getStringOr("VotingPlayerUUID", "");
 			VotingPlayerName = nbt.getStringOr("VotingPlayerName", "");
 			battleBoxStatus = nbt.getStringOr("battleBoxStatus", "");
+			Achievement = nbt.getDoubleOr("Achievement", 0);
+			AchievementCategory = nbt.getDoubleOr("AchievementCategory", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -538,6 +542,8 @@ public class MinigamesModVariables {
 			nbt.putString("VotingPlayerUUID", VotingPlayerUUID);
 			nbt.putString("VotingPlayerName", VotingPlayerName);
 			nbt.putString("battleBoxStatus", battleBoxStatus);
+			nbt.putDouble("Achievement", Achievement);
+			nbt.putDouble("AchievementCategory", AchievementCategory);
 			return nbt;
 		}
 

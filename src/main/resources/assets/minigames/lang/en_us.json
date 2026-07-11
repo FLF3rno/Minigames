@@ -368,5 +368,6 @@
   "subtitles.zap": "Zap",
   "item.minigames.cluster_bomb": "Cluster Bomb",
   "item.minigames.reaction_time": "Reaction Time",
-  "effect.minigames.damage_boost": "Extra Damage"
+  "effect.minigames.damage_boost": "Extra Damage",
+  "gui.minigames.select_category_achievement.label_empty": "Aventur"
 }

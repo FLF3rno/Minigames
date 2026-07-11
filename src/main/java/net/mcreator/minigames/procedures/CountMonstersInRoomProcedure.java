@@ -9,6 +9,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.core.registries.Registries;
 
@@ -30,7 +31,7 @@ public class CountMonstersInRoomProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
 		if (!(world instanceof ServerLevel serverLevel))
 			return;
-		if (!serverLevel.dimension().location().equals(Identifier.parse("minigames:dungeon_dimension")))
+		if (!serverLevel.dimension().equals(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))))
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).roomCheckDelayTicks > 0) {
 			MinigamesModVariables.MapVariables.get(world).roomCheckDelayTicks = MinigamesModVariables.MapVariables.get(world).roomCheckDelayTicks - 1;

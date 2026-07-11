@@ -3,7 +3,6 @@
   "package": "net.mcreator.minigames.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ScreenMixin",
     "RelicInventoryMixin"
   ],
   "client": [

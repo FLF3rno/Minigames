@@ -39,9 +39,9 @@ public class SpawnFloorProcedure {
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " 200 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) + " air"));
 		spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
-		for (int index149 = 0; index149 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index149++) {
+		for (int index7 = 0; index7 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index7++) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
-			for (int index150 = 0; index150 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index150++) {
+			for (int index8 = 0; index8 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index8++) {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.STARTING_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_STARTING_ROOM.get().defaultBlockState(), 3);

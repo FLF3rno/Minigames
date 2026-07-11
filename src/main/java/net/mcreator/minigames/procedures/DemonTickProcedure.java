@@ -50,7 +50,7 @@ public class DemonTickProcedure {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					ApplyEffectProcedure.execute(entityiterator, false, 1, 100, "minecraft:darkness");
 				}
-				for (int index212 = 0; index212 < 6; index212++) {
+				for (int index70 = 0; index70 < 6; index70++) {
 					if (world instanceof ServerLevel _level) {
 						Entity entityToSpawn = MinigamesModEntities.SCULKLING.get().spawn(_level, BlockPos.containing(x, y + 1, z), EntitySpawnReason.MOB_SUMMONED);
 						if (entityToSpawn != null) {

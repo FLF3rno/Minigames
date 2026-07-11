@@ -3,6 +3,5 @@
   "textures": {
     "all": "minigames:block/exploding_magma_3",
     "particle": "minigames:block/exploding_magma"
-  },
-  "render_type": "solid"
+  }
 }

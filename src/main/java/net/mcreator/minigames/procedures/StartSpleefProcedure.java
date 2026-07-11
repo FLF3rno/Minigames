@@ -38,7 +38,7 @@ public class StartSpleefProcedure {
 					_vars.snowballCountSpleef = 0;
 					_vars.markSyncDirty();
 				}
-				if (entity.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
+				if (entityiterator.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
 					setStackInSlot(_resourceHandler, 0, ItemResource.of(new ItemStack(MinigamesModItems.SPLEEF_SHOVEL.get())), 1);
 				}
 			}

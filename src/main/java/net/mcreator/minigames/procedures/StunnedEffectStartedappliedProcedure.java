@@ -5,6 +5,7 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
@@ -26,7 +27,7 @@ public class StunnedEffectStartedappliedProcedure {
 						_ent.position(),
 						_ent.getRotationVector(),
 						_ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-						4,
+						LevelBasedPermissionSet.OWNER,
 						_ent.getName().getString(),
 						_ent.getDisplayName(),
 						_ent.level().getServer(),

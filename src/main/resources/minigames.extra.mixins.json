@@ -12,9 +12,7 @@
     "LivingEntityTargetMixin"
   ],
   "client": [
-    "PlayerRendererGravityRotationMixin",
     "GuiAccessor",
-    "ScreenMixin",
     "EntityTeamColorMixin",
     "PlayerNameColorMixin"
   ],

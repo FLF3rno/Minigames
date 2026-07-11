@@ -11,6 +11,7 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 public class StunnedEffectEntity extends Monster {
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(StunnedEffectEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<Integer> PARENT_ID = SynchedEntityData.defineId(StunnedEffectEntity.class, EntityDataSerializers.INT);
 	public final AnimationState animationState0 = new AnimationState();
 
 	public StunnedEffectEntity(EntityType<? extends Monster> type, Level level) {
@@ -21,6 +22,7 @@ public class StunnedEffectEntity extends Monster {
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(TEXTURE, "empty");
+		builder.define(PARENT_ID, 0);
 	}
 
 	public String getTexture() {
@@ -29,6 +31,14 @@ public class StunnedEffectEntity extends Monster {
 
 	public void setTexture(String texture) {
 		this.entityData.set(TEXTURE, texture);
+	}
+
+	public int getParentId() {
+		return this.entityData.get(PARENT_ID);
+	}
+
+	public void setParent(net.minecraft.world.entity.Entity entity) {
+		this.entityData.set(PARENT_ID, entity.getId());
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {}

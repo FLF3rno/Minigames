@@ -3814,11 +3814,11 @@
       "registry_name": "inflatable_wall_block",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/block/entity/InflatableWallBlockBlockEntity.java",
           "src/main/resources/assets/minigames/blockstates/inflatable_wall_block.json",
-          "src/main/java/net/mcreator/minigames/block/InflatableWallBlockBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/inflatable_wall_block.json",
+          "src/main/java/net/mcreator/minigames/block/entity/InflatableWallBlockBlockEntity.java",
           "src/main/resources/assets/minigames/models/block/inflatable_wall_block.json",
-          "src/main/resources/data/minigames/loot_table/blocks/inflatable_wall_block.json"
+          "src/main/java/net/mcreator/minigames/block/InflatableWallBlockBlock.java"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -4368,12 +4368,12 @@
         "files": [
           "src/main/resources/assets/minigames/models/block/exploding_magma_0.json",
           "src/main/java/net/mcreator/minigames/block/entity/ExplodingMagmaBlockEntity.java",
+          "src/main/resources/assets/minigames/models/block/exploding_magma.json",
+          "src/main/resources/assets/minigames/models/block/exploding_magma_2.json",
           "src/main/resources/data/minigames/loot_table/blocks/exploding_magma.json",
           "src/main/resources/assets/minigames/blockstates/exploding_magma.json",
-          "src/main/resources/assets/minigames/models/block/exploding_magma_1.json",
-          "src/main/resources/assets/minigames/models/block/exploding_magma.json",
           "src/main/java/net/mcreator/minigames/block/ExplodingMagmaBlock.java",
-          "src/main/resources/assets/minigames/models/block/exploding_magma_2.json"
+          "src/main/resources/assets/minigames/models/block/exploding_magma_1.json"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -8901,19 +8901,6 @@
         ]
       },
       "path": "~/General/Advanced Glowing"
-    },
-    {
-      "name": "Screen",
-      "type": "mixin",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "screen",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/mixin/ScreenMixin.java"
-        ]
-      },
-      "path": "~/General/Tablist"
     },
     {
       "name": "AdvancedGlowingCommand",

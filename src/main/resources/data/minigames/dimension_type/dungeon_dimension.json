@@ -21,5 +21,6 @@
     "max_inclusive": 7
   },
   "monster_spawn_block_light_limit": 0,
+  "has_ender_dragon_fight": false,
   "effects": "minigames:dungeon_dimension"
 }

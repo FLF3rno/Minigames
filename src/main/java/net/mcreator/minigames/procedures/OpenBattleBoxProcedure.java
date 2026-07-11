@@ -61,7 +61,6 @@ public class OpenBattleBoxProcedure {
 			Minecraft.getInstance().execute(() -> {
 				entity.getPersistentData().putDouble("guiScale", Minecraft.getInstance().getWindow().getGuiScale());
 				Minecraft.getInstance().options.guiScale().set(0);
-				Minecraft.getInstance().resizeDisplay();
 			});
 		} else if (!entity.getData(MinigamesModVariables.PLAYER_VARIABLES).openBattleBox && entity instanceof Player _plr3 && _plr3.containerMenu instanceof BattleBoxMenu) {
 			if (entity instanceof Player _player)
@@ -69,7 +68,6 @@ public class OpenBattleBoxProcedure {
 			Minecraft.getInstance().execute(() -> {
 				entity.getPersistentData().putDouble("guiScale", Minecraft.getInstance().getWindow().getGuiScale());
 				Minecraft.getInstance().options.guiScale().set((int) entity.getPersistentData().getDoubleOr("guiScale", 0));
-				Minecraft.getInstance().resizeDisplay();
 			});
 		}
 	}

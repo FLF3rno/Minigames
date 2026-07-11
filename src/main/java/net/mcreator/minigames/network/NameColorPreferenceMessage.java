@@ -65,6 +65,7 @@ public record NameColorPreferenceMessage(String color) implements CustomPacketPa
 			vars.color = color;
 			vars.showCustomNameColor = true;
 			vars.markSyncDirty();
+			writeClientColor(serverPlayer.getUUID(), color);
 			NameColorApplyProcedure.applyColor(serverPlayer.level(), serverPlayer);
 			applyCustomNameColorNow(serverPlayer, color);
 			serverPlayer.refreshTabListName();

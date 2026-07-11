@@ -11,13 +11,14 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
+import net.minecraft.client.input.MouseButtonEvent;
 import net.mcreator.minigames.init.MinigamesModScreens;
 import net.mcreator.minigames.network.CustomizeGUIButtonMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.world.inventory.CustomizeGUIMenu;
-
+import net.mcreator.minigames.procedures.CustomizeNameColorProcedure;
 import com.mojang.blaze3d.platform.InputConstants;
+import net.mcreator.minigames.network.NameColorPreferenceMessage;
 
 public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu> implements MinigamesModScreens.ScreenAccessor {
 	private final Level world;
@@ -29,6 +30,7 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/bucket.png");
 	private static final Identifier IMAGE_3 = Identifier.parse("minigames:textures/screens/compass_16.png");
 	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/selectedgamecompass.png");
+	private static final Identifier COLOR_SELECTOR = Identifier.parse("minigames:textures/screens/colorselector.png");
 	private float selectedHue = 0.0f;
 	private float selectedSaturation = 1.0f;
 	private float selectedValue = 1.0f;
@@ -79,12 +81,88 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 		renderHueBar(guiGraphics);
 		renderSelectedColorSwatch(guiGraphics);
 		renderHsvBorders(guiGraphics);
+		renderSelector(guiGraphics);
 	}
 
 	@Override
 	public void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
 		guiGraphics.text(this.font, Component.literal("Customize your name!"), 5, 5, -12829636, false);
 		guiGraphics.text(this.font, resolveDisplayName(), 6, 98, resolveGuiDisplayTextColor(), true);
+	}
+
+	@Override
+public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+    if (event.button() == 0) {
+        if (handleColorPicker(event.x(), event.y())) {
+            return true;
+        }
+    }
+
+    return super.mouseClicked(event, doubleClick);
+}
+
+@Override
+public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+    if (event.button() == 0) {
+        if (handleColorPicker(event.x(), event.y())) {
+            return true;
+        }
+    }
+
+    return super.mouseDragged(event, dragX, dragY);
+}
+private boolean handleColorPicker(double mouseX, double mouseY) {
+    int mapX = this.leftPos + 48;
+    int mapY = this.topPos + 22;
+    int mapW = 220;
+    int mapH = 72;
+
+    int hueX = this.leftPos + 278;
+    int hueY = this.topPos + 22;
+    int hueW = 14;
+    int hueH = 72;
+
+    if (mouseX >= hueX && mouseX < hueX + hueW &&
+        mouseY >= hueY && mouseY < hueY + hueH) {
+
+        selectedHue = (float)((mouseY - hueY) / (double)(hueH - 1));
+        selectedHue = Math.max(0f, Math.min(1f, selectedHue));
+
+        updateCurrentColor();
+        return true;
+    }
+
+    if (mouseX >= mapX && mouseX < mapX + mapW &&
+        mouseY >= mapY && mouseY < mapY + mapH) {
+
+        selectedSaturation = (float)((mouseX - mapX) / (double)(mapW - 1));
+        selectedValue = 1f - (float)((mouseY - mapY) / (double)(mapH - 1));
+
+        selectedSaturation = Math.max(0f, Math.min(1f, selectedSaturation));
+        selectedValue = Math.max(0f, Math.min(1f, selectedValue));
+
+        updateCurrentColor();
+        return true;
+    }
+
+    return false;
+}
+
+	private void updateCurrentColor() {
+
+    	int rgb = java.awt.Color.HSBtoRGB(
+            selectedHue,
+            selectedSaturation,
+            selectedValue);
+
+    	String hex = String.format("#%06X", rgb & 0xFFFFFF);
+    	entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+
+    if (minecraft.player != null) {
+        minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+        ClientPacketDistributor.sendToServer(new NameColorPreferenceMessage(hex));
+    	}
+
 	}
 
 	@Override
@@ -127,6 +205,43 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 		int swatchColor = 0xFF000000 | resolveGuiDisplayTextColor();
 		guiGraphics.fill(this.leftPos + 22, this.topPos + 22, this.leftPos + 40, this.topPos + 94, swatchColor);
 	}
+
+	private void renderSelector(GuiGraphicsExtractor guiGraphics) {
+
+    int mapX = this.leftPos + 48;
+    int mapY = this.topPos + 22;
+    int mapW = 220;
+    int mapH = 72;
+
+    int selectorX = mapX + Math.round(selectedSaturation * (mapW - 1));
+    int selectorY = mapY + Math.round((1f - selectedValue) * (mapH - 1));
+
+    guiGraphics.blit(
+        net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+        COLOR_SELECTOR,
+        selectorX - 4,
+        selectorY - 4,
+        0,0,
+        8,8,
+        8,8
+    );
+
+    int hueX = this.leftPos + 278;
+    int hueY = this.topPos + 22;
+    int hueH = 72;
+
+    int hueSelectorY = hueY + Math.round(selectedHue * (hueH - 1));
+
+    guiGraphics.blit(
+        net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+        COLOR_SELECTOR,
+        hueX - 4,
+        hueSelectorY - 4,
+        0,0,
+        8,8,
+        8,8
+    );
+}
 
 	private void renderHsvBorders(GuiGraphicsExtractor guiGraphics) {
 		drawMinecraftFrame(guiGraphics, this.leftPos + 48, this.topPos + 22, 220, 72);

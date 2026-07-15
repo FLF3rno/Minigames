@@ -73,7 +73,7 @@
     ],
     "baseTexture": "",
     "overlayTarget": "Inventory",
-    "displayCondition": "DisplayReminder",
+    "displayCondition": "PowerupChecklist",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

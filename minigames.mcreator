@@ -1597,14 +1597,14 @@
       "name": "AchievementReminder",
       "type": "overlay",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "achievement_reminder",
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/client/screens/AchievementReminderOverlay.java"
         ]
       },
-      "path": "~/Achievement Run/old/reminder"
+      "path": "~/Achievement Run/new/Reminder"
     },
     {
       "name": "ReminderAchievementIcon",
@@ -3421,7 +3421,7 @@
       "name": "DestroySnowGrantSnowballSpleef",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "destroy_snow_grant_snowball_spleef",
       "metadata": {
         "dependencies": [
@@ -8227,48 +8227,6 @@
       "path": "~/Dungeon/Doors"
     },
     {
-      "name": "Add1Player",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "add_1_player",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/Add1PlayerProcedure.java"
-        ]
-      },
-      "path": "~/General/Player Numeration"
-    },
-    {
-      "name": "Remove1Player",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "remove_1_player",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/Remove1PlayerProcedure.java"
-        ]
-      },
-      "path": "~/General/Player Numeration"
-    },
-    {
       "name": "RemoveAllEffectsButCrowned",
       "type": "procedure",
       "compiles": true,
@@ -12995,7 +12953,7 @@
           "src/main/java/net/mcreator/minigames/client/gui/SelectCategoryAchievementScreen.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run/new/Menu"
     },
     {
       "name": "GetCategory",
@@ -13038,11 +12996,39 @@
       "path": "~/Achievement Run/new"
     },
     {
-      "name": "AchievementHuntv2",
+      "name": "AchievementRunV2",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_run_v_2",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/AchievementRunV2Command.java"
+        ]
+      },
+      "path": "~/Achievement Run/new"
+    },
+    {
+      "name": "DisplayAchievmen",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "display_achievmen",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/DisplayAchievmenMenu.java",
+          "src/main/java/net/mcreator/minigames/network/DisplayAchievmenButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/DisplayAchievmenScreen.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "DisplayAchievementOpen",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "achievement_huntv_2",
+      "registry_name": "display_achievement_open",
       "metadata": {
         "dependencies": [
           {
@@ -13067,23 +13053,328 @@
           }
         ],
         "files": [
-          "src/main/java/net/mcreator/minigames/procedures/AchievementHuntv2Procedure.java"
+          "src/main/java/net/mcreator/minigames/procedures/DisplayAchievementOpenProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "OpenDisplayAchievement",
+      "type": "packet",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "open_display_achievement",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/OpenDisplayAchievementMessage.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "StartAchievementRun",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_achievement_run",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartAchievementRunProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "GetAchievementInfo",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "get_achievement_info",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GetAchievementInfoProcedure.java"
         ]
       },
       "path": "~/Achievement Run/new"
     },
     {
-      "name": "AchievementRunV2",
-      "type": "command",
+      "name": "PlayerNumeration",
+      "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "achievement_run_v_2",
+      "registry_name": "player_numeration",
       "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
         "files": [
-          "src/main/java/net/mcreator/minigames/command/AchievementRunV2Command.java"
+          "src/main/java/net/mcreator/minigames/procedures/PlayerNumerationProcedure.java"
+        ]
+      },
+      "path": "~/General/Player Numeration"
+    },
+    {
+      "name": "AchievementReadyUp",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_ready_up",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementReadyUpProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "AchievementInitiateGame",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_initiate_game",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementInitiateGameProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "AchievementReroll",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_reroll",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementRerollProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "AchievementInitiateReroll",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_initiate_reroll",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementInitiateRerollProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new/Menu"
+    },
+    {
+      "name": "RollAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "roll_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RollAchievementProcedure.java"
         ]
       },
       "path": "~/Achievement Run/new"
+    },
+    {
+      "name": "ModifiersAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "modifiers_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ModifiersAchievementProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/new"
+    },
+    {
+      "name": "ClearEnderchest",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "clear_enderchest",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ClearEnderchestProcedure.java"
+        ]
+      },
+      "path": "~/General/Enderchest"
+    },
+    {
+      "name": "BlockBreakSimulation",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "block_break_simulation",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "Block",
+            "type": "blockstate"
+          },
+          {
+            "name": "Particles",
+            "type": "logic"
+          },
+          {
+            "name": "Sound",
+            "type": "logic"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlockBreakSimulationProcedure.java"
+        ]
+      },
+      "path": "~/General/Particles"
     }
   ],
   "variable_elements": [
@@ -13862,12 +14153,6 @@
       "value": "0"
     },
     {
-      "name": "connectedPlayers",
-      "type": "number",
-      "scope": "map",
-      "value": "0"
-    },
-    {
       "name": "roomCheckDelayTicks",
       "type": "number",
       "scope": "map",
@@ -13992,6 +14277,36 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "AchievementModifier",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "AchievementIcon",
+      "type": "itemstack",
+      "scope": "map",
+      "value": "ItemStack.EMPTY"
+    },
+    {
+      "name": "AchievementTitle",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "AchievementDescription",
+      "type": "string",
+      "scope": "map",
+      "value": ""
+    },
+    {
+      "name": "AchievementLobbyState",
+      "type": "string",
+      "scope": "player_persistent",
+      "value": "\"\""
     }
   ],
   "sound_elements": [
@@ -15015,7 +15330,11 @@
       "item.minigames.cluster_bomb": "Cluster Bomb",
       "item.minigames.reaction_time": "Reaction Time",
       "effect.minigames.damage_boost": "Extra Damage",
-      "gui.minigames.select_category_achievement.label_empty": "Aventur"
+      "gui.minigames.select_category_achievement.label_empty": "Aventur",
+      "gui.minigames.display_achievmen.button_im_ready": "I\u0027m Ready",
+      "gui.minigames.display_achievmen.tooltip_reroll_achievement": "Reroll Achievement",
+      "gui.minigames.display_achievmen.label_empty": "",
+      "key.category.minigames.vote": "Voting"
     }
   },
   "metadata": {
@@ -15091,7 +15410,16 @@
           },
           {
             "name": "new",
-            "children": []
+            "children": [
+              {
+                "name": "Reminder",
+                "children": []
+              },
+              {
+                "name": "Menu",
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -15471,6 +15799,10 @@
                 "children": []
               }
             ]
+          },
+          {
+            "name": "Enderchest",
+            "children": []
           }
         ]
       }

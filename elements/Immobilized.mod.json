@@ -3,7 +3,7 @@
   "_type": "potioneffect",
   "definition": {
     "effectName": "Freeze game",
-    "icon": "cantmove",
+    "icon": "immobilized",
     "color": {
       "value": -16777209,
       "falpha": 0.0
@@ -16,43 +16,36 @@
     "isCuredbyHoney": false,
     "modifiers": [
       {
-        "equipmentSlot": "any",
         "attribute": "BLOCK_REACH",
         "amount": -10.0,
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "any",
         "attribute": "ENTITY_REACH",
         "amount": -10.0,
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "any",
         "attribute": "FLYING_SPEED",
         "amount": -10.0,
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "any",
         "attribute": "EXPLOSION_KNOCKBACK_RESISTANCE",
         "amount": 10.0,
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "any",
         "attribute": "JUMP_STRENGTH",
         "amount": -1000.0,
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "any",
         "attribute": "KNOCKBACK_RESISTANCE",
         "amount": 1000.0,
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "any",
         "attribute": "MOVEMENT_SPEED",
         "amount": -1000.0,
         "operation": "ADD_VALUE"

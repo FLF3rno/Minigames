@@ -1,5 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
+
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -14,6 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
+import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -22,7 +25,7 @@ import java.util.ArrayList;
 public class SpawnP2PedestalProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
-			if (MinigamesModVariables.MapVariables.get(world).connectedPlayers < 2) {
+			if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) < 2) {
 				world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			} else {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {

@@ -1,0 +1,245 @@
+{
+  "_fv": 89,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "diamondwindow.png",
+          "spritesCount": 1,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 24,
+          "y": 8,
+          "locked": true
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_im_ready",
+          "text": "I'm Ready",
+          "isUndecorated": false,
+          "onClick": "ReadyUp",
+          "displayCondition": "ReadyDisplay",
+          "width": 72,
+          "height": 20,
+          "x": 42,
+          "y": 206,
+          "locked": true
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": "DisplayEntity",
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 122,
+          "y": 206,
+          "locked": false
+        }
+      },
+      {
+        "type": "entitymodel",
+        "data": {
+          "entityModel": "DisplayEntity6",
+          "scale": 25,
+          "rotationX": 0,
+          "followMouseMovement": false,
+          "x": 332,
+          "y": 206,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_achievement_description",
+          "text": {
+            "fixedValue": "",
+            "name": "AchievementDescription"
+          },
+          "color": {
+            "value": -11842741,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 54,
+          "y": 118,
+          "locked": true
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_pvp_enables_after_5_minutes",
+          "text": {
+            "fixedValue": "PVP enables after 5 minutes",
+            "name": "DisplayBottomLeftDescription"
+          },
+          "width": 41,
+          "height": 39,
+          "x": 48,
+          "y": 162,
+          "locked": true
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_weather_will_permanently_be_thun",
+          "text": {
+            "fixedValue": "Weather will permanently be Thunder",
+            "name": "TooltipModifier"
+          },
+          "displayCondition": "DisplayTooltipModifier",
+          "width": 42,
+          "height": 39,
+          "x": 92,
+          "y": 162,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_match_settings",
+          "text": {
+            "fixedValue": "Match Settings:",
+            "name": "SettingsDisplay"
+          },
+          "width": 32,
+          "height": 32,
+          "x": 352,
+          "y": 168,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 1.0
+          },
+          "x": 344,
+          "y": 160,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 3.0
+          },
+          "x": 42,
+          "y": 154,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "modifiers.png",
+          "spritesCount": 5,
+          "spriteIndex": {
+            "fixedValue": 3.0,
+            "name": "DisplayThunder"
+          },
+          "x": 85,
+          "y": 158,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_reroll",
+          "image": "reroll.png",
+          "hoveredImage": "rerollhover.png",
+          "onClick": "RerollAchievementPressed",
+          "x": 375,
+          "y": 12,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_reroll_achievement",
+          "text": {
+            "fixedValue": "Reroll Achievement"
+          },
+          "width": 24,
+          "height": 24,
+          "x": 372,
+          "y": 10,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "clock.png",
+          "spritesCount": 1,
+          "displayCondition": "DisplayHeadStart",
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 53,
+          "y": 166,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "achievement_background.png",
+          "use1Xscale": false,
+          "x": 51,
+          "y": 48,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_empty",
+          "text": {
+            "fixedValue": ""
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "hasShadow": false,
+          "x": 132,
+          "y": 80,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

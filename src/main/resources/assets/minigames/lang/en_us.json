@@ -369,5 +369,9 @@
   "item.minigames.cluster_bomb": "Cluster Bomb",
   "item.minigames.reaction_time": "Reaction Time",
   "effect.minigames.damage_boost": "Extra Damage",
-  "gui.minigames.select_category_achievement.label_empty": "Aventur"
+  "gui.minigames.select_category_achievement.label_empty": "Aventur",
+  "gui.minigames.display_achievmen.button_im_ready": "I'm Ready",
+  "gui.minigames.display_achievmen.tooltip_reroll_achievement": "Reroll Achievement",
+  "gui.minigames.display_achievmen.label_empty": "",
+  "key.category.minigames.vote": "Voting"
 }

@@ -1,17 +1,18 @@
 package net.mcreator.minigames.procedures;
 
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
+
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
-
-import net.mcreator.minigames.network.MinigamesModVariables;
+import net.minecraft.client.Minecraft;
 
 public class PlayAgainSpleefProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (MinigamesModVariables.MapVariables.get(world).connectedPlayers >= 2) {
+		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) >= 2) {
 			StartVoteProcedure.execute(world, entity, entity, "spleef");
 		} else {
 			if (entity instanceof ServerPlayer _player)

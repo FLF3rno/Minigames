@@ -11,7 +11,6 @@ import net.mcreator.minigames.MinigamesMod;
 
 public class InflatableWallSoundProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		// Sound is handled only for the initial placement in InflatableWallAddedProcedure.
 		MinigamesMod.queueServerWork(1, () -> {
 			if (getBlockNBTNumber(world, BlockPos.containing(x, y, z), "inflateY") > 0) {
 				world.setBlock(BlockPos.containing(x, y + 1, z), MinigamesModBlocks.INFLATABLE_WALL_BLOCK.get().defaultBlockState(), 3);

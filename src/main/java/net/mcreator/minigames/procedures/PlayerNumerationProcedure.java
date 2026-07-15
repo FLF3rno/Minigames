@@ -1,5 +1,6 @@
 package net.mcreator.minigames.procedures;
 
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -7,13 +8,14 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 import javax.annotation.Nullable;
 
 @EventBusSubscriber
-public class Add1PlayerProcedure {
+public class PlayerNumerationProcedure {
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 		execute(event, event.getEntity().level(), event.getEntity());
@@ -29,10 +31,8 @@ public class Add1PlayerProcedure {
 		double team = 0;
 		{
 			MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-			_vars.team = MinigamesModVariables.MapVariables.get(world).connectedPlayers;
+			_vars.team = world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount();
 			_vars.markSyncDirty();
 		}
-		MinigamesModVariables.MapVariables.get(world).connectedPlayers = MinigamesModVariables.MapVariables.get(world).connectedPlayers + 1;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}
 }

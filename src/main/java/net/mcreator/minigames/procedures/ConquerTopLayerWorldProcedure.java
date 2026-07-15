@@ -160,11 +160,19 @@ public class ConquerTopLayerWorldProcedure {
 
 	private static void clearTopLayer(ServerLevel level, double y) {
 		Vec3 arenaCenter = MinigamesModVariables.MapVariables.get(level).spleefMapMiddleX;
+
+		int minX = (int) arenaCenter.x() + CLEAR_MIN;
+		int maxX = (int) arenaCenter.x() + CLEAR_MAX;
+		int minZ = (int) arenaCenter.z() + CLEAR_MIN;
+		int maxZ = (int) arenaCenter.z() + CLEAR_MAX;
+
 		int fillY = (int) Math.floor(y);
+
 		level.getServer().getCommands().performPrefixedCommand(
 				getSource(level),
-				"execute in minigames:spleef_dimension run fill " + ((int) arenaCenter.x() + CLEAR_MIN) + " " + fillY + " " + ((int) arenaCenter.z() + CLEAR_MIN) + " " + ((int) arenaCenter.x() + CLEAR_MAX) + " 140 "
-						+ ((int) arenaCenter.z() + CLEAR_MAX) + " air");
+				"fill " + minX + " " + fillY + " " + minZ + " " +
+						maxX + " 140 " + maxZ + " air"
+		);
 	}
 
 	private static CommandSourceStack getSource(ServerLevel level) {

@@ -141,6 +141,7 @@ public class MinigamesModVariables {
 		clone.performKnockback = original.performKnockback;
 		clone.openBattleBox = original.openBattleBox;
 		clone.selectedButtonBattleBox = original.selectedButtonBattleBox;
+		clone.AchievementLobbyState = original.AchievementLobbyState;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -317,7 +318,6 @@ public class MinigamesModVariables {
 		public Vec3 DoorOffset = Vec3.ZERO;
 		public double aliveEnemies = 0;
 		public double startingEnemies = 0;
-		public double connectedPlayers = 0;
 		public double roomCheckDelayTicks = 0.0;
 		public boolean removeEffects = false;
 		public boolean ascendingGlobalActive = false;
@@ -327,6 +327,10 @@ public class MinigamesModVariables {
 		public String battleBoxStatus = "\"\"";
 		public double Achievement = 0;
 		public double AchievementCategory = 0;
+		public double AchievementModifier = 0;
+		public ItemStack AchievementIcon = ItemStack.EMPTY;
+		public String AchievementTitle = "\"\"";
+		public String AchievementDescription = "";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			achievmentType = nbt.getDoubleOr("achievmentType", 0);
@@ -425,7 +429,6 @@ public class MinigamesModVariables {
 			DoorOffset = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("DoorOffset")).result().orElse(Vec3.ZERO);
 			aliveEnemies = nbt.getDoubleOr("aliveEnemies", 0);
 			startingEnemies = nbt.getDoubleOr("startingEnemies", 0);
-			connectedPlayers = nbt.getDoubleOr("connectedPlayers", 0);
 			roomCheckDelayTicks = nbt.getDoubleOr("roomCheckDelayTicks", 0);
 			removeEffects = nbt.getBooleanOr("removeEffects", false);
 			ascendingGlobalActive = nbt.getBooleanOr("ascendingGlobalActive", false);
@@ -435,6 +438,10 @@ public class MinigamesModVariables {
 			battleBoxStatus = nbt.getStringOr("battleBoxStatus", "");
 			Achievement = nbt.getDoubleOr("Achievement", 0);
 			AchievementCategory = nbt.getDoubleOr("AchievementCategory", 0);
+			AchievementModifier = nbt.getDoubleOr("AchievementModifier", 0);
+			AchievementIcon = ItemStack.OPTIONAL_CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), nbt.getCompoundOrEmpty("AchievementIcon")).result().orElse(ItemStack.EMPTY);
+			AchievementTitle = nbt.getStringOr("AchievementTitle", "");
+			AchievementDescription = nbt.getStringOr("AchievementDescription", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -534,7 +541,6 @@ public class MinigamesModVariables {
 			nbt.put("DoorOffset", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, DoorOffset).result().orElseGet(CompoundTag::new));
 			nbt.putDouble("aliveEnemies", aliveEnemies);
 			nbt.putDouble("startingEnemies", startingEnemies);
-			nbt.putDouble("connectedPlayers", connectedPlayers);
 			nbt.putDouble("roomCheckDelayTicks", roomCheckDelayTicks);
 			nbt.putBoolean("removeEffects", removeEffects);
 			nbt.putBoolean("ascendingGlobalActive", ascendingGlobalActive);
@@ -544,6 +550,10 @@ public class MinigamesModVariables {
 			nbt.putString("battleBoxStatus", battleBoxStatus);
 			nbt.putDouble("Achievement", Achievement);
 			nbt.putDouble("AchievementCategory", AchievementCategory);
+			nbt.putDouble("AchievementModifier", AchievementModifier);
+			nbt.put("AchievementIcon", (CompoundTag) ItemStack.OPTIONAL_CODEC.encode(AchievementIcon, lookupProvider.createSerializationContext(NbtOps.INSTANCE), new CompoundTag()).result().orElseGet(CompoundTag::new));
+			nbt.putString("AchievementTitle", AchievementTitle);
+			nbt.putString("AchievementDescription", AchievementDescription);
 			return nbt;
 		}
 
@@ -645,6 +655,7 @@ public class MinigamesModVariables {
 		public Vec3 performKnockback = Vec3.ZERO;
 		public boolean openBattleBox = false;
 		public double selectedButtonBattleBox = 0;
+		public String AchievementLobbyState = "\"\"";
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -686,6 +697,7 @@ public class MinigamesModVariables {
 			output.store("performKnockback", Vec3.CODEC, performKnockback);
 			output.putBoolean("openBattleBox", openBattleBox);
 			output.putDouble("selectedButtonBattleBox", selectedButtonBattleBox);
+			output.putString("AchievementLobbyState", AchievementLobbyState);
 		}
 
 		@Override
@@ -728,6 +740,7 @@ public class MinigamesModVariables {
 			performKnockback = input.read("performKnockback", Vec3.CODEC).orElse(Vec3.ZERO);
 			openBattleBox = input.getBooleanOr("openBattleBox", false);
 			selectedButtonBattleBox = input.getDoubleOr("selectedButtonBattleBox", 0);
+			AchievementLobbyState = input.getStringOr("AchievementLobbyState", "");
 		}
 
 		public void markSyncDirty() {

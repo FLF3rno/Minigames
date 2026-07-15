@@ -36,6 +36,7 @@ public class MinigamesModMenus {
 	public static final DeferredHolder<MenuType<?>, MenuType<DungeonInventoryMenu>> DUNGEON_INVENTORY = REGISTRY.register("dungeon_inventory", () -> IMenuTypeExtension.create(DungeonInventoryMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<BattleBoxMenu>> BATTLE_BOX = REGISTRY.register("battle_box", () -> IMenuTypeExtension.create(BattleBoxMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<SelectCategoryAchievementMenu>> SELECT_CATEGORY_ACHIEVEMENT = REGISTRY.register("select_category_achievement", () -> IMenuTypeExtension.create(SelectCategoryAchievementMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<DisplayAchievmenMenu>> DISPLAY_ACHIEVMEN = REGISTRY.register("display_achievmen", () -> IMenuTypeExtension.create(DisplayAchievmenMenu::new));
 
 	public interface MenuAccessor {
 		Map<String, Object> getMenuState();

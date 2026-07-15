@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
@@ -12,8 +13,13 @@ import net.minecraft.commands.CommandSource;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.MinigamesMod;
 
+import java.util.ArrayList;
+
 public class StartGameCrownHuntProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			ClearEnderchestProcedure.execute(entityiterator);
+		}
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),

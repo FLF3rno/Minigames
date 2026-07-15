@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.commands.Commands;
 
-import net.mcreator.minigames.procedures.AchievementHuntv2Procedure;
+import net.mcreator.minigames.procedures.StartAchievementRunProcedure;
 
 @EventBusSubscriber
 public class AchievementRunV2Command {
@@ -31,7 +31,7 @@ public class AchievementRunV2Command {
 					if (entity != null)
 						direction = entity.getDirection();
 
-					AchievementHuntv2Procedure.execute(world, x, y, z, entity);
+					StartAchievementRunProcedure.execute(world, x, y, z);
 					return 0;
 				}));
 	}

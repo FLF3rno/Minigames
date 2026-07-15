@@ -1,11 +1,20 @@
 package net.mcreator.minigames.client.gui;
 
+import io.netty.buffer.Unpooled;
 import net.mcreator.minigames.init.MinigamesModSounds;
-import net.mcreator.minigames.procedures.GetCategoryProcedure;
-import net.mcreator.minigames.procedures.GetCategoryTextureProcedure;
+import net.mcreator.minigames.network.OpenDisplayAchievementMessage;
+import net.mcreator.minigames.procedures.*;
+import net.mcreator.minigames.world.inventory.DisplayAchievmenMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,6 +29,7 @@ import net.mcreator.minigames.init.MinigamesModScreens;
 import net.minecraft.resources.Identifier;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.util.Random;
 
@@ -127,7 +137,7 @@ public class SelectCategoryAchievementScreen extends AbstractContainerScreen<Sel
 	@Override
 	public void init() {
 		super.init();
-		animationState = 200;
+		animationState = 300;
 		animationStateBreak = 0;
 		breakStage = 0;
 		animation2started = false;
@@ -136,13 +146,11 @@ public class SelectCategoryAchievementScreen extends AbstractContainerScreen<Sel
 	@Override
 	protected void containerTick() {
 		super.containerTick();
-		animationState *= 0.97f;
+		animationState *= 0.96f;
 		if (animation2started) {
 			animation2Tick();
 		} else {
 			if (animationState < 6) {
-				MinigamesModVariables.MapVariables.get(world).AchievementCategory = new Random().nextInt(5) + 1;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_PLING, 2.0F));
 				category = (int) MinigamesModVariables.MapVariables.get(world).AchievementCategory;
 				animation2started = true;
@@ -165,23 +173,21 @@ public class SelectCategoryAchievementScreen extends AbstractContainerScreen<Sel
 		animationStateBreak ++;
 		if (animationStateBreak % 3 == 0) {
 			breakStage ++;
-			if (category == 1 || category == 3)
+			if (category == 1 || category == 3 || category == 4)
 			{Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.STONE_HIT, 1.0F));}
 			else if (category == 2)
 			{Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NETHERRACK_HIT, 1.0F));}
-			else if (category == 4)
+			else if (category == 5)
 			{Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.GRAVEL_HIT, 1.0F));}
 		}
-		if  (breakStage == 10) {
-			if (category == 1 || category == 3)
+		if  (breakStage == 9) {
+			ClientPacketDistributor.sendToServer(new OpenDisplayAchievementMessage(""));
+			if (category == 1 || category == 3 || category == 4)
 			{Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.STONE_BREAK, 1.0F));}
 			else if (category == 2)
 			{Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NETHERRACK_BREAK, 1.0F));}
-			else if (category == 4)
+			else if (category == 5)
 			{Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.GRAVEL_BREAK, 1.0F));}
-			this.onClose();
-			//player.openMenu(...);
-			//open the ready up screen
 		}
 	}
 }

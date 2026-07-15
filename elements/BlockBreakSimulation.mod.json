@@ -1,0 +1,8 @@
+{
+  "_fv": 89,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><variables><variable type=\"Boolean\" id=\"aaa\">aaa</variable><variable type=\"MCItemBlock\" id=\"aa\">aa</variable></variables><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"variables_set_logic\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">local:aaa</field><value name=\"VAL\"><block type=\"custom_dependency_logic\"><field name=\"NAME\">Particles</field></block></value><next><block type=\"variables_set_logic\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">local:aaa</field><value name=\"VAL\"><block type=\"custom_dependency_logic\"><field name=\"NAME\">Sound</field></block></value><next><block type=\"variables_set_blockstate\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">local:aa</field><value name=\"VAL\"><block type=\"custom_dependency_blockstate\"><field name=\"NAME\">Block</field></block></value><next><block type=\"set_global_spawn\"><value name=\"x\"><block type=\"coord_x\"></block></value><value name=\"y\"><block type=\"coord_y\"></block></value><value name=\"z\"><block type=\"coord_z\"></block></value></block></next></block></next></block></next></block></next></block></xml>",
+    "skipDependencyNullCheck": false
+  }
+}

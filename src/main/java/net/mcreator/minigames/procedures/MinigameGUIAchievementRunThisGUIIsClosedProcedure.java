@@ -1,106 +1,50 @@
 package net.mcreator.minigames.procedures;
 
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.network.chat.Component;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMenus;
 
 public class MinigameGUIAchievementRunThisGUIIsClosedProcedure {
-	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (parseDouble((entity instanceof Player _entity0 && _entity0.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu0) ? _menu0.getMenuState(0, "hp", "") : "") == 0) {
+		MinigamesModVariables.MapVariables.get(world).WhenPVPActive = Math.round(parseDouble((entity instanceof Player _entity0 && _entity0.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu0) ? _menu0.getMenuState(0, "pvp", "") : ""));
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		if (((entity instanceof Player _entity1 && _entity1.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu1) && _menu1.getMenuState(1, "keepinventory", false)) == true) {
+			if (world instanceof ServerLevel _origLevel) {
+				LevelAccessor _switchworld3 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+				if (_switchworld3 != null) {
+					worldSwitch3(world, entity);
+				}
+			}
+		} else {
+			if (world instanceof ServerLevel _origLevel) {
+				LevelAccessor _switchworld5 = _origLevel.getServer().getLevel(Level.OVERWORLD);
+				if (_switchworld5 != null) {
+					worldSwitch5(world, entity);
+				}
+			}
+		}
+		if (parseDouble((entity instanceof Player _entity6 && _entity6.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu6) ? _menu6.getMenuState(0, "hp", "") : "") == 0) {
 			MinigamesModVariables.health = 20;
 		} else {
-			MinigamesModVariables.health = Math.round(parseDouble((entity instanceof Player _entity1 && _entity1.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu1) ? _menu1.getMenuState(0, "hp", "") : ""));
+			MinigamesModVariables.health = Math.round(parseDouble((entity instanceof Player _entity7 && _entity7.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu7) ? _menu7.getMenuState(0, "hp", "") : ""));
 		}
-		if (((entity instanceof Player _entity2 && _entity2.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu2) && _menu2.getMenuState(1, "nightvision", false)) == true) {
-			MinigamesModVariables.MapVariables.get(world).nightVision = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "effect clear @a night_vision");
-			MinigamesModVariables.MapVariables.get(world).nightVision = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		}
-		if (((entity instanceof Player _entity4 && _entity4.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu4) && _menu4.getMenuState(1, "keepinventory", false)) == true) {
-			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _switchworld6 = _origLevel.getServer().getLevel(Level.OVERWORLD);
-				if (_switchworld6 != null) {
-					worldSwitch6(world, x, y, z, entity);
-				}
-			}
-		} else {
-			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _switchworld8 = _origLevel.getServer().getLevel(Level.OVERWORLD);
-				if (_switchworld8 != null) {
-					worldSwitch8(world, x, y, z, entity);
-				}
-			}
-		}
-		if (((entity instanceof Player _entity9 && _entity9.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu9) && _menu9.getMenuState(1, "minimap", false)) == true) {
-			MinigamesModVariables.MapVariables.get(world).minimap = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			MinigamesModVariables.MapVariables.get(world).minimap = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		}
-		if (((entity instanceof Player _entity10 && _entity10.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu10) && _menu10.getMenuState(1, "spawn", false)) == true) {
-			MinigamesModVariables.MapVariables.get(world).randomizeSpawn = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			MinigamesModVariables.MapVariables.get(world).randomizeSpawn = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		}
-		if (((entity instanceof Player _entity11 && _entity11.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu11) && _menu11.getMenuState(1, "randomhunter", false)) == true) {
-			MinigamesModVariables.MapVariables.get(world).hunterAchievement = "";
-			MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = true;
-			MinigamesModVariables.MapVariables.get(world).achievementHunterMode = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			if (((entity instanceof Player _entity12 && _entity12.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu12) ? _menu12.getMenuState(0, "hunter", "") : "").equals("")) {
-				MinigamesModVariables.MapVariables.get(world).hunterAchievement = "";
-				MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			} else {
-				MinigamesModVariables.MapVariables.get(world).hunterAchievement = (entity instanceof Player _entity13 && _entity13.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu13) ? _menu13.getMenuState(0, "hunter", "") : "";
-				MinigamesModVariables.MapVariables.get(world).achievementHunterMode = true;
-				MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			}
-		}
-		if (((entity instanceof Player _entity14 && _entity14.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu14) && _menu14.getMenuState(1, "headstart", false)) == true) {
-			MinigamesModVariables.MapVariables.get(world).headStart = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			MinigamesModVariables.MapVariables.get(world).headStart = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		}
-		if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode) {
-			StartVoteProcedure.execute(world, entity, entity, "achievement hunt");
-		} else {
-			StartVoteProcedure.execute(world, entity, entity, "achievement run");
-		}
+		StartVoteProcedure.execute(world, entity, entity, "achievement run");
 	}
 
-	private static void worldSwitch6(LevelAccessor world, double x, double y, double z, Entity entity) {
+	private static void worldSwitch3(LevelAccessor world, Entity entity) {
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.KEEP_INVENTORY, true, world.getServer());
 	}
 
-	private static void worldSwitch8(LevelAccessor world, double x, double y, double z, Entity entity) {
+	private static void worldSwitch5(LevelAccessor world, Entity entity) {
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.KEEP_INVENTORY, false, world.getServer());
 	}

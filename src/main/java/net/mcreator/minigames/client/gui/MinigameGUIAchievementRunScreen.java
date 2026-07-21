@@ -18,7 +18,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import net.mcreator.minigames.world.inventory.MinigameGUIAchievementRunMenu;
-import net.mcreator.minigames.procedures.NightVisionCheckedProcedure;
 import net.mcreator.minigames.procedures.KeepInventoryCheckedProcedure;
 import net.mcreator.minigames.network.MinigameGUIAchievementRunButtonMessage;
 import net.mcreator.minigames.init.MinigamesModScreens;
@@ -31,21 +30,17 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 	private final Player entity;
 	private boolean menuStateUpdateActive = false;
 	private EditBox hp;
-	private Checkbox nightvision;
+	private EditBox pvp;
 	private Checkbox keepinventory;
-	private Checkbox minimap;
-	private Checkbox spawn;
 	private Button button_start_normal;
 	private ImageButton imagebutton_compass_16;
 	private ImageButton imagebutton_bucket;
 	private static final Identifier IMAGE_0 = Identifier.parse("minigames:textures/screens/diamondwindow.png");
 	private static final Identifier IMAGE_1 = Identifier.parse("minigames:textures/screens/health_boost.png");
-	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/night_vision.png");
+	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/pvp.png");
 	private static final Identifier IMAGE_3 = Identifier.parse("minigames:textures/screens/keepinventory.png");
-	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/crown.png");
-	private static final Identifier IMAGE_5 = Identifier.parse("minigames:textures/screens/compass_00.png");
-	private static final Identifier IMAGE_6 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
-	private static final Identifier IMAGE_7 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
+	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
+	private static final Identifier IMAGE_5 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
 
 	public MinigameGUIAchievementRunScreen(MinigameGUIAchievementRunMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text, 176, 166);
@@ -62,20 +57,13 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		if (elementType == 0 && elementState instanceof String stringState) {
 			if (name.equals("hp"))
 				hp.setValue(stringState);
+			else if (name.equals("pvp"))
+				pvp.setValue(stringState);
 		}
 		if (elementType == 1 && elementState instanceof Boolean logicState) {
-			if (name.equals("nightvision")) {
-				if (nightvision.selected() != logicState)
-					nightvision.onPress(null);
-			} else if (name.equals("keepinventory")) {
+			if (name.equals("keepinventory")) {
 				if (keepinventory.selected() != logicState)
 					keepinventory.onPress(null);
-			} else if (name.equals("minimap")) {
-				if (minimap.selected() != logicState)
-					minimap.onPress(null);
-			} else if (name.equals("spawn")) {
-				if (spawn.selected() != logicState)
-					spawn.onPress(null);
 			}
 		}
 		menuStateUpdateActive = false;
@@ -92,14 +80,9 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		if (mouseX > leftPos + 181 && mouseX < leftPos + 235 && mouseY > topPos + 36 && mouseY < topPos + 105) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_health_amount"), mouseX, mouseY);
 		}
-		if (mouseX > leftPos + 12 && mouseX < leftPos + 52 && mouseY > topPos + 43 && mouseY < topPos + 103) {
-			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_last_winner_takes_15x_damage"), mouseX, mouseY);
-		}
-		if (mouseX > leftPos + 126 && mouseX < leftPos + 169 && mouseY > topPos + 40 && mouseY < topPos + 104) {
-			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_run.tooltip_dont_reset_world_on_game_start"), mouseX, mouseY);
-		}
 		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 		hp.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+		pvp.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 	}
 
 	@Override
@@ -107,12 +90,10 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + -102, this.topPos + -29, 0, 0, 384, 384, 384, 384);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 184, this.topPos + 35, 0, 0, 46, 46, 46, 46);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -58, this.topPos + 32, 0, 0, 54, 54, 54, 54);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -55, this.topPos + 34, 0, 0, 48, 48, 48, 48);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 68, this.topPos + 36, 0, 0, 48, 48, 48, 48);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 8, this.topPos + 36, 0, 0, 48, 48, 48, 48);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + 124, this.topPos + 35, 0, 0, 48, 48, 48, 48);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_7, this.leftPos + 231, this.topPos + 167, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + 231, this.topPos + 167, 0, 0, 41, 51, 41, 51);
 	}
 
 	@Override
@@ -124,14 +105,18 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		}
 		if (hp.isFocused())
 			return hp.keyPressed(event);
+		if (pvp.isFocused())
+			return pvp.keyPressed(event);
 		return super.keyPressed(event);
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		String hpValue = hp.getValue();
+		String pvpValue = pvp.getValue();
 		super.resize(width, height);
 		hp.setValue(hpValue);
+		pvp.setValue(pvpValue);
 	}
 
 	@Override
@@ -150,6 +135,14 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		});
 		hp.setHint(Component.translatable("gui.minigames.minigame_gui_achievement_run.hp"));
 		this.addWidget(this.hp);
+		pvp = new EditBox(this.font, this.leftPos + -55, this.topPos + 82, 44, 20, Component.translatable("gui.minigames.minigame_gui_achievement_run.pvp"));
+		pvp.setMaxLength(8192);
+		pvp.setResponder(content -> {
+			if (!menuStateUpdateActive)
+				menu.sendMenuStateUpdate(entity, 0, "pvp", content, false);
+		});
+		pvp.setHint(Component.translatable("gui.minigames.minigame_gui_achievement_run.pvp"));
+		this.addWidget(this.pvp);
 		button_start_normal = Button.builder(Component.translatable("gui.minigames.minigame_gui_achievement_run.button_start_normal"), e -> {
 			int x = MinigameGUIAchievementRunScreen.this.x;
 			int y = MinigameGUIAchievementRunScreen.this.y;
@@ -188,15 +181,7 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 			}
 		};
 		this.addRenderableWidget(imagebutton_bucket);
-		boolean nightvisionSelected = NightVisionCheckedProcedure.execute(world);
-		nightvision = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_run.nightvision"), this.font).pos(this.leftPos + -41, this.topPos + 83).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "nightvision", value, false);
-		}).selected(nightvisionSelected).build();
-		if (nightvisionSelected)
-			menu.sendMenuStateUpdate(entity, 1, "nightvision", true, false);
-		this.addRenderableWidget(nightvision);
-		boolean keepinventorySelected = KeepInventoryCheckedProcedure.execute();
+		boolean keepinventorySelected = KeepInventoryCheckedProcedure.execute(world);
 		keepinventory = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_run.keepinventory"), this.font).pos(this.leftPos + 82, this.topPos + 83).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "keepinventory", value, false);
@@ -204,15 +189,5 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 		if (keepinventorySelected)
 			menu.sendMenuStateUpdate(entity, 1, "keepinventory", true, false);
 		this.addRenderableWidget(keepinventory);
-		minimap = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_run.minimap"), this.font).pos(this.leftPos + 23, this.topPos + 83).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "minimap", value, false);
-		}).build();
-		this.addRenderableWidget(minimap);
-		spawn = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_run.spawn"), this.font).pos(this.leftPos + 138, this.topPos + 83).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "spawn", value, false);
-		}).build();
-		this.addRenderableWidget(spawn);
 	}
 }

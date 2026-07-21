@@ -51,7 +51,7 @@ public record MinigameGUIAchievementHuntButtonMessage(int buttonID, int x, int y
 			return;
 		if (buttonID == 0) {
 
-			MinigameGUIAchievementRunThisGUIIsClosedProcedure.execute(world, x, y, z, entity);
+			MinigameGUIAchievementRunThisGUIIsClosedProcedure.execute(world, entity);
 		}
 		if (buttonID == 1) {
 

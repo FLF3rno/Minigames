@@ -18,11 +18,11 @@ public class WonVoteProcedure {
 				MinigamesModVariables.MapVariables.get(world).animateHunter = false;
 				MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				StartRollTypeProcedure.execute(world, x, y, z, entity);
+				StartAchievementRunProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 1) {
 				MinigamesModVariables.MapVariables.get(world).achievementHunterMode = true;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				StartRollTypeProcedure.execute(world, x, y, z, entity);
+				StartAchievementRunProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 2) {
 				ResetCrownHuntProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 3) {

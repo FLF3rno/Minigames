@@ -35,9 +35,9 @@ public class StopPVPProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, DamageSource damagesource, Entity entity, Entity sourceentity) {
 		if (damagesource == null || entity == null || sourceentity == null)
 			return;
-		if (MinigamesModVariables.MapVariables.get(world).gameMinutes < 5 && MinigamesModVariables.MapVariables.get(world).achievement != -1 && damagesource.is(DamageTypes.PLAYER_ATTACK) && (entity instanceof ServerPlayer || entity instanceof Player)
-				|| sourceentity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MinigamesModMobEffects.NERF_HUNTERS)) {
-			if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode == false) {
+		if (TimerSecondsProcedure.execute(entity) < MinigamesModVariables.MapVariables.get(world).WhenPVPActive && MinigamesModVariables.MapVariables.get(world).playingAchievement
+				|| sourceentity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.NERF_HUNTERS)) {
+			if (damagesource.is(DamageTypes.PLAYER_ATTACK) && (entity instanceof ServerPlayer || entity instanceof Player)) {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);
 				}

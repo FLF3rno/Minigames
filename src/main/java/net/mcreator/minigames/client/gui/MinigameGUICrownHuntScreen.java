@@ -209,7 +209,7 @@ public class MinigameGUICrownHuntScreen extends AbstractContainerScreen<Minigame
 		if (nightvisionSelected)
 			menu.sendMenuStateUpdate(entity, 1, "nightvision", true, false);
 		this.addRenderableWidget(nightvision);
-		boolean keepinventorySelected = KeepInventoryCheckedProcedure.execute();
+		boolean keepinventorySelected = KeepInventoryCheckedProcedure.execute(world);
 		keepinventory = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_crown_hunt.keepinventory"), this.font).pos(this.leftPos + 82, this.topPos + 83).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "keepinventory", value, false);

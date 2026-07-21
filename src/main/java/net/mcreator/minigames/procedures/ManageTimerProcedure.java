@@ -1,11 +1,12 @@
 package net.mcreator.minigames.procedures;
 
-import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.entity.Entity;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -14,33 +15,45 @@ import javax.annotation.Nullable;
 @EventBusSubscriber
 public class ManageTimerProcedure {
 	@SubscribeEvent
-	public static void onWorldTick(LevelTickEvent.Post event) {
-		execute(event, event.getLevel());
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+		execute(event, event.getEntity().level(), event.getEntity());
 	}
 
-	public static void execute(LevelAccessor world) {
-		execute(null, world);
+	public static void execute(LevelAccessor world, Entity entity) {
+		execute(null, world, entity);
 	}
 
-	private static void execute(@Nullable Event event, LevelAccessor world) {
-		if (MinigamesModVariables.MapVariables.get(world).displayTimer == true) {
-			if (MinigamesModVariables.MapVariables.get(world).achievement != 1) {
-				MinigamesModVariables.MapVariables.get(world).gameTick = MinigamesModVariables.MapVariables.get(world).gameTick + 1;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				if (MinigamesModVariables.MapVariables.get(world).gameTick >= 60) {
-					MinigamesModVariables.MapVariables.get(world).gameSeconds = MinigamesModVariables.MapVariables.get(world).gameSeconds + 1;
-					MinigamesModVariables.MapVariables.get(world).gameTick = 0;
-					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
+		if (entity == null)
+			return;
+		if (MinigamesModVariables.MapVariables.get(world).ShowTimer == true) {
+			{
+				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.timerTick = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerTick + entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerSpeed;
+				_vars.markSyncDirty();
+			}
+			while (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerTick >= 20) {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.timerSeconds = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerSeconds + 1;
+					_vars.timerTick = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerTick - 20;
+					_vars.markSyncDirty();
 				}
-				if (MinigamesModVariables.MapVariables.get(world).gameSeconds >= 60) {
-					MinigamesModVariables.MapVariables.get(world).gameMinutes = MinigamesModVariables.MapVariables.get(world).gameMinutes + 1;
-					MinigamesModVariables.MapVariables.get(world).gameSeconds = 0;
-					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			}
+			while (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerSeconds >= 60) {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.timerMinutes = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerMinutes + 1;
+					_vars.timerSeconds = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerSeconds - 60;
+					_vars.markSyncDirty();
 				}
-				if (MinigamesModVariables.MapVariables.get(world).gameMinutes >= 60) {
-					MinigamesModVariables.MapVariables.get(world).gameHours = MinigamesModVariables.MapVariables.get(world).gameHours + 1;
-					MinigamesModVariables.MapVariables.get(world).gameMinutes = 0;
-					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			}
+			while (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerMinutes >= 60) {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.timerHours = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerHours + 1;
+					_vars.timerMinutes = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerMinutes - 60;
+					_vars.markSyncDirty();
 				}
 			}
 		}

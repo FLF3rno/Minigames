@@ -40,9 +40,9 @@
         "data": {
           "sprite": "modifiers.png",
           "spritesCount": 5,
+          "displayCondition": "ShowMod1",
           "spriteIndex": {
-            "fixedValue": 3.0,
-            "name": "DisplayThunder"
+            "fixedValue": 4.0
           },
           "anchorPoint": "BOTTOM_LEFT",
           "x": 42,
@@ -81,11 +81,23 @@
           "y": 221,
           "locked": false
         }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "thunder.png",
+          "use1Xscale": false,
+          "displayCondition": "ShowMod2",
+          "anchorPoint": "BOTTOM_CENTER",
+          "x": 44,
+          "y": 202,
+          "locked": false
+        }
       }
     ],
     "baseTexture": "",
     "overlayTarget": "Ingame",
-    "displayCondition": "ShowDefaultTimer",
+    "displayCondition": "ShowAchievementOverlay",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

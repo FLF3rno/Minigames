@@ -12,7 +12,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.world.inventory.StartGameMenu;
-import net.mcreator.minigames.network.MinigamesModVariables;
 
 import io.netty.buffer.Unpooled;
 
@@ -39,7 +38,5 @@ public class GoBackProcedure {
 				}
 			}, _bpos);
 		}
-		MinigamesModVariables.MapVariables.get(world).achievement = -1;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}
 }

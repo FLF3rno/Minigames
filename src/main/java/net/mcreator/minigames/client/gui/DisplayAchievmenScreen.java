@@ -84,13 +84,6 @@ public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchie
 				guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
 			}
 		}
-		if (DisplayTooltipModifierProcedure.execute(world))
-			if (mouseX > leftPos + -34 && mouseX < leftPos + 8 && mouseY > topPos + 125 && mouseY < topPos + 164) {
-				String hoverText = TooltipModifierProcedure.execute(world);
-				if (hoverText != null) {
-					guiGraphics.setComponentTooltipForNextFrame(font, Arrays.stream(hoverText.split("\n")).map(Component::literal).collect(Collectors.toList()), mouseX, mouseY);
-				}
-			}
 		if (mouseX > leftPos + 226 && mouseX < leftPos + 258 && mouseY > topPos + 131 && mouseY < topPos + 163) {
 			String hoverText = SettingsDisplayProcedure.execute(world);
 			if (hoverText != null) {

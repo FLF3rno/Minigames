@@ -37,10 +37,8 @@ public class SettingsAchievementProcedure {
 						_livingEntity2.getAttribute(Attributes.MAX_HEALTH).setBaseValue(MinigamesModVariables.health);
 				}
 			}
-			if (!(entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MobEffects.NIGHT_VISION)) && MinigamesModVariables.MapVariables.get(world).nightVision) {
-				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-					_entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 100000000, 1, false, false));
-			}
+			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 100000000, 1, false, false));
 		}
 	}
 }

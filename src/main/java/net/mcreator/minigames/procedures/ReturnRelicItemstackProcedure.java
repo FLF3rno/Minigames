@@ -13,11 +13,10 @@ public class ReturnRelicItemstackProcedure {
 	public static ItemStack execute(Entity target, ItemStack item) {
 		if (target == null)
 			return ItemStack.EMPTY;
-		for (int slot = 0; slot < 6; slot++) {
-			ItemStack stack = getEntitySlot(target, slot);
-			if (stack.getItem() == item.getItem()) {
-				return stack;
-			}
+		if ((getEntitySlot(target, 34)).getItem() == item.getItem()) {
+			return getEntitySlot(target, 34);
+		} else if ((getEntitySlot(target, 35)).getItem() == item.getItem()) {
+			return getEntitySlot(target, 35);
 		}
 		return new ItemStack(Blocks.AIR);
 	}

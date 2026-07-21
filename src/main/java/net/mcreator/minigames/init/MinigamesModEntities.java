@@ -23,24 +23,24 @@ import net.mcreator.minigames.MinigamesMod;
 @EventBusSubscriber
 public class MinigamesModEntities {
 	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(Registries.ENTITY_TYPE, MinigamesMod.MODID);
-	public static final DeferredHolder<EntityType<?>, EntityType<GoldenSkeletonEntity>> GOLDEN_SKELETON = register("golden_skeleton",
-			EntityType.Builder.<GoldenSkeletonEntity>of(GoldenSkeletonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<GoldenSkeletonEntity>> GOLDEN_SKELETON = register("golden_skeleton", EntityType.Builder.<GoldenSkeletonEntity>of(GoldenSkeletonEntity::new, MobCategory.MONSTER)
+			.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GoldenSpiderEntity>> GOLDEN_SPIDER = register("golden_spider",
 			EntityType.Builder.<GoldenSpiderEntity>of(GoldenSpiderEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune()
 
-					.sized(0.6f, 1f));
+					.notInPeaceful().sized(0.6f, 1f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GoldenZombieEntity>> GOLDEN_ZOMBIE = register("golden_zombie",
-			EntityType.Builder.<GoldenZombieEntity>of(GoldenZombieEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 1.8f));
+			EntityType.Builder.<GoldenZombieEntity>of(GoldenZombieEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<IceDartProjectileEntity>> ICE_DART_PROJECTILE = register("ice_dart_projectile",
 			EntityType.Builder.<IceDartProjectileEntity>of(IceDartProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<SnowbombProjectileEntity>> SNOWBOMB_PROJECTILE = register("snowbomb_projectile",
 			EntityType.Builder.<SnowbombProjectileEntity>of(SnowbombProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GrappleEntity>> GRAPPLE = register("grapple",
 			EntityType.Builder.<GrappleEntity>of(GrappleEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
-	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
-			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 0.6f));
+	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox", EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MONSTER)
+			.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).notInPeaceful().sized(0.6f, 0.6f));
 	public static final DeferredHolder<EntityType<?>, EntityType<MagmaHitboxEntity>> MAGMA_HITBOX = register("magma_hitbox",
-			EntityType.Builder.<MagmaHitboxEntity>of(MagmaHitboxEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.6f, 0.6f));
+			EntityType.Builder.<MagmaHitboxEntity>of(MagmaHitboxEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).notInPeaceful().sized(0.6f, 0.6f));
 	public static final DeferredHolder<EntityType<?>, EntityType<MagmaDartProjectileEntity>> MAGMA_DART_PROJECTILE = register("magma_dart_projectile",
 			EntityType.Builder.<MagmaDartProjectileEntity>of(MagmaDartProjectileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GlueProjectileEntity>> GLUE_PROJECTILE = register("glue_projectile",
@@ -48,55 +48,55 @@ public class MinigamesModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<SpleefPodiumPlayerEntity>> SPLEEF_PODIUM_PLAYER = register("spleef_podium_player",
 			EntityType.Builder.<SpleefPodiumPlayerEntity>of(SpleefPodiumPlayerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
 
-					.ridingOffset(-0.6f).sized(0.6f, 1.8f));
+					.ridingOffset(-0.6f).notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<StunnedEffectEntity>> STUNNED_EFFECT = register("stunned_effect",
 			EntityType.Builder.<StunnedEffectEntity>of(StunnedEffectEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune()
 
-					.sized(0.6f, 0.2f));
+					.notInPeaceful().sized(0.6f, 0.2f));
 	public static final DeferredHolder<EntityType<?>, EntityType<WorshipperEntity>> WORSHIPPER = register("worshipper",
 			EntityType.Builder.<WorshipperEntity>of(WorshipperEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
 
-					.sized(0.6f, 1.8f));
+					.notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<CandleheadEntity>> CANDLEHEAD = register("candlehead",
 			EntityType.Builder.<CandleheadEntity>of(CandleheadEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(32).setUpdateInterval(3).fireImmune()
 
-					.sized(0.6f, 1.8f));
+					.notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<ShieldAngelEntity>> SHIELD_ANGEL = register("shield_angel",
 			EntityType.Builder.<ShieldAngelEntity>of(ShieldAngelEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(32).setUpdateInterval(3).fireImmune()
 
-					.sized(1.6f, 2.2f));
+					.notInPeaceful().sized(1.6f, 2.2f));
 	public static final DeferredHolder<EntityType<?>, EntityType<MovingBlockEntity>> MOVING_BLOCK = register("moving_block",
 			EntityType.Builder.<MovingBlockEntity>of(MovingBlockEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3)
 
-					.sized(1f, 1f));
+					.notInPeaceful().sized(1f, 1f));
 	public static final DeferredHolder<EntityType<?>, EntityType<VolcanicSpewEntity>> VOLCANIC_SPEW = register("volcanic_spew",
 			EntityType.Builder.<VolcanicSpewEntity>of(VolcanicSpewEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.2f, 0.2f));
 	public static final DeferredHolder<EntityType<?>, EntityType<GravediggerEntity>> GRAVEDIGGER = register("gravedigger",
 			EntityType.Builder.<GravediggerEntity>of(GravediggerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
 
-					.sized(0.6f, 1.8f));
+					.notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<PreacherEntity>> PREACHER = register("preacher",
 			EntityType.Builder.<PreacherEntity>of(PreacherEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
 
-					.sized(0.6f, 1.8f));
+					.notInPeaceful().sized(0.6f, 1.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<PreachingShotEntity>> PREACHING_SHOT = register("preaching_shot",
 			EntityType.Builder.<PreachingShotEntity>of(PreachingShotEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<VolleybombEntityEntity>> VOLLEYBOMB_ENTITY = register("volleybomb_entity",
 			EntityType.Builder.<VolleybombEntityEntity>of(VolleybombEntityEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune()
 
-					.sized(0.8f, 0.8f));
+					.notInPeaceful().sized(0.8f, 0.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<PlagueMiddleEntity>> PLAGUE_MIDDLE = register("plague_middle",
-			EntityType.Builder.<PlagueMiddleEntity>of(PlagueMiddleEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).sized(0.1f, 0.1f));
+			EntityType.Builder.<PlagueMiddleEntity>of(PlagueMiddleEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().ridingOffset(-0.6f).notInPeaceful().sized(0.1f, 0.1f));
 	public static final DeferredHolder<EntityType<?>, EntityType<BlessedArrowEntity>> BLESSED_ARROW = register("blessed_arrow",
 			EntityType.Builder.<BlessedArrowEntity>of(BlessedArrowEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<DemonEntity>> DEMON = register("demon",
 			EntityType.Builder.<DemonEntity>of(DemonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
 
-					.sized(1.8f, 2.8f));
+					.notInPeaceful().sized(1.8f, 2.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<SculklingEntity>> SCULKLING = register("sculkling",
 			EntityType.Builder.<SculklingEntity>of(SculklingEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3)
 
-					.sized(0.7f, 0.9f));
+					.notInPeaceful().sized(0.7f, 0.9f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities

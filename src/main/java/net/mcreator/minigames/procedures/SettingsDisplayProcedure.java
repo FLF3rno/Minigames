@@ -13,27 +13,13 @@ public class SettingsDisplayProcedure {
 		String line3 = "";
 		String line4 = "";
 		String line5 = "";
-		if (MinigamesModVariables.MapVariables.get(world).nightVision == true) {
-			line1 = "Permanent Night Vision is active";
-		} else {
-			line1 = "Permanent Night Vision is NOT active";
-		}
+		line1 = "Health is set to " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).WhenPVPActive);
 		if ((world instanceof ServerLevel _serverLevelGR0 && _serverLevelGR0.getGameRules().get(GameRules.KEEP_INVENTORY)) == false) {
 			line2 = "Keep Inventory is active";
 		} else {
 			line2 = "Keep Inventory is active";
 		}
-		if (MinigamesModVariables.MapVariables.get(world).minimap == true) {
-			line4 = "Minimap is shown";
-		} else {
-			line4 = "Minimap is not shown";
-		}
-		if (MinigamesModVariables.MapVariables.get(world).randomizeSpawn == true) {
-			line5 = "Items and location is kept on game start ";
-		} else {
-			line5 = "Items and location is reset on game start ";
-		}
 		line3 = "Health is set to " + new java.text.DecimalFormat("##").format(MinigamesModVariables.health);
-		return ((("Match Settings:" + "\n") + "" + (line1 + "\n")) + "" + (line2 + "\n")) + "" + ((line3 + "\n") + "" + (line4 + "" + ("\n" + line5)));
+		return "Match Settings:" + "\n" + line1 + "\n" + line2 + "\n" + line3;
 	}
 }

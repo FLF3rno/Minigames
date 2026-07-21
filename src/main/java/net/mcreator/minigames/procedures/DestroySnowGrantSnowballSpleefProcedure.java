@@ -86,7 +86,7 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
 					layer = 0;
-					for (int index234 = 0; index234 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index234++) {
+					for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index0++) {
 						layer = layer + 1;
 						targetY = 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef;
 						world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);

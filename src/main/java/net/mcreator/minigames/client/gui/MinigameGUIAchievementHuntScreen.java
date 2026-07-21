@@ -106,7 +106,7 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 		if (mouseX > leftPos + 126 && mouseX < leftPos + 169 && mouseY > topPos + 27 && mouseY < topPos + 91) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_dont_reset_world_on_game_start"), mouseX, mouseY);
 		}
-		if (KeepInventoryCheckedProcedure.execute())
+		if (KeepInventoryCheckedProcedure.execute(world))
 			if (mouseX > leftPos + -14 && mouseX < leftPos + 10 && mouseY > topPos + 120 && mouseY < topPos + 144) {
 				guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_randomize_hunter"), mouseX, mouseY);
 			}
@@ -234,7 +234,7 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 				menu.sendMenuStateUpdate(entity, 1, "minimap", value, false);
 		}).build();
 		this.addRenderableWidget(minimap);
-		boolean headstartSelected = KeepInventoryCheckedProcedure.execute();
+		boolean headstartSelected = KeepInventoryCheckedProcedure.execute(world);
 		headstart = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.headstart"), this.font).pos(this.leftPos + 138, this.topPos + 72).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "headstart", value, false);
@@ -242,7 +242,7 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 		if (headstartSelected)
 			menu.sendMenuStateUpdate(entity, 1, "headstart", true, false);
 		this.addRenderableWidget(headstart);
-		boolean randomhunterSelected = KeepInventoryCheckedProcedure.execute();
+		boolean randomhunterSelected = KeepInventoryCheckedProcedure.execute(world);
 		randomhunter = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.randomhunter"), this.font).pos(this.leftPos + -12, this.topPos + 122).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "randomhunter", value, false);

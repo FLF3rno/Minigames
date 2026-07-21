@@ -64,10 +64,10 @@
       {
         "type": "image",
         "data": {
-          "image": "night_vision.png",
+          "image": "pvp.png",
           "use1Xscale": false,
-          "x": 68,
-          "y": 69,
+          "x": 71,
+          "y": 71,
           "locked": false
         }
       },
@@ -76,7 +76,7 @@
         "data": {
           "name": "tooltip_night_vision",
           "text": {
-            "fixedValue": "Night Vision"
+            "fixedValue": "PVP in X seconds"
           },
           "width": 52,
           "height": 63,
@@ -138,91 +138,12 @@
       {
         "type": "checkbox",
         "data": {
-          "name": "nightvision",
-          "text": "",
-          "isCheckedProcedure": "NightVisionChecked",
-          "x": 85,
-          "y": 120,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
           "name": "keepinventory",
           "text": "",
           "isCheckedProcedure": "KeepInventoryChecked",
           "x": 208,
           "y": 120,
           "locked": true
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "crown.png",
-          "use1Xscale": false,
-          "x": 134,
-          "y": 73,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "minimap",
-          "text": "",
-          "x": 149,
-          "y": 120,
-          "locked": false
-        }
-      },
-      {
-        "type": "tooltip",
-        "data": {
-          "name": "tooltip_last_winner_takes_15x_damage",
-          "text": {
-            "fixedValue": "Enable minimap (only with Xaero's Minimap)"
-          },
-          "width": 40,
-          "height": 60,
-          "x": 138,
-          "y": 80,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "compass_00.png",
-          "use1Xscale": false,
-          "x": 250,
-          "y": 72,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "spawn",
-          "text": "",
-          "x": 264,
-          "y": 120,
-          "locked": false
-        }
-      },
-      {
-        "type": "tooltip",
-        "data": {
-          "name": "tooltip_dont_reset_world_on_game_start",
-          "text": {
-            "fixedValue": "Don't reset world on game start"
-          },
-          "width": 43,
-          "height": 64,
-          "x": 252,
-          "y": 77,
-          "locked": false
         }
       },
       {
@@ -266,6 +187,18 @@
           "onClick": "OpenCustomizationScreen",
           "x": 361,
           "y": 218,
+          "locked": false
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "300",
+          "name": "pvp",
+          "width": 44,
+          "height": 20,
+          "x": 71,
+          "y": 119,
           "locked": false
         }
       }

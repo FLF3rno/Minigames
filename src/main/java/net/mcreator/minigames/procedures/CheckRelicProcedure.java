@@ -6,16 +6,20 @@ import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.capabilities.Capabilities;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 public class CheckRelicProcedure {
 	public static boolean execute(Entity target, ItemStack item) {
 		if (target == null)
 			return false;
-		for (int slot = 0; slot < 6; slot++) {
-			if (getEntitySlot(target, slot).getItem() == item.getItem()) {
+		if (target instanceof Player) {
+			if ((getEntitySlot(target, 34)).getItem() == item.getItem()) {
+				return true;
+			} else if ((getEntitySlot(target, 35)).getItem() == item.getItem()) {
 				return true;
 			}
+			return false;
 		}
 		return false;
 	}

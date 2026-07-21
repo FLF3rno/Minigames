@@ -53,7 +53,7 @@ public class FightDoorsRightclickedProcedure {
 				}
 				middleOffset = 0;
 				pos = 0;
-				for (int index19 = 0; index19 < 5; index19++) {
+				for (int index20 = 0; index20 < 5; index20++) {
 					pos = pos + 1;
 					if ((world.getBlockState(BlockPos.containing(x, y - pos, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 						MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((MinigamesModVariables.MapVariables.get(world).DoorOffset.x()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y() - 1),
@@ -65,14 +65,14 @@ public class FightDoorsRightclickedProcedure {
 				}
 				if (rotatedX) {
 					pos = 0;
-					for (int index20 = 0; index20 < 2; index20++) {
+					for (int index21 = 0; index21 < 2; index21++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x + pos, y, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset + 1;
 						}
 					}
 					pos = 0;
-					for (int index21 = 0; index21 < 2; index21++) {
+					for (int index22 = 0; index22 < 2; index22++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x - pos, y, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset - 1;
@@ -83,14 +83,14 @@ public class FightDoorsRightclickedProcedure {
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				} else {
 					pos = 0;
-					for (int index22 = 0; index22 < 2; index22++) {
+					for (int index23 = 0; index23 < 2; index23++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x, y, z + pos))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset + 1;
 						}
 					}
 					pos = 0;
-					for (int index23 = 0; index23 < 2; index23++) {
+					for (int index24 = 0; index24 < 2; index24++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x, y, z - pos))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset - 1;

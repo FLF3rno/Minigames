@@ -1,6 +1,5 @@
 {
   "gui.minigames.select_type.label_your_achievement_is": "Your Achievement Is:",
-  "gui.minigames.view_achievment.button_im_ready": "I'm Ready",
   "subtitles.countdown": "Game count down begins",
   "subtitles.start": "Game starts",
   "gui.minigames.view_achievment.tooltip_pvp_enables_after_5_minutes": "PVP enables after 5 minutes",
@@ -11,7 +10,7 @@
   "gui.minigames.start_game.label_minigames": "Minigames",
   "gui.minigames.minigame_gui_achievement_run.label_achievement_run": "Achievement Run",
   "gui.minigames.minigame_gui_achievement_run.button_start_normal": "Start",
-  "gui.minigames.minigame_gui_achievement_run.tooltip_night_vision": "Night Vision",
+  "gui.minigames.minigame_gui_achievement_run.tooltip_night_vision": "PVP in X seconds",
   "gui.minigames.minigame_gui_achievement_run.hp": "20",
   "gui.minigames.minigame_gui_achievement_run.tooltip_keep_inventory": "Keep Inventory",
   "gui.minigames.minigame_gui_achievement_run.tooltip_health_amount": "Health Amount",
@@ -19,7 +18,6 @@
   "gui.minigames.minigame_gui_achievement_run.nightvision": "",
   "gui.minigames.minigame_gui_achievement_run.keepinventory": "",
   "subtitles.teameliminated": "",
-  "gui.minigames.view_achievment.tooltip_reroll_achievement": "Reroll Achievement",
   "subtitles.rolldice": "",
   "effect.minigames.crowned": "Crowned",
   "gui.minigames.achievement_reminder.label_obtain_this_achievement": "Obtain this achievement:",
@@ -373,5 +371,7 @@
   "gui.minigames.display_achievmen.button_im_ready": "I'm Ready",
   "gui.minigames.display_achievmen.tooltip_reroll_achievement": "Reroll Achievement",
   "gui.minigames.display_achievmen.label_empty": "",
-  "key.category.minigames.vote": "Voting"
+  "key.category.minigames.vote": "Voting",
+  "gui.minigames.game_timer.label_000000": "00:00:00",
+  "gui.minigames.minigame_gui_achievement_run.pvp": "300"
 }

@@ -42,13 +42,13 @@ import net.minecraft.core.Direction;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.function.Supplier;
+import java.util.ArrayList;
 
 @EventBusSubscriber
 public class MinigamesModVariables {
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MinigamesMod.MODID);
 	public static final Supplier<AttachmentType<PlayerVariables>> PLAYER_VARIABLES = ATTACHMENT_TYPES.register("player_variables", () -> AttachmentType.serializable(() -> new PlayerVariables()).build());
 	public static double health = 20.0;
-	public static double winAnimation = -1.0;
 	public static Identifier crown = null;
 	public static Entity firstSpleef = null;
 	public static Entity secondSpleef = null;
@@ -104,10 +104,7 @@ public class MinigamesModVariables {
 		PlayerVariables original = event.getOriginal().getData(PLAYER_VARIABLES);
 		PlayerVariables clone = new PlayerVariables();
 		clone.team = original.team;
-		clone.ready = original.ready;
-		clone.winner = original.winner;
 		clone.joinFirstTime = original.joinFirstTime;
-		clone.wantsToReroll = original.wantsToReroll;
 		clone.isCrowned = original.isCrowned;
 		clone.color = original.color;
 		clone.helmet = original.helmet;
@@ -142,6 +139,13 @@ public class MinigamesModVariables {
 		clone.openBattleBox = original.openBattleBox;
 		clone.selectedButtonBattleBox = original.selectedButtonBattleBox;
 		clone.AchievementLobbyState = original.AchievementLobbyState;
+		clone.TimerColor = original.TimerColor;
+		clone.timerSeconds = original.timerSeconds;
+		clone.timerMinutes = original.timerMinutes;
+		clone.timerHours = original.timerHours;
+		clone.timerScale = original.timerScale;
+		clone.timerTick = original.timerTick;
+		clone.timerSpeed = original.timerSpeed;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -222,35 +226,15 @@ public class MinigamesModVariables {
 			return instance;
 		}, instance -> instance.save(new CompoundTag(), level.registryAccess())));
 		boolean _syncDirty = false;
-		public double achievmentType = 0.0;
-		public double achivementTypeTimer = 295.0;
-		public double overlayAnimation1 = 0.0;
-		public boolean openGameGUI = false;
-		public double playersReady = 0.0;
-		public double achievement = -1.0;
 		public boolean nightVision = true;
-		public double players = 0;
 		public double gameTick = 0;
 		public double gameSeconds = 0;
 		public double gameMinutes = 0;
 		public double gameHours = 0;
-		public boolean displayTimer = false;
-		public double timertype = 0;
 		public double pvpstate = -1.0;
-		public double winningTeam = 0;
-		public boolean winAnimationStart = false;
-		public double winAnimationTick = 0.0;
 		public boolean pvpAnimationStart = false;
 		public double pvpAnimationTick = 0;
-		public double p1state = 0;
-		public double p2state = 0;
-		public double p3state = 0;
-		public double p4state = 0;
-		public double p5state = 0;
-		public double p6state = 0;
-		public double rerollingPlayers = 0;
 		public double respawningPlayers = 0;
-		public boolean randomizeSpawn = false;
 		public boolean achievementHunterMode = false;
 		public boolean randomHunterAchievement = false;
 		public String hunterAchievement = "\"\"";
@@ -261,7 +245,6 @@ public class MinigamesModVariables {
 		public double overworldHuntedZ = 0;
 		public double netherHuntedX = 0;
 		public double netherHuntedZ = 0;
-		public boolean hunteraWinAnimation = false;
 		public double debuffLength = 0;
 		public boolean headStart = false;
 		public boolean minimap = true;
@@ -331,37 +314,27 @@ public class MinigamesModVariables {
 		public ItemStack AchievementIcon = ItemStack.EMPTY;
 		public String AchievementTitle = "\"\"";
 		public String AchievementDescription = "";
+		public boolean showWinscreen = false;
+		public ArrayList<Object> WinnerList = new ArrayList<>();
+		public boolean ShowTimer = false;
+		public double WhenPVPActive = 300.0;
+		public boolean useOverworld1 = true;
+		public double AchievementSeed = 0;
+		public boolean visitedNetherAchievement = false;
+		public boolean visitedEndAchievement = false;
+		public boolean achievementDimensionRegenQueued = false;
+		public boolean achievementDimensionOccupied = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
-			achievmentType = nbt.getDoubleOr("achievmentType", 0);
-			achivementTypeTimer = nbt.getDoubleOr("achivementTypeTimer", 0);
-			overlayAnimation1 = nbt.getDoubleOr("overlayAnimation1", 0);
-			openGameGUI = nbt.getBooleanOr("openGameGUI", false);
-			playersReady = nbt.getDoubleOr("playersReady", 0);
-			achievement = nbt.getDoubleOr("achievement", 0);
 			nightVision = nbt.getBooleanOr("nightVision", false);
-			players = nbt.getDoubleOr("players", 0);
 			gameTick = nbt.getDoubleOr("gameTick", 0);
 			gameSeconds = nbt.getDoubleOr("gameSeconds", 0);
 			gameMinutes = nbt.getDoubleOr("gameMinutes", 0);
 			gameHours = nbt.getDoubleOr("gameHours", 0);
-			displayTimer = nbt.getBooleanOr("displayTimer", false);
-			timertype = nbt.getDoubleOr("timertype", 0);
 			pvpstate = nbt.getDoubleOr("pvpstate", 0);
-			winningTeam = nbt.getDoubleOr("winningTeam", 0);
-			winAnimationStart = nbt.getBooleanOr("winAnimationStart", false);
-			winAnimationTick = nbt.getDoubleOr("winAnimationTick", 0);
 			pvpAnimationStart = nbt.getBooleanOr("pvpAnimationStart", false);
 			pvpAnimationTick = nbt.getDoubleOr("pvpAnimationTick", 0);
-			p1state = nbt.getDoubleOr("p1state", 0);
-			p2state = nbt.getDoubleOr("p2state", 0);
-			p3state = nbt.getDoubleOr("p3state", 0);
-			p4state = nbt.getDoubleOr("p4state", 0);
-			p5state = nbt.getDoubleOr("p5state", 0);
-			p6state = nbt.getDoubleOr("p6state", 0);
-			rerollingPlayers = nbt.getDoubleOr("rerollingPlayers", 0);
 			respawningPlayers = nbt.getDoubleOr("respawningPlayers", 0);
-			randomizeSpawn = nbt.getBooleanOr("randomizeSpawn", false);
 			achievementHunterMode = nbt.getBooleanOr("achievementHunterMode", false);
 			randomHunterAchievement = nbt.getBooleanOr("randomHunterAchievement", false);
 			hunterAchievement = nbt.getStringOr("hunterAchievement", "");
@@ -372,7 +345,6 @@ public class MinigamesModVariables {
 			overworldHuntedZ = nbt.getDoubleOr("overworldHuntedZ", 0);
 			netherHuntedX = nbt.getDoubleOr("netherHuntedX", 0);
 			netherHuntedZ = nbt.getDoubleOr("netherHuntedZ", 0);
-			hunteraWinAnimation = nbt.getBooleanOr("hunteraWinAnimation", false);
 			debuffLength = nbt.getDoubleOr("debuffLength", 0);
 			headStart = nbt.getBooleanOr("headStart", false);
 			minimap = nbt.getBooleanOr("minimap", false);
@@ -442,38 +414,28 @@ public class MinigamesModVariables {
 			AchievementIcon = ItemStack.OPTIONAL_CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), nbt.getCompoundOrEmpty("AchievementIcon")).result().orElse(ItemStack.EMPTY);
 			AchievementTitle = nbt.getStringOr("AchievementTitle", "");
 			AchievementDescription = nbt.getStringOr("AchievementDescription", "");
+			showWinscreen = nbt.getBooleanOr("showWinscreen", false);
+			WinnerList = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("WinnerList"), lookupProvider);
+			ShowTimer = nbt.getBooleanOr("ShowTimer", false);
+			WhenPVPActive = nbt.getDoubleOr("WhenPVPActive", 0);
+			useOverworld1 = nbt.getBooleanOr("useOverworld1", false);
+			AchievementSeed = nbt.getDoubleOr("AchievementSeed", 0);
+			visitedNetherAchievement = nbt.getBooleanOr("visitedNetherAchievement", false);
+			visitedEndAchievement = nbt.getBooleanOr("visitedEndAchievement", false);
+			achievementDimensionRegenQueued = nbt.getBooleanOr("achievementDimensionRegenQueued", false);
+			achievementDimensionOccupied = nbt.getBooleanOr("achievementDimensionOccupied", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
-			nbt.putDouble("achievmentType", achievmentType);
-			nbt.putDouble("achivementTypeTimer", achivementTypeTimer);
-			nbt.putDouble("overlayAnimation1", overlayAnimation1);
-			nbt.putBoolean("openGameGUI", openGameGUI);
-			nbt.putDouble("playersReady", playersReady);
-			nbt.putDouble("achievement", achievement);
 			nbt.putBoolean("nightVision", nightVision);
-			nbt.putDouble("players", players);
 			nbt.putDouble("gameTick", gameTick);
 			nbt.putDouble("gameSeconds", gameSeconds);
 			nbt.putDouble("gameMinutes", gameMinutes);
 			nbt.putDouble("gameHours", gameHours);
-			nbt.putBoolean("displayTimer", displayTimer);
-			nbt.putDouble("timertype", timertype);
 			nbt.putDouble("pvpstate", pvpstate);
-			nbt.putDouble("winningTeam", winningTeam);
-			nbt.putBoolean("winAnimationStart", winAnimationStart);
-			nbt.putDouble("winAnimationTick", winAnimationTick);
 			nbt.putBoolean("pvpAnimationStart", pvpAnimationStart);
 			nbt.putDouble("pvpAnimationTick", pvpAnimationTick);
-			nbt.putDouble("p1state", p1state);
-			nbt.putDouble("p2state", p2state);
-			nbt.putDouble("p3state", p3state);
-			nbt.putDouble("p4state", p4state);
-			nbt.putDouble("p5state", p5state);
-			nbt.putDouble("p6state", p6state);
-			nbt.putDouble("rerollingPlayers", rerollingPlayers);
 			nbt.putDouble("respawningPlayers", respawningPlayers);
-			nbt.putBoolean("randomizeSpawn", randomizeSpawn);
 			nbt.putBoolean("achievementHunterMode", achievementHunterMode);
 			nbt.putBoolean("randomHunterAchievement", randomHunterAchievement);
 			nbt.putString("hunterAchievement", hunterAchievement);
@@ -484,7 +446,6 @@ public class MinigamesModVariables {
 			nbt.putDouble("overworldHuntedZ", overworldHuntedZ);
 			nbt.putDouble("netherHuntedX", netherHuntedX);
 			nbt.putDouble("netherHuntedZ", netherHuntedZ);
-			nbt.putBoolean("hunteraWinAnimation", hunteraWinAnimation);
 			nbt.putDouble("debuffLength", debuffLength);
 			nbt.putBoolean("headStart", headStart);
 			nbt.putBoolean("minimap", minimap);
@@ -554,6 +515,16 @@ public class MinigamesModVariables {
 			nbt.put("AchievementIcon", (CompoundTag) ItemStack.OPTIONAL_CODEC.encode(AchievementIcon, lookupProvider.createSerializationContext(NbtOps.INSTANCE), new CompoundTag()).result().orElseGet(CompoundTag::new));
 			nbt.putString("AchievementTitle", AchievementTitle);
 			nbt.putString("AchievementDescription", AchievementDescription);
+			nbt.putBoolean("showWinscreen", showWinscreen);
+			nbt.put("WinnerList", NbtArrayLists.saveGlobalMap(WinnerList));
+			nbt.putBoolean("ShowTimer", ShowTimer);
+			nbt.putDouble("WhenPVPActive", WhenPVPActive);
+			nbt.putBoolean("useOverworld1", useOverworld1);
+			nbt.putDouble("AchievementSeed", AchievementSeed);
+			nbt.putBoolean("visitedNetherAchievement", visitedNetherAchievement);
+			nbt.putBoolean("visitedEndAchievement", visitedEndAchievement);
+			nbt.putBoolean("achievementDimensionRegenQueued", achievementDimensionRegenQueued);
+			nbt.putBoolean("achievementDimensionOccupied", achievementDimensionOccupied);
 			return nbt;
 		}
 
@@ -618,10 +589,7 @@ public class MinigamesModVariables {
 	public static class PlayerVariables implements ValueIOSerializable {
 		boolean _syncDirty = false;
 		public double team = 0;
-		public boolean ready = false;
-		public boolean winner = false;
 		public boolean joinFirstTime = false;
-		public boolean wantsToReroll = false;
 		public boolean isCrowned = false;
 		public String color = "white";
 		public ItemStack helmet = ItemStack.EMPTY;
@@ -656,14 +624,18 @@ public class MinigamesModVariables {
 		public boolean openBattleBox = false;
 		public double selectedButtonBattleBox = 0;
 		public String AchievementLobbyState = "\"\"";
+		public String TimerColor = "FFFFFF";
+		public double timerSeconds = 0;
+		public double timerMinutes = 0;
+		public double timerHours = 0;
+		public double timerScale = 2.5;
+		public double timerTick = 0;
+		public double timerSpeed = 1.0;
 
 		@Override
 		public void serialize(ValueOutput output) {
 			output.putDouble("team", team);
-			output.putBoolean("ready", ready);
-			output.putBoolean("winner", winner);
 			output.putBoolean("joinFirstTime", joinFirstTime);
-			output.putBoolean("wantsToReroll", wantsToReroll);
 			output.putBoolean("isCrowned", isCrowned);
 			output.putString("color", color);
 			output.store("helmet", ItemStack.OPTIONAL_CODEC, helmet);
@@ -698,15 +670,19 @@ public class MinigamesModVariables {
 			output.putBoolean("openBattleBox", openBattleBox);
 			output.putDouble("selectedButtonBattleBox", selectedButtonBattleBox);
 			output.putString("AchievementLobbyState", AchievementLobbyState);
+			output.putString("TimerColor", TimerColor);
+			output.putDouble("timerSeconds", timerSeconds);
+			output.putDouble("timerMinutes", timerMinutes);
+			output.putDouble("timerHours", timerHours);
+			output.putDouble("timerScale", timerScale);
+			output.putDouble("timerTick", timerTick);
+			output.putDouble("timerSpeed", timerSpeed);
 		}
 
 		@Override
 		public void deserialize(ValueInput input) {
 			team = input.getDoubleOr("team", 0);
-			ready = input.getBooleanOr("ready", false);
-			winner = input.getBooleanOr("winner", false);
 			joinFirstTime = input.getBooleanOr("joinFirstTime", false);
-			wantsToReroll = input.getBooleanOr("wantsToReroll", false);
 			isCrowned = input.getBooleanOr("isCrowned", false);
 			color = input.getStringOr("color", "");
 			helmet = input.read("helmet", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
@@ -741,6 +717,13 @@ public class MinigamesModVariables {
 			openBattleBox = input.getBooleanOr("openBattleBox", false);
 			selectedButtonBattleBox = input.getDoubleOr("selectedButtonBattleBox", 0);
 			AchievementLobbyState = input.getStringOr("AchievementLobbyState", "");
+			TimerColor = input.getStringOr("TimerColor", "");
+			timerSeconds = input.getDoubleOr("timerSeconds", 0);
+			timerMinutes = input.getDoubleOr("timerMinutes", 0);
+			timerHours = input.getDoubleOr("timerHours", 0);
+			timerScale = input.getDoubleOr("timerScale", 0);
+			timerTick = input.getDoubleOr("timerTick", 0);
+			timerSpeed = input.getDoubleOr("timerSpeed", 0);
 		}
 
 		public void markSyncDirty() {

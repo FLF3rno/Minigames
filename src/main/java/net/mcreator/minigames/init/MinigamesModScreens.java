@@ -14,11 +14,9 @@ import net.mcreator.minigames.client.gui.*;
 public class MinigamesModScreens {
 	@SubscribeEvent
 	public static void clientLoad(RegisterMenuScreensEvent event) {
-		event.register(MinigamesModMenus.VIEW_ACHIEVMENT.get(), ViewAchievmentScreen::new);
 		event.register(MinigamesModMenus.START_GAME.get(), StartGameScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_RUN.get(), MinigameGUIAchievementRunScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_HUNT.get(), MinigameGUIAchievementHuntScreen::new);
-		event.register(MinigamesModMenus.VIEW_ACHIEVMENT_HUNTER.get(), ViewAchievmentHunterScreen::new);
 		event.register(MinigamesModMenus.CUSTOMIZE_GUI.get(), CustomizeGUIScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_CROWN_HUNT.get(), MinigameGUICrownHuntScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_SPLEEF.get(), MinigameGUISpleefScreen::new);

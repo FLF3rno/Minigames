@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:soul_fire",
+    "minecraft:soul_campfire",
+    "minecraft:lava_cauldron",
+    "minecraft:water",
+    "minecraft:campfire",
+    "minecraft:bubble_column",
+    "minecraft:fire",
+    "minecraft:lava"
+  ]
+}

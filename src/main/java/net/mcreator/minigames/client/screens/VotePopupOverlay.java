@@ -71,7 +71,7 @@ public class VotePopupOverlay {
             int voteIconRenderHeight = 32;
             int voteIconFrameSize = 32;
             event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, SPRITE_0, (w / 2) - (voteIconRenderWidth / 2), iconY, 0, voteIconIndex * voteIconFrameSize, voteIconRenderWidth, voteIconRenderHeight, voteIconFrameSize, voteIconFrameSize, voteIconFrameSize,
-                    voteIconFrameSize * 9);
+                    voteIconFrameSize * 10);
             drawPlayerFace(
                     event,
                     getVotingPlayerSkin(),
@@ -98,7 +98,16 @@ public class VotePopupOverlay {
         if (self == null || minecraft.getConnection() == null) {
             return;
         }
-        UUID callerId = MinigamesModVariables.VotingEntity != null ? MinigamesModVariables.VotingEntity.getUUID() : null;
+
+        UUID callerId = null;
+        String uuidString = MinigamesModVariables.MapVariables.get(self.level()).VotingPlayerUUID;
+        if (uuidString != null && !uuidString.isBlank()) {
+            try {
+                callerId = UUID.fromString(uuidString);
+            } catch (IllegalArgumentException ignored) {
+            }
+        }
+
         List<PlayerInfo> others = new ArrayList<>();
         for (PlayerInfo info : minecraft.getConnection().getListedOnlinePlayers()) {
             UUID id = info.getProfile().id();
@@ -107,32 +116,33 @@ public class VotePopupOverlay {
             }
             others.add(info);
         }
+
         others.sort(Comparator.comparing(info -> info.getProfile().name(), String.CASE_INSENSITIVE_ORDER));
+
         if (others.isEmpty()) {
             return;
         }
+
         int votedSize = 16;
         int gap = 3;
         int totalWidth = (others.size() * votedSize) + ((others.size() - 1) * gap);
         int x = (screenWidth - totalWidth) / 2;
+
         for (PlayerInfo info : others) {
             UUID id = info.getProfile().id();
-            Player localEntity = self.level() != null ? self.level().getPlayerByUUID(id) : null;
+            Player localEntity = self.level().getPlayerByUUID(id);
+
             boolean voted = localEntity != null && localEntity.getData(MinigamesModVariables.PLAYER_VARIABLES).voted;
             boolean votedYes = localEntity != null && localEntity.getData(MinigamesModVariables.PLAYER_VARIABLES).votedYes;
-            int size = votedSize;
-            drawPlayerFace(
-                    event,
-                    getPlayerSkin(localEntity,id),
-                    x,
-                    y,
-                    size
-            );
+
+            drawPlayerFace(event, getPlayerSkin(localEntity, id), x, y, votedSize);
+
             if (voted) {
                 int tint = votedYes ? 0x6600FF00 : 0x66FF0000;
-                event.getGuiGraphics().fill(x, y, x + size, y + size, tint);
+                event.getGuiGraphics().fill(x, y, x + votedSize, y + votedSize, tint);
             }
-            x += size + gap;
+
+            x += votedSize + gap;
         }
     }
 
@@ -144,29 +154,56 @@ public class VotePopupOverlay {
     }
 
     private static PlayerSkin getVotingPlayerSkin() {
-        if (MinigamesModVariables.VotingEntity instanceof AbstractClientPlayer clientPlayer) {
-            return clientPlayer.getSkin();
+        Minecraft minecraft = Minecraft.getInstance();
+
+        String uuidString = MinigamesModVariables.MapVariables.get(minecraft.player.level()).VotingPlayerUUID;
+        if (uuidString != null && !uuidString.isBlank()) {
+            try {
+                UUID uuid = UUID.fromString(uuidString);
+
+                Player player = minecraft.level.getPlayerByUUID(uuid);
+                if (player instanceof AbstractClientPlayer clientPlayer) {
+                    return clientPlayer.getSkin();
+                }
+
+                PlayerInfo info = minecraft.getConnection().getPlayerInfo(uuid);
+                if (info != null) {
+                    return info.getSkin();
+                }
+
+                return DefaultPlayerSkin.get(uuid);
+            } catch (IllegalArgumentException ignored) {
+            }
         }
-        if (MinigamesModVariables.VotingEntity != null) {
-            return DefaultPlayerSkin.get(MinigamesModVariables.VotingEntity.getUUID());
-        }
-        return DefaultPlayerSkin.get(Minecraft.getInstance().player != null ? Minecraft.getInstance().player.getUUID() : new UUID(0L, 0L));
+
+        return DefaultPlayerSkin.get(minecraft.player.getUUID());
     }
 
     private static int getVotingPlayerNameColor() {
-        if (MinigamesModVariables.VotingEntity instanceof Player votingPlayer) {
-            String color = votingPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
-            if (color != null && color.matches("^#?[0-9a-fA-F]{6}$")) {
-                String normalized = color.startsWith("#") ? color.substring(1) : color;
-                return (Integer.parseInt(normalized, 16) & 0x00FFFFFF) | 0xFF000000;
+        Minecraft minecraft = Minecraft.getInstance();
+
+        String uuidString = MinigamesModVariables.MapVariables.get(minecraft.player.level()).VotingPlayerUUID;
+        if (uuidString != null && !uuidString.isBlank()) {
+            try {
+                UUID uuid = UUID.fromString(uuidString);
+
+                Player player = minecraft.level.getPlayerByUUID(uuid);
+                if (player != null) {
+                    String color = player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+                    if (color != null && color.matches("^#?[0-9a-fA-F]{6}$")) {
+                        String normalized = color.startsWith("#") ? color.substring(1) : color;
+                        return (Integer.parseInt(normalized, 16) & 0x00FFFFFF) | 0xFF000000;
+                    }
+                }
+            } catch (IllegalArgumentException ignored) {
             }
         }
+
         return -1;
     }
     private static void drawPlayerFace(RenderGuiEvent.Pre event, PlayerSkin skin, int x, int y, int size) {
         Identifier texture = skin.body().texturePath();
 
-        //face
         event.getGuiGraphics().blit(
                 RenderPipelines.GUI_TEXTURED,
                 texture,
@@ -182,7 +219,6 @@ public class VotePopupOverlay {
                 64
         );
 
-        //hat layer
         event.getGuiGraphics().blit(
                 RenderPipelines.GUI_TEXTURED,
                 texture,

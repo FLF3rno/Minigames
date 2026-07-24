@@ -1,8 +1,11 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
@@ -29,8 +32,7 @@ public class OnWinCrownHuntProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/worldborder set 50000000");
-		MinigamesModVariables.MapVariables.get(world).ShowCrownTimer = false;
-		MinigamesModVariables.MapVariables.get(world).MoveCrownTimer = false;
+		MinigamesModVariables.MapVariables.get(world).ShowTimer = false;
 		MinigamesModVariables.MapVariables.get(world).crownHuntWinDisplay = true;
 		MinigamesModVariables.MapVariables.get(world).CrownHuntInGame = false;
 		MinigamesModVariables.MapVariables.get(world).canGrabCrown = false;
@@ -39,6 +41,11 @@ public class OnWinCrownHuntProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.timerSpeed = 0;
+				_vars.markSyncDirty();
+			}
 			if (entityiterator instanceof LivingEntity _entity)
 				_entity.removeAllEffects();
 			if (entityiterator instanceof Player _player)
@@ -55,14 +62,23 @@ public class OnWinCrownHuntProcedure {
 			if ((entityiterator instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
 				if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.CROWNED, 99999999, 0, false, false));
+				if (entityiterator instanceof LivingEntity _living) {
+					_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Blocks.AIR));
+				}
 				MinigamesModVariables.MapVariables.get(world).WinnerList.add((entityiterator.getStringUUID()));
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
+			GrantGameCompassProcedure.execute(entityiterator);
 		}
 		MinigamesMod.queueServerWork(160, () -> {
 			MinigamesModVariables.MapVariables.get(world).showWinscreen = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
+			if (world instanceof Level _level) {
+				PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("crowned");
+				if (_pt != null)
+					_level.getScoreboard().removePlayerTeam(_pt);
+			}
 		});
 	}
 }

@@ -1,5 +1,6 @@
 package net.mcreator.minigames.client.gui;
 
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -11,14 +12,17 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.client.input.MouseButtonEvent;
+
+import net.minecraft.client.input.MouseButtonEvent;
 import net.mcreator.minigames.init.MinigamesModScreens;
 import net.mcreator.minigames.network.CustomizeGUIButtonMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.world.inventory.CustomizeGUIMenu;
-import net.mcreator.minigames.procedures.CustomizeNameColorProcedure;
+
+import net.mcreator.minigames.procedures.CustomizeNameColorProcedure;
 import com.mojang.blaze3d.platform.InputConstants;
-import net.mcreator.minigames.network.NameColorPreferenceMessage;
+
+import net.mcreator.minigames.network.NameColorPreferenceMessage;
 
 public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu> implements MinigamesModScreens.ScreenAccessor {
 	private final Level world;
@@ -28,7 +32,7 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	private static final Identifier IMAGE_0 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
 	private static final Identifier IMAGE_1 = Identifier.parse("minigames:textures/screens/selectedextraslot.png");
 	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/bucket.png");
-	private static final Identifier IMAGE_3 = Identifier.parse("minigames:textures/screens/compass_16.png");
+	private static final Identifier GAME_COMPASS = Identifier.parse("minigames:textures/screens/compass_16.png");
 	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/selectedgamecompass.png");
 	private static final Identifier COLOR_SELECTOR = Identifier.parse("minigames:textures/screens/colorselector.png");
 	private float selectedHue = 0.0f;
@@ -53,19 +57,33 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 		super.init();
 		loadCurrentColorIntoPicker();
 
-		this.addRenderableWidget(new ImageButton(this.leftPos + 64, this.topPos + 177, 18, 18,
-				new net.minecraft.client.gui.components.WidgetSprites(IMAGE_4, IMAGE_4), e -> {
+		this.addRenderableWidget(new ImageButton(
+				this.leftPos + 15,
+				this.topPos + 123,
+				18,
+				18,
+				new WidgetSprites(GAME_COMPASS, IMAGE_4),
+				e -> {
 					ClientPacketDistributor.sendToServer(new CustomizeGUIButtonMessage(13, x, y, z));
 					CustomizeGUIButtonMessage.handleButtonAction(entity, 13, x, y, z);
-				}) {
+				}
+		) {
 			@Override
 			public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-				guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, 0xFF3A5A7A);
-				int border = isHoveredOrFocused() ? 0xFFFFFFFF : 0xAA000000;
-				guiGraphics.fill(getX(), getY(), getX() + width, getY() + 1, border);
-				guiGraphics.fill(getX(), getY() + height - 1, getX() + width, getY() + height, border);
-				guiGraphics.fill(getX(), getY(), getX() + 1, getY() + height, border);
-				guiGraphics.fill(getX() + width - 1, getY(), getX() + width, getY() + height, border);
+				int size = 36;
+
+				guiGraphics.blit(
+						net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+						isHoveredOrFocused() ? IMAGE_4 : GAME_COMPASS,
+						getX() - (size - width) / 2,
+						getY() - (size - height) / 2,
+						0,
+						0,
+						size,
+						size,
+						size,
+						size
+				);
 			}
 		});
 	}

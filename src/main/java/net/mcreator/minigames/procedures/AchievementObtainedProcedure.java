@@ -10,11 +10,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
+import net.minecraft.advancements.AdvancementHolder;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 @EventBusSubscriber
 public class AchievementObtainedProcedure {
@@ -30,16 +30,27 @@ public class AchievementObtainedProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
+
 		if (MinigamesModVariables.MapVariables.get(world).playingAchievement) {
-			if (entity instanceof ServerPlayer _plr0 && _plr0.level() instanceof ServerLevel _serverLevel0
-					&& _plr0.getAdvancements().getOrStartProgress(Objects.requireNonNull(_serverLevel0.getServer().getAdvancements().get(Identifier.parse("minecraft:" +
-                    GetAchievementProcedure.execute(MinigamesModVariables.MapVariables.get(world).AchievementCategory,
-                            MinigamesModVariables.MapVariables.get(world).Achievement)
-            )))).isDone()) {
-				AchievementGameEndProcedure.execute(world, x, y, z, entity);
+			if (entity instanceof ServerPlayer _plr0 && _plr0.level() instanceof ServerLevel _serverLevel0) {
+				String achievementPath = GetAchievementProcedure.execute(
+						MinigamesModVariables.MapVariables.get(world).AchievementCategory,
+						MinigamesModVariables.MapVariables.get(world).Achievement
+				);
+
+				if (achievementPath != null) {
+					AdvancementHolder targetAdvancement = _serverLevel0.getServer()
+							.getAdvancements()
+							.get(Identifier.parse("minecraft:" + achievementPath));
+					
+					if (targetAdvancement != null && _plr0.getAdvancements().getOrStartProgress(targetAdvancement).isDone()) {
+						if (!MinigamesModVariables.MapVariables.get(world).achievementHunterMode
+								|| entity.getStringUUID().equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
+							AchievementGameEndProcedure.execute(world, x, y, z, entity);
+						}
+					}
+				}
 			}
 		}
 	}
 }
-
-

@@ -18,7 +18,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import net.mcreator.minigames.world.inventory.MinigameGUIAchievementHuntMenu;
-import net.mcreator.minigames.procedures.NightVisionCheckedProcedure;
 import net.mcreator.minigames.procedures.KeepInventoryCheckedProcedure;
 import net.mcreator.minigames.network.MinigameGUIAchievementHuntButtonMessage;
 import net.mcreator.minigames.init.MinigamesModScreens;
@@ -31,24 +30,17 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 	private final Player entity;
 	private boolean menuStateUpdateActive = false;
 	private EditBox hp;
-	private EditBox hunter;
-	private Checkbox nightvision;
+	private EditBox hunt;
 	private Checkbox keepinventory;
-	private Checkbox minimap;
-	private Checkbox headstart;
-	private Checkbox randomhunter;
 	private Button button_start_normal;
 	private ImageButton imagebutton_compass_16;
 	private ImageButton imagebutton_bucket;
 	private static final Identifier IMAGE_0 = Identifier.parse("minigames:textures/screens/diamondwindow.png");
 	private static final Identifier IMAGE_1 = Identifier.parse("minigames:textures/screens/health_boost.png");
-	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/night_vision.png");
+	private static final Identifier IMAGE_2 = Identifier.parse("minigames:textures/screens/clock.png");
 	private static final Identifier IMAGE_3 = Identifier.parse("minigames:textures/screens/keepinventory.png");
-	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/crown.png");
-	private static final Identifier IMAGE_5 = Identifier.parse("minigames:textures/screens/clock.png");
-	private static final Identifier IMAGE_6 = Identifier.parse("minigames:textures/screens/diamond_sword.png");
-	private static final Identifier IMAGE_7 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
-	private static final Identifier IMAGE_8 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
+	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
+	private static final Identifier IMAGE_5 = Identifier.parse("minigames:textures/screens/halfextraslot.png");
 
 	public MinigameGUIAchievementHuntScreen(MinigameGUIAchievementHuntMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text, 176, 166);
@@ -65,25 +57,13 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 		if (elementType == 0 && elementState instanceof String stringState) {
 			if (name.equals("hp"))
 				hp.setValue(stringState);
-			else if (name.equals("hunter"))
-				hunter.setValue(stringState);
+			else if (name.equals("hunt"))
+				hunt.setValue(stringState);
 		}
 		if (elementType == 1 && elementState instanceof Boolean logicState) {
-			if (name.equals("nightvision")) {
-				if (nightvision.selected() != logicState)
-					nightvision.onPress(null);
-			} else if (name.equals("keepinventory")) {
+			if (name.equals("keepinventory")) {
 				if (keepinventory.selected() != logicState)
 					keepinventory.onPress(null);
-			} else if (name.equals("minimap")) {
-				if (minimap.selected() != logicState)
-					minimap.onPress(null);
-			} else if (name.equals("headstart")) {
-				if (headstart.selected() != logicState)
-					headstart.onPress(null);
-			} else if (name.equals("randomhunter")) {
-				if (randomhunter.selected() != logicState)
-					randomhunter.onPress(null);
 			}
 		}
 		menuStateUpdateActive = false;
@@ -91,45 +71,29 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		if (mouseX > leftPos + -57 && mouseX < leftPos + -5 && mouseY > topPos + 29 && mouseY < topPos + 92) {
+		if (mouseX > leftPos + -57 && mouseX < leftPos + -5 && mouseY > topPos + 40 && mouseY < topPos + 103) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_night_vision"), mouseX, mouseY);
 		}
-		if (mouseX > leftPos + 70 && mouseX < leftPos + 116 && mouseY > topPos + 28 && mouseY < topPos + 90) {
+		if (mouseX > leftPos + 67 && mouseX < leftPos + 113 && mouseY > topPos + 41 && mouseY < topPos + 103) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_keep_inventory"), mouseX, mouseY);
 		}
-		if (mouseX > leftPos + 179 && mouseX < leftPos + 233 && mouseY > topPos + 26 && mouseY < topPos + 95) {
+		if (mouseX > leftPos + 181 && mouseX < leftPos + 235 && mouseY > topPos + 36 && mouseY < topPos + 105) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_health_amount"), mouseX, mouseY);
-		}
-		if (mouseX > leftPos + 16 && mouseX < leftPos + 56 && mouseY > topPos + 33 && mouseY < topPos + 93) {
-			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_last_winner_takes_15x_damage"), mouseX, mouseY);
-		}
-		if (mouseX > leftPos + 126 && mouseX < leftPos + 169 && mouseY > topPos + 27 && mouseY < topPos + 91) {
-			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_dont_reset_world_on_game_start"), mouseX, mouseY);
-		}
-		if (KeepInventoryCheckedProcedure.execute(world))
-			if (mouseX > leftPos + -14 && mouseX < leftPos + 10 && mouseY > topPos + 120 && mouseY < topPos + 144) {
-				guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_randomize_hunter"), mouseX, mouseY);
-			}
-		if (mouseX > leftPos + 24 && mouseX < leftPos + 150 && mouseY > topPos + 119 && mouseY < topPos + 143) {
-			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.tooltip_name_of_the_hunter_disabled_if"), mouseX, mouseY);
 		}
 		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 		hp.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
-		hunter.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+		hunt.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 	}
 
 	@Override
 	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
 		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + -102, this.topPos + -29, 0, 0, 384, 384, 384, 384);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 184, this.topPos + 23, 0, 0, 46, 46, 46, 46);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -58, this.topPos + 15, 0, 0, 54, 54, 54, 54);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 68, this.topPos + 22, 0, 0, 48, 48, 48, 48);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + 12, this.topPos + 26, 0, 0, 48, 48, 48, 48);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + 132, this.topPos + 31, 0, 0, 32, 32, 32, 32);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_6, this.leftPos + -80, this.topPos + 107, 0, 0, 48, 48, 48, 48);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_7, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
-		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_8, this.leftPos + 231, this.topPos + 168, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 184, this.topPos + 35, 0, 0, 46, 46, 46, 46);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + -48, this.topPos + 43, 0, 0, 32, 32, 32, 32);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_3, this.leftPos + 68, this.topPos + 36, 0, 0, 48, 48, 48, 48);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_4, this.leftPos + -97, this.topPos + 168, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_5, this.leftPos + 231, this.topPos + 167, 0, 0, 41, 51, 41, 51);
 	}
 
 	@Override
@@ -141,18 +105,18 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 		}
 		if (hp.isFocused())
 			return hp.keyPressed(event);
-		if (hunter.isFocused())
-			return hunter.keyPressed(event);
+		if (hunt.isFocused())
+			return hunt.keyPressed(event);
 		return super.keyPressed(event);
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		String hpValue = hp.getValue();
-		String hunterValue = hunter.getValue();
+		String huntValue = hunt.getValue();
 		super.resize(width, height);
 		hp.setValue(hpValue);
-		hunter.setValue(hunterValue);
+		hunt.setValue(huntValue);
 	}
 
 	@Override
@@ -163,7 +127,7 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 	@Override
 	public void init() {
 		super.init();
-		hp = new EditBox(this.font, this.leftPos + 181, this.topPos + 71, 49, 20, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.hp"));
+		hp = new EditBox(this.font, this.leftPos + 181, this.topPos + 82, 49, 20, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.hp"));
 		hp.setMaxLength(8192);
 		hp.setResponder(content -> {
 			if (!menuStateUpdateActive)
@@ -171,13 +135,14 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 		});
 		hp.setHint(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.hp"));
 		this.addWidget(this.hp);
-		hunter = new EditBox(this.font, this.leftPos + 26, this.topPos + 121, 120, 20, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.hunter"));
-		hunter.setMaxLength(8192);
-		hunter.setResponder(content -> {
+		hunt = new EditBox(this.font, this.leftPos + -55, this.topPos + 82, 44, 20, Component.translatable("gui.minigames.minigame_gui_achievement_hunt.hunt"));
+		hunt.setMaxLength(8192);
+		hunt.setResponder(content -> {
 			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 0, "hunter", content, false);
+				menu.sendMenuStateUpdate(entity, 0, "hunt", content, false);
 		});
-		this.addWidget(this.hunter);
+		hunt.setHint(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.hunt"));
+		this.addWidget(this.hunt);
 		button_start_normal = Button.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.button_start_normal"), e -> {
 			int x = MinigameGUIAchievementHuntScreen.this.x;
 			int y = MinigameGUIAchievementHuntScreen.this.y;
@@ -202,7 +167,7 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 			}
 		};
 		this.addRenderableWidget(imagebutton_compass_16);
-		imagebutton_bucket = new ImageButton(this.leftPos + 235, this.topPos + 182, 32, 32, new WidgetSprites(Identifier.parse("minigames:textures/screens/bucket.png"), Identifier.parse("minigames:textures/screens/selectcolor.png")), e -> {
+		imagebutton_bucket = new ImageButton(this.leftPos + 235, this.topPos + 181, 32, 32, new WidgetSprites(Identifier.parse("minigames:textures/screens/bucket.png"), Identifier.parse("minigames:textures/screens/selectcolor.png")), e -> {
 			int x = MinigameGUIAchievementHuntScreen.this.x;
 			int y = MinigameGUIAchievementHuntScreen.this.y;
 			if (true) {
@@ -216,39 +181,13 @@ public class MinigameGUIAchievementHuntScreen extends AbstractContainerScreen<Mi
 			}
 		};
 		this.addRenderableWidget(imagebutton_bucket);
-		boolean nightvisionSelected = NightVisionCheckedProcedure.execute(world);
-		nightvision = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.nightvision"), this.font).pos(this.leftPos + -41, this.topPos + 72).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "nightvision", value, false);
-		}).selected(nightvisionSelected).build();
-		if (nightvisionSelected)
-			menu.sendMenuStateUpdate(entity, 1, "nightvision", true, false);
-		this.addRenderableWidget(nightvision);
-		keepinventory = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.keepinventory"), this.font).pos(this.leftPos + 83, this.topPos + 72).onValueChange((checkbox, value) -> {
+		boolean keepinventorySelected = KeepInventoryCheckedProcedure.execute(world);
+		keepinventory = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.keepinventory"), this.font).pos(this.leftPos + 82, this.topPos + 83).onValueChange((checkbox, value) -> {
 			if (!menuStateUpdateActive)
 				menu.sendMenuStateUpdate(entity, 1, "keepinventory", value, false);
-		}).build();
+		}).selected(keepinventorySelected).build();
+		if (keepinventorySelected)
+			menu.sendMenuStateUpdate(entity, 1, "keepinventory", true, false);
 		this.addRenderableWidget(keepinventory);
-		minimap = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.minimap"), this.font).pos(this.leftPos + 27, this.topPos + 72).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "minimap", value, false);
-		}).build();
-		this.addRenderableWidget(minimap);
-		boolean headstartSelected = KeepInventoryCheckedProcedure.execute(world);
-		headstart = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.headstart"), this.font).pos(this.leftPos + 138, this.topPos + 72).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "headstart", value, false);
-		}).selected(headstartSelected).build();
-		if (headstartSelected)
-			menu.sendMenuStateUpdate(entity, 1, "headstart", true, false);
-		this.addRenderableWidget(headstart);
-		boolean randomhunterSelected = KeepInventoryCheckedProcedure.execute(world);
-		randomhunter = Checkbox.builder(Component.translatable("gui.minigames.minigame_gui_achievement_hunt.randomhunter"), this.font).pos(this.leftPos + -12, this.topPos + 122).onValueChange((checkbox, value) -> {
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 1, "randomhunter", value, false);
-		}).selected(randomhunterSelected).build();
-		if (randomhunterSelected)
-			menu.sendMenuStateUpdate(entity, 1, "randomhunter", true, false);
-		this.addRenderableWidget(randomhunter);
 	}
 }

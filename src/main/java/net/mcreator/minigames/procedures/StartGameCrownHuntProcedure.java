@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
@@ -17,6 +18,12 @@ import java.util.ArrayList;
 
 public class StartGameCrownHuntProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
+		if (world instanceof Level _level)
+			_level.getScoreboard().addPlayerTeam("crowned");
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"team modify crowned prefix {\"text\":\"\\uE001---\",\"font\":\"minigames:icons\",\"color\":\"white\"}");
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			ClearEnderchestProcedure.execute(entityiterator);
 		}
@@ -116,11 +123,20 @@ public class StartGameCrownHuntProcedure {
 			MinigamesModVariables.MapVariables.get(world).CrownHuntInGame = true;
 			MinigamesModVariables.MapVariables.get(world).canGrabCrown = false;
 			MinigamesModVariables.MapVariables.get(world).inGracePeriod = true;
-			MinigamesModVariables.MapVariables.get(world).gameSeconds = 0;
-			MinigamesModVariables.MapVariables.get(world).gameMinutes = MinigamesModVariables.MapVariables.get(world).graceMinutes;
-			MinigamesModVariables.MapVariables.get(world).gameHours = 0;
-			MinigamesModVariables.MapVariables.get(world).MoveCrownTimer = true;
-			MinigamesModVariables.MapVariables.get(world).ShowCrownTimer = true;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.TimerColor = "E0E0E0";
+					_vars.timerTick = 0;
+					_vars.timerSeconds = 0;
+					_vars.timerMinutes = MinigamesModVariables.MapVariables.get(world).graceMinutes;
+					_vars.timerHours = 0;
+					_vars.timerSpeed = -1;
+					_vars.markSyncDirty();
+				}
+			}
+			MinigamesModVariables.MapVariables.get(world).ShowTimer = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		});
 		MinigamesMod.queueServerWork(200, () -> {

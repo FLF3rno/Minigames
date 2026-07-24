@@ -14,7 +14,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.core.registries.Registries;
 
-import net.mcreator.minigames.procedures.*;
+import net.mcreator.minigames.procedures.SyncCrownedRemoveProcedure;
+import net.mcreator.minigames.procedures.StunnedEffectExpiresProcedure;
+import net.mcreator.minigames.procedures.PhantomEffectEndsProcedure;
+import net.mcreator.minigames.procedures.BlessedEffectExpiresProcedure;
+import net.mcreator.minigames.procedures.AscendingEffectExpiresProcedure;
 import net.mcreator.minigames.potion.*;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -23,7 +27,6 @@ public class MinigamesModMobEffects {
 	public static final DeferredRegister<MobEffect> REGISTRY = DeferredRegister.create(Registries.MOB_EFFECT, MinigamesMod.MODID);
 	public static final DeferredHolder<MobEffect, MobEffect> IMMOBILIZED = REGISTRY.register("immobilized", ImmobilizedMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> CROWNED = REGISTRY.register("crowned", CrownedMobEffect::new);
-	public static final DeferredHolder<MobEffect, MobEffect> NERF_HUNTERS = REGISTRY.register("nerf_hunters", NerfHuntersMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> BLOCK_LEFT_CLICK = REGISTRY.register("block_left_click", BlockLeftClickMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> HYPNOTIZED = REGISTRY.register("hypnotized", HypnotizedMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> STUNNED = REGISTRY.register("stunned", StunnedMobEffect::new);
@@ -52,8 +55,6 @@ public class MinigamesModMobEffects {
 	private static void expireEffects(Entity entity, MobEffectInstance effectInstance) {
 		if (effectInstance.is(CROWNED)) {
 			SyncCrownedRemoveProcedure.execute(entity.level(), entity);
-		} else if (effectInstance.is(NERF_HUNTERS)) {
-			StartPVPProcedure.execute(entity.level());
 		} else if (effectInstance.is(STUNNED)) {
 			StunnedEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
 		} else if (effectInstance.is(BLESSED)) {

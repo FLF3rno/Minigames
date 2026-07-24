@@ -125,7 +125,6 @@ public class MinigamesModVariables {
 		clone.votedYes = original.votedYes;
 		clone.voted = original.voted;
 		clone.voteCooldown = original.voteCooldown;
-		clone.randomHunterCheckboxClicked = original.randomHunterCheckboxClicked;
 		clone.healCD = original.healCD;
 		clone.PassiveHealCooldown = original.PassiveHealCooldown;
 		clone.PassiveHealAmount = original.PassiveHealAmount;
@@ -237,20 +236,13 @@ public class MinigamesModVariables {
 		public double respawningPlayers = 0;
 		public boolean achievementHunterMode = false;
 		public boolean randomHunterAchievement = false;
-		public String hunterAchievement = "\"\"";
 		public boolean animateHunter = false;
-		public double animateHunterState = 0;
-		public double displayHunterPlayerAnimation = 0;
 		public double overwoldHuntedX = 0;
 		public double overworldHuntedZ = 0;
 		public double netherHuntedX = 0;
 		public double netherHuntedZ = 0;
-		public double debuffLength = 0;
-		public boolean headStart = false;
 		public boolean minimap = true;
 		public boolean waypoints = true;
-		public boolean MoveCrownTimer = false;
-		public boolean ShowCrownTimer = false;
 		public boolean CrownHuntInGame = false;
 		public boolean crownHuntWinDisplay = false;
 		public boolean canGrabCrown = false;
@@ -259,7 +251,6 @@ public class MinigamesModVariables {
 		public double graceMinutes = 6.0;
 		public boolean applyCustomNameColor = false;
 		public boolean inGracePeriod = false;
-		public boolean showRedTimer = false;
 		public double winAnimationState = 0;
 		public boolean playingSpleef = false;
 		public double layersRemainingSpleef = 0;
@@ -324,6 +315,8 @@ public class MinigamesModVariables {
 		public boolean visitedEndAchievement = false;
 		public boolean achievementDimensionRegenQueued = false;
 		public boolean achievementDimensionOccupied = false;
+		public String hunterAchievementUUID = "\"\"";
+		public double hunterAnimation = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -337,20 +330,13 @@ public class MinigamesModVariables {
 			respawningPlayers = nbt.getDoubleOr("respawningPlayers", 0);
 			achievementHunterMode = nbt.getBooleanOr("achievementHunterMode", false);
 			randomHunterAchievement = nbt.getBooleanOr("randomHunterAchievement", false);
-			hunterAchievement = nbt.getStringOr("hunterAchievement", "");
 			animateHunter = nbt.getBooleanOr("animateHunter", false);
-			animateHunterState = nbt.getDoubleOr("animateHunterState", 0);
-			displayHunterPlayerAnimation = nbt.getDoubleOr("displayHunterPlayerAnimation", 0);
 			overwoldHuntedX = nbt.getDoubleOr("overwoldHuntedX", 0);
 			overworldHuntedZ = nbt.getDoubleOr("overworldHuntedZ", 0);
 			netherHuntedX = nbt.getDoubleOr("netherHuntedX", 0);
 			netherHuntedZ = nbt.getDoubleOr("netherHuntedZ", 0);
-			debuffLength = nbt.getDoubleOr("debuffLength", 0);
-			headStart = nbt.getBooleanOr("headStart", false);
 			minimap = nbt.getBooleanOr("minimap", false);
 			waypoints = nbt.getBooleanOr("waypoints", false);
-			MoveCrownTimer = nbt.getBooleanOr("MoveCrownTimer", false);
-			ShowCrownTimer = nbt.getBooleanOr("ShowCrownTimer", false);
 			CrownHuntInGame = nbt.getBooleanOr("CrownHuntInGame", false);
 			crownHuntWinDisplay = nbt.getBooleanOr("crownHuntWinDisplay", false);
 			canGrabCrown = nbt.getBooleanOr("canGrabCrown", false);
@@ -359,7 +345,6 @@ public class MinigamesModVariables {
 			graceMinutes = nbt.getDoubleOr("graceMinutes", 0);
 			applyCustomNameColor = nbt.getBooleanOr("applyCustomNameColor", false);
 			inGracePeriod = nbt.getBooleanOr("inGracePeriod", false);
-			showRedTimer = nbt.getBooleanOr("showRedTimer", false);
 			winAnimationState = nbt.getDoubleOr("winAnimationState", 0);
 			playingSpleef = nbt.getBooleanOr("playingSpleef", false);
 			layersRemainingSpleef = nbt.getDoubleOr("layersRemainingSpleef", 0);
@@ -424,6 +409,8 @@ public class MinigamesModVariables {
 			visitedEndAchievement = nbt.getBooleanOr("visitedEndAchievement", false);
 			achievementDimensionRegenQueued = nbt.getBooleanOr("achievementDimensionRegenQueued", false);
 			achievementDimensionOccupied = nbt.getBooleanOr("achievementDimensionOccupied", false);
+			hunterAchievementUUID = nbt.getStringOr("hunterAchievementUUID", "");
+			hunterAnimation = nbt.getDoubleOr("hunterAnimation", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -438,20 +425,13 @@ public class MinigamesModVariables {
 			nbt.putDouble("respawningPlayers", respawningPlayers);
 			nbt.putBoolean("achievementHunterMode", achievementHunterMode);
 			nbt.putBoolean("randomHunterAchievement", randomHunterAchievement);
-			nbt.putString("hunterAchievement", hunterAchievement);
 			nbt.putBoolean("animateHunter", animateHunter);
-			nbt.putDouble("animateHunterState", animateHunterState);
-			nbt.putDouble("displayHunterPlayerAnimation", displayHunterPlayerAnimation);
 			nbt.putDouble("overwoldHuntedX", overwoldHuntedX);
 			nbt.putDouble("overworldHuntedZ", overworldHuntedZ);
 			nbt.putDouble("netherHuntedX", netherHuntedX);
 			nbt.putDouble("netherHuntedZ", netherHuntedZ);
-			nbt.putDouble("debuffLength", debuffLength);
-			nbt.putBoolean("headStart", headStart);
 			nbt.putBoolean("minimap", minimap);
 			nbt.putBoolean("waypoints", waypoints);
-			nbt.putBoolean("MoveCrownTimer", MoveCrownTimer);
-			nbt.putBoolean("ShowCrownTimer", ShowCrownTimer);
 			nbt.putBoolean("CrownHuntInGame", CrownHuntInGame);
 			nbt.putBoolean("crownHuntWinDisplay", crownHuntWinDisplay);
 			nbt.putBoolean("canGrabCrown", canGrabCrown);
@@ -460,7 +440,6 @@ public class MinigamesModVariables {
 			nbt.putDouble("graceMinutes", graceMinutes);
 			nbt.putBoolean("applyCustomNameColor", applyCustomNameColor);
 			nbt.putBoolean("inGracePeriod", inGracePeriod);
-			nbt.putBoolean("showRedTimer", showRedTimer);
 			nbt.putDouble("winAnimationState", winAnimationState);
 			nbt.putBoolean("playingSpleef", playingSpleef);
 			nbt.putDouble("layersRemainingSpleef", layersRemainingSpleef);
@@ -525,6 +504,8 @@ public class MinigamesModVariables {
 			nbt.putBoolean("visitedEndAchievement", visitedEndAchievement);
 			nbt.putBoolean("achievementDimensionRegenQueued", achievementDimensionRegenQueued);
 			nbt.putBoolean("achievementDimensionOccupied", achievementDimensionOccupied);
+			nbt.putString("hunterAchievementUUID", hunterAchievementUUID);
+			nbt.putDouble("hunterAnimation", hunterAnimation);
 			return nbt;
 		}
 
@@ -610,7 +591,6 @@ public class MinigamesModVariables {
 		public boolean votedYes = false;
 		public boolean voted = false;
 		public double voteCooldown = 0;
-		public boolean randomHunterCheckboxClicked = false;
 		public double healCD = 0;
 		public double PassiveHealCooldown = 80.0;
 		public double PassiveHealAmount = 1.0;
@@ -656,7 +636,6 @@ public class MinigamesModVariables {
 			output.putBoolean("votedYes", votedYes);
 			output.putBoolean("voted", voted);
 			output.putDouble("voteCooldown", voteCooldown);
-			output.putBoolean("randomHunterCheckboxClicked", randomHunterCheckboxClicked);
 			output.putDouble("healCD", healCD);
 			output.putDouble("PassiveHealCooldown", PassiveHealCooldown);
 			output.putDouble("PassiveHealAmount", PassiveHealAmount);
@@ -703,7 +682,6 @@ public class MinigamesModVariables {
 			votedYes = input.getBooleanOr("votedYes", false);
 			voted = input.getBooleanOr("voted", false);
 			voteCooldown = input.getDoubleOr("voteCooldown", 0);
-			randomHunterCheckboxClicked = input.getBooleanOr("randomHunterCheckboxClicked", false);
 			healCD = input.getDoubleOr("healCD", 0);
 			PassiveHealCooldown = input.getDoubleOr("PassiveHealCooldown", 0);
 			PassiveHealAmount = input.getDoubleOr("PassiveHealAmount", 0);

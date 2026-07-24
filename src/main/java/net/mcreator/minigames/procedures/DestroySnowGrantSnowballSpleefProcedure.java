@@ -53,22 +53,20 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 				if (event instanceof ICancellableEvent _cancellable) {
 					_cancellable.setCanceled(true);
 				}
-			}
-			if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
-				rng = Mth.nextInt(RandomSource.create(), 1, 4);
-				if (rng == 1) {
-					targetX = targetX + 1;
-				} else if (rng == 2) {
-					targetX = targetX - 1;
-				} else if (rng == 3) {
-					targetZ = targetZ + 1;
-				} else if (rng == 4) {
-					targetZ = targetZ - 1;
+				if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
+					rng = Mth.nextInt(RandomSource.create(), 1, 4);
+					if (rng == 1) {
+						targetX = targetX + 1;
+					} else if (rng == 2) {
+						targetX = targetX - 1;
+					} else if (rng == 3) {
+						targetZ = targetZ + 1;
+					} else if (rng == 4) {
+						targetZ = targetZ - 1;
+					}
+					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
+					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
 				}
-				world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-				BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
-			}
-			if (blockstate.is(BlockTags.create(Identifier.parse("minigames:spleefables")))) {
 				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SYMMETRICAL_SHOVEL.get()) {
 					if (world instanceof ServerLevel _level) {
 						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
@@ -86,7 +84,7 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
 					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
 					layer = 0;
-					for (int index0 = 0; index0 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index0++) {
+					for (int index1968 = 0; index1968 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index1968++) {
 						layer = layer + 1;
 						targetY = 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef;
 						world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);

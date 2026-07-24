@@ -26,7 +26,6 @@ public class MinigamesModMenus {
 	public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(Registries.MENU, MinigamesMod.MODID);
 	public static final DeferredHolder<MenuType<?>, MenuType<StartGameMenu>> START_GAME = REGISTRY.register("start_game", () -> IMenuTypeExtension.create(StartGameMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUIAchievementRunMenu>> MINIGAME_GUI_ACHIEVEMENT_RUN = REGISTRY.register("minigame_gui_achievement_run", () -> IMenuTypeExtension.create(MinigameGUIAchievementRunMenu::new));
-	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUIAchievementHuntMenu>> MINIGAME_GUI_ACHIEVEMENT_HUNT = REGISTRY.register("minigame_gui_achievement_hunt", () -> IMenuTypeExtension.create(MinigameGUIAchievementHuntMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<CustomizeGUIMenu>> CUSTOMIZE_GUI = REGISTRY.register("customize_gui", () -> IMenuTypeExtension.create(CustomizeGUIMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUICrownHuntMenu>> MINIGAME_GUI_CROWN_HUNT = REGISTRY.register("minigame_gui_crown_hunt", () -> IMenuTypeExtension.create(MinigameGUICrownHuntMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUISpleefMenu>> MINIGAME_GUI_SPLEEF = REGISTRY.register("minigame_gui_spleef", () -> IMenuTypeExtension.create(MinigameGUISpleefMenu::new));
@@ -35,6 +34,7 @@ public class MinigamesModMenus {
 	public static final DeferredHolder<MenuType<?>, MenuType<BattleBoxMenu>> BATTLE_BOX = REGISTRY.register("battle_box", () -> IMenuTypeExtension.create(BattleBoxMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<SelectCategoryAchievementMenu>> SELECT_CATEGORY_ACHIEVEMENT = REGISTRY.register("select_category_achievement", () -> IMenuTypeExtension.create(SelectCategoryAchievementMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<DisplayAchievmenMenu>> DISPLAY_ACHIEVMEN = REGISTRY.register("display_achievmen", () -> IMenuTypeExtension.create(DisplayAchievmenMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUIAchievementHuntMenu>> MINIGAME_GUI_ACHIEVEMENT_HUNT = REGISTRY.register("minigame_gui_achievement_hunt", () -> IMenuTypeExtension.create(MinigameGUIAchievementHuntMenu::new));
 
 	public interface MenuAccessor {
 		Map<String, Object> getMenuState();

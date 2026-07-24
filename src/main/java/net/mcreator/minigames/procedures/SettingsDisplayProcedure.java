@@ -13,7 +13,11 @@ public class SettingsDisplayProcedure {
 		String line3 = "";
 		String line4 = "";
 		String line5 = "";
-		line1 = "Health is set to " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).WhenPVPActive);
+		if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode) {
+			line1 = "Hunted gains a " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).WhenPVPActive) + "s head start";
+		} else {
+			line1 = "PvP enables after " + new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).WhenPVPActive) + "s";
+		}
 		if ((world instanceof ServerLevel _serverLevelGR0 && _serverLevelGR0.getGameRules().get(GameRules.KEEP_INVENTORY)) == false) {
 			line2 = "Keep Inventory is active";
 		} else {

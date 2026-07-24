@@ -36,7 +36,7 @@ public class AddCrownToKillerProcedure {
 		}
 		if (sourceentity instanceof Player) {
 			MinigamesMod.queueServerWork(3, () -> {
-				AnimateCrownPickupProcedure.execute(world, x, y, z);
+				AnimateCrownPickupProcedure.execute(world);
 			});
 			if (world instanceof ServerLevel _level) {
 				_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);

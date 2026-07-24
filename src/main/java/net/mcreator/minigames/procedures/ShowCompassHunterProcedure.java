@@ -9,10 +9,7 @@ public class ShowCompassHunterProcedure {
 	public static boolean execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return false;
-		if (!(entity.getDisplayName().getString()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievement) && MinigamesModVariables.MapVariables.get(world).achievementHunterMode
-				&& MinigamesModVariables.MapVariables.get(world).playingAchievement) {
-			return true;
-		}
-		return false;
+		return !(entity.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) && MinigamesModVariables.MapVariables.get(world).achievementHunterMode
+				&& MinigamesModVariables.MapVariables.get(world).playingAchievement;
 	}
 }

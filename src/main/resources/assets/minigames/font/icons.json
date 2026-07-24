@@ -1,0 +1,31 @@
+{
+    "providers": [
+        {
+            "type": "bitmap",
+            "file": "minigames:font/empty.png",
+            "height": 8,
+            "ascent": 2,
+            "chars": [
+                "-"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minigames:font/hunted.png",
+            "height": 8,
+            "ascent": 8,
+            "chars": [
+                "\uE000"
+            ]
+        },{
+            "type": "bitmap",
+            "file": "minigames:font/crowned.png",
+            "height": 10,
+            "ascent": 9,
+            "chars": [
+                "\uE001"
+            ]
+        }
+        
+    ]
+}

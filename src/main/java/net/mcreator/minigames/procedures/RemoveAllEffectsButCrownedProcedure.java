@@ -1,5 +1,6 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -31,11 +32,14 @@ public class RemoveAllEffectsButCrownedProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (MinigamesModVariables.MapVariables.get(world).removeEffects) {
-			MinigamesModVariables.MapVariables.get(world).removeEffects = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			clearAllEffects(entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned);
-		}
+		if (MinigamesModVariables.MapVariables.get(world).removeEffects && world instanceof ServerLevel serverLevel) {
+    		MinigamesModVariables.MapVariables.get(world).removeEffects = false;
+    		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+
+    for (ServerPlayer player : serverLevel.players()) {
+        clearAllEffects(player, player.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned);
+    }
+}
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).removeEffectsSingleTarget) {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
@@ -61,7 +65,7 @@ public class RemoveAllEffectsButCrownedProcedure {
 		}
 
 		if (keepCrowned && !livingEntity.hasEffect(MinigamesModMobEffects.CROWNED)) {
-			livingEntity.addEffect(new net.minecraft.world.effect.MobEffectInstance(MinigamesModMobEffects.CROWNED, 1000000000, 0, false, false, true));
+			livingEntity.addEffect(new net.minecraft.world.effect.MobEffectInstance(MinigamesModMobEffects.CROWNED, Integer.MAX_VALUE, 0, false, false, true));
 		}
 	}
 }

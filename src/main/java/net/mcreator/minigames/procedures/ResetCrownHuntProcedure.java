@@ -77,8 +77,15 @@ public class ResetCrownHuntProcedure {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/execute at @a[team=spread,limit=1] run worldborder center ~ ~");
-			MinigamesModVariables.MapVariables.get(world).MoveCrownTimer = false;
-			MinigamesModVariables.MapVariables.get(world).ShowCrownTimer = false;
+			MinigamesModVariables.MapVariables.get(world).ShowTimer = true;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.timerSpeed = -1;
+					_vars.markSyncDirty();
+				}
+			}
 			MinigamesModVariables.MapVariables.get(world).applyCustomNameColor = true;
 			for (Entity entityiterator : new java.util.ArrayList<>(world.players())) {
 				NameColorApplyProcedure.applyColor(world, entityiterator);

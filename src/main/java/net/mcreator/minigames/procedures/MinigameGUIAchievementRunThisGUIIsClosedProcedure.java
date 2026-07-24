@@ -37,6 +37,8 @@ public class MinigameGUIAchievementRunThisGUIIsClosedProcedure {
 			MinigamesModVariables.health = Math.round(parseDouble((entity instanceof Player _entity7 && _entity7.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu7) ? _menu7.getMenuState(0, "hp", "") : ""));
 		}
 		StartVoteProcedure.execute(world, entity, entity, "achievement run");
+		if (entity instanceof Player _player)
+			_player.closeContainer();
 	}
 
 	private static void worldSwitch3(LevelAccessor world, Entity entity) {

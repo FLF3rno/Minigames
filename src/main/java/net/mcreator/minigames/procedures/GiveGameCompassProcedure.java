@@ -5,12 +5,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
-import net.mcreator.minigames.init.MinigamesModItems;
 
 import javax.annotation.Nullable;
 
@@ -34,11 +31,7 @@ public class GiveGameCompassProcedure {
 				_vars.joinFirstTime = true;
 				_vars.markSyncDirty();
 			}
-			if (entity instanceof Player _player) {
-				ItemStack _setstack = new ItemStack(MinigamesModItems.GAME_COMPASS.get()).copy();
-				_setstack.setCount(1);
-				_player.getInventory().placeItemBackInInventory(_setstack);
-			}
+			GrantGameCompassProcedure.execute(entity);
 		}
 	}
 }

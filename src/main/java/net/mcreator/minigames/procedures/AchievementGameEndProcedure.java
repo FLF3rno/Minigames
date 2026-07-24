@@ -1,9 +1,11 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +28,14 @@ public class AchievementGameEndProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
+		if (world instanceof Level _level) {
+			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("hunted");
+			if (_pt != null)
+				_level.getScoreboard().removePlayerTeam(_pt);
+		}
 		MinigamesModVariables.MapVariables.get(world).playingAchievement = false;
+		MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
+		MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (MinigamesModVariables.MapVariables.get(world).useOverworld1) {
 			MinigamesModVariables.MapVariables.get(world).useOverworld1 = false;
@@ -35,8 +44,6 @@ public class AchievementGameEndProcedure {
 			MinigamesModVariables.MapVariables.get(world).useOverworld1 = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}
-		MinigamesModVariables.MapVariables.get(world).achievementDimensionRegenQueued = true;
-		MinigamesModVariables.MapVariables.get(world).achievementDimensionOccupied = true;
 		MinigamesModVariables.MapVariables.get(world).showWinscreen = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(160, () -> {
@@ -48,7 +55,7 @@ public class AchievementGameEndProcedure {
 			MinigamesModVariables.MapVariables.get(world).minimap = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				GiveGameCompassProcedure.execute(entityiterator);
+				GrantGameCompassProcedure.execute(entityiterator);
 			}
 		});
 		for (Entity entityiterator : new ArrayList<>(world.players())) {

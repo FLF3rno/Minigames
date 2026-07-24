@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class AchievementInitiateGameProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
+		TeleportAchievementProcedure.execute(world);
 		GameCountdownProcedure.execute(world, x, y, z);
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			{
@@ -25,14 +26,21 @@ public class AchievementInitiateGameProcedure {
 			if (entityiterator instanceof ServerPlayer _player)
 				_player.setGameMode(GameType.SURVIVAL);
 		}
-		MinigamesMod.queueServerWork(80, () -> {
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			MinigamesMod.queueServerWork(80, () -> {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.timerSpeed = 1;
 					_vars.markSyncDirty();
 				}
-			}
-		});
+			});
+			MinigamesMod.queueServerWork((int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive + 80), () -> {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.TimerColor = "C7C7C7";
+					_vars.markSyncDirty();
+				}
+			});
+		}
 	}
 }

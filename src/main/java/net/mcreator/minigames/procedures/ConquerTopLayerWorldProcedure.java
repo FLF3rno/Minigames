@@ -97,7 +97,7 @@ public class ConquerTopLayerWorldProcedure {
 		if (nextCountdown == COUNTDOWN_START && previousCountdown < COUNTDOWN_START) {
 			playCountdownSound(level);
 			if (playersOnTopLayer.size() == 1) {
-				ConquerTopLayerProcedure.announcePotentialWinner(playersOnTopLayer.get(0));
+				ConquerTopLayerProcedure.announcePotentialWinner(playersOnTopLayer.getFirst());
 			}
 		}
 
@@ -113,7 +113,7 @@ public class ConquerTopLayerWorldProcedure {
 
 		if (previousCountdown < COUNTDOWN_COMPLETE && nextCountdown >= COUNTDOWN_COMPLETE) {
 			if (playersOnTopLayer.size() == 1) {
-				ConquerTopLayerProcedure.awardLayerWin(level, playersOnTopLayer.get(0));
+				ConquerTopLayerProcedure.awardLayerWin(level, playersOnTopLayer.getFirst());
 			}
 
 			clearTopLayer(level, topLayerY);
@@ -170,12 +170,12 @@ public class ConquerTopLayerWorldProcedure {
 
 		level.getServer().getCommands().performPrefixedCommand(
 				getSource(level),
-				"fill " + minX + " " + fillY + " " + minZ + " " +
+				"execute in minigames:spleef_dimension run fill " + minX + " " + fillY + " " + minZ + " " +
 						maxX + " 140 " + maxZ + " air"
 		);
 	}
 
-	private static CommandSourceStack getSource(ServerLevel level) {
+	private static CommandSourceStack getSource(ServerLevel level) { 
 		return new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", net.minecraft.network.chat.Component.literal(""), level.getServer(), null).withSuppressedOutput();
 	}
 }

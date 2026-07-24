@@ -16,7 +16,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.core.SectionPos;
 
 import net.mcreator.minigames.procedures.OpenCustomizationScreenProcedure;
-import net.mcreator.minigames.procedures.MinigameGUIAchievementRunThisGUIIsClosedProcedure;
+import net.mcreator.minigames.procedures.MinigameGUIAchievementHuntThisGUIIsClosedProcedure;
 import net.mcreator.minigames.procedures.GoBackProcedure;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -51,7 +51,7 @@ public record MinigameGUIAchievementHuntButtonMessage(int buttonID, int x, int y
 			return;
 		if (buttonID == 0) {
 
-			MinigameGUIAchievementRunThisGUIIsClosedProcedure.execute(world, entity);
+			MinigameGUIAchievementHuntThisGUIIsClosedProcedure.execute(world, entity);
 		}
 		if (buttonID == 1) {
 

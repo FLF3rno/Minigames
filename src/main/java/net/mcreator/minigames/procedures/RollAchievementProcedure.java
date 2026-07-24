@@ -16,11 +16,7 @@ public class RollAchievementProcedure {
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 2) {
 			achievement = Mth.nextInt(RandomSource.create(), 1, 22);
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 3) {
-			if (Math.random() < 0.85) {
-				RollAchievementProcedure.execute(world);
-			} else {
-				achievement = Mth.nextInt(RandomSource.create(), 1, 1);
-			}
+			RollAchievementProcedure.execute(world);
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 4) {
 			achievement = Mth.nextInt(RandomSource.create(), 1, 43);
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 5) {

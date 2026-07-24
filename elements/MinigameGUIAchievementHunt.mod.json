@@ -43,7 +43,7 @@
           "name": "button_start_normal",
           "text": "Start",
           "isUndecorated": false,
-          "onClick": "MinigameGUIAchievementRunThisGUIIsClosed",
+          "onClick": "MinigameGUIAchievementHuntThisGUIIsClosed",
           "width": 98,
           "height": 20,
           "x": 164,
@@ -57,17 +57,17 @@
           "image": "health_boost.png",
           "use1Xscale": false,
           "x": 310,
-          "y": 60,
+          "y": 72,
           "locked": false
         }
       },
       {
         "type": "image",
         "data": {
-          "image": "night_vision.png",
+          "image": "clock.png",
           "use1Xscale": false,
-          "x": 68,
-          "y": 52,
+          "x": 78,
+          "y": 80,
           "locked": false
         }
       },
@@ -76,12 +76,12 @@
         "data": {
           "name": "tooltip_night_vision",
           "text": {
-            "fixedValue": "Night Vision"
+            "fixedValue": "Headstart"
           },
           "width": 52,
           "height": 63,
           "x": 69,
-          "y": 66,
+          "y": 77,
           "locked": false
         }
       },
@@ -93,7 +93,7 @@
           "width": 49,
           "height": 20,
           "x": 307,
-          "y": 108,
+          "y": 119,
           "locked": false
         }
       },
@@ -106,8 +106,8 @@
           },
           "width": 46,
           "height": 62,
-          "x": 196,
-          "y": 65,
+          "x": 193,
+          "y": 78,
           "locked": false
         }
       },
@@ -120,8 +120,8 @@
           },
           "width": 54,
           "height": 69,
-          "x": 305,
-          "y": 63,
+          "x": 307,
+          "y": 73,
           "locked": false
         }
       },
@@ -131,18 +131,7 @@
           "image": "keepinventory.png",
           "use1Xscale": false,
           "x": 194,
-          "y": 59,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "nightvision",
-          "text": "",
-          "isCheckedProcedure": "NightVisionChecked",
-          "x": 85,
-          "y": 109,
+          "y": 73,
           "locked": false
         }
       },
@@ -151,140 +140,10 @@
         "data": {
           "name": "keepinventory",
           "text": "",
-          "x": 209,
-          "y": 109,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "crown.png",
-          "use1Xscale": false,
-          "x": 138,
-          "y": 63,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "minimap",
-          "text": "",
-          "x": 153,
-          "y": 109,
-          "locked": false
-        }
-      },
-      {
-        "type": "tooltip",
-        "data": {
-          "name": "tooltip_last_winner_takes_15x_damage",
-          "text": {
-            "fixedValue": "Enable minimap (only with Xaero's Minimap)"
-          },
-          "width": 40,
-          "height": 60,
-          "x": 142,
-          "y": 70,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "clock.png",
-          "use1Xscale": false,
-          "x": 258,
-          "y": 68,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "headstart",
-          "text": "",
           "isCheckedProcedure": "KeepInventoryChecked",
-          "x": 264,
-          "y": 109,
-          "locked": false
-        }
-      },
-      {
-        "type": "tooltip",
-        "data": {
-          "name": "tooltip_dont_reset_world_on_game_start",
-          "text": {
-            "fixedValue": "Give hunted a head start"
-          },
-          "width": 43,
-          "height": 64,
-          "x": 252,
-          "y": 64,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "diamond_sword.png",
-          "use1Xscale": false,
-          "x": 46,
-          "y": 144,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "randomhunter",
-          "text": "",
-          "isCheckedProcedure": "KeepInventoryChecked",
-          "x": 114,
-          "y": 159,
-          "locked": false
-        }
-      },
-      {
-        "type": "textfield",
-        "data": {
-          "placeholder": "",
-          "name": "hunter",
-          "width": 120,
-          "height": 20,
-          "x": 152,
-          "y": 158,
-          "locked": false
-        }
-      },
-      {
-        "type": "tooltip",
-        "data": {
-          "name": "tooltip_randomize_hunter",
-          "text": {
-            "fixedValue": "Randomize hunter"
-          },
-          "displayCondition": "KeepInventoryChecked",
-          "width": 24,
-          "height": 24,
-          "x": 112,
-          "y": 157,
-          "locked": false
-        }
-      },
-      {
-        "type": "tooltip",
-        "data": {
-          "name": "tooltip_name_of_the_hunter_disabled_if",
-          "text": {
-            "fixedValue": "Name of the hunter (disabled if randomized)"
-          },
-          "width": 126,
-          "height": 24,
-          "x": 150,
-          "y": 156,
-          "locked": false
+          "x": 208,
+          "y": 120,
+          "locked": true
         }
       },
       {
@@ -293,16 +152,6 @@
           "image": "halfextraslot.png",
           "use1Xscale": false,
           "x": 29,
-          "y": 205,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "halfextraslot.png",
-          "use1Xscale": false,
-          "x": 357,
           "y": 205,
           "locked": false
         }
@@ -320,6 +169,16 @@
         }
       },
       {
+        "type": "image",
+        "data": {
+          "image": "halfextraslot.png",
+          "use1Xscale": false,
+          "x": 357,
+          "y": 204,
+          "locked": false
+        }
+      },
+      {
         "type": "imagebutton",
         "data": {
           "name": "imagebutton_bucket",
@@ -327,12 +186,24 @@
           "hoveredImage": "selectcolor.png",
           "onClick": "OpenCustomizationScreen",
           "x": 361,
-          "y": 219,
+          "y": 218,
+          "locked": false
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "30",
+          "name": "hunt",
+          "width": 44,
+          "height": 20,
+          "x": 71,
+          "y": 119,
           "locked": false
         }
       }
     ],
-    "onTick": "AchievementHuntSettings",
+    "onOpen": "DefaultAchievementHuntSettings",
     "gridSettings": {
       "sx": 18,
       "sy": 18,

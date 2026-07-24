@@ -13,14 +13,10 @@ public class WonVoteProcedure {
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).respawningPlayers == 0) {
 			if (MinigamesModVariables.MapVariables.get(world).voteType == 0) {
-				MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
-				MinigamesModVariables.MapVariables.get(world).headStart = false;
-				MinigamesModVariables.MapVariables.get(world).animateHunter = false;
-				MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				StartAchievementRunProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 1) {
 				MinigamesModVariables.MapVariables.get(world).achievementHunterMode = true;
+				MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = true;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				StartAchievementRunProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 2) {

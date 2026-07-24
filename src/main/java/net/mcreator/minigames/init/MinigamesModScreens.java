@@ -16,7 +16,6 @@ public class MinigamesModScreens {
 	public static void clientLoad(RegisterMenuScreensEvent event) {
 		event.register(MinigamesModMenus.START_GAME.get(), StartGameScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_RUN.get(), MinigameGUIAchievementRunScreen::new);
-		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_HUNT.get(), MinigameGUIAchievementHuntScreen::new);
 		event.register(MinigamesModMenus.CUSTOMIZE_GUI.get(), CustomizeGUIScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_CROWN_HUNT.get(), MinigameGUICrownHuntScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_SPLEEF.get(), MinigameGUISpleefScreen::new);
@@ -25,6 +24,7 @@ public class MinigamesModScreens {
 		event.register(MinigamesModMenus.BATTLE_BOX.get(), BattleBoxScreen::new);
 		event.register(MinigamesModMenus.SELECT_CATEGORY_ACHIEVEMENT.get(), SelectCategoryAchievementScreen::new);
 		event.register(MinigamesModMenus.DISPLAY_ACHIEVMEN.get(), DisplayAchievmenScreen::new);
+		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_HUNT.get(), MinigameGUIAchievementHuntScreen::new);
 	}
 
 	public interface ScreenAccessor {

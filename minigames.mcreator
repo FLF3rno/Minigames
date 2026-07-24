@@ -31,7 +31,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SettingsDisplayProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Settings"
+      "path": "~/Achievement Run/Settings"
     },
     {
       "name": "SettingsAchievement",
@@ -54,13 +54,13 @@
           "src/main/java/net/mcreator/minigames/procedures/SettingsAchievementProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Settings"
+      "path": "~/Achievement Run/Settings"
     },
     {
       "name": "ManageTimer",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "manage_timer",
       "metadata": {
         "dependencies": [
@@ -80,126 +80,6 @@
       "path": "~/General/Timer"
     },
     {
-      "name": "DisplaySeconds",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "display_seconds",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DisplaySecondsProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old"
-    },
-    {
-      "name": "DisplaySeconds2",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "display_seconds_2",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DisplaySeconds2Procedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old"
-    },
-    {
-      "name": "DisplayMinutes",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "display_minutes",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DisplayMinutesProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old"
-    },
-    {
-      "name": "DisplayMinutes2",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "display_minutes_2",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DisplayMinutes2Procedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old"
-    },
-    {
-      "name": "DisplayHours",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "display_hours",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DisplayHoursProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old"
-    },
-    {
-      "name": "DisplayHours2",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "display_hours_2",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DisplayHours2Procedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old"
-    },
-    {
       "name": "AchievementHud",
       "type": "overlay",
       "compiles": true,
@@ -210,7 +90,7 @@
           "src/main/java/net/mcreator/minigames/client/screens/AchievementHudOverlay.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "PVPDisplay",
@@ -234,7 +114,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PVPDisplayProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "ActivatePVP",
@@ -253,7 +133,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ActivatePVPProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "AnimatePVP",
@@ -273,7 +153,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AnimatePVPProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "DisplayPVP",
@@ -293,7 +173,7 @@
           "src/main/java/net/mcreator/minigames/procedures/DisplayPVPProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "StartGame",
@@ -356,7 +236,7 @@
           "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementRunScreen.java"
         ]
       },
-      "path": "~/Achievement Run/new/Settings"
+      "path": "~/Achievement Run/Settings"
     },
     {
       "name": "MinigameGUIAchievementRunThisGUIIsClosed",
@@ -379,7 +259,7 @@
           "src/main/java/net/mcreator/minigames/procedures/MinigameGUIAchievementRunThisGUIIsClosedProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Settings"
+      "path": "~/Achievement Run/Settings"
     },
     {
       "name": "GameCompass",
@@ -414,7 +294,7 @@
           "src/main/java/net/mcreator/minigames/procedures/KeepInventoryCheckedProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Settings"
+      "path": "~/Achievement Run/Settings"
     },
     {
       "name": "NightVisionChecked",
@@ -434,7 +314,7 @@
           "src/main/java/net/mcreator/minigames/procedures/NightVisionCheckedProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/old/settings"
+      "path": "~/Crown Hunt/settings"
     },
     {
       "name": "Crown",
@@ -583,7 +463,7 @@
           "src/main/java/net/mcreator/minigames/procedures/StopPVPProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "AddRespawningPlayer",
@@ -638,7 +518,7 @@
           "src/main/java/net/mcreator/minigames/client/screens/AchievementReminderOverlay.java"
         ]
       },
-      "path": "~/Achievement Run/new/Reminder"
+      "path": "~/Achievement Run/Reminder"
     },
     {
       "name": "SyncCrownedApply",
@@ -721,21 +601,6 @@
       }
     },
     {
-      "name": "MinigameGUIAchievementHunt",
-      "type": "gui",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "minigame_gui_achievement_hunt",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementHuntMenu.java",
-          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementHuntScreen.java",
-          "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementHuntButtonMessage.java"
-        ]
-      },
-      "path": "~/Achievement Run/old/settings"
-    },
-    {
       "name": "HidePVPIconHunt",
       "type": "procedure",
       "compiles": true,
@@ -753,7 +618,7 @@
           "src/main/java/net/mcreator/minigames/procedures/HidePVPIconHuntProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "ShowCompassHunter",
@@ -777,7 +642,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShowCompassHunterProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "CompassHunterSprite",
@@ -801,39 +666,7 @@
           "src/main/java/net/mcreator/minigames/procedures/CompassHunterSpriteProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
-    },
-    {
-      "name": "NerfHunters",
-      "type": "potioneffect",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "nerf_hunters",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/potion/NerfHuntersMobEffect.java"
-        ]
-      },
-      "path": "~/Achievement Run"
-    },
-    {
-      "name": "NerfHuntersOnEffectActiveTick",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "nerf_hunters_on_effect_active_tick",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/NerfHuntersOnEffectActiveTickProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "StartPVP",
@@ -852,7 +685,7 @@
           "src/main/java/net/mcreator/minigames/procedures/StartPVPProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "DisplayBottomLeftDescription",
@@ -872,7 +705,7 @@
           "src/main/java/net/mcreator/minigames/procedures/DisplayBottomLeftDescriptionProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "ManageMinimap",
@@ -1142,25 +975,6 @@
       "path": "~/Crown Hunt"
     },
     {
-      "name": "ManageCountdown",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "manage_countdown",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/ManageCountdownProcedure.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
       "name": "HitArmorStand",
       "type": "procedure",
       "compiles": true,
@@ -1204,57 +1018,12 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
             "name": "world",
             "type": "world"
           }
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/AnimateCrownPickupProcedure.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
-      "name": "CrownTimerMinigame",
-      "type": "overlay",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "crown_timer_minigame",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/client/screens/CrownTimerMinigameOverlay.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
-      "name": "ShowCrownTimer",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "show_crown_timer",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/ShowCrownTimerProcedure.java"
         ]
       },
       "path": "~/Crown Hunt"
@@ -1358,39 +1127,6 @@
         ]
       },
       "path": "~/Crown Hunt/win"
-    },
-    {
-      "name": "LowTimeCrownTimerMinigame",
-      "type": "overlay",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "low_time_crown_timer_minigame",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/client/screens/LowTimeCrownTimerMinigameOverlay.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
-      "name": "ShowLowCrownTimer",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "show_low_crown_timer",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/ShowLowCrownTimerProcedure.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
     },
     {
       "name": "MinigameGUICrownHunt",
@@ -2785,18 +2521,6 @@
       "registry_name": "first_time_join",
       "metadata": {
         "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
           {
             "name": "world",
             "type": "world"
@@ -6584,29 +6308,6 @@
       "path": "~/General/Vote"
     },
     {
-      "name": "AchievementHuntSettings",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "achievement_hunt_settings",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/AchievementHuntSettingsProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/old/settings"
-    },
-    {
       "name": "FightDoors",
       "type": "block",
       "compiles": true,
@@ -6856,7 +6557,7 @@
           "src/main/java/net/mcreator/minigames/procedures/RemoveAllEffectsButCrownedProcedure.java"
         ]
       },
-      "path": "~/General/Crown"
+      "path": "~/General/Effects"
     },
     {
       "name": "DungeonHeal",
@@ -11548,7 +11249,7 @@
           "src/main/java/net/mcreator/minigames/procedures/GetAchievementProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "SelectCategoryAchievement",
@@ -11562,7 +11263,7 @@
           "src/main/java/net/mcreator/minigames/client/gui/SelectCategoryAchievementScreen.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "GetCategory",
@@ -11582,7 +11283,7 @@
           "src/main/java/net/mcreator/minigames/procedures/GetCategoryProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "GetCategoryTexture",
@@ -11602,7 +11303,7 @@
           "src/main/java/net/mcreator/minigames/procedures/GetCategoryTextureProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "DisplayAchievmen",
@@ -11617,7 +11318,7 @@
           "src/main/java/net/mcreator/minigames/client/gui/DisplayAchievmenScreen.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "DisplayAchievementOpen",
@@ -11652,7 +11353,7 @@
           "src/main/java/net/mcreator/minigames/procedures/DisplayAchievementOpenProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "OpenDisplayAchievement",
@@ -11665,13 +11366,13 @@
           "src/main/java/net/mcreator/minigames/network/OpenDisplayAchievementMessage.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "StartAchievementRun",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "start_achievement_run",
       "metadata": {
         "dependencies": [
@@ -11696,7 +11397,7 @@
           "src/main/java/net/mcreator/minigames/procedures/StartAchievementRunProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "GetAchievementInfo",
@@ -11715,7 +11416,7 @@
           "src/main/java/net/mcreator/minigames/procedures/GetAchievementInfoProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "PlayerNumeration",
@@ -11773,7 +11474,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementReadyUpProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "AchievementInitiateGame",
@@ -11804,7 +11505,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementInitiateGameProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "AchievementReroll",
@@ -11839,7 +11540,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementRerollProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "AchievementInitiateReroll",
@@ -11870,7 +11571,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementInitiateRerollProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Menu"
+      "path": "~/Achievement Run/Menu"
     },
     {
       "name": "RollAchievement",
@@ -11889,7 +11590,7 @@
           "src/main/java/net/mcreator/minigames/procedures/RollAchievementProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "ModifiersAchievement",
@@ -11908,7 +11609,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ModifiersAchievementProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new"
+      "path": "~/Achievement Run"
     },
     {
       "name": "ClearEnderchest",
@@ -12005,7 +11706,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementObtainedProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Win"
+      "path": "~/Achievement Run/Win"
     },
     {
       "name": "AchievementGameEnd",
@@ -12040,7 +11741,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementGameEndProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Win"
+      "path": "~/Achievement Run/Win"
     },
     {
       "name": "WinScreen",
@@ -12086,7 +11787,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShowAchievementOverlayProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "TimerSeconds",
@@ -12120,7 +11821,7 @@
           "src/main/resources/data/minigames/dimension/achievement_1.json"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "Achievement2",
@@ -12134,7 +11835,7 @@
           "src/main/resources/data/minigames/dimension/achievement_2.json"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "AchievementNether",
@@ -12148,7 +11849,7 @@
           "src/main/resources/data/minigames/dimension/achievement_nether.json"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "AchievementEnd",
@@ -12162,7 +11863,7 @@
           "src/main/resources/data/minigames/dimension_type/achievement_end.json"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "AchievementVisitedDimension",
@@ -12185,7 +11886,7 @@
           "src/main/java/net/mcreator/minigames/procedures/AchievementVisitedDimensionProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "RegenerateAchievementDimensions",
@@ -12204,7 +11905,7 @@
           "src/main/java/net/mcreator/minigames/procedures/RegenerateAchievementDimensionsProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "RedirectPortal",
@@ -12218,7 +11919,7 @@
           "src/main/java/net/mcreator/minigames/procedures/RedirectPortalProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "ShowMod1",
@@ -12238,7 +11939,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShowMod1Procedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "ShowMod2",
@@ -12258,7 +11959,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShowMod2Procedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/PVP"
+      "path": "~/Achievement Run/PVP"
     },
     {
       "name": "AchievementSeed",
@@ -12271,7 +11972,7 @@
           "src/main/java/net/mcreator/minigames/mixin/AchievementSeedMixin.java"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "CheckQueueDimensionReset",
@@ -12290,7 +11991,278 @@
           "src/main/java/net/mcreator/minigames/procedures/CheckQueueDimensionResetProcedure.java"
         ]
       },
-      "path": "~/Achievement Run/new/Dimensions"
+      "path": "~/Achievement Run/Dimensions"
+    },
+    {
+      "name": "TeleportAchievement",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "teleport_achievement",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TeleportAchievementProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run"
+    },
+    {
+      "name": "GrantGameCompass",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "grant_game_compass",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GrantGameCompassProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "MinigameGUIAchievementHunt",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_achievement_hunt",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/MinigameGUIAchievementHuntMenu.java",
+          "src/main/java/net/mcreator/minigames/client/gui/MinigameGUIAchievementHuntScreen.java",
+          "src/main/java/net/mcreator/minigames/network/MinigameGUIAchievementHuntButtonMessage.java"
+        ]
+      },
+      "path": "~/Achievement Run/Settings"
+    },
+    {
+      "name": "MinigameGUIAchievementHuntThisGUIIsClosed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "minigame_gui_achievement_hunt_this_gui_is_closed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/MinigameGUIAchievementHuntThisGUIIsClosedProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Settings"
+    },
+    {
+      "name": "AchievementHunterAnimation",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_hunter_animation",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementHunterAnimationProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "CheckHunterDeath",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "check_hunter_death",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CheckHunterDeathProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "AchievementGameEndHunter",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "achievement_game_end_hunter",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AchievementGameEndHunterProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "HeadStart",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "head_start",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HeadStartProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "TablistCrownIcon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "tablist_crown_icon",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TablistCrownIconProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "HuntedCoords",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "hunted_coords",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HuntedCoordsProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "DefaultAchievementRunSettings",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "default_achievement_run_settings",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DefaultAchievementRunSettingsProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Settings"
+    },
+    {
+      "name": "DefaultAchievementHuntSettings",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "default_achievement_hunt_settings",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DefaultAchievementHuntSettingsProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Settings"
     }
   ],
   "variable_elements": [
@@ -12391,28 +12363,10 @@
       "value": "false"
     },
     {
-      "name": "hunterAchievement",
-      "type": "string",
-      "scope": "map",
-      "value": "\"\""
-    },
-    {
       "name": "animateHunter",
       "type": "logic",
       "scope": "map",
       "value": "false"
-    },
-    {
-      "name": "animateHunterState",
-      "type": "number",
-      "scope": "map",
-      "value": "0"
-    },
-    {
-      "name": "displayHunterPlayerAnimation",
-      "type": "number",
-      "scope": "map",
-      "value": "0"
     },
     {
       "name": "overwoldHuntedX",
@@ -12439,18 +12393,6 @@
       "value": "0"
     },
     {
-      "name": "debuffLength",
-      "type": "number",
-      "scope": "map",
-      "value": "0"
-    },
-    {
-      "name": "headStart",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
       "name": "minimap",
       "type": "logic",
       "scope": "map",
@@ -12467,18 +12409,6 @@
       "type": "string",
       "scope": "player_persistent",
       "value": "white"
-    },
-    {
-      "name": "MoveCrownTimer",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
-      "name": "ShowCrownTimer",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
     },
     {
       "name": "CrownHuntInGame",
@@ -12524,12 +12454,6 @@
     },
     {
       "name": "inGracePeriod",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
-      "name": "showRedTimer",
       "type": "logic",
       "scope": "map",
       "value": "false"
@@ -12877,12 +12801,6 @@
       "value": "\"\""
     },
     {
-      "name": "randomHunterCheckboxClicked",
-      "type": "logic",
-      "scope": "player_persistent",
-      "value": "false"
-    },
-    {
       "name": "inCombat",
       "type": "logic",
       "scope": "map",
@@ -13175,6 +13093,18 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
+    },
+    {
+      "name": "hunterAchievementUUID",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "hunterAnimation",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [
@@ -13783,9 +13713,6 @@
       "Blocks.TEST_BLOCK",
       "Blocks.TEST_INSTANCE_BLOCK"
     ],
-    "ITEMS:minecraft:head_armor": [
-      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
-    ],
     "BLOCKS:minecraft:stairs": [
       "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
       "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
@@ -13826,6 +13753,19 @@
     ],
     "BLOCKS:minecraft:overworld_carver_replaceables": [
       "~AchievementEnd@Blocks.STONE#0"
+    ],
+    "BLOCKS:mod:unsafe": [
+      "Blocks.WATER",
+      "Blocks.BUBBLE_COLUMN",
+      "Blocks.LAVA",
+      "Blocks.FIRE",
+      "Blocks.SOUL_FIRE",
+      "Blocks.CAMPFIRE",
+      "Blocks.SOUL_CAMPFIRE",
+      "Blocks.LAVA_CAULDRON"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
     ]
   },
   "tab_element_order": {},
@@ -13858,29 +13798,13 @@
       "gui.minigames.minigame_gui_achievement_run.tooltip_dont_reset_world_on_game_start": "Don\u0027t reset world on game start",
       "gui.minigames.minigame_gui_achievement_run.spawn": "",
       "gui.minigames.start_game.tooltip_achievement_hunt": "One player is hunted while trying to obtain an achievement",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_night_vision": "Night Vision",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_keep_inventory": "Keep Inventory",
       "gui.minigames.minigame_gui_achievement_hunt.spawn": "",
-      "gui.minigames.minigame_gui_achievement_hunt.nightvision": "",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_health_amount": "Health Amount",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_dont_reset_world_on_game_start": "Give hunted a head start",
-      "gui.minigames.minigame_gui_achievement_hunt.button_start_normal": "Start",
-      "gui.minigames.minigame_gui_achievement_hunt.hp": "20",
-      "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Hunt",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_last_winner_takes_15x_damage": "Enable minimap (only with Xaero\u0027s Minimap)",
-      "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
       "gui.minigames.minigame_gui_achievement_hunt.crown": "",
-      "gui.minigames.minigame_gui_achievement_hunt.hunter": "",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_randomize_hunter": "Randomize hunter",
-      "gui.minigames.minigame_gui_achievement_hunt.tooltip_name_of_the_hunter_disabled_if": "Name of the hunter (disabled if randomized)",
-      "gui.minigames.minigame_gui_achievement_hunt.randomhunter": "",
       "gui.minigames.view_achievment_hunter.tooltip_reroll_achievement": "Reroll Achievement",
       "gui.minigames.view_achievment_hunter.tooltip_pvp_enables_after_5_minutes": "PVP enables after 5 minutes",
       "gui.minigames.view_achievment_hunter.button_im_ready": "I\u0027m Ready",
       "gui.minigames.start_game.label_achievement": "Achievement",
       "gui.minigames.start_game.label_run": "Run",
-      "effect.minigames.nerf_hunters": "Nerf Hunters",
-      "gui.minigames.minigame_gui_achievement_hunt.headstart": "",
       "gui.minigames.customize_gui.label_customize_player_name": "Customize your name!",
       "gui.minigames.start_game.label_crown": "Crown",
       "gui.minigames.start_game.label_hunt": "Hunt",
@@ -13910,7 +13834,6 @@
       "gui.minigames.minigame_gui_crown_hunt.grace": "0",
       "gui.minigames.minigame_gui_crown_hunt.tooltip_grace_period_minutes": "Grace period minutes",
       "gui.minigames.minigame_gui_achievement_run.minimap": "",
-      "gui.minigames.minigame_gui_achievement_hunt.minimap": "",
       "entity.minigames.golden_skeleton": "Golden Skeleton",
       "entity.minigames.golden_spider": "King Spider",
       "entity.minigames.golden_zombie": "King Zombie",
@@ -14205,7 +14128,16 @@
       "gui.minigames.display_achievmen.label_empty": "",
       "key.category.minigames.vote": "Voting",
       "gui.minigames.game_timer.label_000000": "00:00:00",
-      "gui.minigames.minigame_gui_achievement_run.pvp": "300"
+      "gui.minigames.minigame_gui_achievement_run.pvp": "300",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_night_vision": "Headstart",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_keep_inventory": "Keep Inventory",
+      "gui.minigames.minigame_gui_achievement_hunt.tooltip_health_amount": "Health Amount",
+      "gui.minigames.minigame_gui_achievement_hunt.button_start_normal": "Start",
+      "gui.minigames.minigame_gui_achievement_hunt.hp": "20",
+      "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Hunt",
+      "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
+      "gui.minigames.minigame_gui_achievement_hunt.pvp": "300",
+      "gui.minigames.minigame_gui_achievement_hunt.hunt": "30"
     }
   },
   "metadata": {
@@ -14260,42 +14192,32 @@
         "name": "Achievement Run",
         "children": [
           {
-            "name": "old",
-            "children": [
-              {
-                "name": "settings",
-                "children": []
-              }
-            ]
+            "name": "Reminder",
+            "children": []
           },
           {
-            "name": "new",
-            "children": [
-              {
-                "name": "Reminder",
-                "children": []
-              },
-              {
-                "name": "Menu",
-                "children": []
-              },
-              {
-                "name": "PVP",
-                "children": []
-              },
-              {
-                "name": "Settings",
-                "children": []
-              },
-              {
-                "name": "Dimensions",
-                "children": []
-              },
-              {
-                "name": "Win",
-                "children": []
-              }
-            ]
+            "name": "Menu",
+            "children": []
+          },
+          {
+            "name": "PVP",
+            "children": []
+          },
+          {
+            "name": "Settings",
+            "children": []
+          },
+          {
+            "name": "Dimensions",
+            "children": []
+          },
+          {
+            "name": "Win",
+            "children": []
+          },
+          {
+            "name": "Hunter Mode",
+            "children": []
           }
         ]
       },

@@ -2,12 +2,15 @@ package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+
+import java.util.ArrayList;
 
 public class RepickAnimateCrownProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
@@ -20,8 +23,14 @@ public class RepickAnimateCrownProcedure {
 				}
 			}
 		}
-		MinigamesModVariables.MapVariables.get(world).MoveCrownTimer = true;
-		MinigamesModVariables.MapVariables.get(world).ShowCrownTimer = true;
+		MinigamesModVariables.MapVariables.get(world).ShowTimer = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.timerSpeed = -1;
+				_vars.markSyncDirty();
+			}
+		}
 	}
 }

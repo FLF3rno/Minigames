@@ -4,7 +4,7 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 
@@ -21,7 +21,7 @@ import net.minecraft.world.Container;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
 
-import net.mcreator.minigames.procedures.AchievementHuntSettingsProcedure;
+import net.mcreator.minigames.procedures.DefaultAchievementHuntSettingsProcedure;
 import net.mcreator.minigames.init.MinigamesModMenus;
 
 import java.util.function.Supplier;
@@ -34,7 +34,7 @@ public class MinigameGUIAchievementHuntMenu extends AbstractContainerMenu implem
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override
 		public Object put(String key, Object value) {
-			if (!this.containsKey(key) && this.size() >= 27)
+			if (!this.containsKey(key) && this.size() >= 16)
 				return null;
 			return super.put(key, value);
 		}
@@ -110,14 +110,14 @@ public class MinigameGUIAchievementHuntMenu extends AbstractContainerMenu implem
 	}
 
 	@SubscribeEvent
-	public static void onPlayerTick(PlayerTickEvent.Post event) {
+	public static void onContainerOpen(PlayerContainerEvent.Open event) {
 		Player entity = event.getEntity();
-		if (entity.containerMenu instanceof MinigameGUIAchievementHuntMenu menu) {
+		if (event.getContainer() instanceof MinigameGUIAchievementHuntMenu menu) {
 			Level world = menu.world;
 			double x = menu.x;
 			double y = menu.y;
 			double z = menu.z;
-			AchievementHuntSettingsProcedure.execute(world, entity);
+			DefaultAchievementHuntSettingsProcedure.execute(world, entity);
 		}
 	}
 }

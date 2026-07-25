@@ -263,7 +263,6 @@ public class MinigamesModVariables {
 		public String currentMapSpleef = "\"\"";
 		public Vec3 spleefMapMiddleX = Vec3.ZERO;
 		public double layerConquestCooldownSpleef = 0;
-		public String activeGlueLayersSpleef = "\"\"";
 		public double passiveSnowballsSpleef = 0.05;
 		public Vec3 dungeonSize = Vec3.ZERO;
 		public double lootRoomsDungeon = 0;
@@ -317,6 +316,7 @@ public class MinigamesModVariables {
 		public boolean achievementDimensionOccupied = false;
 		public String hunterAchievementUUID = "\"\"";
 		public double hunterAnimation = 0;
+		public ArrayList<Object> glueY = new ArrayList<>();
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -357,7 +357,6 @@ public class MinigamesModVariables {
 			currentMapSpleef = nbt.getStringOr("currentMapSpleef", "");
 			spleefMapMiddleX = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("spleefMapMiddleX")).result().orElse(Vec3.ZERO);
 			layerConquestCooldownSpleef = nbt.getDoubleOr("layerConquestCooldownSpleef", 0);
-			activeGlueLayersSpleef = nbt.getStringOr("activeGlueLayersSpleef", "");
 			passiveSnowballsSpleef = nbt.getDoubleOr("passiveSnowballsSpleef", 0);
 			dungeonSize = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("dungeonSize")).result().orElse(Vec3.ZERO);
 			lootRoomsDungeon = nbt.getDoubleOr("lootRoomsDungeon", 0);
@@ -411,6 +410,7 @@ public class MinigamesModVariables {
 			achievementDimensionOccupied = nbt.getBooleanOr("achievementDimensionOccupied", false);
 			hunterAchievementUUID = nbt.getStringOr("hunterAchievementUUID", "");
 			hunterAnimation = nbt.getDoubleOr("hunterAnimation", 0);
+			glueY = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("glueY"), lookupProvider);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -452,7 +452,6 @@ public class MinigamesModVariables {
 			nbt.putString("currentMapSpleef", currentMapSpleef);
 			nbt.put("spleefMapMiddleX", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, spleefMapMiddleX).result().orElseGet(CompoundTag::new));
 			nbt.putDouble("layerConquestCooldownSpleef", layerConquestCooldownSpleef);
-			nbt.putString("activeGlueLayersSpleef", activeGlueLayersSpleef);
 			nbt.putDouble("passiveSnowballsSpleef", passiveSnowballsSpleef);
 			nbt.put("dungeonSize", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, dungeonSize).result().orElseGet(CompoundTag::new));
 			nbt.putDouble("lootRoomsDungeon", lootRoomsDungeon);
@@ -506,6 +505,7 @@ public class MinigamesModVariables {
 			nbt.putBoolean("achievementDimensionOccupied", achievementDimensionOccupied);
 			nbt.putString("hunterAchievementUUID", hunterAchievementUUID);
 			nbt.putDouble("hunterAnimation", hunterAnimation);
+			nbt.put("glueY", NbtArrayLists.saveGlobalMap(glueY));
 			return nbt;
 		}
 

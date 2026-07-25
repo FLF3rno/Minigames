@@ -34,5 +34,9 @@ public class PlayerNumerationProcedure {
 			_vars.team = world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount();
 			_vars.markSyncDirty();
 		}
+		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) == 1) {
+			MinigamesModVariables.MapVariables.get(world).respawningPlayers = 0;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		}
 	}
 }

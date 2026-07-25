@@ -4,6 +4,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
@@ -22,6 +24,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModItems;
@@ -105,9 +108,42 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 	@Override
 	public void onHitBlock(BlockHitResult blockHitResult) {
 		super.onHitBlock(blockHitResult);
-		if (!this.level().isClientSide()) {
+		if (this.level().isClientSide()) return;
+
+		BlockPos hitPos = blockHitResult.getBlockPos();
+		BlockState hitState = this.level().getBlockState(hitPos);
+
+		// Only pull non-air, replaceable blocks aren't interesting
+		if (hitState.isAir() || !hitState.isSolid()) {
 			releaseAndBreak(this.getOwner());
+			return;
 		}
+
+		Entity owner = this.getOwner();
+		if (owner == null) { releaseAndBreak(null); return; }
+
+		// Find the associated hitbox entity
+		GrapplingHitboxEntity hitbox = findHitbox(owner);
+		if (hitbox == null) { releaseAndBreak(owner); return; }
+
+		// Remove the block and spawn a no-gravity FallingBlockEntity in its place
+		this.level().removeBlock(hitPos, false);
+		FallingBlockEntity falling = FallingBlockEntity.fall(
+				(Level) this.level(),
+				hitPos,
+				hitState
+		);
+		falling.setNoGravity(true);
+		falling.setDeltaMovement(Vec3.ZERO);
+		falling.time = 1; // prevent instant drop
+		falling.dropItem = false;
+
+		// Register as pull target
+		hitbox.getEntityData().set(GrapplingHitboxEntity.DATA_target, falling.getStringUUID());
+
+		// Stop projectile in place
+		this.setDeltaMovement(Vec3.ZERO);
+		this.setNoGravity(true);
 	}
 
 	@Override
@@ -115,26 +151,33 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		super.tick();
 		Entity owner = this.getOwner();
 		if (!this.level().isClientSide()) {
-			if (owner != null && this.distanceTo(owner) >= 30.0) {
-				releaseAndBreak(owner);
+			// Break if owner is gone or too far while still in flight
+			if (owner == null) {
+				releaseAndBreak(null);
+				return;
+			}
+			if (this.distanceTo(owner) >= 30.0) {
+				GrapplingHitboxEntity hitbox = findHitbox(owner);
+				if (hitbox == null || hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target).isEmpty()) {
+					// Still in flight and missed — break
+					releaseAndBreak(owner);
+				}
 			}
 		}
 		if (owner != null) {
-			GrapplingHitboxEntity hitbox = this.level().getEntitiesOfClass(GrapplingHitboxEntity.class, this.getBoundingBox().inflate(32)).stream()
-					.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner))).findFirst().orElse(null);
+			GrapplingHitboxEntity hitbox = findHitbox(owner);
 			if (hitbox != null) {
 				if (hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target).isEmpty()) {
+					// No target yet — keep hitbox at projectile position for rope rendering
 					hitbox.setPos(this.getX(), this.getY(), this.getZ());
 					hitbox.setDeltaMovement(0, 0, 0);
 				}
 			}
 		}
-		if (this.isInGround())
-			this.discard();
 	}
 
-	private void releaseAndBreak(Entity owner) {
-		if (released || owner == null || this.level().isClientSide())
+	private void releaseAndBreak(@org.jetbrains.annotations.Nullable Entity owner) {
+		if (released || this.level().isClientSide())
 			return;
 		released = true;
 		if (owner instanceof LivingEntity livingOwner) {
@@ -145,26 +188,26 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 			} else if (off.is(MinigamesModItems.GRAPPLING_HOOK.get())) {
 				off.shrink(1);
 			}
-			this.level().playSound(null, livingOwner.getX(), livingOwner.getY(), livingOwner.getZ(), SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 1.0f, 1.0f);
+			this.level().playSound(null, livingOwner.getX(), livingOwner.getY(), livingOwner.getZ(),
+					SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 1.0f, 1.0f);
 		}
 
-		GrapplingHitboxEntity hitbox = this.level().getEntitiesOfClass(GrapplingHitboxEntity.class, new AABB(this.position(), this.position()).inflate(64 / 2d)).stream()
-				.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner))).findFirst().orElse(null);
-		if (hitbox != null) {
-			String targetId = hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target);
-			if (!targetId.isEmpty()) {
-				Entity target = this.level().getEntity(java.util.UUID.fromString(targetId));
-				if (target != null) {
-					Vec3 toOwner = owner.position().subtract(target.position());
-					int pullTicks = hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_pullTicks);
-					double launchSpeed = Math.min(1.6, 0.3 + (pullTicks * 0.02));
-					target.setDeltaMovement(toOwner.normalize().scale(launchSpeed));
-					target.hurtMarked = true;
-				}
+		if (owner != null) {
+			GrapplingHitboxEntity hitbox = findHitbox(owner);
+			if (hitbox != null) {
+				hitbox.earlyRelease();
 			}
-			hitbox.discard();
 		}
 		this.discard();
+	}
+
+	/** Finds the GrapplingHitboxEntity belonging to the given owner within a reasonable radius. */
+	private GrapplingHitboxEntity findHitbox(Entity owner) {
+		return this.level().getEntitiesOfClass(GrapplingHitboxEntity.class,
+				new AABB(owner.position(), owner.position()).inflate(64))
+				.stream()
+				.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner)))
+				.findFirst().orElse(null);
 	}
 
 	public void onTargetReached() {

@@ -375,6 +375,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -1525,21 +1529,6 @@
       "path": "~/Crown Hunt"
     },
     {
-      "name": "GoldenSkeleton",
-      "type": "livingentity",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "golden_skeleton",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/entity/GoldenSkeletonEntity.java",
-          "src/main/java/net/mcreator/minigames/client/renderer/GoldenSkeletonRenderer.java",
-          "src/main/resources/assets/minigames/items/golden_skeleton_spawn_egg.json"
-        ]
-      },
-      "path": "~/Crown Hunt/golden mobs"
-    },
-    {
       "name": "ApplyGlowing",
       "type": "procedure",
       "compiles": true,
@@ -1569,21 +1558,6 @@
           "src/main/java/net/mcreator/minigames/entity/GoldenSpiderEntity.java",
           "src/main/java/net/mcreator/minigames/client/renderer/GoldenSpiderRenderer.java",
           "src/main/resources/assets/minigames/items/golden_spider_spawn_egg.json"
-        ]
-      },
-      "path": "~/Crown Hunt/golden mobs"
-    },
-    {
-      "name": "GoldenZombie",
-      "type": "livingentity",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "golden_zombie",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/client/renderer/GoldenZombieRenderer.java",
-          "src/main/resources/assets/minigames/items/golden_zombie_spawn_egg.json",
-          "src/main/java/net/mcreator/minigames/entity/GoldenZombieEntity.java"
         ]
       },
       "path": "~/Crown Hunt/golden mobs"
@@ -1805,10 +1779,6 @@
       "registry_name": "destroy_snow_grant_snowball_spleef",
       "metadata": {
         "dependencies": [
-          {
-            "name": "blockstate",
-            "type": "blockstate"
-          },
           {
             "name": "entity",
             "type": "entity"
@@ -2450,21 +2420,6 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/minigames/entity/GrappleEntity.java"
-        ]
-      },
-      "path": "~/Spleef/Snowballs/Items"
-    },
-    {
-      "name": "GrapplingHitbox",
-      "type": "livingentity",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "grappling_hitbox",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/items/grappling_hitbox_spawn_egg.json",
-          "src/main/java/net/mcreator/minigames/entity/GrapplingHitboxEntity.java",
-          "src/main/java/net/mcreator/minigames/client/renderer/GrapplingHitboxRenderer.java"
         ]
       },
       "path": "~/Spleef/Snowballs/Items"
@@ -3158,7 +3113,7 @@
       "name": "GlueDartRightclicked",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "glue_dart_rightclicked",
       "metadata": {
         "dependencies": [
@@ -3181,7 +3136,7 @@
       "name": "GlueFlying",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "glue_flying",
       "metadata": {
         "dependencies": [
@@ -12023,6 +11978,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -12177,25 +12136,6 @@
       "path": "~/Achievement Run/Hunter Mode"
     },
     {
-      "name": "TablistCrownIcon",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "tablist_crown_icon",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/TablistCrownIconProcedure.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
       "name": "HuntedCoords",
       "type": "procedure",
       "compiles": true,
@@ -12263,6 +12203,77 @@
         ]
       },
       "path": "~/Achievement Run/Settings"
+    },
+    {
+      "name": "TablistCrownIconRemove",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "tablist_crown_icon_remove",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TablistCrownIconRemoveProcedure.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "RerollAchievement",
+      "type": "packet",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reroll_achievement",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/RerollAchievementMessage.java"
+        ]
+      },
+      "path": "~/Achievement Run/Menu"
+    },
+    {
+      "name": "BreakSnow",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "break_snow",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BreakSnowProcedure.java"
+        ]
+      },
+      "path": "~/Spleef/Snowballs"
     }
   ],
   "variable_elements": [
@@ -12553,12 +12564,6 @@
       "type": "number",
       "scope": "map",
       "value": "0"
-    },
-    {
-      "name": "activeGlueLayersSpleef",
-      "type": "string",
-      "scope": "map",
-      "value": "\"\""
     },
     {
       "name": "passiveSnowballsSpleef",
@@ -13105,6 +13110,12 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "glueY",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
     }
   ],
   "sound_elements": [
@@ -13552,7 +13563,6 @@
       "Blocks.WOOL#13",
       "Blocks.WOOL#14",
       "Blocks.WOOL#15",
-      "CUSTOM:SpreadingGlue",
       "Blocks.RESIN_BLOCK",
       "Blocks.RESIN_BRICKS",
       "Blocks.CHISELED_RESIN_BRICKS",
@@ -13713,6 +13723,19 @@
       "Blocks.TEST_BLOCK",
       "Blocks.TEST_INSTANCE_BLOCK"
     ],
+    "BLOCKS:mod:unsafe": [
+      "Blocks.WATER",
+      "Blocks.BUBBLE_COLUMN",
+      "Blocks.LAVA",
+      "Blocks.FIRE",
+      "Blocks.SOUL_FIRE",
+      "Blocks.CAMPFIRE",
+      "Blocks.SOUL_CAMPFIRE",
+      "Blocks.LAVA_CAULDRON"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
+    ],
     "BLOCKS:minecraft:stairs": [
       "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
       "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
@@ -13750,22 +13773,6 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
-    ],
-    "BLOCKS:minecraft:overworld_carver_replaceables": [
-      "~AchievementEnd@Blocks.STONE#0"
-    ],
-    "BLOCKS:mod:unsafe": [
-      "Blocks.WATER",
-      "Blocks.BUBBLE_COLUMN",
-      "Blocks.LAVA",
-      "Blocks.FIRE",
-      "Blocks.SOUL_FIRE",
-      "Blocks.CAMPFIRE",
-      "Blocks.SOUL_CAMPFIRE",
-      "Blocks.LAVA_CAULDRON"
-    ],
-    "ITEMS:minecraft:head_armor": [
-      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
     ]
   },
   "tab_element_order": {},
@@ -13834,9 +13841,7 @@
       "gui.minigames.minigame_gui_crown_hunt.grace": "0",
       "gui.minigames.minigame_gui_crown_hunt.tooltip_grace_period_minutes": "Grace period minutes",
       "gui.minigames.minigame_gui_achievement_run.minimap": "",
-      "entity.minigames.golden_skeleton": "Golden Skeleton",
       "entity.minigames.golden_spider": "King Spider",
-      "entity.minigames.golden_zombie": "King Zombie",
       "item.minigames.spleef_shovel": "Spleef Shovel",
       "item.minigames.ice_dart.description_1": "    §2Fire a dart that turns a block and its layer into very slippery ice for all opponents",
       "item.minigames.ice_dart.description_0": "On §6right click:",
@@ -13860,7 +13865,6 @@
       "item.minigames.grappling_hook.description_0": "On §6right click:",
       "item.minigames.grappling_hook.description_3": "    §2Release the hook, launching the player in the direction they were being pulled",
       "item.minigames.grappling_hook.description_2": "On §6right click §2while a player is hooked:",
-      "entity.minigames.grappling_hitbox": "Grappling Hitbox",
       "gui.minigames.start_game.tooltip_change_player_name": "Change player name",
       "item.minigames.replay_spleef.description_0": "Replay spleef with the same settings",
       "item.minigames.replay_spleef": "Play Again",
@@ -14635,5 +14639,5 @@
     "credits": "FL_F3rno",
     "modElementsPackage": "net.mcreator.minigames"
   },
-  "mcreatorVersion": 202600229418
+  "mcreatorVersion": 202600230420
 }

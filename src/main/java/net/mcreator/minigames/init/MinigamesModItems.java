@@ -246,8 +246,8 @@ public class MinigamesModItems {
 
 	@SubscribeEvent
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerItem(Capabilities.Item.ITEM, (stack, access) -> new DungeonCompassInventoryCapability(access), DUNGEON_COMPASS.get());
 		event.registerItem(Capabilities.Item.ITEM, (stack, access) -> new GameCompassInventoryCapability(access), GAME_COMPASS.get());
+		event.registerItem(Capabilities.Item.ITEM, (stack, access) -> new DungeonCompassInventoryCapability(access), DUNGEON_COMPASS.get());
 	}
 
 	@EventBusSubscriber(Dist.CLIENT)

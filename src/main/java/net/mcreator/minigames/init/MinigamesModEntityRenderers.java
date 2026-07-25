@@ -16,13 +16,10 @@ import net.mcreator.minigames.client.renderer.*;
 public class MinigamesModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerEntityRenderer(MinigamesModEntities.GOLDEN_SKELETON.get(), GoldenSkeletonRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.GOLDEN_SPIDER.get(), GoldenSpiderRenderer::new);
-		event.registerEntityRenderer(MinigamesModEntities.GOLDEN_ZOMBIE.get(), GoldenZombieRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.ICE_DART_PROJECTILE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.SNOWBOMB_PROJECTILE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.GRAPPLE.get(), ThrownItemRenderer::new);
-		event.registerEntityRenderer(MinigamesModEntities.GRAPPLING_HITBOX.get(), GrapplingHitboxRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_HITBOX.get(), MagmaHitboxRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.MAGMA_DART_PROJECTILE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.GLUE_PROJECTILE.get(), GlueProjectileRenderer::new);

@@ -13,6 +13,8 @@ import net.minecraft.world.phys.Vec3;
 import net.mcreator.minigames.init.MinigamesModBlocks;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
+import java.util.List;
+
 public class GlueHitsBlockProcedure {
 	private static final int GLUE_RADIUS = 20;
 	private static final int GLUE_DURATION_TICKS = 200;
@@ -28,12 +30,12 @@ public class GlueHitsBlockProcedure {
 
 		playGlueSound(world, x, y, z, 2.0F);
 		MinigamesModVariables.MapVariables mapVariables = MinigamesModVariables.MapVariables.get(world);
-		ReapplyGlueLayerProcedure.setGlueLayerTicks(world, glueY, GLUE_DURATION_TICKS);
+		ConquerTopLayerWorldProcedure.registerGlueLayer(glueY, GLUE_DURATION_TICKS);
 		mapVariables.markSyncDirty();
 		applyGlueLayer(world, glueY, minX, maxX, minZ, maxZ);
 	}
 
-	private static void applyGlueLayer(LevelAccessor world, int y, int minX, int maxX, int minZ, int maxZ) {
+	public static void applyGlueLayer(LevelAccessor world, int y, int minX, int maxX, int minZ, int maxZ) {
 		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 		for (int targetX = minX; targetX <= maxX; targetX++) {
 			for (int targetZ = minZ; targetZ <= maxZ; targetZ++) {
@@ -47,6 +49,11 @@ public class GlueHitsBlockProcedure {
 
 	public static void clearGlueLayer(LevelAccessor world, int y, int minX, int maxX, int minZ, int maxZ) {
 		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+
+		MinigamesModVariables.MapVariables mapVars = MinigamesModVariables.MapVariables.get(world);
+		mapVars.glueY.removeIf(obj -> obj instanceof Number num && num.intValue() == y);
+		mapVars.markSyncDirty();
+
 		for (int targetX = minX; targetX <= maxX; targetX++) {
 			for (int targetZ = minZ; targetZ <= maxZ; targetZ++) {
 				mutablePos.set(targetX, y, targetZ);
@@ -57,7 +64,7 @@ public class GlueHitsBlockProcedure {
 		}
 	}
 
-	private static void playGlueSound(LevelAccessor world, double x, double y, double z, float pitch) {
+	public static void playGlueSound(LevelAccessor world, double x, double y, double z, float pitch) {
 		if (world instanceof ServerLevel level) {
 			level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(),
@@ -79,6 +86,8 @@ public class GlueHitsBlockProcedure {
 				closestY = candidateY;
 			}
 		}
+		MinigamesModVariables.MapVariables.get(world).glueY.add((double) closestY);
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		return closestY;
 	}
 

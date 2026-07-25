@@ -12,12 +12,13 @@ import net.minecraft.commands.CommandSource;
 import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
-	public class StopSpleefProcedure {
+import java.util.ArrayList;
+
+public class StopSpleefProcedure {
 	public static void execute(LevelAccessor world) {
 		String firstUuid = MinigamesModVariables.firstSpleef != null ? MinigamesModVariables.firstSpleef.getStringUUID() : "";
 		String secondUuid = MinigamesModVariables.secondSpleef != null ? MinigamesModVariables.secondSpleef.getStringUUID() : "";
 		String thirdUuid = MinigamesModVariables.thirdSpleef != null ? MinigamesModVariables.thirdSpleef.getStringUUID() : "";
-		MinigamesModVariables.MapVariables.get(world).playingSpleef = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
@@ -45,6 +46,10 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 					"/effect give @a minecraft:weakness infinite 100 true");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/effect give @a minecraft:resistance infinite 49 true");
+		if (world instanceof ServerLevel _level)
+
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/weather clear");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
@@ -71,12 +76,10 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 		});
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "clear @a");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"give @a minigames:game_compass");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"give @a minigames:replay_spleef");
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			GrantGameCompassProcedure.execute(world, entityiterator);
+		}
+		MinigamesModVariables.MapVariables.get(world).playingSpleef = false;
 		MinigamesModVariables.MapVariables.get(world).sky = "normal";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}

@@ -17,8 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.core.SectionPos;
 
-import net.mcreator.minigames.procedures.RerollAchievementPressedProcedure;
-import net.mcreator.minigames.procedures.ReadyUpProcedure;
 import net.mcreator.minigames.MinigamesMod;
 
 @EventBusSubscriber
@@ -47,7 +45,6 @@ public record DisplayAchievmenButtonMessage(int buttonID, int x, int y, int z) i
 
 	public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
 		Level world = entity.level();
-		// security measure to prevent arbitrary chunk generation
 		if (!world.getChunkSource().hasChunk(SectionPos.blockToSectionCoord(x), SectionPos.blockToSectionCoord(z)))
 			return;
 		if (buttonID == 0) {

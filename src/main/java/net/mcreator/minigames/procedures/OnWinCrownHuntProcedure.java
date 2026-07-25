@@ -68,7 +68,7 @@ public class OnWinCrownHuntProcedure {
 				MinigamesModVariables.MapVariables.get(world).WinnerList.add((entityiterator.getStringUUID()));
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
-			GrantGameCompassProcedure.execute(entityiterator);
+			GrantGameCompassProcedure.execute(world, entityiterator);
 		}
 		MinigamesMod.queueServerWork(160, () -> {
 			MinigamesModVariables.MapVariables.get(world).showWinscreen = false;

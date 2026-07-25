@@ -3,12 +3,10 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
-import java.util.UUID;
 import java.util.ArrayList;
 
 public class StartVoteProcedure {
@@ -18,7 +16,7 @@ public class StartVoteProcedure {
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown <= 0) {
 			MinigamesModVariables.VotingEntity = voting_player;
 			MinigamesModVariables.MapVariables.get(world).VotingPlayerUUID = voting_player.getStringUUID();
-			MinigamesModVariables.MapVariables.get(world).VotingPlayerName = (world instanceof ServerLevel _level1 ? getEntityFromUUID(_level1, MinigamesModVariables.MapVariables.get(world).VotingPlayerUUID) : null).getDisplayName().getString();
+			MinigamesModVariables.MapVariables.get(world).VotingPlayerName = voting_player.getDisplayName().getString();
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if ((type).equals("achievement run")) {
 				MinigamesModVariables.MapVariables.get(world).voteType = 0;
@@ -80,14 +78,6 @@ public class StartVoteProcedure {
 		} else {
 			if (entity instanceof ServerPlayer _player)
 				_player.sendSystemMessage(Component.literal(("\u00A7cYou cannot call another vote for " + new java.text.DecimalFormat("##").format(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown / 20) + "s")), true);
-		}
-	}
-
-	private static Entity getEntityFromUUID(ServerLevel level, String uuid) {
-		try {
-			return level.getEntity(UUID.fromString(uuid));
-		} catch (IllegalArgumentException e) {
-			return null;
 		}
 	}
 }

@@ -253,7 +253,7 @@ private boolean handleColorPicker(double mouseX, double mouseY) {
     guiGraphics.blit(
         net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
         COLOR_SELECTOR,
-        hueX - 4,
+        hueX + 3,
         hueSelectorY - 4,
         0,0,
         8,8,

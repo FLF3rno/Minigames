@@ -16,43 +16,41 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 public class TeleportAchievementProcedure {
     private static final TagKey<Block> UNSAFE_TAG = TagKey.create(Registries.BLOCK, Identifier.parse("minigames:unsafe"));
 
     public static void execute(LevelAccessor world) {
-        if (!(world instanceof ServerLevel currentLevel))
-            return;
-
+        if (!(world instanceof ServerLevel currentLevel)) return;
         ServerLevel overworld = currentLevel.getServer().getLevel(Level.OVERWORLD);
-        if (overworld == null)
-            return;
+        if (overworld == null) return;
 
         BlockPos targetPos = null;
         RandomSource random = overworld.getRandom();
 
         for (int i = 0; i < 100; i++) {
-            int x = Mth.nextInt(random, 1000, 10000000);
-            int z = Mth.nextInt(random, 1000, 10000000);
+            int x = Mth.nextInt(random, -10000000, 10000000);
+            int z = Mth.nextInt(random, -10000000, 10000000);
+            overworld.getChunkSource().getChunk(x >> 4, z >> 4, ChunkStatus.FULL, true);
 
             int y = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
-
+            
             BlockPos groundPos = new BlockPos(x, y - 1, z);
             BlockState groundState = overworld.getBlockState(groundPos);
 
-            if (!groundState.isAir() 
-                && !groundState.is(Blocks.LAVA) 
-                && !groundState.is(Blocks.WATER) 
-                && !groundState.is(UNSAFE_TAG)) {
-                
+            if (!groundState.isAir() && !groundState.is(Blocks.LAVA) && !groundState.is(Blocks.WATER) && !groundState.is(UNSAFE_TAG)) {
                 targetPos = new BlockPos(x, y, z);
                 break;
             }
         }
 
         if (targetPos == null) {
-            targetPos = new BlockPos(1000, overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, 1000, 1000), 1000);
+            int fallbackX = 1000;
+            int fallbackZ = 1000;
+            overworld.getChunkSource().getChunk(fallbackX >> 4, fallbackZ >> 4, ChunkStatus.FULL, true);
+            int fallbackY = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, fallbackX, fallbackZ);
+            targetPos = new BlockPos(fallbackX, fallbackY, fallbackZ);
         }
 
         double tpX = targetPos.getX() + 0.5;
@@ -60,11 +58,7 @@ public class TeleportAchievementProcedure {
         double tpZ = targetPos.getZ() + 0.5;
 
         for (ServerPlayer player : overworld.getServer().getPlayerList().getPlayers()) {
-            player.teleportTo(
-                    tpX,
-                tpY,
-                tpZ
-            );
+            player.teleportTo(tpX, tpY, tpZ);
         }
 
         if (overworld.getLevelData() instanceof WritableLevelData levelData) {

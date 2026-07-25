@@ -5,6 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -15,14 +16,14 @@ import javax.annotation.Nullable;
 public class GiveGameCompassProcedure {
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		execute(event, event.getEntity());
+		execute(event, event.getEntity().level(), event.getEntity());
 	}
 
-	public static void execute(Entity entity) {
-		execute(null, entity);
+	public static void execute(LevelAccessor world, Entity entity) {
+		execute(null, world, entity);
 	}
 
-	private static void execute(@Nullable Event event, Entity entity) {
+	private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).joinFirstTime == false) {
@@ -31,7 +32,7 @@ public class GiveGameCompassProcedure {
 				_vars.joinFirstTime = true;
 				_vars.markSyncDirty();
 			}
-			GrantGameCompassProcedure.execute(entity);
+			GrantGameCompassProcedure.execute(world, entity);
 		}
 	}
 }

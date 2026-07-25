@@ -5,7 +5,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.spider.Spider;
-import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -41,25 +40,6 @@ public class AddCrownToKillerProcedure {
 			if (world instanceof ServerLevel _level) {
 				_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
 			}
-		} else if (sourceentity instanceof Skeleton) {
-			if (!sourceentity.level().isClientSide())
-				sourceentity.discard();
-			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = MinigamesModEntities.GOLDEN_SKELETON.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
-				if (entityToSpawn != null) {
-					entityToSpawn.setDeltaMovement(0, 0, 0);
-				}
-			}
-			if (world instanceof Level _level) {
-				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
-				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
-				}
-			}
-			if (world instanceof ServerLevel _level) {
-				_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
-			}
 		} else if (sourceentity instanceof Spider) {
 			if (!sourceentity.level().isClientSide())
 				sourceentity.discard();
@@ -80,14 +60,6 @@ public class AddCrownToKillerProcedure {
 				_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
 			}
 		} else if (sourceentity instanceof LivingEntity) {
-			if (!sourceentity.level().isClientSide())
-				sourceentity.discard();
-			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = MinigamesModEntities.GOLDEN_ZOMBIE.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
-				if (entityToSpawn != null) {
-					entityToSpawn.setDeltaMovement(0, 0, 0);
-				}
-			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
 					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);

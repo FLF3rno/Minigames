@@ -55,7 +55,7 @@ public class AchievementGameEndProcedure {
 			MinigamesModVariables.MapVariables.get(world).minimap = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				GrantGameCompassProcedure.execute(entityiterator);
+				GrantGameCompassProcedure.execute(world, entityiterator);
 			}
 		});
 		for (Entity entityiterator : new ArrayList<>(world.players())) {

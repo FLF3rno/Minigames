@@ -14,10 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.resources.Identifier;
-import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -29,14 +26,14 @@ import javax.annotation.Nullable;
 public class DestroySnowGrantSnowballSpleefProcedure {
 	@SubscribeEvent
 	public static void onBlockBreak(BreakBlockEvent event) {
-		execute(event, event.getLevel(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), event.getState(), event.getPlayer());
+		execute(event, event.getLevel(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), event.getPlayer());
 	}
 
-	public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate, Entity entity) {
-		execute(null, world, x, y, z, blockstate, entity);
+	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+		execute(null, world, x, y, z, entity);
 	}
 
-	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, BlockState blockstate, Entity entity) {
+	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
 		double layer = 0;
@@ -49,86 +46,48 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 			targetX = x;
 			targetZ = z;
 			targetY = y;
-			if (blockstate.is(BlockTags.create(Identifier.parse("minigames:spleefables")))) {
-				if (event instanceof ICancellableEvent _cancellable) {
-					_cancellable.setCanceled(true);
+			if (event instanceof ICancellableEvent _cancellable) {
+				_cancellable.setCanceled(true);
+			}
+			if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
+				rng = Mth.nextInt(RandomSource.create(), 1, 4);
+				if (rng == 1) {
+					targetX = targetX + 1;
+				} else if (rng == 2) {
+					targetX = targetX - 1;
+				} else if (rng == 3) {
+					targetZ = targetZ + 1;
+				} else if (rng == 4) {
+					targetZ = targetZ - 1;
 				}
-				if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.HYPNOTIZED)) {
-					rng = Mth.nextInt(RandomSource.create(), 1, 4);
-					if (rng == 1) {
-						targetX = targetX + 1;
-					} else if (rng == 2) {
-						targetX = targetX - 1;
-					} else if (rng == 3) {
-						targetZ = targetZ + 1;
-					} else if (rng == 4) {
-						targetZ = targetZ - 1;
-					}
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
+			}
+			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SYMMETRICAL_SHOVEL.get()) {
+				if (world instanceof ServerLevel _level) {
+					(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
+					});
 				}
-				if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SYMMETRICAL_SHOVEL.get()) {
-					if (world instanceof ServerLevel _level) {
-						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
-						});
-					}
-					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, targetY, targetZ))).getBlock())) {
-						{
-							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 1.25;
-							_vars.markSyncDirty();
-						}
-					}
-					SpleefPowerupProcedure.execute(world, entity);
-					targetY = 100;
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
-					layer = 0;
-					for (int index1968 = 0; index1968 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index1968++) {
-						layer = layer + 1;
-						targetY = 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef;
-						world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-						BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
-					}
-				} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SNOW_SHOVEL.get()) {
-					if (world instanceof ServerLevel _level) {
-						(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
-						});
-					}
-					{
-						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-						_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 3.75;
-						_vars.markSyncDirty();
-					}
-					SpleefPowerupProcedure.execute(world, entity);
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
-					world.setBlock(BlockPos.containing(targetX + 1, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX + 1, targetX, targetX, blockstate, true, true);
-					world.setBlock(BlockPos.containing(targetX - 1, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX - 1, targetX, targetX, blockstate, true, true);
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ + 1), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetZ + 1, blockstate, true, true);
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ - 1), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetZ - 1, blockstate, true, true);
-					targetY = y + 1;
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetZ, blockstate, true, true);
-					targetY = y - 1;
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetZ, blockstate, true, true);
-				} else {
-					if (!(Blocks.AIR == (world.getBlockState(BlockPos.containing(targetX, targetY, targetZ))).getBlock())) {
-						{
-							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-							_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.75;
-							_vars.markSyncDirty();
-						}
-					}
-					SpleefPowerupProcedure.execute(world, entity);
-					world.setBlock(BlockPos.containing(targetX, targetY, targetZ), Blocks.AIR.defaultBlockState(), 3);
-					BlockBreakSimulationProcedure.execute(world, targetX, targetX, targetX, blockstate, true, true);
+				targetY = 100;
+				BreakSnowProcedure.execute(world, targetX, targetY, targetZ, entity);
+				layer = 0;
+				for (int index477 = 0; index477 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index477++) {
+					layer = layer + 1;
+					targetY = 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef;
+					BreakSnowProcedure.execute(world, targetX, targetY, targetZ, entity);
 				}
+			} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SNOW_SHOVEL.get()) {
+				if (world instanceof ServerLevel _level) {
+					(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
+					});
+				}
+				BreakSnowProcedure.execute(world, targetX, targetY, targetZ, entity);
+				BreakSnowProcedure.execute(world, targetX + 1, targetY, targetZ, entity);
+				BreakSnowProcedure.execute(world, targetX - 1, targetY, targetZ, entity);
+				BreakSnowProcedure.execute(world, targetX, targetY, targetZ + 1, entity);
+				BreakSnowProcedure.execute(world, targetX, targetY, targetZ - 1, entity);
+				BreakSnowProcedure.execute(world, targetX, targetY + 1, targetZ, entity);
+				BreakSnowProcedure.execute(world, targetX, targetY - 1, targetZ, entity);
+			} else {
+				BreakSnowProcedure.execute(world, targetX, targetY, targetZ, entity);
 			}
 		}
 	}

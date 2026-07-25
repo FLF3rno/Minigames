@@ -23,7 +23,10 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 import javax.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @EventBusSubscriber
 public class ConquerTopLayerWorldProcedure {
@@ -37,6 +40,15 @@ public class ConquerTopLayerWorldProcedure {
 	private static final int CLEAR_MIN = -20;
 	private static final int CLEAR_MAX = 20;
 	private static final int BASE_Y = 100;
+
+	private static final Map<Integer, Integer> activeGlueLayers = new HashMap<>();
+
+	public static synchronized void registerGlueLayer(int y, int durationTicks) {
+		activeGlueLayers.put(y, durationTicks);
+	}
+	public static synchronized boolean isGlueLayerActive(int y) {
+		return activeGlueLayers.containsKey(y);
+	}
 
 	@SubscribeEvent
 	public static void onWorldTick(LevelTickEvent.Post event) {
@@ -54,6 +66,8 @@ public class ConquerTopLayerWorldProcedure {
 		if (!level.dimension().equals(SPLEEF_DIMENSION)) {
 			return;
 		}
+
+		tickGlueLayers(level);
 
 		MinigamesModVariables.MapVariables mapVariables = MinigamesModVariables.MapVariables.get(level);
 		if (!mapVariables.playingSpleef || mapVariables.layersRemainingSpleef <= 1) {
@@ -121,6 +135,27 @@ public class ConquerTopLayerWorldProcedure {
 			mapVariables.layerConquestCooldownSpleef = RESET_COOLDOWN_TICKS;
 			mapVariables.layersRemainingSpleef = Math.max(1, mapVariables.layersRemainingSpleef - 1);
 			mapVariables.markSyncDirty();
+		}
+	}
+
+	private static synchronized void tickGlueLayers(ServerLevel level) {
+		if (activeGlueLayers.isEmpty()) return;
+		Vec3 arenaCenter = MinigamesModVariables.MapVariables.get(level).spleefMapMiddleX;
+		int minX = (int) arenaCenter.x() + CLEAR_MIN;
+		int maxX = (int) arenaCenter.x() + CLEAR_MAX;
+		int minZ = (int) arenaCenter.z() + CLEAR_MIN;
+		int maxZ = (int) arenaCenter.z() + CLEAR_MAX;
+
+		Iterator<Map.Entry<Integer, Integer>> it = activeGlueLayers.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Integer> entry = it.next();
+			int ticksLeft = entry.getValue() - 1;
+			if (ticksLeft <= 0) {
+				it.remove();
+				GlueHitsBlockProcedure.clearGlueLayer(level, entry.getKey(), minX, maxX, minZ, maxZ);
+			} else {
+				entry.setValue(ticksLeft);
+			}
 		}
 	}
 

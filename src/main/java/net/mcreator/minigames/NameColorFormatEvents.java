@@ -35,7 +35,11 @@ public class NameColorFormatEvents {
 			return null;
 		}
 
-		return Component.literal(player.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor));
+		Component baseName = Component.literal(player.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor));
+		if (player.getTeam() != null) {
+			return player.getTeam().getFormattedName(baseName);
+		}
+		return baseName;
 	}
 }
 

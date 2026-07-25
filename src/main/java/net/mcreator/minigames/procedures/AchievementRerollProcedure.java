@@ -1,6 +1,7 @@
 package net.mcreator.minigames.procedures;
 
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
@@ -13,6 +14,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.client.Minecraft;
 
+import net.mcreator.minigames.network.RerollAchievementMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 import java.util.ArrayList;
@@ -38,7 +40,8 @@ public class AchievementRerollProcedure {
 			}
 		}
 		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) == rerollCount) {
-			AchievementInitiateRerollProcedure.execute(world, x, y, z);
+			if (world.isClientSide())
+				ClientPacketDistributor.sendToServer(new RerollAchievementMessage(""));
 		}
 	}
 }

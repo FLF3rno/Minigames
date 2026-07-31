@@ -46,10 +46,10 @@ public class TablistCrownIconRemoveProcedure {
 					PlayerTeam crownedTeam =
         				entity.level().getScoreboard().getPlayerTeam("crowned");
 
-					if (crownedTeam != null
-        				&& entity.level().getScoreboard().getPlayersTeam(identifier) == crownedTeam)
+					if (crownedTeam != null && entity.level().getScoreboard().getPlayersTeam(identifier) == crownedTeam)
 					{
     					entity.level().getScoreboard().removePlayerFromTeam(identifier, crownedTeam);
+						UpdateTablistProcedure.execute(entity);
 					}
 				}
 			}

@@ -1,11 +1,17 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.scores.Team;
+import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
@@ -24,21 +30,41 @@ public class StartDungeonProcedure {
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		if (world instanceof Level _level)
+			_level.getScoreboard().addPlayerTeam("dungeon_players");
+		if (world instanceof Level _level)
+			_level.getScoreboard().addPlayerTeam("dungeon_mobs");
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			if (entityiterator instanceof Player) {
-				{
-					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-					_vars.showOnlyHearts = true;
-					_vars.playerInInventory = true;
-					_vars.canDash = true;
-					_vars.playerSlots = 3;
-					_vars.backpackSlots = 3;
-					_vars.maxDashCooldown = 60;
-					_vars.dashLength = 1;
-					_vars.PassiveHealCooldown = 80;
-					_vars.PassiveHealAmount = 1;
-					_vars.markSyncDirty();
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.showOnlyHearts = true;
+				_vars.playerInInventory = true;
+				_vars.canDash = true;
+				_vars.playerSlots = 3;
+				_vars.backpackSlots = 3;
+				_vars.maxDashCooldown = 60;
+				_vars.dashLength = 1;
+				_vars.PassiveHealCooldown = 80;
+				_vars.PassiveHealAmount = 1;
+				_vars.markSyncDirty();
+			}
+			{
+				Entity _entityTeam = entityiterator;
+				PlayerTeam _pt = _entityTeam.level().getScoreboard().getPlayerTeam("dungeon_players");
+				if (_pt != null) {
+					if (_entityTeam instanceof Player _player)
+						_entityTeam.level().getScoreboard().addPlayerToTeam(_player.getGameProfile().name(), _pt);
+					else
+						_entityTeam.level().getScoreboard().addPlayerToTeam(_entityTeam.getStringUUID(), _pt);
 				}
+			}
+			if (entityiterator instanceof ServerPlayer _player)
+				_player.setGameMode(GameType.ADVENTURE);
+		}
+		if (world instanceof Level _level) {
+			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("dungeon_mobs");
+			if (_pt != null) {
+				_pt.setNameTagVisibility(Team.Visibility.NEVER);
 			}
 		}
 		if (world instanceof ServerLevel _level)
@@ -49,40 +75,22 @@ public class StartDungeonProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"execute in minigames:dungeon_dimension run forceload add 10 10 -10 -10");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/team add dungeon_players");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/team join dungeon_players @a");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "team add dungeon_mobs");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"team modify dungeon_mobs nametagVisibility never");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/gamerule fallDamage false");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/gamerule naturalRegeneration false");
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.FALL_DAMAGE, false, world.getServer());
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, false, world.getServer());
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "gamemode @a adventure");
 		if (world instanceof ServerLevel _origLevel) {
-			LevelAccessor _switchworld13 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-			if (_switchworld13 != null) {
-				worldSwitch13(world, x, y, z);
+			LevelAccessor _switchworld12 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+			if (_switchworld12 != null) {
+				worldSwitch12(world, x, y, z);
 			}
 		}
 	}
 
-	private static void worldSwitch13(LevelAccessor world, double x, double y, double z) {
+	private static void worldSwitch12(LevelAccessor world, double x, double y, double z) {
 		MinigamesModVariables.MapVariables.get(world).dungeonRoomSize = new Vec3(29, 20, 29);
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		SpawnGridProcedure.execute(world, x, y, z, 1, 13, 1, 9, 5, 5, 1);

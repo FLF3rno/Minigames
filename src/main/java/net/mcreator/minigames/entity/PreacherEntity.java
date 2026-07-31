@@ -2,7 +2,6 @@ package net.mcreator.minigames.entity;
 
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.monster.Monster;
@@ -15,6 +14,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -26,13 +27,13 @@ import net.minecraft.core.BlockPos;
 import net.mcreator.minigames.procedures.PreacherTickProcedure;
 import net.mcreator.minigames.RandomLookAtPlayerGoal;
 import net.mcreator.minigames.init.MinigamesModAttributes;
-import net.mcreator.minigames.client.model.animations.preacherAnimation;
 
 public class PreacherEntity extends Monster {
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(PreacherEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(PreacherEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_ID = SynchedEntityData.defineId(PreacherEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_cooldown = SynchedEntityData.defineId(PreacherEntity.class, EntityDataSerializers.INT);
+
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState1 = new AnimationState();
 
@@ -46,30 +47,29 @@ public class PreacherEntity extends Monster {
 
 	@Override
 	public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
+		super.onSyncedDataUpdated(data);
 		if (ANIM.equals(data)) {
-			switch (this.entityData.get(ANIM)) {
-				case -1 :
-					this.animationState0.stop();
-					break;
-				case -2 :
+			int animId = this.entityData.get(ANIM);
+			switch (animId) {
+				case 0 -> {
+					this.animationState0.startIfStopped(this.tickCount);
 					this.animationState1.stop();
-					break;
-				case 0 :
-					this.animationState0.start(this.tickCount);
-					break;
-				case 1 :
-					this.animationState1.start(this.tickCount);
-					break;
+				}
+				case 1 -> {
+					this.animationState1.startIfStopped(this.tickCount);
+					this.animationState0.stop();
+				}
+				case -1 -> this.animationState0.stop();
+				case -2 -> this.animationState1.stop();
 			}
 		}
-		super.onSyncedDataUpdated(data);
 	}
 
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(TEXTURE, "preacher");
-		builder.define(ANIM, 0);
+		builder.define(ANIM, -1);
 		builder.define(DATA_ID, 0);
 		builder.define(DATA_cooldown, 0);
 	}
@@ -110,7 +110,7 @@ public class PreacherEntity extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput valueOutput) {
+	public void addAdditionalSaveData(ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putInt("DataID", this.entityData.get(DATA_ID));
@@ -118,7 +118,7 @@ public class PreacherEntity extends Monster {
 	}
 
 	@Override
-	public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput valueInput) {
+	public void readAdditionalSaveData(ValueInput valueInput) {
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "preacher"));
 		this.entityData.set(DATA_ID, valueInput.getIntOr("DataID", 0));
@@ -126,34 +126,9 @@ public class PreacherEntity extends Monster {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-		if (this.level().isClientSide()) {
-			if (this.animationState0.isStarted()) {
-				float elapsedSeconds = this.animationState0.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= preacherAnimation.read.lengthInSeconds()) {
-					if (!preacherAnimation.read.looping())
-						this.animationState0.stop();
-					else
-						this.animationState0.start(this.tickCount);
-				}
-			}
-			if (this.animationState1.isStarted()) {
-				float elapsedSeconds = this.animationState1.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= preacherAnimation.attack.lengthInSeconds()) {
-					if (!preacherAnimation.attack.looping())
-						this.animationState1.stop();
-					else
-						this.animationState1.start(this.tickCount);
-				}
-			}
-		}
-	}
-
-	@Override
 	public void baseTick() {
 		super.baseTick();
-		PreacherTickProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		PreacherTickProcedure.execute(this);
 	}
 
 	@Override

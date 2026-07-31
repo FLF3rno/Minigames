@@ -13,7 +13,7 @@ public class StartVoteProcedure {
 	public static void execute(LevelAccessor world, Entity entity, Entity voting_player, String type) {
 		if (entity == null || voting_player == null || type == null)
 			return;
-		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown <= 0) {
+		if (voting_player.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown <= 0) {
 			MinigamesModVariables.VotingEntity = voting_player;
 			MinigamesModVariables.MapVariables.get(world).VotingPlayerUUID = voting_player.getStringUUID();
 			MinigamesModVariables.MapVariables.get(world).VotingPlayerName = voting_player.getDisplayName().getString();
@@ -68,7 +68,7 @@ public class StartVoteProcedure {
 				}
 			}
 			{
-				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				MinigamesModVariables.PlayerVariables _vars = voting_player.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.votedYes = true;
 				_vars.voted = true;
 				_vars.markSyncDirty();
@@ -76,7 +76,7 @@ public class StartVoteProcedure {
 			MinigamesModVariables.MapVariables.get(world).ActiveVote = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else {
-			if (entity instanceof ServerPlayer _player)
+			if (voting_player instanceof ServerPlayer _player)
 				_player.sendSystemMessage(Component.literal(("\u00A7cYou cannot call another vote for " + new java.text.DecimalFormat("##").format(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).voteCooldown / 20) + "s")), true);
 		}
 	}

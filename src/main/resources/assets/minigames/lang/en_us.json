@@ -362,5 +362,6 @@
   "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Hunt",
   "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
   "gui.minigames.minigame_gui_achievement_hunt.pvp": "300",
-  "gui.minigames.minigame_gui_achievement_hunt.hunt": "30"
+  "gui.minigames.minigame_gui_achievement_hunt.hunt": "30",
+  "gui.minigames.force_end": "Force Stop Minigame"
 }

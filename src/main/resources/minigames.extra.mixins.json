@@ -9,12 +9,14 @@
     "LivingEntityJumpGravityMixin",
     "PhantomCollisionMixin",
     "RelicInventoryMixin",
-    "LivingEntityTargetMixin"
+    "LivingEntityTargetMixin",
+    "ChunkGeneratorStructureStateMixin"
   ],
   "client": [
     "GuiAccessor",
     "EntityTeamColorMixin",
-    "PlayerNameColorMixin"
+    "PlayerNameColorMixin",
+    "DebugEntryPositionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

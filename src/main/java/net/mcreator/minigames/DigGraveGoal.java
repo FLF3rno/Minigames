@@ -2,6 +2,7 @@ package net.mcreator.minigames;
 
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.EnumSet;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -18,6 +19,7 @@ public class DigGraveGoal extends Goal {
 	public DigGraveGoal(GravediggerEntity mob, int searchRadius) {
 		this.mob = mob;
 		this.searchRadius = searchRadius;
+		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class DigGraveGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return false;
+		return this.mob.isDigging();
 	}
 
 	@Override
@@ -53,14 +55,21 @@ public class DigGraveGoal extends Goal {
 
 	private Optional<BlockPos> findNearestCoarseDirt() {
 		BlockPos origin = this.mob.blockPosition();
-		return BlockPos.betweenClosedStream(origin.offset(-this.searchRadius, -3, -this.searchRadius), origin.offset(this.searchRadius, 3, this.searchRadius))
-			.filter(pos -> this.mob.level().getBlockState(pos).is(Blocks.COARSE_DIRT))
-			.map(BlockPos::immutable)
-			.min(Comparator.comparingDouble(pos -> pos.distSqr(origin)));
+		return BlockPos.betweenClosedStream(
+						origin.offset(-this.searchRadius, -3, -this.searchRadius),
+						origin.offset(this.searchRadius, 3, this.searchRadius)
+				)
+				.filter(pos -> this.mob.level().getBlockState(pos).is(Blocks.COARSE_DIRT))
+				.map(BlockPos::immutable)
+				.min(Comparator.comparingDouble(pos -> pos.distSqr(origin)));
 	}
 
 	private Optional<Player> findVisiblePlayer() {
-		return this.mob.level().getEntitiesOfClass(Player.class, this.mob.getBoundingBox().inflate(this.searchRadius), player -> player.isAlive() && this.mob.getSensing().hasLineOfSight(player)).stream()
-			.min(Comparator.comparingDouble(this.mob::distanceToSqr));
+		return this.mob.level().getEntitiesOfClass(
+						Player.class,
+						this.mob.getBoundingBox().inflate(this.searchRadius),
+						player -> player != null && player.isAlive() && !player.isSpectator() && this.mob.getSensing().hasLineOfSight(player)
+				).stream()
+				.min(Comparator.comparingDouble(this.mob::distanceToSqr));
 	}
 }

@@ -35,9 +35,12 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	private static final Identifier GAME_COMPASS = Identifier.parse("minigames:textures/screens/compass_16.png");
 	private static final Identifier IMAGE_4 = Identifier.parse("minigames:textures/screens/selectedgamecompass.png");
 	private static final Identifier COLOR_SELECTOR = Identifier.parse("minigames:textures/screens/colorselector.png");
+
 	private float selectedHue = 0.0f;
 	private float selectedSaturation = 1.0f;
 	private float selectedValue = 1.0f;
+
+	private int activeDragTarget = 0;
 
 	public CustomizeGUIScreen(CustomizeGUIMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text, 311, 112);
@@ -109,78 +112,96 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	@Override
-public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-    if (event.button() == 0) {
-        if (handleColorPicker(event.x(), event.y())) {
-            return true;
-        }
-    }
+	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		if (event.button() == 0) {
+			if (tryStartColorPickerDrag(event.x(), event.y())) {
+				return true;
+			}
+		}
+		return super.mouseClicked(event, doubleClick);
+	}
 
-    return super.mouseClicked(event, doubleClick);
-}
+	@Override
+	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+		if (event.button() == 0 && activeDragTarget != 0) {
+			updateColorFromDrag(event.x(), event.y());
+			return true;
+		}
+		return super.mouseDragged(event, dragX, dragY);
+	}
 
-@Override
-public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-    if (event.button() == 0) {
-        if (handleColorPicker(event.x(), event.y())) {
-            return true;
-        }
-    }
+	@Override
+	public boolean mouseReleased(MouseButtonEvent event) {
+		if (event.button() == 0) {
+			activeDragTarget = 0;
+		}
+		return super.mouseReleased(event);
+	}
 
-    return super.mouseDragged(event, dragX, dragY);
-}
-private boolean handleColorPicker(double mouseX, double mouseY) {
-    int mapX = this.leftPos + 48;
-    int mapY = this.topPos + 22;
-    int mapW = 220;
-    int mapH = 72;
+	private boolean tryStartColorPickerDrag(double mouseX, double mouseY) {
+		int mapX = this.leftPos + 48;
+		int mapY = this.topPos + 22;
+		int mapW = 220;
+		int mapH = 72;
 
-    int hueX = this.leftPos + 278;
-    int hueY = this.topPos + 22;
-    int hueW = 14;
-    int hueH = 72;
+		int hueX = this.leftPos + 278;
+		int hueY = this.topPos + 22;
+		int hueW = 14;
+		int hueH = 72;
 
-    if (mouseX >= hueX && mouseX < hueX + hueW &&
-        mouseY >= hueY && mouseY < hueY + hueH) {
+		if (mouseX >= mapX && mouseX < mapX + mapW && mouseY >= mapY && mouseY < mapY + mapH) {
+			activeDragTarget = 1;
+			updateColorFromDrag(mouseX, mouseY);
+			return true;
+		}
 
-        selectedHue = (float)((mouseY - hueY) / (double)(hueH - 1));
-        selectedHue = Math.max(0f, Math.min(1f, selectedHue));
+		if (mouseX >= hueX && mouseX < hueX + hueW && mouseY >= hueY && mouseY < hueY + hueH) {
+			activeDragTarget = 2;
+			updateColorFromDrag(mouseX, mouseY);
+			return true;
+		}
 
-        updateCurrentColor();
-        return true;
-    }
+		return false;
+	}
 
-    if (mouseX >= mapX && mouseX < mapX + mapW &&
-        mouseY >= mapY && mouseY < mapY + mapH) {
+	private void updateColorFromDrag(double mouseX, double mouseY) {
+		int mapX = this.leftPos + 48;
+		int mapY = this.topPos + 22;
+		int mapW = 220;
+		int mapH = 72;
 
-        selectedSaturation = (float)((mouseX - mapX) / (double)(mapW - 1));
-        selectedValue = 1f - (float)((mouseY - mapY) / (double)(mapH - 1));
+		int hueY = this.topPos + 22;
+		int hueH = 72;
 
-        selectedSaturation = Math.max(0f, Math.min(1f, selectedSaturation));
-        selectedValue = Math.max(0f, Math.min(1f, selectedValue));
+		if (activeDragTarget == 1) {
+			selectedSaturation = (float) ((mouseX - mapX) / (double) (mapW - 1));
+			selectedValue = 1f - (float) ((mouseY - mapY) / (double) (mapH - 1));
 
-        updateCurrentColor();
-        return true;
-    }
+			selectedSaturation = Math.max(0f, Math.min(1f, selectedSaturation));
+			selectedValue = Math.max(0f, Math.min(1f, selectedValue));
 
-    return false;
-}
+			updateCurrentColor();
+		} else if (activeDragTarget == 2) {
+			selectedHue = (float) ((mouseY - hueY) / (double) (hueH - 1));
+			selectedHue = Math.max(0f, Math.min(1f, selectedHue));
+
+			updateCurrentColor();
+		}
+	}
 
 	private void updateCurrentColor() {
+		int rgb = java.awt.Color.HSBtoRGB(
+				selectedHue,
+				selectedSaturation,
+				selectedValue);
 
-    	int rgb = java.awt.Color.HSBtoRGB(
-            selectedHue,
-            selectedSaturation,
-            selectedValue);
+		String hex = String.format("#%06X", rgb & 0xFFFFFF);
+		entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
 
-    	String hex = String.format("#%06X", rgb & 0xFFFFFF);
-    	entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
-
-    if (minecraft.player != null) {
-        minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
-        ClientPacketDistributor.sendToServer(new NameColorPreferenceMessage(hex));
-    	}
-
+		if (minecraft.player != null) {
+			minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+			ClientPacketDistributor.sendToServer(new NameColorPreferenceMessage(hex));
+		}
 	}
 
 	@Override
@@ -225,41 +246,40 @@ private boolean handleColorPicker(double mouseX, double mouseY) {
 	}
 
 	private void renderSelector(GuiGraphicsExtractor guiGraphics) {
+		int mapX = this.leftPos + 48;
+		int mapY = this.topPos + 22;
+		int mapW = 220;
+		int mapH = 72;
 
-    int mapX = this.leftPos + 48;
-    int mapY = this.topPos + 22;
-    int mapW = 220;
-    int mapH = 72;
+		int selectorX = mapX + Math.round(selectedSaturation * (mapW - 1));
+		int selectorY = mapY + Math.round((1f - selectedValue) * (mapH - 1));
 
-    int selectorX = mapX + Math.round(selectedSaturation * (mapW - 1));
-    int selectorY = mapY + Math.round((1f - selectedValue) * (mapH - 1));
+		guiGraphics.blit(
+				net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+				COLOR_SELECTOR,
+				selectorX - 4,
+				selectorY - 4,
+				0,0,
+				8,8,
+				8,8
+		);
 
-    guiGraphics.blit(
-        net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
-        COLOR_SELECTOR,
-        selectorX - 4,
-        selectorY - 4,
-        0,0,
-        8,8,
-        8,8
-    );
+		int hueX = this.leftPos + 278;
+		int hueY = this.topPos + 22;
+		int hueH = 72;
 
-    int hueX = this.leftPos + 278;
-    int hueY = this.topPos + 22;
-    int hueH = 72;
+		int hueSelectorY = hueY + Math.round(selectedHue * (hueH - 1));
 
-    int hueSelectorY = hueY + Math.round(selectedHue * (hueH - 1));
-
-    guiGraphics.blit(
-        net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
-        COLOR_SELECTOR,
-        hueX + 3,
-        hueSelectorY - 4,
-        0,0,
-        8,8,
-        8,8
-    );
-}
+		guiGraphics.blit(
+				net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+				COLOR_SELECTOR,
+				hueX + 3,
+				hueSelectorY - 4,
+				0,0,
+				8,8,
+				8,8
+		);
+	}
 
 	private void renderHsvBorders(GuiGraphicsExtractor guiGraphics) {
 		drawMinecraftFrame(guiGraphics, this.leftPos + 48, this.topPos + 22, 220, 72);

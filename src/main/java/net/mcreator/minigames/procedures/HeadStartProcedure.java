@@ -9,13 +9,14 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.server.level.ServerLevel;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 import javax.annotation.Nullable;
 
-import java.util.ArrayList;
+import java.util.UUID;
 
 @EventBusSubscriber
 public class HeadStartProcedure {
@@ -32,33 +33,40 @@ public class HeadStartProcedure {
 		if (entity == null)
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode && MinigamesModVariables.MapVariables.get(world).playingAchievement) {
-			if (!(entity.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
-				if (TimerSecondsProcedure.execute(entity) < MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
-					if (!(entity instanceof LivingEntity _livEnt1 && _livEnt1.hasEffect(MinigamesModMobEffects.IMMOBILIZED))) {
-						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, (int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive * 20), 1, false, false));
-						{
-							MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-							_vars.TimerColor = "DB2300";
-							_vars.markSyncDirty();
-						}
-						for (Entity entityiterator : new ArrayList<>(world.players())) {
-							if ((entityiterator.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
-								{
-									MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-									_vars.TimerColor = "FFCA47";
-									_vars.markSyncDirty();
-								}
+			if ((world instanceof ServerLevel _level0 ? getEntityFromUUID(_level0, MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) : null) != null) {
+				if (!(entity.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
+					if (TimerSecondsProcedure.execute(entity) < MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
+						if (!(entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.IMMOBILIZED))) {
+							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+								_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, (int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive * 20), 1, false, false));
+							{
+								MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+								_vars.TimerColor = "DB2300";
+								_vars.markSyncDirty();
+							}
+							{
+								MinigamesModVariables.PlayerVariables _vars = (world instanceof ServerLevel _level4 ? getEntityFromUUID(_level4, MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) : null)
+										.getData(MinigamesModVariables.PLAYER_VARIABLES);
+								_vars.TimerColor = "FFCA47";
+								_vars.markSyncDirty();
 							}
 						}
-					}
-				} else if (TimerSecondsProcedure.execute(entity) > MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
-					if (entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MinigamesModMobEffects.IMMOBILIZED)) {
-						if (entity instanceof LivingEntity _entity)
-							_entity.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
+					} else if (TimerSecondsProcedure.execute(entity) >= MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
+						if (entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MinigamesModMobEffects.IMMOBILIZED)) {
+							if (entity instanceof LivingEntity _entity)
+								_entity.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
+						}
 					}
 				}
 			}
+		}
+	}
+
+	private static Entity getEntityFromUUID(ServerLevel level, String uuid) {
+		try {
+			return level.getEntity(UUID.fromString(uuid));
+		} catch (IllegalArgumentException e) {
+			return null;
 		}
 	}
 }

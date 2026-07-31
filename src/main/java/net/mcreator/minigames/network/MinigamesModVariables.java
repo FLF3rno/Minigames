@@ -308,15 +308,10 @@ public class MinigamesModVariables {
 		public ArrayList<Object> WinnerList = new ArrayList<>();
 		public boolean ShowTimer = false;
 		public double WhenPVPActive = 300.0;
-		public boolean useOverworld1 = true;
-		public double AchievementSeed = 0;
-		public boolean visitedNetherAchievement = false;
-		public boolean visitedEndAchievement = false;
-		public boolean achievementDimensionRegenQueued = false;
-		public boolean achievementDimensionOccupied = false;
 		public String hunterAchievementUUID = "\"\"";
 		public double hunterAnimation = 0;
 		public ArrayList<Object> glueY = new ArrayList<>();
+		public Vec3 coordinateOffset = Vec3.ZERO;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -402,15 +397,10 @@ public class MinigamesModVariables {
 			WinnerList = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("WinnerList"), lookupProvider);
 			ShowTimer = nbt.getBooleanOr("ShowTimer", false);
 			WhenPVPActive = nbt.getDoubleOr("WhenPVPActive", 0);
-			useOverworld1 = nbt.getBooleanOr("useOverworld1", false);
-			AchievementSeed = nbt.getDoubleOr("AchievementSeed", 0);
-			visitedNetherAchievement = nbt.getBooleanOr("visitedNetherAchievement", false);
-			visitedEndAchievement = nbt.getBooleanOr("visitedEndAchievement", false);
-			achievementDimensionRegenQueued = nbt.getBooleanOr("achievementDimensionRegenQueued", false);
-			achievementDimensionOccupied = nbt.getBooleanOr("achievementDimensionOccupied", false);
 			hunterAchievementUUID = nbt.getStringOr("hunterAchievementUUID", "");
 			hunterAnimation = nbt.getDoubleOr("hunterAnimation", 0);
 			glueY = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("glueY"), lookupProvider);
+			coordinateOffset = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("coordinateOffset")).result().orElse(Vec3.ZERO);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -497,15 +487,10 @@ public class MinigamesModVariables {
 			nbt.put("WinnerList", NbtArrayLists.saveGlobalMap(WinnerList));
 			nbt.putBoolean("ShowTimer", ShowTimer);
 			nbt.putDouble("WhenPVPActive", WhenPVPActive);
-			nbt.putBoolean("useOverworld1", useOverworld1);
-			nbt.putDouble("AchievementSeed", AchievementSeed);
-			nbt.putBoolean("visitedNetherAchievement", visitedNetherAchievement);
-			nbt.putBoolean("visitedEndAchievement", visitedEndAchievement);
-			nbt.putBoolean("achievementDimensionRegenQueued", achievementDimensionRegenQueued);
-			nbt.putBoolean("achievementDimensionOccupied", achievementDimensionOccupied);
 			nbt.putString("hunterAchievementUUID", hunterAchievementUUID);
 			nbt.putDouble("hunterAnimation", hunterAnimation);
 			nbt.put("glueY", NbtArrayLists.saveGlobalMap(glueY));
+			nbt.put("coordinateOffset", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, coordinateOffset).result().orElseGet(CompoundTag::new));
 			return nbt;
 		}
 

@@ -16,17 +16,11 @@ public class MinigamesModSounds {
 	public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(Registries.SOUND_EVENT, MinigamesMod.MODID);
 	public static final DeferredHolder<SoundEvent, SoundEvent> COUNTDOWN = REGISTRY.register("countdown", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "countdown")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> START = REGISTRY.register("start", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "start")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> ROLLAUDIO = REGISTRY.register("rollaudio", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "rollaudio")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> NETHERBREAK = REGISTRY.register("netherbreak", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "netherbreak")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> SANDBREAK = REGISTRY.register("sandbreak", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "sandbreak")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> STONEBREAK = REGISTRY.register("stonebreak", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "stonebreak")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> DIRTBREAK = REGISTRY.register("dirtbreak", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "dirtbreak")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> PVP_SWORDSHIT = REGISTRY.register("pvp_swordshit", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "pvp_swordshit")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> PVP_SWIND = REGISTRY.register("pvp_swind", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "pvp_swind")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> MENU_SWITCH = REGISTRY.register("menu_switch", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "menu_switch")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> TEAMELIMINATED = REGISTRY.register("teameliminated", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "teameliminated")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> ROLLDICE = REGISTRY.register("rolldice", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "rolldice")));
-	public static final DeferredHolder<SoundEvent, SoundEvent> ROLLAUDIOCLEAN = REGISTRY.register("rollaudioclean", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "rollaudioclean")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> CLOCK = REGISTRY.register("clock", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "clock")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> THRUSTER = REGISTRY.register("thruster", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "thruster")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> INFLATE = REGISTRY.register("inflate", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "inflate")));

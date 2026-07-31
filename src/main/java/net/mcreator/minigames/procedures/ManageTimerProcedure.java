@@ -81,8 +81,8 @@ public class ManageTimerProcedure {
 
             _vars.markSyncDirty();
 
-            if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame && MinigamesModVariables.MapVariables.get(world).inGracePeriod) {
-                if (_vars.timerSeconds % 2 == 0 && _vars.timerSeconds < 11 && _vars.timerMinutes == 0 && _vars.timerHours == 0) {
+            if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame) {
+                if (_vars.timerSeconds % 2 == 0 && _vars.timerSeconds < 11 && _vars.timerMinutes == 0 && _vars.timerHours == 0 && _vars.timerSeconds > 0) {
                     
                     if (_vars.timerTick == 0 && entity.level() instanceof ServerLevel _level && _level.getServer() != null) {
                         _level.getServer().getCommands().performPrefixedCommand(

@@ -17,46 +17,6 @@
       }
     ]
   },
-  "rollaudio": {
-    "sounds": [
-      {
-        "name": "minigames:rollaudio",
-        "stream": false
-      }
-    ]
-  },
-  "netherbreak": {
-    "sounds": [
-      {
-        "name": "minigames:netherbreak",
-        "stream": false
-      }
-    ]
-  },
-  "sandbreak": {
-    "sounds": [
-      {
-        "name": "minigames:sandbreak",
-        "stream": false
-      }
-    ]
-  },
-  "stonebreak": {
-    "sounds": [
-      {
-        "name": "minigames:stonebreak",
-        "stream": false
-      }
-    ]
-  },
-  "dirtbreak": {
-    "sounds": [
-      {
-        "name": "minigames:dirtbreak",
-        "stream": false
-      }
-    ]
-  },
   "pvp_swordshit": {
     "sounds": [
       {
@@ -93,14 +53,6 @@
     "sounds": [
       {
         "name": "minigames:rolldice",
-        "stream": false
-      }
-    ]
-  },
-  "rollaudioclean": {
-    "sounds": [
-      {
-        "name": "minigames:rollaudioclean",
         "stream": false
       }
     ]

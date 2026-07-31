@@ -51,55 +51,30 @@ public class PassCrownProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity, Entity sourceentity, double amount) {
 		if (entity == null || sourceentity == null)
 			return;
-		if (!(entity instanceof LivingEntity _livEnt0 && _livEnt0.isBlocking())) {
-			if (amount * (1 - Math
-					.min(20, Math.max((entity instanceof LivingEntity _livingEntity1 && _livingEntity1.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity1.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-							(entity instanceof LivingEntity _livingEntity2 && _livingEntity2.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity2.getAttribute(Attributes.ARMOR).getValue() : 0) - (4 * amount)
-									/ ((entity instanceof LivingEntity _livingEntity3 && _livingEntity3.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS) ? _livingEntity3.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() : 0) + 8)))
-					/ 25) > (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)) {
-				if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
-					{
-						MinigamesModVariables.PlayerVariables _vars = sourceentity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-						_vars.helmet = (sourceentity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).copy();
-						_vars.markSyncDirty();
-					}
-					if (sourceentity instanceof LivingEntity _living) {
-						_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
-					}
-					if (entity instanceof LivingEntity _living) {
-						_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Blocks.AIR));
-					}
-					if (!(sourceentity == null)) {
-						if (world instanceof ServerLevel _level)
-							_level.getServer().getCommands().performPrefixedCommand(
-									new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-									"/kill @e[type=armor_stand,nbt={equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}]");
-						if (world instanceof Level _level) {
-							if (!_level.isClientSide()) {
-								_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
-							} else {
-								_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
-							}
+		if (MinigamesModVariables.MapVariables.get(world).CrownHuntInGame) {
+			if (!(entity instanceof LivingEntity _livEnt0 && _livEnt0.isBlocking())) {
+				if (amount * (1 - Math
+						.min(20, Math.max((entity instanceof LivingEntity _livingEntity1 && _livingEntity1.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity1.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+								(entity instanceof LivingEntity _livingEntity2 && _livingEntity2.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity2.getAttribute(Attributes.ARMOR).getValue() : 0) - (4 * amount)
+										/ ((entity instanceof LivingEntity _livingEntity3 && _livingEntity3.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS) ? _livingEntity3.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue() : 0) + 8)))
+						/ 25) > (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)) {
+					if ((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {
+						{
+							MinigamesModVariables.PlayerVariables _vars = sourceentity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+							_vars.helmet = (sourceentity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).copy();
+							_vars.markSyncDirty();
 						}
-						if (world instanceof ServerLevel _level) {
-							_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((entity.getDisplayName().getString() + " dropped the crown!")).withColor(0xecb25d), false);
+						if (sourceentity instanceof LivingEntity _living) {
+							_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
 						}
-						if (sourceentity instanceof Player) {
-							MinigamesMod.queueServerWork(3, () -> {
-								AnimateCrownPickupProcedure.execute(world);
-							});
-							if (world instanceof ServerLevel _level) {
-								_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
-							}
-						} else if (sourceentity instanceof Spider) {
-							if (!sourceentity.level().isClientSide())
-								sourceentity.discard();
-							if (world instanceof ServerLevel _level) {
-								Entity entityToSpawn = MinigamesModEntities.GOLDEN_SPIDER.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
-								if (entityToSpawn != null) {
-									entityToSpawn.setDeltaMovement(0, 0, 0);
-								}
-							}
+						if (entity instanceof LivingEntity _living) {
+							_living.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Blocks.AIR));
+						}
+						if (!(sourceentity == null)) {
+							if (world instanceof ServerLevel _level)
+								_level.getServer().getCommands().performPrefixedCommand(
+										new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+										"/kill @e[type=armor_stand,nbt={equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}]");
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
 									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
@@ -108,18 +83,45 @@ public class PassCrownProcedure {
 								}
 							}
 							if (world instanceof ServerLevel _level) {
-								_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
+								_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((entity.getDisplayName().getString() + " dropped the crown!")).withColor(0xecb25d), false);
 							}
-						} else if (sourceentity instanceof LivingEntity) {
-							if (world instanceof Level _level) {
-								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
-								} else {
-									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
+							if (sourceentity instanceof Player) {
+								MinigamesMod.queueServerWork(3, () -> {
+									AnimateCrownPickupProcedure.execute(world);
+								});
+								if (world instanceof ServerLevel _level) {
+									_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
 								}
-							}
-							if (world instanceof ServerLevel _level) {
-								_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
+							} else if (sourceentity instanceof Spider) {
+								if (!sourceentity.level().isClientSide())
+									sourceentity.discard();
+								if (world instanceof ServerLevel _level) {
+									Entity entityToSpawn = MinigamesModEntities.GOLDEN_SPIDER.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
+									if (entityToSpawn != null) {
+										entityToSpawn.setDeltaMovement(0, 0, 0);
+									}
+								}
+								if (world instanceof Level _level) {
+									if (!_level.isClientSide()) {
+										_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
+									} else {
+										_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
+									}
+								}
+								if (world instanceof ServerLevel _level) {
+									_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
+								}
+							} else if (sourceentity instanceof LivingEntity) {
+								if (world instanceof Level _level) {
+									if (!_level.isClientSide()) {
+										_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1);
+									} else {
+										_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), SoundSource.NEUTRAL, 1000000, 1, false);
+									}
+								}
+								if (world instanceof ServerLevel _level) {
+									_level.getServer().getPlayerList().broadcastSystemMessage(Component.literal((sourceentity.getDisplayName().getString() + " stole the crown!")).withColor(0xecb25d), false);
+								}
 							}
 						}
 					}

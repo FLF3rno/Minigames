@@ -15,7 +15,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.clock.ServerClockManager;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.util.RandomSource;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
@@ -40,13 +39,7 @@ import io.netty.buffer.Unpooled;
 public class StartAchievementRunProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		double achievement = 0;
-		long seed = RandomSource.create().nextLong();
-		while (seed == 0L) {
-			seed = RandomSource.create().nextLong();
-		}
-		MinigamesModVariables.MapVariables.get(world).AchievementSeed = seed;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		RollAchievementProcedure.execute(world);
+		RollAchievementProcedure.execute(world, x, y, z);
 		MinigamesModVariables.MapVariables.get(world).playingAchievement = true;
 		MinigamesModVariables.MapVariables.get(world).ShowTimer = true;
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
@@ -116,7 +109,7 @@ public class StartAchievementRunProcedure {
 			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.INSTANT_HEALTH, 60, 19, false, false));
 			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100, 19, false, false));
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 1000000, 19, false, false));
 			if (entityiterator instanceof ServerPlayer _player)
 				_player.setGameMode(GameType.SURVIVAL);
 			if (entityiterator instanceof Player _player)

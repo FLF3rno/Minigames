@@ -28,6 +28,8 @@ public class AchievementGameEndProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
+		MinigamesModVariables.MapVariables.get(world).coordinateOffset = new Vec3(0, 0, 0);
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof Level _level) {
 			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("hunted");
 			if (_pt != null)
@@ -36,14 +38,6 @@ public class AchievementGameEndProcedure {
 		MinigamesModVariables.MapVariables.get(world).playingAchievement = false;
 		MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
 		MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		if (MinigamesModVariables.MapVariables.get(world).useOverworld1) {
-			MinigamesModVariables.MapVariables.get(world).useOverworld1 = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			MinigamesModVariables.MapVariables.get(world).useOverworld1 = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		}
 		MinigamesModVariables.MapVariables.get(world).showWinscreen = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(160, () -> {
@@ -83,6 +77,7 @@ public class AchievementGameEndProcedure {
 			}
 			if (entityiterator instanceof LivingEntity _entity)
 				_entity.removeAllEffects();
+			UpdateTablistProcedure.execute(entityiterator);
 		}
 		MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
 		MinigamesModVariables.MapVariables.get(world).WinnerList.add((entity.getStringUUID()));

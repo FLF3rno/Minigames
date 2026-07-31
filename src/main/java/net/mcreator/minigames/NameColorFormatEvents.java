@@ -25,7 +25,7 @@ public class NameColorFormatEvents {
 		}
 
 		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		if (vars == null || vars.color == null || vars.color.isEmpty()) {
+		if (vars.color == null || vars.color.isEmpty()) {
 			return null;
 		}
 
@@ -35,11 +35,20 @@ public class NameColorFormatEvents {
 			return null;
 		}
 
-		Component baseName = Component.literal(player.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor));
+		Component coloredPlayerName = Component.literal(player.getName().getString())
+				.setStyle(Style.EMPTY.withColor(parsedColor));
+
 		if (player.getTeam() != null) {
-			return player.getTeam().getFormattedName(baseName);
+			Component prefix = player.getTeam().getPlayerPrefix();
+			Component suffix = player.getTeam().getPlayerSuffix();
+
+			return Component.empty()
+					.append(prefix)
+					.append(coloredPlayerName)
+					.append(suffix);
 		}
-		return baseName;
+
+		return coloredPlayerName;
 	}
 }
 

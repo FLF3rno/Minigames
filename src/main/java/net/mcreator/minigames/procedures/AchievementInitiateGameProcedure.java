@@ -1,12 +1,12 @@
 package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.server.level.ServerPlayer;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class AchievementInitiateGameProcedure {
 			}
 			if (entityiterator instanceof Player _player)
 				_player.closeContainer();
-			if (entityiterator instanceof ServerPlayer _player)
-				_player.setGameMode(GameType.SURVIVAL);
+			if (entityiterator instanceof LivingEntity _entity)
+				_entity.removeEffect(MinigamesModMobEffects.BLESSED);
 		}
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			MinigamesMod.queueServerWork(80, () -> {

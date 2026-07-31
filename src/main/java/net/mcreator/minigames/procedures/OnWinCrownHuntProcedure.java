@@ -79,6 +79,9 @@ public class OnWinCrownHuntProcedure {
 				if (_pt != null)
 					_level.getScoreboard().removePlayerTeam(_pt);
 			}
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				UpdateTablistProcedure.execute(entityiterator);
+			}
 		});
 	}
 }

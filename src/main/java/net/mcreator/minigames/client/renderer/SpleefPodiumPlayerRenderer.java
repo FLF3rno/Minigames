@@ -14,43 +14,45 @@ import net.mcreator.minigames.entity.SpleefPodiumPlayerEntity;
 
 import java.util.UUID;
 
-public class SpleefPodiumPlayerRenderer extends HumanoidMobRenderer<SpleefPodiumPlayerEntity, HumanoidRenderState, HumanoidModel<HumanoidRenderState>> {
-	private SpleefPodiumPlayerEntity entity = null;
+public class SpleefPodiumPlayerRenderer extends HumanoidMobRenderer<SpleefPodiumPlayerEntity, SpleefPodiumPlayerRenderer.SpleefPodiumPlayerRenderState, HumanoidModel<SpleefPodiumPlayerRenderer.SpleefPodiumPlayerRenderState>> {
 	private final Identifier entityTexture = Identifier.parse("minigames:textures/entities/empty.png");
 
 	public SpleefPodiumPlayerRenderer(EntityRendererProvider.Context context) {
-		super(context, new HumanoidModel<HumanoidRenderState>(context.bakeLayer(ModelLayers.PLAYER)), 0f);
+		super(context, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER)), 0f);
+	}
+
+	public static class SpleefPodiumPlayerRenderState extends HumanoidRenderState {
+		public String displayUuid = "";
+		public String texture = "";
 	}
 
 	@Override
-	public HumanoidRenderState createRenderState() {
-		return new HumanoidRenderState();
+	public SpleefPodiumPlayerRenderState createRenderState() {
+		return new SpleefPodiumPlayerRenderState();
 	}
 
 	@Override
-	public void extractRenderState(SpleefPodiumPlayerEntity entity, HumanoidRenderState state, float partialTicks) {
+	public void extractRenderState(SpleefPodiumPlayerEntity entity, SpleefPodiumPlayerRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
-		this.entity = entity;
+		state.displayUuid = entity.getEntityData().get(SpleefPodiumPlayerEntity.DATA_display_uuid);
+		state.texture = entity.getTexture();
 	}
 
 	@Override
-	public Identifier getTextureLocation(HumanoidRenderState state) {
-		if (entity != null) {
-			String displayUuid = entity.getEntityData().get(SpleefPodiumPlayerEntity.DATA_display_uuid);
-			if (!displayUuid.isBlank()) {
-				try {
-					UUID uuid = parseUuid(displayUuid);
-					if (Minecraft.getInstance().level != null) {
-						if (Minecraft.getInstance().level.getPlayerByUUID(uuid) instanceof AbstractClientPlayer player) {
-							return player.getSkin().body().texturePath();
-						}
+	public Identifier getTextureLocation(SpleefPodiumPlayerRenderState state) {
+		if (state.displayUuid != null && !state.displayUuid.isBlank()) {
+			try {
+				UUID uuid = parseUuid(state.displayUuid);
+				if (Minecraft.getInstance().level != null) {
+					if (Minecraft.getInstance().level.getPlayerByUUID(uuid) instanceof AbstractClientPlayer player) {
+						return player.getSkin().body().texturePath();
 					}
-				} catch (IllegalArgumentException ignored) {
 				}
+			} catch (IllegalArgumentException ignored) {
 			}
 		}
-		if (entity != null && !"empty".equals(entity.getTexture()))
-			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
+		if (state.texture != null && !"empty".equals(state.texture))
+			return Identifier.parse("minigames:textures/entities/" + state.texture + ".png");
 		return entityTexture;
 	}
 

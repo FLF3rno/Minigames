@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 public class AchievementGameEndHunterProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
+		MinigamesModVariables.MapVariables.get(world).coordinateOffset = new Vec3(0, 0, 0);
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof Level _level) {
 			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("hunted");
 			if (_pt != null)
@@ -34,28 +36,9 @@ public class AchievementGameEndHunterProcedure {
 		MinigamesModVariables.MapVariables.get(world).playingAchievement = false;
 		MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
 		MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		if (MinigamesModVariables.MapVariables.get(world).useOverworld1) {
-			MinigamesModVariables.MapVariables.get(world).useOverworld1 = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		} else {
-			MinigamesModVariables.MapVariables.get(world).useOverworld1 = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		}
 		MinigamesModVariables.MapVariables.get(world).showWinscreen = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		MinigamesMod.queueServerWork(160, () -> {
-			MinigamesModVariables.MapVariables.get(world).showWinscreen = false;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
-			MinigamesModVariables.MapVariables.get(world).ShowTimer = false;
-			MinigamesModVariables.MapVariables.get(world).waypoints = true;
-			MinigamesModVariables.MapVariables.get(world).minimap = true;
-			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				GrantGameCompassProcedure.execute(world, entityiterator);
-			}
-		});
+		MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
@@ -81,14 +64,26 @@ public class AchievementGameEndHunterProcedure {
 			}
 			if (entityiterator instanceof LivingEntity _entity)
 				_entity.removeAllEffects();
-			MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
 			if (!(entityiterator.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
 				MinigamesModVariables.MapVariables.get(world).WinnerList.add((entityiterator.getStringUUID()));
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.CROWNED, 99999999, 0, false, false));
 			}
+			UpdateTablistProcedure.execute(entityiterator);
 		}
+		MinigamesMod.queueServerWork(160, () -> {
+			MinigamesModVariables.MapVariables.get(world).showWinscreen = false;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			MinigamesModVariables.MapVariables.get(world).WinnerList.clear();
+			MinigamesModVariables.MapVariables.get(world).ShowTimer = false;
+			MinigamesModVariables.MapVariables.get(world).waypoints = true;
+			MinigamesModVariables.MapVariables.get(world).minimap = true;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				GrantGameCompassProcedure.execute(world, entityiterator);
+			}
+		});
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "worldborder set 50000000");

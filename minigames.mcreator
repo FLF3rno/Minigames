@@ -345,7 +345,7 @@
       "name": "RenderCrownOnPlayer",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "render_crown_on_player",
       "metadata": {
         "dependencies": [
@@ -6893,18 +6893,6 @@
             "type": "entity"
           },
           {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
             "name": "world",
             "type": "world"
           }
@@ -6924,18 +6912,6 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
             "name": "world",
             "type": "world"
           }
@@ -6954,18 +6930,6 @@
       "registry_name": "lose_dungeon",
       "metadata": {
         "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
           {
             "name": "world",
             "type": "world"
@@ -11537,6 +11501,18 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -11765,118 +11741,6 @@
       "path": "~/General/Timer"
     },
     {
-      "name": "Achievement1",
-      "type": "dimension",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "achievement_1",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/dimension_type/achievement_1.json",
-          "src/main/resources/data/minigames/dimension/achievement_1.json"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "Achievement2",
-      "type": "dimension",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "achievement_2",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/dimension_type/achievement_2.json",
-          "src/main/resources/data/minigames/dimension/achievement_2.json"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "AchievementNether",
-      "type": "dimension",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "achievement_nether",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/dimension_type/achievement_nether.json",
-          "src/main/resources/data/minigames/dimension/achievement_nether.json"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "AchievementEnd",
-      "type": "dimension",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "achievement_end",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/dimension/achievement_end.json",
-          "src/main/resources/data/minigames/dimension_type/achievement_end.json"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "AchievementVisitedDimension",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "achievement_visited_dimension",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/AchievementVisitedDimensionProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "RegenerateAchievementDimensions",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "regenerate_achievement_dimensions",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/RegenerateAchievementDimensionsProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "RedirectPortal",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "redirect_portal",
-      "metadata": {
-        "dependencies": [],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/RedirectPortalProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
       "name": "ShowMod1",
       "type": "procedure",
       "compiles": true,
@@ -11915,38 +11779,6 @@
         ]
       },
       "path": "~/Achievement Run/PVP"
-    },
-    {
-      "name": "AchievementSeed",
-      "type": "mixin",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "achievement_seed",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/mixin/AchievementSeedMixin.java"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
-    },
-    {
-      "name": "CheckQueueDimensionReset",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "check_queue_dimension_reset",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/CheckQueueDimensionResetProcedure.java"
-        ]
-      },
-      "path": "~/Achievement Run/Dimensions"
     },
     {
       "name": "TeleportAchievement",
@@ -12274,6 +12106,184 @@
         ]
       },
       "path": "~/Spleef/Snowballs"
+    },
+    {
+      "name": "PauseMenuButtonHandler",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "pause_menu_button_handler",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/PauseMenuButtonHandler.java"
+        ]
+      },
+      "path": "~/General/Forcestop"
+    },
+    {
+      "name": "ForceStopMinigame",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "force_stop_minigame",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ForceStopMinigameProcedure.java"
+        ]
+      },
+      "path": "~/General/Forcestop"
+    },
+    {
+      "name": "StopMinigame",
+      "type": "packet",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stop_minigame",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/StopMinigameMessage.java"
+        ]
+      },
+      "path": "~/General/Forcestop"
+    },
+    {
+      "name": "PlayingMinigame",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "playing_minigame",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayingMinigameProcedure.java"
+        ]
+      },
+      "path": "~/General/Forcestop"
+    },
+    {
+      "name": "UpdateTablist",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "update_tablist",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/UpdateTablistProcedure.java"
+        ]
+      },
+      "path": "~/General/Name Color"
+    },
+    {
+      "name": "AnimationScreen",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "animation_screen",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/AnimationScreen.java"
+        ]
+      },
+      "path": "~/General/Animation"
+    },
+    {
+      "name": "AnimationManager",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "animation_manager",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/AnimationManager.java"
+        ]
+      },
+      "path": "~/General/Animation"
+    },
+    {
+      "name": "AnimationScreenTrigger",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "animation_screen_trigger",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/AnimationScreenTrigger.java"
+        ]
+      },
+      "path": "~/General/Animation"
+    },
+    {
+      "name": "AnimationAction",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "animation_action",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/AnimationAction.java"
+        ]
+      },
+      "path": "~/General/Animation"
+    },
+    {
+      "name": "Debuganim",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debuganim",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/DebuganimCommand.java"
+        ]
+      },
+      "path": "~/Crown Hunt"
+    },
+    {
+      "name": "ClientTickHandler",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "client_tick_handler",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/ClientTickHandler.java"
+        ]
+      },
+      "path": "~/General/Animation"
     }
   ],
   "variable_elements": [
@@ -13064,42 +13074,6 @@
       "value": "300.0"
     },
     {
-      "name": "useOverworld1",
-      "type": "logic",
-      "scope": "map",
-      "value": "true"
-    },
-    {
-      "name": "AchievementSeed",
-      "type": "number",
-      "scope": "map",
-      "value": "0"
-    },
-    {
-      "name": "visitedNetherAchievement",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
-      "name": "visitedEndAchievement",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
-      "name": "achievementDimensionRegenQueued",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
-      "name": "achievementDimensionOccupied",
-      "type": "logic",
-      "scope": "map",
-      "value": "false"
-    },
-    {
       "name": "hunterAchievementUUID",
       "type": "string",
       "scope": "map",
@@ -13116,6 +13090,12 @@
       "type": "arraylist",
       "scope": "map",
       "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "coordinateOffset",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
     }
   ],
   "sound_elements": [
@@ -13134,46 +13114,6 @@
       ],
       "category": "player",
       "subtitle": "Game starts"
-    },
-    {
-      "name": "rollaudio",
-      "files": [
-        "rollaudio"
-      ],
-      "category": "player",
-      "subtitle": ""
-    },
-    {
-      "name": "netherbreak",
-      "files": [
-        "netherbreak"
-      ],
-      "category": "player",
-      "subtitle": ""
-    },
-    {
-      "name": "sandbreak",
-      "files": [
-        "sandbreak"
-      ],
-      "category": "player",
-      "subtitle": ""
-    },
-    {
-      "name": "stonebreak",
-      "files": [
-        "stonebreak"
-      ],
-      "category": "player",
-      "subtitle": ""
-    },
-    {
-      "name": "dirtbreak",
-      "files": [
-        "dirtbreak"
-      ],
-      "category": "player",
-      "subtitle": ""
     },
     {
       "name": "pvp_swordshit",
@@ -13213,14 +13153,6 @@
         "rolldice"
       ],
       "category": "player",
-      "subtitle": ""
-    },
-    {
-      "name": "rollaudioclean",
-      "files": [
-        "rollaudioclean"
-      ],
-      "category": "master",
       "subtitle": ""
     },
     {
@@ -14141,7 +14073,8 @@
       "gui.minigames.minigame_gui_achievement_hunt.label_achievement_run": "Achievement Hunt",
       "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
       "gui.minigames.minigame_gui_achievement_hunt.pvp": "300",
-      "gui.minigames.minigame_gui_achievement_hunt.hunt": "30"
+      "gui.minigames.minigame_gui_achievement_hunt.hunt": "30",
+      "gui.minigames.force_end": "Force Stop Minigame"
     }
   },
   "metadata": {
@@ -14212,15 +14145,15 @@
             "children": []
           },
           {
-            "name": "Dimensions",
-            "children": []
-          },
-          {
             "name": "Win",
             "children": []
           },
           {
             "name": "Hunter Mode",
+            "children": []
+          },
+          {
+            "name": "Stronghold",
             "children": []
           }
         ]
@@ -14616,6 +14549,18 @@
           },
           {
             "name": "Effects",
+            "children": []
+          },
+          {
+            "name": "Forcestop",
+            "children": []
+          },
+          {
+            "name": "Options",
+            "children": []
+          },
+          {
+            "name": "Animation",
             "children": []
           }
         ]

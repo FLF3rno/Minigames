@@ -153,10 +153,10 @@ public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchie
 		InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x0, y0 , x1, this.topPos + 140 + 100, 25, -entity.getBbHeight() / (2.0f * entity.getScale()), 0f, 0, entity);
 
 		if (Objects.equals(player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState, "Ready")) {
-			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0-4, y0+6, 0, 0, 33, 50, 33, 50, 0xFF05fa1b);
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0-4, y0, 0, 0, 33, 50, 33, 50, 0xFF05fa1b);
 		}
 		else if (Objects.equals(player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState, "Rerolling")) {
-			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0-4, y0+6, 0, 0, 33, 50, 33, 50, 0xFF0e56f1);
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0-4, y0, 0, 0, 33, 50, 33, 50, 0xFF0e56f1);
 		}
 
 		if ((player.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) && MinigamesModVariables.MapVariables.get(world).achievementHunterMode

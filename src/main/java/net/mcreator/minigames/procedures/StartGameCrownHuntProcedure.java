@@ -2,6 +2,7 @@ package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.Entity;
@@ -18,12 +19,14 @@ import java.util.ArrayList;
 
 public class StartGameCrownHuntProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.LOCATOR_BAR, false, world.getServer());
 		if (world instanceof Level _level)
 			_level.getScoreboard().addPlayerTeam("crowned");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"team modify crowned prefix {\"text\":\"\\uE001---\",\"font\":\"minigames:icons\",\"color\":\"white\"}");
+					"team modify crowned prefix {\"text\":\"\\uE001  \",\"color\":\"white\"}");
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			ClearEnderchestProcedure.execute(entityiterator);
 		}
@@ -116,10 +119,6 @@ public class StartGameCrownHuntProcedure {
 				_level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/execute in overworld run playsound minigames:start player @a ~ ~ ~ 10000000000 1");
-			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-						"/team modify teamold nametagVisibility always");
 			MinigamesModVariables.MapVariables.get(world).CrownHuntInGame = true;
 			MinigamesModVariables.MapVariables.get(world).canGrabCrown = false;
 			MinigamesModVariables.MapVariables.get(world).inGracePeriod = true;

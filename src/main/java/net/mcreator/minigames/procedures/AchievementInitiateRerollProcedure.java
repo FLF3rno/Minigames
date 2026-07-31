@@ -28,6 +28,6 @@ public class AchievementInitiateRerollProcedure {
 				_vars.markSyncDirty();
 			}
 		}
-		RollAchievementProcedure.execute(world);
+		RollAchievementProcedure.execute(world, x, y, z);
 	}
 }

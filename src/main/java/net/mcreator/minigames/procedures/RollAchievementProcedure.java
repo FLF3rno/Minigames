@@ -7,7 +7,7 @@ import net.minecraft.util.Mth;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 public class RollAchievementProcedure {
-	public static void execute(LevelAccessor world) {
+	public static void execute(LevelAccessor world, double x, double y, double z) {
 		double achievement = 0;
 		MinigamesModVariables.MapVariables.get(world).AchievementCategory = Mth.nextInt(RandomSource.create(), 1, 5);
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -16,7 +16,7 @@ public class RollAchievementProcedure {
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 2) {
 			achievement = Mth.nextInt(RandomSource.create(), 1, 22);
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 3) {
-			RollAchievementProcedure.execute(world);
+			RollAchievementProcedure.execute(world, x, y, z);
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 4) {
 			achievement = Mth.nextInt(RandomSource.create(), 1, 43);
 		} else if (MinigamesModVariables.MapVariables.get(world).AchievementCategory == 5) {

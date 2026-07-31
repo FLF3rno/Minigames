@@ -2,15 +2,6 @@
     "providers": [
         {
             "type": "bitmap",
-            "file": "minigames:font/empty.png",
-            "height": 8,
-            "ascent": 2,
-            "chars": [
-                "-"
-            ]
-        },
-        {
-            "type": "bitmap",
             "file": "minigames:font/hunted.png",
             "height": 8,
             "ascent": 8,

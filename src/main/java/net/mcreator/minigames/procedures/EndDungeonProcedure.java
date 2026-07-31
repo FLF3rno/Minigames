@@ -1,22 +1,19 @@
 package net.mcreator.minigames.procedures;
 
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.scores.PlayerTeam;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.network.chat.Component;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 import java.util.ArrayList;
 
 public class EndDungeonProcedure {
-	public static void execute(LevelAccessor world, double x, double y, double z) {
+	public static void execute(LevelAccessor world) {
 		MinigamesModVariables.MapVariables.get(world).playingDungeons = false;
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
@@ -40,14 +37,19 @@ public class EndDungeonProcedure {
 		}
 		MinigamesModVariables.MapVariables.get(world).removeEffects = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/team empty dungeon_players");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/gamerule fallDamage true");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/gamerule naturalRegeneration true");
+		if (world instanceof Level _level) {
+			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("dungeon_players");
+			if (_pt != null)
+				_level.getScoreboard().removePlayerTeam(_pt);
+		}
+		if (world instanceof Level _level) {
+			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("dungeon_mobs");
+			if (_pt != null)
+				_level.getScoreboard().removePlayerTeam(_pt);
+		}
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.FALL_DAMAGE, true, world.getServer());
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, true, world.getServer());
 	}
 }

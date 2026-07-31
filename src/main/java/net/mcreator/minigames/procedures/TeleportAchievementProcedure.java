@@ -1,5 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.util.StrongholdPositionGenerator;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -17,6 +19,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TeleportAchievementProcedure {
     private static final TagKey<Block> UNSAFE_TAG = TagKey.create(Registries.BLOCK, Identifier.parse("minigames:unsafe"));
@@ -32,10 +39,15 @@ public class TeleportAchievementProcedure {
         for (int i = 0; i < 100; i++) {
             int x = Mth.nextInt(random, -10000000, 10000000);
             int z = Mth.nextInt(random, -10000000, 10000000);
+
             overworld.getChunkSource().getChunk(x >> 4, z >> 4, ChunkStatus.FULL, true);
 
             int y = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
-            
+
+            if (overworld.isOutsideBuildHeight(y)) {
+                continue;
+            }
+
             BlockPos groundPos = new BlockPos(x, y - 1, z);
             BlockState groundState = overworld.getBlockState(groundPos);
 
@@ -50,15 +62,44 @@ public class TeleportAchievementProcedure {
             int fallbackZ = 1000;
             overworld.getChunkSource().getChunk(fallbackX >> 4, fallbackZ >> 4, ChunkStatus.FULL, true);
             int fallbackY = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, fallbackX, fallbackZ);
-            targetPos = new BlockPos(fallbackX, fallbackY, fallbackZ);
+            targetPos = new BlockPos(fallbackX, Math.max(fallbackY, 64), fallbackZ);
         }
 
+        int centerChunkX = targetPos.getX() >> 4;
+        int centerChunkZ = targetPos.getZ() >> 4;
+        for (int cx = centerChunkX - 1; cx <= centerChunkX + 1; cx++) {
+            for (int cz = centerChunkZ - 1; cz <= centerChunkZ + 1; cz++) {
+                overworld.getChunkSource().getChunk(cx, cz, ChunkStatus.FULL, true);
+            }
+        }
+
+        MinigamesModVariables.MapVariables.get(world).coordinateOffset = new Vec3(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+
+        StrongholdPositionGenerator.POSITIONS.clear();
+        StrongholdPositionGenerator.POSITIONS.addAll(
+                StrongholdPositionGenerator.generate(
+                        12345L,
+                        0,
+                        0
+                )
+        );
+
+
         double tpX = targetPos.getX() + 0.5;
-        double tpY = targetPos.getY() + 0.1;
+        double tpY = targetPos.getY() + 1.0;
         double tpZ = targetPos.getZ() + 0.5;
 
         for (ServerPlayer player : overworld.getServer().getPlayerList().getPlayers()) {
-            player.teleportTo(tpX, tpY, tpZ);
+            player.teleportTo(
+                    overworld,
+                    tpX,
+                    tpY,
+                    tpZ,
+                    Collections.emptySet(),
+                    player.getYRot(),
+                    player.getXRot(),
+                    true
+            );
         }
 
         if (overworld.getLevelData() instanceof WritableLevelData levelData) {

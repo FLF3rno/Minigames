@@ -30,9 +30,8 @@ public class GrapplingHookItem extends Item {
 
 	@Override
 	public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-		InteractionResult ar = super.use(world, entity, hand);
 		GrapplingHookRightclickedProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, entity.getItemInHand(hand));
-		return ar;
+		return world.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
 	}
 
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {

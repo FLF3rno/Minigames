@@ -2360,7 +2360,7 @@
       "name": "GrapplingHook",
       "type": "item",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "grappling_hook",
       "metadata": {
         "files": [
@@ -12260,19 +12260,6 @@
       "path": "~/General/Animation"
     },
     {
-      "name": "Debuganim",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debuganim",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/DebuganimCommand.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
       "name": "ClientTickHandler",
       "type": "code",
       "compiles": true,
@@ -12284,6 +12271,20 @@
         ]
       },
       "path": "~/General/Animation"
+    },
+    {
+      "name": "OptionCategory",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "option_category",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/OptionCategoryMenu.java",
+          "src/main/java/net/mcreator/minigames/client/gui/OptionCategoryScreen.java"
+        ]
+      },
+      "path": "~/General/Options"
     }
   ],
   "variable_elements": [
@@ -13705,6 +13706,9 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "ITEMS:mod:on_kill": [
+      "CUSTOM:TheFinisher"
     ]
   },
   "tab_element_order": {},

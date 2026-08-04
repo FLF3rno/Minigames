@@ -1,41 +1,43 @@
 package net.mcreator.minigames.entity;
 
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.util.RandomSource;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.resources.Identifier;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModItems;
-import net.mcreator.minigames.entity.GrapplingHitboxEntity;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.IRON_BARS);
 	private int knockback = 0;
 	private boolean released = false;
+	private String hookedTargetId = "";
+	private int pullTicks = 0;
 
 	public GrappleEntity(EntityType<? extends GrappleEntity> type, Level world) {
 		super(type, world);
@@ -66,12 +68,6 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		return new ItemStack(Blocks.IRON_BARS);
 	}
 
-	@Override
-	protected void doPostHurtEffects(LivingEntity entity) {
-		super.doPostHurtEffects(entity);
-		entity.setArrowCount(entity.getArrowCount() - 1);
-	}
-
 	public void setKnockback(int knockback) {
 		this.knockback = knockback;
 	}
@@ -84,134 +80,204 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 			if (vec3.lengthSqr() > 0.0) {
 				livingEntity.push(vec3.x, 0.1, vec3.z);
 			}
-		} else { // knockback might be set by firedFromWeapon passed into constructor
-			super.doKnockback(livingEntity, damageSource);
 		}
 	}
 
 	@Override
 	protected void onHitEntity(EntityHitResult hitResult) {
-		super.onHitEntity(hitResult);
-		if (!this.level().isClientSide()) {
-			Entity owner = this.getOwner();
-			Entity target = hitResult.getEntity();
-			if (owner != null && target != null) {
-				GrapplingHitboxEntity hitbox = this.level().getEntitiesOfClass(GrapplingHitboxEntity.class, this.getBoundingBox().inflate(32)).stream()
-						.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner))).findFirst().orElse(null);
-				if (hitbox != null) {
-					hitbox.getEntityData().set(GrapplingHitboxEntity.DATA_target, target.getStringUUID());
-				}
-			}
+		if (this.level().isClientSide()) {
+			return;
+		}
+		Entity owner = this.getOwner();
+		Entity target = hitResult.getEntity();
+		if (owner != null && target != null && target != owner) {
+			hookedTargetId = target.getStringUUID();
+			pullTicks = 0;
+			setDeltaMovement(Vec3.ZERO);
+			setNoGravity(true);
 		}
 	}
 
 	@Override
 	public void onHitBlock(BlockHitResult blockHitResult) {
-		super.onHitBlock(blockHitResult);
-		if (this.level().isClientSide()) return;
+		if (this.level().isClientSide()) {
+			return;
+		}
 
 		BlockPos hitPos = blockHitResult.getBlockPos();
 		BlockState hitState = this.level().getBlockState(hitPos);
 
-		// Only pull non-air, replaceable blocks aren't interesting
 		if (hitState.isAir() || !hitState.isSolid()) {
 			releaseAndBreak(this.getOwner());
 			return;
 		}
 
 		Entity owner = this.getOwner();
-		if (owner == null) { releaseAndBreak(null); return; }
+		if (owner == null) {
+			releaseAndBreak(null);
+			return;
+		}
 
-		// Find the associated hitbox entity
-		GrapplingHitboxEntity hitbox = findHitbox(owner);
-		if (hitbox == null) { releaseAndBreak(owner); return; }
-
-		// Remove the block and spawn a no-gravity FallingBlockEntity in its place
 		this.level().removeBlock(hitPos, false);
-		FallingBlockEntity falling = FallingBlockEntity.fall(
-				(Level) this.level(),
-				hitPos,
-				hitState
-		);
+		FallingBlockEntity falling = FallingBlockEntity.fall((Level) this.level(), hitPos, hitState);
 		falling.setNoGravity(true);
 		falling.setDeltaMovement(Vec3.ZERO);
-		falling.time = 1; // prevent instant drop
+		falling.time = 1;
 		falling.dropItem = false;
 
-		// Register as pull target
-		hitbox.getEntityData().set(GrapplingHitboxEntity.DATA_target, falling.getStringUUID());
-
-		// Stop projectile in place
-		this.setDeltaMovement(Vec3.ZERO);
-		this.setNoGravity(true);
+		hookedTargetId = falling.getStringUUID();
+		pullTicks = 0;
+		setDeltaMovement(Vec3.ZERO);
+		setNoGravity(true);
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
 		Entity owner = this.getOwner();
-		if (!this.level().isClientSide()) {
-			// Break if owner is gone or too far while still in flight
-			if (owner == null) {
+		if (owner == null) {
+			if (!this.level().isClientSide()) {
 				releaseAndBreak(null);
+			}
+			return;
+		}
+
+		if (!this.level().isClientSide()) {
+			if (hookedTargetId.isEmpty() && this.distanceTo(owner) >= 30.0) {
+				releaseAndBreak(owner);
 				return;
 			}
-			if (this.distanceTo(owner) >= 30.0) {
-				GrapplingHitboxEntity hitbox = findHitbox(owner);
-				if (hitbox == null || hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target).isEmpty()) {
-					// Still in flight and missed — break
+
+			if (!hookedTargetId.isEmpty()) {
+				Entity target = resolveTarget();
+				if (target == null || !target.isAlive()) {
 					releaseAndBreak(owner);
+					return;
 				}
-			}
-		}
-		if (owner != null) {
-			GrapplingHitboxEntity hitbox = findHitbox(owner);
-			if (hitbox != null) {
-				if (hitbox.getEntityData().get(GrapplingHitboxEntity.DATA_target).isEmpty()) {
-					// No target yet — keep hitbox at projectile position for rope rendering
-					hitbox.setPos(this.getX(), this.getY(), this.getZ());
-					hitbox.setDeltaMovement(0, 0, 0);
+
+				pullTicks++;
+				Vec3 ownerPos = owner.position().add(0, owner.getEyeHeight() * 0.5, 0);
+				Vec3 targetPos = target.position().add(0, target.getBbHeight() * 0.5, 0);
+				Vec3 toOwner = ownerPos.subtract(targetPos);
+				double distance = toOwner.length();
+				if (distance < 2.5D) {
+					onTargetReached(owner, target, pullTicks);
+					return;
 				}
+
+				double speed = Math.min(0.5D, 0.04D + pullTicks * 0.002D);
+				Vec3 pull = toOwner.normalize().scale(speed);
+				Vec3 current = target.getDeltaMovement();
+				target.setDeltaMovement(
+						current.x * 0.6 + pull.x,
+						current.y * 0.6 + pull.y,
+						current.z * 0.6 + pull.z
+				);
+				target.hurtMarked = true;
+				if (target instanceof LivingEntity le) {
+					le.fallDistance = 0f;
+				}
+
+				setPos(target.getX(), target.getEyeY() - 0.1, target.getZ());
+				setDeltaMovement(Vec3.ZERO);
 			}
 		}
 	}
 
-	private void releaseAndBreak(@org.jetbrains.annotations.Nullable Entity owner) {
-		if (released || this.level().isClientSide())
+	private void releaseAndBreak(@Nullable Entity owner) {
+		if (released || this.level().isClientSide()) {
 			return;
+		}
 		released = true;
+
 		if (owner instanceof LivingEntity livingOwner) {
-			ItemStack main = livingOwner.getMainHandItem();
-			ItemStack off = livingOwner.getOffhandItem();
-			if (main.is(MinigamesModItems.GRAPPLING_HOOK.get())) {
-				main.shrink(1);
-			} else if (off.is(MinigamesModItems.GRAPPLING_HOOK.get())) {
-				off.shrink(1);
-			}
 			this.level().playSound(null, livingOwner.getX(), livingOwner.getY(), livingOwner.getZ(),
 					SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 1.0f, 1.0f);
 		}
 
-		if (owner != null) {
-			GrapplingHitboxEntity hitbox = findHitbox(owner);
-			if (hitbox != null) {
-				hitbox.earlyRelease();
-			}
-		}
+		hookedTargetId = "";
 		this.discard();
 	}
 
-	/** Finds the GrapplingHitboxEntity belonging to the given owner within a reasonable radius. */
-	private GrapplingHitboxEntity findHitbox(Entity owner) {
-		return this.level().getEntitiesOfClass(GrapplingHitboxEntity.class,
-				new AABB(owner.position(), owner.position()).inflate(64))
-				.stream()
-				.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner)))
-				.findFirst().orElse(null);
+	private Entity resolveTarget() {
+		if (!(this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) || hookedTargetId.isEmpty()) {
+			return null;
+		}
+		try {
+			return serverLevel.getEntity(UUID.fromString(hookedTargetId));
+		} catch (IllegalArgumentException ignored) {
+			return null;
+		}
 	}
 
-	public void onTargetReached() {
-		releaseAndBreak(this.getOwner());
+	public void onTargetReached(Entity owner, Entity target, int pullTicks) {
+		if (this.level().isClientSide()) {
+			return;
+		}
+		Vec3 toOwner = owner.position().subtract(target.position()).normalize();
+		double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
+		target.setDeltaMovement(toOwner.scale(launchSpeed));
+		target.hurtMarked = true;
+		if (target instanceof FallingBlockEntity fallingBlock) {
+			fallingBlock.setNoGravity(false);
+		}
+		hookedTargetId = "";
+		this.discard();
+	}
+
+	public void releaseHook() {
+		if (this.level().isClientSide()) {
+			return;
+		}
+		Entity owner = this.getOwner();
+		Entity target = resolveTarget();
+		if (owner != null && target != null && target.isAlive()) {
+			Vec3 toOwner = owner.position().subtract(target.position()).normalize();
+			double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
+			target.setDeltaMovement(toOwner.scale(launchSpeed));
+			target.hurtMarked = true;
+			if (target instanceof FallingBlockEntity fallingBlock) {
+				fallingBlock.setNoGravity(false);
+			}
+		}
+		hookedTargetId = "";
+		this.discard();
+	}
+
+	public boolean hasHookedTarget() {
+		return !hookedTargetId.isEmpty();
+	}
+
+	@Nullable
+	public Entity getHookedTargetEntity() {
+		return resolveTarget();
+	}
+
+	public boolean removeWhenFarAway(double d) {
+		return false;
+	}
+
+	@Override
+	public boolean isPushable() {
+		return false;
+	}
+
+	@Override
+	public boolean isAttackable() {
+		return false;
+	}
+
+	@Override
+	public ItemStack getPickResult() {
+		return ItemStack.EMPTY;
+	}
+
+	public static void init(net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent event) {}
+
+	public static net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder createAttributes() {
+		return net.minecraft.world.entity.Mob.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 1.0)
+				.add(Attributes.MOVEMENT_SPEED, 0.0);
 	}
 
 	public static GrappleEntity shoot(Level world, LivingEntity entity, RandomSource source) {

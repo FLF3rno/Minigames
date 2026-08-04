@@ -64,7 +64,6 @@ public class AscendingActiveProcedure {
                 double amp = effectInstance.getAmplifier();
                 double up = (amp / 100d);
                 entity.setDeltaMovement(new Vec3(0, up, 0));
-                entity.setDeltaMovement(entity.getDeltaMovement());
             }
         } else if (entity instanceof Player player && nbt.getBoolean("ascendingSlotSaved").orElse(false)) {
             int previousSlot = nbt.getInt("ascendingPreviousSlot").orElse(0);

@@ -25,6 +25,7 @@ public class MinigamesModScreens {
 		event.register(MinigamesModMenus.SELECT_CATEGORY_ACHIEVEMENT.get(), SelectCategoryAchievementScreen::new);
 		event.register(MinigamesModMenus.DISPLAY_ACHIEVMEN.get(), DisplayAchievmenScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_HUNT.get(), MinigameGUIAchievementHuntScreen::new);
+		event.register(MinigamesModMenus.OPTION_CATEGORY.get(), OptionCategoryScreen::new);
 	}
 
 	public interface ScreenAccessor {

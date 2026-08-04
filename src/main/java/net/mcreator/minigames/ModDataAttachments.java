@@ -19,14 +19,20 @@ public class ModDataAttachments {
         public final int durationTicks;
         public final double scale;
         public final String texture;
+        public final int x;
+        public final int y;
+        public final int z;
 
-        public BeamData(boolean hasBeam, int targetId, int startTick, int durationTicks, double scale, String texture) {
+        public BeamData(boolean hasBeam, int targetId, int startTick, int durationTicks, double scale, String texture, int x, int y, int z) {
             this.hasBeam = hasBeam;
             this.targetId = targetId;
             this.startTick = startTick;
             this.durationTicks = durationTicks;
             this.scale = scale;
             this.texture = texture;
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
 
         public static final Codec<BeamData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -35,7 +41,10 @@ public class ModDataAttachments {
             Codec.INT.fieldOf("startTick").forGetter(d -> d.startTick),
             Codec.INT.fieldOf("durationTicks").forGetter(d -> d.durationTicks),
             Codec.DOUBLE.fieldOf("scale").forGetter(d -> d.scale),
-            Codec.STRING.fieldOf("texture").forGetter(d -> d.texture)
+            Codec.STRING.fieldOf("texture").forGetter(d -> d.texture),
+            Codec.INT.fieldOf("x").forGetter(d -> d.x),
+            Codec.INT.fieldOf("x").forGetter(d -> d.y),
+            Codec.INT.fieldOf("x").forGetter(d -> d.z)
         ).apply(instance, BeamData::new));
 
         public static final StreamCodec<net.minecraft.network.FriendlyByteBuf, BeamData> STREAM_CODEC = StreamCodec.composite(
@@ -45,6 +54,9 @@ public class ModDataAttachments {
             ByteBufCodecs.INT, d -> d.durationTicks,
             ByteBufCodecs.DOUBLE, d -> d.scale,
             ByteBufCodecs.STRING_UTF8, d -> d.texture,
+            ByteBufCodecs.INT, d -> d.x,
+            ByteBufCodecs.INT, d -> d.y,
+            ByteBufCodecs.INT, d -> d.z,
             BeamData::new
         );
     }
@@ -67,7 +79,7 @@ public class ModDataAttachments {
     }
 
     public static final java.util.function.Supplier<AttachmentType<BeamData>> BEAM_DATA = 
-        ATTACHMENTS.register("beam_data", () -> AttachmentType.builder(() -> new BeamData(false, -1, 0, 0, 0.0D, ""))
+        ATTACHMENTS.register("beam_data", () -> AttachmentType.builder(() -> new BeamData(false, -1, 0, 0, 0.0D, "", 0, 0, 0))
             .serialize(BeamData.CODEC.fieldOf("beam_data"))
             .sync(BeamData.STREAM_CODEC)
             .copyOnDeath()

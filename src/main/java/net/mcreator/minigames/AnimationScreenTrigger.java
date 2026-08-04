@@ -1,7 +1,9 @@
 package net.mcreator.minigames;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 
 public class AnimationScreenTrigger {
 
@@ -66,7 +68,8 @@ public class AnimationScreenTrigger {
                 );
                 AnimationManager.displayStatic(50, 60, crownSlash, centerX - 40, centerY - 70, 3f, -17f, 3);
                 AnimationManager.displayStatic(50, 60, sword, centerX - 40, centerY - 70, 3f, -70f, 4);
-
+                AnimationManager.playSound(50, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:pvp_swordshit")), 1.0f, 2f);
+                AnimationManager.playSound(60, SoundEvents.ITEM_BREAK, 0.7f, 1.0f);
                 AnimationManager.displayTransform(60, 100, crownCrack,
                         centerX - 40, centerY - 70, centerX, centerY - 30,
                         3f, 3f,

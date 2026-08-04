@@ -14,7 +14,6 @@ import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModItems;
-import net.mcreator.minigames.MinigamesMod;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class AnimateCrownPickupProcedure {
 				Entity _ent = entityiterator;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
 					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minecraft:item.goat_horn.sound.1 ui @s ~ ~ ~ 10000000 1");
+							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minigames:teameliminated ui @s ~ ~ ~ 10000000 1");
 				}
 			}
 			{
@@ -59,28 +58,6 @@ public class AnimateCrownPickupProcedure {
 			}
 			UpdateTablistProcedure.execute(entityiterator);
 		}
-		net.mcreator.minigames.AnimationScreenTrigger.startAnimation(100, "crown", 1.0f);
-		MinigamesMod.queueServerWork(50, () -> {
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				{
-					Entity _ent = entityiterator;
-					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-								LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minigames:pvp_swordshit ui @s ~ ~ ~ 10000000 2");
-					}
-				}
-			}
-		});
-		MinigamesMod.queueServerWork(60, () -> {
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				{
-					Entity _ent = entityiterator;
-					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-								LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minecraft:entity.item.break ui @s ~ ~ ~ 0.5 1");
-					}
-				}
-			}
-		});
+		net.mcreator.minigames.AnimationScreenTrigger.startAnimation(100, "crown", 1.2f);
 	}
 }

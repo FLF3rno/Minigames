@@ -1,0 +1,42 @@
+{
+  "_fv": 89,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 7,
+    "height": 269,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "minecraft.png",
+          "use1Xscale": false,
+          "x": -48,
+          "y": -3,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "minigames.png",
+          "use1Xscale": false,
+          "x": 216,
+          "y": 0,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

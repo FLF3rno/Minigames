@@ -30,10 +30,6 @@ public class AchievementRerollProcedure {
 			_vars.markSyncDirty();
 		}
 		rerollCount = 0;
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @a at @s run playsound minecraft:block.beacon.deactivate ui @s ~ ~ ~ 1 1");
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			if ((entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Rerolling")) {
 				rerollCount = rerollCount + 1;
@@ -42,6 +38,11 @@ public class AchievementRerollProcedure {
 		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) == rerollCount) {
 			if (world.isClientSide())
 				ClientPacketDistributor.sendToServer(new RerollAchievementMessage(""));
+		} else {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"/execute as @a at @s run playsound minecraft:block.beacon.deactivate ui @s ~ ~ ~ 1 1");
 		}
 	}
 }

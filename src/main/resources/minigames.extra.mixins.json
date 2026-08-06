@@ -10,13 +10,15 @@
     "PhantomCollisionMixin",
     "RelicInventoryMixin",
     "LivingEntityTargetMixin",
-    "ChunkGeneratorStructureStateMixin"
+    "ChunkGeneratorStructureStateMixin",
+    "IsSecondaryUseActiveMixin"
   ],
   "client": [
     "GuiAccessor",
     "EntityTeamColorMixin",
     "PlayerNameColorMixin",
-    "DebugEntryPositionMixin"
+    "DebugEntryPositionMixin",
+    "ExperienceBarRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

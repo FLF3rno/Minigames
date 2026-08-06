@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.MinigamesMod;
 
 public class WonVoteProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -30,7 +31,10 @@ public class WonVoteProcedure {
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 6) {
 				StartRoomProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 7) {
-				StartRoomProcedure.execute(world);
+				PlayBossCutsceneProcedure.execute();
+				MinigamesMod.queueServerWork(200, () -> {
+					StartRoomProcedure.execute(world);
+				});
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {
 				StartRoomProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 9) {

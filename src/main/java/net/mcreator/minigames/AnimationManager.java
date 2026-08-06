@@ -81,6 +81,10 @@ public class AnimationManager {
 		return finished;
 	}
 
+	@FunctionalInterface
+	public interface GuiRenderable {
+		void render(GuiGraphicsExtractor graphics);
+	}
 	public static void displayTransform(
 			int fromTick, int toTick, Identifier texture,
 			int fromX, int fromY, int toX, int toY,

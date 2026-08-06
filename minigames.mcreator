@@ -12285,6 +12285,20 @@
         ]
       },
       "path": "~/General/Options"
+    },
+    {
+      "name": "PlayBossCutscene",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "play_boss_cutscene",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayBossCutsceneProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Cutscene"
     }
   ],
   "variable_elements": [
@@ -14462,6 +14476,10 @@
           },
           {
             "name": "Mob Goals",
+            "children": []
+          },
+          {
+            "name": "Cutscene",
             "children": []
           }
         ]

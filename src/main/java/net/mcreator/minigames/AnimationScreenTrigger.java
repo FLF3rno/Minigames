@@ -27,7 +27,7 @@ public class AnimationScreenTrigger {
                 AnimationManager.displayScale(50, 100, logo, 150, 150, 0.5f, 2.0f, "easeOut", 1);
                 AnimationManager.displayRotate(0, 40, logo, 50, 50, 0f, 180f, "linear", 1);
                 // move, scale, AND rotate all at the same time:
-                AnimationManager.displayTransform(
+                    AnimationManager.displayTransform(
                         0, 50, logo,
                         0, 0, 100, 100,         // Move from (0,0) to (100,100)
                         0.5f, 2.0f,             // Scale from 0.5x to 2.0x
@@ -82,6 +82,9 @@ public class AnimationScreenTrigger {
                         -70f, -130f,
                         "easeOut", 2
                 );
+            }
+            else if (animationType.equalsIgnoreCase("roguelike_boss")) {
+
             }
 
             AnimationOverlay.addManager(manager);

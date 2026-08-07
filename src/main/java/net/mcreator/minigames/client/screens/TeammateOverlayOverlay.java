@@ -15,7 +15,9 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.gui.components.PlayerFaceExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
-
+import net.minecraft.client.gui.Gui;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.network.TeammateHealthSync;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -66,7 +68,10 @@ public class TeammateOverlayOverlay {
     private static final int SUPPORT_COLOR = 0x55FFFF;
     private static final int MAGE_COLOR = 0xFF55FF;
     private static final int DEAD_TEXT_COLOR = 0xFF808080;
-    private static final int ASCENDING_TEXT_COLOR = 0xFFFFE059; // matches the beam (1.0, 0.88, 0.35)
+    private static final int ASCENDING_TEXT_COLOR = 0xFFFFE059;
+    private static final int EFFECT_ICON_SIZE = 9;
+    private static final int EFFECT_ICON_GAP = 2;
+    private static final int MAX_EFFECT_ICONS = 10;
     private static final Map<Integer, FlashState> FLASH_STATES = new ConcurrentHashMap<>();
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
@@ -95,6 +100,7 @@ public class TeammateOverlayOverlay {
             String classLabel = classDisplay.label();
             drawCenteredHeader(event, teammate, playerName, classLabel, withFullAlpha(playerNameColor), withFullAlpha(classDisplay.color()), rowY);
             drawHealthBar(event, teammate, rowY);
+            drawEffectIcons(event, teammate, rowY);
             rowIndex++;
         }
     }
@@ -182,6 +188,77 @@ public class TeammateOverlayOverlay {
             }
         }
     }
+    private static void drawEffectIcons(
+            RenderGuiEvent.Pre event,
+            Player teammate,
+            int rowY
+    ) {
+        var effects = teammate.getActiveEffects()
+                .stream()
+                .filter(effect -> !isHiddenEffect(effect))
+                .sorted()
+                .limit(MAX_EFFECT_ICONS)
+                .toList();
+
+
+        if (effects.isEmpty()) {
+            return;
+        }
+
+
+        int totalWidth =
+                effects.size() * EFFECT_ICON_SIZE
+                        + (effects.size() - 1) * EFFECT_ICON_GAP;
+
+
+        int centerX =
+                HEALTH_BAR_X + HEALTH_BAR_WIDTH / 2;
+
+
+        int startX =
+                centerX - totalWidth / 2;
+
+
+        int y =
+                rowY + ROW_HEIGHT + 2;
+
+
+        for (int i = 0; i < effects.size(); i++) {
+
+            MobEffectInstance effect = effects.get(i);
+
+
+            int x =
+                    startX +
+                            i * (EFFECT_ICON_SIZE + EFFECT_ICON_GAP);
+
+
+            event.getGuiGraphics().blitSprite(
+                    RenderPipelines.GUI_TEXTURED,
+                    Gui.getMobEffectSprite(effect.getEffect()),
+                    x,
+                    y,
+                    EFFECT_ICON_SIZE,
+                    EFFECT_ICON_SIZE
+            );
+        }
+    }
+
+
+    private static boolean isHiddenEffect(
+            MobEffectInstance effect
+    ) {
+
+        String id =
+                BuiltInRegistries.MOB_EFFECT
+                        .getKey(effect.getEffect().value())
+                        .toString();
+
+
+        return id.equals("xaerominimap:no_minimap")
+                || id.equals("xaerominimap:no_waypoints")
+                || id.equals("xaeroworldmap:no_world_map");
+    }
 
     private static FlashState updateFlashState(FlashState state, TeammateHealthSync.HealthSnapshot snapshot, long nowTick) {
         if (state == null) {
@@ -206,7 +283,6 @@ public class TeammateOverlayOverlay {
         if (snapshot.poisoned()) {
             return flashing ? HEART_POISONED_FULL_BLINKING : HEART_POISONED_FULL;
         }
-        // Both harmful and non-harmful use the same heart texture, just simplified the logic
         return flashing ? HEART_FULL_BLINKING : HEART_FULL;
     }
 
@@ -217,7 +293,6 @@ public class TeammateOverlayOverlay {
         if (snapshot.poisoned()) {
             return flashing ? HEART_POISONED_HALF_BLINKING : HEART_POISONED_HALF;
         }
-        // Both harmful and non-harmful use the same heart texture, just simplified the logic
         return flashing ? HEART_HALF_BLINKING : HEART_HALF;
     }
 

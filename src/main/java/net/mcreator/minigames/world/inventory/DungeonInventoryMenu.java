@@ -139,42 +139,97 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		return containerSlot >= 9 && containerSlot <= 33;
 	}
 
-	private void addDynamicPlayerSlots(Inventory inventory, int playerSlots) {
-		final int centerX = 77;
-		final int y = 125;
-		final int slotSpacing = 22;
-		final int slotInset = 2;
-		int startX = centerX - (playerSlots * slotSpacing) / 2;
+	private void addDynamicPlayerSlots(
+			Inventory inventory,
+			int playerSlots
+	) {
+		final int SLOT_SIZE = 18;
+		final int SLOT_SPACING = 22;
+
+		// width of the visible main inventory (minimum 5 columns)
+		int visibleColumns = Math.max(5, playerSlots);
+		int mainWidth = visibleColumns * SLOT_SPACING + 8;
+
+		// hotbar is centered inside the main panel
+		int hotbarWidth = playerSlots * SLOT_SIZE;
+
+		int startX = (mainWidth - hotbarWidth) / 2 + 1;
+		int y = 88 + 1;
+
 		for (int i = 0; i < playerSlots; i++) {
-			Slot slot = new HotbarSlot(inventory, i, startX + i * slotSpacing + slotInset, y + slotInset);
-			this.customSlots.put(this.customSlots.size(), this.addSlot(slot));
+			addSlot(new HotbarSlot(
+					inventory,
+					i,
+					startX + i * SLOT_SIZE,
+					y
+			));
 		}
 	}
 
-	private void addDynamicBackpackSlots(Inventory inventory, int backpackSlots) {
-		final int startX = 74;
-		final int startY = 44;
-		final int maxRowsPerColumn = 3;
-		final int slotSpacing = 22;
-		final int slotInset = 2;
-		int maxSlots = Math.min(backpackSlots, 25);
-		for (int i = 0; i < maxSlots; i++) {
-			int column = i / maxRowsPerColumn;
-			int row = i % maxRowsPerColumn;
-			int x = startX + column * slotSpacing;
-			int y = startY + row * slotSpacing;
-			int inventorySlot = 9 + i;
-			Slot slot = new Slot(inventory, inventorySlot, x + slotInset, y + slotInset);
-			this.customSlots.put(this.customSlots.size(), this.addSlot(slot));
+	private void addDynamicBackpackSlots(
+			Inventory inventory,
+			int backpackSlots
+	) {
+		final int SLOT_SIZE = 18;
+		final int SLOT_SPACING = 22;
+		final int rows = 3;
+
+		int columns = Math.max(1, (int)Math.ceil(backpackSlots / 3.0));
+
+		int backpackWidth = columns * SLOT_SPACING + 8;
+
+		int gridWidth = columns * SLOT_SPACING - (SLOT_SPACING - SLOT_SIZE);
+		int gridHeight = rows * SLOT_SPACING - (SLOT_SPACING - SLOT_SIZE);
+
+		int visibleColumns = Math.max(
+				5,
+				(int)inventory.player.getData(
+						MinigamesModVariables.PLAYER_VARIABLES
+				).playerSlots
+		);
+
+		int mainWidth = visibleColumns * SLOT_SPACING + 8;
+
+		int panelX = mainWidth + 10;
+
+		int startX =
+				panelX
+						+ 4
+						+ ((backpackWidth - 8) - gridWidth) / 2;
+
+		int startY =
+				4
+						+ ((112 - 8) - gridHeight) / 2;
+
+		for (int i = 0; i < backpackSlots; i++) {
+
+			int column = i / rows;
+			int row = i % rows;
+
+			addSlot(new Slot(
+					inventory,
+					9 + i,
+					startX + column * SLOT_SPACING + 1,
+					startY + row * SLOT_SPACING + 1
+			));
 		}
 	}
 
 	private void addRelicSlots(Inventory inventory) {
-		final int slotInset = 2;
-		Slot leftRelic = new RelicSlot(inventory, 34, 25 + slotInset, 17 + slotInset);
-		Slot rightRelic = new RelicSlot(inventory, 35, 49 + slotInset, 17 + slotInset);
-		this.customSlots.put(this.customSlots.size(), this.addSlot(leftRelic));
-		this.customSlots.put(this.customSlots.size(), this.addSlot(rightRelic));
+
+		addSlot(new RelicSlot(
+				inventory,
+				34,
+				71,
+				25
+		));
+
+		addSlot(new RelicSlot(
+				inventory,
+				35,
+				71,
+				43
+		));
 	}
 
 	private static class HotbarSlot extends Slot {

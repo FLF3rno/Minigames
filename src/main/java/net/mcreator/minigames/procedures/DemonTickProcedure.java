@@ -2,25 +2,19 @@ package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
-import net.mcreator.minigames.init.MinigamesModEntities;
-import net.mcreator.minigames.entity.SculklingEntity;
 import net.mcreator.minigames.entity.DemonEntity;
 
-import java.util.Comparator;
 import java.util.ArrayList;
 
 public class DemonTickProcedure {
@@ -50,27 +44,13 @@ public class DemonTickProcedure {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					ApplyEffectProcedure.execute(entityiterator, false, 1, 100, "minecraft:darkness");
 				}
-				for (int index71 = 0; index71 < 6; index71++) {
-					if (world instanceof ServerLevel _level) {
-						Entity entityToSpawn = MinigamesModEntities.SCULKLING.get().spawn(_level, BlockPos.containing(x, y + 1, z), EntitySpawnReason.MOB_SUMMONED);
-						if (entityToSpawn != null) {
-							entityToSpawn.setDeltaMovement((Mth.nextInt(RandomSource.create(), -10, 10)), (Mth.nextInt(RandomSource.create(), -10, 10)), (Mth.nextInt(RandomSource.create(), -10, 10)));
-						}
-					}
-				}
-				{
-					final Vec3 _center = new Vec3(x, y, z);
-					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(20 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-						if (entityiterator instanceof SculklingEntity) {
-							if (entityiterator instanceof SculklingEntity _datEntSetI)
-								_datEntSetI.getEntityData().set(SculklingEntity.DATA_ID, (int) (entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_ID) : 0));
-						}
-					}
+				for (int index346 = 0; index346 < 6; index346++) {
+					SummonMinionProcedure.execute(world, x, y + 1, z, entity, 0, Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), 0, "minigames:sculkling");
 				}
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 50) {
-				if (entity instanceof DemonEntity _ent18) {
-					_ent18.getEntityData().set(DemonEntity.ANIM, 1000);
-					_ent18.getEntityData().set(DemonEntity.ANIM, 1);
+				if (entity instanceof DemonEntity _ent13) {
+					_ent13.getEntityData().set(DemonEntity.ANIM, 1000);
+					_ent13.getEntityData().set(DemonEntity.ANIM, 1);
 				}
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 275) {
 				if (entity instanceof DemonEntity _datEntSetI)

@@ -12299,6 +12299,151 @@
         ]
       },
       "path": "~/Dungeon/Cutscene"
+    },
+    {
+      "name": "ChargeExecuteGoal",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "charge_execute_goal",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/ChargeExecuteGoal.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob Goals"
+    },
+    {
+      "name": "SummonMinion",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "summon_minion",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "pitch",
+            "type": "number"
+          },
+          {
+            "name": "vx",
+            "type": "number"
+          },
+          {
+            "name": "vy",
+            "type": "number"
+          },
+          {
+            "name": "vz",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "yaw",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "entityRegistryName",
+            "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SummonMinionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "OnMinionSummon",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "on_minion_summon",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OnMinionSummonProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "Debugslot",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debugslot",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/DebugslotCommand.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "DebugSlots",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debug_slots",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DebugSlotsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "DebugSlotsB",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debug_slots_b",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DebugSlotsBProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
     }
   ],
   "variable_elements": [
@@ -13723,6 +13868,25 @@
     ],
     "ITEMS:mod:on_kill": [
       "CUSTOM:TheFinisher"
+    ],
+    "ITEMS:mod:weapontype_sword": [
+      "CUSTOM:WindScythe",
+      "CUSTOM:ComboDagger",
+      "CUSTOM:StopSign",
+      "CUSTOM:Hammer",
+      "CUSTOM:TheFinisher",
+      "CUSTOM:BlankDagger",
+      "CUSTOM:BlankSword",
+      "CUSTOM:BlankLongSword"
+    ],
+    "ITEMS:mod:weapontype_bow": [
+      "Blocks.BEDROCK"
+    ],
+    "ITEMS:mod:weapontype_crossbow": [
+      "CUSTOM:BlessedCursedCrossbow"
+    ],
+    "ITEMS:mod:weapontype_throwing": [
+      "Blocks.BEDROCK"
     ]
   },
   "tab_element_order": {},

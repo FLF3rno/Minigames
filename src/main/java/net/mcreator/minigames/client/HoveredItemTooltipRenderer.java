@@ -1,6 +1,9 @@
 package net.mcreator.minigames.client;
 
 import net.minecraft.client.Camera;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import org.joml.Matrix4f;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
@@ -64,6 +67,7 @@ public class HoveredItemTooltipRenderer {
     private static final int DAMAGE_COLOR = 0x55FF55;
     private static final int EXPLOSION_DAMAGE_COLOR = 0xFFAA33;
     private static final int SPEED_COLOR = 0x55FFFF;
+    private static final int WEAPON_TYPE_COLOR = 0x333333;
     private static final int RELIC_GRADIENT_START = 0xA020F0;
     private static final int RELIC_GRADIENT_END = 0xC77DFF;
     private static final int CURSED_GRADIENT_START = 0xFF6666;
@@ -84,9 +88,13 @@ public class HoveredItemTooltipRenderer {
         int nextIndex = 0;
         if (!tooltip.isEmpty()) {
             tooltip.set(0, tooltip.get(0).copy().setStyle(tooltip.get(0).getStyle().withColor(classInfo.color())));
-            tooltip.add(1, Component.empty());
-            nextIndex = 2;
+            //tooltip.add(1, Component.empty());
+            nextIndex = 1;
         }
+
+        String type = getWeaponType(stack);
+        tooltip.add(nextIndex++, Component.literal(type).setStyle(Style.EMPTY.withColor(WEAPON_TYPE_COLOR).withBold(true)));
+
         Double damage = getDisplayedDamage(stack);
         if (damage != null && damage != 0) {
             tooltip.add(nextIndex++, Component.literal(formatDamage(damage) + " Damage").setStyle(Style.EMPTY.withColor(DAMAGE_COLOR)));
@@ -453,6 +461,29 @@ public class HoveredItemTooltipRenderer {
             }
         }
         return false;
+    }
+    private static final TagKey<Item> WEAPON_SWORD = TagKey.create(
+            Registries.ITEM,
+            Identifier.parse("minigames:weapontype_sword")
+    );
+    private static final TagKey<Item> WEAPON_BOW = TagKey.create(
+            Registries.ITEM,
+            Identifier.parse("minigames:weapontype_bow")
+    );
+    private static final TagKey<Item> WEAPON_CROSSBOW = TagKey.create(
+            Registries.ITEM,
+            Identifier.parse("minigames:weapontype_crossbow")
+    );
+    private static final TagKey<Item> WEAPON_THROWING = TagKey.create(
+            Registries.ITEM,
+            Identifier.parse("minigames:weapontype_throwing")
+    );
+    private static String getWeaponType(ItemStack stack) {
+            if (stack.is(WEAPON_SWORD)) return "SWORD";
+            else if (stack.is(WEAPON_BOW)) return "BOW";
+            else if (stack.is(WEAPON_CROSSBOW)) return "CROSSBOW";
+            else if (stack.is(WEAPON_THROWING)) return "THROWING";
+        return "";
     }
 
     private static Double getDisplayedDamage(ItemStack stack) {

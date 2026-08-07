@@ -18,7 +18,8 @@
     "EntityTeamColorMixin",
     "PlayerNameColorMixin",
     "DebugEntryPositionMixin",
-    "ExperienceBarRendererMixin"
+    "ExperienceBarRendererMixin",
+    "EffectsInInventoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

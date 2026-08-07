@@ -29,6 +29,7 @@ public final class WorldTooltipDefinitions {
     private static final int PHANTOM_COLOR = 0x605AA5;
     private static final int BLESSED_COLOR = 0x84D4FF;
     private static final int DEFINITION_TEXT = 0xEAE6D8;
+    private static final int WEAPON_TYPE_COLOR = 0xE0E0E0;
     private static final int PADDING_X = 6;
     private static final int PADDING_Y = 6;
     private static final int LINE_HEIGHT = 10;

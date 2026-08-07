@@ -1,5 +1,6 @@
 package net.mcreator.minigames.entity;
 
+import net.mcreator.minigames.procedures.SummonMinionProcedure;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
@@ -301,10 +302,21 @@ public class GravediggerEntity extends Monster {
 		}
 		EntityType<?> entityType = types.get(this.random.nextInt(types.size()));
 		BlockPos spawnPos = targetPos.above();
-		Entity spawned = entityType.spawn(serverLevel, spawnPos, EntitySpawnReason.MOB_SUMMONED);
-		if (spawned != null) {
-			spawned.setPos(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D);
-		}
+		Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+		SummonMinionProcedure.execute(
+				level(),
+				spawnPos.getX() + 0.5D,
+				spawnPos.getY(),
+				spawnPos.getZ() + 0.5D,
+				this,
+				this.getXRot() * -1,
+				this.getYRot() * -1,
+				0,
+				0,
+				0,
+				id.toString()
+		);
+
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {

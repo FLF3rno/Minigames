@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minigames:blank_dagger",
+    "minigames:hammer",
+    "minigames:the_finisher",
+    "minigames:wind_scythe",
+    "minigames:combo_dagger",
+    "minigames:stop_sign",
+    "minigames:blank_sword",
+    "minigames:blank_long_sword"
+  ]
+}

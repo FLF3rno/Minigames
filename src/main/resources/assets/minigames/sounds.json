@@ -565,5 +565,26 @@
         "stream": false
       }
     ]
+  },
+  "party_explode": {
+    "subtitle": "subtitles.party_explode",
+    "sounds": [
+      {
+        "name": "minigames:party_explode1",
+        "stream": false
+      },
+      {
+        "name": "minigames:party_explode2",
+        "stream": false
+      },
+      {
+        "name": "minigames:party_explode3",
+        "stream": false
+      },
+      {
+        "name": "minigames:party_explode4",
+        "stream": false
+      }
+    ]
   }
 }

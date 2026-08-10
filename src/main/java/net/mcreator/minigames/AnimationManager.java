@@ -6,7 +6,9 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -85,8 +87,94 @@ public class AnimationManager {
 	public interface GuiRenderable {
 		void render(GuiGraphicsExtractor graphics);
 	}
+
+	@FunctionalInterface
+	public interface DisplayRenderable {
+		void render(GuiGraphicsExtractor graphics, float x, float y, float scale, float rotation);
+	}
+
+	private static void renderTransform(
+			GuiGraphicsExtractor g,
+			float x, float y,
+			float scale, float rotation,
+			Runnable drawCall) {
+		g.pose().pushMatrix();
+		g.pose().translate(x, y);
+		g.pose().scale(scale, scale);
+		if (rotation != 0.0f) {
+			g.pose().translate(8.0f, 8.0f);
+			g.pose().rotate((float) Math.toRadians(rotation));
+			g.pose().translate(-8.0f, -8.0f);
+		}
+		drawCall.run();
+		g.pose().popMatrix();
+	}
+
 	public static void displayTransform(
 			int fromTick, int toTick, Identifier texture,
+			int fromX, int fromY, int toX, int toY,
+			float startScale, float endScale,
+			float startAngle, float endAngle,
+			String clampType, int layer) {
+		if (CURRENT_INSTANCE != null) {
+			CURRENT_INSTANCE.actions.add(new AnimationAction() {
+				@Override
+				public boolean isAlive(int tick) {
+					return tick >= fromTick && tick <= toTick;
+				}
+
+				@Override
+				public int getLayer() {
+					return layer;
+				}
+
+				@Override
+				public void render(GuiGraphicsExtractor g, int tick, int sw, int sh) {
+					float progress = clamp((float)(tick - fromTick) / (float)(toTick - fromTick), clampType);
+
+					float currentX = fromX + (toX - fromX) * progress;
+					float currentY = fromY + (toY - fromY) * progress;
+					float currentScale = startScale + (endScale - startScale) * progress;
+					float currentAngle = startAngle + (endAngle - startAngle) * progress;
+
+					g.pose().pushMatrix();
+					g.pose().translate(currentX, currentY);
+					g.pose().scale(currentScale, currentScale);
+					if (currentAngle != 0) {
+						g.pose().translate(8.0f, 8.0f);
+						g.pose().rotate((float) Math.toRadians(currentAngle));
+						g.pose().translate(-8.0f, -8.0f);
+					}
+
+					g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, texture, 0, 0, 0, 0, 16, 16, 16, 16);
+					g.pose().popMatrix();
+				}
+			});
+		}
+	}
+
+	public static void displayTransform(
+			int fromTick, int toTick, ItemStack itemStack,
+			int fromX, int fromY, int toX, int toY,
+			float startScale, float endScale,
+			float startAngle, float endAngle,
+			String clampType, int layer) {
+		displayTransform(fromTick, toTick, (g, x, y, scale, rotation) ->
+				g.item(itemStack, (int) x, (int) y), fromX, fromY, toX, toY, startScale, endScale, startAngle, endAngle, clampType, layer);
+	}
+
+	public static void displayTransform(
+			int fromTick, int toTick, Component text,
+			int fromX, int fromY, int toX, int toY,
+			float startScale, float endScale,
+			float startAngle, float endAngle,
+			String clampType, int layer) {
+		displayTransform(fromTick, toTick, (g, x, y, scale, rotation) ->
+				g.text(Minecraft.getInstance().font, text, (int) x, (int) y, 0xFFFFFFFF, false), fromX, fromY, toX, toY, startScale, endScale, startAngle, endAngle, clampType, layer);
+	}
+
+	public static void displayTransform(
+			int fromTick, int toTick, DisplayRenderable renderable,
 			int fromX, int fromY, int toX, int toY,
 			float startScale, float endScale,
 			float startAngle, float endAngle,
@@ -112,25 +200,8 @@ public class AnimationManager {
 					float currentY = fromY + (toY - fromY) * progress;
 					float currentScale = startScale + (endScale - startScale) * progress;
 					float currentAngle = startAngle + (endAngle - startAngle) * progress;
-
-					g.pose().pushMatrix();
-
-					//pos
-					g.pose().translate(currentX, currentY);
-
-					//scale
-					g.pose().scale(currentScale, currentScale);
-
-					//rot
-					if (currentAngle != 0) {
-						g.pose().translate(8.0f, 8.0f);
-						g.pose().rotate((float) Math.toRadians(currentAngle));
-						g.pose().translate(-8.0f, -8.0f);
-					}
-
-					g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, texture, 0, 0, 0, 0, 16, 16, 16, 16);
-
-					g.pose().popMatrix();
+					renderTransform(g, currentX, currentY, currentScale, currentAngle,
+							() -> renderable.render(g, currentX, currentY, currentScale, currentAngle));
 				}
 			});
 		}

@@ -10,6 +10,7 @@ import net.neoforged.api.distmarker.Dist;
 
 import net.mcreator.minigames.client.particle.RedExplosionParticle;
 import net.mcreator.minigames.client.particle.PoisonParticle;
+import net.mcreator.minigames.client.particle.ConfettiParticle;
 import net.mcreator.minigames.client.particle.BloodParticle;
 
 @EventBusSubscriber(Dist.CLIENT)
@@ -19,5 +20,6 @@ public class MinigamesModParticles {
 		event.registerSpriteSet(MinigamesModParticleTypes.RED_EXPLOSION.get(), RedExplosionParticle::provider);
 		event.registerSpriteSet(MinigamesModParticleTypes.POISON.get(), PoisonParticle::provider);
 		event.registerSpriteSet(MinigamesModParticleTypes.BLOOD.get(), BloodParticle::provider);
+		event.registerSpriteSet(MinigamesModParticleTypes.CONFETTI.get(), ConfettiParticle::provider);
 	}
 }

@@ -13048,6 +13048,20 @@
         ]
       },
       "path": "~/Dungeon/Items/Description Helper"
+    },
+    {
+      "name": "Confetti",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "confetti",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/particle/ConfettiParticle.java",
+          "src/main/resources/assets/minigames/particles/confetti.json"
+        ]
+      },
+      "path": "~/Dungeon/Items"
     }
   ],
   "variable_elements": [
@@ -14181,6 +14195,17 @@
       ],
       "category": "neutral",
       "subtitle": "Zap"
+    },
+    {
+      "name": "party_explode",
+      "files": [
+        "party_explode1",
+        "party_explode2",
+        "party_explode3",
+        "party_explode4"
+      ],
+      "category": "player",
+      "subtitle": ":D"
     }
   ],
   "tag_elements": {
@@ -14890,7 +14915,8 @@
       "item.minigames.horseshoe": "Horseshoe",
       "item.minigames.slam": "Slam",
       "item.minigames.box_of_fun": "Box of Fun",
-      "attribute.minigames.effect_potency_2": "Effect Potency 2"
+      "attribute.minigames.effect_potency_2": "Effect Potency 2",
+      "subtitles.party_explode": ":D"
     }
   },
   "metadata": {

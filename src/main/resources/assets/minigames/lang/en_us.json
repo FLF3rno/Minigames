@@ -376,5 +376,6 @@
   "item.minigames.horseshoe": "Horseshoe",
   "item.minigames.slam": "Slam",
   "item.minigames.box_of_fun": "Box of Fun",
-  "attribute.minigames.effect_potency_2": "Effect Potency 2"
+  "attribute.minigames.effect_potency_2": "Effect Potency 2",
+  "subtitles.party_explode": ":D"
 }

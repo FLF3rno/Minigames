@@ -2,6 +2,8 @@ package net.mcreator.minigames;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 
@@ -15,20 +17,9 @@ public class AnimationScreenTrigger {
 
             if (animationType.equalsIgnoreCase("template")) {
                 Identifier logo = Identifier.fromNamespaceAndPath("minigames", "textures/screens/logo");
-                Identifier banner = Identifier.fromNamespaceAndPath("minigames", "textures/screens/banner.png");
 
-                //static display from tick 0 to 40
-                AnimationManager.displayStatic(0, 40, banner, 50, 50, 2, 0);
-
-                //sliding movement from tick 20 to 80
-                AnimationManager.displayMove(20, 80, logo, 0, 100, 200, 100, 1, "easeInOut", 0);
-
-                //scaling effect from tick 50 to 100
-                AnimationManager.displayScale(50, 100, logo, 150, 150, 0.5f, 2.0f, "easeOut", 1);
-                AnimationManager.displayRotate(0, 40, logo, 50, 50, 0f, 180f, "linear", 1);
-                // move, scale, AND rotate all at the same time:
                     AnimationManager.displayTransform(
-                        0, 50, logo,
+                        0, 50, Component.literal("Take no damage").withStyle(Style.EMPTY.withColor(0xFFFFFFFF)),
                         0, 0, 100, 100,         // Move from (0,0) to (100,100)
                         0.5f, 2.0f,             // Scale from 0.5x to 2.0x
                         0f, 360f,               // Spin a full circle (0 to 360 degrees)

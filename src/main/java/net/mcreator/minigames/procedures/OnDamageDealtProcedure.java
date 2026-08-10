@@ -15,7 +15,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Mth;
 import net.minecraft.tags.TagKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
@@ -37,6 +40,8 @@ import net.mcreator.minigames.init.MinigamesModItems;
 
 import javax.annotation.Nullable;
 
+import java.util.ArrayList;
+
 @EventBusSubscriber
 public class OnDamageDealtProcedure {
 	@SubscribeEvent
@@ -55,6 +60,7 @@ public class OnDamageDealtProcedure {
 			return;
 		double damage = 0;
 		Entity target = null;
+		ArrayList<Object> entitiesinrange = new ArrayList<>();
 		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.BLESSED) && !damagesource.is(TagKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minecraft:bypasses_cooldown")))) {
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount(0);
@@ -94,20 +100,20 @@ public class OnDamageDealtProcedure {
 			}
 			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:zap")))) {
 				if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.PLUG.get()))) {
-					for (int index241 = 0; index241 < 3; index241++) {
-						for (Entity entityiterator : world.getEntities(entity,
-								new AABB((x - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
-										(y - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
-										(z - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
-										(x + GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
-										(y + GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
-										(z + GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range"))))) {
-							if (Math.random() < 0.4) {
-								target = entityiterator;
-							}
+					entitiesinrange.clear();
+					for (Entity entityiterator : world.getEntities(entity,
+							new AABB((x - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
+									(y - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
+									(z - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
+									(x + GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
+									(y + GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
+									(z + GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range"))))) {
+						if (!(entityiterator instanceof Player) && entityiterator instanceof AgeableMob && MinigamesModVariables.MapVariables.get(world).currentRoomID == entityiterator.getPersistentData().getDoubleOr("DataID", 0)) {
+							entitiesinrange.add(entityiterator);
 						}
 					}
-					if (MinigamesModVariables.MapVariables.get(world).currentRoomID == target.getPersistentData().getDoubleOr("DataID", 0)) {
+					if (!entitiesinrange.isEmpty()) {
+						target = entitiesinrange.get(Mth.nextInt(RandomSource.create(), 0, (int) (entitiesinrange.size() - 1))) instanceof Entity _entity29 ? _entity29 : null;
 						{
 							Entity _ent = target;
 							if (_ent.level() instanceof ServerLevel _serverLevel) {

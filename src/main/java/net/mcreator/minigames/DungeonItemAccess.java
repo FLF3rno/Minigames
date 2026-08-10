@@ -64,6 +64,12 @@ public final class DungeonItemAccess {
 	public static boolean hasPhantom(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("phantom", false);
 	}
+	public static boolean hasBleed(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("bleed", false);
+	}
+	public static boolean hasLuck(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("luck", false);
+	}
 	public static boolean hasBlessed(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("blessed", false);
 	}

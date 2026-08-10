@@ -8,7 +8,7 @@ import net.mcreator.minigames.procedures.BlessedEffectStartedProcedure;
 
 public class BlessedMobEffect extends MobEffect {
 	public BlessedMobEffect() {
-		super(MobEffectCategory.NEUTRAL, -3342337);
+		super(MobEffectCategory.NEUTRAL, -5966861);
 	}
 
 	@Override

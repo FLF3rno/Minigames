@@ -37,6 +37,8 @@ public class MinigamesModAttributes {
 	public static final DeferredHolder<Attribute, Attribute> ATTACK_COOLDOWN = REGISTRY.register("attack_cooldown", () -> new RangedAttribute("attribute.minigames.attack_cooldown", 0d, 0d, 1000000d).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> EFFECT_LENGTH_2 = REGISTRY.register("effect_length_2", () -> new RangedAttribute("attribute.minigames.effect_length_2", 0d, 0d, 1000000d).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> EFFECT_POTENCY = REGISTRY.register("effect_potency", () -> new RangedAttribute("attribute.minigames.effect_potency", 0d, 0d, 1000000d).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> LUCK = REGISTRY.register("luck", () -> new RangedAttribute("attribute.minigames.luck", 0d, 0d, 99d).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> EFFECT_POTENCY_2 = REGISTRY.register("effect_potency_2", () -> new RangedAttribute("attribute.minigames.effect_potency_2", 0d, 0d, 1000000d).setSyncable(true));
 
 	@SubscribeEvent
 	public static void addAttributes(EntityAttributeModificationEvent event) {
@@ -58,5 +60,7 @@ public class MinigamesModAttributes {
 		event.add(EntityType.PLAYER, ATTACK_COOLDOWN);
 		event.add(EntityType.PLAYER, EFFECT_LENGTH_2);
 		event.add(EntityType.PLAYER, EFFECT_POTENCY);
+		event.add(EntityType.PLAYER, LUCK);
+		event.add(EntityType.PLAYER, EFFECT_POTENCY_2);
 	}
 }

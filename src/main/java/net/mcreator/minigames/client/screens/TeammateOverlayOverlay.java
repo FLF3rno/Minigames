@@ -43,6 +43,17 @@ public class TeammateOverlayOverlay {
     private static final Identifier HEART_WITHERED_HALF_BLINKING = Identifier.withDefaultNamespace("hud/heart/withered_half_blinking");
     private static final Identifier HEART_ABSORBING_FULL = Identifier.withDefaultNamespace("hud/heart/absorbing_full");
     private static final Identifier HEART_ABSORBING_HALF = Identifier.withDefaultNamespace("hud/heart/absorbing_half");
+    private static final Identifier HEART_DECAY_FULL =
+            Identifier.fromNamespaceAndPath("minigames", "hud/heart/decay_full");
+
+    private static final Identifier HEART_DECAY_HALF =
+            Identifier.fromNamespaceAndPath("minigames", "hud/heart/decay_half");
+
+    private static final Identifier HEART_DECAY_FULL_BLINKING =
+            Identifier.fromNamespaceAndPath("minigames", "hud/heart/decay_full_blinking");
+
+    private static final Identifier HEART_DECAY_HALF_BLINKING =
+            Identifier.fromNamespaceAndPath("minigames", "hud/heart/decay_half_blinking");
     private static final int DAMAGE_FLASH_DURATION_TICKS = 20;
     private static final int HEAL_FLASH_DURATION_TICKS = 10;
     private static final int FLASH_INTERVAL_TICKS = 3;
@@ -167,8 +178,8 @@ public class TeammateOverlayOverlay {
         int absorptionHalfHearts = Math.max(0, (int) Math.ceil(Math.max(0.0F, snapshot.absorption())));
         int totalIcons = Math.min(MAX_HEART_ICONS, Math.max(1, (int) Math.ceil((maxHalfHearts + absorptionHalfHearts) / 2.0)));
 
-        Identifier fullHeart = getNormalHeartFull(snapshot, shouldFlash);
-        Identifier halfHeart = getNormalHeartHalf(snapshot, shouldFlash);
+        Identifier fullHeart = getNormalHeartFull(teammate, snapshot, shouldFlash);
+        Identifier halfHeart = getNormalHeartHalf(teammate, snapshot, shouldFlash);
 
         for (int i = 0; i < totalIcons; i++) {
             int x = heartsX + i * HEART_SIZE;
@@ -276,24 +287,60 @@ public class TeammateOverlayOverlay {
         return new FlashState(snapshot.health(), flashUntilTick, snapshot.hurtFlashTicks());
     }
 
-    private static Identifier getNormalHeartFull(TeammateHealthSync.HealthSnapshot snapshot, boolean flashing) {
+    private static Identifier getNormalHeartFull(
+            Player teammate,
+            TeammateHealthSync.HealthSnapshot snapshot,
+            boolean flashing
+    ) {
+        if (teammate.hasEffect(MinigamesModMobEffects.DECAY)) {
+            return flashing
+                    ? HEART_DECAY_FULL_BLINKING
+                    : HEART_DECAY_FULL;
+        }
+
         if (snapshot.withered()) {
-            return flashing ? HEART_WITHERED_FULL_BLINKING : HEART_WITHERED_FULL;
+            return flashing
+                    ? HEART_WITHERED_FULL_BLINKING
+                    : HEART_WITHERED_FULL;
         }
+
         if (snapshot.poisoned()) {
-            return flashing ? HEART_POISONED_FULL_BLINKING : HEART_POISONED_FULL;
+            return flashing
+                    ? HEART_POISONED_FULL_BLINKING
+                    : HEART_POISONED_FULL;
         }
-        return flashing ? HEART_FULL_BLINKING : HEART_FULL;
+
+        return flashing
+                ? HEART_FULL_BLINKING
+                : HEART_FULL;
     }
 
-    private static Identifier getNormalHeartHalf(TeammateHealthSync.HealthSnapshot snapshot, boolean flashing) {
+    private static Identifier getNormalHeartHalf(
+            Player teammate,
+            TeammateHealthSync.HealthSnapshot snapshot,
+            boolean flashing
+    ) {
+        if (teammate.hasEffect(MinigamesModMobEffects.DECAY)) {
+            return flashing
+                    ? HEART_DECAY_HALF_BLINKING
+                    : HEART_DECAY_HALF;
+        }
+
         if (snapshot.withered()) {
-            return flashing ? HEART_WITHERED_HALF_BLINKING : HEART_WITHERED_HALF;
+            return flashing
+                    ? HEART_WITHERED_HALF_BLINKING
+                    : HEART_WITHERED_HALF;
         }
+
         if (snapshot.poisoned()) {
-            return flashing ? HEART_POISONED_HALF_BLINKING : HEART_POISONED_HALF;
+            return flashing
+                    ? HEART_POISONED_HALF_BLINKING
+                    : HEART_POISONED_HALF;
         }
-        return flashing ? HEART_HALF_BLINKING : HEART_HALF;
+
+        return flashing
+                ? HEART_HALF_BLINKING
+                : HEART_HALF;
     }
 
     private static int getPlayerNameColor(Player player) {

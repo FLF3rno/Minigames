@@ -19,7 +19,8 @@
     "PlayerNameColorMixin",
     "DebugEntryPositionMixin",
     "ExperienceBarRendererMixin",
-    "EffectsInInventoryMixin"
+    "EffectsInInventoryMixin",
+    "DecayHeartMixin"
   ],
   "injectors": {
     "defaultRequire": 1

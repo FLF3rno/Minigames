@@ -3,10 +3,12 @@
   "values": [
     "minigames:blessed_cursed_crossbow",
     "minigames:plague_starter",
+    "minigames:box_of_fun",
     "minigames:time_clock",
     "minigames:stop_sign",
     "minigames:crystallized_potion",
     "minigames:blank_long_sword",
-    "minigames:cluster_bomb"
+    "minigames:cluster_bomb",
+    "minigames:parasite_scythe"
   ]
 }

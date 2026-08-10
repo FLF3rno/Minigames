@@ -510,7 +510,7 @@ public class DungeonInventoryScreen extends AbstractContainerScreen<DungeonInven
 						))
 						.values()
 						.stream()
-						.filter(effect -> !EffectUtils.isHiddenEffect(effect))
+						.filter(effect -> !EffectUtils.isHiddenEffect(effect) && !EffectUtils.isHiddenRoguelikeEffect(effect))
 						.toList();
 
 

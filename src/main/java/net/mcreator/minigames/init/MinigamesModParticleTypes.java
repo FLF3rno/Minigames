@@ -16,4 +16,5 @@ public class MinigamesModParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(Registries.PARTICLE_TYPE, MinigamesMod.MODID);
 	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_EXPLOSION = REGISTRY.register("red_explosion", () -> new SimpleParticleType(false));
 	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> POISON = REGISTRY.register("poison", () -> new SimpleParticleType(false));
+	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLOOD = REGISTRY.register("blood", () -> new SimpleParticleType(false));
 }

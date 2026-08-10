@@ -3,11 +3,14 @@
   "values": [
     "minigames:blank_dagger",
     "minigames:hammer",
+    "minigames:power_harvester",
     "minigames:the_finisher",
     "minigames:wind_scythe",
     "minigames:combo_dagger",
     "minigames:stop_sign",
     "minigames:blank_sword",
-    "minigames:blank_long_sword"
+    "minigames:silent_assassin",
+    "minigames:blank_long_sword",
+    "minigames:parasite_scythe"
   ]
 }

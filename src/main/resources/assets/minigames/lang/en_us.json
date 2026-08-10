@@ -363,5 +363,18 @@
   "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
   "gui.minigames.minigame_gui_achievement_hunt.pvp": "300",
   "gui.minigames.minigame_gui_achievement_hunt.hunt": "30",
-  "gui.minigames.force_end": "Force Stop Minigame"
+  "gui.minigames.force_end": "Force Stop Minigame",
+  "item.minigames.silent_assassin": "Silent Assassin",
+  "effect.minigames.bleed": "Bleed",
+  "item.minigames.power_harvester": "Power Harvester",
+  "item.minigames.parasite_scythe": "Parasite Scythe",
+  "effect.minigames.decay": "Decay",
+  "death.attack.decay_dmg.player": "%1$s decayed whilst trying to escape %2$s",
+  "death.attack.decay_dmg": "%1$s decayed",
+  "death.attack.decay_dmg.item": "%1$s was decayed by %2$s using %3$s",
+  "attribute.minigames.luck": "Luck",
+  "item.minigames.horseshoe": "Horseshoe",
+  "item.minigames.slam": "Slam",
+  "item.minigames.box_of_fun": "Box of Fun",
+  "attribute.minigames.effect_potency_2": "Effect Potency 2"
 }

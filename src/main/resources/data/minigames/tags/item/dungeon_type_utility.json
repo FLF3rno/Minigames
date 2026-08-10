@@ -1,8 +1,11 @@
 {
   "replace": false,
   "values": [
+    "minigames:slam",
     "minigames:plague_starter",
+    "minigames:box_of_fun",
     "minigames:time_clock",
+    "minigames:horseshoe",
     "minigames:ghostifier",
     "minigames:volley_bomb",
     "minigames:snatching_claw",

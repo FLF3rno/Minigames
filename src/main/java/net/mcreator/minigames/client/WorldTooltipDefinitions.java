@@ -28,8 +28,9 @@ public final class WorldTooltipDefinitions {
     private static final int MONSTER_COLOR = 0xF40B0D;
     private static final int PHANTOM_COLOR = 0x605AA5;
     private static final int BLESSED_COLOR = 0x84D4FF;
+    private static final int BLEED_COLOR = 0xCF3041;
+    private static final int LUCK_COLOR = 0x2AD56E;
     private static final int DEFINITION_TEXT = 0xEAE6D8;
-    private static final int WEAPON_TYPE_COLOR = 0xE0E0E0;
     private static final int PADDING_X = 6;
     private static final int PADDING_Y = 6;
     private static final int LINE_HEIGHT = 10;
@@ -80,6 +81,28 @@ public final class WorldTooltipDefinitions {
                     (stack, val) -> new DefinitionCard(10,
                             DefinitionText.staticText("PHANTOM", Style.EMPTY.withBold(true).withColor(PHANTOM_COLOR)),
                             List.of(DefinitionText.fromComponent(centeredLine(partialColorText("Phase through entities", 0xFFFFFFFF))))
+                    )
+            ),
+            new DefinitionRule(4,
+                    stack -> DungeonItemAccess.hasBleed(stack),
+                    stack -> 0,
+                    (stack, val) -> new DefinitionCard(10,
+                            DefinitionText.staticText("BLEED", Style.EMPTY.withBold(true).withColor(BLEED_COLOR)),
+                            List.of(
+                                    DefinitionText.staticText("Take damage based off of", Style.EMPTY.withColor(0xFFFFFFFF)),
+                                    DefinitionText.staticText("your current velocity", Style.EMPTY.withColor(0xFFFFFFFF))
+                            )
+                    )
+            ),
+            new DefinitionRule(7,
+                    stack -> DungeonItemAccess.hasLuck(stack),
+                    stack -> 0,
+                    (stack, val) -> new DefinitionCard(10,
+                            DefinitionText.staticText("LUCK", Style.EMPTY.withBold(true).withColor(LUCK_COLOR)),
+                            List.of(
+                                    DefinitionText.staticText("Multiply chance based events by X", Style.EMPTY.withColor(0xFFFFFFFF)),
+                                    DefinitionText.staticText("(Items dropping from monsters)", Style.EMPTY.withColor(0xFFFFFFFF))
+                            )
                     )
             ),
             new DefinitionRule(6,

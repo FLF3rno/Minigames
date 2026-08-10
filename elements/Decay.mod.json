@@ -1,0 +1,20 @@
+{
+  "_fv": 89,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Decay",
+    "icon": "decay",
+    "color": {
+      "value": -6736897,
+      "falpha": 0.0
+    },
+    "onAddedSound": "",
+    "isInstant": false,
+    "mobEffectCategory": "HARMFUL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [],
+    "onActiveTick": "DecayTick"
+  }
+}

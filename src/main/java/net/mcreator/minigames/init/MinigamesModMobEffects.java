@@ -35,6 +35,8 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> ADVANCED_GLOWING = REGISTRY.register("advanced_glowing", AdvancedGlowingMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> PHANTOM = REGISTRY.register("phantom", PhantomMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> DAMAGE_BOOST = REGISTRY.register("damage_boost", DamageBoostMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> BLEED = REGISTRY.register("bleed", BleedMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> DECAY = REGISTRY.register("decay", DecayMobEffect::new);
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {

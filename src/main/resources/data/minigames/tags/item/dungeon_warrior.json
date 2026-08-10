@@ -2,7 +2,9 @@
   "replace": false,
   "values": [
     "minigames:hammer",
+    "minigames:power_harvester",
     "minigames:blacksmith_hammer",
+    "minigames:slam",
     "minigames:wind_scythe",
     "minigames:blank_sword",
     "minigames:volley_bomb",

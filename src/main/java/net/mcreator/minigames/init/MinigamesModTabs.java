@@ -43,6 +43,12 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.PLUG.get());
 				tabData.accept(MinigamesModItems.CLUSTER_BOMB.get());
 				tabData.accept(MinigamesModItems.REACTION_TIME.get());
+				tabData.accept(MinigamesModItems.SILENT_ASSASSIN.get());
+				tabData.accept(MinigamesModItems.POWER_HARVESTER.get());
+				tabData.accept(MinigamesModItems.PARASITE_SCYTHE.get());
+				tabData.accept(MinigamesModItems.HORSESHOE.get());
+				tabData.accept(MinigamesModItems.SLAM.get());
+				tabData.accept(MinigamesModItems.BOX_OF_FUN.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {

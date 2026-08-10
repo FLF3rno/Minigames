@@ -128,6 +128,12 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> PLUG;
 	public static final DeferredItem<Item> CLUSTER_BOMB;
 	public static final DeferredItem<Item> REACTION_TIME;
+	public static final DeferredItem<Item> SILENT_ASSASSIN;
+	public static final DeferredItem<Item> POWER_HARVESTER;
+	public static final DeferredItem<Item> PARASITE_SCYTHE;
+	public static final DeferredItem<Item> HORSESHOE;
+	public static final DeferredItem<Item> SLAM;
+	public static final DeferredItem<Item> BOX_OF_FUN;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -228,6 +234,12 @@ public class MinigamesModItems {
 		PLUG = register("plug", PlugItem::new);
 		CLUSTER_BOMB = register("cluster_bomb", ClusterBombItem::new);
 		REACTION_TIME = register("reaction_time", ReactionTimeItem::new);
+		SILENT_ASSASSIN = register("silent_assassin", SilentAssassinItem::new);
+		POWER_HARVESTER = register("power_harvester", PowerHarvesterItem::new);
+		PARASITE_SCYTHE = register("parasite_scythe", ParasiteScytheItem::new);
+		HORSESHOE = register("horseshoe", HorseshoeItem::new);
+		SLAM = register("slam", SlamItem::new);
+		BOX_OF_FUN = register("box_of_fun", BoxOfFunItem::new);
 	}
 
 	// Start of user code block custom items

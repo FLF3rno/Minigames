@@ -17,4 +17,15 @@ public class EffectUtils {
                 || id.equals("xaerominimap:no_waypoints")
                 || id.equals("xaeroworldmap:no_world_map");
     }
+    public static boolean isHiddenRoguelikeEffect(MobEffectInstance effect) {
+
+        String id =
+                BuiltInRegistries.MOB_EFFECT
+                        .getKey(effect.getEffect().value())
+                        .toString();
+
+
+        return id.equals("minecraft:saturation")
+                || id.equals("minecraft:instant_health");
+    }
 }

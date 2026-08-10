@@ -10469,6 +10469,18 @@
             "type": "entity"
           },
           {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -12387,63 +12399,655 @@
       "path": "~/Dungeon/Events"
     },
     {
-      "name": "Debugslot",
-      "type": "command",
+      "name": "SilentAssassin",
+      "type": "item",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "debugslot",
+      "registry_name": "silent_assassin",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/minigames/command/DebugslotCommand.java"
+          "src/main/resources/assets/minigames/items/silent_assassin.json",
+          "src/main/resources/assets/minigames/models/item/silent_assassin.json",
+          "src/main/java/net/mcreator/minigames/item/SilentAssassinItem.java"
         ]
       },
-      "path": "~/Dungeon"
+      "path": "~/Dungeon/Items/Thief/Weapons/Silent Assassin"
     },
     {
-      "name": "DebugSlots",
+      "name": "SilentAssassinDescription",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "debug_slots",
+      "registry_name": "silent_assassin_description",
       "metadata": {
         "dependencies": [
           {
-            "name": "arguments",
-            "type": "cmdcontext"
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SilentAssassinDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Silent Assassin"
+    },
+    {
+      "name": "IsBackstab",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_backstab",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "attacker",
+            "type": "entity"
           },
           {
+            "name": "target",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IsBackstabProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "CanBackstab",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "can_backstab",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "item",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CanBackstabProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "Bleed",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bleed",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/BleedMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "BleedTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bleed_tick",
+      "metadata": {
+        "dependencies": [
+          {
             "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BleedTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "Blood",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blood",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/particle/BloodParticle.java",
+          "src/main/resources/assets/minigames/particles/blood.json"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "PowerHarvester",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "power_harvester",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/power_harvester.json",
+          "src/main/resources/assets/minigames/items/power_harvester.json",
+          "src/main/java/net/mcreator/minigames/item/PowerHarvesterItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Power Harvester"
+    },
+    {
+      "name": "PowerHarvesterDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "power_harvester_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PowerHarvesterDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Power Harvester"
+    },
+    {
+      "name": "PowerHarvesterHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "power_harvester_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PowerHarvesterHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Power Harvester"
+    },
+    {
+      "name": "ParasiteScythe",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "parasite_scythe",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/parasite_scythe.json",
+          "src/main/resources/assets/minigames/items/parasite_scythe.json",
+          "src/main/java/net/mcreator/minigames/item/ParasiteScytheItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Parasite Scythe"
+    },
+    {
+      "name": "ParasiteScytheDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "parasite_scythe_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ParasiteScytheDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Parasite Scythe"
+    },
+    {
+      "name": "ParasiteScytheHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "parasite_scythe_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
             "type": "entity"
           }
         ],
         "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DebugSlotsProcedure.java"
+          "src/main/java/net/mcreator/minigames/procedures/ParasiteScytheHitProcedure.java"
         ]
       },
-      "path": "~/Dungeon"
+      "path": "~/Dungeon/Items/Support/Weapons/Parasite Scythe"
     },
     {
-      "name": "DebugSlotsB",
+      "name": "Decay",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "decay",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/DecayMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "DecayDmg",
+      "type": "damagetype",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "decay_dmg",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/damage_type/decay_dmg.json"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "DecayTick",
       "type": "procedure",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "debug_slots_b",
+      "registry_name": "decay_tick",
       "metadata": {
         "dependencies": [
           {
-            "name": "arguments",
-            "type": "cmdcontext"
-          },
-          {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "amplifier",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DebugSlotsBProcedure.java"
+          "src/main/java/net/mcreator/minigames/procedures/DecayTickProcedure.java"
         ]
       },
-      "path": "~/Dungeon"
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "Luck",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "luck",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "RandomClass",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "random_class",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RandomClassProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "Horseshoe",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "horseshoe",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/HorseshoeItem.java",
+          "src/main/resources/assets/minigames/items/horseshoe.json",
+          "src/main/resources/assets/minigames/models/item/horseshoe.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Horseshoe"
+    },
+    {
+      "name": "HorseshoeDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "horseshoe_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HorseshoeDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Horseshoe"
+    },
+    {
+      "name": "ItemUsesDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "item_uses_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ItemUsesDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Description Helper"
+    },
+    {
+      "name": "HorseshoeRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "horseshoe_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HorseshoeRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Horseshoe"
+    },
+    {
+      "name": "Slam",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slam",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SlamItem.java",
+          "src/main/resources/assets/minigames/models/item/slam.json",
+          "src/main/resources/assets/minigames/items/slam.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Slam"
+    },
+    {
+      "name": "SlamDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slam_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SlamDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Slam"
+    },
+    {
+      "name": "SlamRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slam_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SlamRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Slam"
+    },
+    {
+      "name": "SlamFallOnGround",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slam_fall_on_ground",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SlamFallOnGroundProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Slam"
+    },
+    {
+      "name": "RandomPotion",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "random_potion",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RandomPotionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Potion"
+    },
+    {
+      "name": "BoxOfFun",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "box_of_fun",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/box_of_fun.json",
+          "src/main/java/net/mcreator/minigames/item/BoxOfFunItem.java",
+          "src/main/resources/assets/minigames/models/item/box_of_fun.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Box Of Fun"
+    },
+    {
+      "name": "BoxOfFunDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "box_of_fun_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BoxOfFunDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Box Of Fun"
+    },
+    {
+      "name": "EffectPotency2",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "effect_potency_2",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "BoxOfFunRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "box_of_fun_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BoxOfFunRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Box Of Fun"
+    },
+    {
+      "name": "CooldownDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cooldown_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CooldownDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Description Helper"
     }
   ],
   "variable_elements": [
@@ -13707,7 +14311,9 @@
       "CUSTOM:BlessedCursedCrossbow",
       "CUSTOM:StopSign",
       "CUSTOM:TimeClock",
-      "CUSTOM:ClusterBomb"
+      "CUSTOM:ClusterBomb",
+      "CUSTOM:ParasiteScythe",
+      "CUSTOM:BoxOfFun"
     ],
     "ITEMS:mod:dungeon_thief": [
       "CUSTOM:BlankDagger",
@@ -13716,7 +14322,9 @@
       "CUSTOM:ComboDagger",
       "CUSTOM:TheFinisher",
       "CUSTOM:SnatchingClaw",
-      "CUSTOM:ReactionTime"
+      "CUSTOM:ReactionTime",
+      "CUSTOM:SilentAssassin",
+      "CUSTOM:Horseshoe"
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
@@ -13725,7 +14333,9 @@
       "CUSTOM:WindScythe",
       "CUSTOM:Hammer",
       "CUSTOM:HumanCannonball",
-      "CUSTOM:Plug"
+      "CUSTOM:Plug",
+      "CUSTOM:PowerHarvester",
+      "CUSTOM:Slam"
     ],
     "ITEMS:mod:dungeon_type_relic": [
       "CUSTOM:CrystallizedPotion",
@@ -13773,7 +14383,10 @@
       "CUSTOM:Ghostifier",
       "CUSTOM:HumanCannonball",
       "CUSTOM:TimeClock",
-      "CUSTOM:SnatchingClaw"
+      "CUSTOM:SnatchingClaw",
+      "CUSTOM:Horseshoe",
+      "CUSTOM:Slam",
+      "CUSTOM:BoxOfFun"
     ],
     "ITEMS:mod:dungeon_type_weapon": [
       "CUSTOM:WindScythe",
@@ -13781,7 +14394,10 @@
       "CUSTOM:ComboDagger",
       "CUSTOM:StopSign",
       "CUSTOM:Hammer",
-      "CUSTOM:TheFinisher"
+      "CUSTOM:TheFinisher",
+      "CUSTOM:SilentAssassin",
+      "CUSTOM:PowerHarvester",
+      "CUSTOM:ParasiteScythe"
     ],
     "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
       "CUSTOM:SelfDamage"
@@ -13838,6 +14454,7 @@
       "~CastleStairs@CUSTOM:CastleStairs"
     ],
     "ITEMS:minecraft:enchantable/durability": [
+      "~Horseshoe@CUSTOM:Horseshoe",
       "~SnatchingClaw@CUSTOM:SnatchingClaw",
       "~SnowShovel@CUSTOM:SnowShovel",
       "~SymmetricalShovel@CUSTOM:SymmetricalShovel",
@@ -13867,7 +14484,8 @@
       "~TuffPedestal@CUSTOM:TuffPedestal"
     ],
     "ITEMS:mod:on_kill": [
-      "CUSTOM:TheFinisher"
+      "CUSTOM:TheFinisher",
+      "CUSTOM:BlankDagger"
     ],
     "ITEMS:mod:weapontype_sword": [
       "CUSTOM:WindScythe",
@@ -13877,7 +14495,10 @@
       "CUSTOM:TheFinisher",
       "CUSTOM:BlankDagger",
       "CUSTOM:BlankSword",
-      "CUSTOM:BlankLongSword"
+      "CUSTOM:BlankLongSword",
+      "CUSTOM:SilentAssassin",
+      "CUSTOM:PowerHarvester",
+      "CUSTOM:ParasiteScythe"
     ],
     "ITEMS:mod:weapontype_bow": [
       "Blocks.BEDROCK"
@@ -14256,7 +14877,20 @@
       "gui.minigames.minigame_gui_achievement_hunt.keepinventory": "",
       "gui.minigames.minigame_gui_achievement_hunt.pvp": "300",
       "gui.minigames.minigame_gui_achievement_hunt.hunt": "30",
-      "gui.minigames.force_end": "Force Stop Minigame"
+      "gui.minigames.force_end": "Force Stop Minigame",
+      "item.minigames.silent_assassin": "Silent Assassin",
+      "effect.minigames.bleed": "Bleed",
+      "item.minigames.power_harvester": "Power Harvester",
+      "item.minigames.parasite_scythe": "Parasite Scythe",
+      "effect.minigames.decay": "Decay",
+      "death.attack.decay_dmg.player": "%1$s decayed whilst trying to escape %2$s",
+      "death.attack.decay_dmg": "%1$s decayed",
+      "death.attack.decay_dmg.item": "%1$s was decayed by %2$s using %3$s",
+      "attribute.minigames.luck": "Luck",
+      "item.minigames.horseshoe": "Horseshoe",
+      "item.minigames.slam": "Slam",
+      "item.minigames.box_of_fun": "Box of Fun",
+      "attribute.minigames.effect_potency_2": "Effect Potency 2"
     }
   },
   "metadata": {
@@ -14446,6 +15080,10 @@
                       {
                         "name": "TheFinisher",
                         "children": []
+                      },
+                      {
+                        "name": "Silent Assassin",
+                        "children": []
                       }
                     ]
                   },
@@ -14458,6 +15096,10 @@
                       },
                       {
                         "name": "Snatching Claw",
+                        "children": []
+                      },
+                      {
+                        "name": "Horseshoe",
                         "children": []
                       }
                     ]
@@ -14481,6 +15123,10 @@
                       {
                         "name": "Hammer",
                         "children": []
+                      },
+                      {
+                        "name": "Power Harvester",
+                        "children": []
                       }
                     ]
                   },
@@ -14493,6 +15139,10 @@
                       },
                       {
                         "name": "Human Cannonball",
+                        "children": []
+                      },
+                      {
+                        "name": "Slam",
                         "children": []
                       }
                     ]
@@ -14520,6 +15170,10 @@
                       {
                         "name": "Stop Sign",
                         "children": []
+                      },
+                      {
+                        "name": "Parasite Scythe",
+                        "children": []
                       }
                     ]
                   },
@@ -14532,6 +15186,10 @@
                       },
                       {
                         "name": "Clock",
+                        "children": []
+                      },
+                      {
+                        "name": "Box Of Fun",
                         "children": []
                       }
                     ]
@@ -14569,6 +15227,10 @@
               },
               {
                 "name": "Pedestal",
+                "children": []
+              },
+              {
+                "name": "Description Helper",
                 "children": []
               }
             ]

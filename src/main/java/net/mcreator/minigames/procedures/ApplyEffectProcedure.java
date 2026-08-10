@@ -17,19 +17,31 @@ public class ApplyEffectProcedure {
 			return;
 		if ((effect).equals("minigames:stunned")) {
 			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.STUNNED, (int) ticks, (int) (level - 1), false, (!hide)));
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.STUNNED, (int) ticks, (int) (level - 1), (!hide), false));
 		} else if ((effect).equals("minigames:blessed")) {
 			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, (int) ticks, (int) (level - 1), false, (!hide)));
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, (int) ticks, (int) (level - 1), (!hide), false));
 		} else if ((effect).equals("minigames:phantom")) {
 			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.PHANTOM, (int) ticks, (int) (level - 1), false, (!hide)));
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.PHANTOM, (int) ticks, (int) (level - 1), (!hide), false));
 		} else if ((effect).equals("minecraft:strength")) {
 			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) ticks, (int) (level - 1), false, (!hide)));
-		} else if ((effect).equals("minecraft:damage_boost")) {
+				_entity.addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) ticks, (int) (level - 1), (!hide), false));
+		} else if ((effect).equals("minigames:extra_damage") || (effect).equals("minigames:damage_boost")) {
 			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
-				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.DAMAGE_BOOST, (int) ticks, (int) (level - 1), false, (!hide)));
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.DAMAGE_BOOST, (int) ticks, (int) (level - 1), (!hide), false));
+		} else if ((effect).equals("minigames:bleed")) {
+			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLEED, (int) ticks, (int) (level - 1), (!hide), false));
+		} else if ((effect).equals("minigames:decay")) {
+			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.DECAY, (int) ticks, (int) (level - 1), (!hide), false));
+		} else if ((effect).equals("minecraft:luck") || (effect).equals("minigames:luck")) {
+			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MobEffects.LUCK, (int) ticks, (int) (level - 1), (!hide), false));
+		} else if ((effect).equals("minecraft:unluck") || (effect).equals("minigames:unluck")) {
+			if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MobEffects.UNLUCK, (int) ticks, (int) (level - 1), (!hide), false));
 		} else {
 			{
 				Entity _ent = target;

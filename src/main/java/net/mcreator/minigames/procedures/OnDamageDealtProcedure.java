@@ -9,6 +9,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.tags.TagKey;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +25,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
@@ -65,12 +69,32 @@ public class OnDamageDealtProcedure {
 			if (sourceentity instanceof LivingEntity _livEnt10 && _livEnt10.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST)) {
 				damage = damage + damage * (((sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_BOOST).getAmplifier() : 0) + 1) / 100d);
 			}
+			if (IsBackstabProcedure.execute(sourceentity, entity) && CanBackstabProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) {
+				if (world instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.attack.crit")), SoundSource.NEUTRAL, 1, 1);
+					} else {
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.attack.crit")), SoundSource.NEUTRAL, 1, 1, false);
+					}
+				}
+				damage = damage * GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage");
+				ApplyEffectProcedure.execute(entity, true, 1, GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:effect_length"), "minigames:bleed");
+			}
+			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:decay_dmg")))) {
+				if (entity.getPersistentData().getBooleanOr("parasiteScytheActive", false)) {
+					entity.getPersistentData().putBoolean("parasiteScytheActive", false);
+					damage = damage - damage * (GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get()), "minigames:effect_potency") / 100);
+					ApplyEffectProcedure.execute(entity, true, damage / (GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get()), "minigames:effect_length") / 20),
+							GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get()), "minigames:effect_length"), "minigames:decay");
+					damage = 0;
+				}
+			}
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount((float) damage);
 			}
 			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:zap")))) {
 				if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.PLUG.get()))) {
-					for (int index9 = 0; index9 < 3; index9++) {
+					for (int index241 = 0; index241 < 3; index241++) {
 						for (Entity entityiterator : world.getEntities(entity,
 								new AABB((x - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),
 										(y - GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PLUG.get()), "minigames:ability_range")),

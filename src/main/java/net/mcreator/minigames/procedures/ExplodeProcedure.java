@@ -17,6 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
@@ -39,6 +40,9 @@ public class ExplodeProcedure {
 		double knockback = 0;
 		double length = 0;
 		double yOffset = 0;
+		double Yloop = 0;
+		double Zloop = 0;
+		double Xloop = 0;
 		String type = "";
 		damage = ExplosionDamage;
 		knockback = ExplosionKnockback;
@@ -67,6 +71,26 @@ public class ExplodeProcedure {
 				_level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"/playsound minigames:red_explosion player @a ~ ~ ~ 0.4 1");
+		} else if ((type).equals("groundbreaking")) {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"/playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.8 1.4");
+			Xloop = x + ExplosionSize;
+			Yloop = y + ExplosionSize;
+			Zloop = z + ExplosionSize;
+			for (int index177 = 0; index177 < (int) (ExplosionSize * 2); index177++) {
+				Xloop = Xloop - 1;
+				Yloop = y + ExplosionSize;
+				for (int index178 = 0; index178 < (int) (ExplosionSize * 2); index178++) {
+					Yloop = Yloop - 1;
+					Zloop = z + ExplosionSize;
+					for (int index179 = 0; index179 < (int) (ExplosionSize * 2); index179++) {
+						Zloop = Zloop - 1;
+						BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, true);
+					}
+				}
+			}
 		}
 		{
 			final Vec3 _center = new Vec3(x, y, z);
@@ -78,10 +102,10 @@ public class ExplodeProcedure {
 							if (_ent.level() instanceof ServerLevel _serverLevel) {
 								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
 										(float) (damage * (1 - Math.min(20,
-												Math.max((entityiterator instanceof LivingEntity _livingEntity7 && _livingEntity7.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity7.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-														(entityiterator instanceof LivingEntity _livingEntity8 && _livingEntity8.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity8.getAttribute(Attributes.ARMOR).getValue() : 0)
-																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity9 && _livingEntity9.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																		? _livingEntity9.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+												Math.max((entityiterator instanceof LivingEntity _livingEntity9 && _livingEntity9.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity9.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+														(entityiterator instanceof LivingEntity _livingEntity10 && _livingEntity10.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity10.getAttribute(Attributes.ARMOR).getValue() : 0)
+																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity11 && _livingEntity11.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																		? _livingEntity11.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
 																		: 0) + 8)))
 												/ 25)));
 							}
@@ -94,10 +118,10 @@ public class ExplodeProcedure {
 							if (_ent.level() instanceof ServerLevel _serverLevel) {
 								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
 										(float) (damage * (1 - Math.min(20,
-												Math.max((entityiterator instanceof LivingEntity _livingEntity14 && _livingEntity14.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity14.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-														(entityiterator instanceof LivingEntity _livingEntity15 && _livingEntity15.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity15.getAttribute(Attributes.ARMOR).getValue() : 0)
-																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity16 && _livingEntity16.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																		? _livingEntity16.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+												Math.max((entityiterator instanceof LivingEntity _livingEntity16 && _livingEntity16.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity16.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+														(entityiterator instanceof LivingEntity _livingEntity17 && _livingEntity17.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity17.getAttribute(Attributes.ARMOR).getValue() : 0)
+																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity18 && _livingEntity18.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																		? _livingEntity18.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
 																		: 0) + 8)))
 												/ 25)));
 							}
@@ -109,10 +133,10 @@ public class ExplodeProcedure {
 						if (_ent.level() instanceof ServerLevel _serverLevel) {
 							_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
 									(float) (damage * (1 - Math.min(20,
-											Math.max((entityiterator instanceof LivingEntity _livingEntity19 && _livingEntity19.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity19.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-													(entityiterator instanceof LivingEntity _livingEntity20 && _livingEntity20.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity20.getAttribute(Attributes.ARMOR).getValue() : 0)
-															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity21 && _livingEntity21.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																	? _livingEntity21.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+											Math.max((entityiterator instanceof LivingEntity _livingEntity21 && _livingEntity21.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity21.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+													(entityiterator instanceof LivingEntity _livingEntity22 && _livingEntity22.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity22.getAttribute(Attributes.ARMOR).getValue() : 0)
+															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity23 && _livingEntity23.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																	? _livingEntity23.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
 																	: 0) + 8)))
 											/ 25)));
 						}

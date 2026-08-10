@@ -37,6 +37,20 @@ public class SpawnDungeonItemProcedure {
 				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
 			}
 		}
+		if (item.getItem() == MinigamesModItems.SILENT_ASSASSIN.get()) {
+			{
+				final String _tagName = "bleed";
+				final boolean _tagValue = true;
+				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
+			}
+		}
+		if (item.getItem() == MinigamesModItems.HORSESHOE.get()) {
+			{
+				final String _tagName = "luck";
+				final boolean _tagValue = true;
+				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
+			}
+		}
 		if (world instanceof ServerLevel _level) {
 			ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, new ItemStack(Blocks.AIR));
 			entityToSpawn.setPickUpDelay(10);

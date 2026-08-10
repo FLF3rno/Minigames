@@ -3,9 +3,12 @@
   "values": [
     "minigames:blessed_cursed_crossbow",
     "minigames:hammer",
+    "minigames:power_harvester",
     "minigames:the_finisher",
     "minigames:wind_scythe",
     "minigames:combo_dagger",
-    "minigames:stop_sign"
+    "minigames:stop_sign",
+    "minigames:silent_assassin",
+    "minigames:parasite_scythe"
   ]
 }

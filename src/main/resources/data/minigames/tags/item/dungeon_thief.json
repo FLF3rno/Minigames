@@ -3,9 +3,11 @@
   "values": [
     "minigames:blank_dagger",
     "minigames:the_finisher",
+    "minigames:horseshoe",
     "minigames:phase_cloak",
     "minigames:combo_dagger",
     "minigames:reaction_time",
+    "minigames:silent_assassin",
     "minigames:ghostifier",
     "minigames:snatching_claw"
   ]

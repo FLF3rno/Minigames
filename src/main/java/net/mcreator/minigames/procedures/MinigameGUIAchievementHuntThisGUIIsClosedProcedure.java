@@ -20,14 +20,14 @@ public class MinigameGUIAchievementHuntThisGUIIsClosedProcedure {
 			if (world instanceof ServerLevel _origLevel) {
 				LevelAccessor _switchworld3 = _origLevel.getServer().getLevel(Level.OVERWORLD);
 				if (_switchworld3 != null) {
-					worldSwitch3(world, entity);
+					worldSwitch3(_switchworld3, entity);
 				}
 			}
 		} else {
 			if (world instanceof ServerLevel _origLevel) {
 				LevelAccessor _switchworld5 = _origLevel.getServer().getLevel(Level.OVERWORLD);
 				if (_switchworld5 != null) {
-					worldSwitch5(world, entity);
+					worldSwitch5(_switchworld5, entity);
 				}
 			}
 		}

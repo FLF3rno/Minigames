@@ -79,13 +79,13 @@ public class ExplodeProcedure {
 			Xloop = x + ExplosionSize;
 			Yloop = y + ExplosionSize;
 			Zloop = z + ExplosionSize;
-			for (int index177 = 0; index177 < (int) (ExplosionSize * 2); index177++) {
+			for (int _i1 = 0; _i1 < (int) (ExplosionSize * 2); _i1++) {
 				Xloop = Xloop - 1;
 				Yloop = y + ExplosionSize;
-				for (int index178 = 0; index178 < (int) (ExplosionSize * 2); index178++) {
+				for (int _i2 = 0; _i2 < (int) (ExplosionSize * 2); _i2++) {
 					Yloop = Yloop - 1;
 					Zloop = z + ExplosionSize;
-					for (int index179 = 0; index179 < (int) (ExplosionSize * 2); index179++) {
+					for (int _i3 = 0; _i3 < (int) (ExplosionSize * 2); _i3++) {
 						Zloop = Zloop - 1;
 						BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, true);
 					}

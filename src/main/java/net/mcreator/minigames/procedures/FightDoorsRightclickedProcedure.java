@@ -4,7 +4,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.Identifier;
@@ -13,7 +15,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.init.MinigamesModBlocks;
+import net.mcreator.minigames.MinigamesMod;
+
+import java.util.ArrayList;
 
 public class FightDoorsRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -53,7 +59,7 @@ public class FightDoorsRightclickedProcedure {
 				}
 				middleOffset = 0;
 				pos = 0;
-				for (int index20 = 0; index20 < 5; index20++) {
+				for (int _i1 = 0; _i1 < 5; _i1++) {
 					pos = pos + 1;
 					if ((world.getBlockState(BlockPos.containing(x, y - pos, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 						MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((MinigamesModVariables.MapVariables.get(world).DoorOffset.x()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y() - 1),
@@ -65,14 +71,14 @@ public class FightDoorsRightclickedProcedure {
 				}
 				if (rotatedX) {
 					pos = 0;
-					for (int index21 = 0; index21 < 2; index21++) {
+					for (int _i1 = 0; _i1 < 2; _i1++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x + pos, y, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset + 1;
 						}
 					}
 					pos = 0;
-					for (int index22 = 0; index22 < 2; index22++) {
+					for (int _i1 = 0; _i1 < 2; _i1++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x - pos, y, z))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset - 1;
@@ -83,14 +89,14 @@ public class FightDoorsRightclickedProcedure {
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				} else {
 					pos = 0;
-					for (int index23 = 0; index23 < 2; index23++) {
+					for (int _i1 = 0; _i1 < 2; _i1++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x, y, z + pos))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset + 1;
 						}
 					}
 					pos = 0;
-					for (int index24 = 0; index24 < 2; index24++) {
+					for (int _i1 = 0; _i1 < 2; _i1++) {
 						pos = pos + 1;
 						if ((world.getBlockState(BlockPos.containing(x, y, z - pos))).is(BlockTags.create(Identifier.parse("minigames:door")))) {
 							middleOffset = middleOffset - 1;
@@ -107,7 +113,14 @@ public class FightDoorsRightclickedProcedure {
 				} else if (MinigamesModBlocks.MINIBOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 					StartVoteProcedure.execute(world, entity, entity, "miniboss room");
 				} else if (MinigamesModBlocks.BOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					StartVoteProcedure.execute(world, entity, entity, "boss room");
+					PlayBossCutsceneProcedure.execute();
+					for (Entity entityiterator : new ArrayList<>(world.players())) {
+						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 200, 1, false, false));
+					}
+					MinigamesMod.queueServerWork(200, () -> {
+						StartVoteProcedure.execute(world, entity, entity, "boss room");
+					});
 				} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 					StartVoteProcedure.execute(world, entity, entity, "floor");
 				}

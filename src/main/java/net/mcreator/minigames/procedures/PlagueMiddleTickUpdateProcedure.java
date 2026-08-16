@@ -84,6 +84,7 @@ public class PlagueMiddleTickUpdateProcedure {
 									&& !target.is(IS_MARKER)) {
 
 								ApplyEffectProcedure.execute(
+										world,
 										livingTarget,
 										false,
 										effectInstance.getAmplifier(),

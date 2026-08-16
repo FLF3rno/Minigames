@@ -14,7 +14,7 @@ public class ShieldAngelSpawnProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		MinigamesMod.queueServerWork(20, () -> {
+		MinigamesMod.queueServerWork(40, () -> {
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {

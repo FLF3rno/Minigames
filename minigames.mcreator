@@ -6591,6 +6591,10 @@
           {
             "name": "effect",
             "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -10380,6 +10384,10 @@
           {
             "name": "itemstack",
             "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -10990,6 +10998,10 @@
           {
             "name": "entity",
             "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -13097,6 +13109,269 @@
         ]
       },
       "path": "~/Dungeon/Events"
+    },
+    {
+      "name": "AirBoots",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "air_boots",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/AirBootsItem.java",
+          "src/main/resources/assets/minigames/models/item/air_boots.json",
+          "src/main/resources/assets/minigames/items/air_boots.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "AirBootsDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "air_boots_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AirBootsDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "KeybindPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "keybind_pressed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/KeybindPressedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Keybind"
+    },
+    {
+      "name": "AttackSpeedGem",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "attack_speed_gem",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/AttackSpeedGemItem.java",
+          "src/main/resources/assets/minigames/models/item/attack_speed_gem.json",
+          "src/main/resources/assets/minigames/items/attack_speed_gem.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "AttackSpeedGemDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "attack_speed_gem_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AttackSpeedGemDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "AttackSpeedGemTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "attack_speed_gem_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AttackSpeedGemTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "AttackSpeedGemDropped",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "attack_speed_gem_dropped",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AttackSpeedGemDroppedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "WirelessCauldron",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "wireless_cauldron",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/WirelessCauldronItem.java",
+          "src/main/resources/assets/minigames/items/wireless_cauldron.json",
+          "src/main/resources/assets/minigames/models/item/wireless_cauldron.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "WirelessCauldronDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "wireless_cauldron_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/WirelessCauldronDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "SpawnBossRoomProcedure",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_boss_room_procedure",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnBossRoomProcedureProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "Debuganim",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debuganim",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/DebuganimCommand.java"
+        ]
+      },
+      "path": "~/Dungeon/Cutscene"
+    },
+    {
+      "name": "ChooseRandomBoss",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choose_random_boss",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChooseRandomBossProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floor Spawning"
+    },
+    {
+      "name": "ChooseFloor",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choose_floor",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "floorTheme",
+            "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChooseFloorProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
     }
   ],
   "variable_elements": [
@@ -13909,6 +14184,18 @@
       "type": "vector",
       "scope": "map",
       "value": "Vec3.ZERO"
+    },
+    {
+      "name": "bossNumber",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "bossName",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
     }
   ],
   "sound_elements": [
@@ -14373,7 +14660,8 @@
       "CUSTOM:TimeClock",
       "CUSTOM:ClusterBomb",
       "CUSTOM:ParasiteScythe",
-      "CUSTOM:BoxOfFun"
+      "CUSTOM:BoxOfFun",
+      "CUSTOM:WirelessCauldron"
     ],
     "ITEMS:mod:dungeon_thief": [
       "CUSTOM:BlankDagger",
@@ -14384,7 +14672,8 @@
       "CUSTOM:SnatchingClaw",
       "CUSTOM:ReactionTime",
       "CUSTOM:SilentAssassin",
-      "CUSTOM:Horseshoe"
+      "CUSTOM:Horseshoe",
+      "CUSTOM:AirBoots"
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
@@ -14395,7 +14684,8 @@
       "CUSTOM:HumanCannonball",
       "CUSTOM:Plug",
       "CUSTOM:PowerHarvester",
-      "CUSTOM:Slam"
+      "CUSTOM:Slam",
+      "CUSTOM:AttackSpeedGem"
     ],
     "ITEMS:mod:dungeon_type_relic": [
       "CUSTOM:CrystallizedPotion",
@@ -14403,7 +14693,10 @@
       "CUSTOM:PhaseCloak",
       "CUSTOM:Plug",
       "CUSTOM:ClusterBomb",
-      "CUSTOM:ReactionTime"
+      "CUSTOM:ReactionTime",
+      "CUSTOM:AirBoots",
+      "CUSTOM:AttackSpeedGem",
+      "CUSTOM:WirelessCauldron"
     ],
     "ENTITIES:mod:dungeon": [
       "CUSTOM:Worshipper",
@@ -14501,47 +14794,12 @@
       "Blocks.SOUL_CAMPFIRE",
       "Blocks.LAVA_CAULDRON"
     ],
-    "ITEMS:minecraft:head_armor": [
-      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
-    ],
-    "BLOCKS:minecraft:stairs": [
-      "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
-      "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
-      "~CinnabarStairs@CUSTOM:CinnabarStairs",
-      "~SulfurBrickStairs@CUSTOM:SulfurBrickStairs",
-      "~PolishedSulfurStairs@CUSTOM:PolishedSulfurStairs",
-      "~SulfurStairs@CUSTOM:SulfurStairs",
-      "~CastleStairs@CUSTOM:CastleStairs"
-    ],
     "ITEMS:minecraft:enchantable/durability": [
       "~Horseshoe@CUSTOM:Horseshoe",
       "~SnatchingClaw@CUSTOM:SnatchingClaw",
       "~SnowShovel@CUSTOM:SnowShovel",
       "~SymmetricalShovel@CUSTOM:SymmetricalShovel",
       "~GrapplingHook@CUSTOM:GrapplingHook"
-    ],
-    "BLOCKS:minecraft:walls": [
-      "~CinnabarBrickWall@CUSTOM:CinnabarBrickWall",
-      "~PolishedCinnabarWall@CUSTOM:PolishedCinnabarWall",
-      "~CinnabarWall@CUSTOM:CinnabarWall",
-      "~SulfurBrickWall@CUSTOM:SulfurBrickWall",
-      "~PolishedSulfurWall@CUSTOM:PolishedSulfurWall",
-      "~SulfurWall@CUSTOM:SulfurWall",
-      "~ChiseledQuartzWall@CUSTOM:ChiseledQuartzWall"
-    ],
-    "BLOCKS:minecraft:slabs": [
-      "~CinnabarBrickSlab@CUSTOM:CinnabarBrickSlab",
-      "~PolishedCinnabarSlab@CUSTOM:PolishedCinnabarSlab",
-      "~CinnabarSlab@CUSTOM:CinnabarSlab",
-      "~SulfurBrickSlab@CUSTOM:SulfurBrickSlab",
-      "~PolishedSulfurSlab@CUSTOM:PolishedSulfurSlab",
-      "~SulfurSlab@CUSTOM:SulfurSlab"
-    ],
-    "BLOCKS:minecraft:mineable/pickaxe": [
-      "~TuffPedestal@CUSTOM:TuffPedestal"
-    ],
-    "BLOCKS:minecraft:needs_stone_tool": [
-      "~TuffPedestal@CUSTOM:TuffPedestal"
     ],
     "ITEMS:mod:on_kill": [
       "CUSTOM:TheFinisher",
@@ -14568,6 +14826,41 @@
     ],
     "ITEMS:mod:weapontype_throwing": [
       "Blocks.BEDROCK"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
+    ],
+    "BLOCKS:minecraft:stairs": [
+      "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
+      "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
+      "~CinnabarStairs@CUSTOM:CinnabarStairs",
+      "~SulfurBrickStairs@CUSTOM:SulfurBrickStairs",
+      "~PolishedSulfurStairs@CUSTOM:PolishedSulfurStairs",
+      "~SulfurStairs@CUSTOM:SulfurStairs",
+      "~CastleStairs@CUSTOM:CastleStairs"
+    ],
+    "BLOCKS:minecraft:walls": [
+      "~CinnabarBrickWall@CUSTOM:CinnabarBrickWall",
+      "~PolishedCinnabarWall@CUSTOM:PolishedCinnabarWall",
+      "~CinnabarWall@CUSTOM:CinnabarWall",
+      "~SulfurBrickWall@CUSTOM:SulfurBrickWall",
+      "~PolishedSulfurWall@CUSTOM:PolishedSulfurWall",
+      "~SulfurWall@CUSTOM:SulfurWall",
+      "~ChiseledQuartzWall@CUSTOM:ChiseledQuartzWall"
+    ],
+    "BLOCKS:minecraft:slabs": [
+      "~CinnabarBrickSlab@CUSTOM:CinnabarBrickSlab",
+      "~PolishedCinnabarSlab@CUSTOM:PolishedCinnabarSlab",
+      "~CinnabarSlab@CUSTOM:CinnabarSlab",
+      "~SulfurBrickSlab@CUSTOM:SulfurBrickSlab",
+      "~PolishedSulfurSlab@CUSTOM:PolishedSulfurSlab",
+      "~SulfurSlab@CUSTOM:SulfurSlab"
+    ],
+    "BLOCKS:minecraft:mineable/pickaxe": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "BLOCKS:minecraft:needs_stone_tool": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
     ]
   },
   "tab_element_order": {},
@@ -14951,7 +15244,10 @@
       "item.minigames.slam": "Slam",
       "item.minigames.box_of_fun": "Box of Fun",
       "attribute.minigames.effect_potency_2": "Effect Potency 2",
-      "subtitles.party_explode": ":D"
+      "subtitles.party_explode": ":D",
+      "item.minigames.air_boots": "Air Boots",
+      "item.minigames.attack_speed_gem": "Attack Speed Gem",
+      "item.minigames.wireless_cauldron": "Wireless Cauldron"
     }
   },
   "metadata": {
@@ -15350,6 +15646,10 @@
               {
                 "name": "Visual",
                 "children": []
+              },
+              {
+                "name": "Keybind",
+                "children": []
               }
             ]
           },
@@ -15493,5 +15793,5 @@
     "credits": "FL_F3rno",
     "modElementsPackage": "net.mcreator.minigames"
   },
-  "mcreatorVersion": 202600230420
+  "mcreatorVersion": 202600233518
 }

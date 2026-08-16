@@ -69,7 +69,7 @@ public class DestroySnowGrantSnowballSpleefProcedure {
 				targetY = 100;
 				BreakSnowProcedure.execute(world, targetX, targetY, targetZ, entity);
 				layer = 0;
-				for (int index477 = 0; index477 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; index477++) {
+				for (int _i1 = 0; _i1 < (int) MinigamesModVariables.MapVariables.get(world).layersRemainingSpleef; _i1++) {
 					layer = layer + 1;
 					targetY = 100 + layer * MinigamesModVariables.MapVariables.get(world).gapBetweenLayersSpleef;
 					BreakSnowProcedure.execute(world, targetX, targetY, targetZ, entity);

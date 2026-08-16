@@ -20,7 +20,7 @@ public class GhostifierRightclickedProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/playsound minecraft:entity.phantom.ambient player @a ~ ~ ~ 1 0.1");
-		ApplyEffectProcedure.execute(entity, true, 1, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:blessed");
-		ApplyEffectProcedure.execute(entity, true, 1, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:phantom");
+		ApplyEffectProcedure.execute(world, entity, true, 1, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:blessed");
+		ApplyEffectProcedure.execute(world, entity, true, 1, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:phantom");
 	}
 }

@@ -1,18 +1,28 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.mcreator.minigames.init.MinigamesModItems;
+
+import java.util.ArrayList;
 
 public class ApplyEffectProcedure {
-	public static void execute(Entity target, boolean hide, double level, double ticks, String effect) {
+	public static void execute(LevelAccessor world, Entity target, boolean hide, double level, double ticks, String effect) {
 		if (target == null || effect == null)
 			return;
 		if ((effect).equals("minigames:stunned")) {
@@ -50,6 +60,24 @@ public class ApplyEffectProcedure {
 							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(),
 									_ent.getDisplayName(), _ent.level().getServer(), _ent),
 							("effect give @s " + effect + " " + new java.text.DecimalFormat("##").format(ticks / 20) + " " + new java.text.DecimalFormat("##").format(level - 1) + " " + hide));
+				}
+			}
+		}
+		if (CheckRelicProcedure.execute(target, new ItemStack(MinigamesModItems.WIRELESS_CAULDRON.get()))) {
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				if (!(entityiterator == target)) {
+					ApplyEffectProcedure.execute(world, entityiterator, hide, level, GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.WIRELESS_CAULDRON.get()), "minigames:effect_length") / 20, effect);
+				}
+				if (world.isClientSide()) {
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.brewing_stand.brew")), SoundSource.PLAYERS,
+									(float) 0.7, 2);
+						} else {
+							_level.playLocalSound((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.brewing_stand.brew")), SoundSource.PLAYERS, (float) 0.7, 2,
+									false);
+						}
+					}
 				}
 			}
 		}

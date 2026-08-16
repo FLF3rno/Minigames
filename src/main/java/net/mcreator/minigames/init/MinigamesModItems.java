@@ -134,6 +134,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> HORSESHOE;
 	public static final DeferredItem<Item> SLAM;
 	public static final DeferredItem<Item> BOX_OF_FUN;
+	public static final DeferredItem<Item> AIR_BOOTS;
+	public static final DeferredItem<Item> ATTACK_SPEED_GEM;
+	public static final DeferredItem<Item> WIRELESS_CAULDRON;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -240,6 +243,9 @@ public class MinigamesModItems {
 		HORSESHOE = register("horseshoe", HorseshoeItem::new);
 		SLAM = register("slam", SlamItem::new);
 		BOX_OF_FUN = register("box_of_fun", BoxOfFunItem::new);
+		AIR_BOOTS = register("air_boots", AirBootsItem::new);
+		ATTACK_SPEED_GEM = register("attack_speed_gem", AttackSpeedGemItem::new);
+		WIRELESS_CAULDRON = register("wireless_cauldron", WirelessCauldronItem::new);
 	}
 
 	// Start of user code block custom items

@@ -42,9 +42,9 @@ public class DemonTickProcedure {
 							"/playsound minecraft:entity.warden.ambient hostile @a ~ ~ ~ 1 0.1");
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 32) {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
-					ApplyEffectProcedure.execute(entityiterator, false, 1, 100, "minecraft:darkness");
+					ApplyEffectProcedure.execute(world, entityiterator, false, 1, 100, "minecraft:darkness");
 				}
-				for (int index346 = 0; index346 < 6; index346++) {
+				for (int _i1 = 0; _i1 < 6; _i1++) {
 					SummonMinionProcedure.execute(world, x, y + 1, z, entity, 0, Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), 0, "minigames:sculkling");
 				}
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 50) {

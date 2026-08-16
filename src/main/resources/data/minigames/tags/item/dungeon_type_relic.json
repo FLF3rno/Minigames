@@ -1,11 +1,14 @@
 {
   "replace": false,
   "values": [
+    "minigames:attack_speed_gem",
     "minigames:blacksmith_hammer",
     "minigames:phase_cloak",
     "minigames:reaction_time",
+    "minigames:air_boots",
     "minigames:crystallized_potion",
     "minigames:cluster_bomb",
+    "minigames:wireless_cauldron",
     "minigames:plug"
   ]
 }

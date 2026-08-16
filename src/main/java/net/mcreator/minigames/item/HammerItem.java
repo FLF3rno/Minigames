@@ -45,7 +45,7 @@ public class HammerItem extends Item {
 	@Override
 	public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
 		super.hurtEnemy(itemstack, entity, sourceentity);
-		HammerHitProcedure.execute(entity, itemstack);
+		HammerHitProcedure.execute(entity.level(), entity, itemstack);
 	}
 
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {

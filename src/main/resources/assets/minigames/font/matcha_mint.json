@@ -1,0 +1,10 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "minigames:MatchaMint.ttf",
+      "size": 128,
+      "oversample": 2.0
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 package net.mcreator.minigames.client.screens;
 
+import net.mcreator.minigames.AnimationOverlay;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
@@ -79,23 +80,19 @@ public class PlayerSlotsOverlay {
             if (playingDungeons && path.equals("selected_item_name")) {
                 event.setCanceled(true);
             }
-            // 1. Handle Hotbar Hiding (if slots < 9)
             if (playerSlots < 9) {
                 if (path.contains("hotbar")) {
                     event.setCanceled(true);
                 }
             }
 
-            // 2. Handle showOnlyHearts HUD changes
             if (showOnlyHearts) {
-                // Hide Food, Armor, XP, Air, and Vehicle Health
                 if (path.equals("food_level") || path.equals("armor_level") || path.equals("air_level") || path.equals("experience_bar")
                         || path.equals("experience_level") || path.contains("experience") || path.contains("exp_bar") || layerName.contains("experience") || layerName.contains("exp_bar")
                         || layerName.contains("xp_bar") || path.equals("jump_bar") || path.equals("vehicle_health")) {
                     event.setCanceled(true);
                 }
 
-                // Center Health Bar
                 if (path.equals("player_health")) {
                     event.getGuiGraphics().pose().pushMatrix();
                     event.getGuiGraphics().pose().translate(51, 0);
@@ -199,11 +196,69 @@ public class PlayerSlotsOverlay {
             }
         }
     }
+    @SubscribeEvent
+    public static void onScreenRenderPost(ScreenEvent.Render.Post event) {
 
-    private static void renderCustomHotbar(GuiGraphicsExtractor guiGraphics, int nSlots) {
+        if (AnimationOverlay.isAnimationPlaying()) {
+            return;
+        }
+
+        if (event.getScreen() instanceof AbstractContainerScreen<?> gui) {
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+
+            if (player != null) {
+                if (player.isSpectator()) {
+                    return;
+                }
+
+                double playerSlots =
+                        player.getData(
+                                MinigamesModVariables.PLAYER_VARIABLES
+                        ).playerSlots;
+
+                int nSlots =
+                        Math.max(
+                                0,
+                                Math.min(9, (int) playerSlots)
+                        );
+
+                if (nSlots < 9) {
+                    for (Slot slot : gui.getMenu().slots) {
+                        if (slot.container instanceof Inventory) {
+                            int slotIndex = slot.getContainerSlot();
+
+                            if (slotIndex >= nSlots && slotIndex < 9) {
+                                int sx = gui.getLeftPos() + slot.x;
+                                int sy = gui.getTopPos() + slot.y;
+
+                                event.getGuiGraphics().fill(
+                                        sx,
+                                        sy,
+                                        sx + 16,
+                                        sy + 16,
+                                        0xAA000000
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void renderCustomHotbar(
+            GuiGraphicsExtractor guiGraphics,
+            int nSlots) {
+
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
-        if (player == null || guiGraphics == null || mc.options.hideGui) return;
+
+        if (player == null
+                || guiGraphics == null
+                || mc.options.hideGui
+                || AnimationOverlay.isAnimationPlaying()) {
+            return;
+        }
 
         int w = guiGraphics.guiWidth();
         int h = guiGraphics.guiHeight();
@@ -215,28 +270,60 @@ public class PlayerSlotsOverlay {
 
         for (int i = 0; i < nSlots; i++) {
             int x = startX + i * slotWidth;
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, HOTBAR_SLOT, x, hotbarY, 0, 0, 20, 22, 20, 22);
+
+            guiGraphics.blit(
+                    RenderPipelines.GUI_TEXTURED,
+                    HOTBAR_SLOT,
+                    x, hotbarY,
+                    0, 0,
+                    20, 22,
+                    20, 22
+            );
         }
 
         int selectedSlot = getSelectedSlot(player.getInventory());
+
         if (selectedSlot >= 0 && selectedSlot < nSlots) {
             int x = startX + selectedSlot * slotWidth - 2;
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SELECTED_SLOT, x, hotbarY - 1, 0, 0, 24, 24, 24, 24);
+
+            guiGraphics.blit(
+                    RenderPipelines.GUI_TEXTURED,
+                    SELECTED_SLOT,
+                    x, hotbarY - 1,
+                    0, 0,
+                    24, 24,
+                    24, 24
+            );
         }
 
         for (int i = 0; i < nSlots; i++) {
-            int x = startX + i * slotWidth + 2;
+            int itemX = startX + i * slotWidth + 2;
             int itemY = hotbarY + 3;
+
             ItemStack stack = player.getInventory().getItem(i);
+
             if (!stack.isEmpty()) {
-                guiGraphics.item(stack, x, itemY);
-                guiGraphics.itemDecorations(mc.font, stack, x, itemY);
+                guiGraphics.item(stack, itemX, itemY);
+                guiGraphics.itemDecorations(
+                        mc.font,
+                        stack,
+                        itemX,
+                        itemY
+                );
             }
         }
     }
 
-    private static void renderColoredSelectedItemName(GuiGraphicsExtractor guiGraphics, Player player, ItemStack stack) {
-        if (guiGraphics == null || player == null || stack == null || stack.isEmpty()) {
+    private static void renderColoredSelectedItemName(
+            GuiGraphicsExtractor guiGraphics,
+            Player player,
+            ItemStack stack) {
+
+        if (guiGraphics == null
+                || player == null
+                || stack == null
+                || stack.isEmpty()
+                || AnimationOverlay.isAnimationPlaying()) {
             return;
         }
 

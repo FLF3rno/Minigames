@@ -55,14 +55,14 @@ public class MinigameGUICrownHuntThisGUIIsClosedProcedure {
 			if (world instanceof ServerLevel _origLevel) {
 				LevelAccessor _switchworld11 = _origLevel.getServer().getLevel(Level.OVERWORLD);
 				if (_switchworld11 != null) {
-					worldSwitch11(world, x, y, z, entity);
+					worldSwitch11(_switchworld11, x, y, z, entity);
 				}
 			}
 		} else {
 			if (world instanceof ServerLevel _origLevel) {
 				LevelAccessor _switchworld13 = _origLevel.getServer().getLevel(Level.OVERWORLD);
 				if (_switchworld13 != null) {
-					worldSwitch13(world, x, y, z, entity);
+					worldSwitch13(_switchworld13, x, y, z, entity);
 				}
 			}
 		}

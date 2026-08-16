@@ -377,5 +377,8 @@
   "item.minigames.slam": "Slam",
   "item.minigames.box_of_fun": "Box of Fun",
   "attribute.minigames.effect_potency_2": "Effect Potency 2",
-  "subtitles.party_explode": ":D"
+  "subtitles.party_explode": ":D",
+  "item.minigames.air_boots": "Air Boots",
+  "item.minigames.attack_speed_gem": "Attack Speed Gem",
+  "item.minigames.wireless_cauldron": "Wireless Cauldron"
 }

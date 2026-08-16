@@ -69,7 +69,7 @@ public class GravediggerRenderer extends MobRenderer<GravediggerEntity, LivingEn
 
 	@Override
 	protected void scale(LivingEntityRenderState state, PoseStack poseStack) {
-		poseStack.scale(1.3f, 1.3f, 1.3f);
+		poseStack.scale(1f, 1f, 1f);
 	}
 
 	private static final class AnimatedModel extends Modelgravedigger {

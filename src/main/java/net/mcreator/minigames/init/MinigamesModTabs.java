@@ -49,6 +49,9 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.HORSESHOE.get());
 				tabData.accept(MinigamesModItems.SLAM.get());
 				tabData.accept(MinigamesModItems.BOX_OF_FUN.get());
+				tabData.accept(MinigamesModItems.AIR_BOOTS.get());
+				tabData.accept(MinigamesModItems.ATTACK_SPEED_GEM.get());
+				tabData.accept(MinigamesModItems.WIRELESS_CAULDRON.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {

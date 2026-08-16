@@ -445,9 +445,7 @@ public class HoveredItemTooltipRenderer {
         tooltip.removeIf(line -> {
             String text = line.getString().trim().toLowerCase(Locale.ROOT);
             return hasTranslatableKey(line, "item.modifiers.") || hasTranslatableKey(line, "attribute.modifier.")
-                    || text.startsWith("when in ") || text.startsWith("when equipped") || text.startsWith("+") || text.startsWith("-")
-                    || text.endsWith(" attack damage") || text.endsWith(" attack speed")
-                    || text.endsWith(" salvage value") || text.endsWith(" coins on kill");
+                    || text.startsWith("when in ") || text.startsWith("when equipped") || text.startsWith("+") || text.startsWith("-");
         });
     }
 

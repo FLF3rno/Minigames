@@ -135,6 +135,7 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
+    "onTickUpdate": "SpawnBossRoomProcedure",
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

@@ -83,18 +83,14 @@ public class StartDungeonProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
 		if (world instanceof ServerLevel _origLevel) {
-			LevelAccessor _switchworld12 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-			if (_switchworld12 != null) {
-				worldSwitch12(world, x, y, z);
+			LevelAccessor _switchworld11 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+			if (_switchworld11 != null) {
+				worldSwitch11(_switchworld11, x, y, z);
 			}
 		}
 	}
 
-	private static void worldSwitch12(LevelAccessor world, double x, double y, double z) {
-		MinigamesModVariables.MapVariables.get(world).dungeonRoomSize = new Vec3(29, 20, 29);
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		SpawnGridProcedure.execute(world, x, y, z, 1, 13, 1, 9, 5, 5, 1);
-		MinigamesModVariables.MapVariables.get(world).floorTypeDungeon = "church";
-		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+	private static void worldSwitch11(LevelAccessor world, double x, double y, double z) {
+		ChooseFloorProcedure.execute(world, x, y, z, "church");
 	}
 }

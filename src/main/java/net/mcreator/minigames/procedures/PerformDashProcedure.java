@@ -49,8 +49,8 @@ public class PerformDashProcedure {
 					}
 				}
 				if (CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.PHASE_CLOAK.get()))) {
-					ApplyEffectProcedure.execute(entity, true, 1, 3, "minigames:phantom");
-					ApplyEffectProcedure.execute(entity, true, 1, 3, "minigames:blessed");
+					ApplyEffectProcedure.execute(world, entity, true, 1, 3, "minigames:phantom");
+					ApplyEffectProcedure.execute(world, entity, true, 1, 3, "minigames:blessed");
 				}
 			}
 		}

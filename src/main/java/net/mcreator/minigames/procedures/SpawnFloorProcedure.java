@@ -35,13 +35,41 @@ public class SpawnFloorProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					("execute in minigames:dungeon_dimension run forceload add -50 -50 "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2)));
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					("execute in minigames:dungeon_dimension run forceload add "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100)));
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run fill -50 0 -50 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " 200 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) + " air"));
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					("execute in minigames:dungeon_dimension run forceload remove -50 -50 "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2)));
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					("execute in minigames:dungeon_dimension run forceload remove "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
+							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " "
+							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100)));
 		spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
-		for (int index8 = 0; index8 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); index8++) {
+		for (int _i1 = 0; _i1 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.z(); _i1++) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
-			for (int index9 = 0; index9 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); index9++) {
+			for (int _i2 = 0; _i2 < (int) MinigamesModVariables.MapVariables.get(world).dungeonSize.x(); _i2++) {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.STARTING_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_STARTING_ROOM.get().defaultBlockState(), 3);
@@ -70,14 +98,14 @@ public class SpawnFloorProcedure {
 				if ((world.getBlockState(BlockPos.containing(spawnRoomX, 300, spawnRoomZ))).getBlock() == MinigamesModBlocks.BOSS_ROOM_GRID_BLOCK.get()) {
 					world.setBlock(BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z()),
 							MinigamesModBlocks.SPAWN_BOSS_ROOM.get().defaultBlockState(), 3);
-					if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
+					if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);
 							if (_bs.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _booleanProp)
 								world.setBlock(_pos, _bs.setValue(_booleanProp, true), 3);
 						}
-					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX + 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
+					} else if ((world.getBlockState(BlockPos.containing(spawnRoomX - 1, 300, spawnRoomZ))).is(BlockTags.create(Identifier.parse("minigames:room")))) {
 						{
 							BlockPos _pos = BlockPos.containing(spawnRoomX * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x(), 100, spawnRoomZ * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z());
 							BlockState _bs = world.getBlockState(_pos);

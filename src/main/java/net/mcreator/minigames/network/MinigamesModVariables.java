@@ -312,6 +312,8 @@ public class MinigamesModVariables {
 		public double hunterAnimation = 0;
 		public ArrayList<Object> glueY = new ArrayList<>();
 		public Vec3 coordinateOffset = Vec3.ZERO;
+		public double bossNumber = 0;
+		public String bossName = "\"\"";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -401,6 +403,8 @@ public class MinigamesModVariables {
 			hunterAnimation = nbt.getDoubleOr("hunterAnimation", 0);
 			glueY = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("glueY"), lookupProvider);
 			coordinateOffset = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("coordinateOffset")).result().orElse(Vec3.ZERO);
+			bossNumber = nbt.getDoubleOr("bossNumber", 0);
+			bossName = nbt.getStringOr("bossName", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -491,6 +495,8 @@ public class MinigamesModVariables {
 			nbt.putDouble("hunterAnimation", hunterAnimation);
 			nbt.put("glueY", NbtArrayLists.saveGlobalMap(glueY));
 			nbt.put("coordinateOffset", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, coordinateOffset).result().orElseGet(CompoundTag::new));
+			nbt.putDouble("bossNumber", bossNumber);
+			nbt.putString("bossName", bossName);
 			return nbt;
 		}
 

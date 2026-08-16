@@ -1,11 +1,22 @@
 package net.mcreator.minigames;
 
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.world.entity.Entity;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+import java.util.ArrayList;
 
 public class AnimationScreenTrigger {
 
@@ -14,6 +25,27 @@ public class AnimationScreenTrigger {
             int x = Minecraft.getInstance().getWindow().getGuiScaledWidth();
             int y = Minecraft.getInstance().getWindow().getGuiScaledHeight();
             AnimationManager manager = new AnimationManager(length, speed);
+
+            Entity p1 = null;
+            Entity p2 = null;
+            Entity p3 = null;
+            Entity p4 = null;
+            for (Entity entityiterator : new ArrayList<>(Minecraft.getInstance().level.players())) {
+                if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
+                    p1 = entityiterator;
+                } else if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 2) {
+                    p2 = entityiterator;
+                } else if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 3) {
+                    p3 = entityiterator;
+                } else if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 4) {
+                    p4 = entityiterator;
+                }
+            }
+            Identifier MATCHA_FONT =
+                    Identifier.fromNamespaceAndPath(
+                            "minigames",
+                            "matcha_mint"
+                    );
 
             if (animationType.equalsIgnoreCase("template")) {
                 Identifier logo = Identifier.fromNamespaceAndPath("minigames", "textures/screens/logo");
@@ -26,7 +58,6 @@ public class AnimationScreenTrigger {
                         "easeInOut", 5          // Interpolation & Layer
                 );
 
-                //spin in place:
                 AnimationManager.displayRotate(0, 40, logo, 50, 50, 0f, 180f, "linear", 1);
             }
             else if (animationType.equalsIgnoreCase("crown")) {
@@ -76,8 +107,203 @@ public class AnimationScreenTrigger {
             }
             else if (animationType.equalsIgnoreCase("roguelike_boss")) {
 
-            }
+                Identifier bossTexture = Identifier.fromNamespaceAndPath("minigames", "textures/animation/roguelike/boss/" + MinigamesModVariables.MapVariables.get(Minecraft.getInstance().level).bossName + ".png");
+                AnimationManager.displayColor(0, 200, 0xFF000000, 0);
 
+                if (p4 != null) {
+                    AnimationManager.displayEntity(
+                            0, 200, p1,
+                            100, 145, 100, 145,
+                            50f, 50f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                    AnimationManager.displayEntity(
+                            0, 200, p2,
+                            100, 245, 100, 245,
+                            50f, 50f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                    AnimationManager.displayEntity(
+                            0, 200, p3,
+                            100, 345, 100, 345,
+                            50f, 50f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                    AnimationManager.displayEntity(
+                            0, 200, p4,
+                            100, 445, 100, 445,
+                            50f, 50f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                } else if (p3 != null) {
+                    AnimationManager.displayEntity(
+                            0, 200, p1,
+                            100, 165, 100, 165,
+                            65f, 65f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                    AnimationManager.displayEntity(
+                            0, 200, p2,
+                            100, 295, 100, 295,
+                            65f, 65f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                    AnimationManager.displayEntity(
+                            0, 200, p3,
+                            100, 435, 100, 435,
+                            65f, 65f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                } else if (p2 != null) {
+                    AnimationManager.displayEntity(
+                            0, 200, p1,
+                            100, 265, 100, 265,
+                            80f, 80f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                    AnimationManager.displayEntity(
+                            0, 200, p2,
+                            100, 435, 100, 435,
+                            80f, 80f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                } else {
+                    AnimationManager.displayEntity(
+                            0, 200, p1,
+                            100, 315, 100, 315,
+                            90f, 90f,
+                            180f, 180f,
+                            "linear", 5
+                    );
+                }
+
+                AnimationManager.displayTransform(
+                        0, 200, Component.literal("VS")
+                                .withStyle(Style.EMPTY
+                                        .withColor(0xFFF1F3BE)
+                                        .withFont(new FontDescription.Resource(MATCHA_FONT))
+                                ),
+                        x / 2 - 48, y / 2, x / 2 - 48, y / 2, 0.5f, 0.5f,
+                        0f, 0f, "easeInOut", 6
+                );
+                int bossCenterX = x / 2 + 60;
+                int bossCenterY = (int) (y / 1.65);
+
+                Component bossName = Component.literal(
+                        MinigamesModVariables.MapVariables
+                                .get(Minecraft.getInstance().level)
+                                .bossName).withStyle(style -> style
+                        .withColor(0xFFF1F3BE)
+                        .withFont(
+                                new FontDescription.Resource(MATCHA_FONT))
+                );
+
+                AnimationManager.displayCenteredTextWrapped(
+                        0, 200,
+                        bossName,
+                        bossCenterX,
+                        bossCenterY,
+                        700,
+                        0.3f, 0.3f,
+                        0f, 0f,
+                        "easeInOut",
+                        6
+                );
+
+
+                Component playerName = p1.getDisplayName().copy().withStyle(
+                        style -> style
+                                .withColor(0xFFF1F3BE)
+                                .withFont(new FontDescription.Resource(MATCHA_FONT))
+                );
+
+                AnimationManager.displayCenteredText(
+                        0, 200,
+                        playerName,
+                        x / 2 - 68,
+                        (int) (y / 2.7),
+                        0.3f, 0.3f,
+                        0f, 0f,
+                        "easeInOut",
+                        6
+                );
+                if (p2 != null) {
+                    playerName = p2.getDisplayName().copy().withStyle(
+                            style -> style
+                                    .withColor(0xFFF1F3BE)
+                                    .withFont(new FontDescription.Resource(MATCHA_FONT))
+                    );
+
+                    AnimationManager.displayCenteredText(
+                            0, 200,
+                            playerName,
+                            x / 2 - 68,
+                            (int) (y / 2.9),
+                            0.3f, 0.3f,
+                            0f, 0f,
+                            "easeInOut",
+                            6
+                    );
+                }
+                if (p3 != null) {
+                    playerName = p3.getDisplayName().copy().withStyle(
+                            style -> style
+                                    .withColor(0xFFF1F3BE)
+                                    .withFont(new FontDescription.Resource(MATCHA_FONT))
+                    );
+
+                    AnimationManager.displayCenteredText(
+                            0, 200,
+                            playerName,
+                            x / 2 - 68,
+                            (int) (y / 3.1),
+                            0.3f, 0.3f,
+                            0f, 0f,
+                            "easeInOut",
+                            6
+                    );
+                }
+                if (p4 != null) {
+                    playerName = p4.getDisplayName().copy().withStyle(
+                            style -> style
+                                    .withColor(0xFFF1F3BE)
+                                    .withFont(new FontDescription.Resource(MATCHA_FONT))
+                    );
+
+                    AnimationManager.displayCenteredText(
+                            0, 200,
+                            playerName,
+                            x / 2 - 68,
+                            (int) (y / 3.3),
+                            0.3f, 0.3f,
+                            0f, 0f,
+                            "easeInOut",
+                            6
+                    );
+                }
+
+                AnimationManager.displayTransform(
+                        0, 200,
+                        bossTexture,
+                        512, 512,
+                        x - 275 , y /4,
+                        x - 275, y / 4,
+                        0.5f, 0.5f,
+                        0f, 0f,
+                        "linear",
+                        10
+                );
+
+            }
             AnimationOverlay.addManager(manager);
         });
     }

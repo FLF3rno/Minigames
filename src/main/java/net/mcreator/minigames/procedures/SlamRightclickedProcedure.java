@@ -3,7 +3,6 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 
 public class SlamRightclickedProcedure {
@@ -16,7 +15,6 @@ public class SlamRightclickedProcedure {
 		} else {
 			entity.setDeltaMovement(new Vec3(0, (-6), 0));
 		}
-		if (entity instanceof Player _player)
-			_player.getCooldowns().addCooldown(itemstack, (int) GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 	}
 }

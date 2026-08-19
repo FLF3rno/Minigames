@@ -1,7 +1,8 @@
 package net.mcreator.minigames.procedures;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
-import net.mcreator.minigames.util.StrongholdPositionGenerator;
+import net.mcreator.minigames.MinigamesMod;
+import net.mcreator.minigames.util.AchievementStrongholdTargets;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -75,16 +76,22 @@ public class TeleportAchievementProcedure {
 
         MinigamesModVariables.MapVariables.get(world).coordinateOffset = new Vec3(targetPos.getX(), targetPos.getY(), targetPos.getZ());
 
-        StrongholdPositionGenerator.POSITIONS.clear();
-        StrongholdPositionGenerator.POSITIONS.addAll(
-                StrongholdPositionGenerator.generate(
-                        12345L,
-                        0,
-                        0
-                )
-        );
-
-
+        List<BlockPos> targets = new ArrayList<>();
+        int ringCount = 3;
+        int ringDistance = 192;
+        int ringSize = 3;
+        for (int ring = 1; ring <= ringCount; ring++) {
+            int distance = ringDistance * ring;
+            for (int i = 0; i < ringSize; i++) {
+                double angle = (Math.PI * 2.0 * i / ringSize) + (ring * 0.73D);
+                int x = targetPos.getX() + (int) Math.round(Math.cos(angle) * distance);
+                int z = targetPos.getZ() + (int) Math.round(Math.sin(angle) * distance);
+                int y = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+                targets.add(new BlockPos(x, Math.max(y, targetPos.getY()), z));
+            }
+            ringSize += 2;
+        }
+        AchievementStrongholdTargets.setTargets(targets);
         double tpX = targetPos.getX() + 0.5;
         double tpY = targetPos.getY() + 1.0;
         double tpZ = targetPos.getZ() + 0.5;

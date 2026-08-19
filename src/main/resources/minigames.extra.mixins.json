@@ -10,7 +10,7 @@
     "PhantomCollisionMixin",
     "RelicInventoryMixin",
     "LivingEntityTargetMixin",
-    "ChunkGeneratorStructureStateMixin"
+    "EnderEyeItemMixin"
   ],
   "client": [
     "GuiAccessor",
@@ -19,7 +19,7 @@
     "DebugEntryPositionMixin",
     "ExperienceBarRendererMixin",
     "EffectsInInventoryMixin",
-    "DecayHeartMixin",
+    "DecayHeartMixin",
     "BlockInteractionBypassMixin"
 
   ],

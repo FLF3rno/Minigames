@@ -86,6 +86,7 @@ public class FlavioTrapdoorEntity extends Monster {
 		if (damagesource.is(DamageTypes.GENERIC_KILL)) {
         return super.hurtServer(level, damagesource, amount);
     	}
+    	return false;
 	}
 
 	@Override

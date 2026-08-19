@@ -10,8 +10,7 @@
     "PhantomCollisionMixin",
     "RelicInventoryMixin",
     "LivingEntityTargetMixin",
-    "ChunkGeneratorStructureStateMixin",
-    "IsSecondaryUseActiveMixin"
+    "ChunkGeneratorStructureStateMixin"
   ],
   "client": [
     "GuiAccessor",
@@ -20,7 +19,9 @@
     "DebugEntryPositionMixin",
     "ExperienceBarRendererMixin",
     "EffectsInInventoryMixin",
-    "DecayHeartMixin"
+    "DecayHeartMixin",
+    "BlockInteractionBypassMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1

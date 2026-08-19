@@ -99,6 +99,9 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> BLANK_PEDESTAL_P_3;
 	public static final DeferredBlock<Block> BLANK_PEDESTAL_P_4;
 	public static final DeferredBlock<Block> SPAWN_SCULKLING;
+	public static final DeferredBlock<Block> SPAWN_FLAVIO;
+	public static final DeferredBlock<Block> SPAWN_BLESSING_DISPENSER;
+	public static final DeferredBlock<Block> SPAWN_FLAVIO_TRAPDOOR;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -183,6 +186,9 @@ public class MinigamesModBlocks {
 		BLANK_PEDESTAL_P_3 = register("blank_pedestal_p_3", BlankPedestalP3Block::new);
 		BLANK_PEDESTAL_P_4 = register("blank_pedestal_p_4", BlankPedestalP4Block::new);
 		SPAWN_SCULKLING = register("spawn_sculkling", SpawnSculklingBlock::new);
+		SPAWN_FLAVIO = register("spawn_flavio", SpawnFlavioBlock::new);
+		SPAWN_BLESSING_DISPENSER = register("spawn_blessing_dispenser", SpawnBlessingDispenserBlock::new);
+		SPAWN_FLAVIO_TRAPDOOR = register("spawn_flavio_trapdoor", SpawnFlavioTrapdoorBlock::new);
 	}
 
 	// Start of user code block custom blocks

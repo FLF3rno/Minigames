@@ -13307,19 +13307,6 @@
       "path": "~/Dungeon/Floors/Rooms"
     },
     {
-      "name": "Debuganim",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debuganim",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/DebuganimCommand.java"
-        ]
-      },
-      "path": "~/Dungeon/Cutscene"
-    },
-    {
       "name": "ChooseRandomBoss",
       "type": "procedure",
       "compiles": true,
@@ -13372,6 +13359,411 @@
         ]
       },
       "path": "~/Dungeon"
+    },
+    {
+      "name": "SpawnFlavio",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/SpawnFlavioBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_flavio.json",
+          "src/main/resources/assets/minigames/models/block/spawn_flavio.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_flavio.json",
+          "src/main/resources/assets/minigames/items/spawn_flavio.json",
+          "src/main/resources/assets/minigames/models/item/spawn_flavio.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio"
+    },
+    {
+      "name": "SpawnFlavioBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnFlavioBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio"
+    },
+    {
+      "name": "Flavio",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioRenderer.java",
+          "src/main/resources/assets/minigames/items/flavio_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/FlavioEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio"
+    },
+    {
+      "name": "FlavioTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_tick",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FlavioTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio"
+    },
+    {
+      "name": "FlavioFightManager",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_fight_manager",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/FlavioFightManager.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio"
+    },
+    {
+      "name": "BossBarRender",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "boss_bar_render",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/BossBarRender.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss"
+    },
+    {
+      "name": "Debugbossbar",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debugbossbar",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/DebugbossbarCommand.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss"
+    },
+    {
+      "name": "Bossbarshow",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bossbarshow",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BossbarshowProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss"
+    },
+    {
+      "name": "BlessingDispenser",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessing_dispenser",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/BlessingDispenserEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/BlessingDispenserRenderer.java",
+          "src/main/resources/assets/minigames/items/blessing_dispenser_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Blessing Dispenser"
+    },
+    {
+      "name": "BlessingDispenserSpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessing_dispenser_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlessingDispenserSpawnProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Blessing Dispenser"
+    },
+    {
+      "name": "BlessingDispenserTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessing_dispenser_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BlessingDispenserTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Blessing Dispenser"
+    },
+    {
+      "name": "ParticleFlowHelper",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "particle_flow_helper",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "particlesPerTick",
+            "type": "number"
+          },
+          {
+            "name": "ticks",
+            "type": "number"
+          },
+          {
+            "name": "easing",
+            "type": "string"
+          },
+          {
+            "name": "particleId",
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "type": "vector"
+          },
+          {
+            "name": "to",
+            "type": "vector"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ParticleFlowHelperProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Visual"
+    },
+    {
+      "name": "BlessedParticle",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "blessed_particle",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/particles/blessed_particle.json",
+          "src/main/java/net/mcreator/minigames/client/particle/BlessedParticleParticle.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "CursedParticle",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cursed_particle",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/particle/CursedParticleParticle.java",
+          "src/main/resources/assets/minigames/particles/cursed_particle.json"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "SpawnBlessingDispenser",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_blessing_dispenser",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/spawn_blessing_dispenser.json",
+          "src/main/resources/assets/minigames/items/spawn_blessing_dispenser.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_blessing_dispenser.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_blessing_dispenser.json",
+          "src/main/resources/assets/minigames/models/block/spawn_blessing_dispenser.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnBlessingDispenserBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Blessing Dispenser"
+    },
+    {
+      "name": "SpawnBlessingDispenserBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_blessing_dispenser_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnBlessingDispenserBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Blessing Dispenser"
+    },
+    {
+      "name": "FlavioTrapdoor",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_trapdoor",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/FlavioTrapdoorEntity.java",
+          "src/main/resources/assets/minigames/items/flavio_trapdoor_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioTrapdoorRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnFlavioTrapdoor",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_trapdoor",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/spawn_flavio_trapdoor.json",
+          "src/main/resources/assets/minigames/models/block/spawn_flavio_trapdoor.json",
+          "src/main/resources/assets/minigames/models/item/spawn_flavio_trapdoor.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnFlavioTrapdoorBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_flavio_trapdoor.json",
+          "src/main/resources/assets/minigames/items/spawn_flavio_trapdoor.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnFlavioTrapdoorBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_trapdoor_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnFlavioTrapdoorBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
     }
   ],
   "variable_elements": [
@@ -14196,6 +14588,12 @@
       "type": "string",
       "scope": "map",
       "value": "\"\""
+    },
+    {
+      "name": "showBossBar",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -14705,7 +15103,9 @@
       "CUSTOM:Gravedigger",
       "CUSTOM:Preacher",
       "CUSTOM:Demon",
-      "CUSTOM:Sculkling"
+      "CUSTOM:Sculkling",
+      "CUSTOM:Flavio",
+      "CUSTOM:BlessingDispenser"
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel"
@@ -14861,6 +15261,9 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "ENTITIES:mod:dungeon_boss": [
+      "CUSTOM:Flavio"
     ]
   },
   "tab_element_order": {},
@@ -15247,7 +15650,13 @@
       "subtitles.party_explode": ":D",
       "item.minigames.air_boots": "Air Boots",
       "item.minigames.attack_speed_gem": "Attack Speed Gem",
-      "item.minigames.wireless_cauldron": "Wireless Cauldron"
+      "item.minigames.wireless_cauldron": "Wireless Cauldron",
+      "item.minigames.spawn_flavio": "Spawn Flavio",
+      "entity.minigames.flavio": "Flavio",
+      "entity.minigames.blessing_dispenser": "Blessing Dispenser",
+      "item.minigames.spawn_blessing_dispenser": "Spawn Blessing Dispenser",
+      "entity.minigames.flavio_trapdoor": "Flavio Trapdoor",
+      "item.minigames.spawn_flavio_trapdoor": "Spawn Flavio Trapdoor"
     }
   },
   "metadata": {
@@ -15668,6 +16077,29 @@
           {
             "name": "Cutscene",
             "children": []
+          },
+          {
+            "name": "Boss",
+            "children": [
+              {
+                "name": "Flavio",
+                "children": [
+                  {
+                    "name": "Machines",
+                    "children": [
+                      {
+                        "name": "Blessing Dispenser",
+                        "children": []
+                      },
+                      {
+                        "name": "Trapdoor",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ]
       },

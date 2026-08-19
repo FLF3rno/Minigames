@@ -38,5 +38,8 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.BLESSED_ARROW.get(), BlessedArrowRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.DEMON.get(), DemonRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.SCULKLING.get(), SculklingRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO.get(), FlavioRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.BLESSING_DISPENSER.get(), BlessingDispenserRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TRAPDOOR.get(), FlavioTrapdoorRenderer::new);
 	}
 }

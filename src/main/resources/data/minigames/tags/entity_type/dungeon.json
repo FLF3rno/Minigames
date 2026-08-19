@@ -1,9 +1,11 @@
 {
   "replace": false,
   "values": [
+    "minigames:flavio",
     "minigames:worshipper",
     "minigames:shield_angel",
     "minigames:demon",
+    "minigames:blessing_dispenser",
     "minigames:candlehead",
     "minigames:gravedigger",
     "minigames:preacher",

@@ -11,13 +11,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.commands.Commands;
 
-import net.mcreator.minigames.procedures.PlayBossCutsceneProcedure;
+import net.mcreator.minigames.procedures.BossbarshowProcedure;
 
 @EventBusSubscriber
-public class DebuganimCommand {
+public class DebugbossbarCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("debuganim")
+		event.getDispatcher().register(Commands.literal("debugbossbar")
 
 				.executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();
@@ -31,7 +31,7 @@ public class DebuganimCommand {
 					if (entity != null)
 						direction = entity.getDirection();
 
-					PlayBossCutsceneProcedure.execute();
+					BossbarshowProcedure.execute(world);
 					return 0;
 				}));
 	}

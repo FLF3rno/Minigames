@@ -137,6 +137,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> AIR_BOOTS;
 	public static final DeferredItem<Item> ATTACK_SPEED_GEM;
 	public static final DeferredItem<Item> WIRELESS_CAULDRON;
+	public static final DeferredItem<Item> SPAWN_FLAVIO;
+	public static final DeferredItem<Item> SPAWN_BLESSING_DISPENSER;
+	public static final DeferredItem<Item> SPAWN_FLAVIO_TRAPDOOR;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -246,6 +249,9 @@ public class MinigamesModItems {
 		AIR_BOOTS = register("air_boots", AirBootsItem::new);
 		ATTACK_SPEED_GEM = register("attack_speed_gem", AttackSpeedGemItem::new);
 		WIRELESS_CAULDRON = register("wireless_cauldron", WirelessCauldronItem::new);
+		SPAWN_FLAVIO = block(MinigamesModBlocks.SPAWN_FLAVIO);
+		SPAWN_BLESSING_DISPENSER = block(MinigamesModBlocks.SPAWN_BLESSING_DISPENSER);
+		SPAWN_FLAVIO_TRAPDOOR = block(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR);
 	}
 
 	// Start of user code block custom items

@@ -89,6 +89,9 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.BLANK_PEDESTAL_P_3.get().asItem());
 				tabData.accept(MinigamesModBlocks.BLANK_PEDESTAL_P_4.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_SCULKLING.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_BLESSING_DISPENSER.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {

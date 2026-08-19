@@ -28,6 +28,10 @@ public class HealthBar {
             Registries.ENTITY_TYPE,
             Identifier.fromNamespaceAndPath("minigames", "dungeon")
     );
+    private static final TagKey<EntityType<?>> DUNGEON_BOSS_TAG = TagKey.create(
+            Registries.ENTITY_TYPE,
+            Identifier.fromNamespaceAndPath("minigames", "dungeon_boss")
+    );
 
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent.AfterOpaqueFeatures event) {
@@ -48,6 +52,7 @@ public class HealthBar {
             if (entity == mc.player || !entity.isAlive()) continue;
 
             if (!entity.is(DUNGEON_TAG)) continue;
+            if (entity.is(DUNGEON_BOSS_TAG)) continue;
 
             if (!shouldShowHealthBar(mc, entity)) continue;
 

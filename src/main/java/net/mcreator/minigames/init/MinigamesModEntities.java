@@ -67,6 +67,12 @@ public class MinigamesModEntities {
 			EntityType.Builder.<DemonEntity>of(DemonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3).notInPeaceful().sized(1.8f, 2.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<SculklingEntity>> SCULKLING = register("sculkling",
 			EntityType.Builder.<SculklingEntity>of(SculklingEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(26).setUpdateInterval(3).notInPeaceful().sized(0.7f, 0.9f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioEntity>> FLAVIO = register("flavio",
+			EntityType.Builder.<FlavioEntity>of(FlavioEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(0.8f, 2.4f));
+	public static final DeferredHolder<EntityType<?>, EntityType<BlessingDispenserEntity>> BLESSING_DISPENSER = register("blessing_dispenser",
+			EntityType.Builder.<BlessingDispenserEntity>of(BlessingDispenserEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(0.8f, 3.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioTrapdoorEntity>> FLAVIO_TRAPDOOR = register("flavio_trapdoor",
+			EntityType.Builder.<FlavioTrapdoorEntity>of(FlavioTrapdoorEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(3f, 0.99f));
 	// Start of user code block custom entities
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.1f, 0.1f));
@@ -92,6 +98,9 @@ public class MinigamesModEntities {
 		PlagueMiddleEntity.init(event);
 		DemonEntity.init(event);
 		SculklingEntity.init(event);
+		FlavioEntity.init(event);
+		BlessingDispenserEntity.init(event);
+		FlavioTrapdoorEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -110,5 +119,8 @@ public class MinigamesModEntities {
 		event.put(PLAGUE_MIDDLE.get(), PlagueMiddleEntity.createAttributes().build());
 		event.put(DEMON.get(), DemonEntity.createAttributes().build());
 		event.put(SCULKLING.get(), SculklingEntity.createAttributes().build());
+		event.put(FLAVIO.get(), FlavioEntity.createAttributes().build());
+		event.put(BLESSING_DISPENSER.get(), BlessingDispenserEntity.createAttributes().build());
+		event.put(FLAVIO_TRAPDOOR.get(), FlavioTrapdoorEntity.createAttributes().build());
 	}
 }

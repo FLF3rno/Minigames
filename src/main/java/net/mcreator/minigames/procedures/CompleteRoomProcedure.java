@@ -22,5 +22,7 @@ public class CompleteRoomProcedure {
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			DungeonHealProcedure.execute(entityiterator, (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1), "room_complete");
 		}
+		MinigamesModVariables.MapVariables.get(world).showBossBar = false;
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 	}
 }

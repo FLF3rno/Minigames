@@ -380,5 +380,11 @@
   "subtitles.party_explode": ":D",
   "item.minigames.air_boots": "Air Boots",
   "item.minigames.attack_speed_gem": "Attack Speed Gem",
-  "item.minigames.wireless_cauldron": "Wireless Cauldron"
+  "item.minigames.wireless_cauldron": "Wireless Cauldron",
+  "item.minigames.spawn_flavio": "Spawn Flavio",
+  "entity.minigames.flavio": "Flavio",
+  "entity.minigames.blessing_dispenser": "Blessing Dispenser",
+  "item.minigames.spawn_blessing_dispenser": "Spawn Blessing Dispenser",
+  "entity.minigames.flavio_trapdoor": "Flavio Trapdoor",
+  "item.minigames.spawn_flavio_trapdoor": "Spawn Flavio Trapdoor"
 }

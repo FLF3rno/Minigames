@@ -23,14 +23,17 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelchain.LAYER_LOCATION, Modelchain::createBodyLayer);
 		event.registerLayerDefinition(Modelworshipper.LAYER_LOCATION, Modelworshipper::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat_left.LAYER_LOCATION, Modelpewseat_left::createBodyLayer);
+		event.registerLayerDefinition(Modelblessing_dispenser.LAYER_LOCATION, Modelblessing_dispenser::createBodyLayer);
 		event.registerLayerDefinition(Modelcandlehead.LAYER_LOCATION, Modelcandlehead::createBodyLayer);
 		event.registerLayerDefinition(Modelhalfblock.LAYER_LOCATION, Modelhalfblock::createBodyLayer);
 		event.registerLayerDefinition(Modelwinnercrown.LAYER_LOCATION, Modelwinnercrown::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat_right.LAYER_LOCATION, Modelpewseat_right::createBodyLayer);
 		event.registerLayerDefinition(Modelgrapple.LAYER_LOCATION, Modelgrapple::createBodyLayer);
 		event.registerLayerDefinition(Modelshortboard.LAYER_LOCATION, Modelshortboard::createBodyLayer);
+		event.registerLayerDefinition(Modelflavio.LAYER_LOCATION, Modelflavio::createBodyLayer);
 		event.registerLayerDefinition(Modelvolleybomb.LAYER_LOCATION, Modelvolleybomb::createBodyLayer);
 		event.registerLayerDefinition(Modelshieldagent.LAYER_LOCATION, Modelshieldagent::createBodyLayer);
+		event.registerLayerDefinition(Modelflavio_trapdoor.LAYER_LOCATION, Modelflavio_trapdoor::createBodyLayer);
 		event.registerLayerDefinition(Modeldemon.LAYER_LOCATION, Modeldemon::createBodyLayer);
 		event.registerLayerDefinition(Modelpreacher.LAYER_LOCATION, Modelpreacher::createBodyLayer);
 		event.registerLayerDefinition(Modelstunned.LAYER_LOCATION, Modelstunned::createBodyLayer);

@@ -314,6 +314,7 @@ public class MinigamesModVariables {
 		public Vec3 coordinateOffset = Vec3.ZERO;
 		public double bossNumber = 0;
 		public String bossName = "\"\"";
+		public boolean showBossBar = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -405,6 +406,7 @@ public class MinigamesModVariables {
 			coordinateOffset = Vec3.CODEC.parse(NbtOps.INSTANCE, nbt.get("coordinateOffset")).result().orElse(Vec3.ZERO);
 			bossNumber = nbt.getDoubleOr("bossNumber", 0);
 			bossName = nbt.getStringOr("bossName", "");
+			showBossBar = nbt.getBooleanOr("showBossBar", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -497,6 +499,7 @@ public class MinigamesModVariables {
 			nbt.put("coordinateOffset", Vec3.CODEC.encodeStart(NbtOps.INSTANCE, coordinateOffset).result().orElseGet(CompoundTag::new));
 			nbt.putDouble("bossNumber", bossNumber);
 			nbt.putString("bossName", bossName);
+			nbt.putBoolean("showBossBar", showBossBar);
 			return nbt;
 		}
 

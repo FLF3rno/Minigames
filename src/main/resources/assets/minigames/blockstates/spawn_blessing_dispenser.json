@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/spawn_blessing_dispenser"
+    },
+    "facing=east": {
+      "model": "minigames:block/spawn_blessing_dispenser",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/spawn_blessing_dispenser",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/spawn_blessing_dispenser",
+      "y": 270
+    }
+  }
+}

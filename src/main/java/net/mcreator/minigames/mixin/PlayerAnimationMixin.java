@@ -43,14 +43,17 @@ public abstract class PlayerAnimationMixin {
 		if (player == null)
 			return;
 		PlayerModel model = (PlayerModel) (Object) this;
-		if (!player.getPersistentData().contains("setNullRender"))
+		Minecraft mc = Minecraft.getInstance();
+		CompoundTag playerData = player.getPersistentData();
+		if ((mc.player == player && mc.options.getCameraType().isFirstPerson() && !playerData.contains("setNullRender")) || (mc.player == player && !mc.options.getCameraType().isFirstPerson()) || mc.player != player)
 			hideModelParts(model, false);
 		MinigamesModPlayerAnimationAPI.PlayerAnimation animation = MinigamesModPlayerAnimationAPI.active_animations.get(player);
 		if (animation == null)
 			return;
 		if (animation.bones.get("left_arm") != null || animation.bones.get("torso") != null || animation.bones.get("right_arm") != null)
 			renderState.attackTime = 0;
-		renderState.isCrouching = false;
+		if (animation.bones.get("left_leg") != null || animation.bones.get("right_leg") != null)
+			renderState.isCrouching = false;
 	}
 
 	@Inject(method = "Lnet/minecraft/client/model/player/PlayerModel;setupAnim(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)V", at = @At(value = "TAIL"))
@@ -80,7 +83,7 @@ public abstract class PlayerAnimationMixin {
 		if (playingAnimation.isEmpty()) {
 			return;
 		}
-		if (firstPerson || data.contains("setNullRender"))
+		if (firstPerson)
 			hideModelParts(model, true);
 		if (overrideAnimation) {
 			firstPerson = data.getBooleanOr("FirstPersonAnimation", false) && mc.options.getCameraType().isFirstPerson() && player == mc.player && (mc.screen == null || mc.screen instanceof ChatScreen);

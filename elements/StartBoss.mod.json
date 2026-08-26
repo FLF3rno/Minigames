@@ -1,0 +1,8 @@
+{
+  "_fv": 89,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"variables_set_logic\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">global:showBossBar</field><value name=\"VAL\"><block type=\"logic_boolean\"><field name=\"BOOL\">TRUE</field></block></value><next><block type=\"controls_if\"><value name=\"IF0\"><block type=\"text_binary_ops\"><value name=\"A\"><block type=\"variables_get_string\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">global:bossName</field></block></value><value name=\"B\"><block type=\"text\"><field name=\"TEXT\">Flavio</field></block></value></block></value><statement name=\"DO0\"><block type=\"java_code\"><field name=\"CODE\">net.mcreator.minigames.&amp;#10;FlavioFightManager.phase = 1;</field><next><block type=\"call_procedure\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" inputs=\"0\"></mutation><field name=\"procedure\">SpawnSingleMachine</field></block></next></block></statement></block></next></block></next></block></xml>",
+    "skipDependencyNullCheck": false
+  }
+}

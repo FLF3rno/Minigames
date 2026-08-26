@@ -64,6 +64,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPRUCE_SHORT_BOARD.get().asItem());
 				tabData.accept(MinigamesModBlocks.INTERSECTING_END_RODS.get().asItem());
 				tabData.accept(MinigamesModBlocks.TUFF_PEDESTAL.get().asItem());
+				tabData.accept(MinigamesModBlocks.RUBY_FROGLIGHT.get().asItem());
+				tabData.accept(MinigamesModBlocks.AZURE_FROGLIGHT.get().asItem());
 			}).withSearchBar().withTabsBefore(DUNGEON_ITEMS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_MOBS = REGISTRY.register("custom_mobs",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_mobs")).icon(() -> new ItemStack(MinigamesModBlocks.SPAWN_WORSHIPPER.get())).displayItems((parameters, tabData) -> {
@@ -92,6 +94,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_BLESSING_DISPENSER.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_2.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_3.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {

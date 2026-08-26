@@ -144,19 +144,21 @@ public class ExplodeProcedure {
 				}
 			}
 		}
-		{
-			final Vec3 _center = new Vec3(x, y, z);
-			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(ExplosionSize / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-				Dcoords = new Vec3((entityiterator.getX() - x), (entityiterator.getY() - y), (entityiterator.getZ() - z));
-				length = Math.sqrt(Dcoords.x() * Dcoords.x() + Dcoords.y() * Dcoords.y() + Dcoords.z() * Dcoords.z());
-				if (entityiterator instanceof Player || entityiterator instanceof ServerPlayer) {
-					{
-						MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-						_vars.performKnockback = new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback));
-						_vars.markSyncDirty();
+		if (!(ExplosionKnockback == 0)) {
+			{
+				final Vec3 _center = new Vec3(x, y, z);
+				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(ExplosionSize / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
+					Dcoords = new Vec3((entityiterator.getX() - x), (entityiterator.getY() - y), (entityiterator.getZ() - z));
+					length = Math.sqrt(Dcoords.x() * Dcoords.x() + Dcoords.y() * Dcoords.y() + Dcoords.z() * Dcoords.z());
+					if (entityiterator instanceof Player || entityiterator instanceof ServerPlayer) {
+						{
+							MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+							_vars.performKnockback = new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback));
+							_vars.markSyncDirty();
+						}
+					} else {
+						entityiterator.setDeltaMovement(new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback)));
 					}
-				} else {
-					entityiterator.setDeltaMovement(new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback)));
 				}
 			}
 		}

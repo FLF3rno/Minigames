@@ -386,5 +386,21 @@
   "entity.minigames.blessing_dispenser": "Blessing Dispenser",
   "item.minigames.spawn_blessing_dispenser": "Spawn Blessing Dispenser",
   "entity.minigames.flavio_trapdoor": "Flavio Trapdoor",
-  "item.minigames.spawn_flavio_trapdoor": "Spawn Flavio Trapdoor"
+  "item.minigames.spawn_flavio_trapdoor": "Spawn Flavio Trapdoor",
+  "item.minigames.ruby_froglight": "Ruby Froglight",
+  "item.minigames.azure_froglight": "Ruby Froglight",
+  "entity.minigames.flavio_tesla_coil": "Tesla Coil",
+  "entity.minigames.flavio_antenna": "Antenna",
+  "entity.minigames.spike_trap": "Spike Trap",
+  "subtitles.spike": "Spike Trap extends",
+  "entity.minigames.flavio_clock_cannon": "Clock Cannon",
+  "subtitles.cannon": "Cannon shot fires",
+  "subtitles.clock_tick_1": "Clock ticks",
+  "subtitles.clock_tick_2": "Clock ticks",
+  "entity.minigames.flavio_sweeper": "Sweeper",
+  "entity.minigames.flavio_trapdoor_2": "Flavio Trapdoor",
+  "entity.minigames.flavio_trapdoor_3": "Flavio Trapdoor",
+  "item.minigames.spawn_flavio_trapdoor_2": "Spawn Flavio Trapdoor 2",
+  "item.minigames.spawn_flavio_trapdoor_3": "Spawn Flavio Trapdoor 3",
+  "entity.minigames.player_cage": "Player Cage"
 }

@@ -49,4 +49,8 @@ public class MinigamesModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> RED_EXPLOSION = REGISTRY.register("red_explosion", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "red_explosion")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> ZAP = REGISTRY.register("zap", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "zap")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> PARTY_EXPLODE = REGISTRY.register("party_explode", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "party_explode")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> SPIKE = REGISTRY.register("spike", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "spike")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CANNON = REGISTRY.register("cannon", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "cannon")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOCK_TICK_1 = REGISTRY.register("clock_tick_1", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "clock_tick_1")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> CLOCK_TICK_2 = REGISTRY.register("clock_tick_2", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "clock_tick_2")));
 }

@@ -321,6 +321,142 @@ public class AnimationManager {
 			});
 		}
 	}
+	public static void displayTransform(
+			int fromTick, int toTick,
+			Identifier texture,
+			int textureWidth, int textureHeight,
+			int fromX, int fromY,
+			int toX, int toY,
+			float startScale, float endScale,
+			float startAngle, float endAngle,
+			float startOpacity, float endOpacity,
+			int startColor, int endColor,
+			String clampType,
+			int layer) {
+
+		if (CURRENT_INSTANCE == null) {
+			return;
+		}
+
+		CURRENT_INSTANCE.actions.add(new AnimationAction() {
+			@Override
+			public boolean isAlive(int tick) {
+				return tick >= fromTick && tick <= toTick;
+			}
+
+			@Override
+			public int getLayer() {
+				return layer;
+			}
+
+			@Override
+			public void render(
+					GuiGraphicsExtractor g,
+					int tick,
+					int sw,
+					int sh) {
+
+				float progress;
+
+				if (toTick == fromTick) {
+					progress = 1.0f;
+				} else {
+					progress = clamp(
+							(float) (tick - fromTick)
+									/ (float) (toTick - fromTick),
+							clampType
+					);
+				}
+
+				float currentX =
+						fromX + (toX - fromX) * progress;
+
+				float currentY =
+						fromY + (toY - fromY) * progress;
+
+				float currentScale =
+						startScale
+								+ (endScale - startScale) * progress;
+
+				float currentAngle =
+						startAngle
+								+ (endAngle - startAngle) * progress;
+
+				float currentOpacity =
+						startOpacity
+								+ (endOpacity - startOpacity) * progress;
+
+				int currentColor =
+						interpolateColor(
+								startColor,
+								endColor,
+								progress
+						);
+
+				// Extract RGB components.
+				int r = (currentColor >> 16) & 0xFF;
+				int green = (currentColor >> 8) & 0xFF;
+				int b = currentColor & 0xFF;
+
+				// Apply opacity separately.
+				int alpha =
+						Math.round(
+								Math.max(0.0f, Math.min(1.0f, currentOpacity))
+										* 255.0f
+						);
+
+				int finalColor =
+						(alpha << 24)
+								| (r << 16)
+								| (green << 8)
+								| b;
+
+				g.pose().pushMatrix();
+
+				g.pose().translate(
+						currentX,
+						currentY
+				);
+
+				g.pose().scale(
+						currentScale,
+						currentScale
+				);
+
+				if (currentAngle != 0.0f) {
+					g.pose().translate(
+							textureWidth / 2.0f,
+							textureHeight / 2.0f
+					);
+
+					g.pose().rotate(
+							(float) Math.toRadians(currentAngle)
+					);
+
+					g.pose().translate(
+							-textureWidth / 2.0f,
+							-textureHeight / 2.0f
+					);
+				}
+
+				g.blit(
+						net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+						texture,
+						0,
+						0,
+						0,
+						0,
+						textureWidth,
+						textureHeight,
+						textureWidth,
+						textureHeight,
+						finalColor
+				);
+
+				g.pose().popMatrix();
+			}
+		});
+	}
 	public static void displayEntity(
 			int fromTick, int toTick,
 			Entity entity,
@@ -669,6 +805,230 @@ public class AnimationManager {
 			}
 		});
 	}
+	public static void displayCenteredTextWrappedScroll(
+			int fromTick, int toTick,
+			Component text,
+			int centerX, int centerY,
+			int maxWidth,
+			float startScale, float endScale,
+			float startAngle, float endAngle,
+			String clampType,
+			float scrollSpeed,
+			int layer) {
+
+		if (CURRENT_INSTANCE == null) {
+			return;
+		}
+
+		Minecraft minecraft = Minecraft.getInstance();
+
+		CURRENT_INSTANCE.actions.add(new AnimationAction() {
+			@Override
+			public boolean isAlive(int tick) {
+				return tick >= fromTick && tick <= toTick;
+			}
+
+			@Override
+			public int getLayer() {
+				return layer;
+			}
+
+			@Override
+			public void render(
+					GuiGraphicsExtractor g,
+					int tick,
+					int sw,
+					int sh) {
+
+				float progress;
+
+				if (toTick == fromTick) {
+					progress = 1.0f;
+				} else {
+					progress = clamp(
+							(float) (tick - fromTick)
+									/ (float) (toTick - fromTick),
+							clampType
+					);
+				}
+
+				float currentScale =
+						startScale
+								+ (endScale - startScale) * progress;
+
+				float currentAngle =
+						startAngle
+								+ (endAngle - startAngle) * progress;
+
+				List<net.minecraft.util.FormattedCharSequence> lines =
+						minecraft.font.split(text, maxWidth);
+
+				if (lines.isEmpty()) {
+					return;
+				}
+
+				int lineHeight = minecraft.font.lineHeight;
+				int totalHeight = lines.size() * lineHeight;
+
+				float scrollOffset =
+						(tick - fromTick) * scrollSpeed;
+
+				g.pose().pushMatrix();
+
+				g.pose().translate(centerX, centerY);
+
+				g.pose().scale(
+						currentScale,
+						currentScale
+				);
+
+				if (currentAngle != 0.0f) {
+					g.pose().rotate(
+							(float) Math.toRadians(currentAngle)
+					);
+				}
+
+				g.pose().translate(
+						scrollOffset,
+						0.0f
+				);
+
+				float startY = -totalHeight / 2.0f;
+
+				for (int i = 0; i < lines.size(); i++) {
+
+					var line = lines.get(i);
+
+					int lineWidth =
+							minecraft.font.width(line);
+
+					float y =
+							startY
+									+ i * lineHeight;
+
+					g.text(
+							minecraft.font,
+							line,
+							-lineWidth / 2,
+							(int) y,
+							0xFFFFFFFF,
+							false
+					);
+				}
+
+				g.pose().popMatrix();
+			}
+		});
+	}
+	public static void fadeOut(
+			int fromTick,
+			int toTick,
+			int color,
+			int layer
+	) {
+		if (CURRENT_INSTANCE == null) {
+			return;
+		}
+
+		CURRENT_INSTANCE.actions.add(new AnimationAction() {
+			@Override
+			public boolean isAlive(int tick) {
+				return tick >= fromTick && tick <= toTick;
+			}
+
+			@Override
+			public int getLayer() {
+				return layer;
+			}
+
+			@Override
+			public void render(
+					GuiGraphicsExtractor g,
+					int tick,
+					int sw,
+					int sh
+			) {
+				float progress;
+
+				if (toTick == fromTick) {
+					progress = 1.0f;
+				} else {
+					progress = (float) (tick - fromTick)
+							/ (float) (toTick - fromTick);
+				}
+
+				progress = Math.max(0.0f, Math.min(1.0f, progress));
+
+				int alpha = 255 - (int) (progress * 255.0f);
+
+				int rgb = color & 0x00FFFFFF;
+				int finalColor = (alpha << 24) | rgb;
+
+				g.fill(
+						0,
+						0,
+						sw,
+						sh,
+						finalColor
+				);
+			}
+		});
+	}
+
+	public static void fadeIn(
+			int fromTick,
+			int toTick,
+			int color,
+			int layer
+	) {
+		if (CURRENT_INSTANCE == null) {
+			return;
+		}
+
+		CURRENT_INSTANCE.actions.add(new AnimationAction() {
+			@Override
+			public boolean isAlive(int tick) {
+				return tick >= fromTick && tick <= toTick;
+			}
+
+			@Override
+			public int getLayer() {
+				return layer;
+			}
+
+			@Override
+			public void render(
+					GuiGraphicsExtractor g,
+					int tick,
+					int sw,
+					int sh
+			) {
+				float progress;
+
+				if (toTick == fromTick) {
+					progress = 1.0f;
+				} else {
+					progress = (float) (tick - fromTick)
+							/ (float) (toTick - fromTick);
+				}
+
+				progress = Math.max(0.0f, Math.min(1.0f, progress));
+
+				int alpha = (int) (progress * 255.0f);
+
+				int rgb = color & 0x00FFFFFF;
+				int finalColor = (alpha << 24) | rgb;
+
+				g.fill(
+						0,
+						0,
+						sw,
+						sh,
+						finalColor
+				);
+			}
+		});
+	}
 
 	public static void displayStatic(int fromTick, int toTick, Identifier texture, int x, int y, int scale, int layer) {
 		displayStatic(fromTick, toTick, texture, x, y, (float) scale, 0f, layer);
@@ -702,30 +1062,19 @@ public class AnimationManager {
 		displayTransform(fromTick, toTick, texture, x, y, x, y, scale, scale, startAngle, endAngle, clampType, layer);
 	}
 
-	/**
-	 * Schedules a sound to play at the given tick during this animation.
-	 * @param atTick  the tick at which to play the sound
-	 * @param sound   the SoundEvent to play
-	 * @param volume  volume (1.0 = normal)
-	 * @param pitch   pitch (1.0 = normal)
-	 */
 	public static void playSound(int atTick, SoundEvent sound, float volume, float pitch) {
 		if (CURRENT_INSTANCE != null) {
 			CURRENT_INSTANCE.soundCues.add(new SoundCue(atTick, sound, volume, pitch));
 		}
 	}
 
-	/** Overload accepting a {@code Holder<SoundEvent>} (returned by registry lookups). */
 	public static void playSound(int atTick, Holder<SoundEvent> sound, float volume, float pitch) {
 		playSound(atTick, sound.value(), volume, pitch);
 	}
 
-	/** Plays a sound at the given tick with default volume and pitch (1.0). */
 	public static void playSound(int atTick, SoundEvent sound) {
 		playSound(atTick, sound, 1.0f, 1.0f);
 	}
-
-	/** Overload accepting a {@code Holder<SoundEvent>} with default volume and pitch (1.0). */
 	public static void playSound(int atTick, Holder<SoundEvent> sound) {
 		playSound(atTick, sound.value(), 1.0f, 1.0f);
 	}
@@ -738,5 +1087,32 @@ public class AnimationManager {
 			case "easeinout" -> t < 0.5f ? 2 * t * t : -1 + (4 - 2 * t) * t;
 			default -> t;
 		};
+	}
+	private static int interpolateColor(
+			int startColor,
+			int endColor,
+			float progress) {
+
+		int startR = (startColor >> 16) & 0xFF;
+		int startG = (startColor >> 8) & 0xFF;
+		int startB = startColor & 0xFF;
+
+		int endR = (endColor >> 16) & 0xFF;
+		int endG = (endColor >> 8) & 0xFF;
+		int endB = endColor & 0xFF;
+
+		int r = Math.round(
+				startR + (endR - startR) * progress
+		);
+
+		int g = Math.round(
+				startG + (endG - startG) * progress
+		);
+
+		int b = Math.round(
+				startB + (endB - startB) * progress
+		);
+
+		return (r << 16) | (g << 8) | b;
 	}
 }

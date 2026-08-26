@@ -36,6 +36,7 @@ public class MinigamesModMenus {
 	public static final DeferredHolder<MenuType<?>, MenuType<DisplayAchievmenMenu>> DISPLAY_ACHIEVMEN = REGISTRY.register("display_achievmen", () -> IMenuTypeExtension.create(DisplayAchievmenMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<MinigameGUIAchievementHuntMenu>> MINIGAME_GUI_ACHIEVEMENT_HUNT = REGISTRY.register("minigame_gui_achievement_hunt", () -> IMenuTypeExtension.create(MinigameGUIAchievementHuntMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<OptionCategoryMenu>> OPTION_CATEGORY = REGISTRY.register("option_category", () -> IMenuTypeExtension.create(OptionCategoryMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<FlavioPhase2Menu>> FLAVIO_PHASE_2 = REGISTRY.register("flavio_phase_2", () -> IMenuTypeExtension.create(FlavioPhase2Menu::new));
 
 	public interface MenuAccessor {
 		Map<String, Object> getMenuState();

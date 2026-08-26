@@ -41,5 +41,14 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.FLAVIO.get(), FlavioRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.BLESSING_DISPENSER.get(), BlessingDispenserRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TRAPDOOR.get(), FlavioTrapdoorRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TESLA_COIL.get(), FlavioTeslaCoilRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_ANTENNA.get(), FlavioAntennaRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.SPIKE_TRAP.get(), SpikeTrapRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_CLOCK_CANNON.get(), FlavioClockCannonRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.CANNONBALL.get(), CannonballRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_SWEEPER.get(), FlavioSweeperRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TRAPDOOR_2.get(), FlavioTrapdoor2Renderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TRAPDOOR_3.get(), FlavioTrapdoor3Renderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.PLAYER_CAGE.get(), PlayerCageRenderer::new);
 	}
 }

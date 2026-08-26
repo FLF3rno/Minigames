@@ -17,7 +17,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.AreaEffectCloud;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.server.level.ServerLevel;
@@ -25,13 +24,10 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
 
-import net.mcreator.minigames.client.model.animations.flavio_trapdoorAnimation;
-
 public class FlavioTrapdoorEntity extends Monster {
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(FlavioTrapdoorEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(FlavioTrapdoorEntity.class, EntityDataSerializers.INT);
-	public final AnimationState animationState0 = new AnimationState();
-	public final AnimationState animationState1 = new AnimationState();
+	public static final EntityDataAccessor<Integer> DATA_animationIndex = SynchedEntityData.defineId(FlavioTrapdoorEntity.class, EntityDataSerializers.INT);
 
 	public FlavioTrapdoorEntity(EntityType<FlavioTrapdoorEntity> type, Level world) {
 		super(type, world);
@@ -41,31 +37,11 @@ public class FlavioTrapdoorEntity extends Monster {
 	}
 
 	@Override
-	public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
-		if (ANIM.equals(data)) {
-			switch (this.entityData.get(ANIM)) {
-				case -1 :
-					this.animationState0.stop();
-					break;
-				case -2 :
-					this.animationState1.stop();
-					break;
-				case 0 :
-					this.animationState0.start(this.tickCount);
-					break;
-				case 1 :
-					this.animationState1.start(this.tickCount);
-					break;
-			}
-		}
-		super.onSyncedDataUpdated(data);
-	}
-
-	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(TEXTURE, "flavio_trapdoor");
 		builder.define(ANIM, 0);
+		builder.define(DATA_animationIndex, 0);
 	}
 
 	public void setTexture(String texture) {
@@ -98,37 +74,14 @@ public class FlavioTrapdoorEntity extends Monster {
 	public void addAdditionalSaveData(ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
+		valueOutput.putInt("DataanimationIndex", this.entityData.get(DATA_animationIndex));
 	}
 
 	@Override
 	public void readAdditionalSaveData(ValueInput valueInput) {
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "flavio_trapdoor"));
-	}
-
-	@Override
-	public void tick() {
-		super.tick();
-		if (this.level().isClientSide()) {
-			if (this.animationState0.isStarted()) {
-				float elapsedSeconds = this.animationState0.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= flavio_trapdoorAnimation.open.lengthInSeconds()) {
-					if (!flavio_trapdoorAnimation.open.looping())
-						this.animationState0.stop();
-					else
-						this.animationState0.start(this.tickCount);
-				}
-			}
-			if (this.animationState1.isStarted()) {
-				float elapsedSeconds = this.animationState1.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= flavio_trapdoorAnimation.close.lengthInSeconds()) {
-					if (!flavio_trapdoorAnimation.close.looping())
-						this.animationState1.stop();
-					else
-						this.animationState1.start(this.tickCount);
-				}
-			}
-		}
+		this.entityData.set(DATA_animationIndex, valueInput.getIntOr("DataanimationIndex", 0));
 	}
 
 	@Override
@@ -147,7 +100,7 @@ public class FlavioTrapdoorEntity extends Monster {
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-		builder = builder.add(Attributes.MAX_HEALTH, 10);
+		builder = builder.add(Attributes.MAX_HEALTH, 1000);
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);

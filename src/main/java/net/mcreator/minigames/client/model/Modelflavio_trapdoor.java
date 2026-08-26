@@ -34,10 +34,8 @@ public class Modelflavio_trapdoor extends EntityModel<LivingEntityRenderState> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		PartDefinition trapdoor = partdefinition.addOrReplaceChild("trapdoor", CubeListBuilder.create(), PartPose.offset(0.0F, 24.01F, 0.0F));
-		PartDefinition left = trapdoor.addOrReplaceChild("left", CubeListBuilder.create().texOffs(0, 0).addBox(8.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)).texOffs(0, 64)
-				.addBox(-24.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)).texOffs(0, 32).addBox(-8.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.01F, 0.0F));
-		PartDefinition right = trapdoor.addOrReplaceChild("right", CubeListBuilder.create().texOffs(64, 0).addBox(-8.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)).texOffs(64, 32)
-				.addBox(8.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)).texOffs(64, 64).addBox(-24.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.01F, 16.0F));
+		PartDefinition left = trapdoor.addOrReplaceChild("left", CubeListBuilder.create().texOffs(64, 96).addBox(-8.0F, -16.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.01F, 0.0F));
+		PartDefinition right = trapdoor.addOrReplaceChild("right", CubeListBuilder.create(), PartPose.offset(0.0F, -0.01F, 16.0F));
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 

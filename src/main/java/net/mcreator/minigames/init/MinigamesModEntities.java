@@ -72,7 +72,25 @@ public class MinigamesModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<BlessingDispenserEntity>> BLESSING_DISPENSER = register("blessing_dispenser",
 			EntityType.Builder.<BlessingDispenserEntity>of(BlessingDispenserEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(0.8f, 3.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<FlavioTrapdoorEntity>> FLAVIO_TRAPDOOR = register("flavio_trapdoor",
-			EntityType.Builder.<FlavioTrapdoorEntity>of(FlavioTrapdoorEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(3f, 0.99f));
+			EntityType.Builder.<FlavioTrapdoorEntity>of(FlavioTrapdoorEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(1f, 0.99f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioTeslaCoilEntity>> FLAVIO_TESLA_COIL = register("flavio_tesla_coil",
+			EntityType.Builder.<FlavioTeslaCoilEntity>of(FlavioTeslaCoilEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.35f, 4.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioAntennaEntity>> FLAVIO_ANTENNA = register("flavio_antenna",
+			EntityType.Builder.<FlavioAntennaEntity>of(FlavioAntennaEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(2f, 5.5f));
+	public static final DeferredHolder<EntityType<?>, EntityType<SpikeTrapEntity>> SPIKE_TRAP = register("spike_trap",
+			EntityType.Builder.<SpikeTrapEntity>of(SpikeTrapEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.4f, 0.9f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioClockCannonEntity>> FLAVIO_CLOCK_CANNON = register("flavio_clock_cannon",
+			EntityType.Builder.<FlavioClockCannonEntity>of(FlavioClockCannonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1f, 4.6f));
+	public static final DeferredHolder<EntityType<?>, EntityType<CannonballEntity>> CANNONBALL = register("cannonball",
+			EntityType.Builder.<CannonballEntity>of(CannonballEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.6f, 0.6f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioSweeperEntity>> FLAVIO_SWEEPER = register("flavio_sweeper",
+			EntityType.Builder.<FlavioSweeperEntity>of(FlavioSweeperEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(0.7f, 2f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioTrapdoor2Entity>> FLAVIO_TRAPDOOR_2 = register("flavio_trapdoor_2",
+			EntityType.Builder.<FlavioTrapdoor2Entity>of(FlavioTrapdoor2Entity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(1f, 0.99f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioTrapdoor3Entity>> FLAVIO_TRAPDOOR_3 = register("flavio_trapdoor_3",
+			EntityType.Builder.<FlavioTrapdoor3Entity>of(FlavioTrapdoor3Entity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(1f, 0.99f));
+	public static final DeferredHolder<EntityType<?>, EntityType<PlayerCageEntity>> PLAYER_CAGE = register("player_cage",
+			EntityType.Builder.<PlayerCageEntity>of(PlayerCageEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.2f, 2.2f));
 	// Start of user code block custom entities
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.1f, 0.1f));
@@ -101,6 +119,14 @@ public class MinigamesModEntities {
 		FlavioEntity.init(event);
 		BlessingDispenserEntity.init(event);
 		FlavioTrapdoorEntity.init(event);
+		FlavioTeslaCoilEntity.init(event);
+		FlavioAntennaEntity.init(event);
+		SpikeTrapEntity.init(event);
+		FlavioClockCannonEntity.init(event);
+		FlavioSweeperEntity.init(event);
+		FlavioTrapdoor2Entity.init(event);
+		FlavioTrapdoor3Entity.init(event);
+		PlayerCageEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -122,5 +148,13 @@ public class MinigamesModEntities {
 		event.put(FLAVIO.get(), FlavioEntity.createAttributes().build());
 		event.put(BLESSING_DISPENSER.get(), BlessingDispenserEntity.createAttributes().build());
 		event.put(FLAVIO_TRAPDOOR.get(), FlavioTrapdoorEntity.createAttributes().build());
+		event.put(FLAVIO_TESLA_COIL.get(), FlavioTeslaCoilEntity.createAttributes().build());
+		event.put(FLAVIO_ANTENNA.get(), FlavioAntennaEntity.createAttributes().build());
+		event.put(SPIKE_TRAP.get(), SpikeTrapEntity.createAttributes().build());
+		event.put(FLAVIO_CLOCK_CANNON.get(), FlavioClockCannonEntity.createAttributes().build());
+		event.put(FLAVIO_SWEEPER.get(), FlavioSweeperEntity.createAttributes().build());
+		event.put(FLAVIO_TRAPDOOR_2.get(), FlavioTrapdoor2Entity.createAttributes().build());
+		event.put(FLAVIO_TRAPDOOR_3.get(), FlavioTrapdoor3Entity.createAttributes().build());
+		event.put(PLAYER_CAGE.get(), PlayerCageEntity.createAttributes().build());
 	}
 }

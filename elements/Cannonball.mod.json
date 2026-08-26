@@ -1,0 +1,19 @@
+{
+  "_fv": 89,
+  "_type": "projectile",
+  "definition": {
+    "projectileItem": "Blocks.AIR",
+    "showParticles": false,
+    "actionSound": "",
+    "igniteFire": false,
+    "disableGravity": true,
+    "disableDiscarding": false,
+    "power": 0.4,
+    "damage": 5.0,
+    "knockback": 5,
+    "entityModel": "Modelcannonball",
+    "customModelTexture": "cannonball.png",
+    "modelWidth": 0.6,
+    "modelHeight": 0.6
+  }
+}

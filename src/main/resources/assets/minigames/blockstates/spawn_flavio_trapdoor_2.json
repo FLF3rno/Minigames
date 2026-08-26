@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/spawn_flavio_trapdoor_2"
+    },
+    "facing=east": {
+      "model": "minigames:block/spawn_flavio_trapdoor_2",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/spawn_flavio_trapdoor_2",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/spawn_flavio_trapdoor_2",
+      "y": 270
+    }
+  }
+}

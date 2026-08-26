@@ -31,9 +31,12 @@ public class WonVoteProcedure {
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 6) {
 				StartRoomProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 7) {
-				PlayBossCutsceneProcedure.execute();
-				MinigamesMod.queueServerWork(200, () -> {
-					StartRoomProcedure.execute(world);
+				StartRoomProcedure.execute(world);
+				if (world.isClientSide()) {
+					PlayBossCutsceneProcedure.execute();
+				}
+				MinigamesMod.queueServerWork(100, () -> {
+					StartBossProcedure.execute(world);
 				});
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {
 				StartRoomProcedure.execute(world);

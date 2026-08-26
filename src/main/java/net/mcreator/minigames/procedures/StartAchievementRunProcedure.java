@@ -110,6 +110,8 @@ public class StartAchievementRunProcedure {
 				_entity.addEffect(new MobEffectInstance(MobEffects.INSTANT_HEALTH, 60, 19, false, false));
 			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 1000000, 19, false, false));
+			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 1000000, 19, false, false));
 			if (entityiterator instanceof ServerPlayer _player)
 				_player.setGameMode(GameType.SURVIVAL);
 			if (entityiterator instanceof Player _player)

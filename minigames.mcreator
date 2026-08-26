@@ -13334,6 +13334,14 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "floor",
+            "type": "number"
+          },
+          {
             "name": "x",
             "type": "number"
           },
@@ -13344,10 +13352,6 @@
           {
             "name": "z",
             "type": "number"
-          },
-          {
-            "name": "floorTheme",
-            "type": "string"
           },
           {
             "name": "world",
@@ -13764,6 +13768,757 @@
         ]
       },
       "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnSingleMachine",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_single_machine",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnSingleMachineProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines"
+    },
+    {
+      "name": "RubyFroglight",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ruby_froglight",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/ruby_froglight.json",
+          "src/main/resources/assets/minigames/models/block/ruby_froglight.json",
+          "src/main/resources/data/minigames/loot_table/blocks/ruby_froglight.json",
+          "src/main/resources/assets/minigames/models/item/ruby_froglight.json",
+          "src/main/java/net/mcreator/minigames/block/RubyFroglightBlock.java",
+          "src/main/resources/assets/minigames/blockstates/ruby_froglight.json"
+        ]
+      },
+      "path": "~/General/Blocks"
+    },
+    {
+      "name": "AzureFroglight",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "azure_froglight",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/azure_froglight.json",
+          "src/main/java/net/mcreator/minigames/block/AzureFroglightBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/azure_froglight.json",
+          "src/main/resources/assets/minigames/models/item/azure_froglight.json",
+          "src/main/resources/assets/minigames/blockstates/azure_froglight.json",
+          "src/main/resources/assets/minigames/items/azure_froglight.json"
+        ]
+      },
+      "path": "~/General/Blocks"
+    },
+    {
+      "name": "FlavioTeslaCoil",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_tesla_coil",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/FlavioTeslaCoilEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioTeslaCoilRenderer.java",
+          "src/main/resources/assets/minigames/items/flavio_tesla_coil_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Tesla"
+    },
+    {
+      "name": "FlavioMachineDestroyed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_machine_destroyed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FlavioMachineDestroyedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines"
+    },
+    {
+      "name": "StartBoss",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_boss",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartBossProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss"
+    },
+    {
+      "name": "FlavioMachineDamaged",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_machine_damaged",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FlavioMachineDamagedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines"
+    },
+    {
+      "name": "TeslaTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "tesla_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TeslaTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Tesla"
+    },
+    {
+      "name": "ApplyTelegraph",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "apply_telegraph",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "attackId",
+            "type": "number"
+          },
+          {
+            "name": "ticks",
+            "type": "number"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyTelegraphProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss"
+    },
+    {
+      "name": "FlavioAntenna",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_antenna",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/flavio_antenna_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioAntennaRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/FlavioAntennaEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Antenna"
+    },
+    {
+      "name": "AntennaTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "antenna_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/AntennaTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Antenna"
+    },
+    {
+      "name": "SpikeTrap",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spike_trap",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/spike_trap_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/SpikeTrapEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/SpikeTrapRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Spike Trap"
+    },
+    {
+      "name": "SpikeTrapTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spike_trap_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpikeTrapTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Spike Trap"
+    },
+    {
+      "name": "FlavioClockCannon",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_clock_cannon",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioClockCannonRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/FlavioClockCannonEntity.java",
+          "src/main/resources/assets/minigames/items/flavio_clock_cannon_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Clock Cannon"
+    },
+    {
+      "name": "ClockCannonTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "clock_cannon_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ClockCannonTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Clock Cannon"
+    },
+    {
+      "name": "Cannonball",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "cannonball",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/CannonballEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/CannonballRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Clock Cannon"
+    },
+    {
+      "name": "FlavioClockCollides",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "flavio_clock_collides",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FlavioClockCollidesProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Clock Cannon"
+    },
+    {
+      "name": "FlavioSweeper",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_sweeper",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/FlavioSweeperEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioSweeperRenderer.java",
+          "src/main/resources/assets/minigames/items/flavio_sweeper_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Sweeper"
+    },
+    {
+      "name": "SweeperTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "sweeper_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SweeperTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Sweeper"
+    },
+    {
+      "name": "FlavioTrapdoor2",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_trapdoor_2",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioTrapdoor2Renderer.java",
+          "src/main/resources/assets/minigames/items/flavio_trapdoor_2_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/FlavioTrapdoor2Entity.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "FlavioTrapdoor3",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_trapdoor_3",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioTrapdoor3Renderer.java",
+          "src/main/resources/assets/minigames/items/flavio_trapdoor_3_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/FlavioTrapdoor3Entity.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnFlavioTrapdoor2",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_trapdoor_2",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/block/spawn_flavio_trapdoor_2.json",
+          "src/main/resources/assets/minigames/models/item/spawn_flavio_trapdoor_2.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_flavio_trapdoor_2.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_flavio_trapdoor_2.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnFlavioTrapdoor2Block.java",
+          "src/main/resources/assets/minigames/items/spawn_flavio_trapdoor_2.json"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnFlavioTrapdoor2BlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_trapdoor_2_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnFlavioTrapdoor2BlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnFlavioTrapdoor3",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_trapdoor_3",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_flavio_trapdoor_3.json",
+          "src/main/resources/assets/minigames/items/spawn_flavio_trapdoor_3.json",
+          "src/main/resources/assets/minigames/models/item/spawn_flavio_trapdoor_3.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_flavio_trapdoor_3.json",
+          "src/main/resources/assets/minigames/models/block/spawn_flavio_trapdoor_3.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnFlavioTrapdoor3Block.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnFlavioTrapdoor3BlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_flavio_trapdoor_3_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnFlavioTrapdoor3BlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Trapdoor"
+    },
+    {
+      "name": "SpawnTwoMachines",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spawn_two_machines",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnTwoMachinesProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines"
+    },
+    {
+      "name": "PlayerCage",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_cage",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/PlayerCageRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/PlayerCageEntity.java",
+          "src/main/resources/assets/minigames/items/player_cage_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Player Cage"
+    },
+    {
+      "name": "PlayerCageEntityFalls",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_cage_entity_falls",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayerCageEntityFallsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Player Cage"
+    },
+    {
+      "name": "PlayerCageSpawn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "player_cage_spawn",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayerCageSpawnProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Player Cage"
+    },
+    {
+      "name": "Debugphase2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debugphase_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/Debugphase2Procedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "Debugphase",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debugphase",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/DebugphaseCommand.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "FlavioPhase2",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_phase_2",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/gui/FlavioPhase2Screen.java",
+          "src/main/java/net/mcreator/minigames/world/inventory/FlavioPhase2Menu.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "ApplyClass",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "apply_class",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "selectClass",
+            "type": "string"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyClassProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Classes"
     }
   ],
   "variable_elements": [
@@ -14594,6 +15349,18 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
+    },
+    {
+      "name": "minimumLightLevel",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "0"
+    },
+    {
+      "name": "classColor",
+      "type": "string",
+      "scope": "player_persistent",
+      "value": "\"\""
     }
   ],
   "sound_elements": [
@@ -14926,6 +15693,42 @@
       ],
       "category": "player",
       "subtitle": ":D"
+    },
+    {
+      "name": "spike",
+      "files": [
+        "spike3",
+        "spike2",
+        "spike1"
+      ],
+      "category": "block",
+      "subtitle": "Spike Trap extends"
+    },
+    {
+      "name": "cannon",
+      "files": [
+        "cannon3",
+        "cannon2",
+        "cannon1"
+      ],
+      "category": "hostile",
+      "subtitle": "Cannon shot fires"
+    },
+    {
+      "name": "clock_tick_1",
+      "files": [
+        "clock_tick_1"
+      ],
+      "category": "hostile",
+      "subtitle": "Clock ticks"
+    },
+    {
+      "name": "clock_tick_2",
+      "files": [
+        "clock_tick_2"
+      ],
+      "category": "hostile",
+      "subtitle": "Clock ticks"
     }
   ],
   "tag_elements": {
@@ -15105,7 +15908,10 @@
       "CUSTOM:Demon",
       "CUSTOM:Sculkling",
       "CUSTOM:Flavio",
-      "CUSTOM:BlessingDispenser"
+      "CUSTOM:BlessingDispenser",
+      "CUSTOM:FlavioTeslaCoil",
+      "CUSTOM:FlavioAntenna",
+      "CUSTOM:FlavioClockCannon"
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel"
@@ -15656,15 +16462,31 @@
       "entity.minigames.blessing_dispenser": "Blessing Dispenser",
       "item.minigames.spawn_blessing_dispenser": "Spawn Blessing Dispenser",
       "entity.minigames.flavio_trapdoor": "Flavio Trapdoor",
-      "item.minigames.spawn_flavio_trapdoor": "Spawn Flavio Trapdoor"
+      "item.minigames.spawn_flavio_trapdoor": "Spawn Flavio Trapdoor",
+      "item.minigames.ruby_froglight": "Ruby Froglight",
+      "item.minigames.azure_froglight": "Ruby Froglight",
+      "entity.minigames.flavio_tesla_coil": "Tesla Coil",
+      "entity.minigames.flavio_antenna": "Antenna",
+      "entity.minigames.spike_trap": "Spike Trap",
+      "subtitles.spike": "Spike Trap extends",
+      "entity.minigames.flavio_clock_cannon": "Clock Cannon",
+      "subtitles.cannon": "Cannon shot fires",
+      "subtitles.clock_tick_1": "Clock ticks",
+      "subtitles.clock_tick_2": "Clock ticks",
+      "entity.minigames.flavio_sweeper": "Sweeper",
+      "entity.minigames.flavio_trapdoor_2": "Flavio Trapdoor",
+      "entity.minigames.flavio_trapdoor_3": "Flavio Trapdoor",
+      "item.minigames.spawn_flavio_trapdoor_2": "Spawn Flavio Trapdoor 2",
+      "item.minigames.spawn_flavio_trapdoor_3": "Spawn Flavio Trapdoor 3",
+      "entity.minigames.player_cage": "Player Cage"
     }
   },
   "metadata": {
     "files": [
       "src/main/java/net/mcreator/minigames/init/MinigamesModAttributes.java",
+      "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMenus.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
-      "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
       "src/main/java/net/mcreator/minigames/client/renderer/item/LegacyOverrideSelectItemModel.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModKeyMappings.java",
@@ -15674,32 +16496,32 @@
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModItems.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModEntities.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModEntityRenderers.java",
-      "src/main/resources/pack.mcmeta",
-      "src/main/java/net/mcreator/minigames/mixin/CameraAccessor.java",
-      "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
-      "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/client/RenderUtils.java",
-      "src/main/java/net/mcreator/minigames/mixin/EntityRenderDispatcherMixin.java",
-      "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
-      "src/main/java/net/mcreator/minigames/network/MinigamesModVariables.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModEntities.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModRenderStateModifiers.java",
+      "src/main/java/net/mcreator/minigames/network/MinigamesModVariables.java",
+      "src/main/java/net/mcreator/minigames/mixin/CameraAccessor.java",
       "src/main/resources/assets/minigames/sounds.json",
       "src/main/java/net/mcreator/minigames/init/MinigamesModTabs.java",
-      "src/main/java/net/mcreator/minigames/mixin/EntityRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/network/NbtArrayLists.java",
-      "src/main/resources/META-INF/neoforge.mods.toml",
       "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationMixin.java",
-      "src/main/java/net/mcreator/minigames/MinigamesMod.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
-      "src/main/resources/minigames.mixins.json",
-      "src/main/java/net/mcreator/minigames/mixin/LivingEntityRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/EntityRenderDispatcherMixin.java",
       "src/main/resources/META-INF/accesstransformer.cfg",
+      "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationMixin.java",
+      "src/main/java/net/mcreator/minigames/client/RenderUtils.java",
+      "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
+      "src/main/java/net/mcreator/minigames/mixin/EntityRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
+      "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
+      "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
+      "src/main/resources/minigames.mixins.json",
+      "src/main/resources/META-INF/neoforge.mods.toml",
+      "src/main/java/net/mcreator/minigames/network/NbtArrayLists.java",
+      "src/main/resources/pack.mcmeta",
       "src/main/java/net/mcreator/minigames/network/PlayPlayerAnimationMessage.java",
-      "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java"
+      "src/main/java/net/mcreator/minigames/MinigamesMod.java",
+      "src/main/java/net/mcreator/minigames/mixin/LivingEntityRendererMixin.java",
+      "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java"
     ],
     "betteranimations_models": {},
     "betteranimations_perspectives": {}
@@ -16094,12 +16916,49 @@
                       {
                         "name": "Trapdoor",
                         "children": []
+                      },
+                      {
+                        "name": "Tesla",
+                        "children": []
+                      },
+                      {
+                        "name": "Antenna",
+                        "children": []
+                      },
+                      {
+                        "name": "Clock Cannon",
+                        "children": []
+                      },
+                      {
+                        "name": "Sweeper",
+                        "children": []
                       }
                     ]
+                  },
+                  {
+                    "name": "Phase 2",
+                    "children": []
                   }
                 ]
               }
             ]
+          },
+          {
+            "name": "Mob",
+            "children": [
+              {
+                "name": "Spike Trap",
+                "children": []
+              },
+              {
+                "name": "Player Cage",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Classes",
+            "children": []
           }
         ]
       },
@@ -16202,6 +17061,10 @@
           },
           {
             "name": "Animation",
+            "children": []
+          },
+          {
+            "name": "Blocks",
             "children": []
           }
         ]

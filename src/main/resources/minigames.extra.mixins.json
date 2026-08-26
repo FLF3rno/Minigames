@@ -10,7 +10,8 @@
     "PhantomCollisionMixin",
     "RelicInventoryMixin",
     "LivingEntityTargetMixin",
-    "EnderEyeItemMixin"
+    "EnderEyeItemMixin",
+    "HangingEntityMixin"
   ],
   "client": [
     "GuiAccessor",
@@ -20,7 +21,8 @@
     "ExperienceBarRendererMixin",
     "EffectsInInventoryMixin",
     "DecayHeartMixin",
-    "BlockInteractionBypassMixin"
+    "BlockInteractionBypassMixin",
+    "LightCoordsUtilMixin"
 
   ],
   "injectors": {

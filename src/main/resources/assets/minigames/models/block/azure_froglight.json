@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "minigames:block/azure_froglight_top",
+    "up": "minigames:block/azure_froglight_top",
+    "north": "minigames:block/azure_froglight_side",
+    "east": "minigames:block/azure_froglight_side",
+    "south": "minigames:block/azure_froglight_side",
+    "west": "minigames:block/azure_froglight_side",
+    "particle": "minigames:block/azure_froglight_top"
+  }
+}

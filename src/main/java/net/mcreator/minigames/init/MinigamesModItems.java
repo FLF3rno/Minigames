@@ -140,6 +140,10 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SPAWN_FLAVIO;
 	public static final DeferredItem<Item> SPAWN_BLESSING_DISPENSER;
 	public static final DeferredItem<Item> SPAWN_FLAVIO_TRAPDOOR;
+	public static final DeferredItem<Item> RUBY_FROGLIGHT;
+	public static final DeferredItem<Item> AZURE_FROGLIGHT;
+	public static final DeferredItem<Item> SPAWN_FLAVIO_TRAPDOOR_2;
+	public static final DeferredItem<Item> SPAWN_FLAVIO_TRAPDOOR_3;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -252,6 +256,10 @@ public class MinigamesModItems {
 		SPAWN_FLAVIO = block(MinigamesModBlocks.SPAWN_FLAVIO);
 		SPAWN_BLESSING_DISPENSER = block(MinigamesModBlocks.SPAWN_BLESSING_DISPENSER);
 		SPAWN_FLAVIO_TRAPDOOR = block(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR);
+		RUBY_FROGLIGHT = block(MinigamesModBlocks.RUBY_FROGLIGHT);
+		AZURE_FROGLIGHT = block(MinigamesModBlocks.AZURE_FROGLIGHT);
+		SPAWN_FLAVIO_TRAPDOOR_2 = block(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_2);
+		SPAWN_FLAVIO_TRAPDOOR_3 = block(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_3);
 	}
 
 	// Start of user code block custom items

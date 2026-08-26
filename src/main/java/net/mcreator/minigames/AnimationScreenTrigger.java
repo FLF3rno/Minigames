@@ -108,32 +108,32 @@ public class AnimationScreenTrigger {
             else if (animationType.equalsIgnoreCase("roguelike_boss")) {
 
                 Identifier bossTexture = Identifier.fromNamespaceAndPath("minigames", "textures/animation/roguelike/boss/" + MinigamesModVariables.MapVariables.get(Minecraft.getInstance().level).bossName + ".png");
-                AnimationManager.displayColor(0, 200, 0xFF000000, 0);
+                AnimationManager.displayColor(0, length, 0xFF000000, 0);
 
                 if (p4 != null) {
                     AnimationManager.displayEntity(
-                            0, 200, p1,
+                            0, length, p1,
                             100, 145, 100, 145,
                             50f, 50f,
                             180f, 180f,
                             "linear", 5
                     );
                     AnimationManager.displayEntity(
-                            0, 200, p2,
+                            0, length, p2,
                             100, 245, 100, 245,
                             50f, 50f,
                             180f, 180f,
                             "linear", 5
                     );
                     AnimationManager.displayEntity(
-                            0, 200, p3,
+                            0, length, p3,
                             100, 345, 100, 345,
                             50f, 50f,
                             180f, 180f,
                             "linear", 5
                     );
                     AnimationManager.displayEntity(
-                            0, 200, p4,
+                            0, length, p4,
                             100, 445, 100, 445,
                             50f, 50f,
                             180f, 180f,
@@ -141,21 +141,21 @@ public class AnimationScreenTrigger {
                     );
                 } else if (p3 != null) {
                     AnimationManager.displayEntity(
-                            0, 200, p1,
+                            0, length, p1,
                             100, 165, 100, 165,
                             65f, 65f,
                             180f, 180f,
                             "linear", 5
                     );
                     AnimationManager.displayEntity(
-                            0, 200, p2,
+                            0, length, p2,
                             100, 295, 100, 295,
                             65f, 65f,
                             180f, 180f,
                             "linear", 5
                     );
                     AnimationManager.displayEntity(
-                            0, 200, p3,
+                            0, length, p3,
                             100, 435, 100, 435,
                             65f, 65f,
                             180f, 180f,
@@ -163,14 +163,14 @@ public class AnimationScreenTrigger {
                     );
                 } else if (p2 != null) {
                     AnimationManager.displayEntity(
-                            0, 200, p1,
+                            0, length, p1,
                             100, 265, 100, 265,
                             80f, 80f,
                             180f, 180f,
                             "linear", 5
                     );
                     AnimationManager.displayEntity(
-                            0, 200, p2,
+                            0, length, p2,
                             100, 435, 100, 435,
                             80f, 80f,
                             180f, 180f,
@@ -178,7 +178,7 @@ public class AnimationScreenTrigger {
                     );
                 } else {
                     AnimationManager.displayEntity(
-                            0, 200, p1,
+                            0, length, p1,
                             100, 315, 100, 315,
                             90f, 90f,
                             180f, 180f,
@@ -187,7 +187,7 @@ public class AnimationScreenTrigger {
                 }
 
                 AnimationManager.displayTransform(
-                        0, 200, Component.literal("VS")
+                        0, length, Component.literal("VS")
                                 .withStyle(Style.EMPTY
                                         .withColor(0xFFF1F3BE)
                                         .withFont(new FontDescription.Resource(MATCHA_FONT))
@@ -208,7 +208,7 @@ public class AnimationScreenTrigger {
                 );
 
                 AnimationManager.displayCenteredTextWrapped(
-                        0, 200,
+                        0, length,
                         bossName,
                         bossCenterX,
                         bossCenterY,
@@ -227,7 +227,7 @@ public class AnimationScreenTrigger {
                 );
 
                 AnimationManager.displayCenteredText(
-                        0, 200,
+                        0, length,
                         playerName,
                         x / 2 - 68,
                         (int) (y / 2.7),
@@ -244,7 +244,7 @@ public class AnimationScreenTrigger {
                     );
 
                     AnimationManager.displayCenteredText(
-                            0, 200,
+                            0, length,
                             playerName,
                             x / 2 - 68,
                             (int) (y / 2.9),
@@ -262,7 +262,7 @@ public class AnimationScreenTrigger {
                     );
 
                     AnimationManager.displayCenteredText(
-                            0, 200,
+                            0, length,
                             playerName,
                             x / 2 - 68,
                             (int) (y / 3.1),
@@ -280,7 +280,7 @@ public class AnimationScreenTrigger {
                     );
 
                     AnimationManager.displayCenteredText(
-                            0, 200,
+                            0, length,
                             playerName,
                             x / 2 - 68,
                             (int) (y / 3.3),
@@ -292,7 +292,7 @@ public class AnimationScreenTrigger {
                 }
 
                 AnimationManager.displayTransform(
-                        0, 200,
+                        0, length,
                         bossTexture,
                         512, 512,
                         x - 275 , y /4,
@@ -303,6 +303,53 @@ public class AnimationScreenTrigger {
                         10
                 );
 
+            }
+            else if (animationType.equalsIgnoreCase("fade_in")) {
+                AnimationManager.fadeIn(0, 20, 0x000000, 10);
+            }
+            else if (animationType.equalsIgnoreCase("fade_out")) {
+                AnimationManager.fadeOut(0, 20, 0x000000, 10);
+            }
+            else if (animationType.equalsIgnoreCase("fade_in_ascend")) {
+                AnimationManager.fadeIn(60, 140, 0x000000, 0);
+                AnimationManager.displayColor(140, length, 0xFF000000, 0);
+                // da 180 text per 5s e poi inizia l'azione
+                Component ASCEND = Component.literal("ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND")
+                        .withStyle(style -> style
+                        .withColor(0xFFF1F3BE)
+                        //.withFont(new FontDescription.Resource(MATCHA_FONT))
+                );
+                Component GET_TOP = Component.literal("GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP ")
+                        .withStyle(style -> style
+                                        .withColor(0xFFF1F3BE)
+                                //.withFont(new FontDescription.Resource(MATCHA_FONT))
+                        );
+                float lineamount = 8f;
+                for (float iteration = -lineamount; iteration < lineamount * 2 + 1; iteration ++) {
+                    if (iteration % 2 == 0) {
+                        AnimationManager.displayCenteredTextWrappedScroll(
+                                180, length,
+                                ASCEND,
+                                x / 2, (int) (y - y * (iteration / lineamount)),
+                                4000,
+                                5f, 5f,
+                                30f, 30f,
+                                "linear",
+                                0.4f, 6
+                        );
+                    } else {
+                        AnimationManager.displayCenteredTextWrappedScroll(
+                                180, length,
+                                GET_TOP,
+                                x / 2, (int) (y - y * (iteration / lineamount)),
+                                4000,
+                                5f, 5f,
+                                30f, 30f,
+                                "linear",
+                                -0.2f, 6
+                        );
+                    }
+                }
             }
             AnimationOverlay.addManager(manager);
         });

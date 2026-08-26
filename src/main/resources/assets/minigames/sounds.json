@@ -586,5 +586,57 @@
         "stream": false
       }
     ]
+  },
+  "spike": {
+    "subtitle": "subtitles.spike",
+    "sounds": [
+      {
+        "name": "minigames:spike3",
+        "stream": false
+      },
+      {
+        "name": "minigames:spike2",
+        "stream": false
+      },
+      {
+        "name": "minigames:spike1",
+        "stream": false
+      }
+    ]
+  },
+  "cannon": {
+    "subtitle": "subtitles.cannon",
+    "sounds": [
+      {
+        "name": "minigames:cannon3",
+        "stream": false
+      },
+      {
+        "name": "minigames:cannon2",
+        "stream": false
+      },
+      {
+        "name": "minigames:cannon1",
+        "stream": false
+      }
+    ]
+  },
+  "clock_tick_1": {
+    "subtitle": "subtitles.clock_tick_1",
+    "sounds": [
+      {
+        "name": "minigames:clock_tick_1",
+        "stream": false
+      }
+    ]
+  },
+  "clock_tick_2": {
+    "subtitle": "subtitles.clock_tick_2",
+    "sounds": [
+      {
+        "name": "minigames:clock_tick_2",
+        "stream": false
+      }
+    ]
   }
 }

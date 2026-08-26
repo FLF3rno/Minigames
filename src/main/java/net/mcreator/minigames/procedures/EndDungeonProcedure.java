@@ -31,6 +31,7 @@ public class EndDungeonProcedure {
 					_vars.dashLength = 1;
 					_vars.PassiveHealCooldown = 80;
 					_vars.PassiveHealAmount = 1;
+					_vars.minimumLightLevel = 0;
 					_vars.markSyncDirty();
 				}
 			}

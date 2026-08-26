@@ -145,6 +145,8 @@ public class MinigamesModVariables {
 		clone.timerScale = original.timerScale;
 		clone.timerTick = original.timerTick;
 		clone.timerSpeed = original.timerSpeed;
+		clone.minimumLightLevel = original.minimumLightLevel;
+		clone.classColor = original.classColor;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -605,6 +607,8 @@ public class MinigamesModVariables {
 		public double timerScale = 2.5;
 		public double timerTick = 0;
 		public double timerSpeed = 1.0;
+		public double minimumLightLevel = 0;
+		public String classColor = "\"\"";
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -650,6 +654,8 @@ public class MinigamesModVariables {
 			output.putDouble("timerScale", timerScale);
 			output.putDouble("timerTick", timerTick);
 			output.putDouble("timerSpeed", timerSpeed);
+			output.putDouble("minimumLightLevel", minimumLightLevel);
+			output.putString("classColor", classColor);
 		}
 
 		@Override
@@ -696,6 +702,8 @@ public class MinigamesModVariables {
 			timerScale = input.getDoubleOr("timerScale", 0);
 			timerTick = input.getDoubleOr("timerTick", 0);
 			timerSpeed = input.getDoubleOr("timerSpeed", 0);
+			minimumLightLevel = input.getDoubleOr("minimumLightLevel", 0);
+			classColor = input.getStringOr("classColor", "");
 		}
 
 		public void markSyncDirty() {

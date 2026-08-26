@@ -91,6 +91,6 @@ public class StartDungeonProcedure {
 	}
 
 	private static void worldSwitch11(LevelAccessor world, double x, double y, double z) {
-		ChooseFloorProcedure.execute(world, x, y, z, "church");
+		ChooseFloorProcedure.execute(world, x, y, z, 1);
 	}
 }

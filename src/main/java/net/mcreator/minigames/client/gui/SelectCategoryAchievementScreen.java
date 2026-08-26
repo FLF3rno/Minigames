@@ -116,11 +116,11 @@ public class SelectCategoryAchievementScreen extends AbstractContainerScreen<Sel
 
 	@Override
 	public boolean keyPressed(KeyEvent event) {
-		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
-			return true;
-		}
-		return super.keyPressed(event);
+    	if (event.key() == InputConstants.KEY_ESCAPE) {
+        	return true;
+    	}
+
+    	return super.keyPressed(event);
 	}
 
 	@Override

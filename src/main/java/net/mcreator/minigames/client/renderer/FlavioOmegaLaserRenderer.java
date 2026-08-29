@@ -23,9 +23,12 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.animation.AnimationDefinition;
+import net.minecraft.util.Mth;
 import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
 import net.mcreator.minigames.client.model.animations.flavio_omega_laserAnimation;
 import net.mcreator.minigames.client.model.Modelflavio_omega_laser;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import java.util.Map;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -60,9 +63,7 @@ public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity
 
     @Override
     public void extractRenderState(FlavioOmegaLaserEntity entity, LivingEntityRenderState state, float partialTicks) {
-
         super.extractRenderState(entity, state, partialTicks);
-
     }
 
     @Override
@@ -82,6 +83,8 @@ public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity
     private static final class AnimatedModel extends Modelflavio_omega_laser {
 
         private final KeyframeAnimation keyframeAnimation0;
+        private float smoothedYaw;
+        private float smoothedPitch;
         public AnimatedModel(ModelPart root) {
             super(root);
             this.keyframeAnimation0 = safeBake(flavio_omega_laserAnimation.fire);
@@ -107,10 +110,24 @@ public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity
 
             if (entity != null) {
                 this.keyframeAnimation0.apply(entity.animationState0, state.ageInTicks, 1.0F);
-            }
+                Player player = entity.level().getNearestPlayer(entity, 60.0D);
+                if (player != null) {
+                    Vec3 eyes = entity.getEyePosition();
+                    Vec3 target = player.getEyePosition();
+                    double dx = target.x - eyes.x;
+                    double dy = target.y - eyes.y;
+                    double dz = target.z - eyes.z;
+                    double horizontal = Math.sqrt(dx * dx + dz * dz);
+                    float targetYaw = (float) Math.toDegrees(Math.atan2(dx, dz)) * -1.0F - 11;
+                    float targetPitch = (float) -Math.toDegrees(Math.atan2(dy, horizontal)) + 20.0F;
 
-            this.head.yRot = state.yRot * ((float)Math.PI / 180F);
-            this.head.xRot = state.xRot * ((float)Math.PI / 180F);
+                    this.smoothedYaw = Mth.approachDegrees(this.smoothedYaw, targetYaw, 2.0F);
+                    this.smoothedPitch = Mth.approachDegrees(this.smoothedPitch, targetPitch, 2.0F);
+
+                    this.head.yRot = this.smoothedYaw * ((float) Math.PI / 180F);
+                    this.head.xRot = this.smoothedPitch * ((float) Math.PI / 180F);
+                }
+            }
         }
 
     }

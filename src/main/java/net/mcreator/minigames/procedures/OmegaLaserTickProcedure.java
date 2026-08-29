@@ -37,8 +37,6 @@ public class OmegaLaserTickProcedure {
 			{
 				entity.setYRot(entity.getYRot() + 10);
 				entity.setXRot(0);
-				entity.setYBodyRot(entity.getYRot());
-				entity.setYHeadRot(entity.getYRot());
 				entity.yRotO = entity.getYRot();
 				entity.xRotO = entity.getXRot();
 
@@ -66,8 +64,6 @@ public class OmegaLaserTickProcedure {
 			{
 				entity.setYRot(0);
 				entity.setXRot(0);
-				entity.setYBodyRot(entity.getYRot());
-				entity.setYHeadRot(entity.getYRot());
 				entity.yRotO = entity.getYRot();
 				entity.xRotO = entity.getXRot();
 
@@ -98,15 +94,12 @@ public class OmegaLaserTickProcedure {
 				return;
 
 			Player player = (Player)findEntityInWorldRange(world, Player.class, x, y, z, 60);
-            smoothLookAt(entity, player.getEyePosition(), 4.0F);
+            if (player != null) {
+                smoothLookAt(entity, player.getEyePosition(), 4.0F);
+            }
 		} else {
 			if (world.isClientSide())
 				return;
-
-			entity.setYRot(lockedYaw);
-			entity.setXRot(lockedPitch);
-			entity.setYBodyRot(lockedYaw);
-			entity.setYHeadRot(lockedYaw);
 
 		}
 	}
@@ -123,8 +116,6 @@ public class OmegaLaserTickProcedure {
 		float targetPitch = (float)-Math.toDegrees(Math.atan2(dy, horizontal));
 		entity.setYRot(net.minecraft.util.Mth.approachDegrees(entity.getYRot(), targetYaw, maxTurn));
 		entity.setXRot(net.minecraft.util.Mth.approachDegrees(entity.getXRot(), targetPitch, maxTurn));
-		entity.setYBodyRot(entity.getYRot());
-		entity.setYHeadRot(entity.getYRot());
 	}
 
 	private static float rotateTowards(float current, float target, float maxChange) {

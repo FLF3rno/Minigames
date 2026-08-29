@@ -25,12 +25,8 @@ public class RenderBeamProcedure {
 				0
 		);
 
-		// 1. Set the attachment data on 'from'
 		from.setData(ModDataAttachments.BEAM_DATA, beamData);
-
-		// 2. Sync 'from' entity data to all tracking clients
 		if (!from.level().isClientSide()) {
-			// NeoForge extension method on Entity: syncs to self (if player) AND tracking clients!
 			from.syncData(ModDataAttachments.BEAM_DATA.get());
 		}
 	}

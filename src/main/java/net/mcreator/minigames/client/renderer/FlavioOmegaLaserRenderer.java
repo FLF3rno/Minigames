@@ -2,6 +2,7 @@ package net.mcreator.minigames.client.renderer;
 
 
 
+import net.mcreator.minigames.procedures.OmegaLaserTickProcedure;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -36,7 +37,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity, LivingEntityRenderState, Modelflavio_omega_laser> {
 
     private final Identifier entityTexture = Identifier.parse("minigames:textures/entities/omega_laser.png");
-
+    private static float lookY;
+    private static float lookX;
 
 
     public FlavioOmegaLaserRenderer(EntityRendererProvider.Context context) {
@@ -118,14 +120,23 @@ public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity
                     double dy = target.y - eyes.y;
                     double dz = target.z - eyes.z;
                     double horizontal = Math.sqrt(dx * dx + dz * dz);
-                    float targetYaw = (float) Math.toDegrees(Math.atan2(dx, dz)) * -1.0F - 11;
-                    float targetPitch = (float) -Math.toDegrees(Math.atan2(dy, horizontal)) + 20.0F;
+                    float targetYaw = (float) Math.toDegrees(Math.atan2(dx, dz)) * -1.0F;
+                    float targetPitch = (float) -Math.toDegrees(Math.atan2(dy, horizontal)) + 14f;
+                    if (OmegaLaserTickProcedure.tracking) {
+                        this.smoothedYaw = Mth.approachDegrees(this.smoothedYaw, targetYaw, 2.0F);
+                        this.smoothedPitch = Mth.approachDegrees(this.smoothedPitch, targetPitch, 2.0F);
 
-                    this.smoothedYaw = Mth.approachDegrees(this.smoothedYaw, targetYaw, 2.0F);
-                    this.smoothedPitch = Mth.approachDegrees(this.smoothedPitch, targetPitch, 2.0F);
+                        this.head.yRot = this.smoothedYaw * ((float) Math.PI / 180F);
+                        this.head.xRot = this.smoothedPitch * ((float) Math.PI / 180F);
+                        lookX = targetPitch;
+                        lookY = targetYaw;
+                    } else if (OmegaLaserTickProcedure.tracking == false){
+                        this.head.yRot = (float) Math.toRadians(lookY);
+                        this.head.xRot = (float) Math.toRadians(lookX);
+                    }
 
-                    this.head.yRot = this.smoothedYaw * ((float) Math.PI / 180F);
-                    this.head.xRot = this.smoothedPitch * ((float) Math.PI / 180F);
+
+
                 }
             }
         }

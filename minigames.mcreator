@@ -14597,6 +14597,69 @@
         ]
       },
       "path": "~/Dungeon/Boss/Flavio/Machines/Omega Laser"
+    },
+    {
+      "name": "RenderBeamXYZ",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "render_beam_xyz",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "owner",
+            "type": "entity"
+          },
+          {
+            "name": "emissive",
+            "type": "logic"
+          },
+          {
+            "name": "fromX",
+            "type": "number"
+          },
+          {
+            "name": "fromY",
+            "type": "number"
+          },
+          {
+            "name": "fromZ",
+            "type": "number"
+          },
+          {
+            "name": "scale",
+            "type": "number"
+          },
+          {
+            "name": "tickLength",
+            "type": "number"
+          },
+          {
+            "name": "toX",
+            "type": "number"
+          },
+          {
+            "name": "toY",
+            "type": "number"
+          },
+          {
+            "name": "toZ",
+            "type": "number"
+          },
+          {
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "name": "texture",
+            "type": "texturelocation"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RenderBeamXYZProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Visual"
     }
   ],
   "variable_elements": [

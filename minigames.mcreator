@@ -3947,7 +3947,7 @@
           "src/main/java/net/mcreator/minigames/command/ClasCommand.java"
         ]
       },
-      "path": "~/Dungeon/Item Description"
+      "path": "~/Dungeon/Classes"
     },
     {
       "name": "ClassDebug",
@@ -3970,7 +3970,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ClassDebugProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Item Description"
+      "path": "~/Dungeon/Classes"
     },
     {
       "name": "BlankDagger",
@@ -13334,10 +13334,6 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
             "name": "floor",
             "type": "number"
           },
@@ -14452,38 +14448,6 @@
       "path": "~/Dungeon/Mob/Player Cage"
     },
     {
-      "name": "Debugphase2",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debugphase_2",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/Debugphase2Procedure.java"
-        ]
-      },
-      "path": "~/Dungeon/Boss/Flavio/Phase 2"
-    },
-    {
-      "name": "Debugphase",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debugphase",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/DebugphaseCommand.java"
-        ]
-      },
-      "path": "~/Dungeon/Boss/Flavio/Phase 2"
-    },
-    {
       "name": "FlavioPhase2",
       "type": "gui",
       "compiles": true,
@@ -14519,6 +14483,120 @@
         ]
       },
       "path": "~/Dungeon/Classes"
+    },
+    {
+      "name": "FailFlavioPhase2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fail_flavio_phase_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FailFlavioPhase2Procedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "FailFlavioPacket",
+      "type": "packet",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fail_flavio_packet",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/FailFlavioPacketMessage.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "SucceedFlavioPhase2",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "succeed_flavio_phase_2",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SucceedFlavioPhase2Procedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "SucceedFlavioPacket",
+      "type": "packet",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "succeed_flavio_packet",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/SucceedFlavioPacketMessage.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Phase 2"
+    },
+    {
+      "name": "FlavioOmegaLaser",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_omega_laser",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/flavio_omega_laser_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioOmegaLaserRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/FlavioOmegaLaserEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Omega Laser"
+    },
+    {
+      "name": "OmegaLaserTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "omega_laser_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OmegaLaserTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Omega Laser"
     }
   ],
   "variable_elements": [
@@ -16033,6 +16111,9 @@
     "ITEMS:mod:weapontype_throwing": [
       "Blocks.BEDROCK"
     ],
+    "ENTITIES:mod:dungeon_boss": [
+      "CUSTOM:Flavio"
+    ],
     "ITEMS:minecraft:head_armor": [
       "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
     ],
@@ -16067,9 +16148,6 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
-    ],
-    "ENTITIES:mod:dungeon_boss": [
-      "CUSTOM:Flavio"
     ]
   },
   "tab_element_order": {},
@@ -16478,7 +16556,8 @@
       "entity.minigames.flavio_trapdoor_3": "Flavio Trapdoor",
       "item.minigames.spawn_flavio_trapdoor_2": "Spawn Flavio Trapdoor 2",
       "item.minigames.spawn_flavio_trapdoor_3": "Spawn Flavio Trapdoor 3",
-      "entity.minigames.player_cage": "Player Cage"
+      "entity.minigames.player_cage": "Player Cage",
+      "entity.minigames.flavio_omega_laser": "Tesla Coil"
     }
   },
   "metadata": {
@@ -16931,6 +17010,10 @@
                       },
                       {
                         "name": "Sweeper",
+                        "children": []
+                      },
+                      {
+                        "name": "Omega Laser",
                         "children": []
                       }
                     ]

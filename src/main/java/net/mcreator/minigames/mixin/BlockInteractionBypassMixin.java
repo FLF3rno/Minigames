@@ -52,6 +52,7 @@ public abstract class BlockInteractionBypassMixin {
                 || state.is(BlockTags.CEILING_HANGING_SIGNS)
                 || blockId.endsWith("_hanging_sign")
                 || blockId.endsWith("_sign")
-                || blockId.endsWith("_shelf");
+                || blockId.endsWith("_shelf")
+                || blockId.endsWith("_bookshelf");
     }
 }

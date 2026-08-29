@@ -48,6 +48,7 @@ public class AnimationManager {
 	public AnimationManager(int lengthInTicks, float speed) {
 		this.totalTicks = lengthInTicks;
 		this.speed = speed;
+
 		CURRENT_INSTANCE = this;
 	}
 
@@ -251,17 +252,6 @@ public class AnimationManager {
 			});
 		}
 	}
-
-	public static void displayTransform(
-			int fromTick, int toTick, ItemStack itemStack,
-			int fromX, int fromY, int toX, int toY,
-			float startScale, float endScale,
-			float startAngle, float endAngle,
-			String clampType, int layer) {
-		displayTransform(fromTick, toTick, (g, x, y, scale, rotation) ->
-				g.item(itemStack, (int) x, (int) y), fromX, fromY, toX, toY, startScale, endScale, startAngle, endAngle, clampType, layer);
-	}
-
 	public static void displayTransform(
 			int fromTick, int toTick, Component text,
 			int fromX, int fromY, int toX, int toY,
@@ -325,8 +315,8 @@ public class AnimationManager {
 			int fromTick, int toTick,
 			Identifier texture,
 			int textureWidth, int textureHeight,
-			int fromX, int fromY,
-			int toX, int toY,
+			int fromCenterX, int fromCenterY,
+			int toCenterX, int toCenterY,
 			float startScale, float endScale,
 			float startAngle, float endAngle,
 			float startOpacity, float endOpacity,
@@ -339,6 +329,7 @@ public class AnimationManager {
 		}
 
 		CURRENT_INSTANCE.actions.add(new AnimationAction() {
+
 			@Override
 			public boolean isAlive(int tick) {
 				return tick >= fromTick && tick <= toTick;
@@ -368,88 +359,35 @@ public class AnimationManager {
 					);
 				}
 
-				float currentX =
-						fromX + (toX - fromX) * progress;
 
-				float currentY =
-						fromY + (toY - fromY) * progress;
+				float currentX = fromCenterX + (toCenterX - fromCenterX) * progress;
+				float currentY = fromCenterY + (toCenterY - fromCenterY) * progress;
+				float currentScale = startScale + (endScale - startScale) * progress;
+				float currentAngle = startAngle + (endAngle - startAngle) * progress;
+				float currentOpacity = startOpacity + (endOpacity - startOpacity) * progress;
 
-				float currentScale =
-						startScale
-								+ (endScale - startScale) * progress;
+				currentOpacity = Math.max(0.0f, Math.min(1.0f, currentOpacity));
 
-				float currentAngle =
-						startAngle
-								+ (endAngle - startAngle) * progress;
+				int currentColor = interpolateColor(startColor, endColor, progress);
 
-				float currentOpacity =
-						startOpacity
-								+ (endOpacity - startOpacity) * progress;
-
-				int currentColor =
-						interpolateColor(
-								startColor,
-								endColor,
-								progress
-						);
-
-				// Extract RGB components.
 				int r = (currentColor >> 16) & 0xFF;
 				int green = (currentColor >> 8) & 0xFF;
 				int b = currentColor & 0xFF;
 
-				// Apply opacity separately.
-				int alpha =
-						Math.round(
-								Math.max(0.0f, Math.min(1.0f, currentOpacity))
-										* 255.0f
-						);
+				int alpha = Math.round(currentOpacity * 255.0f);
 
-				int finalColor =
-						(alpha << 24)
-								| (r << 16)
-								| (green << 8)
-								| b;
+				int finalColor = (alpha << 24) | (r << 16) | (green << 8) | b;
 
 				g.pose().pushMatrix();
 
-				g.pose().translate(
-						currentX,
-						currentY
-				);
+				g.pose().translate(currentX, currentY);
 
-				g.pose().scale(
-						currentScale,
-						currentScale
-				);
+				if (currentAngle != 0.0f) {g.pose().rotate((float) Math.toRadians(currentAngle));}
 
-				if (currentAngle != 0.0f) {
-					g.pose().translate(
-							textureWidth / 2.0f,
-							textureHeight / 2.0f
-					);
+				g.pose().scale(currentScale, currentScale);
 
-					g.pose().rotate(
-							(float) Math.toRadians(currentAngle)
-					);
-
-					g.pose().translate(
-							-textureWidth / 2.0f,
-							-textureHeight / 2.0f
-					);
-				}
-
-				g.blit(
-						net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
-						texture,
-						0,
-						0,
-						0,
-						0,
-						textureWidth,
-						textureHeight,
-						textureWidth,
-						textureHeight,
+				g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, texture, -textureWidth / 2, -textureHeight / 2,
+						0, 0, textureWidth, textureHeight, textureWidth, textureHeight,
 						finalColor
 				);
 

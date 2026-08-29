@@ -39,6 +39,7 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelcannonball.LAYER_LOCATION, Modelcannonball::createBodyLayer);
 		event.registerLayerDefinition(Modelvolleybomb.LAYER_LOCATION, Modelvolleybomb::createBodyLayer);
 		event.registerLayerDefinition(Modelshieldagent.LAYER_LOCATION, Modelshieldagent::createBodyLayer);
+		event.registerLayerDefinition(Modelflavio_omega_laser.LAYER_LOCATION, Modelflavio_omega_laser::createBodyLayer);
 		event.registerLayerDefinition(Modelflavio_trapdoor.LAYER_LOCATION, Modelflavio_trapdoor::createBodyLayer);
 		event.registerLayerDefinition(Modeldemon.LAYER_LOCATION, Modeldemon::createBodyLayer);
 		event.registerLayerDefinition(Modelflavio_clock_cannon.LAYER_LOCATION, Modelflavio_clock_cannon::createBodyLayer);

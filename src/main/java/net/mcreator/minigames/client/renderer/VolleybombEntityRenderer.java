@@ -32,12 +32,12 @@ public class VolleybombEntityRenderer extends MobRenderer<VolleybombEntityEntity
 		this.addLayer(new RenderLayer<>(this) {
 			final Identifier LAYER_TEXTURE = Identifier.parse("minigames:textures/entities/volleybomb.png");
 			final RenderType RENDER_TYPE = RenderTypes.entityCutout(LAYER_TEXTURE);
+			final EntityModel LAYER_MODEL = new Modelvolleybomb(Minecraft.getInstance().getEntityModels().bakeLayer(Modelvolleybomb.LAYER_LOCATION));
 
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
-				EntityModel model = new Modelvolleybomb(Minecraft.getInstance().getEntityModels().bakeLayer(Modelvolleybomb.LAYER_LOCATION));
-				model.setupAnim(state);
-				submitNodeCollector.submitModel(model, state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+				LAYER_MODEL.setupAnim(state);
+				submitNodeCollector.submitModel(LAYER_MODEL, state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
 			}
 		});
 	}

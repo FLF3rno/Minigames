@@ -50,5 +50,6 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TRAPDOOR_2.get(), FlavioTrapdoor2Renderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_TRAPDOOR_3.get(), FlavioTrapdoor3Renderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.PLAYER_CAGE.get(), PlayerCageRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_OMEGA_LASER.get(), FlavioOmegaLaserRenderer::new);
 	}
 }

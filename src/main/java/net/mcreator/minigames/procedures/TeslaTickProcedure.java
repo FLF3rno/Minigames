@@ -74,7 +74,7 @@ public class TeslaTickProcedure {
 			}
 
 			if (entity.tickCount % 15 == 0 && entity.tickCount % 30 != 0) {
-				lightning(x, y + 5, z, world, 0.3F, true);
+				lightning(x, y + 5, z, world, 0.5F, true);
 				telegraph = true;
 			}
 		}
@@ -99,7 +99,7 @@ public class TeslaTickProcedure {
 								ypos,
 								z + xpos,
 								world,
-								0.02F,
+								0.05F,
 								lightningIndex % 2 == 0
 						);
 
@@ -136,7 +136,7 @@ public class TeslaTickProcedure {
 								ypos,
 								z - zpos,
 								world,
-								0.02F,
+								0.05F,
 								lightningIndex % 2 == 0
 						);
 
@@ -173,7 +173,7 @@ public class TeslaTickProcedure {
 								ypos,
 								z,
 								world,
-								0.02F,
+								0.05F,
 								lightningIndex % 2 == 0
 						);
 
@@ -210,7 +210,7 @@ public class TeslaTickProcedure {
 								ypos,
 								z + zpos,
 								world,
-								0.02F,
+								0.05F,
 								lightningIndex % 2 == 0
 						);
 
@@ -390,6 +390,14 @@ public class TeslaTickProcedure {
 							null,
 							pos,
 							SoundEvents.LIGHTNING_BOLT_THUNDER,
+							SoundSource.WEATHER,
+							vol / 1.2f,
+							1.0F
+					);
+					_level.playSound(
+							null,
+							pos,
+							SoundEvents.LIGHTNING_BOLT_IMPACT,
 							SoundSource.WEATHER,
 							vol,
 							1.0F

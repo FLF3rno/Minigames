@@ -35,7 +35,7 @@ public class WonVoteProcedure {
 				if (world.isClientSide()) {
 					PlayBossCutsceneProcedure.execute();
 				}
-				MinigamesMod.queueServerWork(100, () -> {
+				MinigamesMod.queueServerWork(50, () -> {
 					StartBossProcedure.execute(world);
 				});
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {

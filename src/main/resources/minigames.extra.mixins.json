@@ -11,7 +11,8 @@
     "RelicInventoryMixin",
     "LivingEntityTargetMixin",
     "EnderEyeItemMixin",
-    "HangingEntityMixin"
+    "HangingEntityMixin",
+    "LightningBoltMixin"
   ],
   "client": [
     "GuiAccessor",

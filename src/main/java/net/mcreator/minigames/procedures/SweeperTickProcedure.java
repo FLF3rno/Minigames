@@ -87,18 +87,9 @@ public class SweeperTickProcedure {
 
 			if (entity instanceof FlavioSweeperEntity sweeper) {
 
-				sweeper.getEntityData().set(
-						FlavioSweeperEntity.ANIM,
-						1000
-				);
-
-				sweeper.getEntityData().set(
-						FlavioSweeperEntity.ANIM,
-						0
-				);
-
+				sweeper.getEntityData().set(FlavioSweeperEntity.ANIM, 1000);
+				sweeper.getEntityData().set(FlavioSweeperEntity.ANIM, 0);
 				HIT_THIS_SWEEP.clear();
-
 				lastAnimationTick = 0;
 			}
 		}
@@ -107,14 +98,11 @@ public class SweeperTickProcedure {
 
 			if (world instanceof net.minecraft.server.level.ServerLevel serverLevel) {
 
-				int animationTick =
-						(entity.tickCount - 70) % 120;
+				int animationTick = (entity.tickCount - 70) % 120;
 
-				double angleDegrees =
-						-animationTick * 3.0;
+				double angleDegrees = -animationTick * 3.0;
 
-				double angleRadians =
-						Math.toRadians(angleDegrees);
+				double angleRadians = Math.toRadians(angleDegrees);
 
 
 				double dirX = Math.cos(angleRadians);
@@ -139,10 +127,7 @@ public class SweeperTickProcedure {
 						center.z + searchRadius
 				);
 
-				for (LivingEntity target :
-						serverLevel.getEntitiesOfClass(
-								LivingEntity.class,
-								searchBox)) {
+				for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, searchBox)) {
 
 					if (target == entity)
 						continue;
@@ -150,84 +135,48 @@ public class SweeperTickProcedure {
 					if (!target.isAlive())
 						continue;
 
-					Vec3 relative = new Vec3(
-							target.getX() - center.x,
-							target.getY() - center.y,
-							target.getZ() - center.z
-					);
+					Vec3 relative = new Vec3(target.getX() - center.x, target.getY() - center.y, target.getZ() - center.z);
 
 
-					double targetHalfHeight =
-							target.getBbHeight() / 2.0;
+					double targetHalfHeight = target.getBbHeight() / 2.0;
 
-					double verticalDistance =
-							Math.abs(relative.y);
+					double verticalDistance = Math.abs(relative.y);
 
-					if (verticalDistance >
-							targetHalfHeight + COLLISION_RADIUS) {
-
+					if (verticalDistance > targetHalfHeight + COLLISION_RADIUS) {
 						continue;
 					}
 
 
-					double along =
-							relative.x * dirX +
-									relative.z * dirZ;
+					double along = relative.x * dirX + relative.z * dirZ;
 
-					if (Math.abs(along) >
-							ARM_LENGTH + target.getBbWidth() / 2.0) {
-
+					if (Math.abs(along) > ARM_LENGTH + target.getBbWidth() / 2.0) {
 						continue;
 					}
 
-					double perpendicular =
-							Math.abs(
-									relative.x * dirZ -
-											relative.z * dirX
-							);
+					double perpendicular = Math.abs(relative.x * dirZ - relative.z * dirX);
 
-					double targetRadius =
-							target.getBbWidth() / 2.0;
+					double targetRadius = target.getBbWidth() / 2.0;
 
-					double collisionDistance =
-							COLLISION_RADIUS + targetRadius;
+					double collisionDistance = COLLISION_RADIUS + targetRadius;
 
 					if (perpendicular <= collisionDistance) {
 
-						target.hurtServer(
-								serverLevel,
-								serverLevel.damageSources().mobAttack(
-										(LivingEntity) entity
-								),
-								DAMAGE
-						);
+						target.hurtServer(serverLevel, serverLevel.damageSources().mobAttack((LivingEntity) entity), DAMAGE);
 
-						double distance =
-								Math.sqrt(
-										relative.x * relative.x +
-												relative.z * relative.z
-								);
+						double distance = Math.sqrt(relative.x * relative.x + relative.z * relative.z);
 
 						if (distance > 0.001) {
 
-							double knockX =
-									relative.x / distance;
+							double knockX = relative.x / distance;
 
-							double knockZ =
-									relative.z / distance;
+							double knockZ = relative.z / distance;
 
-							target.push(
-									knockX * KNOCKBACK,
-									0.25,
-									knockZ * KNOCKBACK
-							);
+							target.push(knockX * KNOCKBACK, 0.25, knockZ * KNOCKBACK);
 
 							target.hurtMarked = true;
 						}
 
-						HIT_THIS_SWEEP.add(
-								target.getUUID()
-						);
+						HIT_THIS_SWEEP.add(target.getUUID());
 					}
 				}
 			}

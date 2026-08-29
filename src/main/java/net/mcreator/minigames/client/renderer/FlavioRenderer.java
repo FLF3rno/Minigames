@@ -31,12 +31,12 @@ public class FlavioRenderer extends MobRenderer<FlavioEntity, LivingEntityRender
 		this.addLayer(new RenderLayer<>(this) {
 			final Identifier LAYER_TEXTURE = Identifier.parse("minigames:textures/entities/flavioemissive.png");
 			final RenderType RENDER_TYPE = RenderTypes.eyes(LAYER_TEXTURE);
+			final EntityModel LAYER_MODEL = new Modelflavio(Minecraft.getInstance().getEntityModels().bakeLayer(Modelflavio.LAYER_LOCATION));
 
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
-				EntityModel model = new Modelflavio(Minecraft.getInstance().getEntityModels().bakeLayer(Modelflavio.LAYER_LOCATION));
-				model.setupAnim(state);
-				submitNodeCollector.submitModel(model, state, poseStack, RENDER_TYPE, light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
+				LAYER_MODEL.setupAnim(state);
+				submitNodeCollector.submitModel(LAYER_MODEL, state, poseStack, RENDER_TYPE, light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
 			}
 		});
 	}

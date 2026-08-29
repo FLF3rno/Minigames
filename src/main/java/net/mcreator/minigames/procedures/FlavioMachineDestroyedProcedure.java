@@ -12,7 +12,7 @@ import java.util.Comparator;
 
 public class FlavioMachineDestroyedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		ExplodeProcedure.execute(world, x, y, z, findEntityInWorldRange(world, Player.class, x, y, z, 20), true, true, 0, 2.5, 3, "normal");
+		ExplodeProcedure.execute(world, x, y, z, findEntityInWorldRange(world, Player.class, x, y, z, 20), true, true, 0, 0, 3, "normal");
 		if (net.mcreator.minigames.FlavioFightManager.phase == 3) {
 			net.mcreator.minigames.FlavioFightManager.phase += 0.5;
 		} else {

@@ -38,11 +38,14 @@ public class BlessingDispenserTickProcedure {
 				final Vec3 _center = new Vec3(x, y, z);
 				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(10 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 					if (entityiterator instanceof Player) {
-						ParticleFlowHelperProcedure.execute(world, 1, 10, "linear", "minigames:cursed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
-						{
-							Entity _ent = entityiterator;
-							if (_ent.level() instanceof ServerLevel _serverLevel) {
-								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC), entity), 1);
+						if (!(entityiterator instanceof LivingEntity _livEnt14 && _livEnt14.hasEffect(MinigamesModMobEffects.IMMOBILIZED))
+								&& !(entityiterator instanceof LivingEntity _livEnt15 && _livEnt15.hasEffect(MinigamesModMobEffects.BLESSED))) {
+							ParticleFlowHelperProcedure.execute(world, 1, 10, "linear", "minigames:cursed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
+							{
+								Entity _ent = entityiterator;
+								if (_ent.level() instanceof ServerLevel _serverLevel) {
+									_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC), entity), 1);
+								}
 							}
 						}
 					}
@@ -50,9 +53,9 @@ public class BlessingDispenserTickProcedure {
 			}
 		}
 		if (entity.tickCount % 54 == 0) {
-			if (entity instanceof BlessingDispenserEntity _ent23) {
-				_ent23.getEntityData().set(BlessingDispenserEntity.ANIM, 1000);
-				_ent23.getEntityData().set(BlessingDispenserEntity.ANIM, 0);
+			if (entity instanceof BlessingDispenserEntity _ent25) {
+				_ent25.getEntityData().set(BlessingDispenserEntity.ANIM, 1000);
+				_ent25.getEntityData().set(BlessingDispenserEntity.ANIM, 0);
 			}
 		}
 	}

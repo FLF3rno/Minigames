@@ -24,17 +24,17 @@ public class SpikeTrapTickProcedure {
 		if (entity.tickCount == 1) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.2, 1);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.3, 1);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.2, 1, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.3, 1, false);
 				}
 			}
 		}
-		if (entity.tickCount <= 2) {
+		if (entity.tickCount <= 10) {
 			{
 				Entity _ent = entity;
 				double _tx = x;
-				double _ty = (y + 0.26);
+				double _ty = (y + 0.1);
 				double _tz = z;
 				_ent.teleportTo(_tx, _ty, _tz);
 				if (_ent instanceof ServerPlayer _serverPlayer)
@@ -58,14 +58,14 @@ public class SpikeTrapTickProcedure {
 			{
 				Entity _ent = entity;
 				double _tx = x;
-				double _ty = (y - 0.1);
+				double _ty = (y - 0.2);
 				double _tz = z;
 				_ent.teleportTo(_tx, _ty, _tz);
 				if (_ent instanceof ServerPlayer _serverPlayer)
 					_serverPlayer.connection.teleport(_tx, _ty, _tz, _ent.getYRot(), _ent.getXRot());
 			}
 		}
-		if (entity.tickCount > 55) {
+		if (entity.tickCount > 50) {
 			if (!entity.level().isClientSide())
 				entity.discard();
 			if (world instanceof Level _level) {

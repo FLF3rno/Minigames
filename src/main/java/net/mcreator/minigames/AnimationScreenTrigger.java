@@ -2,8 +2,6 @@ package net.mcreator.minigames;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FontDescription;
@@ -11,11 +9,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.world.entity.Entity;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
+
 import java.util.ArrayList;
 
 public class AnimationScreenTrigger {
@@ -311,6 +305,8 @@ public class AnimationScreenTrigger {
                 AnimationManager.fadeOut(0, 20, 0x000000, 10);
             }
             else if (animationType.equalsIgnoreCase("fade_in_ascend")) {
+                Identifier square = Identifier.fromNamespaceAndPath("minigames", "textures/screens/square.png");
+
                 AnimationManager.fadeIn(60, 140, 0x000000, 0);
                 AnimationManager.displayColor(140, length, 0xFF000000, 0);
                 // da 180 text per 5s e poi inizia l'azione
@@ -321,8 +317,8 @@ public class AnimationScreenTrigger {
                 );
                 Component GET_TOP = Component.literal("GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP ")
                         .withStyle(style -> style
-                                        .withColor(0xFFF1F3BE)
-                                //.withFont(new FontDescription.Resource(MATCHA_FONT))
+                        .withColor(0xFFF1F3BE)
+                        //.withFont(new FontDescription.Resource(MATCHA_FONT))
                         );
                 float lineamount = 8f;
                 for (float iteration = -lineamount; iteration < lineamount * 2 + 1; iteration ++) {
@@ -350,6 +346,21 @@ public class AnimationScreenTrigger {
                         );
                     }
                 }
+                int color = 0xFFFFFFFF;
+                AnimationManager.displayTransform(
+                        240, length,
+                        square,
+                        48, 48,
+                        x / 2, y / 2,
+                        x / 2, y / 2,
+                        0.0f, 1.0f,
+                        0.0f, 0.0f,
+                        0.0f, 1.0f,
+                        color,
+                        color,
+                        "linear",
+                        10
+                );
             }
             AnimationOverlay.addManager(manager);
         });

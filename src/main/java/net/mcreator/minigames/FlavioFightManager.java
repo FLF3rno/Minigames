@@ -88,13 +88,8 @@ public class FlavioFightManager {
 
 			if (entityiterator instanceof LivingEntity living
 					&& !living.level().isClientSide()) {
-				living.addEffect(new MobEffectInstance(
-						MinigamesModMobEffects.IMMOBILIZED,
-						1000000,
-						1,
-						false,
-						false
-				));
+				living.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 1000000, 1, false, false));
+				living.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLOCK_HEAL, 1000000, 99, false, false));
 			}
 
 			MinigamesMod.queueServerWork(297, () -> {
@@ -163,8 +158,9 @@ public class FlavioFightManager {
         }
 		if  (playersDoneP2 >= world.players().size()) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				if (entityiterator instanceof LivingEntity _entity)
+				if (entityiterator instanceof LivingEntity _entity) {
 					_entity.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
+					_entity.removeEffect(MinigamesModMobEffects.BLOCK_HEAL); }
 				if (!(findEntityInWorldRange(world, PlayerCageEntity.class, (entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), 10)).level().isClientSide())
 					(findEntityInWorldRange(world, PlayerCageEntity.class, (entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), 10)).discard();
 			}

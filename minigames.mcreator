@@ -14660,6 +14660,19 @@
         ]
       },
       "path": "~/Dungeon/Events/Visual"
+    },
+    {
+      "name": "BlockHeal",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "block_heal",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/BlockHealMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
     }
   ],
   "variable_elements": [
@@ -16620,7 +16633,8 @@
       "item.minigames.spawn_flavio_trapdoor_2": "Spawn Flavio Trapdoor 2",
       "item.minigames.spawn_flavio_trapdoor_3": "Spawn Flavio Trapdoor 3",
       "entity.minigames.player_cage": "Player Cage",
-      "entity.minigames.flavio_omega_laser": "Tesla Coil"
+      "entity.minigames.flavio_omega_laser": "Tesla Coil",
+      "effect.minigames.block_heal": "Block Heal"
     }
   },
   "metadata": {

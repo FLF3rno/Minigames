@@ -23,38 +23,30 @@ public class ProcedureBeamXYZRenderManager {
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentParticles event) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null || mc.player == null || mc.gameRenderer == null || mc.gameRenderer.getMainCamera() == null) return;
+
+        if (mc.level == null || mc.player == null) {
+            return;
+        }
 
         Vec3 cameraPos = mc.gameRenderer.getMainCamera().position();
-        float partialTick = mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
-        MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
 
-        for (Entity source : mc.level.getEntities((Entity)null, new AABB(cameraPos, cameraPos).inflate(512.0D), e -> true)) {
+        for (Entity source : mc.level.getEntities(
+                (Entity)null,
+                new AABB(cameraPos, cameraPos).inflate(512.0D),
+                e -> true
+        )) {
             try {
-                ModDataAttachments.BeamXYZData data = source.getData(ModDataAttachments.BEAM_XYZ_DATA);
+                ModDataAttachments.BeamXYZData data =
+                        source.getData(ModDataAttachments.BEAM_XYZ_DATA);
+
                 if (!data.active) continue;
 
                 System.out.println("XYZ BEAM ACTIVE");
-
-                if (source.tickCount - data.startTick > data.durationTicks) {
-                    clearBeamData(source);
-                    continue;
-                }
-
-                Vec3 start = new Vec3(data.fromX, data.fromY, data.fromZ).subtract(cameraPos);
-                Vec3 end = new Vec3(data.toX, data.toY, data.toZ).subtract(cameraPos);
-
-                if ("sprite".equalsIgnoreCase(data.type)) {
-                    renderSprite(bufferSource, start, end, data.scale, data.texture, data.emissive, source.tickCount + partialTick);
-                } else {
-                    renderBeam(bufferSource, start, end, data.scale, data.texture, data.emissive, source.tickCount + partialTick);
-                }
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-        bufferSource.endBatch();
     }
 
     private static Identifier getTexture(String path) {

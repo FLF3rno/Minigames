@@ -10,6 +10,9 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -27,7 +30,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 public class BlessedEntityTint {
 
 	private static final int BLESSED_TINT_COLOR = 0xE070FFFF;
-
+	private static final TagKey<EntityType<?>> TINT_IMMUNE_TAG = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("minigames", "tint_immune"));
 	@SubscribeEvent
 	public static void registerLayers(EntityRenderersEvent.AddLayers event) {
 
@@ -78,6 +81,7 @@ public class BlessedEntityTint {
 
 			if (entity == null ||
 					entity.isInvisible() ||
+					entity.is(TINT_IMMUNE_TAG) ||
 					!hasBlessedMarker(entity)) {
 				return;
 			}

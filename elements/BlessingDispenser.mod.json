@@ -102,6 +102,7 @@
     "stepSound": "",
     "raidCelebrationSound": "",
     "entityDataEntries": [],
+    "whenMobDies": "BlessingDispenserEntityDies",
     "onMobTickUpdate": "BlessingDispenserTick",
     "onInitialSpawn": "BlessingDispenserSpawn",
     "hasAI": true,

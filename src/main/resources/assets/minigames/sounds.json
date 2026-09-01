@@ -638,5 +638,23 @@
         "stream": false
       }
     ]
+  },
+  "laser_cannon_windup": {
+    "subtitle": "subtitles.laser_cannon_windup",
+    "sounds": [
+      {
+        "name": "minigames:laser_cannon_windup",
+        "stream": false
+      }
+    ]
+  },
+  "laser_cannon_impact": {
+    "subtitle": "subtitles.laser_cannon_impact",
+    "sounds": [
+      {
+        "name": "minigames:laser_cannon_impact",
+        "stream": false
+      }
+    ]
   }
 }

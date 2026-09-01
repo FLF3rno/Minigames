@@ -24,14 +24,8 @@ import org.joml.Matrix4f;
 
 @EventBusSubscriber(modid = "minigames", value = Dist.CLIENT)
 public class HealthBar {
-    private static final TagKey<EntityType<?>> DUNGEON_TAG = TagKey.create(
-            Registries.ENTITY_TYPE,
-            Identifier.fromNamespaceAndPath("minigames", "dungeon")
-    );
-    private static final TagKey<EntityType<?>> DUNGEON_BOSS_TAG = TagKey.create(
-            Registries.ENTITY_TYPE,
-            Identifier.fromNamespaceAndPath("minigames", "dungeon_boss")
-    );
+    private static final TagKey<EntityType<?>> DUNGEON_TAG = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("minigames", "dungeon"));
+    private static final TagKey<EntityType<?>> DUNGEON_BOSS_TAG = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("minigames", "dungeon_boss"));
 
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent.AfterOpaqueFeatures event) {

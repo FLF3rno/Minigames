@@ -1,9 +1,15 @@
 package net.mcreator.minigames.procedures;
 
 import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
+import net.mcreator.minigames.init.MinigamesModEntities;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -42,13 +48,18 @@ public class OmegaLaserTickProcedure {
 			return;
 		}
 
-		if (entity.tickCount > 65) {
+		if (entity.tickCount > 120) {
 			int cycleTick = entity.tickCount % 120;
 
 			if (cycleTick == 0) {
 				if (entity instanceof FlavioOmegaLaserEntity laser) {
 					laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 1000);
 					laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_windup")), SoundSource.HOSTILE, 1, 1);
+						}
+					}
 				}
 				tracking = true;
 				bodyYaw = entity.getYRot();
@@ -68,7 +79,7 @@ public class OmegaLaserTickProcedure {
 		}
 
 		Player player = (Player) findEntityInWorldRange(world, Player.class, x, y, z, 60);
-		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5, entity.getZ());
+		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5.4, entity.getZ());
 
 		if (tracking && player != null) {
 			lockedTarget = player.getEyePosition();
@@ -119,13 +130,22 @@ public class OmegaLaserTickProcedure {
 						_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 7.0F);
 					}
 				} else {
-					if (world instanceof ServerLevel serverLevel) {
-						affectedEntity.hurtServer(serverLevel, serverLevel.damageSources().generic(), 100000.0F);
+					if (world instanceof ServerLevel serverLevel && affectedEntity instanceof LivingEntity livingEntity) {
+						if (!livingEntity.hasEffect(MinigamesModMobEffects.BLESSED)) {
+							affectedEntity.hurtServer(serverLevel, serverLevel.damageSources().generic(), 100000.0F);
+						}
 					}
 				}
 			}
-
+			if (entity instanceof LivingEntity livingEntity1) {
+				livingEntity1.removeEffect(MinigamesModMobEffects.BLESSED);
+			}
 			RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 30, end.x, end.y, end.z, "beam", BEAM);
+			if (world instanceof Level _level) {
+				if (!_level.isClientSide()) {
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_impact")), SoundSource.HOSTILE, 1, 1);
+				}
+			}
 		}
 
 		if (telegraph) {

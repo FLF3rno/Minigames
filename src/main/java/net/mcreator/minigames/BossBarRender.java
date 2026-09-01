@@ -24,10 +24,7 @@ import net.neoforged.neoforge.client.gui.GuiLayer;
 
 import java.util.Locale;
 
-@EventBusSubscriber(
-		modid = "minigames",
-		value = Dist.CLIENT
-)
+@EventBusSubscriber(modid = "minigames", value = Dist.CLIENT)
 public class BossBarRender {
 
 	private static final int DAMAGE_TICKS = 9;
@@ -42,26 +39,11 @@ public class BossBarRender {
 
 	private static int currentBossId = -1;
 
-	private static final TagKey<EntityType<?>> DUNGEON_BOSS =
-			TagKey.create(
-					Registries.ENTITY_TYPE,
-					Identifier.fromNamespaceAndPath(
-							"minigames",
-							"dungeon_boss"
-					)
-			);
+	private static final TagKey<EntityType<?>> DUNGEON_BOSS = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("minigames", "dungeon_boss"));
 
 	@SubscribeEvent
 	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
-		event.registerAboveAll(
-				Identifier.fromNamespaceAndPath(
-						"minigames",
-						"boss_bar"
-				),
-				(GuiLayer) (graphics, deltaTracker) -> {
-					renderBossBar(graphics);
-				}
-		);
+		event.registerAboveAll(Identifier.fromNamespaceAndPath("minigames", "boss_bar"), (GuiLayer) (graphics, deltaTracker) -> {renderBossBar(graphics);});
 	}
 
 	@SubscribeEvent
@@ -73,8 +55,7 @@ public class BossBarRender {
 			return;
 		}
 
-		MinigamesModVariables.MapVariables vars =
-				MinigamesModVariables.MapVariables.get(mc.level);
+		MinigamesModVariables.MapVariables vars = MinigamesModVariables.MapVariables.get(mc.level);
 
 		if (!vars.showBossBar) {
 			resetBar();
@@ -110,28 +91,20 @@ public class BossBarRender {
 			healthTarget = newHealth;
 
 			healthAnimationTick = 0;
-			healthAnimationDuration =
-					damage ? DAMAGE_TICKS : HEAL_TICKS;
+			healthAnimationDuration = damage ? DAMAGE_TICKS : HEAL_TICKS;
 		}
 
 		if (healthAnimationTick < healthAnimationDuration) {
 			healthAnimationTick++;
 
-			float progress =
-					healthAnimationTick
-							/ (float) healthAnimationDuration;
+			float progress = healthAnimationTick / (float) healthAnimationDuration;
 
 			progress = Mth.clamp(progress, 0.0f, 1.0f);
 
 			if (healthTarget < healthStart) {
-				progress = 1.0f - (float) Math.pow(
-						1.0f - progress,
-						8.5f
-				);
+				progress = 1.0f - (float) Math.pow(1.0f - progress, 8.5f);
 			} else {
-				progress =
-						progress * progress
-								* (3.0f - 2.0f * progress);
+				progress = progress * progress * (3.0f - 2.0f * progress);
 			}
 
 			displayedHealth = Mth.lerp(
@@ -156,9 +129,7 @@ public class BossBarRender {
 				continue;
 			}
 
-			if (entity.getType()
-					.builtInRegistryHolder()
-					.is(DUNGEON_BOSS)) {
+			if (entity.getType().builtInRegistryHolder().is(DUNGEON_BOSS)) {
 
 				return livingEntity;
 			}
@@ -174,11 +145,7 @@ public class BossBarRender {
 			return 0.0f;
 		}
 
-		return Mth.clamp(
-				boss.getHealth() / maxHealth,
-				0.0f,
-				1.0f
-		);
+		return Mth.clamp(boss.getHealth() / maxHealth, 0.0f, 1.0f);
 	}
 
 	private static void resetBar() {
@@ -192,8 +159,7 @@ public class BossBarRender {
 		healthAnimationDuration = 0;
 	}
 
-	private static void renderBossBar(
-			GuiGraphicsExtractor graphics) {
+	private static void renderBossBar(GuiGraphicsExtractor graphics) {
 
 		Minecraft mc = Minecraft.getInstance();
 
@@ -201,8 +167,7 @@ public class BossBarRender {
 			return;
 		}
 
-		MinigamesModVariables.MapVariables vars =
-				MinigamesModVariables.MapVariables.get(mc.level);
+		MinigamesModVariables.MapVariables vars = MinigamesModVariables.MapVariables.get(mc.level);
 
 		if (!vars.showBossBar) {
 			return;
@@ -218,25 +183,11 @@ public class BossBarRender {
 			return;
 		}
 
-		String textureName = vars.bossName
-				.toLowerCase(Locale.ROOT)
-				.replace(' ', '_');
+		String textureName = vars.bossName.toLowerCase(Locale.ROOT).replace(' ', '_');
 
-		Identifier emptyTexture =
-				Identifier.fromNamespaceAndPath(
-						"minigames",
-						"textures/gui/sprites/boss_bar/"
-								+ textureName
-								+ "_empty.png"
-				);
+		Identifier emptyTexture = Identifier.fromNamespaceAndPath("minigames", "textures/gui/sprites/boss_bar/" + textureName + "_empty.png");
 
-		Identifier fullTexture =
-				Identifier.fromNamespaceAndPath(
-						"minigames",
-						"textures/gui/sprites/boss_bar/"
-								+ textureName
-								+ ".png"
-				);
+		Identifier fullTexture = Identifier.fromNamespaceAndPath("minigames", "textures/gui/sprites/boss_bar/" + textureName + ".png");
 
 		int screenWidth = graphics.guiWidth();
 
@@ -246,74 +197,31 @@ public class BossBarRender {
 		int x = screenWidth / 2 - barWidth / 2;
 		int y = 20;
 
-		graphics.blit(
-				RenderPipelines.GUI_TEXTURED,
-				emptyTexture,
-				x,
-				y,
-				0,
-				0,
-				barWidth,
-				barHeight,
-				barWidth,
-				barHeight
-		);
+		graphics.blit(RenderPipelines.GUI_TEXTURED, emptyTexture, x, y, 0, 0, barWidth, barHeight, barWidth, barHeight);
 
-		int healthWidth =
-				(int) (barWidth * displayedHealth);
+		int healthWidth = (int) (barWidth * displayedHealth);
 
 		if (healthWidth > 0) {
-			graphics.blit(
-					RenderPipelines.GUI_TEXTURED,
-					fullTexture,
-					x,
-					y,
-					0,
-					0,
-					healthWidth,
-					barHeight,
-					barWidth,
-					barHeight
-			);
+			graphics.blit(RenderPipelines.GUI_TEXTURED, fullTexture, x, y, 0, 0, healthWidth, barHeight, barWidth, barHeight);
 		}
 
-		Component bossName = Component.literal(vars.bossName)
-				.withStyle(style -> style
-						.withColor(0xFFF1F3BE)
-						.withBold(true)
-				);
+		Component bossName = Component.literal(vars.bossName).withStyle(style -> style.withColor(0xFFF1F3BE).withBold(true));
 
 		int nameWidth = mc.font.width(bossName);
 
 		float nameScale = 1.0f;
 
-		int nameX = (int)(
-				screenWidth / 2.0f
-						- (nameWidth * nameScale) / 2.0f
-		);
+		int nameX = (int)(screenWidth / 2.0f - (nameWidth * nameScale) / 2.0f);
 
 		int nameY = y - mc.font.lineHeight - 4;
 
 		graphics.pose().pushMatrix();
 
-		graphics.pose().translate(
-				nameX,
-				nameY
-		);
+		graphics.pose().translate(nameX, nameY);
 
-		graphics.pose().scale(
-				nameScale,
-				nameScale
-		);
+		graphics.pose().scale(nameScale, nameScale);
 
-		graphics.text(
-				mc.font,
-                bossName,
-				0,
-				0,
-				0xFFFFFFFF,
-				true
-		);
+		graphics.text(mc.font, bossName, 0, 0, 0xFFFFFFFF, true);
 
 		graphics.pose().popMatrix();
 	}

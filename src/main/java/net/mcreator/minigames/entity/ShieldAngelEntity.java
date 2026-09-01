@@ -1,6 +1,5 @@
 package net.mcreator.minigames.entity;
 
-import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 
@@ -45,7 +44,6 @@ public class ShieldAngelEntity extends Monster {
 	public static final EntityDataAccessor<Integer> DATA_cooldown = SynchedEntityData.defineId(ShieldAngelEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_HP = SynchedEntityData.defineId(ShieldAngelEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_timeSinceLastHit = SynchedEntityData.defineId(ShieldAngelEntity.class, EntityDataSerializers.INT);
-
 	public final AnimationState animationState0 = new AnimationState();
 
 	public ShieldAngelEntity(EntityType<ShieldAngelEntity> type, Level world) {
@@ -60,11 +58,13 @@ public class ShieldAngelEntity extends Monster {
 	@Override
 	public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
 		if (ANIM.equals(data)) {
-			int animId = this.entityData.get(ANIM);
-			if (animId == 0) {
-				this.animationState0.start(this.tickCount);
-			} else if (animId == -1) {
-				this.animationState0.stop();
+			switch (this.entityData.get(ANIM)) {
+				case -1 :
+					this.animationState0.stop();
+					break;
+				case 0 :
+					this.animationState0.start(this.tickCount);
+					break;
 			}
 		}
 		super.onSyncedDataUpdated(data);
@@ -97,6 +97,7 @@ public class ShieldAngelEntity extends Monster {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
+
 	}
 
 	@Override
@@ -116,19 +117,39 @@ public class ShieldAngelEntity extends Monster {
 
 	@Override
 	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
-		ShieldAngelHurtProcedure.execute(level, this);
-		if (damagesource.is(DamageTypes.IN_FIRE)) return false;
-		if (damagesource.getDirectEntity() instanceof AbstractArrow) return false;
-		if (damagesource.getDirectEntity() instanceof AbstractThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud || damagesource.typeHolder().is(NeoForgeMod.POISON_DAMAGE)) return false;
-		if (damagesource.is(DamageTypes.FALL)) return false;
-		if (damagesource.is(DamageTypes.CACTUS)) return false;
-		if (damagesource.is(DamageTypes.DROWN)) return false;
-		if (damagesource.is(DamageTypes.LIGHTNING_BOLT)) return false;
-		if (damagesource.is(DamageTypes.EXPLOSION) || damagesource.is(DamageTypes.PLAYER_EXPLOSION)) return false;
-		if (damagesource.is(DamageTypes.TRIDENT)) return false;
-		if (damagesource.is(DamageTypes.FALLING_ANVIL)) return false;
-		if (damagesource.is(DamageTypes.DRAGON_BREATH)) return false;
-		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL)) return false;
+		double x = this.getX();
+		double y = this.getY();
+		double z = this.getZ();
+		Level world = this.level();
+		Entity entity = this;
+		Entity sourceentity = damagesource.getEntity();
+		Entity immediatesourceentity = damagesource.getDirectEntity();
+
+		ShieldAngelHurtProcedure.execute(world, entity);
+		if (damagesource.is(DamageTypes.IN_FIRE))
+			return false;
+		if (damagesource.getDirectEntity() instanceof AbstractArrow)
+			return false;
+		if (damagesource.getDirectEntity() instanceof AbstractThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud || damagesource.typeHolder().is(NeoForgeMod.POISON_DAMAGE))
+			return false;
+		if (damagesource.is(DamageTypes.FALL))
+			return false;
+		if (damagesource.is(DamageTypes.CACTUS))
+			return false;
+		if (damagesource.is(DamageTypes.DROWN))
+			return false;
+		if (damagesource.is(DamageTypes.LIGHTNING_BOLT))
+			return false;
+		if (damagesource.is(DamageTypes.EXPLOSION) || damagesource.is(DamageTypes.PLAYER_EXPLOSION))
+			return false;
+		if (damagesource.is(DamageTypes.TRIDENT))
+			return false;
+		if (damagesource.is(DamageTypes.FALLING_ANVIL))
+			return false;
+		if (damagesource.is(DamageTypes.DRAGON_BREATH))
+			return false;
+		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
+			return false;
 		return super.hurtServer(level, damagesource, amount);
 	}
 
@@ -167,12 +188,15 @@ public class ShieldAngelEntity extends Monster {
 	@Override
 	public void tick() {
 		super.tick();
-
 		if (this.level().isClientSide()) {
-			if (this.entityData.get(ANIM) == 0) {
-				this.animationState0.startIfStopped(this.tickCount);
-			} else if (this.entityData.get(ANIM) == -1) {
-				this.animationState0.stop();
+			if (this.animationState0.isStarted()) {
+				float elapsedSeconds = this.animationState0.getTimeInMillis(this.tickCount) / 1000.0F;
+				if (elapsedSeconds >= shieldagentAnimation.rotate.lengthInSeconds()) {
+					if (!shieldagentAnimation.rotate.looping())
+						this.animationState0.stop();
+					else
+						this.animationState0.start(this.tickCount);
+				}
 			}
 		}
 	}
@@ -231,7 +255,6 @@ public class ShieldAngelEntity extends Monster {
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 10);
 		builder = builder.add(Attributes.FLYING_SPEED, 0);
-		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 6);
 		return builder;
 	}
 }

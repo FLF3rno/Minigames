@@ -2,6 +2,7 @@ package net.mcreator.minigames;
 
 import io.netty.buffer.Unpooled;
 import net.mcreator.minigames.entity.FlavioEntity;
+import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
 import net.mcreator.minigames.entity.PlayerCageEntity;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -45,15 +46,16 @@ public class FlavioFightManager {
 
 	public static int phase = 0;
 	public static int playersDoneP2 = 0;
+	public static Entity flavio;
 
 	public static void nextPhase(LevelAccessor world) {
 		if (!world.isClientSide()) {
             phase++;
         }
 		switch (phase) {
-			case 2: startPhase2(world); break;
-			case 3: startPhase3(world); break;
-			case 4: startPhase4(world); break;
+			case 2: startPhase2(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
+			case 3: startPhase3(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
+			case 4: startPhase4(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
 			default: break;
 		}
 	}
@@ -148,7 +150,7 @@ public class FlavioFightManager {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(1, 1, 1), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @e[type=minigames:flavio_trapdoor] at @s run summon minigames:flavio_omega_cannon ~ ~-3.1 ~");
+					"/execute as @e[type=minigames:flavio_trapdoor] at @s run summon minigames:flavio_omega_laser ~ ~-3.1 ~");
 
 	}
 

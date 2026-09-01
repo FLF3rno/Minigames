@@ -1,5 +1,6 @@
 package net.mcreator.minigames.client.model;
 
+import net.minecraft.util.Mth;
 import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.model.geom.builders.PartDefinition;
@@ -97,5 +98,7 @@ public class Modelflavio extends EntityModel<LivingEntityRenderState> {
 		float netHeadYaw = state.yRot;
 		float headPitch = state.xRot;
 
+		this.left_leg.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
+		this.right_leg.xRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
 	}
 }

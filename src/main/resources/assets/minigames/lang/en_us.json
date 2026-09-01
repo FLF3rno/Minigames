@@ -404,5 +404,8 @@
   "item.minigames.spawn_flavio_trapdoor_3": "Spawn Flavio Trapdoor 3",
   "entity.minigames.player_cage": "Player Cage",
   "entity.minigames.flavio_omega_laser": "Tesla Coil",
-  "effect.minigames.block_heal": "Block Heal"
+  "effect.minigames.block_heal": "Block Heal",
+  "subtitles.laser_cannon_windup": "Laser Cannon Wind Up",
+  "subtitles.laser_impact_impact": "Laser Cannon Fires",
+  "subtitles.laser_cannon_impact": "Laser Cannon Fires"
 }

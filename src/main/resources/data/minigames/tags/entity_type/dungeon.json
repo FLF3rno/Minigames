@@ -1,15 +1,16 @@
 {
   "replace": false,
   "values": [
-    "minigames:flavio",
-    "minigames:worshipper",
+    "minigames:flavio_omega_laser",
     "minigames:shield_angel",
-    "minigames:flavio_tesla_coil",
-    "minigames:demon",
-    "minigames:blessing_dispenser",
     "minigames:candlehead",
     "minigames:flavio_antenna",
     "minigames:gravedigger",
+    "minigames:flavio",
+    "minigames:worshipper",
+    "minigames:flavio_tesla_coil",
+    "minigames:demon",
+    "minigames:blessing_dispenser",
     "minigames:flavio_clock_cannon",
     "minigames:preacher",
     "minigames:sculkling"

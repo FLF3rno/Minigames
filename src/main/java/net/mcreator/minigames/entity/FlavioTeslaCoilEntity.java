@@ -93,7 +93,7 @@ public class FlavioTeslaCoilEntity extends Monster {
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		FlavioMachineDestroyedProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
+		FlavioMachineDestroyedProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
 	@Override

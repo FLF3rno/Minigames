@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.mcreator.minigames.entity.FlavioSweeperEntity;
-import net.mcreator.minigames.client.model.animations.flavio_sweeperAnimation;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -109,21 +108,12 @@ public class SweeperTickProcedure {
 				double dirZ = Math.sin(angleRadians);
 
 
-				Vec3 center = new Vec3(
-						entity.getX(),
-						entity.getY(),
-						entity.getZ()
-				);
+				Vec3 center = new Vec3(entity.getX(), entity.getY(), entity.getZ());
 
 				double searchRadius =
 						ARM_LENGTH + COLLISION_RADIUS + 1.0;
 
-				AABB searchBox = new AABB(
-						center.x - searchRadius,
-						center.y - 2.0,
-						center.z - searchRadius,
-						center.x + searchRadius,
-						center.y + 2.0,
+				AABB searchBox = new AABB(center.x - searchRadius, center.y - 2.0, center.z - searchRadius, center.x + searchRadius, center.y + 2.0,
 						center.z + searchRadius
 				);
 

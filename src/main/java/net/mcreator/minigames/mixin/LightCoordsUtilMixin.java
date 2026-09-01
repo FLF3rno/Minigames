@@ -20,7 +20,7 @@ public class LightCoordsUtilMixin {
     private static void onPack(int blockLight, int skyLight, CallbackInfoReturnable<Integer> cir) {
         try {
             if (areShadersEnabled()) {
-                return;
+                //return;
             }
             Minecraft mc = Minecraft.getInstance();
             if (mc == null || mc.player == null) {
@@ -33,7 +33,7 @@ public class LightCoordsUtilMixin {
                 int newSkyLight = Math.max(skyLight, minLight);
                 cir.setReturnValue((newBlockLight << 4) | (newSkyLight << 20));
             }
-        } catch (Throwable t) {
+        } catch (Exception ignored) {
         }
     }
 

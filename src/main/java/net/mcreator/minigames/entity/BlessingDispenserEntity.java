@@ -21,6 +21,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.minigames.procedures.BlessingDispenserTickProcedure;
 import net.mcreator.minigames.procedures.BlessingDispenserSpawnProcedure;
+import net.mcreator.minigames.procedures.BlessingDispenserEntityDiesProcedure;
 import net.mcreator.minigames.client.model.animations.blessing_dispenserAnimation;
 
 import javax.annotation.Nullable;
@@ -86,6 +87,12 @@ public class BlessingDispenserEntity extends Monster {
 	@Override
 	public SoundEvent getDeathSound() {
 		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("block.respawn_anchor.deplete"));
+	}
+
+	@Override
+	public void die(DamageSource source) {
+		super.die(source);
+		BlessingDispenserEntityDiesProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
 	}
 
 	@Override

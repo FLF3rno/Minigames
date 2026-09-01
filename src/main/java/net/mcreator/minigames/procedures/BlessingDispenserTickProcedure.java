@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
 import net.mcreator.minigames.entity.FlavioEntity;
 import net.mcreator.minigames.entity.BlessingDispenserEntity;
 
@@ -32,14 +33,19 @@ public class BlessingDispenserTickProcedure {
 							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100000, 1, false, false));
 						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())));
 					}
+					if (entityiterator instanceof FlavioOmegaLaserEntity) {
+						ParticleFlowHelperProcedure.execute(world, 1, 50, "linear", "minigames:blessed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
+						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100000, 1, false, false));
+					}
 				}
 			}
 			{
 				final Vec3 _center = new Vec3(x, y, z);
 				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(10 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 					if (entityiterator instanceof Player) {
-						if (!(entityiterator instanceof LivingEntity _livEnt14 && _livEnt14.hasEffect(MinigamesModMobEffects.IMMOBILIZED))
-								&& !(entityiterator instanceof LivingEntity _livEnt15 && _livEnt15.hasEffect(MinigamesModMobEffects.BLESSED))) {
+						if (!(entityiterator instanceof LivingEntity _livEnt21 && _livEnt21.hasEffect(MinigamesModMobEffects.IMMOBILIZED))
+								&& !(entityiterator instanceof LivingEntity _livEnt22 && _livEnt22.hasEffect(MinigamesModMobEffects.BLESSED))) {
 							ParticleFlowHelperProcedure.execute(world, 1, 10, "linear", "minigames:cursed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
 							{
 								Entity _ent = entityiterator;
@@ -53,9 +59,9 @@ public class BlessingDispenserTickProcedure {
 			}
 		}
 		if (entity.tickCount % 54 == 0) {
-			if (entity instanceof BlessingDispenserEntity _ent25) {
-				_ent25.getEntityData().set(BlessingDispenserEntity.ANIM, 1000);
-				_ent25.getEntityData().set(BlessingDispenserEntity.ANIM, 0);
+			if (entity instanceof BlessingDispenserEntity _ent32) {
+				_ent32.getEntityData().set(BlessingDispenserEntity.ANIM, 1000);
+				_ent32.getEntityData().set(BlessingDispenserEntity.ANIM, 0);
 			}
 		}
 	}

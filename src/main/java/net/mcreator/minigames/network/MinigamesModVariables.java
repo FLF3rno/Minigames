@@ -315,7 +315,7 @@ public class MinigamesModVariables {
 		public ArrayList<Object> glueY = new ArrayList<>();
 		public Vec3 coordinateOffset = Vec3.ZERO;
 		public double bossNumber = 0;
-		public String bossName = "\"\"";
+		public String bossName = "";
 		public boolean showBossBar = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {

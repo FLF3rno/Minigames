@@ -24,7 +24,7 @@ public class FlavioTickProcedure {
 					_ent4.getEntityData().set(FlavioEntity.ANIM, 1000);
 					_ent4.getEntityData().set(FlavioEntity.ANIM, 4);
 				}
-				MinigamesMod.queueServerWork(24, () -> {
+				MinigamesMod.queueServerWork(32, () -> {
 					ExplodeProcedure.execute(world, x, y, z, entity, true, true, 0, 1, 5, "normal");
 					if (!entity.level().isClientSide())
 						entity.discard();

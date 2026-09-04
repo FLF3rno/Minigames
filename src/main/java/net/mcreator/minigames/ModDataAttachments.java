@@ -1,6 +1,7 @@
 package net.mcreator.minigames;
 
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.IAttachmentSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.minecraft.network.codec.StreamCodec;
@@ -8,6 +9,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.FriendlyByteBuf;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
+import java.util.function.Supplier;
 
 public class ModDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, "minigames");
@@ -54,8 +57,7 @@ public class ModDataAttachments {
     }
 
     public static final java.util.function.Supplier<AttachmentType<BeamData>> BEAM_DATA = ATTACHMENTS.register("beam_data", () -> AttachmentType.builder(() -> new BeamData(false, -1, 0, 0, 0.0D, "", 0, 0, 0)).serialize(BeamData.CODEC.fieldOf("beam_data")).sync(BeamData.STREAM_CODEC).copyOnDeath().build());
-
     public static final java.util.function.Supplier<AttachmentType<BeamXYZData>> BEAM_XYZ_DATA = ATTACHMENTS.register("beam_xyz_data", () -> AttachmentType.builder(() -> new BeamXYZData(false, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0, 0, 0.0D, "", "beam", false)).serialize(BeamXYZData.CODEC.fieldOf("beam_xyz_data")).sync(BeamXYZData.STREAM_CODEC).copyOnDeath().build());
-
     public static final java.util.function.Supplier<AttachmentType<BlessedData>> BLESSED_DATA = ATTACHMENTS.register("blessed_data", () -> AttachmentType.builder(() -> new BlessedData(0)).serialize(BlessedData.CODEC.fieldOf("blessed_data")).sync(BlessedData.STREAM_CODEC).copyOnDeath().build());
+
 }

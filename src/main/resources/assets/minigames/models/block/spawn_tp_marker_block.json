@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "minecraft:block/small_dripleaf_side",
-    "particle": "minecraft:block/small_dripleaf_side"
+    "all": "minecraft:block/big_dripleaf_side",
+    "particle": "minecraft:block/big_dripleaf_side"
   }
 }

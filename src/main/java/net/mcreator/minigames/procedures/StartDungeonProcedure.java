@@ -60,7 +60,7 @@ public class StartDungeonProcedure {
 				}
 			}
 			if (entityiterator instanceof ServerPlayer _player)
-				_player.setGameMode(GameType.ADVENTURE);
+				_player.setGameMode(GameType.SPECTATOR);
 		}
 		if (world instanceof Level _level) {
 			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("dungeon_mobs");
@@ -68,6 +68,10 @@ public class StartDungeonProcedure {
 				_pt.setNameTagVisibility(Team.Visibility.NEVER);
 			}
 		}
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"execute in minigames:dungeon_dimension run tp @a 0 200 0");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
@@ -84,14 +88,14 @@ public class StartDungeonProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
 		if (world instanceof ServerLevel _origLevel) {
-			LevelAccessor _switchworld11 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-			if (_switchworld11 != null) {
-				worldSwitch11(_switchworld11, x, y, z);
+			LevelAccessor _switchworld12 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+			if (_switchworld12 != null) {
+				worldSwitch12(_switchworld12, x, y, z);
 			}
 		}
 	}
 
-	private static void worldSwitch11(LevelAccessor world, double x, double y, double z) {
+	private static void worldSwitch12(LevelAccessor world, double x, double y, double z) {
 		ChooseFloorProcedure.execute(world, x, y, z, 1);
 	}
 }

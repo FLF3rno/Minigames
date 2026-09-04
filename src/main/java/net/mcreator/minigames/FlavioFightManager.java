@@ -102,8 +102,11 @@ public class FlavioFightManager {
 				living.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 1000000, 1, false, false));
 				living.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLOCK_HEAL, 1000000, 99, false, false));
 			}
-
+			MinigamesModVariables.MapVariables.get(world).showBossBar = false;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			MinigamesMod.queueServerWork(297, () -> {
+				MinigamesModVariables.MapVariables.get(world).showBossBar = true;
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (entityiterator instanceof ServerPlayer player) {
 					BlockPos pos = BlockPos.containing(0, 0, 0);
 

@@ -2,6 +2,7 @@ package net.mcreator.minigames.entity;
 
 import net.mcreator.minigames.ChargeAttackGoal;
 import net.mcreator.minigames.DigGraveGoal;
+import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.MoveToCoarseDirtGoal;
 import net.mcreator.minigames.entity.I.IChargerMob;
 import net.mcreator.minigames.entity.I.IDiggerMob;
@@ -21,6 +22,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
@@ -45,6 +49,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.mcreator.minigames.procedures.AnimationAttackProcedure;
 import net.mcreator.minigames.client.model.animations.gravediggerAnimation;
 
+import java.lang.reflect.Constructor;
 import java.util.Comparator;
 import java.util.List;
 
@@ -64,6 +69,7 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 	public final AnimationState animationState1 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 	public final AnimationState animationState3 = new AnimationState();
+	private boolean hasSeenPlayer = false;
 
 	public GravediggerMinibossEntity(EntityType<GravediggerMinibossEntity> type, Level world) {
 		super(type, world);
@@ -145,6 +151,7 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putInt("DataID", this.entityData.get(DATA_ID));
+		valueOutput.putBoolean("HasSeenPlayer", this.hasSeenPlayer);
 	}
 
 	@Override
@@ -152,6 +159,7 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 		super.readAdditionalSaveData(valueInput);
 		this.setTexture(valueInput.getStringOr("Texture", "gravedigger"));
 		this.entityData.set(DATA_ID, valueInput.getIntOr("DataID", 0));
+		this.hasSeenPlayer = valueInput.getBooleanOr("HasSeenPlayer", false);
 	}
 	@Override
 	public void die(DamageSource source) {
@@ -168,6 +176,58 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 	@Override
 	public void tick() {
 		super.tick();
+		if (!this.level().isClientSide() && !this.hasSeenPlayer) {
+
+			if (this.tickCount % 10 == 0) {
+
+				Player nearestPlayer = this.level().getNearestPlayer(this, 60.0D);
+
+				if (nearestPlayer != null && this.getSensing().hasLineOfSight(nearestPlayer)) {
+
+					this.hasSeenPlayer = true;
+
+					this.entityData.set(ANIM, 1000);
+					this.entityData.set(ANIM, 3);
+					MinigamesMod.queueServerWork(40, () -> {
+						Constructor<FallingBlockEntity> constructor = null;
+						try {
+							constructor = FallingBlockEntity.class.getDeclaredConstructor(
+									Level.class, double.class, double.class, double.class, BlockState.class
+							);
+							constructor.setAccessible(true);
+						} catch (NoSuchMethodException e) {
+							e.printStackTrace();
+						}
+
+						if (constructor != null) {
+							for (int i = 0; i < 10; i++) {
+								try {
+									FallingBlockEntity fallingBlock = constructor.newInstance(
+											this.level(), this.getX(), this.getY() + 1.0D, this.getZ(), Blocks.COARSE_DIRT.defaultBlockState()
+									);
+
+									fallingBlock.time = 1;
+									fallingBlock.dropItem = false;
+									fallingBlock.setHurtsEntities(4.0f, 40);
+
+									RandomSource random = this.getRandom();
+									double velocityX = (random.nextDouble() - 0.5D) * 1.2D;
+									double velocityZ = (random.nextDouble() - 0.5D) * 1.2D;
+									double velocityY = random.nextDouble() * 0.5D + 0.5D;
+
+									fallingBlock.setDeltaMovement(velocityX, velocityY, velocityZ);
+
+									this.level().addFreshEntity(fallingBlock);
+
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					});
+				}
+			}
+		}
 
 		if (this.level().isClientSide()) {
 			this.animationState1.animateWhen(AnimationAttackProcedure.execute(this), this.tickCount);

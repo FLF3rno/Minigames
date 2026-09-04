@@ -92,7 +92,7 @@ public class FlavioRenderer extends MobRenderer<FlavioEntity, LivingEntityRender
             this.keyframeAnimation1 = safeBake(flavioAnimation.press_button);
             this.keyframeAnimation2 = safeBake(flavioAnimation.run);
             this.keyframeAnimation3 = safeBake(flavioAnimation.punch);
-            this.keyframeAnimation4 = safeBake(flavioAnimation.punch);
+            this.keyframeAnimation4 = safeBake(flavioAnimation.death);
         }
 
         private KeyframeAnimation safeBake(AnimationDefinition source) {

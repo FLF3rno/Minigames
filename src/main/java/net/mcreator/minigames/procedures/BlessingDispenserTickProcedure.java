@@ -16,6 +16,7 @@ import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
 import net.mcreator.minigames.entity.FlavioEntity;
 import net.mcreator.minigames.entity.BlessingDispenserEntity;
+import net.mcreator.minigames.FlavioFightManager;
 
 import java.util.Comparator;
 
@@ -23,45 +24,49 @@ public class BlessingDispenserTickProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (entity.tickCount % 1 == 0) {
-			{
-				final Vec3 _center = new Vec3(x, y, z);
-				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(40 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-					if (entityiterator instanceof FlavioEntity) {
-						ParticleFlowHelperProcedure.execute(world, 1, 50, "linear", "minigames:blessed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
-						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100000, 1, false, false));
-						entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())));
-					}
-					if (entityiterator instanceof FlavioOmegaLaserEntity) {
-						ParticleFlowHelperProcedure.execute(world, 1, 50, "linear", "minigames:blessed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
-						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100000, 1, false, false));
+		if (net.mcreator.minigames.FlavioFightManager.phase != 5) {
+			if (entity.tickCount % 1 == 0) {
+				{
+					final Vec3 _center = new Vec3(x, y, z);
+					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(40 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
+						if (entityiterator instanceof FlavioEntity) {
+							ParticleFlowHelperProcedure.execute(world, 1, 50, "linear", "minigames:blessed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
+							if (net.mcreator.minigames.FlavioFightManager.phase < 4) {
+								if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+									_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100000, 1, false, false));
+							}
+							entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3((entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ())));
+						}
+						if (entityiterator instanceof FlavioOmegaLaserEntity) {
+							ParticleFlowHelperProcedure.execute(world, 1, 50, "linear", "minigames:blessed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
+							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+								_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 100000, 1, false, false));
+						}
 					}
 				}
-			}
-			{
-				final Vec3 _center = new Vec3(x, y, z);
-				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(10 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-					if (entityiterator instanceof Player) {
-						if (!(entityiterator instanceof LivingEntity _livEnt21 && _livEnt21.hasEffect(MinigamesModMobEffects.IMMOBILIZED))
-								&& !(entityiterator instanceof LivingEntity _livEnt22 && _livEnt22.hasEffect(MinigamesModMobEffects.BLESSED))) {
-							ParticleFlowHelperProcedure.execute(world, 1, 10, "linear", "minigames:cursed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
-							{
-								Entity _ent = entityiterator;
-								if (_ent.level() instanceof ServerLevel _serverLevel) {
-									_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC), entity), 1);
+				{
+					final Vec3 _center = new Vec3(x, y, z);
+					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(10 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
+						if (entityiterator instanceof Player) {
+							if (!(entityiterator instanceof LivingEntity _livEnt21 && _livEnt21.hasEffect(MinigamesModMobEffects.IMMOBILIZED))
+									&& !(entityiterator instanceof LivingEntity _livEnt22 && _livEnt22.hasEffect(MinigamesModMobEffects.BLESSED))) {
+								ParticleFlowHelperProcedure.execute(world, 1, 10, "linear", "minigames:cursed_particle", new Vec3(x, (y + 3.7), z), new Vec3((entityiterator.getX()), (entityiterator.getY() + 1), (entityiterator.getZ())));
+								{
+									Entity _ent = entityiterator;
+									if (_ent.level() instanceof ServerLevel _serverLevel) {
+										_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC), entity), 1);
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-		if (entity.tickCount % 54 == 0) {
-			if (entity instanceof BlessingDispenserEntity _ent32) {
-				_ent32.getEntityData().set(BlessingDispenserEntity.ANIM, 1000);
-				_ent32.getEntityData().set(BlessingDispenserEntity.ANIM, 0);
+			if (entity.tickCount % 54 == 0) {
+				if (entity instanceof BlessingDispenserEntity _ent32) {
+					_ent32.getEntityData().set(BlessingDispenserEntity.ANIM, 1000);
+					_ent32.getEntityData().set(BlessingDispenserEntity.ANIM, 0);
+				}
 			}
 		}
 	}

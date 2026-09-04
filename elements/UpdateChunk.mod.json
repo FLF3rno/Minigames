@@ -1,0 +1,8 @@
+{
+  "_fv": 89,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"java_code\"><field name=\"CODE\">Minecraft mc = Minecraft.getInstance();&amp;#10;&amp;#10;if (mc.level != null &amp;&amp; mc.player != null) {&amp;#10;    int px = mc.player.chunkPosition().x;&amp;#10;    int pz = mc.player.chunkPosition().z;&amp;#10;&amp;#10;    for (int cx = px - 8; cx &lt;= px + 8; cx++) {&amp;#10;        for (int cz = pz - 8; cz &lt;= pz + 8; cz++) {&amp;#10;            for (int sy = mc.level.getMinSectionY(); sy &lt; mc.level.getMaxSectionY(); sy++) {&amp;#10;                mc.levelRenderer.setSectionDirty(cx, sy, cz);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}</field></block></next></block></xml>",
+    "skipDependencyNullCheck": false
+  }
+}

@@ -14,7 +14,7 @@ public class FlavioTickProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= 20) {
+		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) <= 40) {
 			if (!entity.getPersistentData().getBooleanOr("die", false)) {
 				entity.getPersistentData().putBoolean("die", true);
 				if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())

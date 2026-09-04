@@ -94,12 +94,16 @@ public class FlavioEntity extends Monster {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.8, false) {
 			@Override
+			public boolean canUse() {
+				return FlavioFightManager.phase >= 5 && super.canUse();
+			}
+			@Override
 			public boolean canContinueToUse() {
-				return FlavioFightManager.phase == 5 && super.canContinueToUse();
+				return FlavioFightManager.phase >= 5 && super.canContinueToUse();
 			}
 			@Override
 			protected boolean canPerformAttack(LivingEntity entity) {
-				boolean canAttack = this.isTimeToAttack() && FlavioFightManager.phase == 5
+				boolean canAttack = this.isTimeToAttack() && FlavioFightManager.phase >= 5
 						&& this.mob.distanceToSqr(entity)
 						< (this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth())
 						&& this.mob.getSensing().hasLineOfSight(entity);
@@ -116,12 +120,12 @@ public class FlavioEntity extends Monster {
 		{
 			@Override
 			public boolean canUse() {
-				return FlavioFightManager.phase == 5 && super.canUse();
+				return FlavioFightManager.phase >= 5 && super.canUse();
 			}
 
 			@Override
 			public boolean canContinueToUse() {
-				return FlavioFightManager.phase == 5 && super.canContinueToUse();
+				return FlavioFightManager.phase >= 5 && super.canContinueToUse();
 			}
 		});
 		this.goalSelector.addGoal(3, new FloatGoal(this));
@@ -233,7 +237,7 @@ public class FlavioEntity extends Monster {
 		builder = builder.add(Attributes.MAX_HEALTH, 1000);
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
-		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
+		builder = builder.add(Attributes.FOLLOW_RANGE, 60);
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 100);
 		return builder;

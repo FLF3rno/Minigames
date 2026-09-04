@@ -1,5 +1,6 @@
 package net.mcreator.minigames.mixin;
 
+import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,20 +21,31 @@ public class LightCoordsUtilMixin {
     private static void onPack(int blockLight, int skyLight, CallbackInfoReturnable<Integer> cir) {
         try {
             if (areShadersEnabled()) {
-                //return;
+                return;
             }
+
             Minecraft mc = Minecraft.getInstance();
             if (mc == null || mc.player == null) {
                 return;
             }
-            double minLevel = mc.player.getData(MinigamesModVariables.PLAYER_VARIABLES).minimumLightLevel;
-            int minLight = (int) minLevel;
-            if (minLight > 0) {
-                int newBlockLight = Math.max(blockLight, minLight);
-                int newSkyLight = Math.max(skyLight, minLight);
-                cir.setReturnValue((newBlockLight << 4) | (newSkyLight << 20));
+
+            var variables = mc.player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+
+            int minLight = Mth.clamp((int) variables.minimumLightLevel, 0, 15);
+
+            int maxLight = Mth.clamp((int) variables.maximumLightLevel, 0, 15);
+
+            if (minLight > maxLight) {
+                minLight = maxLight;
             }
-        } catch (Exception ignored) {
+
+            int newBlockLight = Mth.clamp(blockLight, minLight, maxLight);
+
+            int newSkyLight = Mth.clamp(skyLight, minLight, maxLight);
+
+            cir.setReturnValue((newBlockLight << 4) | (newSkyLight << 20));
+
+        } catch (Throwable t) {
         }
     }
 

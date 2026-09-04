@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -48,7 +49,6 @@ public class OmegaLaserTickProcedure {
 			return;
 		}
 
-		if (entity.tickCount > 120) {
 			int cycleTick = entity.tickCount % 120;
 
 			if (cycleTick == 0) {
@@ -57,7 +57,7 @@ public class OmegaLaserTickProcedure {
 					laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
 					if (world instanceof Level _level) {
 						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_windup")), SoundSource.HOSTILE, 1, 1);
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_windup")), SoundSource.HOSTILE, 4, 0.9f);
 						}
 					}
 				}
@@ -75,8 +75,25 @@ public class OmegaLaserTickProcedure {
 
 			if (cycleTick == 90) {
 				attack = true;
+				for (Entity entityiterator : new ArrayList<>(world.players())) {
+					ApplyScreenshakeProcedure.execute(1, 30);
+				}
+
 			}
-		}
+			if (cycleTick == 90) {
+				AffectLightingMin(world, -8);
+				AffectLightingMax(world, -8);
+				if (world.isClientSide()) {
+                    UpdateChunkProcedure.execute(x, z);
+                }
+			}
+			if (cycleTick >= 111 && cycleTick <= 118) {
+				AffectLightingMin(world, 1);
+				AffectLightingMax(world, 1);
+				if (world.isClientSide()) {
+					UpdateChunkProcedure.execute(x, z);
+				}
+			}
 
 		Player player = (Player) findEntityInWorldRange(world, Player.class, x, y, z, 60);
 		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5.4, entity.getZ());
@@ -143,13 +160,33 @@ public class OmegaLaserTickProcedure {
 			RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 30, end.x, end.y, end.z, "beam", BEAM);
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_impact")), SoundSource.HOSTILE, 1, 1);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_impact")), SoundSource.HOSTILE, 4, 1);
 				}
 			}
 		}
 
 		if (telegraph) {
-			ParticleFlowHelperProcedure.execute(world, 100, 1, "linear", "minecraft:portal", end, start);
+			Vec3 end2 = new Vec3(end.x, end.y - 0.3f, end.z);
+			ParticleFlowHelperProcedure.execute(world, 100, 1, "linear", "minecraft:portal", end2, start);
+		}
+	}
+
+	private static void AffectLightingMin(LevelAccessor world, int change) {
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.minimumLightLevel += change;
+				_vars.markSyncDirty();
+			}
+		}
+	}
+	private static void AffectLightingMax(LevelAccessor world, int change) {
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.maximumLightLevel += change;
+				_vars.markSyncDirty();
+			}
 		}
 	}
 

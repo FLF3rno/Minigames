@@ -5,18 +5,19 @@ import java.util.Optional;
 import java.util.EnumSet;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Blocks;
 
-import net.mcreator.minigames.entity.GravediggerEntity;
+import net.mcreator.minigames.entity.I.IDiggerMob;
 
-public class DigGraveGoal extends Goal {
-	private final GravediggerEntity mob;
+public class DigGraveGoal<T extends PathfinderMob & IDiggerMob> extends Goal {
+	private final T mob;
 	private final int searchRadius;
 	private BlockPos targetPos;
 
-	public DigGraveGoal(GravediggerEntity mob, int searchRadius) {
+	public DigGraveGoal(T mob, int searchRadius) {
 		this.mob = mob;
 		this.searchRadius = searchRadius;
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));

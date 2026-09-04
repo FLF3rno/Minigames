@@ -116,7 +116,7 @@ public class TeslaTickProcedure {
 								5,
 								0,
 								2,
-								"none"
+								"tesla"
 						);
 					}
 				}
@@ -153,7 +153,7 @@ public class TeslaTickProcedure {
 								5,
 								0,
 								2,
-								"none"
+								"tesla"
 						);
 					}
 				}
@@ -190,7 +190,7 @@ public class TeslaTickProcedure {
 								5,
 								0,
 								2,
-								"none"
+								"tesla"
 						);
 					}
 				}
@@ -227,7 +227,7 @@ public class TeslaTickProcedure {
 								5,
 								0,
 								2,
-								"none"
+								"tesla"
 						);
 					}
 				}

@@ -55,6 +55,7 @@ public class SpawnMinibossRoomProcedureProcedure {
 				rotation = "180";
 			}
 			SpawnStructureDungeonProcedure.execute(world, Mth.nextInt(RandomSource.create(), 1, 999999999), structureX, structureY, structureZ, rotation, spawnRoomName);
+			net.mcreator.minigames.procedures.SpawnMinibossProcedure.spawn(world, x + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() / 2, 103, z + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() / 2, 0, 0);
 		}
 	}
 }

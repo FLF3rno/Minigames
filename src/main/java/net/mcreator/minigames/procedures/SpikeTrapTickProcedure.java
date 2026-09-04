@@ -24,9 +24,9 @@ public class SpikeTrapTickProcedure {
 		if (entity.tickCount == 1) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.8, 1);
+					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.4, 1);
 				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.8, 1, false);
+					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.4, 1, false);
 				}
 			}
 		}
@@ -68,13 +68,6 @@ public class SpikeTrapTickProcedure {
 		if (entity.tickCount > 50) {
 			if (!entity.level().isClientSide())
 				entity.discard();
-			if (world instanceof Level _level) {
-				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.8, (float) 0.7);
-				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:spike")), SoundSource.BLOCKS, (float) 0.8, (float) 0.7, false);
-				}
-			}
 		}
 	}
 }

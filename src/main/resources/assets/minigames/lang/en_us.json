@@ -407,5 +407,6 @@
   "effect.minigames.block_heal": "Block Heal",
   "subtitles.laser_cannon_windup": "Laser Cannon Wind Up",
   "subtitles.laser_impact_impact": "Laser Cannon Fires",
-  "subtitles.laser_cannon_impact": "Laser Cannon Fires"
+  "subtitles.laser_cannon_impact": "Laser Cannon Fires",
+  "entity.minigames.gravedigger_miniboss": "Churchgoer"
 }

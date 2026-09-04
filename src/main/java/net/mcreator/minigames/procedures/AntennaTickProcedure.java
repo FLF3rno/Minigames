@@ -75,11 +75,11 @@ public class AntennaTickProcedure {
 
 		} else if (entity.tickCount > 65) {
 
-			if (entity.tickCount % 10 == 0) {
+			if (entity.tickCount % 15 == 0) {
 				attack = true;
 			}
 
-			if (entity.tickCount % 10 == 5) {
+			if (entity.tickCount % 15 == 8) {
 				telegraph = true;
 			}
 		}
@@ -134,7 +134,7 @@ public class AntennaTickProcedure {
 			for (Vec3 pos : positionsToAttack) {
 
 				double spawnX = pos.x;
-				double spawnY = pos.y - 0.5D;
+				double spawnY = pos.y - 1D;
 				double spawnZ = pos.z;
 
 				String command =
@@ -143,22 +143,7 @@ public class AntennaTickProcedure {
 								+ spawnY + " "
 								+ spawnZ;
 
-				serverLevel.getServer()
-						.getCommands()
-						.performPrefixedCommand(
-								serverLevel.getServer()
-										.createCommandSourceStack()
-										.withLevel(serverLevel)
-										.withPosition(
-												new Vec3(
-														spawnX,
-														spawnY,
-														spawnZ
-												)
-										)
-										.withSuppressedOutput(),
-								command
-						);
+				serverLevel.getServer().getCommands().performPrefixedCommand(serverLevel.getServer().createCommandSourceStack().withLevel(serverLevel).withPosition(new Vec3(spawnX, spawnY, spawnZ)).withSuppressedOutput(), command);
 			}
 
 			strikePositions.clear();

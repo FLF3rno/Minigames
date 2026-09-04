@@ -8,6 +8,7 @@ import net.mcreator.minigames.entity.FlavioSweeperEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -113,9 +114,7 @@ public class SweeperTickProcedure {
 				double searchRadius =
 						ARM_LENGTH + COLLISION_RADIUS + 1.0;
 
-				AABB searchBox = new AABB(center.x - searchRadius, center.y - 2.0, center.z - searchRadius, center.x + searchRadius, center.y + 2.0,
-						center.z + searchRadius
-				);
+				AABB searchBox = new AABB(center.x - searchRadius, center.y - 2.0, center.z - searchRadius, center.x + searchRadius, center.y + 2.0, center.z + searchRadius);
 
 				for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, searchBox)) {
 
@@ -129,9 +128,7 @@ public class SweeperTickProcedure {
 
 
 					double targetHalfHeight = target.getBbHeight() / 2.0;
-
 					double verticalDistance = Math.abs(relative.y);
-
 					if (verticalDistance > targetHalfHeight + COLLISION_RADIUS) {
 						continue;
 					}
@@ -144,26 +141,22 @@ public class SweeperTickProcedure {
 					}
 
 					double perpendicular = Math.abs(relative.x * dirZ - relative.z * dirX);
-
 					double targetRadius = target.getBbWidth() / 2.0;
-
 					double collisionDistance = COLLISION_RADIUS + targetRadius;
 
 					if (perpendicular <= collisionDistance) {
-
-						target.hurtServer(serverLevel, serverLevel.damageSources().mobAttack((LivingEntity) entity), DAMAGE);
+						if (target instanceof Player player) {
+							player.hurtServer(serverLevel, serverLevel.damageSources().mobAttack((LivingEntity) entity), DAMAGE);
+						}
 
 						double distance = Math.sqrt(relative.x * relative.x + relative.z * relative.z);
 
 						if (distance > 0.001) {
-
 							double knockX = relative.x / distance;
-
 							double knockZ = relative.z / distance;
-
-							target.push(knockX * KNOCKBACK, 0.25, knockZ * KNOCKBACK);
-
-							target.hurtMarked = true;
+							if (target instanceof Player player) {
+								player.push(knockX * KNOCKBACK, 0.25, knockZ * KNOCKBACK);
+								player.hurtMarked = true; }
 						}
 
 						HIT_THIS_SWEEP.add(target.getUUID());

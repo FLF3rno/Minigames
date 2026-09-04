@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class StartDungeonProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		MinigamesModVariables.MapVariables.get(world).playingDungeons = true;
+		MinigamesModVariables.MapVariables.get(world).showBossBar = false;
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();

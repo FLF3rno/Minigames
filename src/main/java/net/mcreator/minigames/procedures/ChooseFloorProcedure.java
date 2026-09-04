@@ -1,11 +1,14 @@
 package net.mcreator.minigames.procedures;
 
+import net.neoforged.neoforge.network.PacketDistributor;
+
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 
+import net.mcreator.minigames.network.UpdateWorldRendererPMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
 import java.util.ArrayList;
@@ -29,9 +32,12 @@ public class ChooseFloorProcedure {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.minimumLightLevel = 8;
+					_vars.maximumLightLevel = 15;
 					_vars.markSyncDirty();
 				}
 			}
+			if (!world.isClientSide())
+				PacketDistributor.sendToAllPlayers(new UpdateWorldRendererPMessage(""));
 		}
 	}
 }

@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minigames:shield_angel",
     "minigames:gravedigger_miniboss"
   ]
 }

@@ -11,10 +11,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.BlockPos;
@@ -128,17 +131,19 @@ public class ExplodeProcedure {
 						}
 					}
 				} else {
-					{
-						Entity _ent = entityiterator;
-						if (_ent.level() instanceof ServerLevel _serverLevel) {
-							_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
-									(float) (damage * (1 - Math.min(20,
-											Math.max((entityiterator instanceof LivingEntity _livingEntity21 && _livingEntity21.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity21.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-													(entityiterator instanceof LivingEntity _livingEntity22 && _livingEntity22.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity22.getAttribute(Attributes.ARMOR).getValue() : 0)
-															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity23 && _livingEntity23.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																	? _livingEntity23.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
-																	: 0) + 8)))
-											/ 25)));
+					if (!((type).equals("tesla") && entityiterator.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"))))) {
+						{
+							Entity _ent = entityiterator;
+							if (_ent.level() instanceof ServerLevel _serverLevel) {
+								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
+										(float) (damage * (1 - Math.min(20,
+												Math.max((entityiterator instanceof LivingEntity _livingEntity22 && _livingEntity22.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity22.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+														(entityiterator instanceof LivingEntity _livingEntity23 && _livingEntity23.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity23.getAttribute(Attributes.ARMOR).getValue() : 0)
+																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity24 && _livingEntity24.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																		? _livingEntity24.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																		: 0) + 8)))
+												/ 25)));
+							}
 						}
 					}
 				}

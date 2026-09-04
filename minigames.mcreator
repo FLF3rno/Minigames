@@ -7194,7 +7194,7 @@
           "src/main/resources/assets/minigames/items/spawn_gravedigger.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Gravedigger"
     },
     {
       "name": "SpawnGravediggerBlockAdded",
@@ -7225,7 +7225,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnGravediggerBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Gravedigger"
     },
     {
       "name": "EmptyCoarseDirt",
@@ -7243,7 +7243,7 @@
           "src/main/resources/assets/minigames/blockstates/empty_coarse_dirt.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Gravedigger"
     },
     {
       "name": "IntersectingEndRods",
@@ -7278,7 +7278,7 @@
           "src/main/java/net/mcreator/minigames/entity/GravediggerEntity.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Gravedigger"
     },
     {
       "name": "MoveToCoarseDirtGoal",
@@ -14697,6 +14697,99 @@
         ]
       },
       "path": "~/Dungeon/Boss/Flavio/Machines/Blessing Dispenser"
+    },
+    {
+      "name": "UpdateChunk",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "update_chunk",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/UpdateChunkProcedure.java"
+        ]
+      },
+      "path": "~/General/Lighting"
+    },
+    {
+      "name": "UpdateWorldRenderer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "update_world_renderer",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/UpdateWorldRendererProcedure.java"
+        ]
+      },
+      "path": "~/General/Lighting"
+    },
+    {
+      "name": "UpdateWorldRendererP",
+      "type": "packet",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "update_world_renderer_p",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/network/UpdateWorldRendererPMessage.java"
+        ]
+      },
+      "path": "~/General/Lighting"
+    },
+    {
+      "name": "ApplyScreenshake",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "apply_screenshake",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "duration",
+            "type": "number"
+          },
+          {
+            "name": "intensity",
+            "type": "number"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyScreenshakeProcedure.java"
+        ]
+      },
+      "path": "~/General/Screenshake"
+    },
+    {
+      "name": "GravediggerMiniboss",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "gravedigger_miniboss",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/GravediggerMinibossEntity.java",
+          "src/main/resources/assets/minigames/items/gravedigger_miniboss_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/GravediggerMinibossRenderer.java"
+        ]
+      },
+      "path": "~/Dungeon/Miniboss/Gravedigger M"
+    },
+    {
+      "name": "SpawnMiniboss",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "spawn_miniboss",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnMinibossProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
     }
   ],
   "variable_elements": [
@@ -15539,6 +15632,12 @@
       "type": "string",
       "scope": "player_persistent",
       "value": "\"\""
+    },
+    {
+      "name": "maximumLightLevel",
+      "type": "number",
+      "scope": "player_persistent",
+      "value": "15.0"
     }
   ],
   "sound_elements": [
@@ -16106,10 +16205,12 @@
       "CUSTOM:FlavioTeslaCoil",
       "CUSTOM:FlavioAntenna",
       "CUSTOM:FlavioClockCannon",
-      "CUSTOM:FlavioOmegaLaser"
+      "CUSTOM:FlavioOmegaLaser",
+      "CUSTOM:GravediggerMiniboss"
     ],
     "ENTITIES:mod:blesser": [
-      "CUSTOM:ShieldAngel"
+      "CUSTOM:ShieldAngel",
+      "CUSTOM:GravediggerMiniboss"
     ],
     "BLOCKS:mod:door": [
       "CUSTOM:FightDoors",
@@ -16154,7 +16255,8 @@
       "CUSTOM:ParasiteScythe"
     ],
     "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
-      "CUSTOM:SelfDamage"
+      "CUSTOM:SelfDamage",
+      "CUSTOM:DecayDmg"
     ],
     "ITEMS:mod:block_dropping": [
       "CUSTOM:GameCompass",
@@ -16270,6 +16372,14 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "ENTITIES:mod:buried_miniboss": [
+      "CUSTOM:Worshipper",
+      "CUSTOM:Candlehead",
+      "CUSTOM:Preacher"
+    ],
+    "ENTITIES:mod:miniboss": [
+      "CUSTOM:GravediggerMiniboss"
     ]
   },
   "tab_element_order": {},
@@ -16683,7 +16793,8 @@
       "effect.minigames.block_heal": "Block Heal",
       "subtitles.laser_cannon_windup": "Laser Cannon Wind Up",
       "subtitles.laser_impact_impact": "Laser Cannon Fires",
-      "subtitles.laser_cannon_impact": "Laser Cannon Fires"
+      "subtitles.laser_cannon_impact": "Laser Cannon Fires",
+      "entity.minigames.gravedigger_miniboss": "Churchgoer"
     }
   },
   "metadata": {
@@ -17162,12 +17273,25 @@
               {
                 "name": "Player Cage",
                 "children": []
+              },
+              {
+                "name": "Gravedigger",
+                "children": []
               }
             ]
           },
           {
             "name": "Classes",
             "children": []
+          },
+          {
+            "name": "Miniboss",
+            "children": [
+              {
+                "name": "Gravedigger M",
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -17274,6 +17398,14 @@
           },
           {
             "name": "Blocks",
+            "children": []
+          },
+          {
+            "name": "Lighting",
+            "children": []
+          },
+          {
+            "name": "Screenshake",
             "children": []
           }
         ]

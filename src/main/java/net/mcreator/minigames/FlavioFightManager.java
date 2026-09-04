@@ -6,8 +6,10 @@ import net.mcreator.minigames.entity.FlavioOmegaLaserEntity;
 import net.mcreator.minigames.entity.PlayerCageEntity;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.procedures.SpawnTwoMachinesProcedure;
 
+import net.mcreator.minigames.procedures.UpdateChunkProcedure;
 import net.mcreator.minigames.world.inventory.FlavioPhase2Menu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSource;
@@ -44,18 +46,25 @@ import java.util.Comparator;
 @EventBusSubscriber
 public class FlavioFightManager {
 
-	public static int phase = 0;
+	public static float phase = 0;
 	public static int playersDoneP2 = 0;
-	public static Entity flavio;
+	public static int dispensersAlive = 2;
+	public static LivingEntity flavio;
 
+	public static void reset() {
+		phase = 1;
+		dispensersAlive = 2;
+		playersDoneP2 = 0;
+	}
 	public static void nextPhase(LevelAccessor world) {
 		if (!world.isClientSide()) {
             phase++;
         }
-		switch (phase) {
+		switch ((int) phase) {
 			case 2: startPhase2(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
 			case 3: startPhase3(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
 			case 4: startPhase4(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
+			case 5: startPhase5(world); break;
 			default: break;
 		}
 	}
@@ -152,6 +161,18 @@ public class FlavioFightManager {
 					new CommandSourceStack(CommandSource.NULL, new Vec3(1, 1, 1), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute as @e[type=minigames:flavio_trapdoor] at @s run summon minigames:flavio_omega_laser ~ ~-3.1 ~");
 
+	}
+
+	private static void startPhase5(LevelAccessor world) {
+		if (flavio != null) {
+			flavio.removeEffect(MinigamesModMobEffects.BLESSED);
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.maximumLightLevel = 15;
+				_vars.minimumLightLevel = 8;
+				_vars.markSyncDirty();
+			}
+		}
 	}
 
 	public static void completePhase2(LevelAccessor world) {

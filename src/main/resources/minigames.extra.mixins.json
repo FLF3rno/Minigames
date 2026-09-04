@@ -23,7 +23,8 @@
     "EffectsInInventoryMixin",
     "DecayHeartMixin",
     "BlockInteractionBypassMixin",
-    "LightCoordsUtilMixin"
+    "LightCoordsUtilMixin",
+    "GameRendererMixin"
 
   ],
   "injectors": {

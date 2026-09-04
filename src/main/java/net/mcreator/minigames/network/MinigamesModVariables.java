@@ -147,6 +147,7 @@ public class MinigamesModVariables {
 		clone.timerSpeed = original.timerSpeed;
 		clone.minimumLightLevel = original.minimumLightLevel;
 		clone.classColor = original.classColor;
+		clone.maximumLightLevel = original.maximumLightLevel;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -609,6 +610,7 @@ public class MinigamesModVariables {
 		public double timerSpeed = 1.0;
 		public double minimumLightLevel = 0;
 		public String classColor = "\"\"";
+		public double maximumLightLevel = 15.0;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -656,6 +658,7 @@ public class MinigamesModVariables {
 			output.putDouble("timerSpeed", timerSpeed);
 			output.putDouble("minimumLightLevel", minimumLightLevel);
 			output.putString("classColor", classColor);
+			output.putDouble("maximumLightLevel", maximumLightLevel);
 		}
 
 		@Override
@@ -704,6 +707,7 @@ public class MinigamesModVariables {
 			timerSpeed = input.getDoubleOr("timerSpeed", 0);
 			minimumLightLevel = input.getDoubleOr("minimumLightLevel", 0);
 			classColor = input.getStringOr("classColor", "");
+			maximumLightLevel = input.getDoubleOr("maximumLightLevel", 0);
 		}
 
 		public void markSyncDirty() {

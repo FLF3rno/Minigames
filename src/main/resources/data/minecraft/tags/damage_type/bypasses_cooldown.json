@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minigames:decay_dmg",
     "minigames:self_damage"
   ]
 }

@@ -9,14 +9,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class ParticleFlowHelperProcedure {
 
-    public static void execute(
-            LevelAccessor world,
-            int particleCount,
-            int ticks,
-            String easing,
-            String particleId,
-            Vec3 from,
-            Vec3 to) {
+    public static void execute(LevelAccessor world, int particleCount, int ticks, String easing, String particleId, Vec3 from, Vec3 to) {
 
         if (!(world instanceof ServerLevel serverLevel))
             return;
@@ -32,8 +25,7 @@ public class ParticleFlowHelperProcedure {
         if (!BuiltInRegistries.PARTICLE_TYPE.containsKey(id))
             return;
 
-        if (!(BuiltInRegistries.PARTICLE_TYPE.getValue(id)
-                instanceof SimpleParticleType particle))
+        if (!(BuiltInRegistries.PARTICLE_TYPE.getValue(id) instanceof SimpleParticleType particle))
             return;
 
         Vec3 delta = to.subtract(from);
@@ -50,19 +42,7 @@ public class ParticleFlowHelperProcedure {
                     offset = distance;
                 Vec3 p = from.add(dir.scale(offset));
 
-                serverLevel.sendParticles(
-                        particle,
-                        true,
-                        false,
-                        p.x,
-                        p.y,
-                        p.z,
-                        1,
-                        0.0D,
-                        0.0D,
-                        0.0D,
-                        0.0D
-                );
+                serverLevel.sendParticles(particle, true, false, p.x, p.y, p.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             }
         } else {
             double friction = 0.98D;
@@ -76,19 +56,7 @@ public class ParticleFlowHelperProcedure {
                 velocity = delta.scale(1.0D / (fx * totalDistanceFactor));
             }
 
-            serverLevel.sendParticles(
-                    particle,
-                    true,
-                    false,
-                    from.x,
-                    from.y,
-                    from.z,
-                    0,
-                    velocity.x,
-                    velocity.y,
-                    velocity.z,
-                    1.0D
-            );
+            serverLevel.sendParticles(particle, true, false, from.x, from.y, from.z, 0, velocity.x, velocity.y, velocity.z, 1.0D);
         }
     }
 
@@ -101,4 +69,4 @@ public class ParticleFlowHelperProcedure {
             default -> 1.0D;
         };
     }
-}
+}

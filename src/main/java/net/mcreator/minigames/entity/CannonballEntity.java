@@ -1,5 +1,6 @@
 package net.mcreator.minigames.entity;
 
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.AABB;
@@ -34,12 +35,7 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 		super(type, x, y, z, world, PROJECTILE_ITEM, firedFromWeapon);
 		setNoGravity(true);
 
-		if (firedFromWeapon != null)
-			setKnockback(firedFromWeapon.getEnchantmentLevel(
-					world.registryAccess()
-							.lookupOrThrow(Registries.ENCHANTMENT)
-							.getOrThrow(Enchantments.KNOCKBACK)
-			));
+		if (firedFromWeapon != null) setKnockback(firedFromWeapon.getEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.KNOCKBACK)));
 	}
 
 	public CannonballEntity(EntityType<? extends CannonballEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
@@ -47,11 +43,7 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 		setNoGravity(true);
 
 		if (firedFromWeapon != null)
-			setKnockback(firedFromWeapon.getEnchantmentLevel(
-					world.registryAccess()
-							.lookupOrThrow(Registries.ENCHANTMENT)
-							.getOrThrow(Enchantments.KNOCKBACK)
-			));
+			setKnockback(firedFromWeapon.getEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.KNOCKBACK)));
 	}
 
 	@Override
@@ -71,15 +63,9 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 	@Override
 	protected void doKnockback(LivingEntity livingEntity, DamageSource damageSource) {
 		if (knockback > 0) {
-			double resistance = Math.max(
-					0.0,
-					1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE)
-			);
+			double resistance = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
 
-			Vec3 vec3 = this.getDeltaMovement()
-					.multiply(1.0, 0.0, 1.0)
-					.normalize()
-					.scale(knockback * 0.6 * resistance);
+			Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale(knockback * 0.6 * resistance);
 
 			if (vec3.lengthSqr() > 0.0)
 				livingEntity.push(vec3.x, 0.1, vec3.z);
@@ -116,23 +102,21 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 		this.setDeltaMovement(movement);
 
 		if (movement.lengthSqr() > 0.000001) {
-			float yaw = (float) (
-					Math.atan2(movement.z, movement.x) * 180.0 / Math.PI
-			) - 90.0F;
+			float yaw = (float) (Math.atan2(movement.z, movement.x) * 180.0 / Math.PI) - 90.0F;
 
-			float pitch = (float) (
-					-(Math.atan2(
-							movement.y,
-							Math.sqrt(
-									movement.x * movement.x +
-											movement.z * movement.z
-							)
-					) * 180.0 / Math.PI)
-			);
+			float pitch = (float) (-(Math.atan2(movement.y, Math.sqrt(movement.x * movement.x + movement.z * movement.z)) * 180.0 / Math.PI));
 
 			this.setYRot(yaw);
 			this.setXRot(pitch);
 		}
+	}
+
+	@Override
+	protected void onHitEntity(EntityHitResult result) {
+		Entity target = result.getEntity();
+		if (!(target instanceof Player))
+			return;
+		super.onHitEntity(result);
 	}
 
 	@Nullable
@@ -141,9 +125,7 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 		double closestDistance = Double.MAX_VALUE;
 		Entity closestEntity = null;
 
-		AABB lookupBox = this.getBoundingBox()
-				.expandTowards(deltaPosition)
-				.inflate(0.5);
+		AABB lookupBox = this.getBoundingBox().expandTowards(deltaPosition).inflate(0.2);
 
 		for (Entity entity : this.level().getEntities(
 				this,
@@ -156,9 +138,7 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 			AABB entityBox = entity.getBoundingBox();
 
 			if (entityBox.intersects(lookupBox)) {
-				double distance = projectilePosition.distanceToSqr(
-						entityBox.getCenter()
-				);
+				double distance = projectilePosition.distanceToSqr(entityBox.getCenter());
 
 				if (distance < closestDistance) {
 					closestEntity = entity;
@@ -180,28 +160,10 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 		return shoot(world, entity, source, pullingPower * 0.4f, 5, 5);
 	}
 
-	public static CannonballEntity shoot(
-			Level world,
-			LivingEntity entity,
-			RandomSource random,
-			float power,
-			double damage,
-			int knockback
-	) {
-		CannonballEntity entityarrow = new CannonballEntity(
-				MinigamesModEntities.CANNONBALL.get(),
-				entity,
-				world,
-				null
-		);
+	public static CannonballEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
+		CannonballEntity entityarrow = new CannonballEntity(MinigamesModEntities.CANNONBALL.get(), entity, world, null);
 
-		entityarrow.shoot(
-				entity.getViewVector(1).x,
-				entity.getViewVector(1).y,
-				entity.getViewVector(1).z,
-				power * 2,
-				0
-		);
+		entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
 
 		entityarrow.setSilent(true);
 		entityarrow.setCritArrow(false);
@@ -225,13 +187,7 @@ public class CannonballEntity extends AbstractArrow implements ItemSupplier {
 		double dy = target.getY() + target.getEyeHeight() - 1.1;
 		double dz = target.getZ() - entity.getZ();
 
-		entityarrow.shoot(
-				dx,
-				dy - entityarrow.getY() + Math.hypot(dx, dz) * 0.2F,
-				dz,
-				0.4f * 2,
-				12.0F
-		);
+		entityarrow.shoot(dx, dy - entityarrow.getY() + Math.hypot(dx, dz) * 0.2F, dz, 0.4f * 2, 12.0F);
 
 		entityarrow.setSilent(true);
 		entityarrow.setBaseDamage(5);

@@ -1,51 +1,54 @@
 package net.mcreator.minigames.entity;
 
+import net.mcreator.minigames.ChargeAttackGoal;
+import net.mcreator.minigames.DigGraveGoal;
+import net.mcreator.minigames.MoveToCoarseDirtGoal;
 import net.mcreator.minigames.entity.I.IChargerMob;
 import net.mcreator.minigames.entity.I.IDiggerMob;
+import net.mcreator.minigames.init.MinigamesModBlocks;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.procedures.SummonMinionProcedure;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.core.registries.BuiltInRegistries;
 
-import net.mcreator.minigames.DigGraveGoal;
-import net.mcreator.minigames.ChargeAttackGoal;
-import net.mcreator.minigames.MoveToCoarseDirtGoal;
+import net.mcreator.minigames.procedures.AnimationAttackProcedure;
 import net.mcreator.minigames.client.model.animations.gravediggerAnimation;
-import net.mcreator.minigames.init.MinigamesModAttributes;
-import net.mcreator.minigames.init.MinigamesModBlocks;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
-public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMob {
+import java.util.Comparator;
+import java.util.List;
+
+public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IChargerMob {
 	private static final String DIG_STATE_KEY = "dig_state";
 	private static final String DIG_TICKS_REMAINING_KEY = "dig_ticks_remaining";
 	private static final String DIG_TARGET_X_KEY = "dig_target_x";
@@ -55,15 +58,14 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	private static final int DIG_FIRST_SOUND_TICK = 12;
 	private static final int DIG_SECOND_SOUND_TICK = 24;
 	private static final Identifier DIG_KB_MODIFIER_ID = Identifier.parse("minigames:gravedigger_dig_kb");
-
-	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(GravediggerEntity.class, EntityDataSerializers.STRING);
-	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(GravediggerEntity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> DATA_ID = SynchedEntityData.defineId(GravediggerEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(GravediggerMinibossEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(GravediggerMinibossEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> DATA_ID = SynchedEntityData.defineId(GravediggerMinibossEntity.class, EntityDataSerializers.INT);
 	public final AnimationState animationState1 = new AnimationState();
 	public final AnimationState animationState2 = new AnimationState();
 	public final AnimationState animationState3 = new AnimationState();
 
-	public GravediggerEntity(EntityType<GravediggerEntity> type, Level world) {
+	public GravediggerMinibossEntity(EntityType<GravediggerMinibossEntity> type, Level world) {
 		super(type, world);
 		xpReward = 0;
 		setNoAi(false);
@@ -74,23 +76,23 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
 		if (ANIM.equals(data)) {
 			switch (this.entityData.get(ANIM)) {
-				case -1 :
+				case -2 :
 					this.animationState1.stop();
 					break;
-				case -2 :
+				case -3 :
 					this.animationState2.stop();
 					break;
-				case -3 :
+				case -4 :
 					this.animationState3.stop();
 					break;
-				case 0 :
-					this.animationState1.start(this.tickCount);
-					break;
 				case 1 :
-					this.animationState3.start(this.tickCount);
+					this.animationState1.start(this.tickCount);
 					break;
 				case 2 :
 					this.animationState2.start(this.tickCount);
+					break;
+				case 3 :
+					this.animationState3.start(this.tickCount);
 					break;
 			}
 		}
@@ -112,7 +114,7 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	public String getTexture() {
 		return this.entityData.get(TEXTURE);
 	}
-
+	
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
@@ -129,12 +131,12 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	}
 
 	@Override
-	public @Nullable SoundEvent getHurtSound(net.minecraft.world.damagesource.@NonNull DamageSource ds) {
+	public SoundEvent getHurtSound(DamageSource ds) {
 		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.pillager.hurt"));
 	}
 
 	@Override
-	public @Nullable SoundEvent getDeathSound() {
+	public SoundEvent getDeathSound() {
 		return BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.pillager.death"));
 	}
 
@@ -151,36 +153,43 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 		this.setTexture(valueInput.getStringOr("Texture", "gravedigger"));
 		this.entityData.set(DATA_ID, valueInput.getIntOr("DataID", 0));
 	}
+	@Override
+	public void die(DamageSource source) {
+		super.die(source);
+		final Vec3 _center = new Vec3(this.getX(), this.getY(), this.getZ());
+		for (Entity entityiterator : this.level().getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(60 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
+			if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == this.getPersistentData().getDoubleOr("DataID", 0)) {
+				if (entityiterator instanceof LivingEntity _entity)
+					_entity.removeEffect(MinigamesModMobEffects.BLESSED);
+			}
+		}
 
+	}
 	@Override
 	public void tick() {
 		super.tick();
+
 		if (this.level().isClientSide()) {
-			if (!this.isDigging() && !this.animationState3.isStarted() && this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-4D) {
-				if (!this.animationState1.isStarted()) {
-					this.entityData.set(ANIM, 0);
-				}
-			} else if (this.animationState1.isStarted() && !this.isDigging() && !this.animationState3.isStarted()) {
-				this.entityData.set(ANIM, -1);
-			}
-			if (this.animationState1.isStarted()) {
-				float elapsedSeconds = this.animationState1.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= gravediggerAnimation.walk.lengthInSeconds() && !gravediggerAnimation.walk.looping()) {
-					this.entityData.set(ANIM, -1);
+			this.animationState1.animateWhen(AnimationAttackProcedure.execute(this), this.tickCount);
+			if (this.animationState2.isStarted()) {
+				float elapsedSeconds = this.animationState2.getTimeInMillis(this.tickCount) / 1000.0F;
+				if (elapsedSeconds >= gravediggerAnimation.dig.lengthInSeconds()) {
+					if (!gravediggerAnimation.dig.looping())
+						this.animationState2.stop();
+					else
+						this.animationState2.start(this.tickCount);
 				}
 			}
 			if (this.animationState3.isStarted()) {
 				float elapsedSeconds = this.animationState3.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= gravediggerAnimation.attack.lengthInSeconds() && !gravediggerAnimation.attack.looping()) {
-					this.entityData.set(ANIM, -4);
+				if (elapsedSeconds >= gravediggerAnimation.summon.lengthInSeconds()) {
+					if (!gravediggerAnimation.summon.looping())
+						this.animationState3.stop();
+					else
+						this.animationState3.start(this.tickCount);
 				}
 			}
-			if (this.animationState2.isStarted()) {
-				float elapsedSeconds = this.animationState2.getTimeInMillis(this.tickCount) / 1000.0F;
-				if (elapsedSeconds >= gravediggerAnimation.dig.lengthInSeconds() && !gravediggerAnimation.dig.looping()) {
-					this.entityData.set(ANIM, -2);
-				}
-			}
+
 			return;
 		}
 
@@ -221,12 +230,12 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	}
 
 	public void startAttackAnimation() {
-		this.entityData.set(ANIM, -3);
+		this.entityData.set(ANIM, -2);
 		this.entityData.set(ANIM, 1);
 	}
 
 	public void stopAttackAnimation() {
-		this.entityData.set(ANIM, -3);
+		this.entityData.set(ANIM, -2);
 	}
 
 	public void doChargedAttack(LivingEntity targetPlayer) {
@@ -262,7 +271,7 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 		this.getPersistentData().remove(DIG_TARGET_Y_KEY);
 		this.getPersistentData().remove(DIG_TARGET_Z_KEY);
 		this.setDigKnockbackImmune(false);
-		this.entityData.set(ANIM, -2);
+		this.entityData.set(ANIM, -3);
 	}
 
 	private void setDigKnockbackImmune(boolean enabled) {
@@ -296,28 +305,31 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	}
 
 	private void spawnBuriedEntity(ServerLevel serverLevel, BlockPos targetPos) {
-		TagKey<EntityType<?>> buriedTag = TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:buried"));
+		TagKey<EntityType<?>> buriedTag = TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:buried_miniboss"));
 		var types = BuiltInRegistries.ENTITY_TYPE.stream().filter(entityType -> entityType.builtInRegistryHolder().is(buriedTag)).toList();
 		if (types.isEmpty()) {
 			return;
 		}
+
 		EntityType<?> entityType = types.get(this.random.nextInt(types.size()));
 		BlockPos spawnPos = targetPos.above();
 		Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
-		SummonMinionProcedure.execute(
-				level(),
-				spawnPos.getX() + 0.5D,
-				spawnPos.getY(),
-				spawnPos.getZ() + 0.5D,
-				this,
-				this.getXRot() * -1,
-				this.getYRot() * -1,
-				0,
-				0,
-				0,
-				id.toString()
-		);
 
+		SummonMinionProcedure.execute(level(), spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, this, this.getXRot() * -1, this.getYRot() * -1, 0, 0, 0, id.toString());
+
+		AABB searchBox = new AABB(spawnPos).inflate(1.0D);
+		List<LivingEntity> entitiesFound = serverLevel.getEntitiesOfClass(LivingEntity.class, searchBox,
+				entity -> entity.getType() == entityType && entity != this);
+
+		if (!entitiesFound.isEmpty()) {
+			LivingEntity minion = entitiesFound.get(0);
+
+			minion.addEffect(new MobEffectInstance(MobEffects.SPEED, 10000, 1, true, true));
+			minion.addEffect(new MobEffectInstance(MinigamesModMobEffects.DAMAGE_BOOST, 10000, 19, false, true));
+			if (this.isAlive()) {
+                minion.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 10000, 19, false, true));
+            }
+		}
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {
@@ -326,14 +338,13 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.15);
-		builder = builder.add(Attributes.MAX_HEALTH, 50);
+		builder = builder.add(Attributes.MAX_HEALTH, 200);
 		builder = builder.add(Attributes.ARMOR, 0);
-		builder = builder.add(Attributes.ATTACK_DAMAGE, 7);
-		builder = builder.add(Attributes.FOLLOW_RANGE, 24);
+		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
+		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 0.15);
 		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 3);
-		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 10);
 		return builder;
 	}
 }

@@ -3,7 +3,9 @@ package net.mcreator.minigames;
 import java.util.Comparator;
 import java.util.Optional;
 
+import net.mcreator.minigames.entity.I.IDiggerMob;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -13,13 +15,13 @@ import net.minecraft.world.level.block.Blocks;
 
 import net.mcreator.minigames.entity.GravediggerEntity;
 
-public class MoveToCoarseDirtGoal extends Goal {
-	private final GravediggerEntity mob;
+public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends Goal {
+	private final T mob;
 	private final double speedModifier;
 	private final int searchRadius;
 	private BlockPos targetPos;
 
-	public MoveToCoarseDirtGoal(GravediggerEntity mob, double speedModifier, int searchRadius) {
+		public MoveToCoarseDirtGoal(T mob, double speedModifier, int searchRadius) {
 		this.mob = mob;
 		this.speedModifier = speedModifier;
 		this.searchRadius = searchRadius;

@@ -106,6 +106,8 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> AZURE_FROGLIGHT;
 	public static final DeferredBlock<Block> SPAWN_FLAVIO_TRAPDOOR_2;
 	public static final DeferredBlock<Block> SPAWN_FLAVIO_TRAPDOOR_3;
+	public static final DeferredBlock<Block> SPAWN_LASER_STATUE;
+	public static final DeferredBlock<Block> SPAWN_BOOKLING;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -197,6 +199,8 @@ public class MinigamesModBlocks {
 		AZURE_FROGLIGHT = register("azure_froglight", AzureFroglightBlock::new);
 		SPAWN_FLAVIO_TRAPDOOR_2 = register("spawn_flavio_trapdoor_2", SpawnFlavioTrapdoor2Block::new);
 		SPAWN_FLAVIO_TRAPDOOR_3 = register("spawn_flavio_trapdoor_3", SpawnFlavioTrapdoor3Block::new);
+		SPAWN_LASER_STATUE = register("spawn_laser_statue", SpawnLaserStatueBlock::new);
+		SPAWN_BOOKLING = register("spawn_bookling", SpawnBooklingBlock::new);
 	}
 
 	// Start of user code block custom blocks

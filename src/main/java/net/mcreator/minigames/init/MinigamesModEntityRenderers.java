@@ -52,5 +52,7 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.PLAYER_CAGE.get(), PlayerCageRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_OMEGA_LASER.get(), FlavioOmegaLaserRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.GRAVEDIGGER_MINIBOSS.get(), GravediggerMinibossRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.LASER_STATUE.get(), LaserStatueRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.BOOKLING.get(), BooklingRenderer::new);
 	}
 }

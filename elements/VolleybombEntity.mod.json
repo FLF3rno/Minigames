@@ -108,7 +108,7 @@
         "value": false
       }
     ],
-    "onPlayerCollidesWith": "VolleybombCheckCollision",
+    "onMobTickUpdate": "VolleybombCheckCollision",
     "onInitialSpawn": "VolleybombSpawn",
     "hasAI": true,
     "aiBase": "(none)",

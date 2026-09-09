@@ -1,11 +1,13 @@
 package net.mcreator.minigames.procedures;
 
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import net.mcreator.minigames.network.SpawnCustomParticleMessage;
 
 public class ParticleFlowHelperProcedure {
 
@@ -25,9 +27,6 @@ public class ParticleFlowHelperProcedure {
         if (!BuiltInRegistries.PARTICLE_TYPE.containsKey(id))
             return;
 
-        if (!(BuiltInRegistries.PARTICLE_TYPE.getValue(id) instanceof SimpleParticleType particle))
-            return;
-
         Vec3 delta = to.subtract(from);
         double distance = delta.length();
         if (distance < 0.001D)
@@ -42,7 +41,8 @@ public class ParticleFlowHelperProcedure {
                     offset = distance;
                 Vec3 p = from.add(dir.scale(offset));
 
-                serverLevel.sendParticles(particle, true, false, p.x, p.y, p.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                PacketDistributor.sendToPlayersInDimension(serverLevel,
+                    new SpawnCustomParticleMessage(particleId, p.x, p.y, p.z, 0.0D, 0.0D, 0.0D, ticks));
             }
         } else {
             double friction = 0.98D;
@@ -56,7 +56,8 @@ public class ParticleFlowHelperProcedure {
                 velocity = delta.scale(1.0D / (fx * totalDistanceFactor));
             }
 
-            serverLevel.sendParticles(particle, true, false, from.x, from.y, from.z, 0, velocity.x, velocity.y, velocity.z, 1.0D);
+            PacketDistributor.sendToPlayersInDimension(serverLevel,
+                new SpawnCustomParticleMessage(particleId, from.x, from.y, from.z, velocity.x, velocity.y, velocity.z, ticks));
         }
     }
 

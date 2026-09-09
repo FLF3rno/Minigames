@@ -49,51 +49,51 @@ public class OmegaLaserTickProcedure {
 			return;
 		}
 
-			int cycleTick = entity.tickCount % 120;
+		int cycleTick = entity.tickCount % 120;
 
-			if (cycleTick == 0) {
-				if (entity instanceof FlavioOmegaLaserEntity laser) {
-					laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 1000);
-					laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
-					if (world instanceof Level _level) {
-						if (!_level.isClientSide()) {
-							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_windup")), SoundSource.HOSTILE, 4, 0.9f);
-						}
+		if (cycleTick == 0) {
+			if (entity instanceof FlavioOmegaLaserEntity laser) {
+				laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 1000);
+				laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
+				if (world instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_windup")), SoundSource.HOSTILE, 4, 0.9f);
 					}
 				}
-				tracking = true;
-				bodyYaw = entity.getYRot();
-			} else if (cycleTick == 60) {
-				tracking = false;
-				lockedYaw = entity.getYRot();
-				lockedPitch = entity.getXRot();
+			}
+			tracking = true;
+			bodyYaw = entity.getYRot();
+		} else if (cycleTick == 60) {
+			tracking = false;
+			lockedYaw = entity.getYRot();
+			lockedPitch = entity.getXRot();
+		}
+
+		if (cycleTick >= 60 && cycleTick < 90) {
+			telegraph = true;
+		}
+
+		if (cycleTick == 90) {
+			attack = true;
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				ApplyScreenshakeProcedure.execute(1, 30);
 			}
 
-			if (cycleTick >= 60 && cycleTick < 90) {
-				telegraph = true;
+		}
+		if (cycleTick == 90) {
+			AffectLightingMin(world, -8);
+			AffectLightingMax(world, -8);
+			if (world.isClientSide()) {
+				UpdateChunkProcedure.execute(x, z);
 			}
-
-			if (cycleTick == 90) {
-				attack = true;
-				for (Entity entityiterator : new ArrayList<>(world.players())) {
-					ApplyScreenshakeProcedure.execute(1, 30);
-				}
-
+		}
+		if (cycleTick >= 111 && cycleTick <= 118) {
+			AffectLightingMin(world, 1);
+			AffectLightingMax(world, 1);
+			if (world.isClientSide()) {
+				UpdateChunkProcedure.execute(x, z);
 			}
-			if (cycleTick == 90) {
-				AffectLightingMin(world, -8);
-				AffectLightingMax(world, -8);
-				if (world.isClientSide()) {
-                    UpdateChunkProcedure.execute(x, z);
-                }
-			}
-			if (cycleTick >= 111 && cycleTick <= 118) {
-				AffectLightingMin(world, 1);
-				AffectLightingMax(world, 1);
-				if (world.isClientSide()) {
-					UpdateChunkProcedure.execute(x, z);
-				}
-			}
+		}
 
 		Player player = (Player) findEntityInWorldRange(world, Player.class, x, y, z, 60);
 		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5.4, entity.getZ());

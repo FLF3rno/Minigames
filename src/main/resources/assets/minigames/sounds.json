@@ -656,5 +656,14 @@
         "stream": false
       }
     ]
+  },
+  "holy_laser": {
+    "subtitle": "subtitles.holy_laser",
+    "sounds": [
+      {
+        "name": "minigames:holy_laser",
+        "stream": false
+      }
+    ]
   }
 }

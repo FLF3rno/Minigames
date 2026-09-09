@@ -14,6 +14,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
@@ -144,6 +145,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> AZURE_FROGLIGHT;
 	public static final DeferredItem<Item> SPAWN_FLAVIO_TRAPDOOR_2;
 	public static final DeferredItem<Item> SPAWN_FLAVIO_TRAPDOOR_3;
+	public static final DeferredItem<Item> LASER_STATUE_SPAWN_EGG;
+	public static final DeferredItem<Item> SPAWN_LASER_STATUE;
+	public static final DeferredItem<Item> SPAWN_BOOKLING;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -260,6 +264,9 @@ public class MinigamesModItems {
 		AZURE_FROGLIGHT = block(MinigamesModBlocks.AZURE_FROGLIGHT);
 		SPAWN_FLAVIO_TRAPDOOR_2 = block(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_2);
 		SPAWN_FLAVIO_TRAPDOOR_3 = block(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_3);
+		LASER_STATUE_SPAWN_EGG = register("laser_statue_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(MinigamesModEntities.LASER_STATUE.get())));
+		SPAWN_LASER_STATUE = block(MinigamesModBlocks.SPAWN_LASER_STATUE);
+		SPAWN_BOOKLING = block(MinigamesModBlocks.SPAWN_BOOKLING);
 	}
 
 	// Start of user code block custom items

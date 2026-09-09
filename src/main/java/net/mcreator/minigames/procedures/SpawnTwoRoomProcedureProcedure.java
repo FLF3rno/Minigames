@@ -23,7 +23,7 @@ public class SpawnTwoRoomProcedureProcedure {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			prefix = "dungeon_two_";
 			if ((MinigamesModVariables.MapVariables.get(world).floorTypeDungeon).equals("church")) {
-				rng = Mth.nextInt(RandomSource.create(), 1, 1);
+				rng = Mth.nextInt(RandomSource.create(), 1, 2);
 			}
 			structureX = x;
 			structureY = y;

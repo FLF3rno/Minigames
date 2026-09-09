@@ -96,6 +96,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_2.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_3.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_LASER_STATUE.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_BOOKLING.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {
@@ -136,6 +138,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.MOVING_BLOCK_SPAWN.get().asItem());
 				tabData.accept(MinigamesModItems.DUNGEON_COMPASS.get());
 			}
+		} else if (tabData.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+			tabData.accept(MinigamesModItems.LASER_STATUE_SPAWN_EGG.get());
 		}
 	}
 }

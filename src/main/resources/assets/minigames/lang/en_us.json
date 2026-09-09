@@ -408,5 +408,11 @@
   "subtitles.laser_cannon_windup": "Laser Cannon Wind Up",
   "subtitles.laser_impact_impact": "Laser Cannon Fires",
   "subtitles.laser_cannon_impact": "Laser Cannon Fires",
-  "entity.minigames.gravedigger_miniboss": "Churchgoer"
+  "entity.minigames.gravedigger_miniboss": "Churchgoer",
+  "entity.minigames.laser_statue": "Laser Statue",
+  "item.minigames.laser_statue_spawn_egg": "Laser Statue Spawn Egg",
+  "subtitles.holy_laser": "Holy Laser is fired",
+  "item.minigames.spawn_laser_statue": "Spawn Laser Statue",
+  "entity.minigames.bookling": "Bookling",
+  "item.minigames.spawn_bookling": "Spawn Bookling"
 }

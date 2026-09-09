@@ -14790,6 +14790,240 @@
         ]
       },
       "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "LaserStatue",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "laser_statue",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/laser_statue_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/LaserStatueEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/LaserStatueRenderer.java",
+          "src/main/resources/assets/minigames/items/laser_statue_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Laser Statue"
+    },
+    {
+      "name": "LaserStatueHurt",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "laser_statue_hurt",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/LaserStatueHurtProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Laser Statue"
+    },
+    {
+      "name": "LaserStatueTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "laser_statue_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/LaserStatueTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Laser Statue"
+    },
+    {
+      "name": "SpawnLaserStatue",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_laser_statue",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/spawn_laser_statue.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnLaserStatueBlock.java",
+          "src/main/resources/assets/minigames/models/block/spawn_laser_statue.json",
+          "src/main/resources/assets/minigames/items/spawn_laser_statue.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_laser_statue.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_laser_statue.json"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Laser Statue"
+    },
+    {
+      "name": "SpawnLaserStatueBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_laser_statue_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnLaserStatueBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Laser Statue"
+    },
+    {
+      "name": "Bookling",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "bookling",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/bookling_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/client/renderer/BooklingRenderer.java",
+          "src/main/java/net/mcreator/minigames/entity/BooklingEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Bookling"
+    },
+    {
+      "name": "BooklingTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "bookling_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BooklingTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Bookling"
+    },
+    {
+      "name": "SpawnBookling",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_bookling",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/spawn_bookling.json",
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_bookling.json",
+          "src/main/resources/assets/minigames/items/spawn_bookling.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_bookling.json",
+          "src/main/resources/assets/minigames/models/block/spawn_bookling.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnBooklingBlock.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Bookling"
+    },
+    {
+      "name": "SpawnBooklingBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_bookling_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnBooklingBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Bookling"
     }
   ],
   "variable_elements": [
@@ -16022,6 +16256,14 @@
       ],
       "category": "hostile",
       "subtitle": "Laser Cannon Fires"
+    },
+    {
+      "name": "holy_laser",
+      "files": [
+        "holy_laser"
+      ],
+      "category": "hostile",
+      "subtitle": "Holy Laser is fired"
     }
   ],
   "tag_elements": {
@@ -16206,7 +16448,8 @@
       "CUSTOM:FlavioAntenna",
       "CUSTOM:FlavioClockCannon",
       "CUSTOM:FlavioOmegaLaser",
-      "CUSTOM:GravediggerMiniboss"
+      "CUSTOM:GravediggerMiniboss",
+      "CUSTOM:LaserStatue"
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel",
@@ -16794,7 +17037,13 @@
       "subtitles.laser_cannon_windup": "Laser Cannon Wind Up",
       "subtitles.laser_impact_impact": "Laser Cannon Fires",
       "subtitles.laser_cannon_impact": "Laser Cannon Fires",
-      "entity.minigames.gravedigger_miniboss": "Churchgoer"
+      "entity.minigames.gravedigger_miniboss": "Churchgoer",
+      "entity.minigames.laser_statue": "Laser Statue",
+      "item.minigames.laser_statue_spawn_egg": "Laser Statue Spawn Egg",
+      "subtitles.holy_laser": "Holy Laser is fired",
+      "item.minigames.spawn_laser_statue": "Spawn Laser Statue",
+      "entity.minigames.bookling": "Bookling",
+      "item.minigames.spawn_bookling": "Spawn Bookling"
     }
   },
   "metadata": {
@@ -17276,6 +17525,14 @@
               },
               {
                 "name": "Gravedigger",
+                "children": []
+              },
+              {
+                "name": "Laser Statue",
+                "children": []
+              },
+              {
+                "name": "Bookling",
                 "children": []
               }
             ]

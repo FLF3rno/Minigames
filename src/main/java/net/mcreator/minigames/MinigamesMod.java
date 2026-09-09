@@ -62,6 +62,7 @@ public class MinigamesMod {
 		MinigamesModAttributes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
 		net.mcreator.minigames.ModDataAttachments.ATTACHMENTS.register(modEventBus);
+		net.mcreator.minigames.init.MinigamesModCustomParticleTypes.REGISTRY.register(modEventBus);
 		// End of user code block mod init
 	}
 

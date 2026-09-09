@@ -7,7 +7,6 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -123,8 +122,8 @@ public class VolleybombEntityEntity extends Monster {
 	}
 
 	@Override
-	public void playerTouch(Player sourceentity) {
-		super.playerTouch(sourceentity);
+	public void baseTick() {
+		super.baseTick();
 		VolleybombCheckCollisionProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 

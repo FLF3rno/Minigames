@@ -55,4 +55,5 @@ public class MinigamesModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> CLOCK_TICK_2 = REGISTRY.register("clock_tick_2", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "clock_tick_2")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> LASER_CANNON_WINDUP = REGISTRY.register("laser_cannon_windup", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "laser_cannon_windup")));
 	public static final DeferredHolder<SoundEvent, SoundEvent> LASER_CANNON_IMPACT = REGISTRY.register("laser_cannon_impact", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "laser_cannon_impact")));
+	public static final DeferredHolder<SoundEvent, SoundEvent> HOLY_LASER = REGISTRY.register("holy_laser", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("minigames", "holy_laser")));
 }

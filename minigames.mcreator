@@ -15024,6 +15024,124 @@
         ]
       },
       "path": "~/Dungeon/Mob/Bookling"
+    },
+    {
+      "name": "ChoiceBagWarrior",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choice_bag_warrior",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/choice_bag_warrior.json",
+          "src/main/java/net/mcreator/minigames/item/ChoiceBagWarriorItem.java",
+          "src/main/resources/assets/minigames/models/item/choice_bag_warrior.json"
+        ]
+      },
+      "path": "~/Dungeon/Choice Bundle"
+    },
+    {
+      "name": "ChoiceBagDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choice_bag_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChoiceBagDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Choice Bundle"
+    },
+    {
+      "name": "ChoiceBagRightClicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choice_bag_right_clicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChoiceBagRightClickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Choice Bundle"
+    },
+    {
+      "name": "ChoiceBagSupport",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choice_bag_support",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/ChoiceBagSupportItem.java",
+          "src/main/resources/assets/minigames/items/choice_bag_support.json",
+          "src/main/resources/assets/minigames/models/item/choice_bag_support.json"
+        ]
+      },
+      "path": "~/Dungeon/Choice Bundle"
+    },
+    {
+      "name": "ChoiceBagThief",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choice_bag_thief",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/choice_bag_thief.json",
+          "src/main/resources/assets/minigames/models/item/choice_bag_thief.json",
+          "src/main/java/net/mcreator/minigames/item/ChoiceBagThiefItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Choice Bundle"
+    },
+    {
+      "name": "ChoiceBundle",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "choice_bundle",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/ChoiceBundleMenu.java",
+          "src/main/java/net/mcreator/minigames/client/gui/ChoiceBundleScreen.java"
+        ]
+      },
+      "path": "~/Dungeon/Choice Bundle"
     }
   ],
   "variable_elements": [
@@ -16397,7 +16515,8 @@
       "CUSTOM:ClusterBomb",
       "CUSTOM:ParasiteScythe",
       "CUSTOM:BoxOfFun",
-      "CUSTOM:WirelessCauldron"
+      "CUSTOM:WirelessCauldron",
+      "CUSTOM:ChoiceBagSupport"
     ],
     "ITEMS:mod:dungeon_thief": [
       "CUSTOM:BlankDagger",
@@ -16409,7 +16528,8 @@
       "CUSTOM:ReactionTime",
       "CUSTOM:SilentAssassin",
       "CUSTOM:Horseshoe",
-      "CUSTOM:AirBoots"
+      "CUSTOM:AirBoots",
+      "CUSTOM:ChoiceBagThief"
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
@@ -16421,7 +16541,8 @@
       "CUSTOM:Plug",
       "CUSTOM:PowerHarvester",
       "CUSTOM:Slam",
-      "CUSTOM:AttackSpeedGem"
+      "CUSTOM:AttackSpeedGem",
+      "CUSTOM:ChoiceBagWarrior"
     ],
     "ITEMS:mod:dungeon_type_relic": [
       "CUSTOM:CrystallizedPotion",
@@ -16449,7 +16570,8 @@
       "CUSTOM:FlavioClockCannon",
       "CUSTOM:FlavioOmegaLaser",
       "CUSTOM:GravediggerMiniboss",
-      "CUSTOM:LaserStatue"
+      "CUSTOM:LaserStatue",
+      "CUSTOM:Bookling"
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel",
@@ -16484,7 +16606,10 @@
       "CUSTOM:SnatchingClaw",
       "CUSTOM:Horseshoe",
       "CUSTOM:Slam",
-      "CUSTOM:BoxOfFun"
+      "CUSTOM:BoxOfFun",
+      "CUSTOM:ChoiceBagWarrior",
+      "CUSTOM:ChoiceBagSupport",
+      "CUSTOM:ChoiceBagThief"
     ],
     "ITEMS:mod:dungeon_type_weapon": [
       "CUSTOM:WindScythe",
@@ -16543,6 +16668,9 @@
       "Blocks.WEB"
     ],
     "ITEMS:minecraft:enchantable/durability": [
+      "~ChoiceBagSupport@CUSTOM:ChoiceBagSupport",
+      "~ChoiceBagWarrior@CUSTOM:ChoiceBagWarrior",
+      "~ChoiceBagThief@CUSTOM:ChoiceBagThief",
       "~Horseshoe@CUSTOM:Horseshoe",
       "~SnatchingClaw@CUSTOM:SnatchingClaw",
       "~SnowShovel@CUSTOM:SnowShovel",
@@ -17043,7 +17171,10 @@
       "subtitles.holy_laser": "Holy Laser is fired",
       "item.minigames.spawn_laser_statue": "Spawn Laser Statue",
       "entity.minigames.bookling": "Bookling",
-      "item.minigames.spawn_bookling": "Spawn Bookling"
+      "item.minigames.spawn_bookling": "Spawn Bookling",
+      "item.minigames.choice_bag_warrior": "Choice Bundle",
+      "item.minigames.choice_bag_support": "Choice Bundle",
+      "item.minigames.choice_bag_thief": "Choice Bundle"
     }
   },
   "metadata": {
@@ -17549,6 +17680,10 @@
                 "children": []
               }
             ]
+          },
+          {
+            "name": "Choice Bundle",
+            "children": []
           }
         ]
       },

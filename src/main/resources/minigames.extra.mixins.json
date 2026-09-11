@@ -24,8 +24,8 @@
     "DecayHeartMixin",
     "BlockInteractionBypassMixin",
     "LightCoordsUtilMixin",
-    "GameRendererMixin"
-
+    "GameRendererMixin",
+    "PhantomRenderTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

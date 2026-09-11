@@ -148,6 +148,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> LASER_STATUE_SPAWN_EGG;
 	public static final DeferredItem<Item> SPAWN_LASER_STATUE;
 	public static final DeferredItem<Item> SPAWN_BOOKLING;
+	public static final DeferredItem<Item> CHOICE_BAG_WARRIOR;
+	public static final DeferredItem<Item> CHOICE_BAG_SUPPORT;
+	public static final DeferredItem<Item> CHOICE_BAG_THIEF;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -267,6 +270,9 @@ public class MinigamesModItems {
 		LASER_STATUE_SPAWN_EGG = register("laser_statue_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(MinigamesModEntities.LASER_STATUE.get())));
 		SPAWN_LASER_STATUE = block(MinigamesModBlocks.SPAWN_LASER_STATUE);
 		SPAWN_BOOKLING = block(MinigamesModBlocks.SPAWN_BOOKLING);
+		CHOICE_BAG_WARRIOR = register("choice_bag_warrior", ChoiceBagWarriorItem::new);
+		CHOICE_BAG_SUPPORT = register("choice_bag_support", ChoiceBagSupportItem::new);
+		CHOICE_BAG_THIEF = register("choice_bag_thief", ChoiceBagThiefItem::new);
 	}
 
 	// Start of user code block custom items

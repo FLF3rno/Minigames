@@ -3,8 +3,11 @@
   "values": [
     "minigames:grappling_hook",
     "minigames:snow_shovel",
+    "minigames:choice_bag_warrior",
     "minigames:symmetrical_shovel",
+    "minigames:choice_bag_thief",
     "minigames:horseshoe",
+    "minigames:choice_bag_support",
     "minigames:snatching_claw"
   ]
 }

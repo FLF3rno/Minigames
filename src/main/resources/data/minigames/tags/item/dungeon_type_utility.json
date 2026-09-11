@@ -2,13 +2,16 @@
   "replace": false,
   "values": [
     "minigames:slam",
+    "minigames:choice_bag_warrior",
     "minigames:plague_starter",
     "minigames:box_of_fun",
     "minigames:time_clock",
     "minigames:horseshoe",
+    "minigames:choice_bag_thief",
     "minigames:ghostifier",
     "minigames:volley_bomb",
     "minigames:snatching_claw",
+    "minigames:choice_bag_support",
     "minigames:human_cannonball"
   ]
 }

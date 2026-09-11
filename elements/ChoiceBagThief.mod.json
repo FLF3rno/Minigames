@@ -3,13 +3,13 @@
   "_type": "item",
   "definition": {
     "renderType": 0,
-    "texture": "utility_slam",
+    "texture": "utility_choice_bundle_thief",
     "customModelName": "Tool",
     "guiTexture": "",
     "customProperties": {},
     "states": [],
     "animations": [],
-    "name": "Slam",
+    "name": "Choice Bundle",
     "rarity": "COMMON",
     "creativeTabs": [
       "CUSTOM:DungeonItems"
@@ -18,7 +18,7 @@
     "enchantability": 0,
     "useDuration": 0,
     "toolType": 1.0,
-    "damageCount": 0,
+    "damageCount": 1,
     "recipeRemainder": "",
     "destroyAnyBlock": false,
     "immuneToFire": true,
@@ -44,7 +44,7 @@
         "     Knock the bomb forward with increased speed and ",
         "     §20%§f more damage"
       ],
-      "name": "SlamDescription"
+      "name": "ChoiceBagDescription"
     },
     "glowCondition": {
       "fixedValue": false
@@ -54,7 +54,7 @@
     },
     "inventorySize": 9,
     "inventoryStackSize": 99,
-    "onRightClickedInAir": "SlamRightclicked",
+    "onRightClickedInAir": "ChoiceBagRightClicked",
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
@@ -82,20 +82,8 @@
       },
       {
         "equipmentSlot": "mainhand",
-        "attribute": "CUSTOM:AbilityCooldown",
-        "amount": 160.0,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "mainhand",
-        "attribute": "CUSTOM:AbilityRange",
-        "amount": 2.0,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:EffectPotency",
-        "amount": 1.15,
+        "amount": 3.0,
         "operation": "ADD_VALUE"
       }
     ]

@@ -112,7 +112,8 @@ public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity
 
             if (entity != null) {
                 this.keyframeAnimation0.apply(entity.animationState0, state.ageInTicks, 1.0F);
-                Player player = entity.level().getNearestPlayer(entity, 60.0D);
+                Player player = entity.level().getNearestPlayer(entity.getX(), entity.getY(), entity.getZ(), 60.0D,
+                        p -> p instanceof Player pl && !pl.isCreative() && !pl.isSpectator() && pl.isAlive() && !pl.hasEffect(net.mcreator.minigames.init.MinigamesModMobEffects.BLESSED));
                 if (player != null) {
                     Vec3 eyes = entity.getEyePosition();
                     Vec3 target = player.getEyePosition();

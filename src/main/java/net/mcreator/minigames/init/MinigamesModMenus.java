@@ -38,6 +38,7 @@ public class MinigamesModMenus {
 	public static final DeferredHolder<MenuType<?>, MenuType<OptionCategoryMenu>> OPTION_CATEGORY = REGISTRY.register("option_category", () -> IMenuTypeExtension.create(OptionCategoryMenu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<FlavioPhase2Menu>> FLAVIO_PHASE_2 = REGISTRY.register("flavio_phase_2", () -> IMenuTypeExtension.create(FlavioPhase2Menu::new));
 	public static final DeferredHolder<MenuType<?>, MenuType<ChoiceBundleMenu>> CHOICE_BUNDLE = REGISTRY.register("choice_bundle", () -> IMenuTypeExtension.create(ChoiceBundleMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<ClassSelectionRoguelikeMenu>> CLASS_SELECTION_ROGUELIKE = REGISTRY.register("class_selection_roguelike", () -> IMenuTypeExtension.create(ClassSelectionRoguelikeMenu::new));
 
 	public interface MenuAccessor {
 		Map<String, Object> getMenuState();

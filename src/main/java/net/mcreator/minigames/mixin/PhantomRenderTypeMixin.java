@@ -32,6 +32,10 @@ public abstract class PhantomRenderTypeMixin<T extends LivingEntity, S extends L
 		boolean appearGlowing,
 		CallbackInfoReturnable<RenderType> cir
 	) {
+		if (net.mcreator.minigames.client.gui.ClassSelectionRoguelikeScreen.renderingSkinOverride != null) {
+			cir.setReturnValue(RenderTypes.entityCutout(net.mcreator.minigames.client.gui.ClassSelectionRoguelikeScreen.renderingSkinOverride));
+			return;
+		}
 		LivingEntity entity = state.getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
 		if (entity != null && entity.hasEffect(MinigamesModMobEffects.PHANTOM)) {
 			Identifier texture = this.getTextureLocation(state);

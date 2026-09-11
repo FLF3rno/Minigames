@@ -94,7 +94,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		for (Item item : BuiltInRegistries.ITEM) {
 			ItemStack testStack = new ItemStack(item);
 			if (DungeonItemAccess.canClassPickUp(testStack, classDungeon) && DungeonItemAccess.isDungeonItem(testStack)) {
-				// Avoid giving another choice bag
 				String path = BuiltInRegistries.ITEM.getKey(item).getPath();
 				if (!path.contains("choice_bag")) {
 					classPool.add(item);
@@ -118,17 +117,13 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 				reel.pool.add(net.minecraft.world.item.Items.DIAMOND);
 			}
 
-			// Generate tape
 			int tapeSize = 90 + col * 20;
 			for (int i = 0; i < tapeSize; i++) {
 				reel.tape.add(reel.pool.get(random.nextInt(reel.pool.size())));
 			}
 
-			// The target final item to land in the middle
 			reel.targetIndex = tapeSize - 10;
 
-			// Deceleration and initial velocity for staggered stops
-			// Gradual easing into the final item
 			reel.targetPosition = reel.targetIndex * ITEM_SPACING;
 			reel.totalDistance = reel.targetPosition;
 			reel.totalTicks = 70f + col * 25f; // ~3.5s to 6s for gradual deceleration
@@ -154,8 +149,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			reel.elapsedTicks += 1.0f;
 			float t = Math.min(1.0f, reel.elapsedTicks / reel.totalTicks);
 
-			// Quartic ease-out for very gradual slowdown towards the end
-			// 1 - (1 - t)^4
 			float progress = 1.0f - (float) Math.pow(1.0 - t, 4);
 			reel.position = progress * reel.totalDistance;
 
@@ -165,12 +158,10 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 				Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_PLING, 2.0F));
 				dingedThisTick = true;
 			} else {
-				// Check if an item has crossed over the middle point
 				int currentIndex = (int) Math.floor(reel.position / ITEM_SPACING);
 				if (currentIndex > reel.lastPassedIndex) {
 					reel.lastPassedIndex = currentIndex;
 					if (!dingedThisTick) {
-						// Ding every time an item passes over the middle sprite
 						float pitch = 1.0F + (col * 0.15F);
 						Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_PLING, pitch));
 						dingedThisTick = true;
@@ -181,10 +172,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 	}
 
 	private int getColumnCenterX(int col) {
-		// Centered 3/5 of the screen:
-		// Left bound = width * 0.2, Right bound = width * 0.8 (span = width * 0.6)
-		// 3 columns evenly spaced at col = 0, 1, 2:
-		// col 0: width * 0.35, col 1: width * 0.50 (exact center), col 2: width * 0.65
 		float screenCenter = this.width / 2.0f;
 		float spacing = (this.width * 0.6f) / 4.0f; // spacing between column centers
 		return Math.round(screenCenter + (col - 1) * spacing);
@@ -198,7 +185,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
 
-		// Dark transparent casino overlay
 		guiGraphics.fill(0, 0, this.width, this.height, 0xC0101015);
 
 		int centerY = getMiddleY();
@@ -206,11 +192,9 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		for (int col = 0; col < NUM_COLUMNS; col++) {
 			int cx = getColumnCenterX(col);
 
-			// 1. Draw column reel window background & border
 			guiGraphics.fill(cx - 26, centerY - 65, cx + 26, centerY + 65, 0xDD1a1a24);
 			drawColumnBorder(guiGraphics, cx - 26, centerY - 65, 52, 130);
 
-			// 2. Draw slot frame in the middle
 			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SINGULAR_SLOT, cx - 16, centerY - 16, 0, 0, 32, 32, 32, 32);
 
 			ReelColumn reel = columns[col];
@@ -218,7 +202,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 			float currentPos = reel.position;
 
-			// 3. Render tape items OVER the slot frame (so items are on top of the slot sprite)
 			int centerItemIndex = Math.round(currentPos / ITEM_SPACING);
 			for (int i = centerItemIndex - 3; i <= centerItemIndex + 3; i++) {
 				if (i >= 0 && i < reel.tape.size()) {
@@ -227,7 +210,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 					float itemY = centerY + (i * ITEM_SPACING - currentPos);
 
-					// Render if within column viewport
 					if (itemY >= centerY - 60 && itemY <= centerY + 60) {
 						int drawX = cx - 8;
 						int drawY = Math.round(itemY - 8);
@@ -237,7 +219,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 				}
 			}
 
-			// Highlight selection box if stopped
 			if (reel.stopped) {
 				boolean isHovered = (mouseX >= cx - 16 && mouseX <= cx + 16 && mouseY >= centerY - 16 && mouseY <= centerY + 16);
 				int highlightColor = isHovered ? 0x5500FF00 : 0x22FFFFFF;
@@ -245,12 +226,31 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			}
 		}
 
-		// Render Top Header Texts
 		renderHeaderTitles(guiGraphics);
 	}
 
+	private int getTitleColor() {
+		String classDungeon = "";
+		Player p = Minecraft.getInstance().player != null ? Minecraft.getInstance().player : this.entity;
+		if (p != null) {
+			classDungeon = p.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+		}
+		if (classDungeon != null) {
+			classDungeon = classDungeon.trim().toLowerCase();
+			if (classDungeon.equals("warrior")) {
+				return 0xFFFF001F; // Red
+			} else if (classDungeon.equals("support")) {
+				return 0xFF09E2F6; // Light Blue
+			} else if (classDungeon.equals("thief")) {
+				return 0xFFFFD700; // Gold / Yellow (as it currently was)
+			} else if (classDungeon.equals("mage")) {
+				return 0xFFFF7BFE; // Mage Purple / Pink
+			}
+		}
+		return 0xFFFFD700;
+	}
+
 	private void renderHeaderTitles(GuiGraphicsExtractor guiGraphics) {
-		// Big shaded text centered at the top: "Choice Bundle Reward"
 		float titleScale = 2.0F;
 		Component titleComp = Component.literal("Choice Bundle Reward");
 		int titleWidth = this.font.width(titleComp);
@@ -259,10 +259,9 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		guiGraphics.pose().scale(titleScale, titleScale);
 		int titleX = Math.round((this.width / 2.0f) / titleScale - (titleWidth / 2.0f));
 		int titleY = Math.round(14.0f / titleScale);
-		guiGraphics.text(this.font, titleComp, titleX, titleY, 0xFFFFD700, true);
+		guiGraphics.text(this.font, titleComp, titleX, titleY, getTitleColor(), true);
 		guiGraphics.pose().popMatrix();
 
-		// Count finished columns
 		int finishedColumns = 0;
 		for (int col = 0; col < NUM_COLUMNS; col++) {
 			if (columns[col] != null && columns[col].stopped) {
@@ -270,8 +269,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			}
 		}
 
-		// Subtitle: "Choose an item"
-		// Appears 1 word per column finished, but horizontally positioned as if the whole text is already appeared
 		if (finishedColumns > 0) {
 			float subScale = 1.35F;
 			String fullText = "Choose an item";
@@ -314,7 +311,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 		int centerY = getMiddleY();
 
-		// Check for hover on stopped items and render tooltip
 		for (int col = 0; col < NUM_COLUMNS; col++) {
 			ReelColumn reel = columns[col];
 			if (reel != null && reel.stopped) {
@@ -346,7 +342,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 							Item chosenItem = reel.tape.get(reel.targetIndex);
 							String itemId = BuiltInRegistries.ITEM.getKey(chosenItem).toString();
 
-							// Send reward packet to server to place in player inventory (hotbar first) and close
 							ClientPacketDistributor.sendToServer(new ChoiceBagRewardMessage(itemId));
 
 							if (this.minecraft != null && this.minecraft.player != null) {
@@ -375,7 +370,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 	@Override
 	protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
-		// No default container labels (removes "Inventory" / "ChoiceBundle")
 	}
 
 	@Override

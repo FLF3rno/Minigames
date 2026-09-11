@@ -95,7 +95,7 @@ public class OmegaLaserTickProcedure {
 			}
 		}
 
-		Player player = (Player) findEntityInWorldRange(world, Player.class, x, y, z, 60);
+		Player player = (Player) findEntityInWorldRange(world, Player.class, x, y, z, 60, e -> !(e instanceof LivingEntity living && living.hasEffect(MinigamesModMobEffects.BLESSED)));
 		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5.4, entity.getZ());
 
 		if (tracking && player != null) {
@@ -143,8 +143,10 @@ public class OmegaLaserTickProcedure {
 		if (attack) {
 			for (Entity affectedEntity : hits) {
 				if (affectedEntity instanceof Player _player) {
-					if (world instanceof ServerLevel serverLevel) {
-						_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 7.0F);
+					if (!_player.hasEffect(MinigamesModMobEffects.BLESSED)) {
+						if (world instanceof ServerLevel serverLevel) {
+							_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 7.0F);
+						}
 					}
 				} else {
 					if (world instanceof ServerLevel serverLevel && affectedEntity instanceof LivingEntity livingEntity) {
@@ -190,7 +192,11 @@ public class OmegaLaserTickProcedure {
 		}
 	}
 
+	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range, java.util.function.Predicate<Entity> predicate) {
+		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), predicate).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
+	}
+
 	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range) {
-		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), e -> true).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
+		return findEntityInWorldRange(world, clazz, x, y, z, range, e -> true);
 	}
 }

@@ -46,10 +46,10 @@ public class AnimationScreenTrigger {
 
                     AnimationManager.displayTransform(
                         0, 50, Component.literal("Take no damage").withStyle(Style.EMPTY.withColor(0xFFFFFFFF)),
-                        0, 0, 100, 100,         // Move from (0,0) to (100,100)
-                        0.5f, 2.0f,             // Scale from 0.5x to 2.0x
-                        0f, 360f,               // Spin a full circle (0 to 360 degrees)
-                        "easeInOut", 5          // Interpolation & Layer
+                        0, 0, 100, 100,
+                        0.5f, 2.0f,
+                        0f, 360f,
+                        "easeInOut", 5
                 );
 
                 AnimationManager.displayRotate(0, 40, logo, 50, 50, 0f, 180f, "linear", 1);
@@ -301,6 +301,10 @@ public class AnimationScreenTrigger {
             else if (animationType.equalsIgnoreCase("fade_in")) {
                 AnimationManager.fadeIn(0, 20, 0x000000, 10);
             }
+            else if (animationType.equalsIgnoreCase("fade_in_fill")) {
+                AnimationManager.fadeIn(0, 20, 0x000000, 10);
+                AnimationManager.displayColor(20, length, 0xFF000000, 0);
+            }
             else if (animationType.equalsIgnoreCase("fade_out")) {
                 AnimationManager.fadeOut(0, 20, 0x000000, 10);
             }
@@ -309,16 +313,14 @@ public class AnimationScreenTrigger {
 
                 AnimationManager.fadeIn(60, 140, 0x000000, 0);
                 AnimationManager.displayColor(140, length, 0xFF000000, 0);
-                // da 180 text per 5s e poi inizia l'azione
+
                 Component ASCEND = Component.literal("ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND ASCEND")
                         .withStyle(style -> style
                         .withColor(0xFFF1F3BE)
-                        //.withFont(new FontDescription.Resource(MATCHA_FONT))
                 );
                 Component GET_TOP = Component.literal("GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP GET TO THE TOP ")
                         .withStyle(style -> style
                         .withColor(0xFFF1F3BE)
-                        //.withFont(new FontDescription.Resource(MATCHA_FONT))
                         );
                 float lineamount = 8f;
                 for (float iteration = -lineamount; iteration < lineamount * 2 + 1; iteration ++) {

@@ -47,6 +47,9 @@ public class LaserStatueTickProcedure {
 		if (attack || telegraph) {
 
 			for (Entity targetPlayer : new ArrayList<>(world.players())) {
+				if (targetPlayer instanceof LivingEntity _livingTarget && _livingTarget.hasEffect(MinigamesModMobEffects.BLESSED)) {
+					continue;
+				}
 
 				Vec3 direction = targetPlayer.position().subtract(start);
 				if (direction.lengthSqr() < 1.0E-6D) {
@@ -86,8 +89,10 @@ public class LaserStatueTickProcedure {
 
 					for (Entity affectedEntity : hits) {
 						if (affectedEntity instanceof Player _player) {
-							if (world instanceof ServerLevel serverLevel) {
-								_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 3.0F);
+							if (!_player.hasEffect(MinigamesModMobEffects.BLESSED)) {
+								if (world instanceof ServerLevel serverLevel) {
+									_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 3.0F);
+								}
 							}
 						}
 					}

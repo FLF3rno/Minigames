@@ -110,9 +110,10 @@ public class BooklingTickProcedure {
 					return;
 
 				LivingEntity rawTarget = bookling.getTarget();
-				if (!(rawTarget instanceof Player playerTarget) || !playerTarget.isAlive() || playerTarget.isCreative() || playerTarget.isSpectator() || bookling.distanceToSqr(playerTarget) > 256.0D) {
-					Player nearest = serverLevel.getNearestPlayer(bookling, 16.0D);
-					if (nearest != null && !nearest.isCreative() && !nearest.isSpectator() && nearest.isAlive()) {
+				if (!(rawTarget instanceof Player playerTarget) || !playerTarget.isAlive() || playerTarget.isCreative() || playerTarget.isSpectator() || playerTarget.hasEffect(net.mcreator.minigames.init.MinigamesModMobEffects.BLESSED) || bookling.distanceToSqr(playerTarget) > 256.0D) {
+					Player nearest = serverLevel.getNearestPlayer(bookling.getX(), bookling.getY(), bookling.getZ(), 16.0D,
+							p -> p instanceof Player pl && !pl.isCreative() && !pl.isSpectator() && pl.isAlive() && !pl.hasEffect(net.mcreator.minigames.init.MinigamesModMobEffects.BLESSED));
+					if (nearest != null) {
 						bookling.setTarget(nearest);
 						rawTarget = nearest;
 					} else {
@@ -215,7 +216,9 @@ public class BooklingTickProcedure {
 					// Piercing entity damage: damages all valid entities along the stream up to the wall
 					AABB searchBox = new AABB(shootFrom, endPoint).inflate(1.0D);
 					List<Entity> candidates = serverLevel.getEntities(bookling, searchBox,
-							e -> e instanceof LivingEntity living && living.isAlive() && !living.isAlliedTo(bookling) && !(e instanceof Player p && (p.isCreative() || p.isSpectator())));
+							e -> e instanceof LivingEntity living && living.isAlive() && !living.isAlliedTo(bookling)
+									&& !living.hasEffect(net.mcreator.minigames.init.MinigamesModMobEffects.BLESSED)
+									&& !(e instanceof Player p && (p.isCreative() || p.isSpectator())));
 
 					for (Entity e : candidates) {
 						AABB bb = e.getBoundingBox().inflate(0.3D);

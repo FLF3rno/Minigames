@@ -98,7 +98,8 @@ public class BooklingEntity extends Monster {
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, 10, true, false,
+				(LivingEntity target, net.minecraft.server.level.ServerLevel level) -> target != null && !target.hasEffect(net.mcreator.minigames.init.MinigamesModMobEffects.BLESSED)));
 	}
 
 	@Override

@@ -15142,6 +15142,20 @@
         ]
       },
       "path": "~/Dungeon/Choice Bundle"
+    },
+    {
+      "name": "ClassSelectionRoguelike",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "class_selection_roguelike",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/ClassSelectionRoguelikeMenu.java",
+          "src/main/java/net/mcreator/minigames/client/gui/ClassSelectionRoguelikeScreen.java"
+        ]
+      },
+      "path": "~/Dungeon/Classes"
     }
   ],
   "variable_elements": [

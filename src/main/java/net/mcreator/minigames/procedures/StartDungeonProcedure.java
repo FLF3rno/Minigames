@@ -21,6 +21,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.MinigamesMod;
+import net.mcreator.minigames.AnimationScreenTrigger;
 
 import java.util.ArrayList;
 
@@ -71,10 +73,6 @@ public class StartDungeonProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"execute in minigames:dungeon_dimension run tp @a 0 200 0");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"effect give @a minecraft:saturation infinite 100 true");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
@@ -87,12 +85,23 @@ public class StartDungeonProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
-		if (world instanceof ServerLevel _origLevel) {
-			LevelAccessor _switchworld12 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-			if (_switchworld12 != null) {
-				worldSwitch12(_switchworld12, x, y, z);
+		AnimationScreenTrigger.startAnimation(400, "fade_in_fill", 1f);
+		MinigamesMod.queueServerWork(20, () -> {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"execute in minigames:dungeon_dimension run tp @a 0 200 0");
+			if (world instanceof ServerLevel _origLevel) {
+				LevelAccessor _switchworld12 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+				if (_switchworld12 != null) {
+					worldSwitch12(_switchworld12, x, y, z);
+				}
 			}
-		}
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				if (entityiterator instanceof ServerPlayer _player)
+					_player.setGameMode(GameType.SPECTATOR);
+			}
+		});
 	}
 
 	private static void worldSwitch12(LevelAccessor world, double x, double y, double z) {

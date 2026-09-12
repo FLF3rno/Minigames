@@ -10,6 +10,7 @@ import net.minecraft.util.Mth;
 
 import net.mcreator.minigames.network.UpdateWorldRendererPMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.FlavioFightManager;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class ChooseFloorProcedure {
 		double floorTheme = 0;
 		if (floor == 1) {
 			floorTheme = Mth.nextInt(RandomSource.create(), 1, 1);
+			MinigamesModVariables.MapVariables.get(world).dungeonFloor = 1;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (floorTheme == 1) {
 				MinigamesModVariables.MapVariables.get(world).floorTypeDungeon = "church";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
@@ -36,6 +39,7 @@ public class ChooseFloorProcedure {
 					_vars.markSyncDirty();
 				}
 			}
+			net.mcreator.minigames.FlavioFightManager.phase = 0;
 			if (!world.isClientSide())
 				PacketDistributor.sendToAllPlayers(new UpdateWorldRendererPMessage(""));
 		}

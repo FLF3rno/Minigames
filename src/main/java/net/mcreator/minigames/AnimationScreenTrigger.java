@@ -298,6 +298,20 @@ public class AnimationScreenTrigger {
                 );
 
             }
+            else if (animationType.equalsIgnoreCase("roguelike_intro")) {
+                Identifier introTexture = Identifier.fromNamespaceAndPath("minigames", "textures/animation/roguelike/intro/" + MinigamesModVariables.MapVariables.get(Minecraft.getInstance().level).floorTypeDungeon + ".png");
+                AnimationManager.displayTransform(
+                        0, length,
+                        introTexture,
+                        512, 512,
+                        x / 2 , y  /2,
+                        x / 2, y / 2,
+                        0.5f, 0.5f,
+                        0f, 0f,
+                        "linear",
+                        10
+                );
+            }
             else if (animationType.equalsIgnoreCase("fade_in")) {
                 AnimationManager.fadeIn(0, 20, 0x000000, 10);
             }

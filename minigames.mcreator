@@ -4212,10 +4212,6 @@
             "type": "entity"
           },
           {
-            "name": "amount",
-            "type": "number"
-          },
-          {
             "name": "x",
             "type": "number"
           },
@@ -15156,6 +15152,20 @@
         ]
       },
       "path": "~/Dungeon/Classes"
+    },
+    {
+      "name": "PlayIntroCutscene",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "play_intro_cutscene",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlayIntroCutsceneProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Cutscene"
     }
   ],
   "variable_elements": [

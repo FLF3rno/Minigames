@@ -47,7 +47,7 @@ public class StartDungeonProcedure {
 				_vars.backpackSlots = 3;
 				_vars.maxDashCooldown = 60;
 				_vars.dashLength = 1;
-				_vars.PassiveHealCooldown = 80;
+				_vars.PassiveHealCooldown = 50;
 				_vars.PassiveHealAmount = 1;
 				_vars.markSyncDirty();
 			}
@@ -63,6 +63,11 @@ public class StartDungeonProcedure {
 			}
 			if (entityiterator instanceof ServerPlayer _player)
 				_player.setGameMode(GameType.SPECTATOR);
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				_vars.classDungeon = "";
+				_vars.markSyncDirty();
+			}
 		}
 		if (world instanceof Level _level) {
 			PlayerTeam _pt = _level.getScoreboard().getPlayerTeam("dungeon_mobs");

@@ -54,6 +54,11 @@ public record ChoiceBagRewardMessage(String itemId) implements CustomPacketPaylo
 			return;
 		}
 
+		String path = BuiltInRegistries.ITEM.getKey(item).getPath();
+		if (path.contains("choice_bag") || path.equals("blank_sword") || path.equals("blank_long_sword") || path.equals("blank_dagger")) {
+			return;
+		}
+
 		ItemStack stack = new ItemStack(item);
 		Inventory inv = player.getInventory();
 
@@ -63,10 +68,8 @@ public record ChoiceBagRewardMessage(String itemId) implements CustomPacketPaylo
 				inv.setItem(34, stack);
 			} else if (inv.getItem(35).isEmpty()) {
 				inv.setItem(35, stack);
-			} else {
-				if (!insertIntoAvailableSlot(player, stack)) {
-					player.drop(stack, false);
-				}
+			} else if (!insertIntoBackpackSlot(player, stack)) {
+				player.drop(stack, false);
 			}
 		} else {
 			if (!insertIntoAvailableSlot(player, stack)) {
@@ -79,6 +82,20 @@ public record ChoiceBagRewardMessage(String itemId) implements CustomPacketPaylo
 
 		player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 1.0F);
+	}
+
+	private static boolean insertIntoBackpackSlot(ServerPlayer player, ItemStack stack) {
+		Inventory inv = player.getInventory();
+		double backpackSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots;
+		int backpackSlots = Math.max(0, Math.min(25, (int) backpackSlotsVal));
+		for (int i = 0; i < backpackSlots; i++) {
+			int slotIndex = 9 + i;
+			if (slotIndex < 36 && inv.getItem(slotIndex).isEmpty()) {
+				inv.setItem(slotIndex, stack);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static boolean insertIntoAvailableSlot(ServerPlayer player, ItemStack stack) {
@@ -95,22 +112,8 @@ public record ChoiceBagRewardMessage(String itemId) implements CustomPacketPaylo
 		}
 
 		// 2. Backpack slots (slots 9 to 9 + backpackSlots - 1)
-		double backpackSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots;
-		int backpackSlots = Math.max(0, Math.min(27, (int) backpackSlotsVal));
-		for (int i = 0; i < backpackSlots; i++) {
-			int slotIndex = 9 + i;
-			if (slotIndex < 36 && inv.getItem(slotIndex).isEmpty()) {
-				inv.setItem(slotIndex, stack);
-				return true;
-			}
-		}
-
-		// 3. Fallback to any slot in 36
-		for (int i = 0; i < 36; i++) {
-			if (inv.getItem(i).isEmpty()) {
-				inv.setItem(i, stack);
-				return true;
-			}
+		if (insertIntoBackpackSlot(player, stack)) {
+			return true;
 		}
 
 		return false;

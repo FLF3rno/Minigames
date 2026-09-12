@@ -15,6 +15,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import net.mcreator.minigames.DungeonItemAccess;
 import net.mcreator.minigames.init.MinigamesModAttributes;
+import net.mcreator.minigames.network.MinigamesModVariables;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class DungeonWeaponClickBlocker {
@@ -29,6 +30,14 @@ public class DungeonWeaponClickBlocker {
 			return;
 
 		ItemStack mainHand = player.getMainHandItem();
+		boolean playingDungeons = player.level() != null
+				&& MinigamesModVariables.MapVariables.get(player.level()).playingDungeons;
+
+		if (playingDungeons && !DungeonItemAccess.isDungeonWeapon(mainHand)) {
+			event.setCanceled(true);
+			return;
+		}
+
 		if (!DungeonItemAccess.isDungeonItem(mainHand))
 			return;
 

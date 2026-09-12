@@ -14,12 +14,23 @@ public final class DungeonItemAccess {
 	public static final TagKey<Item> DUNGEON_SUPPORT = itemTag("minigames:dungeon_support");
 	public static final TagKey<Item> DUNGEON_MAGE = itemTag("minigames:dungeon_mage");
 	public static final TagKey<Item> DUNGEON_TYPE_RELIC = itemTag("minigames:dungeon_type_relic");
+	public static final TagKey<Item> DUNGEON_TYPE_WEAPON = itemTag("minigames:dungeon_type_weapon");
 
 	private DungeonItemAccess() {
 	}
 
 	public static boolean isDungeonItem(ItemStack stack) {
 		return stack.is(DUNGEON_WARRIOR) || stack.is(DUNGEON_THIEF) || stack.is(DUNGEON_SUPPORT) || stack.is(DUNGEON_MAGE);
+	}
+
+	public static boolean isDungeonWeapon(ItemStack stack) {
+		if (stack.is(DUNGEON_TYPE_WEAPON)) {
+			return true;
+		}
+		Item item = stack.getItem();
+		return item == net.mcreator.minigames.init.MinigamesModItems.BLANK_SWORD.get()
+				|| item == net.mcreator.minigames.init.MinigamesModItems.BLANK_LONG_SWORD.get()
+				|| item == net.mcreator.minigames.init.MinigamesModItems.BLANK_DAGGER.get();
 	}
 
 	public static boolean isRelic(ItemStack stack) {

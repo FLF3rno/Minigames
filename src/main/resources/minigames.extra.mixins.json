@@ -25,7 +25,9 @@
     "BlockInteractionBypassMixin",
     "LightCoordsUtilMixin",
     "GameRendererMixin",
-    "PhantomRenderTypeMixin"
+    "PhantomRenderTypeMixin",
+    "LivingEntityRenderStateMixin",
+    "PhantomEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

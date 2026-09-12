@@ -17,6 +17,14 @@ public class RandomLookAtPlayerGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (this.mob instanceof net.mcreator.minigames.entity.PreacherEntity preacher) {
+            if (net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(preacher.level()).currentRoomID != preacher.getEntityData().get(net.mcreator.minigames.entity.PreacherEntity.DATA_ID)) {
+                this.target = null;
+                this.mob.setTarget(null);
+                return false;
+            }
+        }
+
         List<Player> players = this.mob.level().getEntitiesOfClass(Player.class, 
             this.mob.getBoundingBox().inflate(50.0D));
         
@@ -25,6 +33,18 @@ public class RandomLookAtPlayerGoal extends Goal {
         this.target = players.get(this.mob.getRandom().nextInt(players.size()));
         this.mob.setTarget(this.target);
         return true;
+    }
+
+    @Override
+    public boolean canContinueToUse() {
+        if (this.mob instanceof net.mcreator.minigames.entity.PreacherEntity preacher) {
+            if (net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(preacher.level()).currentRoomID != preacher.getEntityData().get(net.mcreator.minigames.entity.PreacherEntity.DATA_ID)) {
+                this.target = null;
+                this.mob.setTarget(null);
+                return false;
+            }
+        }
+        return this.target != null && this.target.isAlive() && this.mob.distanceToSqr(this.target) < 900.0D;
     }
 
     @Override

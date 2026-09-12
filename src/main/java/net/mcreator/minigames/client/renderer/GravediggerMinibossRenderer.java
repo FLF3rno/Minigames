@@ -39,7 +39,7 @@ public class GravediggerMinibossRenderer extends MobRenderer<GravediggerMiniboss
 		this.addLayer(new RenderLayer<>(this) {
 			final Identifier LAYER_TEXTURE = Identifier.parse("minigames:textures/entities/gravedigger_emissive.png");
 			final RenderType RENDER_TYPE = RenderTypes.eyes(LAYER_TEXTURE);
-			final EntityModel LAYER_MODEL = new Modelgravedigger(Minecraft.getInstance().getEntityModels().bakeLayer(Modelgravedigger.LAYER_LOCATION));
+			final EntityModel LAYER_MODEL = new AnimatedModel(Minecraft.getInstance().getEntityModels().bakeLayer(Modelgravedigger.LAYER_LOCATION));
 
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {

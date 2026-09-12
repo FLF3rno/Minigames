@@ -7,12 +7,22 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.mcreator.minigames.entity.PreacherEntity;
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.entity.PreachingShotEntity;
+
 public class PreacherTickProcedure {
 	public static void execute(Entity entity) {
 		if (entity == null)
 			return;
+
+		if (entity instanceof PreacherEntity preacher) {
+			if (MinigamesModVariables.MapVariables.get(preacher.level()).currentRoomID != preacher.getEntityData().get(PreacherEntity.DATA_ID)) {
+				preacher.getEntityData().set(PreacherEntity.DATA_cooldown, 0);
+				return;
+			}
+		}
+
 		if ((entity instanceof PreacherEntity _datEntI ? _datEntI.getEntityData().get(PreacherEntity.DATA_cooldown) : 0) == 40) {
 			if (entity instanceof PreacherEntity _ent1) {
 				_ent1.getEntityData().set(PreacherEntity.ANIM, 1000);

@@ -95,7 +95,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			ItemStack testStack = new ItemStack(item);
 			if (DungeonItemAccess.canClassPickUp(testStack, classDungeon) && DungeonItemAccess.isDungeonItem(testStack)) {
 				String path = BuiltInRegistries.ITEM.getKey(item).getPath();
-				if (!path.contains("choice_bag")) {
+				if (!isExcludedChoiceItem(path)) {
 					classPool.add(item);
 				}
 			}
@@ -105,7 +105,10 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			for (Item item : BuiltInRegistries.ITEM) {
 				ItemStack testStack = new ItemStack(item);
 				if (DungeonItemAccess.isDungeonItem(testStack)) {
-					classPool.add(item);
+					String path = BuiltInRegistries.ITEM.getKey(item).getPath();
+					if (!isExcludedChoiceItem(path)) {
+						classPool.add(item);
+					}
 				}
 			}
 		}
@@ -134,6 +137,13 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 			columns[col] = reel;
 		}
+	}
+
+	public static boolean isExcludedChoiceItem(String path) {
+		return path.contains("choice_bag")
+				|| path.equals("blank_sword")
+				|| path.equals("blank_long_sword")
+				|| path.equals("blank_dagger");
 	}
 
 	@Override
@@ -361,7 +371,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		int key = InputConstants.getKey(event).getValue();
 		if (key == 256) {
 			if (this.minecraft != null && this.minecraft.player != null) {
-				this.minecraft.player.closeContainer();
+				//this.minecraft.player.closeContainer();
 			}
 			return true;
 		}

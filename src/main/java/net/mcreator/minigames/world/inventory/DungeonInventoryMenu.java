@@ -42,16 +42,18 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 	private Supplier<Boolean> boundItemMatcher = null;
 	private Entity boundEntity = null;
 	private BlockEntity boundBlockEntity = null;
+	private final int playerSlots;
+	private final int backpackSlots;
 
 	public DungeonInventoryMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
 		super(MinigamesModMenus.DUNGEON_INVENTORY.get(), id);
 		this.entity = inv.player;
 		this.world = inv.player.level();
-		int playerSlots = Math.max(0, Math.min(9, (int) inv.player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots));
-		int backpackSlots = Math.max(0, Math.min(25, (int) inv.player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots));
+		this.playerSlots = Math.max(0, Math.min(9, (int) inv.player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots));
+		this.backpackSlots = Math.max(0, Math.min(25, (int) inv.player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots));
 		addRelicSlots(inv);
-		addDynamicPlayerSlots(inv, playerSlots);
-		addDynamicBackpackSlots(inv, backpackSlots);
+		addDynamicPlayerSlots(inv, this.playerSlots);
+		addDynamicBackpackSlots(inv, this.backpackSlots);
 		BlockPos pos = null;
 		if (extraData != null) {
 			pos = extraData.readBlockPos();
@@ -77,7 +79,98 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 
 	@Override
 	public ItemStack quickMoveStack(Player playerIn, int index) {
-		return ItemStack.EMPTY;
+		ItemStack itemstack = ItemStack.EMPTY;
+		if (index < 0 || index >= this.slots.size()) {
+			return ItemStack.EMPTY;
+		}
+
+		Slot slot = this.slots.get(index);
+		if (slot == null || !slot.hasItem()) {
+			return ItemStack.EMPTY;
+		}
+
+		ItemStack slotStack = slot.getItem();
+		itemstack = slotStack.copy();
+
+		boolean inCombat = isInCombat();
+		boolean isRelic = DungeonItemAccess.isRelic(slotStack);
+		boolean isDungeonItem = DungeonItemAccess.isDungeonItem(slotStack);
+
+		int relicStart = 0;
+		int relicEnd = 2; // 0, 1
+		int hotbarStart = 2;
+		int hotbarEnd = 2 + this.playerSlots;
+		int backpackStart = hotbarEnd;
+		int backpackEnd = backpackStart + this.backpackSlots;
+
+		// 1. If clicking a Relic slot (0 or 1)
+		if (index >= relicStart && index < relicEnd) {
+			// Combat rule: cannot move relics out of relic slots
+			if (inCombat) {
+				return ItemStack.EMPTY;
+			}
+			// Relics move to backpack only; if no space, ignore
+			if (!this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
+				return ItemStack.EMPTY;
+			}
+		}
+		// 2. If clicking a Hotbar slot
+		else if (index >= hotbarStart && index < hotbarEnd) {
+			if (isRelic) {
+				// Relic should not be in hotbar, but if clicked, only move to relic slots or backpack
+				if (!this.moveItemStackTo(slotStack, relicStart, relicEnd, false)) {
+					if (inCombat || !this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
+						return ItemStack.EMPTY;
+					}
+				}
+			} else {
+				// Regular item or dungeon class item: moves to backpack
+				if (inCombat && isDungeonItem) {
+					// Cannot move dungeon class items into backpack in combat
+					return ItemStack.EMPTY;
+				}
+				if (!this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
+					return ItemStack.EMPTY;
+				}
+			}
+		}
+		// 3. If clicking a Backpack slot
+		else if (index >= backpackStart && index < backpackEnd) {
+			if (isRelic) {
+				// Combat rule: cannot move relics in combat
+				if (inCombat) {
+					return ItemStack.EMPTY;
+				}
+				// Relics only move to relic slots; if no space, ignore
+				if (!this.moveItemStackTo(slotStack, relicStart, relicEnd, false)) {
+					return ItemStack.EMPTY;
+				}
+			} else {
+				// Move from backpack to hotbar
+				if (inCombat && isDungeonItem) {
+					// Cannot move dungeon class item out of backpack in combat
+					return ItemStack.EMPTY;
+				}
+				if (!this.moveItemStackTo(slotStack, hotbarStart, hotbarEnd, false)) {
+					return ItemStack.EMPTY;
+				}
+			}
+		} else {
+			return ItemStack.EMPTY;
+		}
+
+		if (slotStack.isEmpty()) {
+			slot.setByPlayer(ItemStack.EMPTY);
+		} else {
+			slot.setChanged();
+		}
+
+		if (slotStack.getCount() == itemstack.getCount()) {
+			return ItemStack.EMPTY;
+		}
+
+		slot.onTake(playerIn, slotStack);
+		return itemstack;
 	}
 
 	@Override
@@ -91,7 +184,7 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 					}
 				}
 			}
-			if (clickType == ContainerInput.PICKUP || clickType == ContainerInput.SWAP || clickType == ContainerInput.QUICK_MOVE || clickType == ContainerInput.QUICK_CRAFT) {
+			if (clickType == ContainerInput.PICKUP || clickType == ContainerInput.SWAP || clickType == ContainerInput.QUICK_CRAFT) {
 				if (slotId >= 0 && slotId < this.slots.size()) {
 					Slot slot = this.slots.get(slotId);
 					int containerSlot = slot.getContainerSlot();

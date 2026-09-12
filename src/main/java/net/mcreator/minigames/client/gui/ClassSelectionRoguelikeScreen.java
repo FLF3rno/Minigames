@@ -21,6 +21,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.resources.DefaultPlayerSkin;
+import net.minecraft.world.entity.player.PlayerSkin;
+import net.minecraft.client.gui.components.PlayerFaceExtractor;
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.util.ArrayList;
@@ -40,8 +45,6 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 
 	private static final int COLOR_GOLD = 0xFFFFAA00;
 
-	public static Identifier renderingSkinOverride = null;
-
 	public record ClassDef(
 			String id,
 			String displayName,
@@ -57,6 +60,9 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 
 	private final List<Button> selectButtons = new ArrayList<>();
 	private Button backButton;
+
+	private int readyHoldTicks = 0;
+	private float guiAlpha = 1.0f;
 
 	public ClassSelectionRoguelikeScreen(ClassSelectionRoguelikeMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text, 176, 166);
@@ -128,6 +134,8 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 		int tooltipH = Math.min(screenH - 24, 380);
 		int tooltipTop = (screenH - tooltipH) / 2;
 
+		boolean isReady = isLocalPlayerReady();
+
 		if (activeDetailIndex == -1) {
 			int colCount = classes.size();
 			int colW = Math.min(170, (screenW - 40) / colCount - 16);
@@ -147,6 +155,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 					chooseClass(cDef.id());
 				}).bounds(btnX, btnY, btnW, btnH).build();
 
+				btn.visible = !isReady;
 				selectButtons.add(btn);
 				this.addRenderableWidget(btn);
 			}
@@ -164,6 +173,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 				chooseClass(cDef.id());
 			}).bounds(btnX, btnY, btnW, btnH).build();
 
+			btn.visible = !isReady;
 			selectButtons.add(btn);
 			this.addRenderableWidget(btn);
 
@@ -184,18 +194,37 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 		}
 	}
 
+	private boolean isLocalPlayerReady() {
+		Player player = this.minecraft != null && this.minecraft.player != null ? this.minecraft.player : this.entity;
+		if (player == null) return false;
+		String chosen = player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+		return chosen != null && !chosen.trim().isEmpty() && !chosen.equalsIgnoreCase("none");
+	}
+
 	private void chooseClass(String classId) {
 		ClientPacketDistributor.sendToServer(new SelectClassMessage(classId));
-		if (this.minecraft != null && this.minecraft.player != null) {
-			this.minecraft.player.closeContainer();
+		Player player = this.minecraft != null && this.minecraft.player != null ? this.minecraft.player : this.entity;
+		if (player != null) {
+			player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon = classId;
 		}
+		rebuildClassWidgets();
+	}
+
+	private int applyAlpha(int argb, float alpha) {
+		int a = (argb >> 24) & 0xFF;
+		int newA = Math.round(a * Math.max(0.0f, Math.min(1.0f, alpha)));
+		return (newA << 24) | (argb & 0x00FFFFFF);
 	}
 
 	@Override
 	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
 
-		guiGraphics.fill(0, 0, this.width, this.height, 0xFF000000);
+		if (guiAlpha <= 0.001f) {
+			return;
+		}
+
+		guiGraphics.fill(0, 0, this.width, this.height, applyAlpha(0xFF000000, guiAlpha));
 
 		int screenW = this.width;
 		int screenH = this.height;
@@ -228,10 +257,13 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 				guiGraphics.pose().scale(scale, scale);
 				int tx = Math.round((cX + (colW / 2.0f)) / scale - (titleW / 2.0f));
 				int ty = Math.round((tooltipTop + 14) / scale);
-				guiGraphics.text(this.font, title, tx, ty, cDef.color(), true);
+				guiGraphics.text(this.font, title, tx, ty, applyAlpha(cDef.color(), guiAlpha), true);
 				guiGraphics.pose().popMatrix();
 
-				renderClassSkinEntity(guiGraphics, cX + colW / 2, tooltipTop, tooltipBottom, colW, cDef);
+				if (guiAlpha > 0.05f) {
+					renderClassSkinEntity(guiGraphics, cX + colW / 2, tooltipTop, tooltipBottom, colW, cDef);
+					renderClassPlayerHeads(guiGraphics, cDef.id(), cX, btnY, colW, btnH);
+				}
 			}
 		} else {
 			ClassDef cDef = classes.get(activeDetailIndex);
@@ -249,10 +281,18 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			guiGraphics.pose().scale(scale, scale);
 			int tx = Math.round((leftColX + (leftColW / 2.0f)) / scale - (titleW / 2.0f));
 			int ty = Math.round((tooltipTop + 14) / scale);
-			guiGraphics.text(this.font, title, tx, ty, cDef.color(), true);
+			guiGraphics.text(this.font, title, tx, ty, applyAlpha(cDef.color(), guiAlpha), true);
 			guiGraphics.pose().popMatrix();
 
-			renderClassSkinEntity(guiGraphics, leftColX + leftColW / 2, tooltipTop, tooltipBottom, leftColW, cDef);
+			if (guiAlpha > 0.05f) {
+				renderClassSkinEntity(guiGraphics, leftColX + leftColW / 2, tooltipTop, tooltipBottom, leftColW, cDef);
+			}
+
+			int btnH = 20;
+			int btnY = tooltipTop + tooltipH - btnH - 12;
+			if (guiAlpha > 0.05f) {
+				renderClassPlayerHeads(guiGraphics, cDef.id(), leftColX, btnY, leftColW, btnH);
+			}
 
 			int rightPanelX = leftColRight + 14;
 			int rightPanelW = screenW - rightPanelX - 14;
@@ -267,7 +307,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			guiGraphics.pose().scale(descScale, descScale);
 			int dtx = Math.round((rightPanelX + (rightPanelW / 2.0f)) / descScale - (descW / 2.0f));
 			int dty = Math.round((tooltipTop + 16) / descScale);
-			guiGraphics.text(this.font, descTitle, dtx, dty, cDef.color(), true);
+			guiGraphics.text(this.font, descTitle, dtx, dty, applyAlpha(cDef.color(), guiAlpha), true);
 			guiGraphics.pose().popMatrix();
 
 			int rightPanelCenterX = rightPanelX + rightPanelW / 2;
@@ -283,22 +323,22 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			int playstyleHeaderY = contentStartY;
 			Component playstyleHeader = Component.literal("PLAYSTYLE").setStyle(Style.EMPTY.withBold(true));
 			int playstyleHeaderW = this.font.width(playstyleHeader);
-			guiGraphics.text(this.font, playstyleHeader, rightPanelCenterX - playstyleHeaderW / 2, playstyleHeaderY, COLOR_GOLD, true);
+			guiGraphics.text(this.font, playstyleHeader, rightPanelCenterX - playstyleHeaderW / 2, playstyleHeaderY, applyAlpha(COLOR_GOLD, guiAlpha), true);
 
 			Component playstyleDesc = Component.literal(cDef.playstyle());
 			int playstyleDescW = this.font.width(playstyleDesc);
-			guiGraphics.text(this.font, playstyleDesc, rightPanelCenterX - playstyleDescW / 2, playstyleHeaderY + 14, 0xFFFFFFFF, true);
+			guiGraphics.text(this.font, playstyleDesc, rightPanelCenterX - playstyleDescW / 2, playstyleHeaderY + 14, applyAlpha(0xFFFFFFFF, guiAlpha), true);
 
 			int passiveHeaderY = playstyleHeaderY + 14 + 18;
 			Component passiveHeader = Component.literal("PASSIVE ABILITIES").setStyle(Style.EMPTY.withBold(true));
 			int headerW = this.font.width(passiveHeader);
-			guiGraphics.text(this.font, passiveHeader, rightPanelCenterX - headerW / 2, passiveHeaderY, COLOR_GOLD, true);
+			guiGraphics.text(this.font, passiveHeader, rightPanelCenterX - headerW / 2, passiveHeaderY, applyAlpha(COLOR_GOLD, guiAlpha), true);
 
 			Component line2 = Component.literal("Can hold ")
 					.append(Component.literal(cDef.displayName()).setStyle(Style.EMPTY.withColor(cDef.color())))
 					.append(Component.literal(" only items."));
 			int line2W = this.font.width(line2);
-			guiGraphics.text(this.font, line2, rightPanelCenterX - line2W / 2, passiveHeaderY + 14, 0xFFFFFFFF, true);
+			guiGraphics.text(this.font, line2, rightPanelCenterX - line2W / 2, passiveHeaderY + 14, applyAlpha(0xFFFFFFFF, guiAlpha), true);
 
 			int afterPassiveY = passiveHeaderY + 28;
 			if (isThief) {
@@ -306,14 +346,14 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 						.append(Component.literal("STOLEN").setStyle(Style.EMPTY.withBold(true).withColor(COLOR_GOLD)))
 						.append(Component.literal(" items from other classes."));
 				int line3W = this.font.width(line3);
-				guiGraphics.text(this.font, line3, rightPanelCenterX - line3W / 2, afterPassiveY, 0xFFFFFFFF, true);
+				guiGraphics.text(this.font, line3, rightPanelCenterX - line3W / 2, afterPassiveY, applyAlpha(0xFFFFFFFF, guiAlpha), true);
 				afterPassiveY += 14;
 			}
 
 			int startingHeaderY = afterPassiveY + 18;
 			Component startingHeader = Component.literal("STARTING ITEMS").setStyle(Style.EMPTY.withBold(true));
 			int startingHeaderW = this.font.width(startingHeader);
-			guiGraphics.text(this.font, startingHeader, rightPanelCenterX - startingHeaderW / 2, startingHeaderY, COLOR_GOLD, true);
+			guiGraphics.text(this.font, startingHeader, rightPanelCenterX - startingHeaderW / 2, startingHeaderY, applyAlpha(COLOR_GOLD, guiAlpha), true);
 
 			List<ItemStack> items = cDef.startingItems();
 			int itemCount = items.size();
@@ -327,13 +367,15 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 				ItemStack stack = items.get(idx);
 				int slotX = itemsStartX + idx * (itemSlotSize + itemSpacing);
 
-				guiGraphics.fill(slotX, itemSlotsY, slotX + itemSlotSize, itemSlotsY + itemSlotSize, 0x88000000);
-				guiGraphics.fill(slotX - 1, itemSlotsY - 1, slotX + itemSlotSize + 1, itemSlotsY, 0xAA555555);
-				guiGraphics.fill(slotX - 1, itemSlotsY + itemSlotSize, slotX + itemSlotSize + 1, itemSlotsY + itemSlotSize + 1, 0xAA333333);
-				guiGraphics.fill(slotX - 1, itemSlotsY, slotX, itemSlotsY + itemSlotSize, 0xAA555555);
-				guiGraphics.fill(slotX + itemSlotSize, itemSlotsY, slotX + itemSlotSize + 1, itemSlotsY + itemSlotSize, 0xAA333333);
+				guiGraphics.fill(slotX, itemSlotsY, slotX + itemSlotSize, itemSlotsY + itemSlotSize, applyAlpha(0x88000000, guiAlpha));
+				guiGraphics.fill(slotX - 1, itemSlotsY - 1, slotX + itemSlotSize + 1, itemSlotsY, applyAlpha(0xAA555555, guiAlpha));
+				guiGraphics.fill(slotX - 1, itemSlotsY + itemSlotSize, slotX + itemSlotSize + 1, itemSlotsY + itemSlotSize + 1, applyAlpha(0xAA333333, guiAlpha));
+				guiGraphics.fill(slotX - 1, itemSlotsY, slotX, itemSlotsY + itemSlotSize, applyAlpha(0xAA555555, guiAlpha));
+				guiGraphics.fill(slotX + itemSlotSize, itemSlotsY, slotX + itemSlotSize + 1, itemSlotsY + itemSlotSize, applyAlpha(0xAA333333, guiAlpha));
 
-				guiGraphics.item(stack, slotX + 3, itemSlotsY + 3);
+				if (guiAlpha > 0.05f) {
+					guiGraphics.item(stack, slotX + 3, itemSlotsY + 3);
+				}
 			}
 		}
 	}
@@ -341,6 +383,10 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+
+		if (guiAlpha < 0.5f) {
+			return;
+		}
 
 		if (activeDetailIndex == -1) {
 			int screenW = this.width;
@@ -407,6 +453,29 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 					break;
 				}
 			}
+
+			int btnH = 20;
+			int btnY = tooltipTop + tooltipH - btnH - 12;
+			renderHeadTooltip(guiGraphics, cDef.id(), leftColX, btnY, leftColW, btnH, mouseX, mouseY);
+		}
+
+		if (activeDetailIndex == -1) {
+			int screenW = this.width;
+			int screenH = this.height;
+			int tooltipH = Math.min(screenH - 24, 380);
+			int tooltipTop = (screenH - tooltipH) / 2;
+			int colCount = classes.size();
+			int colW = Math.min(170, (screenW - 40) / colCount - 16);
+			int totalColsW = colCount * colW + (colCount - 1) * 16;
+			int startX = (screenW - totalColsW) / 2;
+			int btnH = 20;
+			int btnY = tooltipTop + tooltipH - btnH - 12;
+
+			for (int i = 0; i < colCount; i++) {
+				ClassDef cDef = classes.get(i);
+				int cX = startX + i * (colW + 16);
+				renderHeadTooltip(guiGraphics, cDef.id(), cX, btnY, colW, btnH, mouseX, mouseY);
+			}
 		}
 	}
 
@@ -429,7 +498,6 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 		int y1 = availableBottom;
 
 		ItemStack originalMainHand = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
-		renderingSkinOverride = cDef.customSkin();
 		if (!cDef.heldItem().isEmpty()) {
 			livingEntity.setItemInHand(InteractionHand.MAIN_HAND, cDef.heldItem().copy());
 		}
@@ -437,39 +505,130 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 		try {
 			float yOffset = 0.0625f;
 
-			InventoryScreen.renderEntityInInventoryFollowsAngle(
-					guiGraphics,
-					x0,
-					y0,
-					x1,
-					y1,
-					scale,
-					yOffset,
-					0f,
-					0f,
-					livingEntity
-			);
+			org.joml.Quaternionf rotation = new org.joml.Quaternionf().rotateZ((float) Math.PI);
+			org.joml.Quaternionf xRotation = new org.joml.Quaternionf();
+			rotation.mul(xRotation);
+
+			net.minecraft.client.renderer.entity.EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+			net.minecraft.client.renderer.entity.EntityRenderer<? super LivingEntity, ?> renderer = dispatcher.getRenderer(livingEntity);
+			net.minecraft.client.renderer.entity.state.EntityRenderState renderState = renderer.createRenderState(livingEntity, 1.0F);
+			renderState.shadowPieces.clear();
+			renderState.outlineColor = 0;
+
+			if (renderState instanceof net.minecraft.client.renderer.entity.state.LivingEntityRenderState livingState) {
+				livingState.bodyRot = 180.0F;
+				livingState.yRot = 0.0F;
+				if (livingState.pose != net.minecraft.world.entity.Pose.FALL_FLYING) {
+					livingState.xRot = 0.0F;
+				} else {
+					livingState.xRot = 0.0F;
+				}
+				livingState.boundingBoxWidth = livingState.boundingBoxWidth / livingState.scale;
+				livingState.boundingBoxHeight = livingState.boundingBoxHeight / livingState.scale;
+				livingState.scale = 1.0F;
+			}
+
+			if (renderState instanceof net.minecraft.client.renderer.entity.state.AvatarRenderState avatarState) {
+				net.minecraft.world.entity.player.PlayerModelType modelType =
+						avatarState.skin != null ? avatarState.skin.model() : net.minecraft.world.entity.player.PlayerModelType.WIDE;
+				avatarState.skin = net.minecraft.world.entity.player.PlayerSkin.insecure(
+						new net.minecraft.core.ClientAsset.ResourceTexture(cDef.customSkin(), cDef.customSkin()),
+						null,
+						null,
+						modelType
+				);
+				avatarState.showHat = true;
+				avatarState.showJacket = true;
+				avatarState.showLeftSleeve = true;
+				avatarState.showRightSleeve = true;
+				avatarState.showLeftPants = true;
+				avatarState.showRightPants = true;
+			}
+
+			org.joml.Vector3f translation = new org.joml.Vector3f(0.0F, renderState.boundingBoxHeight / 2.0F + yOffset, 0.0F);
+			guiGraphics.entity(renderState, (float) scale, translation, rotation, xRotation, x0, y0, x1, y1);
 		} finally {
-			renderingSkinOverride = null;
 			livingEntity.setItemInHand(InteractionHand.MAIN_HAND, originalMainHand);
 		}
 	}
 
 	private void drawTooltipBox(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, boolean hovered) {
-		guiGraphics.fill(left, top, right, bottom, TOOLTIP_BG);
+		guiGraphics.fill(left, top, right, bottom, applyAlpha(TOOLTIP_BG, guiAlpha));
 
 		int borderLight = hovered ? TOOLTIP_BORDER_HOVER_LIGHT : TOOLTIP_BORDER_LIGHT;
 		int borderDark = hovered ? TOOLTIP_BORDER_HOVER_DARK : TOOLTIP_BORDER_DARK;
 
-		guiGraphics.fill(left - 1, top - 1, right + 1, top, borderLight);
-		guiGraphics.fill(left - 1, top, left, bottom, borderLight);
+		guiGraphics.fill(left - 1, top - 1, right + 1, top, applyAlpha(borderLight, guiAlpha));
+		guiGraphics.fill(left - 1, top, left, bottom, applyAlpha(borderLight, guiAlpha));
 
-		guiGraphics.fill(left - 1, bottom, right + 1, bottom + 1, borderDark);
-		guiGraphics.fill(right, top, right + 1, bottom, borderDark);
+		guiGraphics.fill(left - 1, bottom, right + 1, bottom + 1, applyAlpha(borderDark, guiAlpha));
+		guiGraphics.fill(right, top, right + 1, bottom, applyAlpha(borderDark, guiAlpha));
+	}
+
+	private List<Player> getPlayersWithClass(String classId) {
+		List<Player> list = new ArrayList<>();
+		if (this.minecraft == null || this.minecraft.level == null) return list;
+		for (Player p : this.minecraft.level.players()) {
+			String c = p.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+			if (c != null && c.equalsIgnoreCase(classId)) {
+				list.add(p);
+			}
+		}
+		return list;
+	}
+
+	private PlayerSkin getPlayerSkin(Player player) {
+		if (player instanceof AbstractClientPlayer clientPlayer) {
+			return clientPlayer.getSkin();
+		}
+		return DefaultPlayerSkin.get(player.getUUID());
+	}
+
+	private void renderClassPlayerHeads(GuiGraphicsExtractor guiGraphics, String classId, int cX, int btnY, int colW, int btnH) {
+		List<Player> players = getPlayersWithClass(classId);
+		if (players.isEmpty()) return;
+
+		int headSize = 16;
+		int gap = 4;
+		int count = players.size();
+		int totalW = count * headSize + (count - 1) * gap;
+		int startX = cX + (colW - totalW) / 2;
+		int headY = btnY + (btnH - headSize) / 2;
+
+		for (int i = 0; i < count; i++) {
+			Player p = players.get(i);
+			int hx = startX + i * (headSize + gap);
+			PlayerFaceExtractor.extractRenderState(guiGraphics, getPlayerSkin(p), hx, headY, headSize);
+		}
+	}
+
+	private void renderHeadTooltip(GuiGraphicsExtractor guiGraphics, String classId, int cX, int btnY, int colW, int btnH, int mouseX, int mouseY) {
+		List<Player> players = getPlayersWithClass(classId);
+		if (players.isEmpty()) return;
+
+		int headSize = 16;
+		int gap = 4;
+		int count = players.size();
+		int totalW = count * headSize + (count - 1) * gap;
+		int startX = cX + (colW - totalW) / 2;
+		int headY = btnY + (btnH - headSize) / 2;
+
+		for (int i = 0; i < count; i++) {
+			Player p = players.get(i);
+			int hx = startX + i * (headSize + gap);
+			if (mouseX >= hx && mouseX <= hx + headSize && mouseY >= headY && mouseY <= headY + headSize) {
+				guiGraphics.setTooltipForNextFrame(this.font, p.getDisplayName(), mouseX, mouseY);
+				break;
+			}
+		}
 	}
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		if (guiAlpha < 0.95f) {
+			return false;
+		}
+
 		if (event.button() == 0) {
 			double mouseX = event.x();
 			double mouseY = event.y();
@@ -522,6 +681,48 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			return true;
 		}
 		return super.keyPressed(event);
+	}
+
+	@Override
+	public void containerTick() {
+		super.containerTick();
+		boolean ready = isLocalPlayerReady();
+		for (Button btn : selectButtons) {
+			if (btn.visible == ready) {
+				btn.visible = !ready;
+			}
+			btn.setAlpha(guiAlpha);
+		}
+		if (backButton != null) {
+			backButton.setAlpha(guiAlpha);
+		}
+
+		if (areAllPlayersReady()) {
+			readyHoldTicks++;
+			// Hold for 2s (40 ticks), then over the next 2s (40 ticks, ticks 41-80) fade transparency down to 0%
+			if (readyHoldTicks > 40) {
+				float progress = Math.min(1.0f, (readyHoldTicks - 40) / 40.0f);
+				guiAlpha = 1.0f - progress;
+			} else {
+				guiAlpha = 1.0f;
+			}
+		} else {
+			readyHoldTicks = 0;
+			guiAlpha = 1.0f;
+		}
+	}
+
+	private boolean areAllPlayersReady() {
+		if (this.minecraft == null || this.minecraft.level == null) return false;
+		List<? extends Player> players = this.minecraft.level.players();
+		if (players.isEmpty()) return false;
+		for (Player p : players) {
+			String c = p.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+			if (c == null || c.trim().isEmpty() || c.equalsIgnoreCase("none")) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override

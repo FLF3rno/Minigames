@@ -699,7 +699,6 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 
 		if (areAllPlayersReady()) {
 			readyHoldTicks++;
-			// Hold for 2s (40 ticks), then over the next 2s (40 ticks, ticks 41-80) fade transparency down to 0%
 			if (readyHoldTicks > 40) {
 				float progress = Math.min(1.0f, (readyHoldTicks - 40) / 40.0f);
 				guiAlpha = 1.0f - progress;

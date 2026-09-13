@@ -81,6 +81,7 @@ public class SweeperTickProcedure {
 				living.yBodyRotO = living.getYRot();
 				living.yHeadRotO = living.getYRot();
 			}
+			entity.setNoGravity(false);
 		}
 
 		if (entity.tickCount == 70) {

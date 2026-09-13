@@ -72,14 +72,15 @@ public class AntennaTickProcedure {
 				living.yBodyRotO = 0.0F;
 				living.yHeadRotO = 0.0F;
 			}
+			entity.setNoGravity(false);
 
 		} else if (entity.tickCount > 65) {
 
-			if (entity.tickCount % 15 == 0) {
+			if (entity.tickCount % 25 == 0) {
 				attack = true;
 			}
 
-			if (entity.tickCount % 15 == 8) {
+			if (entity.tickCount % 25 == 13) {
 				telegraph = true;
 			}
 		}
@@ -120,7 +121,7 @@ public class AntennaTickProcedure {
 						strikeX,
 						surfaceY,
 						strikeZ,
-						15,
+						25,
 						0
 				);
 			}

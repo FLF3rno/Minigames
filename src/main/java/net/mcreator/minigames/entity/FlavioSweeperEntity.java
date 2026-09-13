@@ -151,12 +151,6 @@ public class FlavioSweeperEntity extends Monster {
 	}
 
 	@Override
-	public void playerTouch(Player sourceentity) {
-		super.playerTouch(sourceentity);
-		FlavioClockCollidesProcedure.execute(this.level(), sourceentity);
-	}
-
-	@Override
 	public boolean canCollideWith(Entity entity) {
 		return true;
 	}
@@ -192,7 +186,7 @@ public class FlavioSweeperEntity extends Monster {
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-		builder = builder.add(Attributes.MAX_HEALTH, 175);
+		builder = builder.add(Attributes.MAX_HEALTH, 75);
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);

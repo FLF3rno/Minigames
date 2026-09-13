@@ -80,7 +80,7 @@ public class MinigamesModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<SpikeTrapEntity>> SPIKE_TRAP = register("spike_trap",
 			EntityType.Builder.<SpikeTrapEntity>of(SpikeTrapEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.4f, 0.9f));
 	public static final DeferredHolder<EntityType<?>, EntityType<FlavioClockCannonEntity>> FLAVIO_CLOCK_CANNON = register("flavio_clock_cannon",
-			EntityType.Builder.<FlavioClockCannonEntity>of(FlavioClockCannonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1f, 4.6f));
+			EntityType.Builder.<FlavioClockCannonEntity>of(FlavioClockCannonEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(0.8f, 4.6f));
 	public static final DeferredHolder<EntityType<?>, EntityType<CannonballEntity>> CANNONBALL = register("cannonball",
 			EntityType.Builder.<CannonballEntity>of(CannonballEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.6f, 0.6f));
 	public static final DeferredHolder<EntityType<?>, EntityType<FlavioSweeperEntity>> FLAVIO_SWEEPER = register("flavio_sweeper",

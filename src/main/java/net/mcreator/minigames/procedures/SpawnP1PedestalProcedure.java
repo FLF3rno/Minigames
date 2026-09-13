@@ -15,12 +15,14 @@ import java.util.ArrayList;
 
 public class SpawnP1PedestalProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			if (entityiterator instanceof Player) {
-				if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
-					if ((entityiterator.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
-						world.setBlock(BlockPos.containing(x, y, z), BuiltInRegistries.BLOCK
-								.getValue(Identifier.parse((("minigames:" + entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon + "_item_pedestal")).toLowerCase(java.util.Locale.ENGLISH))).defaultBlockState(), 3);
+		if (MinigamesModVariables.MapVariables.get(world).SpawnItems) {
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				if (entityiterator instanceof Player) {
+					if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
+						if ((entityiterator.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
+							world.setBlock(BlockPos.containing(x, y, z), BuiltInRegistries.BLOCK
+									.getValue(Identifier.parse((("minigames:" + entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon + "_item_pedestal")).toLowerCase(java.util.Locale.ENGLISH))).defaultBlockState(), 3);
+						}
 					}
 				}
 			}

@@ -417,5 +417,6 @@
   "item.minigames.spawn_bookling": "Spawn Bookling",
   "item.minigames.choice_bag_warrior": "Choice Bundle",
   "item.minigames.choice_bag_support": "Choice Bundle",
-  "item.minigames.choice_bag_thief": "Choice Bundle"
+  "item.minigames.choice_bag_thief": "Choice Bundle",
+  "attribute.minigames.item_size": "Luck"
 }

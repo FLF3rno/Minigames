@@ -7,13 +7,15 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.server.level.ServerLevel;
 
 public class FlavioClockCollidesProcedure {
-	public static void execute(LevelAccessor world, Entity sourceentity) {
-		if (sourceentity == null)
+	public static void execute(LevelAccessor world, Entity entity, Entity sourceentity) {
+		if (entity == null || sourceentity == null)
 			return;
-		{
-			Entity _ent = sourceentity;
-			if (_ent.level() instanceof ServerLevel _serverLevel) {
-				_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC)), 3);
+		if (sourceentity.getY() > entity.getY() + 1) {
+			{
+				Entity _ent = sourceentity;
+				if (_ent.level() instanceof ServerLevel _serverLevel) {
+					_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC)), 3);
+				}
 			}
 		}
 	}

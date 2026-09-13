@@ -104,7 +104,7 @@ public class LaserStatueEntity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		LaserStatueHurtProcedure.execute(world, x, y, z, entity);
+		LaserStatueHurtProcedure.execute(world, x, y, z, entity, amount);
 		return retval;
 	}
 

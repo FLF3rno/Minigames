@@ -32,7 +32,7 @@ public class SpawnFourRoomProcedureProcedure {
 			if (rng == 1) {
 				structureY = structureY - 1;
 			} else if (rng == 2) {
-				structureY = structureY - 2;
+				structureY = structureY - 21;
 			}
 			rotation = "none";
 			SpawnStructureDungeonProcedure.execute(world, Mth.nextInt(RandomSource.create(), 1, 999999999), structureX, structureY, structureZ, rotation, spawnRoomName);

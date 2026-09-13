@@ -17,6 +17,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModBlocks;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -24,11 +25,14 @@ public class FightDoorsBlockedCheckProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate) {
 		MinigamesMod.queueServerWork(20, () -> {
 			if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
-				if ((getDirectionFromBlockState(blockstate)) == Direction.WEST || (getDirectionFromBlockState(blockstate)) == Direction.EAST) {
-					if (Blocks.AIR == (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() && Blocks.AIR == (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock()) {
+				if ((getDirectionFromBlockState(blockstate)) == Direction.WEST && Blocks.AIR == (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock()
+						|| (getDirectionFromBlockState(blockstate)) == Direction.EAST && Blocks.AIR == (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock()
+						|| (getDirectionFromBlockState(blockstate)) == Direction.SOUTH && Blocks.AIR == (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock()
+						|| (getDirectionFromBlockState(blockstate)) == Direction.NORTH && Blocks.AIR == (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock()) {
+					if ((MinigamesModVariables.MapVariables.get(world).floorTypeDungeon).equals("church")) {
 						{
 							BlockPos _bp = BlockPos.containing(x, y, z);
-							BlockState _bs = MinigamesModBlocks.FIGHT_DOORS_BLOCKED.get().defaultBlockState();
+							BlockState _bs = Blocks.CHISELED_QUARTZ_BLOCK.defaultBlockState();
 							BlockState _bso = world.getBlockState(_bp);
 							for (Property<?> _propertyOld : _bso.getProperties()) {
 								Property _propertyNew = _bs.getBlock().getStateDefinition().getProperty(_propertyOld.getName());
@@ -55,9 +59,7 @@ public class FightDoorsBlockedCheckProcedure {
 								}
 							}
 						}
-					}
-				} else if ((getDirectionFromBlockState(blockstate)) == Direction.SOUTH || (getDirectionFromBlockState(blockstate)) == Direction.NORTH) {
-					if (Blocks.AIR == (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() && Blocks.AIR == (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock()) {
+					} else {
 						{
 							BlockPos _bp = BlockPos.containing(x, y, z);
 							BlockState _bs = MinigamesModBlocks.FIGHT_DOORS_BLOCKED.get().defaultBlockState();

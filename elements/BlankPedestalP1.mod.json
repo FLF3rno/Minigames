@@ -101,7 +101,7 @@
     "canRedstoneConnect": false,
     "hasCustomOpacity": true,
     "lightOpacity": 0,
-    "tickRate": 0,
+    "tickRate": 20,
     "tickRandomly": false,
     "isReplaceable": false,
     "canProvidePower": false,
@@ -158,6 +158,7 @@
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
     "onBlockAdded": "SpawnP1Pedestal",
+    "onTickUpdate": "SpawnP1Pedestal",
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

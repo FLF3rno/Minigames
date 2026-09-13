@@ -1,0 +1,14 @@
+{
+  "_fv": 89,
+  "_type": "attribute",
+  "definition": {
+    "name": "Luck",
+    "minValue": 0.01,
+    "maxValue": 100000.0,
+    "defaultValue": 1.0,
+    "sentiment": "POSITIVE",
+    "addToAllEntities": false,
+    "addToPlayers": true,
+    "entities": []
+  }
+}

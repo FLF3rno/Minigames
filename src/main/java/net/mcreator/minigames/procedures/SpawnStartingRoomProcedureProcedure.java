@@ -26,11 +26,14 @@ public class SpawnStartingRoomProcedureProcedure {
 		double structureY = 0;
 		if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("structure") instanceof BooleanProperty _withbp2 ? blockstate.setValue(_withbp2, true) : blockstate)) {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
-			spawnRoomName = "dungeon_start_generic";
+			spawnRoomName = "dungeon_start_" + MinigamesModVariables.MapVariables.get(world).floorTypeDungeon;
 			rotation = "none";
 			structureX = x;
 			structureY = y;
 			structureZ = z;
+			if ((MinigamesModVariables.MapVariables.get(world).floorTypeDungeon).equals("church")) {
+				structureY = structureY - 5;
+			}
 			if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _withbp7 ? blockstate.setValue(_withbp7, true) : blockstate)) {
 				structureX = structureX + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() - 1;
 				rotation = "clockwise_90";

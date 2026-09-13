@@ -113,12 +113,27 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			}
 		}
 
+		// Ensure available pool has at least diamond if empty
+		List<Item> reelPool = new ArrayList<>(classPool);
+		if (reelPool.isEmpty()) {
+			reelPool.add(net.minecraft.world.item.Items.DIAMOND);
+		}
+
+		// Pick distinct winning/finishing items for each column so choices never have duplicate items
+		List<Item> distinctChoices = new ArrayList<>(reelPool);
+		java.util.Collections.shuffle(distinctChoices, random);
+		Item[] winningItems = new Item[NUM_COLUMNS];
+		for (int col = 0; col < NUM_COLUMNS; col++) {
+			if (col < distinctChoices.size()) {
+				winningItems[col] = distinctChoices.get(col);
+			} else {
+				winningItems[col] = reelPool.get(random.nextInt(reelPool.size()));
+			}
+		}
+
 		for (int col = 0; col < NUM_COLUMNS; col++) {
 			ReelColumn reel = new ReelColumn();
-			reel.pool = new ArrayList<>(classPool);
-			if (reel.pool.isEmpty()) {
-				reel.pool.add(net.minecraft.world.item.Items.DIAMOND);
-			}
+			reel.pool = new ArrayList<>(reelPool);
 
 			int tapeSize = 90 + col * 20;
 			for (int i = 0; i < tapeSize; i++) {
@@ -126,6 +141,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			}
 
 			reel.targetIndex = tapeSize - 10;
+			reel.tape.set(reel.targetIndex, winningItems[col]);
 
 			reel.targetPosition = reel.targetIndex * ITEM_SPACING;
 			reel.totalDistance = reel.targetPosition;

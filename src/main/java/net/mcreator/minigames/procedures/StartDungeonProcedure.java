@@ -32,6 +32,7 @@ public class StartDungeonProcedure {
 		MinigamesModVariables.MapVariables.get(world).showBossBar = false;
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
+		MinigamesModVariables.MapVariables.get(world).SpawnItems = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof Level _level)
 			_level.getScoreboard().addPlayerTeam("dungeon_players");
@@ -47,7 +48,7 @@ public class StartDungeonProcedure {
 				_vars.backpackSlots = 3;
 				_vars.maxDashCooldown = 60;
 				_vars.dashLength = 1;
-				_vars.PassiveHealCooldown = 50;
+				_vars.PassiveHealCooldown = 65;
 				_vars.PassiveHealAmount = 1;
 				_vars.markSyncDirty();
 			}

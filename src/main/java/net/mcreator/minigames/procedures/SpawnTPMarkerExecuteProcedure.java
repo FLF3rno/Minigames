@@ -29,43 +29,43 @@ import io.netty.buffer.Unpooled;
 
 public class SpawnTPMarkerExecuteProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands()
-					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "tp @a ~ ~ ~");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "gamemode adventure @a");
-		if (!((findEntityInWorldRange(world, Player.class, x, y, z, 4)) instanceof Player _plr3 && _plr3.gameMode() == GameType.CREATIVE)) {
+		if (!((findEntityInWorldRange(world, Player.class, x, y, z, 4)) instanceof Player _plr1 && _plr1.gameMode() == GameType.CREATIVE)) {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "tp @a ~ ~ ~");
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "gamemode adventure @a");
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
-		}
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			if (entityiterator instanceof ServerPlayer _ent) {
-				BlockPos _bpos = BlockPos.containing(x, y, z);
-				_ent.openMenu(new MenuProvider() {
-					@Override
-					public Component getDisplayName() {
-						return Component.literal("ClassSelectionRoguelike");
-					}
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				if (entityiterator instanceof ServerPlayer _ent) {
+					BlockPos _bpos = BlockPos.containing(x, y, z);
+					_ent.openMenu(new MenuProvider() {
+						@Override
+						public Component getDisplayName() {
+							return Component.literal("ClassSelectionRoguelike");
+						}
 
-					@Override
-					public boolean shouldTriggerClientSideContainerClosingOnOpen() {
-						return false;
-					}
+						@Override
+						public boolean shouldTriggerClientSideContainerClosingOnOpen() {
+							return false;
+						}
 
-					@Override
-					public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-						return new ClassSelectionRoguelikeMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
-					}
-				}, _bpos);
+						@Override
+						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+							return new ClassSelectionRoguelikeMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+						}
+					}, _bpos);
+				}
 			}
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"execute as @e[type=item] unless items entity @s contents #minigames:dungeon_warrior unless items entity @s contents #minigames:dungeon_support unless items entity @s contents #minigames:dungeon_thief run kill @s");
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands()
+						.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "clear @a");
 		}
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"execute as @e[type=item] unless items entity @s contents #minigames:dungeon_warrior unless items entity @s contents #minigames:dungeon_support unless items entity @s contents #minigames:dungeon_thief run kill @s");
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands()
-					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "clear @a");
 	}
 
 	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range) {

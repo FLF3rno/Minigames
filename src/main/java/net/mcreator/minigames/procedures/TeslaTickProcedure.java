@@ -67,6 +67,7 @@ public class TeslaTickProcedure {
 					_entity.yBodyRotO = _entity.getYRot();
 					_entity.yHeadRotO = _entity.getYRot();
 				}
+				entity.setNoGravity(false);
 			}
 		} else if (entity.tickCount > 65) {
 			if (entity.tickCount % 30 == 0) {

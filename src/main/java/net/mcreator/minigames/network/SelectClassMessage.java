@@ -35,7 +35,6 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 					ApplyClassProcedure.execute(serverPlayer, message.selectedClass);
 
 					net.minecraft.server.level.ServerLevel serverLevel = (net.minecraft.server.level.ServerLevel) serverPlayer.level();
-					// Play ding sound to all players in the dimension whenever a player selects a class
 					for (ServerPlayer p : serverLevel.players()) {
 						serverLevel.playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.EXPERIENCE_ORB_PICKUP, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
 					}
@@ -60,7 +59,6 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 					}
 
 					if (allReady) {
-						// Hold for 2s (40 ticks), then play beacon activation sound and let screen fade out over 2s (40 ticks) before closing
 						MinigamesMod.queueServerWork(40, () -> {
 							for (ServerPlayer p : serverLevel.players()) {
 								serverLevel.playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
@@ -72,6 +70,8 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 									}
 								}
 							});
+							MinigamesModVariables.MapVariables.get(serverLevel).SpawnItems = true;
+							MinigamesModVariables.MapVariables.get(serverLevel).markSyncDirty();
 						});
 					}
 				}

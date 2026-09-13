@@ -4,9 +4,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.Identifier;
@@ -15,11 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
-import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.init.MinigamesModBlocks;
-import net.mcreator.minigames.MinigamesMod;
-
-import java.util.ArrayList;
 
 public class FightDoorsRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -113,14 +107,7 @@ public class FightDoorsRightclickedProcedure {
 				} else if (MinigamesModBlocks.MINIBOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 					StartVoteProcedure.execute(world, entity, entity, "miniboss room");
 				} else if (MinigamesModBlocks.BOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					PlayBossCutsceneProcedure.execute();
-					for (Entity entityiterator : new ArrayList<>(world.players())) {
-						if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 200, 1, false, false));
-					}
-					MinigamesMod.queueServerWork(200, () -> {
-						StartVoteProcedure.execute(world, entity, entity, "boss room");
-					});
+					StartVoteProcedure.execute(world, entity, entity, "boss room");
 				} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 					StartVoteProcedure.execute(world, entity, entity, "floor");
 				}

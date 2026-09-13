@@ -318,6 +318,7 @@ public class MinigamesModVariables {
 		public double bossNumber = 0;
 		public String bossName = "";
 		public boolean showBossBar = false;
+		public boolean SpawnItems = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -410,6 +411,7 @@ public class MinigamesModVariables {
 			bossNumber = nbt.getDoubleOr("bossNumber", 0);
 			bossName = nbt.getStringOr("bossName", "");
 			showBossBar = nbt.getBooleanOr("showBossBar", false);
+			SpawnItems = nbt.getBooleanOr("SpawnItems", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -503,6 +505,7 @@ public class MinigamesModVariables {
 			nbt.putDouble("bossNumber", bossNumber);
 			nbt.putString("bossName", bossName);
 			nbt.putBoolean("showBossBar", showBossBar);
+			nbt.putBoolean("SpawnItems", SpawnItems);
 			return nbt;
 		}
 

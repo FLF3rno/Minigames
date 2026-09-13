@@ -65,7 +65,7 @@ public class FlavioClockCannonRenderer extends MobRenderer<FlavioClockCannonEnti
 		public void setupAnim(LivingEntityRenderState state) {
 			this.root().getAllParts().forEach(ModelPart::resetPose);
 			FlavioClockCannonEntity entity = state.getRenderData(ENTITY_KEY);
-			this.keyframeAnimation0.apply(entity.animationState0, state.ageInTicks, 1f);
+			this.keyframeAnimation0.apply(entity.animationState0, state.ageInTicks, 2f);
 			super.setupAnim(state);
 		}
 	}

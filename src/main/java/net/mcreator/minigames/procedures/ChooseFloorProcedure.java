@@ -34,7 +34,7 @@ public class ChooseFloorProcedure {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-					_vars.minimumLightLevel = 8;
+					_vars.minimumLightLevel = 6;
 					_vars.maximumLightLevel = 15;
 					_vars.markSyncDirty();
 				}

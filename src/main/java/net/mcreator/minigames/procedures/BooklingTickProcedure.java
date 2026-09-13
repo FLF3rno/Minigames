@@ -20,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import net.mcreator.minigames.entity.BooklingEntity;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.SpawnCustomParticleMessage;
 
 import java.util.ArrayList;
@@ -32,6 +33,19 @@ public class BooklingTickProcedure {
 			return;
 		if (world.isClientSide())
 			return;
+
+		if (entity instanceof LivingEntity living && living.hasEffect(MinigamesModMobEffects.STUNNED)) {
+			if (entity instanceof BooklingEntity bookling) {
+				if (bookling.aimTicks > 0) {
+					bookling.aimTicks = 0;
+					if (bookling.getEntityData().get(BooklingEntity.ANIM) == 1) {
+						bookling.getEntityData().set(BooklingEntity.ANIM, 1000);
+						bookling.getEntityData().set(BooklingEntity.ANIM, -2);
+					}
+				}
+			}
+			return;
+		}
 
 		ArrayList<Vec3> bookshelves = new ArrayList<>();
 		ArrayList<Vec3> selectedBookshelves = new ArrayList<>();

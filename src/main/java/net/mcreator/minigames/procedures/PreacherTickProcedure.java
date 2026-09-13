@@ -17,7 +17,8 @@ public class PreacherTickProcedure {
 			return;
 
 		if (entity instanceof PreacherEntity preacher) {
-			if (MinigamesModVariables.MapVariables.get(preacher.level()).currentRoomID != preacher.getEntityData().get(PreacherEntity.DATA_ID)) {
+			int roomID = preacher.getRoomID();
+			if (roomID > 0 && MinigamesModVariables.MapVariables.get(preacher.level()).currentRoomID != roomID) {
 				preacher.getEntityData().set(PreacherEntity.DATA_cooldown, 0);
 				return;
 			}

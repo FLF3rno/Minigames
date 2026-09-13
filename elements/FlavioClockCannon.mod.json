@@ -25,12 +25,12 @@
     "animations": [
       {
         "animation": "CUSTOM:flavio_clock_cannonAnimation.shoot",
-        "speed": 1.0,
+        "speed": 2.0,
         "walking": false,
         "amplitude": 1.0
       }
     ],
-    "modelWidth": 1.0,
+    "modelWidth": 0.8,
     "modelHeight": 4.6,
     "modelShadowSize": 0.5,
     "mountedYOffset": 0.0,
@@ -66,7 +66,7 @@
     "armorBaseValue": 0.0,
     "trackingRange": 64,
     "followRange": 16,
-    "health": 200,
+    "health": 90,
     "xpAmount": 0,
     "waterMob": false,
     "breatheUnderwater": {
@@ -84,7 +84,7 @@
     "canControlStrafe": false,
     "immuneToFire": false,
     "immuneToArrows": false,
-    "immuneToFallDamage": false,
+    "immuneToFallDamage": true,
     "immuneToCactus": false,
     "immuneToDrowning": false,
     "immuneToLightning": false,

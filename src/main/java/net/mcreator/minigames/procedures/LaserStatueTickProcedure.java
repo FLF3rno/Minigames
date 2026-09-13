@@ -31,29 +31,43 @@ public class LaserStatueTickProcedure {
 		boolean attack = false;
 		boolean telegraph = false;
 
+		if (entity instanceof LivingEntity _living && _living.hasEffect(MinigamesModMobEffects.STUNNED)) {
+			return;
+		}
+
 		int cycleTick = entity.tickCount % 90;
 		if (!(entity.getEntityData().get(LaserStatueEntity.DATA_active))) { cycleTick = 0;}
-		if (entity.getEntityData().get(LaserStatueEntity.DATA_active) && MinigamesModVariables.MapVariables.get(world).currentRoomID == entity.getPersistentData().getDoubleOr("DataID", 0)) {
-		if (cycleTick == 50) {
-			telegraph = true;
+
+		int roomID = (int) entity.getPersistentData().getDoubleOr("DataID", 0);
+		if (roomID == 0) {
+			roomID = entity.getPersistentData().getIntOr("DataID", 0);
 		}
 
-		if (cycleTick == 89) {
-			attack = true;
-		}
+		boolean inCurrentRoom = MinigamesModVariables.MapVariables.get(world).inCombat
+				&& roomID > 0
+				&& (int) MinigamesModVariables.MapVariables.get(world).currentRoomID == roomID;
 
-		Vec3 start = new Vec3(entity.getX(), entity.getY() + 1.5, entity.getZ());
+		if (entity.getEntityData().get(LaserStatueEntity.DATA_active) && inCurrentRoom) {
+			if (cycleTick == 50) {
+				telegraph = true;
+			}
 
-		if (attack || telegraph) {
+			if (cycleTick == 89) {
+				attack = true;
+			}
 
-			for (Entity targetPlayer : new ArrayList<>(world.players())) {
-				if (targetPlayer instanceof LivingEntity _livingTarget && _livingTarget.hasEffect(MinigamesModMobEffects.BLESSED)) {
-					continue;
-				}
+			Vec3 start = new Vec3(entity.getX(), entity.getY() + 1.5, entity.getZ());
 
-				Vec3 direction = targetPlayer.position().subtract(start);
-				if (direction.lengthSqr() < 1.0E-6D) {
-					direction = new Vec3(0, 0, 1);
+			if (attack || telegraph) {
+				// Only target players within 32 blocks (inside the room), not across the whole world
+				for (Player targetPlayer : world.getEntitiesOfClass(Player.class, entity.getBoundingBox().inflate(32.0D))) {
+					if (targetPlayer.isCreative() || targetPlayer.isSpectator() || !targetPlayer.isAlive() || targetPlayer.hasEffect(MinigamesModMobEffects.BLESSED)) {
+						continue;
+					}
+
+					Vec3 direction = targetPlayer.position().subtract(start);
+					if (direction.lengthSqr() < 1.0E-6D) {
+						direction = new Vec3(0, 0, 1);
 				} else {
 					direction = direction.normalize();
 				}

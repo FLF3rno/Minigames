@@ -10442,7 +10442,7 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
+            "name": "sourceentity",
             "type": "entity"
           },
           {
@@ -14160,6 +14160,10 @@
       "metadata": {
         "dependencies": [
           {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
             "name": "sourceentity",
             "type": "entity"
           },
@@ -14356,7 +14360,7 @@
       "name": "SpawnTwoMachines",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "spawn_two_machines",
       "metadata": {
         "dependencies": [
@@ -14816,6 +14820,10 @@
             "type": "entity"
           },
           {
+            "name": "amount",
+            "type": "number"
+          },
+          {
             "name": "x",
             "type": "number"
           },
@@ -15166,6 +15174,17 @@
         ]
       },
       "path": "~/Dungeon/Cutscene"
+    },
+    {
+      "name": "ItemSize",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "item_size",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
     }
   ],
   "variable_elements": [
@@ -16014,6 +16033,12 @@
       "type": "number",
       "scope": "player_persistent",
       "value": "15.0"
+    },
+    {
+      "name": "SpawnItems",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -16619,7 +16644,10 @@
     ],
     "ENTITIES:mod:marker": [
       "CUSTOM:PlagueMiddle",
-      "CUSTOM:StunnedEffect"
+      "CUSTOM:StunnedEffect",
+      "CUSTOM:FlavioTrapdoor",
+      "CUSTOM:FlavioTrapdoor2",
+      "CUSTOM:FlavioTrapdoor3"
     ],
     "ITEMS:mod:dungeon_type_utility": [
       "CUSTOM:VolleyBomb",
@@ -16731,7 +16759,10 @@
       "CUSTOM:Flavio"
     ],
     "ENTITIES:mod:tint_immune": [
-      "CUSTOM:FlavioOmegaLaser"
+      "CUSTOM:FlavioOmegaLaser",
+      "CUSTOM:FlavioTrapdoor",
+      "CUSTOM:FlavioTrapdoor2",
+      "CUSTOM:FlavioTrapdoor3"
     ],
     "ITEMS:minecraft:head_armor": [
       "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
@@ -17198,7 +17229,8 @@
       "item.minigames.spawn_bookling": "Spawn Bookling",
       "item.minigames.choice_bag_warrior": "Choice Bundle",
       "item.minigames.choice_bag_support": "Choice Bundle",
-      "item.minigames.choice_bag_thief": "Choice Bundle"
+      "item.minigames.choice_bag_thief": "Choice Bundle",
+      "attribute.minigames.item_size": "Luck"
     }
   },
   "metadata": {

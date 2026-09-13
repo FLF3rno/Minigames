@@ -48,7 +48,9 @@ public class OmegaLaserTickProcedure {
 				_serverPlayer.connection.teleport(x, _ty, z, entity.getYRot(), entity.getXRot());
 			return;
 		}
-
+		if (entity.tickCount == 36) {
+			entity.setNoGravity(false);
+		}
 		int cycleTick = entity.tickCount % 120;
 
 		if (cycleTick == 0) {
@@ -95,7 +97,7 @@ public class OmegaLaserTickProcedure {
 			}
 		}
 
-		Player player = (Player) findEntityInWorldRange(world, Player.class, x, y, z, 60, e -> !(e instanceof LivingEntity living && living.hasEffect(MinigamesModMobEffects.BLESSED)));
+		Player player = (Player) findFurthestEntityInWorldRange(world, Player.class, x, y, z, 60, e -> !(e instanceof LivingEntity living && living.hasEffect(MinigamesModMobEffects.BLESSED)));
 		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5.4, entity.getZ());
 
 		if (tracking && player != null) {
@@ -190,6 +192,13 @@ public class OmegaLaserTickProcedure {
 				_vars.markSyncDirty();
 			}
 		}
+	}
+
+	private static Entity findFurthestEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range, java.util.function.Predicate<Entity> predicate) {
+		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), predicate).stream()
+				.filter(e -> e.isAlive() && (!(e instanceof Player p) || !p.isSpectator()))
+				.max(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z)))
+				.orElse(null);
 	}
 
 	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range, java.util.function.Predicate<Entity> predicate) {

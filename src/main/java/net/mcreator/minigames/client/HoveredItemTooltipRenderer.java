@@ -320,21 +320,28 @@ public class HoveredItemTooltipRenderer {
         int secondPanelTop = baseTop + panel1Height + gap;
         renderTooltipPanel(matrix, bufferSource, 0, secondPanelTop, maxWidth + PADDING_X * 2, secondPanelTop + panel2Height);
 
-        poseStack.translate(0.0F, 0.0F, 0.01F);
+        if (!definitions.isEmpty()) {
+            int definitionLeft = maxWidth + PADDING_X * 2 + 8;
+            int definitionTop = baseTop;
+            WorldTooltipDefinitions.renderDefinitions(matrix, bufferSource, font, definitions, definitionLeft, definitionTop);
+        }
+
+        // Flush background panels before rendering text so Sodium/Iris does not reorder text behind panels
+        bufferSource.endBatch(textBackgroundSeeThrough());
+
+        poseStack.translate(0.0F, 0.0F, 0.05F);
         matrix = poseStack.last().pose();
 
         for (int i = 0; i < tooltip.size(); i++) {
             Component line = styleWorldTooltipLine(tooltip.get(i), itemEntity.getItem(), classInfo);
             float lineX = PADDING_X + 1;
             float lineY = PADDING_Y + getLineY(i) + 1;
-            font.drawInBatch(line, lineX, lineY, TEXT_COLOR, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
+            font.drawInBatch(line, lineX, lineY, TEXT_COLOR, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
                     15728880);
         }
 
         if (!definitions.isEmpty()) {
-            int definitionLeft = maxWidth + PADDING_X * 2 + 8;
-            int definitionTop = baseTop;
-            WorldTooltipDefinitions.renderDefinitions(matrix, bufferSource, font, definitions, definitionLeft, definitionTop);
+            WorldTooltipDefinitions.drawDefinitionText(matrix, bufferSource, font, definitions, maxWidth + PADDING_X * 2 + 8, baseTop);
         }
 
         float fullWidth = maxWidth + PADDING_X * 2;
@@ -342,7 +349,7 @@ public class HoveredItemTooltipRenderer {
             Component prompt = (!canPickUp || full || !isRelic) ? Component.literal(fullPrompt).setStyle(promptStyle) : createRelicGradientText(fullPrompt);
             float promptX = (fullWidth - font.width(prompt)) / 2.0f;
             float promptY = secondPanelTop + PADDING_Y + 1;
-            font.drawInBatch(prompt, promptX, promptY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
+            font.drawInBatch(prompt, promptX, promptY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
                     15728880);
         } else {
             Component line1, line2;
@@ -365,9 +372,9 @@ public class HoveredItemTooltipRenderer {
             float line2X = (fullWidth - font.width(line2)) / 2.0f;
             float line1Y = secondPanelTop + PADDING_Y + 1;
             float line2Y = secondPanelTop + PADDING_Y + LINE_HEIGHT + 1;
-            font.drawInBatch(line1, line1X, line1Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
+            font.drawInBatch(line1, line1X, line1Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
                     15728880);
-            font.drawInBatch(line2, line2X, line2Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
+            font.drawInBatch(line2, line2X, line2Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
                     15728880);
         }
 

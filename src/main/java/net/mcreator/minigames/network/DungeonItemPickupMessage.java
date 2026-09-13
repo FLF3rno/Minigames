@@ -62,7 +62,10 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		}
 
 		ItemStack entityStack = itemEntity.getItem();
+		tryPickupStack(player, entityStack, itemEntity);
+	}
 
+	public static void tryPickupStack(ServerPlayer player, ItemStack entityStack, ItemEntity itemEntity) {
 		if (!DungeonItemAccess.isDungeonItem(entityStack)) {
 			return;
 		}
@@ -80,13 +83,18 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 						tag -> tag.putDouble("forged", tag.getDoubleOr("forged", 0) + 10));
 			}
 		}
+
+		double px = itemEntity != null ? itemEntity.getX() : player.getX();
+		double py = itemEntity != null ? itemEntity.getY() : player.getY();
+		double pz = itemEntity != null ? itemEntity.getZ() : player.getZ();
+
 		ItemPickedUpDungeonProcedure.execute(
 			player.level(),
-    		itemEntity.getX(), 
-    		itemEntity.getY(), 
-    		itemEntity.getZ(), 
+			px, 
+			py, 
+			pz, 
 			player,
-    		entityStack
+			entityStack
 		);
 
 		int inserted;
@@ -94,29 +102,45 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		if (isRelic) {
 			inserted = tryInsertRelic(player.getInventory(), entityStack.copy());
 			if (inserted <= 0) {
-				player.sendSystemMessage(Component.literal("§cRELIC SLOTS FULL"), true);
-				return;
+				if (itemEntity != null) {
+					player.sendSystemMessage(Component.literal("§cRELIC SLOTS FULL"), true);
+					return;
+				} else if (!insertIntoBackpackSlot(player, entityStack)) {
+					player.drop(entityStack, false);
+					inserted = entityStack.getCount();
+				} else {
+					inserted = entityStack.getCount();
+				}
 			}
 		} else {
 			if (isInventoryFull(player)) {
-				player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
-				return;
+				if (itemEntity != null) {
+					player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
+					return;
+				} else if (!insertIntoAvailableSlot(player, entityStack)) {
+					player.drop(entityStack, false);
+					inserted = entityStack.getCount();
+				} else {
+					inserted = entityStack.getCount();
+				}
+			} else {
+				ItemStack remaining = entityStack.copy();
+				player.getInventory().add(remaining);
+				inserted = entityStack.getCount() - remaining.getCount();
 			}
-
-			ItemStack remaining = entityStack.copy();
-			player.getInventory().add(remaining);
-			inserted = entityStack.getCount() - remaining.getCount();
 		}
 
 		if (inserted <= 0) {
 			return;
 		}
 
-		if (inserted >= entityStack.getCount()) {
-			itemEntity.discard();
-		} else {
-			entityStack.shrink(inserted);
-			itemEntity.setItem(entityStack);
+		if (itemEntity != null) {
+			if (inserted >= entityStack.getCount()) {
+				itemEntity.discard();
+			} else {
+				entityStack.shrink(inserted);
+				itemEntity.setItem(entityStack);
+			}
 		}
 
 		player.containerMenu.broadcastChanges();
@@ -124,6 +148,41 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		float pitch = ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F;
 		player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F, pitch);
+	}
+
+	public static boolean insertIntoBackpackSlot(ServerPlayer player, ItemStack stack) {
+		Inventory inv = player.getInventory();
+		double backpackSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots;
+		int backpackSlots = Math.max(0, Math.min(25, (int) backpackSlotsVal));
+		for (int i = 0; i < backpackSlots; i++) {
+			int slotIndex = 9 + i;
+			if (slotIndex < 36 && inv.getItem(slotIndex).isEmpty()) {
+				inv.setItem(slotIndex, stack);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean insertIntoAvailableSlot(ServerPlayer player, ItemStack stack) {
+		Inventory inv = player.getInventory();
+		double playerSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
+		int hotbarSlots = Math.max(0, Math.min(9, (int) playerSlotsVal));
+
+		// 1. Hotbar first (slots 0 to hotbarSlots - 1)
+		for (int i = 0; i < hotbarSlots; i++) {
+			if (inv.getItem(i).isEmpty()) {
+				inv.setItem(i, stack);
+				return true;
+			}
+		}
+
+		// 2. Backpack slots (slots 9 to 9 + backpackSlots - 1)
+		if (insertIntoBackpackSlot(player, stack)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private static boolean isInventoryFull(ServerPlayer player) {

@@ -11,7 +11,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
@@ -34,7 +33,8 @@ public class TheFinisherItem extends Item {
 						.add(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "the_finisher_1"), -1.4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 						.add(MinigamesModAttributes.SALVAGE_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "the_finisher_2"), 35, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 						.add(MinigamesModAttributes.ATTACK_COOLDOWN, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "the_finisher_3"), 100, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-						.add(MinigamesModAttributes.REPAIR_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "the_finisher_4"), 50, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
+						.add(MinigamesModAttributes.REPAIR_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "the_finisher_4"), 50, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+						.add(MinigamesModAttributes.ITEM_SIZE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "the_finisher_5"), 1.3, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
 	}
 
 	@Override
@@ -50,10 +50,9 @@ public class TheFinisherItem extends Item {
 	}
 
 	@Override
-	public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
-		boolean retval = super.onEntitySwing(itemstack, entity, hand);
-		TheFinisherSwingProcedure.execute(entity, itemstack);
-		return retval;
+	public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+		super.hurtEnemy(itemstack, entity, sourceentity);
+		TheFinisherSwingProcedure.execute(sourceentity, itemstack);
 	}
 
 	@Override

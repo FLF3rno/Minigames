@@ -17,7 +17,9 @@ public class FlavioMachineDestroyedProcedure {
 		if (!entity.level().isClientSide())
 			entity.discard();
 		ExplodeProcedure.execute(world, x, y, z, findEntityInWorldRange(world, Player.class, x, y, z, 20), true, true, 0, 0, 3, "normal");
-		if (net.mcreator.minigames.FlavioFightManager.phase == 3) {
+		if (net.mcreator.minigames.FlavioFightManager.phase > 2.9 && net.mcreator.minigames.FlavioFightManager.phase < 3.5) {
+			net.mcreator.minigames.FlavioFightManager.phase += 0.3;
+		} else if (net.mcreator.minigames.FlavioFightManager.phase > 0.9 && net.mcreator.minigames.FlavioFightManager.phase < 1.4) {
 			net.mcreator.minigames.FlavioFightManager.phase += 0.5;
 		} else {
 			net.mcreator.minigames.FlavioFightManager.nextPhase(world);

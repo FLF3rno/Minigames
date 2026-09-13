@@ -125,9 +125,21 @@ public class PreacherEntity extends Monster {
 		this.entityData.set(DATA_cooldown, valueInput.getIntOr("Datacooldown", 0));
 	}
 
+	public int getRoomID() {
+		int id = this.entityData.get(DATA_ID);
+		if (id == 0) {
+			id = this.getPersistentData().getIntOr("DataID", (int) this.getPersistentData().getDoubleOr("DataID", 0));
+			if (id != 0) {
+				this.entityData.set(DATA_ID, id);
+			}
+		}
+		return id;
+	}
+
 	@Override
 	public void baseTick() {
 		super.baseTick();
+		getRoomID();
 		PreacherTickProcedure.execute(this);
 	}
 

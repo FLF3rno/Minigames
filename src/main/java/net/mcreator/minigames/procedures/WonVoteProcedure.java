@@ -1,12 +1,18 @@
 package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.network.PlayScreenAnimationMessage;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
+
+import java.util.ArrayList;
 
 public class WonVoteProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -31,12 +37,14 @@ public class WonVoteProcedure {
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 6) {
 				StartRoomProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 7) {
-				StartRoomProcedure.execute(world);
-				if (world.isClientSide()) {
-					PlayBossCutsceneProcedure.execute();
+				for (Entity entityiterator : new ArrayList<>(world.players())) {
+					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+						_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 200, 1, false, false));
 				}
-				MinigamesMod.queueServerWork(50, () -> {
+				PlayScreenAnimationMessage.sendToAll(world, 150, "roguelike_boss", 1.0f);
+				MinigamesMod.queueServerWork(200, () -> {
 					StartBossProcedure.execute(world);
+					StartRoomProcedure.execute(world);
 				});
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {
 				StartRoomProcedure.execute(world);

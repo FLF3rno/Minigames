@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
+    "minigames:flavio_trapdoor_3",
+    "minigames:flavio_trapdoor_2",
     "minigames:plague_middle",
-    "minigames:stunned_effect"
+    "minigames:stunned_effect",
+    "minigames:flavio_trapdoor"
   ]
 }

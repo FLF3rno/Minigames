@@ -24,5 +24,6 @@ public class FailFlavioPhase2Procedure {
 				}
 			}
 		}
+		net.mcreator.minigames.FlavioFightManager.completePhase2(world);
 	}
 }

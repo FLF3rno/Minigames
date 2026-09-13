@@ -6,7 +6,6 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -28,7 +27,6 @@ import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.procedures.FlavioMachineDestroyedProcedure;
 import net.mcreator.minigames.procedures.FlavioMachineDamagedProcedure;
-import net.mcreator.minigames.procedures.FlavioClockCollidesProcedure;
 import net.mcreator.minigames.procedures.AntennaTickProcedure;
 
 public class FlavioAntennaEntity extends Monster {
@@ -117,9 +115,16 @@ public class FlavioAntennaEntity extends Monster {
 	}
 
 	@Override
-	public void playerTouch(Player sourceentity) {
-		super.playerTouch(sourceentity);
-		FlavioClockCollidesProcedure.execute(this.level(), sourceentity);
+	public boolean isPushable() {
+		return false;
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+	}
+
+	@Override
+	protected void pushEntities() {
 	}
 
 	@Override
@@ -158,7 +163,7 @@ public class FlavioAntennaEntity extends Monster {
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
 		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-		builder = builder.add(Attributes.MAX_HEALTH, 150);
+		builder = builder.add(Attributes.MAX_HEALTH, 80);
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);

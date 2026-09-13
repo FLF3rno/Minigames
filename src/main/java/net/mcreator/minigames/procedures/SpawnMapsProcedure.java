@@ -134,7 +134,7 @@ public class SpawnMapsProcedure {
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
 							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							"/execute in minigames:spleef_dimension run place template minigames:spleef_steampunk 1984 100 -16");
+							"/execute in minigames:spleef_dimension run place template minigames:spleef_steampunk_full 1923 81 -66");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
 							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),

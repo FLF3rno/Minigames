@@ -89,7 +89,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:AbilityRange",
-        "amount": 2.0,
+        "amount": 3.0,
         "operation": "ADD_VALUE"
       },
       {

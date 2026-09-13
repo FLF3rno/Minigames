@@ -74,6 +74,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	private boolean menuStateUpdateActive = false;
 	private float victoryFade;
 	private int victoryTicks;
+	private int keyPressCount;
 
 	public FlavioPhase2Screen(
 			FlavioPhase2Menu container,
@@ -175,6 +176,8 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 		if (!gameStarted || gameOver || victory || isClimbing)
 			return;
 
+		keyPressCount++;
+
 		if (playerGridX <= 0)
 			return;
 
@@ -185,6 +188,8 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	private void moveRight() {
 		if (!gameStarted || gameOver || victory || isClimbing)
 			return;
+
+		keyPressCount++;
 
 		if (playerGridX >= GRID_WIDTH - 1)
 			return;
@@ -953,6 +958,50 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 		return super.keyPressed(event);
 	}
 
+	private void renderKeybindTutorial(GuiGraphicsExtractor guiGraphics) {
+		if (gameOver || victory || rowsPassed >= 3 || keyPressCount >= 6) {
+			return;
+		}
+
+		Minecraft minecraft = Minecraft.getInstance();
+		Component leftKey = minecraft.options.keyLeft.getTranslatedKeyMessage();
+		Component rightKey = minecraft.options.keyRight.getTranslatedKeyMessage();
+
+		String leftStr = leftKey.getString();
+		String rightStr = rightKey.getString();
+
+		float pulse = (float) (Math.sin(ticksOpen * 0.2f) * 3f);
+
+		int playerCenterX = Math.round(playerVisualX + PLAYER_SIZE / 2f);
+		int playerCenterY = Math.round(playerVisualY + PLAYER_SIZE / 2f);
+
+		Component leftPrompt = Component.literal("\u25C0 [" + leftStr + "]");
+		int leftWidth = minecraft.font.width(leftPrompt);
+		int leftX = playerCenterX - (int) (PLAYER_SIZE / 2f) - leftWidth - 14 + (int) pulse;
+		int leftY = playerCenterY - 6;
+
+		Component rightPrompt = Component.literal("[" + rightStr + "] \u25B6");
+		int rightWidth = minecraft.font.width(rightPrompt);
+		int rightX = playerCenterX + (int) (PLAYER_SIZE / 2f) + 14 - (int) pulse;
+		int rightY = playerCenterY - 6;
+
+		guiGraphics.fill(leftX - 4, leftY - 3, leftX + leftWidth + 4, leftY + 12, 0xAA000000);
+		guiGraphics.fill(leftX - 4, leftY - 3, leftX + leftWidth + 4, leftY - 2, 0xFF09E2F6);
+		guiGraphics.text(minecraft.font, leftPrompt, leftX, leftY, 0xFFFFFFFF, false);
+
+		guiGraphics.fill(rightX - 4, rightY - 3, rightX + rightWidth + 4, rightY + 12, 0xAA000000);
+		guiGraphics.fill(rightX - 4, rightY - 3, rightX + rightWidth + 4, rightY - 2, 0xFF09E2F6);
+		guiGraphics.text(minecraft.font, rightPrompt, rightX, rightY, 0xFFFFFFFF, false);
+
+		Component guideText = Component.literal("Use " + leftStr + " / " + rightStr + " to Move");
+		int guideWidth = minecraft.font.width(guideText);
+		int guideX = playerCenterX - guideWidth / 2;
+		int guideY = Math.round(playerVisualY + PLAYER_SIZE + 10);
+
+		guiGraphics.fill(guideX - 6, guideY - 3, guideX + guideWidth + 6, guideY + 12, 0xCC000000);
+		guiGraphics.text(minecraft.font, guideText, guideX, guideY, 0xFFF1F3BE, false);
+	}
+
 	@Override
 	public void extractRenderState(
 			GuiGraphicsExtractor guiGraphics,
@@ -964,6 +1013,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 		renderMaze(guiGraphics);
 		renderTrail(guiGraphics);
 		renderPlayer(guiGraphics);
+		renderKeybindTutorial(guiGraphics);
 		renderDeathZone(guiGraphics);
 		renderVictoryFade(guiGraphics);
 	}

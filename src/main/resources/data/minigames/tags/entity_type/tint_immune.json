@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minigames:flavio_omega_laser"
+    "minigames:flavio_omega_laser",
+    "minigames:flavio_trapdoor_3",
+    "minigames:flavio_trapdoor_2",
+    "minigames:flavio_trapdoor"
   ]
 }

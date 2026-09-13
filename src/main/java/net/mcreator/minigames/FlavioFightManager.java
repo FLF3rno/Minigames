@@ -7,11 +7,11 @@ import net.mcreator.minigames.entity.PlayerCageEntity;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.network.PlayScreenAnimationMessage;
 import net.mcreator.minigames.procedures.SpawnTwoMachinesProcedure;
 
 import net.mcreator.minigames.procedures.UpdateChunkProcedure;
 import net.mcreator.minigames.world.inventory.FlavioPhase2Menu;
-import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
@@ -70,9 +70,7 @@ public class FlavioFightManager {
 	}
 
 	private static void startPhase2(LevelAccessor world) {
-		if (!world.isClientSide()) {
-            AnimationScreenTrigger.startAnimation(300, "fade_in_ascend", 1f);
-        }
+		PlayScreenAnimationMessage.sendToAll(world, 300, "fade_in_ascend", 1f);
 
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			if (world instanceof ServerLevel level) {

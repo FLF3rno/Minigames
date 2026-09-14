@@ -99,6 +99,8 @@ public class MinigamesModEntities {
 			EntityType.Builder.<LaserStatueEntity>of(LaserStatueEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1f, 1f));
 	public static final DeferredHolder<EntityType<?>, EntityType<BooklingEntity>> BOOKLING = register("bookling",
 			EntityType.Builder.<BooklingEntity>of(BooklingEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.2f, 0.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<FlavioOmegaLaserScreenEntity>> FLAVIO_OMEGA_LASER_SCREEN = register("flavio_omega_laser_screen",
+			EntityType.Builder.<FlavioOmegaLaserScreenEntity>of(FlavioOmegaLaserScreenEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(0.6f, 1.8f));
 	// Start of user code block custom entities
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.1f, 0.1f));
@@ -139,6 +141,7 @@ public class MinigamesModEntities {
 		GravediggerMinibossEntity.init(event);
 		LaserStatueEntity.init(event);
 		BooklingEntity.init(event);
+		FlavioOmegaLaserScreenEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -172,5 +175,6 @@ public class MinigamesModEntities {
 		event.put(GRAVEDIGGER_MINIBOSS.get(), GravediggerMinibossEntity.createAttributes().build());
 		event.put(LASER_STATUE.get(), LaserStatueEntity.createAttributes().build());
 		event.put(BOOKLING.get(), BooklingEntity.createAttributes().build());
+		event.put(FLAVIO_OMEGA_LASER_SCREEN.get(), FlavioOmegaLaserScreenEntity.createAttributes().build());
 	}
 }

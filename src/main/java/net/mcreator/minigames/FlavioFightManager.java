@@ -8,6 +8,7 @@ import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.network.PlayScreenAnimationMessage;
+import net.mcreator.minigames.procedures.FlavioMachineDamagedProcedure;
 import net.mcreator.minigames.procedures.SpawnTwoMachinesProcedure;
 
 import net.mcreator.minigames.procedures.UpdateChunkProcedure;
@@ -50,11 +51,13 @@ public class FlavioFightManager {
 	public static int playersDoneP2 = 0;
 	public static int dispensersAlive = 2;
 	public static LivingEntity flavio;
+	public static int MachinesAlive = 5;
 
 	public static void reset() {
 		phase = 1;
 		dispensersAlive = 2;
 		playersDoneP2 = 0;
+		MachinesAlive = 2;
 	}
 	public static void nextPhase(LevelAccessor world) {
 		if (!world.isClientSide()) {
@@ -71,7 +74,6 @@ public class FlavioFightManager {
 
 	private static void startPhase2(LevelAccessor world) {
 		PlayScreenAnimationMessage.sendToAll(world, 300, "fade_in_ascend", 1f);
-
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			if (world instanceof ServerLevel level) {
 				Entity cage = MinigamesModEntities.PLAYER_CAGE.get().spawn(
@@ -140,6 +142,7 @@ public class FlavioFightManager {
 	}
 
 	private static void startPhase3(LevelAccessor world) {
+		MachinesAlive = 3;
 		if (!(world instanceof ServerLevel currentLevel))
 			return;
 
@@ -165,14 +168,18 @@ public class FlavioFightManager {
 	}
 
 	private static void startPhase5(LevelAccessor world) {
-		if (flavio != null) {
+		if (flavio != null && flavio.isAlive()) {
 			flavio.removeEffect(MinigamesModMobEffects.BLESSED);
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.maximumLightLevel = 15;
-				_vars.minimumLightLevel = 8;
-				_vars.markSyncDirty();
-			}
+		}
+		for (FlavioEntity fe : world.getEntitiesOfClass(FlavioEntity.class, new AABB(-500, -100, -500, 500, 300, 500), Entity::isAlive)) {
+			flavio = fe;
+			fe.removeEffect(MinigamesModMobEffects.BLESSED);
+		}
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			_vars.maximumLightLevel = 15;
+			_vars.minimumLightLevel = 8;
+			_vars.markSyncDirty();
 		}
 	}
 

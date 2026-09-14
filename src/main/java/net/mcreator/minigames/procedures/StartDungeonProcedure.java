@@ -44,6 +44,12 @@ public class StartDungeonProcedure {
 				_vars.showOnlyHearts = true;
 				_vars.playerInInventory = true;
 				_vars.canDash = true;
+				_vars.markSyncDirty();
+			}
+			MinigamesModVariables.MapVariables.get(world).dungeonCoins = 0;
+			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			{
+				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.playerSlots = 3;
 				_vars.backpackSlots = 3;
 				_vars.maxDashCooldown = 60;

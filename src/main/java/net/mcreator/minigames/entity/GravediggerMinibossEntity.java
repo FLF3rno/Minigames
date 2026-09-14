@@ -402,8 +402,8 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
-		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
-		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 0.15);
+		builder = builder.add(Attributes.STEP_HEIGHT, 2);
+		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 10.15);
 		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 3);
 		return builder;
 	}

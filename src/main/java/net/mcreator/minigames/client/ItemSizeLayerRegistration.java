@@ -21,7 +21,6 @@ public class ItemSizeLayerRegistration {
 
     static {
         try {
-            // Locate the layers field in LivingEntityRenderer
             for (Field f : net.minecraft.client.renderer.entity.LivingEntityRenderer.class.getDeclaredFields()) {
                 if (List.class.isAssignableFrom(f.getType())) {
                     f.setAccessible(true);
@@ -43,7 +42,6 @@ public class ItemSizeLayerRegistration {
                     @SuppressWarnings("unchecked")
                     List<RenderLayer<?, ?>> layers = (List<RenderLayer<?, ?>>) layersField.get(renderer);
                     if (layers != null) {
-                        // Replace existing PlayerItemInHandLayer with our CustomPlayerItemInHandLayer
                         int index = -1;
                         for (int i = 0; i < layers.size(); i++) {
                             if (layers.get(i) instanceof PlayerItemInHandLayer) {

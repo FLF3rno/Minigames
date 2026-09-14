@@ -418,5 +418,6 @@
   "item.minigames.choice_bag_warrior": "Choice Bundle",
   "item.minigames.choice_bag_support": "Choice Bundle",
   "item.minigames.choice_bag_thief": "Choice Bundle",
-  "attribute.minigames.item_size": "Luck"
+  "attribute.minigames.item_size": "Luck",
+  "entity.minigames.flavio_omega_laser_screen": "Flavio Omega Laser Screen"
 }

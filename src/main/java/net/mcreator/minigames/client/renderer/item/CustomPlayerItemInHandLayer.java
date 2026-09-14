@@ -53,7 +53,6 @@ public class CustomPlayerItemInHandLayer extends PlayerItemInHandLayer<AvatarRen
             return;
         }
 
-        // Custom third person render positioning so scaling occurs directly around the item in hand
         poseStack.pushPose();
         this.getParentModel().translateToHand(state, arm, poseStack);
         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));

@@ -15,21 +15,30 @@ public class BlessingDispenserEntityDiesProcedure {
 		Entity laser = null;
 		if (!world.isClientSide()) {
 			net.mcreator.minigames.FlavioFightManager.dispensersAlive--;
-		}
-		if (net.mcreator.minigames.FlavioFightManager.dispensersAlive <= 0) {
-			if (findEntityInWorldRange(world, FlavioOmegaLaserEntity.class, x, y, z, 60) != null) {
-				laser = findEntityInWorldRange(world, FlavioOmegaLaserEntity.class, x, y, z, 60);
-				ExplodeProcedure.execute(world, laser.getX(), laser.getY(), laser.getZ(), laser, true, true, 0, 1, 3, "normal");
-				if (!world.isClientSide()) {
-					net.mcreator.minigames.FlavioFightManager.nextPhase(world);
+			
+			boolean allDead = net.mcreator.minigames.FlavioFightManager.dispensersAlive <= 0;
+			if (!allDead) {
+				long aliveDispensers = world.getEntitiesOfClass(net.mcreator.minigames.entity.BlessingDispenserEntity.class, 
+						new AABB(new Vec3(x, y, z), new Vec3(x, y, z)).inflate(250), 
+						Entity::isAlive).size();
+				if (aliveDispensers <= 0) {
+					allDead = true;
 				}
-				if (!laser.level().isClientSide())
-					laser.discard();
+			}
+
+			if (allDead) {
+				net.mcreator.minigames.FlavioFightManager.nextPhase(world);
+
+				Entity laserEntity = findEntityInWorldRange(world, FlavioOmegaLaserEntity.class, x, y, z, 250);
+				if (laserEntity != null) {
+					ExplodeProcedure.execute(world, laserEntity.getX(), laserEntity.getY(), laserEntity.getZ(), laserEntity, true, true, 0, 1, 3, "normal");
+					laserEntity.discard();
+				}
 			}
 		}
 	}
 
 	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range) {
-		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), e -> true).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
+		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), Entity::isAlive).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
 	}
 }

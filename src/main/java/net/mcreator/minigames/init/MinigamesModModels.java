@@ -17,6 +17,7 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelsculklings.LAYER_LOCATION, Modelsculklings::createBodyLayer);
 		event.registerLayerDefinition(Modelboard.LAYER_LOCATION, Modelboard::createBodyLayer);
 		event.registerLayerDefinition(Modelcrown.LAYER_LOCATION, Modelcrown::createBodyLayer);
+		event.registerLayerDefinition(Modelomega_laser_screen.LAYER_LOCATION, Modelomega_laser_screen::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat.LAYER_LOCATION, Modelpewseat::createBodyLayer);
 		event.registerLayerDefinition(Modelplayer_cage.LAYER_LOCATION, Modelplayer_cage::createBodyLayer);
 		event.registerLayerDefinition(Modelarrowmodel.LAYER_LOCATION, Modelarrowmodel::createBodyLayer);

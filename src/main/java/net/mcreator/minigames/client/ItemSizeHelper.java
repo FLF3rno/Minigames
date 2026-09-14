@@ -10,10 +10,6 @@ import net.mcreator.minigames.init.MinigamesModAttributes;
 
 public class ItemSizeHelper {
 
-    /**
-     * Determines the scaling multiplier for an item based on its MinigamesModAttributes.ITEM_SIZE attribute modifier.
-     * Defaults to 1.0f (normal scale).
-     */
     public static float getItemScale(ItemStack stack, EquipmentSlot slot) {
         if (stack == null || stack.isEmpty()) {
             return 1.0f;

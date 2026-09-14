@@ -112,33 +112,14 @@ public class FlavioOmegaLaserRenderer extends MobRenderer<FlavioOmegaLaserEntity
 
             if (entity != null) {
                 this.keyframeAnimation0.apply(entity.animationState0, state.ageInTicks, 1.0F);
-                Player player = entity.level().getNearestPlayer(entity.getX(), entity.getY(), entity.getZ(), 60.0D,
-                        p -> p instanceof Player pl && !pl.isCreative() && !pl.isSpectator() && pl.isAlive() && !pl.hasEffect(net.mcreator.minigames.init.MinigamesModMobEffects.BLESSED));
-                if (player != null) {
-                    Vec3 eyes = entity.getEyePosition();
-                    Vec3 target = player.getEyePosition();
-                    double dx = target.x - eyes.x;
-                    double dy = target.y - eyes.y;
-                    double dz = target.z - eyes.z;
-                    double horizontal = Math.sqrt(dx * dx + dz * dz);
-                    float targetYaw = (float) Math.toDegrees(Math.atan2(dx, dz)) * -1.0F;
-                    float targetPitch = (float) -Math.toDegrees(Math.atan2(dy, horizontal)) + 14f;
-                    if (OmegaLaserTickProcedure.tracking) {
-                        this.smoothedYaw = Mth.approachDegrees(this.smoothedYaw, targetYaw, 2.0F);
-                        this.smoothedPitch = Mth.approachDegrees(this.smoothedPitch, targetPitch, 2.0F);
+                float targetYaw = entity.getHeadYaw();
+                float targetPitch = entity.getHeadPitch();
 
-                        this.head.yRot = this.smoothedYaw * ((float) Math.PI / 180F);
-                        this.head.xRot = this.smoothedPitch * ((float) Math.PI / 180F);
-                        lookX = targetPitch;
-                        lookY = targetYaw;
-                    } else if (OmegaLaserTickProcedure.tracking == false){
-                        this.head.yRot = (float) Math.toRadians(lookY);
-                        this.head.xRot = (float) Math.toRadians(lookX);
-                    }
+                this.smoothedYaw = Mth.approachDegrees(this.smoothedYaw, targetYaw, 5.0F);
+                this.smoothedPitch = Mth.approachDegrees(this.smoothedPitch, targetPitch, 5.0F);
 
-
-
-                }
+                this.head.yRot = this.smoothedYaw * ((float) Math.PI / 180F);
+                this.head.xRot = this.smoothedPitch * ((float) Math.PI / 180F);
             }
         }
 

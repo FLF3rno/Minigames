@@ -51,7 +51,7 @@ public class Modelflavio_omega_laser extends EntityModel<LivingEntityRenderState
 		PartDefinition cube_r4 = base.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(112, 0).addBox(-14.0F, -5.0F, -10.0F, 9.0F, 5.0F, 20.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(26.8F, 2.8F, 0.0F, 0.0F, 0.0F, 0.1745F));
 		PartDefinition body = laser.addOrReplaceChild("body", CubeListBuilder.create().texOffs(152, 92).addBox(-6.0F, -49.25F, -6.0F, 12.0F, 20.0F, 14.0F, new CubeDeformation(0.0F)).texOffs(152, 92)
-				.addBox(-6.0F, -7.25F, -5.0F, 12.0F, 26.0F, 14.0F, new CubeDeformation(0.0F)).texOffs(162, -6).addBox(-5.0F, -53.25F, -5.0F, 10.0F, 79.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -30.55F, 0.0F));
+				.addBox(-6.0F, -7.25F, -6.0F, 12.0F, 26.0F, 14.0F, new CubeDeformation(0.0F)).texOffs(162, -6).addBox(-5.0F, -53.25F, -5.0F, 10.0F, 79.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -30.55F, 0.0F));
 		PartDefinition head = laser.addOrReplaceChild("head",
 				CubeListBuilder.create().texOffs(80, 77).addBox(4.75F, -3.825F, -17.15F, 4.0F, 4.0F, 36.0F, new CubeDeformation(0.0F)).texOffs(58, 159).addBox(4.75F, -14.825F, -17.15F, 4.0F, 11.0F, 5.0F, new CubeDeformation(0.0F)).texOffs(80, 156)
 						.addBox(4.75F, -14.825F, -12.15F, 3.0F, 11.0F, 27.0F, new CubeDeformation(0.0F)).texOffs(72, 194).addBox(4.75F, -14.825F, 14.85F, 4.0F, 11.0F, 4.0F, new CubeDeformation(0.0F)).texOffs(80, 117)
@@ -66,7 +66,7 @@ public class Modelflavio_omega_laser extends EntityModel<LivingEntityRenderState
 						.addBox(0.75F, -12.325F, -45.15F, 3.0F, 6.0F, 11.0F, new CubeDeformation(0.0F)).texOffs(176, 234).addBox(-4.25F, -13.325F, -45.15F, 8.0F, 2.0F, 11.0F, new CubeDeformation(0.0F)).texOffs(176, 234)
 						.addBox(-4.25F, -8.325F, -45.15F, 8.0F, 2.0F, 11.0F, new CubeDeformation(0.0F)),
 				PartPose.offset(0.25F, -79.975F, 0.15F));
-		PartDefinition progress = head.addOrReplaceChild("progress", CubeListBuilder.create().texOffs(0, 33).addBox(-8.5F, -8.5F, -27.5F, 17.0F, 17.0F, 27.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.25F, -8.825F, 15.35F));
+		PartDefinition progress = head.addOrReplaceChild("progress", CubeListBuilder.create().texOffs(0, 33).addBox(-8.5F, -8.5F, -13.5F, 17.0F, 17.0F, 27.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.25F, -8.825F, 1.35F));
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 

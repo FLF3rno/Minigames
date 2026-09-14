@@ -27,19 +27,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class OmegaLaserTickProcedure {
-	public static boolean tracking;
-	private static float lockedYaw;
-	private static float bodyYaw;
-	private static float lockedPitch;
-	private static Vec3 lockedTarget = null;
 	private static final Identifier BEAM = Identifier.fromNamespaceAndPath("minigames", "textures/entities/beam_renderer/omega_laser_beam.png");
 
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-
-		boolean attack = false;
-		boolean telegraph = false;
 
 		if (entity.tickCount < 35) {
 			double _ty = y + 0.12;
@@ -51,127 +43,87 @@ public class OmegaLaserTickProcedure {
 		if (entity.tickCount == 36) {
 			entity.setNoGravity(false);
 		}
-		int cycleTick = entity.tickCount % 120;
+	}
 
-		if (cycleTick == 0) {
-			if (entity instanceof FlavioOmegaLaserEntity laser) {
-				laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 1000);
-				laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
-				if (world instanceof Level _level) {
-					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_windup")), SoundSource.HOSTILE, 4, 0.9f);
-					}
-				}
-			}
-			tracking = true;
-			bodyYaw = entity.getYRot();
-		} else if (cycleTick == 60) {
-			tracking = false;
-			lockedYaw = entity.getYRot();
-			lockedPitch = entity.getXRot();
-		}
+	public static void fireLaser(Level level, FlavioOmegaLaserEntity laser) {
+		if (laser == null || level == null) return;
 
-		if (cycleTick >= 60 && cycleTick < 90) {
-			telegraph = true;
-		}
+		double x = laser.getX();
+		double y = laser.getY();
+		double z = laser.getZ();
 
-		if (cycleTick == 90) {
-			attack = true;
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				ApplyScreenshakeProcedure.execute(1, 30);
-			}
+		// Trigger fire animation
+		laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 1000);
+		laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
 
-		}
-		if (cycleTick == 90) {
-			AffectLightingMin(world, -8);
-			AffectLightingMax(world, -8);
-			if (world.isClientSide()) {
-				UpdateChunkProcedure.execute(x, z);
-			}
-		}
-		if (cycleTick >= 111 && cycleTick <= 118) {
-			AffectLightingMin(world, 1);
-			AffectLightingMax(world, 1);
-			if (world.isClientSide()) {
-				UpdateChunkProcedure.execute(x, z);
-			}
-		}
+		// Calculate beam direction based on cannon body rotation + head yaw & pitch
+		float totalYaw = laser.getYRot() + laser.getHeadYaw();
+		float totalPitch = laser.getHeadPitch();
 
-		Player player = (Player) findFurthestEntityInWorldRange(world, Player.class, x, y, z, 60, e -> !(e instanceof LivingEntity living && living.hasEffect(MinigamesModMobEffects.BLESSED)));
-		Vec3 start = new Vec3(entity.getX(), entity.getY() + 5.4, entity.getZ());
-
-		if (tracking && player != null) {
-			lockedTarget = player.getEyePosition();
-		}
-
-		if (lockedTarget == null) {
-			if (player != null) {
-				lockedTarget = player.getEyePosition();
-			} else {
-				lockedTarget = start.add(entity.getLookAngle().scale(30.0));
-			}
-		}
-
-		Vec3 direction = lockedTarget.subtract(start);
-		if (direction.lengthSqr() < 1.0E-6D) {
-			direction = new Vec3(0, 0, 1);
-		} else {
-			direction = direction.normalize();
-		}
+		Vec3 start = new Vec3(x, y + 5.4, z);
+		Vec3 direction = Vec3.directionFromRotation(totalPitch, totalYaw);
 
 		double maxDistance = 128.0;
 		Vec3 end = start.add(direction.scale(maxDistance));
-		BlockHitResult blockHit = world.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
+		BlockHitResult blockHit = level.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, laser));
 		if (blockHit.getType() == HitResult.Type.BLOCK) {
 			end = blockHit.getLocation();
 		}
 
-		AABB box = new AABB(start, end).inflate(1.0);
-		List<Entity> candidates = world.getEntities(
+		AABB box = new AABB(start, end).inflate(1.5);
+		List<Entity> candidates = level.getEntities(
 				(Entity) null,
 				box,
-				e -> e instanceof LivingEntity && e.isAlive() && e != entity
+				e -> e instanceof LivingEntity && e.isAlive() && e != laser
 		);
 		List<Entity> hits = new ArrayList<>();
 
 		for (Entity e : candidates) {
-			AABB bb = e.getBoundingBox().inflate(0.3);
+			AABB bb = e.getBoundingBox().inflate(0.5);
 			Optional<Vec3> intersection = bb.clip(start, end);
 			if (intersection.isPresent()) {
 				hits.add(e);
 			}
 		}
 
-		if (attack) {
-			for (Entity affectedEntity : hits) {
-				if (affectedEntity instanceof Player _player) {
-					if (!_player.hasEffect(MinigamesModMobEffects.BLESSED)) {
-						if (world instanceof ServerLevel serverLevel) {
-							_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 7.0F);
-						}
-					}
-				} else {
-					if (world instanceof ServerLevel serverLevel && affectedEntity instanceof LivingEntity livingEntity) {
-						if (!livingEntity.hasEffect(MinigamesModMobEffects.BLESSED)) {
-							affectedEntity.hurtServer(serverLevel, serverLevel.damageSources().generic(), 100000.0F);
-						}
+		for (Entity affectedEntity : hits) {
+			if (affectedEntity instanceof Player _player) {
+				if (!_player.hasEffect(MinigamesModMobEffects.BLESSED)) {
+					if (level instanceof ServerLevel serverLevel) {
+						_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 7.0F);
 					}
 				}
-			}
-			if (entity instanceof LivingEntity livingEntity1) {
-				livingEntity1.removeEffect(MinigamesModMobEffects.BLESSED);
-			}
-			RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 30, end.x, end.y, end.z, "beam", BEAM);
-			if (world instanceof Level _level) {
-				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_impact")), SoundSource.HOSTILE, 4, 1);
+			} else {
+				if (level instanceof ServerLevel serverLevel && affectedEntity instanceof LivingEntity livingEntity) {
+					if (!livingEntity.hasEffect(MinigamesModMobEffects.BLESSED)) {
+						affectedEntity.hurtServer(serverLevel, serverLevel.damageSources().generic(), 100000.0F);
+					}
 				}
 			}
 		}
 
-		if (telegraph) {
-			Vec3 end2 = new Vec3(end.x, end.y - 0.3f, end.z);
-			ParticleFlowHelperProcedure.execute(world, 100, 1, "linear", "minecraft:portal", end2, start);
+		if (laser instanceof LivingEntity livingEntity1) {
+			livingEntity1.removeEffect(MinigamesModMobEffects.BLESSED);
+		}
+
+		// Screenshake
+		for (Player p : level.players()) {
+			ApplyScreenshakeProcedure.execute(1, 30);
+		}
+
+		// Light and chunks
+		AffectLightingMin(level, -8);
+		AffectLightingMax(level, -8);
+		if (level.isClientSide()) {
+			UpdateChunkProcedure.execute(x, z);
+		}
+
+		// Render beam
+		RenderBeamXYZProcedure.execute(laser, true, start.x, start.y, start.z, 2, 30, end.x, end.y, end.z, "beam", BEAM);
+
+		// Sound
+		if (!level.isClientSide()) {
+			level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_impact")), SoundSource.HOSTILE, 4, 1);
 		}
 	}
 

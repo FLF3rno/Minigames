@@ -28,8 +28,6 @@ public class FirstPersonItemSizeHandler {
             try {
                 for (Method m : ItemInHandRenderer.class.getDeclaredMethods()) {
                     Class<?>[] params = m.getParameterTypes();
-                    // renderArmWithItem signature:
-                    // (AbstractClientPlayer, float, float, InteractionHand, float, ItemStack, float, PoseStack, SubmitNodeCollector, int)
                     if (params.length == 10
                         && params[0] == AbstractClientPlayer.class
                         && params[1] == float.class
@@ -75,7 +73,6 @@ public class FirstPersonItemSizeHandler {
             return;
         }
 
-        // Cancel vanilla rendering for this hand
         event.setCanceled(true);
 
         try {

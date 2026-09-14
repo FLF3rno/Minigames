@@ -59,7 +59,7 @@ public class Modelflavio_omega_laser<T extends Entity> extends EntityModel<T> {
 		PartDefinition body = laser.addOrReplaceChild("body",
 				CubeListBuilder.create().texOffs(152, 92)
 						.addBox(-6.0F, -49.25F, -6.0F, 12.0F, 20.0F, 14.0F, new CubeDeformation(0.0F)).texOffs(152, 92)
-						.addBox(-6.0F, -7.25F, -5.0F, 12.0F, 26.0F, 14.0F, new CubeDeformation(0.0F)).texOffs(162, -6)
+						.addBox(-6.0F, -7.25F, -6.0F, 12.0F, 26.0F, 14.0F, new CubeDeformation(0.0F)).texOffs(162, -6)
 						.addBox(-5.0F, -53.25F, -5.0F, 10.0F, 79.0F, 12.0F, new CubeDeformation(0.0F)),
 				PartPose.offset(0.0F, -30.55F, 0.0F));
 
@@ -90,8 +90,8 @@ public class Modelflavio_omega_laser<T extends Entity> extends EntityModel<T> {
 				PartPose.offset(0.25F, -79.975F, 0.15F));
 
 		PartDefinition progress = head.addOrReplaceChild("progress", CubeListBuilder.create().texOffs(0, 33)
-				.addBox(-8.5F, -8.5F, -27.5F, 17.0F, 17.0F, 27.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(-0.25F, -8.825F, 15.35F));
+				.addBox(-8.5F, -8.5F, -13.5F, 17.0F, 17.0F, 27.0F, new CubeDeformation(0.0F)),
+				PartPose.offset(-0.25F, -8.825F, 1.35F));
 
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}

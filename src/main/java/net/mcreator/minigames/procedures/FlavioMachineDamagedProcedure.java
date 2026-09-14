@@ -24,7 +24,7 @@ public class FlavioMachineDamagedProcedure {
 			HPamount = amount;
 		}
 		mult = (double) (flavio instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1);
-		mult = mult / 4;
+		mult = mult / 8;
 		if (flavio instanceof LivingEntity _entity)
 			_entity.setHealth((float) ((flavio instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) - mult * HPamount));
 	}

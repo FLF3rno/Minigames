@@ -45,7 +45,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	private static final float ROW_GAP = CELL_SIZE;
 	private static final float ROW_HEIGHT = CELL_SIZE + ROW_GAP;
 
-	private static final float MAZE_SCROLL_SPEED = 6.7f;
+	private static final float MAZE_SCROLL_SPEED = 6.8f;
 	private static final float PLAYER_TOP_LIMIT = 70f;
 	private static final float X_EASE = 0.35f;
 	private static final int CLIMB_DURATION_TICKS = 2;

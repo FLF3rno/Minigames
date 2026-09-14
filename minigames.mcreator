@@ -13535,7 +13535,7 @@
       "name": "BlessingDispenserTick",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "blessing_dispenser_tick",
       "metadata": {
         "dependencies": [
@@ -13824,7 +13824,7 @@
       "name": "FlavioMachineDestroyed",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "flavio_machine_destroyed",
       "metadata": {
         "dependencies": [
@@ -15185,6 +15185,21 @@
         "files": []
       },
       "path": "~/Dungeon/Items/Attributes"
+    },
+    {
+      "name": "FlavioOmegaLaserScreen",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "flavio_omega_laser_screen",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/FlavioOmegaLaserScreenRenderer.java",
+          "src/main/resources/assets/minigames/items/flavio_omega_laser_screen_spawn_egg.json",
+          "src/main/java/net/mcreator/minigames/entity/FlavioOmegaLaserScreenEntity.java"
+        ]
+      },
+      "path": "~/Dungeon/Boss/Flavio/Machines/Omega Laser"
     }
   ],
   "variable_elements": [
@@ -16620,7 +16635,8 @@
       "CUSTOM:FlavioOmegaLaser",
       "CUSTOM:GravediggerMiniboss",
       "CUSTOM:LaserStatue",
-      "CUSTOM:Bookling"
+      "CUSTOM:Bookling",
+      "CUSTOM:FlavioSweeper"
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel",
@@ -17230,7 +17246,8 @@
       "item.minigames.choice_bag_warrior": "Choice Bundle",
       "item.minigames.choice_bag_support": "Choice Bundle",
       "item.minigames.choice_bag_thief": "Choice Bundle",
-      "attribute.minigames.item_size": "Luck"
+      "attribute.minigames.item_size": "Luck",
+      "entity.minigames.flavio_omega_laser_screen": "Flavio Omega Laser Screen"
     }
   },
   "metadata": {

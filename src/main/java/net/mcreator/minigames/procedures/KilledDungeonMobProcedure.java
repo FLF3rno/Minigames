@@ -7,7 +7,6 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffects;
@@ -18,9 +17,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
 
-import net.mcreator.minigames.init.MinigamesModItems;
 import net.mcreator.minigames.init.MinigamesModBlocks;
-import net.mcreator.minigames.MinigamesMod;
 
 import javax.annotation.Nullable;
 
@@ -61,12 +58,8 @@ public class KilledDungeonMobProcedure {
 					world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.THIEF_ITEM_PEDESTAL.get().defaultBlockState(), 3);
 				}
 			}
-			if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.THE_FINISHER.get()) {
-				MinigamesMod.queueServerWork(1, () -> {
-					if (sourceentity instanceof Player _player)
-						_player.getCooldowns().addCooldown((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), 0);
-				});
-			}
+			if (!entity.level().isClientSide())
+				entity.discard();
 		}
 	}
 }

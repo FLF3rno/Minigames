@@ -47,8 +47,8 @@ public record PlayScreenAnimationMessage(int length, String animationType, float
 	}
 
 	public static void sendToAll(LevelAccessor world, int length, String animationType, float speed) {
-		if (world instanceof ServerLevel serverLevel) {
-			PacketDistributor.sendToPlayersInDimension(serverLevel, new PlayScreenAnimationMessage(length, animationType, speed));
+		if (world instanceof ServerLevel) {
+			PacketDistributor.sendToAllPlayers(new PlayScreenAnimationMessage(length, animationType, speed));
 		} else if (world.isClientSide()) {
 			AnimationScreenTrigger.startAnimation(length, animationType, speed);
 		}

@@ -41,7 +41,7 @@ public record FailFlavioPacketMessage(String extradata) implements CustomPacketP
 				if (!world.hasChunkAt(entity.blockPosition()))
 					return;
 
-				FailFlavioPhase2Procedure.execute(world);
+				FailFlavioPhase2Procedure.execute(world, entity);
 			}).exceptionally(e -> {
 				context.connection().disconnect(Component.literal(e.getMessage()));
 				return null;

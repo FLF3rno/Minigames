@@ -66,10 +66,28 @@ public final class DungeonItemAccess {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getIntOr("glitched", 0);
 	}
 	public static boolean isForged(ItemStack stack) {
-		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("isForged", false);
+		return isForged(stack, null);
 	}
+
+	public static boolean isForged(ItemStack stack, net.minecraft.world.entity.LivingEntity entity) {
+		return Forged(stack, entity) > 0 || stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("isForged", false);
+	}
+
 	public static int Forged(ItemStack stack) {
-		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getIntOr("forged", 0);
+		return Forged(stack, null);
+	}
+
+	public static int Forged(ItemStack stack, net.minecraft.world.entity.LivingEntity entity) {
+		int base = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getIntOr("forged", 0);
+		net.minecraft.world.entity.LivingEntity target = entity;
+		if (target == null) {
+			target = MinigamesMod.clientPlayer();
+		}
+		int extra = 0;
+		if (target != null && net.mcreator.minigames.procedures.CheckRelicProcedure.execute(target, new ItemStack(net.mcreator.minigames.init.MinigamesModItems.BLACKSMITH_HAMMER.get()))) {
+			extra += 10;
+		}
+		return base + extra;
 	}
 	//CONDITIONS per EFFECTS
 	public static boolean hasPhantom(ItemStack stack) {

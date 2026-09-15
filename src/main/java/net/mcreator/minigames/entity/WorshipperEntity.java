@@ -91,16 +91,52 @@ public class WorshipperEntity extends Monster {
 		return this.entityData.get(TEXTURE);
 	}
 
+	public int getRoomID() {
+		int id = this.entityData.get(DATA_ID);
+		if (id == 0) {
+			id = this.getPersistentData().getIntOr("DataID", (int) this.getPersistentData().getDoubleOr("DataID", 0));
+			if (id != 0) {
+				this.entityData.set(DATA_ID, id);
+			}
+		}
+		return id;
+	}
+
+	public boolean isCurrentRoomActive() {
+		int roomID = getRoomID();
+		return roomID <= 0 || net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(this.level()).currentRoomID == roomID;
+	}
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true) {
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, false) {
+			@Override
+			public boolean canUse() {
+				return WorshipperEntity.this.isCurrentRoomActive() && super.canUse();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return WorshipperEntity.this.isCurrentRoomActive() && super.canContinueToUse();
+			}
+
 			@Override
 			protected boolean canPerformAttack(LivingEntity entity) {
-				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) < (this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth()) && this.mob.getSensing().hasLineOfSight(entity);
+				return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= (this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth() + 1.5D);
 			}
 		});
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false) {
+			@Override
+			public boolean canUse() {
+				return WorshipperEntity.this.isCurrentRoomActive() && super.canUse();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return WorshipperEntity.this.isCurrentRoomActive() && super.canContinueToUse();
+			}
+		});
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(4, new FloatGoal(this));
 	}
@@ -153,6 +189,10 @@ public class WorshipperEntity extends Monster {
 	public void tick() {
 		super.tick();
 		if (!this.level().isClientSide()) {
+			if (!isCurrentRoomActive()) {
+				this.getNavigation().stop();
+				this.setTarget(null);
+			}
 			int localAttackCooldown = this.getPersistentData().getIntOr(LOCAL_ATTACK_COOLDOWN_KEY, 0);
 			if (localAttackCooldown > 0) {
 				this.getPersistentData().putInt(LOCAL_ATTACK_COOLDOWN_KEY, localAttackCooldown - 1);

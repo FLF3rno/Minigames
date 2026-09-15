@@ -77,20 +77,20 @@ public class ClockCannonTickProcedure {
 			}
 		} else if (entity.tickCount > 65) {
 			if (entity.tickCount == 66) { if (entity instanceof FlavioClockCannonEntity _ent3) { _ent3.getEntityData().set(FlavioClockCannonEntity.ANIM, 1000); _ent3.getEntityData().set(FlavioClockCannonEntity.ANIM, 0);}}
-			if (entity.tickCount % 16 == 0) {
+			if (entity.tickCount % 32 == 0) {
 				attack = true;
 				rotBonus -= 15;
 				if (rotBonus < 0)
 					rotBonus = 360;
 			}
-			if (entity.tickCount % 32 == 0) {
+			if (entity.tickCount % 64 == 0) {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(x, y + 2.5, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:clock_tick_1")), SoundSource.BLOCKS, (float) 0.3, (float) 1);
 					}
 				}
 			}
-			if (entity.tickCount % 32 == 16) {
+			if (entity.tickCount % 64 == 32) {
 				if (world instanceof Level _level) {
 					if (!_level.isClientSide()) {
 						_level.playSound(null, BlockPos.containing(x, y + 2.5, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:clock_tick_2")), SoundSource.BLOCKS, (float) 0.3, (float) 1);
@@ -101,7 +101,7 @@ public class ClockCannonTickProcedure {
 
 		if (attack) {
 			double yoffset = y + 1.5;
-			float damage = 20;
+			float damage = 15;
 			if (world instanceof ServerLevel projectileLevel) {
 				Projectile _entityToSpawn = initArrowProjectile(new CannonballEntity(MinigamesModEntities.CANNONBALL.get(), 0, 0, 0, projectileLevel, createArrowWeaponItemStack(projectileLevel, 1, (byte) 10)), entity, damage, true, false, false,
 						AbstractArrow.Pickup.DISALLOWED);

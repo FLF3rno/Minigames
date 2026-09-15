@@ -41,8 +41,7 @@ public class GetItemAttributeProcedure {
                 item.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 
         CompoundTag tag = customData.copyTag();
-
-        int forgedAmount = tag.getInt("forged").orElse(0);
+        int forgedAmount = net.mcreator.minigames.DungeonItemAccess.Forged(item);
         int glitchedAmount = tag.getInt("glitched").orElse(0);
 
         if (forgedAmount != 0) {

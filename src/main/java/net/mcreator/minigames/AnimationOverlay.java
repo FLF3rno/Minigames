@@ -1,5 +1,6 @@
 package net.mcreator.minigames;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
@@ -44,14 +45,25 @@ public class AnimationOverlay {
 
 					int sw = graphics.guiWidth();
 					int sh = graphics.guiHeight();
+					double guiScale = Minecraft.getInstance().getWindow().getGuiScale();
+					double targetScale = 3.0; // Standard reference GUI scale
+					float scaleFactor = (float) (guiScale / targetScale);
+
+					graphics.pose().pushMatrix();
+					graphics.pose().scale(scaleFactor, scaleFactor);
+
+					int virtualW = Math.round(sw / scaleFactor);
+					int virtualH = Math.round(sh / scaleFactor);
 
 					for (AnimationManager manager :
 							new ArrayList<>(ACTIVE_MANAGERS)) {
 
 						if (!manager.isFinished()) {
-							manager.render(graphics, sw, sh);
+							manager.render(graphics, virtualW, virtualH);
 						}
 					}
+
+					graphics.pose().popMatrix();
 
 					ACTIVE_MANAGERS.removeIf(AnimationManager::isFinished);
 

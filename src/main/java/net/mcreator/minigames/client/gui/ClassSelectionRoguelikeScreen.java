@@ -262,7 +262,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 
 				if (guiAlpha > 0.05f) {
 					renderClassSkinEntity(guiGraphics, cX + colW / 2, tooltipTop, tooltipBottom, colW, cDef);
-					renderClassPlayerHeads(guiGraphics, cDef.id(), cX, btnY, colW, btnH);
+					renderClassPlayerHeads(guiGraphics, cDef.id(), cX, btnY - 22, colW, 18);
 				}
 			}
 		} else {
@@ -291,9 +291,8 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			int btnH = 20;
 			int btnY = tooltipTop + tooltipH - btnH - 12;
 			if (guiAlpha > 0.05f) {
-				renderClassPlayerHeads(guiGraphics, cDef.id(), leftColX, btnY, leftColW, btnH);
+				renderClassPlayerHeads(guiGraphics, cDef.id(), leftColX, btnY - 22, leftColW, 18);
 			}
-
 			int rightPanelX = leftColRight + 14;
 			int rightPanelW = screenW - rightPanelX - 14;
 			int rightPanelRight = rightPanelX + rightPanelW;
@@ -456,7 +455,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 
 			int btnH = 20;
 			int btnY = tooltipTop + tooltipH - btnH - 12;
-			renderHeadTooltip(guiGraphics, cDef.id(), leftColX, btnY, leftColW, btnH, mouseX, mouseY);
+			renderHeadTooltip(guiGraphics, cDef.id(), leftColX, btnY - 22, leftColW, 18, mouseX, mouseY);
 		}
 
 		if (activeDetailIndex == -1) {
@@ -474,7 +473,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			for (int i = 0; i < colCount; i++) {
 				ClassDef cDef = classes.get(i);
 				int cX = startX + i * (colW + 16);
-				renderHeadTooltip(guiGraphics, cDef.id(), cX, btnY, colW, btnH, mouseX, mouseY);
+				renderHeadTooltip(guiGraphics, cDef.id(), cX, btnY - 22, colW, 18, mouseX, mouseY);
 			}
 		}
 	}

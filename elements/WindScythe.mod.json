@@ -91,6 +91,12 @@
         "attribute": "CUSTOM:ExtraDamage",
         "amount": 60.0,
         "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "default",
+        "attribute": "CUSTOM:ItemSize",
+        "amount": 1.2,
+        "operation": "ADD_VALUE"
       }
     ]
   }

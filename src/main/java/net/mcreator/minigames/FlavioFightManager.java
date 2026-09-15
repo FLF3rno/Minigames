@@ -43,30 +43,59 @@ import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @EventBusSubscriber
 public class FlavioFightManager {
 
 	public static float phase = 0;
+	public static boolean isFightActive = false;
 	public static int playersDoneP2 = 0;
+	public static final Set<UUID> completedPhase2Players = new HashSet<>();
 	public static int dispensersAlive = 2;
 	public static LivingEntity flavio;
 	public static int MachinesAlive = 5;
 
 	public static void reset() {
-		phase = 1;
+		phase = 0;
+		isFightActive = false;
 		dispensersAlive = 2;
 		playersDoneP2 = 0;
+		completedPhase2Players.clear();
 		MachinesAlive = 2;
+		flavio = null;
 	}
 	public static void nextPhase(LevelAccessor world) {
+		if (!isFightActive || phase < 1) {
+			return;
+		}
 		if (!world.isClientSide()) {
             phase++;
         }
 		switch ((int) phase) {
-			case 2: startPhase2(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
-			case 3: startPhase3(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
-			case 4: startPhase4(world); flavio.getEntityData().set(FlavioEntity.ANIM, 1000); flavio.getEntityData().set(FlavioEntity.ANIM, 1); break;
+			case 2: 
+				startPhase2(world); 
+				if (flavio != null && flavio.isAlive()) {
+					flavio.getEntityData().set(FlavioEntity.ANIM, 1000); 
+					flavio.getEntityData().set(FlavioEntity.ANIM, 1);
+				}
+				break;
+			case 3: 
+				startPhase3(world); 
+				if (flavio != null && flavio.isAlive()) {
+					flavio.getEntityData().set(FlavioEntity.ANIM, 1000); 
+					flavio.getEntityData().set(FlavioEntity.ANIM, 1);
+				}
+				break;
+			case 4: 
+				startPhase4(world); 
+				if (flavio != null && flavio.isAlive()) {
+					flavio.getEntityData().set(FlavioEntity.ANIM, 1000); 
+					flavio.getEntityData().set(FlavioEntity.ANIM, 1);
+				}
+				break;
 			case 5: startPhase5(world); break;
 			default: break;
 		}
@@ -183,23 +212,54 @@ public class FlavioFightManager {
 		}
 	}
 
-	public static void completePhase2(LevelAccessor world) {
-		if (!world.isClientSide()) {
-            playersDoneP2 ++;
-        }
-		if  (playersDoneP2 >= world.players().size()) {
+	public static void completePhase2(LevelAccessor world, Entity playerEntity) {
+		if (world.isClientSide()) {
+			return;
+		}
+
+		if (playerEntity instanceof LivingEntity living) {
+			living.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
+			living.removeEffect(MinigamesModMobEffects.BLOCK_HEAL);
+			removeCageNear(world, living.getX(), living.getY(), living.getZ());
+			completedPhase2Players.add(living.getUUID());
+		}
+
+		int totalPlayers = world.players().size();
+		int doneCount = 0;
+		for (Entity p : world.players()) {
+			if (completedPhase2Players.contains(p.getUUID())) {
+				doneCount++;
+			}
+		}
+
+		if (doneCount >= totalPlayers && totalPlayers > 0) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				if (entityiterator instanceof LivingEntity _entity) {
 					_entity.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
-					_entity.removeEffect(MinigamesModMobEffects.BLOCK_HEAL); }
-				if (!(findEntityInWorldRange(world, PlayerCageEntity.class, (entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), 10)).level().isClientSide())
-					(findEntityInWorldRange(world, PlayerCageEntity.class, (entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), 10)).discard();
+					_entity.removeEffect(MinigamesModMobEffects.BLOCK_HEAL);
+				}
+				removeCageNear(world, entityiterator.getX(), entityiterator.getY(), entityiterator.getZ());
+			}
+			// Clean up any remaining cages anywhere in the dimension
+			for (PlayerCageEntity cage : new ArrayList<>(world.getEntitiesOfClass(PlayerCageEntity.class, new AABB(-500, -100, -500, 500, 300, 500), e -> true))) {
+				if (!cage.level().isClientSide()) {
+					cage.discard();
+				}
 			}
 			nextPhase(world);
 		}
 	}
-	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range) {
-		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), e -> true).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);
+
+	public static void completePhase2(LevelAccessor world) {
+		completePhase2(world, null);
+	}
+
+	private static void removeCageNear(LevelAccessor world, double x, double y, double z) {
+		for (PlayerCageEntity cage : world.getEntitiesOfClass(PlayerCageEntity.class, AABB.ofSize(new Vec3(x, y, z), 20, 20, 20), e -> true)) {
+			if (!cage.level().isClientSide()) {
+				cage.discard();
+			}
+		}
 	}
 
 }

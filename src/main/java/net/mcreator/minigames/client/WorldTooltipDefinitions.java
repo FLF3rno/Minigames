@@ -176,6 +176,49 @@ public final class WorldTooltipDefinitions {
         }
     }
 
+    public static void renderDefinitions2D(net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, Font font, List<DefinitionCard> definitions, int left, int top) {
+        int definitionTop = top;
+        for (DefinitionCard definition : definitions) {
+            int definitionWidth = definition.width(font) + PADDING_X * 2;
+            int definitionHeight = definition.height();
+
+            // Background & Border
+            guiGraphics.fill(left, definitionTop, left + definitionWidth, definitionTop + definitionHeight, DEFINITION_BACKGROUND);
+            guiGraphics.fill(left - 1, definitionTop - 1, left + definitionWidth + 1, definitionTop, DEFINITION_BORDER_LIGHT);
+            guiGraphics.fill(left - 1, definitionTop + definitionHeight, left + definitionWidth + 1, definitionTop + definitionHeight + 1, DEFINITION_BORDER_DARK);
+            guiGraphics.fill(left - 1, definitionTop, left, definitionTop + definitionHeight, DEFINITION_BORDER_LIGHT);
+            guiGraphics.fill(left + definitionWidth, definitionTop, left + definitionWidth + 1, definitionTop + definitionHeight, DEFINITION_BORDER_DARK);
+
+            // Title
+            Component renderedTitle = definition.title().render();
+            float innerWidth = definition.width(font);
+            if (renderedTitle.getStyle().getColor() == null) {
+                renderedTitle = renderedTitle.copy().setStyle(renderedTitle.getStyle().withColor(0xFFFFFFFF));
+            }
+            int titleX = Math.round(left + PADDING_X + (innerWidth - font.width(renderedTitle)) / 2.0F);
+            int titleY = definitionTop + PADDING_Y + 1;
+            guiGraphics.text(font, renderedTitle, titleX, titleY, 0xFFFFFFFF, false);
+
+            // Lines
+            List<DefinitionText> lines = definition.lines();
+            int bodyHeight = lines.size() * LINE_HEIGHT;
+            int bodyAreaTop = definitionTop + PADDING_Y + LINE_HEIGHT + TITLE_BODY_GAP;
+            int bodyAreaHeight = definitionHeight - (PADDING_Y * 2) - LINE_HEIGHT - TITLE_BODY_GAP;
+            int bodyStartY = bodyAreaTop + ((bodyAreaHeight - bodyHeight) / 2);
+            for (int i = 0; i < lines.size(); i++) {
+                Component line = lines.get(i).render();
+                if (line.getStyle().getColor() == null) {
+                    line = line.copy().setStyle(line.getStyle().withColor(0xFFFFFFFF));
+                }
+                int lineX = Math.round(left + PADDING_X + (innerWidth - font.width(line)) / 2.0F);
+                int lineY = bodyStartY + (i * LINE_HEIGHT) + 1;
+                guiGraphics.text(font, line, lineX, lineY, 0xFFFFFFFF, false);
+            }
+
+            definitionTop += definitionHeight + DEFINITION_GAP;
+        }
+    }
+
     private static void renderDefinitionPanel(Matrix4f matrix, MultiBufferSource.BufferSource bufferSource, int left, int top, int right, int bottom) {
         var background = bufferSource.getBuffer(textBackgroundSeeThrough());
         addQuad(background, matrix, left, top, right, bottom, DEFINITION_BACKGROUND);

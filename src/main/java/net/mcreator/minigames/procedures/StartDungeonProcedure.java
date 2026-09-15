@@ -21,8 +21,9 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.network.PlayScreenAnimationMessage;
 import net.mcreator.minigames.MinigamesMod;
-import net.mcreator.minigames.AnimationScreenTrigger;
+import net.mcreator.minigames.FlavioFightManager;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class StartDungeonProcedure {
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
 		MinigamesModVariables.MapVariables.get(world).SpawnItems = false;
+		MinigamesModVariables.MapVariables.get(world).removeEffects = false;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (world instanceof Level _level)
 			_level.getScoreboard().addPlayerTeam("dungeon_players");
@@ -94,19 +96,24 @@ public class StartDungeonProcedure {
 			_serverLevel.getGameRules().set(GameRules.FALL_DAMAGE, false, world.getServer());
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, false, world.getServer());
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.LOCATOR_BAR, false, world.getServer());
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
-		AnimationScreenTrigger.startAnimation(400, "fade_in_fill", 1f);
+		FlavioFightManager.reset();
+		FlavioFightManager.phase = 0;
+		FlavioFightManager.flavio = null;
+		PlayScreenAnimationMessage.sendToAll(world, 200, "fade_in_fill", 1f);
 		MinigamesMod.queueServerWork(20, () -> {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"execute in minigames:dungeon_dimension run tp @a 0 200 0");
 			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _switchworld12 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-				if (_switchworld12 != null) {
-					worldSwitch12(_switchworld12, x, y, z);
+				LevelAccessor _switchworld13 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+				if (_switchworld13 != null) {
+					worldSwitch13(_switchworld13, x, y, z);
 				}
 			}
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
@@ -116,7 +123,7 @@ public class StartDungeonProcedure {
 		});
 	}
 
-	private static void worldSwitch12(LevelAccessor world, double x, double y, double z) {
+	private static void worldSwitch13(LevelAccessor world, double x, double y, double z) {
 		ChooseFloorProcedure.execute(world, x, y, z, 1);
 	}
 }

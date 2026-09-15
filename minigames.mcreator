@@ -9062,16 +9062,7 @@
       "locked_code": false,
       "registry_name": "relic_equipped",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "item",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/RelicEquippedProcedure.java"
         ]
@@ -9085,16 +9076,7 @@
       "locked_code": false,
       "registry_name": "relic_unequipped",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "item",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/RelicUnequippedProcedure.java"
         ]
@@ -9121,20 +9103,7 @@
       "locked_code": false,
       "registry_name": "item_dropped_dungeon",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
+        "dependencies": [],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ItemDroppedDungeonProcedure.java"
         ]

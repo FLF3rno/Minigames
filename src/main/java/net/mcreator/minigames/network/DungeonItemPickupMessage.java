@@ -77,13 +77,6 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 
 		boolean isRelic = DungeonItemAccess.isRelic(entityStack);
 
-		if (MinigamesModVariables.MapVariables.get(player.level()).playingDungeons) {
-			if (!isRelic && CheckRelicProcedure.execute(player, new ItemStack(MinigamesModItems.BLACKSMITH_HAMMER.get()))) {
-				CustomData.update(DataComponents.CUSTOM_DATA, entityStack,
-						tag -> tag.putDouble("forged", tag.getDoubleOr("forged", 0) + 10));
-			}
-		}
-
 		double px = itemEntity != null ? itemEntity.getX() : player.getX();
 		double py = itemEntity != null ? itemEntity.getY() : player.getY();
 		double pz = itemEntity != null ? itemEntity.getZ() : player.getZ();

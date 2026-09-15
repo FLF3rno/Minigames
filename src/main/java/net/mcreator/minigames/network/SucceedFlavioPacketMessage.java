@@ -41,7 +41,7 @@ public record SucceedFlavioPacketMessage(String extradata) implements CustomPack
 				if (!world.hasChunkAt(entity.blockPosition()))
 					return;
 
-				SucceedFlavioPhase2Procedure.execute(world);
+				SucceedFlavioPhase2Procedure.execute(world, entity);
 			}).exceptionally(e -> {
 				context.connection().disconnect(Component.literal(e.getMessage()));
 				return null;

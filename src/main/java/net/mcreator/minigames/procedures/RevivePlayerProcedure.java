@@ -6,6 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,9 +32,8 @@ public class RevivePlayerProcedure {
 	private static void execute(@Nullable Event event, Entity entity, Entity immediatesourceentity) {
 		if (entity == null || immediatesourceentity == null)
 			return;
-		if ((BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:server_player") || (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:player")
-				|| (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minigames:blessed_arrow")) {
-			if (entity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MinigamesModMobEffects.ASCENDING)) {
+		if ((BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:server_player") || (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minecraft:player")) {
+			if (entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.ASCENDING)) {
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.removeEffectsSingleTarget = true;
@@ -44,6 +44,23 @@ public class RevivePlayerProcedure {
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.ascendingTimer = 0;
 					_vars.markSyncDirty();
+				}
+			}
+		}
+		if (immediatesourceentity instanceof Projectile projectile) {
+			if (entity != projectile.getOwner() && (BuiltInRegistries.ENTITY_TYPE.getKey(immediatesourceentity.getType()).toString()).equals("minigames:blessed_arrow")) {
+				if (entity instanceof LivingEntity _livEnt8 && _livEnt8.hasEffect(MinigamesModMobEffects.ASCENDING)) {
+					{
+						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						_vars.removeEffectsSingleTarget = true;
+						_vars.markSyncDirty();
+					}
+					entity.setDeltaMovement(new Vec3((immediatesourceentity.getLookAngle().x * 2), (immediatesourceentity.getLookAngle().y * 2), (immediatesourceentity.getLookAngle().z * 2)));
+					{
+						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						_vars.ascendingTimer = 0;
+						_vars.markSyncDirty();
+					}
 				}
 			}
 		}

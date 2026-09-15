@@ -101,9 +101,10 @@ public class FlavioOmegaLaserScreenEntity extends Monster {
 
 	@Override
 	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
-		if (damagesource.is(DamageTypes.IN_FIRE))
-			return false;
-		return super.hurtServer(level, damagesource, amount);
+		if (damagesource.is(DamageTypes.GENERIC_KILL)) {
+			return super.hurtServer(level, damagesource, amount);
+		}
+		return false;
 	}
 
 	@Override

@@ -292,7 +292,9 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	}
 
 	private void updateMaze() {
-		mazeOffset += MAZE_SCROLL_SPEED;
+		if (currentRow > 0) {
+			mazeOffset += MAZE_SCROLL_SPEED;
+		}
 	}
 
 	private float getMazeScreenY(int row) {

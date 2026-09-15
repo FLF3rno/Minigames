@@ -2,6 +2,7 @@ package net.mcreator.minigames.client.gui;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.mcreator.minigames.DungeonItemAccess;
+import net.mcreator.minigames.client.WorldTooltipDefinitions;
 import net.mcreator.minigames.init.MinigamesModScreens;
 import net.mcreator.minigames.network.ChoiceBagRewardMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
@@ -345,6 +346,30 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 					if (reel.targetIndex >= 0 && reel.targetIndex < reel.tape.size()) {
 						ItemStack targetStack = new ItemStack(reel.tape.get(reel.targetIndex));
 						guiGraphics.setTooltipForNextFrame(this.font, targetStack, mouseX, mouseY);
+
+						List<WorldTooltipDefinitions.DefinitionCard> definitions = WorldTooltipDefinitions.getDefinitionCards(targetStack);
+						if (!definitions.isEmpty()) {
+							int defWidth = WorldTooltipDefinitions.getDefinitionsWidth(this.font, definitions) + 12;
+							int defHeight = WorldTooltipDefinitions.getDefinitionsHeight(definitions);
+
+							int defX = mouseX + 16;
+							if (defX + defWidth > this.width - 10) {
+								defX = mouseX - defWidth - 16;
+							}
+							if (defX < 10) {
+								defX = 10;
+							}
+
+							int defY = mouseY - 12;
+							if (defY + defHeight > this.height - 10) {
+								defY = this.height - defHeight - 10;
+							}
+							if (defY < 10) {
+								defY = 10;
+							}
+
+							WorldTooltipDefinitions.renderDefinitions2D(guiGraphics, this.font, definitions, defX, defY);
+						}
 					}
 				}
 			}

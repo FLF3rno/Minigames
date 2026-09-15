@@ -109,8 +109,8 @@ public class VolcanicSpewEntity extends AbstractArrow implements ItemSupplier {
                 }
             }
 
-            // Ensure it disappears after 10-15 seconds
-            if (this.tickCount > 200) {
+			// Remove one second sooner once it has landed.
+			if (this.tickCount > 180) {
                 this.discard();
             }
         }

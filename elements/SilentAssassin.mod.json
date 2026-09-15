@@ -68,13 +68,13 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "ATTACK_DAMAGE",
-        "amount": 5.5,
+        "amount": 3.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
         "attribute": "ATTACK_SPEED",
-        "amount": -1.9,
+        "amount": -2.1,
         "operation": "ADD_VALUE"
       },
       {
@@ -92,7 +92,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ExtraDamage",
-        "amount": 2.0,
+        "amount": 1.75,
         "operation": "ADD_VALUE"
       },
       {

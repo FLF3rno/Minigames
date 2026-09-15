@@ -9888,7 +9888,7 @@
       "name": "SpawnP1Pedestal",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spawn_p_1_pedestal",
       "metadata": {
         "dependencies": [
@@ -9937,7 +9937,7 @@
       "name": "SpawnP2Pedestal",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spawn_p_2_pedestal",
       "metadata": {
         "dependencies": [
@@ -9986,7 +9986,7 @@
       "name": "SpawnP3Pedestal",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spawn_p_3_pedestal",
       "metadata": {
         "dependencies": [
@@ -10035,7 +10035,7 @@
       "name": "SpawnP4Pedestal",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spawn_p_4_pedestal",
       "metadata": {
         "dependencies": [

@@ -1,5 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
@@ -20,8 +22,12 @@ public class SpawnP1PedestalProcedure {
 				if (entityiterator instanceof Player) {
 					if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
 						if ((entityiterator.level().dimension()) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
-							world.setBlock(BlockPos.containing(x, y, z), BuiltInRegistries.BLOCK
-									.getValue(Identifier.parse((("minigames:" + entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon + "_item_pedestal")).toLowerCase(java.util.Locale.ENGLISH))).defaultBlockState(), 3);
+							BlockState pedestalState = BuiltInRegistries.BLOCK
+									.getValue(Identifier.parse((("minigames:" + entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon + "_item_pedestal")).toLowerCase(java.util.Locale.ENGLISH))).defaultBlockState();
+							if (pedestalState.getBlock().getStateDefinition().getProperty("owner") instanceof IntegerProperty ownerProperty
+									&& ownerProperty.getPossibleValues().contains(1))
+								pedestalState = pedestalState.setValue(ownerProperty, 1);
+							world.setBlock(BlockPos.containing(x, y, z), pedestalState, 3);
 						}
 					}
 				}

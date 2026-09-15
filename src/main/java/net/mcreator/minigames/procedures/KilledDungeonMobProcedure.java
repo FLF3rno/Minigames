@@ -5,6 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.Event;
 
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,10 +57,11 @@ public class KilledDungeonMobProcedure {
 					world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.SUPPORT_ITEM_PEDESTAL.get().defaultBlockState(), 3);
 				} else if ((RandomClassProcedure.execute()).equals("thief")) {
 					world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.THIEF_ITEM_PEDESTAL.get().defaultBlockState(), 3);
+				} else if ((RandomClassProcedure.execute()).equals("mage")) {
+					world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.MAGE_ITEM_PEDESTAL.get().defaultBlockState(), 3);
 				}
+				world.setBlock(BlockPos.containing(x, y + 1, z), Blocks.AIR.defaultBlockState(), 3);
 			}
-			if (!entity.level().isClientSide())
-				entity.discard();
 		}
 	}
 }

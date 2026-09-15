@@ -322,7 +322,7 @@ public final class WorldTooltipDefinitions {
             }
             float titleX = left + PADDING_X + (innerWidth - font.width(renderedTitle)) / 2.0F;
             float titleY = top + PADDING_Y + 1;
-            font.drawInBatch(renderedTitle, titleX, titleY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
+            font.drawInBatch(renderedTitle, titleX, titleY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
                     15728880);
             int bodyHeight = lines.size() * LINE_HEIGHT;
             int bodyAreaTop = top + PADDING_Y + LINE_HEIGHT + TITLE_BODY_GAP;
@@ -335,7 +335,7 @@ public final class WorldTooltipDefinitions {
                 }
                 float lineX = left + PADDING_X + (innerWidth - font.width(line)) / 2.0F;
                 float lineY = bodyStartY + (i * LINE_HEIGHT) + 1;
-                font.drawInBatch(line, lineX, lineY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
+                font.drawInBatch(line, lineX, lineY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
                         15728880);
             }
         }

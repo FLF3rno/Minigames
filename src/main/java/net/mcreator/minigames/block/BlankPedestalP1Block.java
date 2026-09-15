@@ -46,7 +46,6 @@ public class BlankPedestalP1Block extends Block {
 	public void onPlace(BlockState blockstate, Level world, BlockPos pos, BlockState oldState, boolean moving) {
 		super.onPlace(blockstate, world, pos, oldState, moving);
 		world.scheduleTick(pos, this, 20);
-		SpawnP1PedestalProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override

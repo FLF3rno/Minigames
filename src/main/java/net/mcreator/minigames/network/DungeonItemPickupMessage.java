@@ -95,25 +95,25 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		if (isRelic) {
 			inserted = tryInsertRelic(player.getInventory(), entityStack.copy());
 			if (inserted <= 0) {
-				if (itemEntity != null) {
+				if (insertIntoBackpackSlot(player, entityStack.copy())) {
+					inserted = entityStack.getCount();
+				} else if (itemEntity != null) {
 					player.sendSystemMessage(Component.literal("§cRELIC SLOTS FULL"), true);
 					return;
-				} else if (!insertIntoBackpackSlot(player, entityStack)) {
-					player.drop(entityStack, false);
-					inserted = entityStack.getCount();
 				} else {
+					player.drop(entityStack, false);
 					inserted = entityStack.getCount();
 				}
 			}
 		} else {
 			if (isInventoryFull(player)) {
-				if (itemEntity != null) {
+				if (insertIntoBackpackSlot(player, entityStack.copy())) {
+					inserted = entityStack.getCount();
+				} else if (itemEntity != null) {
 					player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
 					return;
-				} else if (!insertIntoAvailableSlot(player, entityStack)) {
-					player.drop(entityStack, false);
-					inserted = entityStack.getCount();
 				} else {
+					player.drop(entityStack, false);
 					inserted = entityStack.getCount();
 				}
 			} else {

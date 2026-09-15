@@ -204,8 +204,9 @@ public class HoveredItemTooltipRenderer {
             double distSq = rel.subtract(projectedPoint).lengthSqr();
 
             if (distSq < bestDistSq) {
-                net.minecraft.world.phys.BlockHitResult raytrace = minecraft.level.clip(new net.minecraft.world.level.ClipContext(eyePos, itemCenter,
-                        net.minecraft.world.level.ClipContext.Block.VISUAL, net.minecraft.world.level.ClipContext.Fluid.NONE, minecraft.player));
+                Vec3 itemTop = new Vec3(itemCenter.x, itemEntity.getBoundingBox().maxY + 0.1, itemCenter.z);
+                net.minecraft.world.phys.BlockHitResult raytrace = minecraft.level.clip(new net.minecraft.world.level.ClipContext(eyePos, itemTop,
+                        net.minecraft.world.level.ClipContext.Block.COLLIDER, net.minecraft.world.level.ClipContext.Fluid.NONE, minecraft.player));
 
                 if (raytrace.getType() == net.minecraft.world.phys.HitResult.Type.MISS) {
                     bestDistSq = distSq;
@@ -276,7 +277,7 @@ public class HoveredItemTooltipRenderer {
         } else if (full) {
             fullPrompt = isRelic ? "RELIC SLOTS FULL" : "INVENTORY FULL";
         } else {
-            fullPrompt = "RIGHT CLICK TO CHOOSE";
+            fullPrompt = isOnOwnedPedestal(minecraft, itemEntity) ? "RIGHT CLICK TO CHOOSE" : "RIGHT CLICK TO PICK UP";
         }
 
         int fullPromptWidth = font.width(Component.literal(fullPrompt).setStyle(promptStyle));
@@ -285,7 +286,6 @@ public class HoveredItemTooltipRenderer {
         if (oneLine) {
             maxWidth = Math.max(maxWidth, fullPromptWidth);
         } else {
-            // Recalculate maxWidth for multi-line if needed
             if (!canPickUp) {
                 maxWidth = Math.max(maxWidth, font.width(Component.literal("WRONG").setStyle(promptStyle)));
                 maxWidth = Math.max(maxWidth, font.width(Component.literal("CLASS").setStyle(promptStyle)));
@@ -336,7 +336,7 @@ public class HoveredItemTooltipRenderer {
             Component line = styleWorldTooltipLine(tooltip.get(i), itemEntity.getItem(), classInfo);
             float lineX = PADDING_X + 1;
             float lineY = PADDING_Y + getLineY(i) + 1;
-            font.drawInBatch(line, lineX, lineY, TEXT_COLOR, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
+            font.drawInBatch(line, lineX, lineY, TEXT_COLOR, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
                     15728880);
         }
 
@@ -349,7 +349,7 @@ public class HoveredItemTooltipRenderer {
             Component prompt = (!canPickUp || full || !isRelic) ? Component.literal(fullPrompt).setStyle(promptStyle) : createRelicGradientText(fullPrompt);
             float promptX = (fullWidth - font.width(prompt)) / 2.0f;
             float promptY = secondPanelTop + PADDING_Y + 1;
-            font.drawInBatch(prompt, promptX, promptY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
+            font.drawInBatch(prompt, promptX, promptY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
                     15728880);
         } else {
             Component line1, line2;
@@ -372,9 +372,9 @@ public class HoveredItemTooltipRenderer {
             float line2X = (fullWidth - font.width(line2)) / 2.0f;
             float line1Y = secondPanelTop + PADDING_Y + 1;
             float line2Y = secondPanelTop + PADDING_Y + LINE_HEIGHT + 1;
-            font.drawInBatch(line1, line1X, line1Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
+            font.drawInBatch(line1, line1X, line1Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
                     15728880);
-            font.drawInBatch(line2, line2X, line2Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0,
+            font.drawInBatch(line2, line2X, line2Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
                     15728880);
         }
 
@@ -446,6 +446,28 @@ public class HoveredItemTooltipRenderer {
             tooltipSize = 0.8;
         }
         return (float) (BASE_TEXT_SCALE * tooltipSize);
+    }
+
+    private static boolean isOnOwnedPedestal(Minecraft minecraft, net.minecraft.world.entity.item.ItemEntity itemEntity) {
+        if (minecraft.level == null) return false;
+        net.minecraft.core.BlockPos below = net.minecraft.core.BlockPos.containing(itemEntity.getX(), itemEntity.getY() - 0.5, itemEntity.getZ());
+        net.minecraft.world.level.block.state.BlockState state = minecraft.level.getBlockState(below);
+        net.minecraft.world.level.block.Block block = state.getBlock();
+        if (block instanceof net.mcreator.minigames.block.WarriorItemPedestalBlock
+                || block instanceof net.mcreator.minigames.block.ThiefItemPedestalBlock
+                || block instanceof net.mcreator.minigames.block.SupportItemPedestalBlock
+                || block instanceof net.mcreator.minigames.block.MageItemPedestalBlock) {
+            net.minecraft.world.level.block.state.properties.IntegerProperty ownerProp = null;
+            if (block instanceof net.mcreator.minigames.block.WarriorItemPedestalBlock) ownerProp = net.mcreator.minigames.block.WarriorItemPedestalBlock.OWNER;
+            else if (block instanceof net.mcreator.minigames.block.ThiefItemPedestalBlock) ownerProp = net.mcreator.minigames.block.ThiefItemPedestalBlock.OWNER;
+            else if (block instanceof net.mcreator.minigames.block.SupportItemPedestalBlock) ownerProp = net.mcreator.minigames.block.SupportItemPedestalBlock.OWNER;
+            else if (block instanceof net.mcreator.minigames.block.MageItemPedestalBlock) ownerProp = net.mcreator.minigames.block.MageItemPedestalBlock.OWNER;
+            if (ownerProp != null) {
+                int owner = state.getValue(ownerProp);
+                return owner >= 1 && owner <= 4;
+            }
+        }
+        return false;
     }
 
     private static void removeVanillaAttributeLines(List<Component> tooltip) {
@@ -786,5 +808,4 @@ public class HoveredItemTooltipRenderer {
         }
         return line;
     }
-
 }

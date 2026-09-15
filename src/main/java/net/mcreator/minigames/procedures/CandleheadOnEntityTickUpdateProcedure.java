@@ -5,8 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.CommandSource;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
@@ -17,6 +16,9 @@ import net.mcreator.minigames.entity.VolcanicSpewEntity;
 import net.mcreator.minigames.init.MinigamesModEntities;
 
 public class CandleheadOnEntityTickUpdateProcedure {
+    private static final int FLAME_PARTICLE_INTERVAL_TICKS = 5;
+    private static final int VOLCANIC_SPEW_PER_ATTACK = 12;
+
     public static void execute(Entity entity) {
         if (entity == null) return;
 
@@ -26,12 +28,8 @@ public class CandleheadOnEntityTickUpdateProcedure {
         double z = entity.getZ();
 
         if (entity instanceof CandleheadEntity _datEntL0 && _datEntL0.getEntityData().get(CandleheadEntity.DATA_ready)) {
-            if (!world.isClientSide() && entity.level().getServer() != null) {
-                entity.level().getServer().getCommands().performPrefixedCommand(
-                    new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), world instanceof ServerLevel ? (ServerLevel) world : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
-                    entity.getName().getString(), entity.getDisplayName(), entity.level().getServer(), entity), 
-                    "particle minecraft:flame ~ ~2.5 ~ 0.1 0.1 0.1 0 3 normal @a"
-                );
+            if (world instanceof ServerLevel serverLevel && entity.tickCount % FLAME_PARTICLE_INTERVAL_TICKS == 0) {
+                serverLevel.sendParticles(ParticleTypes.FLAME, x, y + 2.5, z, 3, 0.1, 0.1, 0.1, 0.0);
             }
 
             // attack code
@@ -46,7 +44,7 @@ public class CandleheadOnEntityTickUpdateProcedure {
                 }
 
                 if (world instanceof ServerLevel projectileLevel) {
-                    for (int index0 = 0; index0 < 30; index0++) {
+                    for (int index0 = 0; index0 < VOLCANIC_SPEW_PER_ATTACK; index0++) {
                         VolcanicSpewEntity _entityToSpawn = new VolcanicSpewEntity(
                             MinigamesModEntities.VOLCANIC_SPEW.get(), 
                             projectileLevel

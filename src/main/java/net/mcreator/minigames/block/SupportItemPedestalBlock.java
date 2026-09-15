@@ -3,6 +3,8 @@ package net.mcreator.minigames.block;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.core.BlockPos;
 
@@ -18,10 +21,12 @@ import net.mcreator.minigames.procedures.SpawnSupportPedestalItemProcedure;
 import net.mcreator.minigames.block.entity.SupportItemPedestalBlockEntity;
 
 public class SupportItemPedestalBlock extends Block implements EntityBlock {
+	public static final IntegerProperty OWNER = IntegerProperty.create("owner", 0, 4);
 	private static final VoxelShape SHAPE = Shapes.or(box(1, 0, 1, 15, 1, 15), box(2, 1, 2, 14, 3, 14), box(4, 3, 4, 12, 11, 12), box(3, 11, 3, 13, 12, 13), box(2, 12, 2, 14, 13, 14));
 
 	public SupportItemPedestalBlock(BlockBehaviour.Properties properties) {
 		super(properties.sound(SoundType.POLISHED_TUFF).strength(-1, 3600000).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(OWNER, 0));
 	}
 
 	@Override
@@ -42,6 +47,20 @@ public class SupportItemPedestalBlock extends Block implements EntityBlock {
 	@Override
 	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return Shapes.empty();
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(OWNER);
+	}
+
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		BlockState state = super.getStateForPlacement(context);
+		if (state == null)
+			return null;
+		return state.setValue(OWNER, 0);
 	}
 
 	@Override

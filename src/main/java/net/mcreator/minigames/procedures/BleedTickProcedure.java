@@ -14,16 +14,18 @@ public class BleedTickProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		if (Math.abs(entity.getDeltaMovement().x()) + Math.abs(entity.getDeltaMovement().y()) + Math.abs(entity.getDeltaMovement().z()) > 0.079) {
-			{
-				Entity _ent = entity;
-				if (_ent.level() instanceof ServerLevel _serverLevel) {
-					_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC)), (float) ((Math.abs(entity.getDeltaMovement().x()) + Math.abs(entity.getDeltaMovement().y()) + Math.abs(entity.getDeltaMovement().z()))
-							* ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.BLEED) ? _livEnt.getEffect(MinigamesModMobEffects.BLEED).getAmplifier() : 0) + 1) * 0.8));
+		if ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.BLEED) ? _livEnt.getEffect(MinigamesModMobEffects.BLEED).getDuration() : 0) % 10 == 0) {
+			if (Math.abs(entity.getDeltaMovement().x()) + Math.abs(entity.getDeltaMovement().y()) + Math.abs(entity.getDeltaMovement().z()) > 0.077) {
+				{
+					Entity _ent = entity;
+					if (_ent.level() instanceof ServerLevel _serverLevel) {
+						_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.GENERIC)), (float) ((Math.abs(entity.getDeltaMovement().x()) + Math.abs(entity.getDeltaMovement().y()) + Math.abs(entity.getDeltaMovement().z()))
+								* ((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.BLEED) ? _livEnt.getEffect(MinigamesModMobEffects.BLEED).getAmplifier() : 0) + 1) * 0.8));
+					}
 				}
-			}
-			if (world instanceof ServerLevel _level) {
-				_level.sendParticles(MinigamesModParticleTypes.BLOOD.get(), entity.getX(), entity.getY() + 0.5, entity.getZ(), 7, 0.25, 0.4, 0.25, 0.1);
+				if (world instanceof ServerLevel _level) {
+					_level.sendParticles(MinigamesModParticleTypes.BLOOD.get(), entity.getX(), entity.getY() + 0.5, entity.getZ(), 7, 0.25, 0.4, 0.25, 0.1);
+				}
 			}
 		}
 	}

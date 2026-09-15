@@ -32,6 +32,18 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 		if (context.flow() == PacketFlow.SERVERBOUND) {
 			context.enqueueWork(() -> {
 				if (context.player() instanceof ServerPlayer serverPlayer) {
+					// Class selection is a one-time server-side action. Keyboard input can
+					// send the packet repeatedly before the client UI updates, so reject every
+					// packet after this player has already chosen a class.
+					String currentClass = serverPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+					if (currentClass != null && !currentClass.trim().isEmpty() && !currentClass.equalsIgnoreCase("none")) {
+						return;
+					}
+
+					if (MinigamesModVariables.MapVariables.get(serverPlayer.level()).SpawnItems) {
+						return;
+					}
+
 					ApplyClassProcedure.execute(serverPlayer, message.selectedClass);
 
 					net.minecraft.server.level.ServerLevel serverLevel = (net.minecraft.server.level.ServerLevel) serverPlayer.level();

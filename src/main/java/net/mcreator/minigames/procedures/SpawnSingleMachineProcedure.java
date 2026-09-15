@@ -15,7 +15,7 @@ public class SpawnSingleMachineProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(1, 1, 1), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-					"/execute as @e[type=minigames:flavio_trapdoor_2] at @s run summon minigames:flavio_clock_cannon ~ ~-3.1 ~");
+					"/execute as @e[type=minigames:flavio_trapdoor_2] at @s run summon minigames:flavio_antenna ~ ~-3.1 ~");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(1, 1, 1), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),

@@ -77,7 +77,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ExplosionDamage",
-        "amount": 8.0,
+        "amount": 9.0,
         "operation": "ADD_VALUE"
       },
       {

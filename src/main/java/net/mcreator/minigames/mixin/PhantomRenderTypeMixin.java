@@ -3,6 +3,7 @@ package net.mcreator.minigames.mixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.mcreator.minigames.client.PhantomRenderState;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.mcreator.minigames.network.PhantomStateSyncMessage;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -30,7 +31,9 @@ public abstract class PhantomRenderTypeMixin<T extends LivingEntity, S extends L
 	)
 	private void minigames(T entity, S state, float partialTicks, CallbackInfo ci) {
 		if (state instanceof PhantomRenderState phantomState) {
-			phantomState.minigames_setPhantom(entity != null && entity.hasEffect(MinigamesModMobEffects.PHANTOM));
+			boolean isPhantom = entity != null && (entity.hasEffect(MinigamesModMobEffects.PHANTOM)
+					|| PhantomStateSyncMessage.isPhantomOnClient(entity.getId()));
+			phantomState.minigames_setPhantom(isPhantom);
 		}
 	}
 

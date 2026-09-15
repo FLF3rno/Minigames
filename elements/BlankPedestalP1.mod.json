@@ -157,7 +157,6 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
-    "onBlockAdded": "SpawnP1Pedestal",
     "onTickUpdate": "SpawnP1Pedestal",
     "generateFeature": false,
     "restrictionBiomes": [],

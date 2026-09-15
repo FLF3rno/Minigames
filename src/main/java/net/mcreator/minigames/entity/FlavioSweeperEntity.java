@@ -151,11 +151,6 @@ public class FlavioSweeperEntity extends Monster {
 	}
 
 	@Override
-	public boolean canCollideWith(Entity entity) {
-		return true;
-	}
-
-	@Override
 	public boolean canBeCollidedWith(Entity sourceentity) {
 		return true;
 	}
@@ -172,7 +167,7 @@ public class FlavioSweeperEntity extends Monster {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		this.setNoGravity(true);
+		this.setNoGravity(false);
 	}
 
 	@Override

@@ -52,17 +52,19 @@ public class SpawnDungeonItemProcedure {
 			}
 		}
 		if (world instanceof ServerLevel _level) {
-			ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, new ItemStack(Blocks.AIR));
+			ItemEntity entityToSpawn = new ItemEntity(_level, x, (y - 10), z, new ItemStack(Blocks.AIR));
 			entityToSpawn.setPickUpDelay(10);
 			entityToSpawn.setUnlimitedLifetime();
 			_level.addFreshEntity(entityToSpawn);
 		}
-		if (world instanceof ServerLevel _level) {
-			ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, item);
-			entityToSpawn.setDeltaMovement(0, 0, 0);
-			entityToSpawn.setPickUpDelay(10);
-			entityToSpawn.setUnlimitedLifetime();
-			_level.addFreshEntity(entityToSpawn);
+		if (!world.isClientSide()) {
+			if (world instanceof ServerLevel _level) {
+				ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, item);
+				entityToSpawn.setDeltaMovement(0, 0, 0);
+				entityToSpawn.setPickUpDelay(10);
+				entityToSpawn.setUnlimitedLifetime();
+				_level.addFreshEntity(entityToSpawn);
+			}
 		}
 	}
 }

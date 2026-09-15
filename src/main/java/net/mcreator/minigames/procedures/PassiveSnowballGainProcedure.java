@@ -42,7 +42,9 @@ public class PassiveSnowballGainProcedure {
 						_vars.markSyncDirty();
 					}
 				}
-				SpleefPowerupProcedure.execute(world, entity);
+				if (!world.isClientSide()) {
+					SpleefPowerupProcedure.execute(world, entity);
+				}
 			}
 		}
 	}

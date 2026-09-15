@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.WorldGenLevel;
@@ -45,6 +46,9 @@ public class SpawnP3PedestalProcedure {
 											} catch (Exception e) {
 											}
 									}
+									if (_bs.getBlock().getStateDefinition().getProperty("owner") instanceof IntegerProperty ownerProperty
+											&& ownerProperty.getPossibleValues().contains(3))
+										_bs = _bs.setValue(ownerProperty, 3);
 									world.setBlock(_bp, _bs, 3);
 								}
 							}

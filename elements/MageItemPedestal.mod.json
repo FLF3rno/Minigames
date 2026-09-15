@@ -73,7 +73,15 @@
         "subtract": false
       }
     ],
-    "customProperties": [],
+    "customProperties": [
+      {
+        "min": 0,
+        "max": 4,
+        "name": "CUSTOM:owner",
+        "type": "integer",
+        "value": 0
+      }
+    ],
     "name": "Item Pedestal",
     "specialInformation": {
       "fixedValue": []

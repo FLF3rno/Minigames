@@ -338,7 +338,8 @@ public class PlayerSlotsOverlay {
         guiGraphics.pose().translate(0.0F, 2.0F);
         guiGraphics.pose().scale(0.96F, 0.96F);
         int x = Math.round((guiGraphics.guiWidth() / 2.134F) / 0.9F);
-        int y = Math.round(((guiGraphics.guiHeight() - 74) / 0.9F));
+		int renderedY = guiGraphics.guiHeight() - 50;
+		int y = Math.round((renderedY - 2.0F) / 0.96F);
         guiGraphics.centeredText(mc.font, displayName, x, y, 0xFFFFFFFF);
         guiGraphics.pose().popMatrix();
     }

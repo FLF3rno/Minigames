@@ -31,7 +31,7 @@ public class VolleyBombRightclickedProcedure {
 			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 				if (entityiterator instanceof VolleybombEntityEntity) {
 					entityiterator.getPersistentData().putDouble("explosionDamage", GetItemAttributeProcedure.execute(itemstack, "minigames:explosion_damage"));
-					entityiterator.getPersistentData().putDouble("explosionSize", 2);
+					entityiterator.getPersistentData().putDouble("explosionSize", 3);
 				}
 			}
 		}

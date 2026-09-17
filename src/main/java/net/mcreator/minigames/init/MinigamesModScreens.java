@@ -25,7 +25,6 @@ public class MinigamesModScreens {
 		event.register(MinigamesModMenus.SELECT_CATEGORY_ACHIEVEMENT.get(), SelectCategoryAchievementScreen::new);
 		event.register(MinigamesModMenus.DISPLAY_ACHIEVMEN.get(), DisplayAchievmenScreen::new);
 		event.register(MinigamesModMenus.MINIGAME_GUI_ACHIEVEMENT_HUNT.get(), MinigameGUIAchievementHuntScreen::new);
-		event.register(MinigamesModMenus.OPTION_CATEGORY.get(), OptionCategoryScreen::new);
 		event.register(MinigamesModMenus.FLAVIO_PHASE_2.get(), FlavioPhase2Screen::new);
 		event.register(MinigamesModMenus.CHOICE_BUNDLE.get(), ChoiceBundleScreen::new);
 		event.register(MinigamesModMenus.CLASS_SELECTION_ROGUELIKE.get(), ClassSelectionRoguelikeScreen::new);

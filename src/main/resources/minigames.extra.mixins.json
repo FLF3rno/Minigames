@@ -12,7 +12,10 @@
     "LivingEntityTargetMixin",
     "EnderEyeItemMixin",
     "HangingEntityMixin",
-    "LightningBoltMixin"
+    "LightningBoltMixin",
+    "UnmovableEntityMixin",
+    "UnmovableLivingEntityMixin",
+    "UnmovableItemEntityMixin"
   ],
   "client": [
     "GuiAccessor",

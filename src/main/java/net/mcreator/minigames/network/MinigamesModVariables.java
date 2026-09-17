@@ -148,6 +148,7 @@ public class MinigamesModVariables {
 		clone.minimumLightLevel = original.minimumLightLevel;
 		clone.classColor = original.classColor;
 		clone.maximumLightLevel = original.maximumLightLevel;
+		clone.AlwaysShowReminder = original.AlwaysShowReminder;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -614,6 +615,7 @@ public class MinigamesModVariables {
 		public double minimumLightLevel = 0;
 		public String classColor = "\"\"";
 		public double maximumLightLevel = 15.0;
+		public boolean AlwaysShowReminder = false;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -662,6 +664,7 @@ public class MinigamesModVariables {
 			output.putDouble("minimumLightLevel", minimumLightLevel);
 			output.putString("classColor", classColor);
 			output.putDouble("maximumLightLevel", maximumLightLevel);
+			output.putBoolean("AlwaysShowReminder", AlwaysShowReminder);
 		}
 
 		@Override
@@ -711,6 +714,7 @@ public class MinigamesModVariables {
 			minimumLightLevel = input.getDoubleOr("minimumLightLevel", 0);
 			classColor = input.getStringOr("classColor", "");
 			maximumLightLevel = input.getDoubleOr("maximumLightLevel", 0);
+			AlwaysShowReminder = input.getBooleanOr("AlwaysShowReminder", false);
 		}
 
 		public void markSyncDirty() {

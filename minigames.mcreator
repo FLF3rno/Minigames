@@ -12262,20 +12262,6 @@
       "path": "~/General/Animation"
     },
     {
-      "name": "OptionCategory",
-      "type": "gui",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "option_category",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/world/inventory/OptionCategoryMenu.java",
-          "src/main/java/net/mcreator/minigames/client/gui/OptionCategoryScreen.java"
-        ]
-      },
-      "path": "~/General/Options"
-    },
-    {
       "name": "PlayBossCutscene",
       "type": "procedure",
       "compiles": true,
@@ -16023,6 +16009,12 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
+    },
+    {
+      "name": "AlwaysShowReminder",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -16791,6 +16783,20 @@
     ],
     "ENTITIES:mod:miniboss": [
       "CUSTOM:GravediggerMiniboss"
+    ],
+    "ENTITIES:mod:unmovable": [
+      "CUSTOM:GravediggerMiniboss",
+      "CUSTOM:FlavioTrapdoor",
+      "CUSTOM:FlavioTeslaCoil",
+      "CUSTOM:FlavioAntenna",
+      "CUSTOM:FlavioClockCannon",
+      "CUSTOM:FlavioSweeper",
+      "CUSTOM:FlavioTrapdoor2",
+      "CUSTOM:FlavioTrapdoor3",
+      "CUSTOM:FlavioOmegaLaser",
+      "CUSTOM:FlavioOmegaLaserScreen",
+      "CUSTOM:BlessingDispenser",
+      "EntityItem"
     ]
   },
   "tab_element_order": {},
@@ -17820,10 +17826,6 @@
           },
           {
             "name": "Forcestop",
-            "children": []
-          },
-          {
-            "name": "Options",
             "children": []
           },
           {

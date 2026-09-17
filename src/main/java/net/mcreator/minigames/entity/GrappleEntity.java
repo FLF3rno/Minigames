@@ -26,13 +26,22 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+
+import net.minecraft.world.InteractionHand;
+
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModItems;
+import net.mcreator.minigames.item.GrapplingHookItem;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class GrappleEntity extends AbstractArrow implements ItemSupplier {
+	public static final EntityDataAccessor<String> DATA_OWNER_UUID = SynchedEntityData.defineId(GrappleEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<Boolean> DATA_HOOKED = SynchedEntityData.defineId(GrappleEntity.class, EntityDataSerializers.BOOLEAN);
 	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.IRON_BARS);
 	private int knockback = 0;
 	private boolean released = false;
@@ -54,8 +63,51 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 	public GrappleEntity(EntityType<? extends GrappleEntity> type, LivingEntity entity, Level world, @Nullable ItemStack firedFromWeapon) {
 		super(type, entity, world, PROJECTILE_ITEM, firedFromWeapon);
 		setNoGravity(true);
+		if (entity != null)
+			this.entityData.set(DATA_OWNER_UUID, entity.getStringUUID());
 		if (firedFromWeapon != null)
 			setKnockback(EnchantmentHelper.getItemEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.KNOCKBACK), firedFromWeapon));
+	}
+
+	@Override
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_OWNER_UUID, "");
+		builder.define(DATA_HOOKED, false);
+	}
+
+	@Override
+	public void setOwner(@Nullable Entity entity) {
+		super.setOwner(entity);
+		if (entity != null) {
+			this.entityData.set(DATA_OWNER_UUID, entity.getStringUUID());
+		}
+	}
+
+	@Override
+	@Nullable
+	public Entity getOwner() {
+		Entity owner = super.getOwner();
+		if (owner != null) {
+			return owner;
+		}
+		String uuidStr = this.entityData.get(DATA_OWNER_UUID);
+		if (!uuidStr.isEmpty() && this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+			try {
+				return serverLevel.getEntity(UUID.fromString(uuidStr));
+			} catch (IllegalArgumentException ignored) {}
+		}
+		return null;
+	}
+
+	public boolean isOwner(Entity entity) {
+		if (entity == null) return false;
+		String ownerUuid = this.entityData.get(DATA_OWNER_UUID);
+		if (!ownerUuid.isEmpty()) {
+			return entity.getStringUUID().equals(ownerUuid);
+		}
+		Entity owner = this.getOwner();
+		return owner != null && entity.getStringUUID().equals(owner.getStringUUID());
 	}
 
 	@Override
@@ -73,14 +125,8 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 	}
 
 	@Override
-	protected void doKnockback(LivingEntity livingEntity, DamageSource damageSource) {
-		if (knockback > 0.0) {
-			double d1 = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
-			Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale(knockback * 0.6 * d1);
-			if (vec3.lengthSqr() > 0.0) {
-				livingEntity.push(vec3.x, 0.1, vec3.z);
-			}
-		}
+	protected double getDefaultGravity() {
+		return 0.0055;
 	}
 
 	@Override
@@ -92,6 +138,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		Entity target = hitResult.getEntity();
 		if (owner != null && target != null && target != owner) {
 			hookedTargetId = target.getStringUUID();
+			this.entityData.set(DATA_HOOKED, true);
 			pullTicks = 0;
 			setDeltaMovement(Vec3.ZERO);
 			setNoGravity(true);
@@ -107,7 +154,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		BlockPos hitPos = blockHitResult.getBlockPos();
 		BlockState hitState = this.level().getBlockState(hitPos);
 
-		if (hitState.isAir() || !hitState.isSolid()) {
+		if (hitState.isAir() || !hitState.isSolid() || hitState.is(Blocks.BARRIER) || hitState.getBlock() instanceof net.minecraft.world.level.block.BarrierBlock || hitState.getDestroySpeed(this.level(), hitPos) < 0) {
 			releaseAndBreak(this.getOwner());
 			return;
 		}
@@ -126,6 +173,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		falling.dropItem = false;
 
 		hookedTargetId = falling.getStringUUID();
+		this.entityData.set(DATA_HOOKED, true);
 		pullTicks = 0;
 		setDeltaMovement(Vec3.ZERO);
 		setNoGravity(true);
@@ -143,7 +191,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		}
 
 		if (!this.level().isClientSide()) {
-			if (hookedTargetId.isEmpty() && this.distanceTo(owner) >= 30.0) {
+			if (hookedTargetId.isEmpty() && (this.distanceTo(owner) >= 90.0 || this.tickCount > 180)) {
 				releaseAndBreak(owner);
 				return;
 			}
@@ -160,7 +208,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 				Vec3 targetPos = target.position().add(0, target.getBbHeight() * 0.5, 0);
 				Vec3 toOwner = ownerPos.subtract(targetPos);
 				double distance = toOwner.length();
-				if (distance < 2.5D) {
+				if (distance < 2.5D || pullTicks > 180) {
 					onTargetReached(owner, target, pullTicks);
 					return;
 				}
@@ -190,13 +238,79 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		}
 		released = true;
 
-		if (owner instanceof LivingEntity livingOwner) {
-			this.level().playSound(null, livingOwner.getX(), livingOwner.getY(), livingOwner.getZ(),
-					SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 1.0f, 1.0f);
+		final Entity resolvedOwner = owner != null ? owner : this.getOwner();
+
+		if (resolvedOwner instanceof LivingEntity livingOwner) {
+			breakOwnerGrapplingHook(livingOwner);
 		}
 
 		hookedTargetId = "";
+		this.entityData.set(DATA_HOOKED, false);
+		if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel && resolvedOwner != null) {
+			serverLevel.getEntitiesOfClass(
+					GrapplingHitboxEntity.class,
+					new AABB(resolvedOwner.position(), resolvedOwner.position()).inflate(256)
+			).stream()
+					.filter(h -> resolvedOwner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner)))
+					.forEach(Entity::discard);
+		}
 		this.discard();
+	}
+
+	private void breakOwnerGrapplingHook(LivingEntity livingOwner) {
+		this.level().playSound(null, livingOwner.getX(), livingOwner.getY(), livingOwner.getZ(),
+				SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 1.0f, 1.0f);
+
+		ItemStack main = livingOwner.getMainHandItem();
+		if (main.getItem() instanceof GrapplingHookItem) {
+			main.hurtAndBreak(main.getMaxDamage(), livingOwner, InteractionHand.MAIN_HAND);
+			if (!main.isEmpty()) {
+				main.shrink(1);
+			}
+			if (livingOwner instanceof net.minecraft.server.level.ServerPlayer sp) {
+				sp.containerMenu.broadcastChanges();
+				sp.inventoryMenu.broadcastChanges();
+			}
+			return;
+		}
+
+		ItemStack off = livingOwner.getOffhandItem();
+		if (off.getItem() instanceof GrapplingHookItem) {
+			off.hurtAndBreak(off.getMaxDamage(), livingOwner, InteractionHand.OFF_HAND);
+			if (!off.isEmpty()) {
+				off.shrink(1);
+			}
+			if (livingOwner instanceof net.minecraft.server.level.ServerPlayer sp) {
+				sp.containerMenu.broadcastChanges();
+				sp.inventoryMenu.broadcastChanges();
+			}
+			return;
+		}
+
+		if (livingOwner instanceof net.minecraft.world.entity.player.Player player) {
+			for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+				ItemStack stack = player.getInventory().getItem(i);
+				if (stack.getItem() instanceof GrapplingHookItem && stack.getDamageValue() > 0) {
+					stack.shrink(1);
+					if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+						sp.containerMenu.broadcastChanges();
+						sp.inventoryMenu.broadcastChanges();
+					}
+					return;
+				}
+			}
+			for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+				ItemStack stack = player.getInventory().getItem(i);
+				if (stack.getItem() instanceof GrapplingHookItem) {
+					stack.shrink(1);
+					if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+						sp.containerMenu.broadcastChanges();
+						sp.inventoryMenu.broadcastChanges();
+					}
+					return;
+				}
+			}
+		}
 	}
 
 	private Entity resolveTarget() {
@@ -214,14 +328,29 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		if (this.level().isClientSide()) {
 			return;
 		}
-		Vec3 toOwner = owner.position().subtract(target.position()).normalize();
-		double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
-		target.setDeltaMovement(toOwner.scale(launchSpeed));
-		target.hurtMarked = true;
-		if (target instanceof FallingBlockEntity fallingBlock) {
-			fallingBlock.setNoGravity(false);
+		final Entity resolvedOwner = owner != null ? owner : this.getOwner();
+		if (target != null && target.isAlive()) {
+			Vec3 toOwner = (resolvedOwner != null ? resolvedOwner.position() : this.position()).subtract(target.position()).normalize();
+			double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
+			target.setDeltaMovement(toOwner.scale(launchSpeed));
+			target.hurtMarked = true;
+			if (target instanceof FallingBlockEntity fallingBlock) {
+				fallingBlock.setNoGravity(false);
+			}
+		}
+		if (resolvedOwner instanceof LivingEntity livingOwner) {
+			breakOwnerGrapplingHook(livingOwner);
 		}
 		hookedTargetId = "";
+		this.entityData.set(DATA_HOOKED, false);
+		if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel && resolvedOwner != null) {
+			serverLevel.getEntitiesOfClass(
+					GrapplingHitboxEntity.class,
+					new AABB(resolvedOwner.position(), resolvedOwner.position()).inflate(256)
+			).stream()
+					.filter(h -> resolvedOwner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner)))
+					.forEach(Entity::discard);
+		}
 		this.discard();
 	}
 
@@ -241,11 +370,20 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 			}
 		}
 		hookedTargetId = "";
+		this.entityData.set(DATA_HOOKED, false);
+		if (this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel && owner != null) {
+			serverLevel.getEntitiesOfClass(
+					GrapplingHitboxEntity.class,
+					new AABB(owner.position(), owner.position()).inflate(256)
+			).stream()
+					.filter(h -> owner.getStringUUID().equals(h.getEntityData().get(GrapplingHitboxEntity.DATA_owner)))
+					.forEach(Entity::discard);
+		}
 		this.discard();
 	}
 
 	public boolean hasHookedTarget() {
-		return !hookedTargetId.isEmpty();
+		return this.entityData.get(DATA_HOOKED) || !hookedTargetId.isEmpty();
 	}
 
 	@Nullable

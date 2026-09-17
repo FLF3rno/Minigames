@@ -34,7 +34,13 @@ public class GameTimerOverlay {
 			int hh = (int) Math.round(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerHours);
 			int mm = (int) Math.round(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerMinutes);
 			int ss = (int) Math.round(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerSeconds);
-			float scale = (float) entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerScale;
+			float scale = (float) net.mcreator.minigames.client.gui.options.MinigamesSettingsConfig.getDouble("timerScale", entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerScale);
+			if (scale <= 0.05f) {
+				scale = (float) entity.getData(MinigamesModVariables.PLAYER_VARIABLES).timerScale;
+			}
+			if (scale <= 0.05f) {
+				scale = 2.5f;
+			}
 			String timer;
 			if (hh > 0) {
 				timer = String.format("%02d:%02d:%02d", hh, mm, ss);

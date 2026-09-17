@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "minigames:flavio_omega_laser",
+    "minigames:flavio_trapdoor_3",
+    "minigames:flavio_tesla_coil",
+    "minigames:flavio_sweeper",
+    "minigames:flavio_trapdoor_2",
+    "minigames:blessing_dispenser",
+    "minigames:flavio_antenna",
+    "minigames:gravedigger_miniboss",
+    "minigames:flavio_clock_cannon",
+    "minigames:flavio_omega_laser_screen",
+    "minigames:flavio_trapdoor",
+    "item"
+  ]
+}

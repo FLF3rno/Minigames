@@ -70,13 +70,10 @@ public class OnDamageDealtProcedure {
 				_event.setAmount(0);
 			}
 		} else {
-			ItemStack mainHand = sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY;
-			LivingEntity livingSource = sourceentity instanceof LivingEntity _livEnt ? _livEnt : null;
-			double forgedBonus = net.mcreator.minigames.DungeonItemAccess.Forged(mainHand, livingSource);
-			damage = amount * (1 + forgedBonus * 0.01
-					+ mainHand.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("glitched", 0) * 0.01);
-			if (sourceentity instanceof LivingEntity _livEnt10 && _livEnt10.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST)) {
-				damage = damage + damage * (((sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_BOOST).getAmplifier() : 0) + 1) / 100d);
+			damage = amount * (1 + (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("forged", 0) * 0.01
+					+ (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("glitched", 0) * 0.01);
+			if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.BAT_ESSENCE.get()))) {
+				damage = damage + damage * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.BAT_ESSENCE.get())), "minigames:extra_damage") / 100);
 			}
 			if (IsBackstabProcedure.execute(sourceentity, entity) && CanBackstabProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) {
 				if (world instanceof Level _level) {
@@ -89,6 +86,12 @@ public class OnDamageDealtProcedure {
 				damage = damage * GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage");
 				ApplyEffectProcedure.execute(world, entity, true, 1, GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:effect_length"), "minigames:bleed");
 			}
+			if (sourceentity instanceof LivingEntity _livEnt14 && _livEnt14.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST)) {
+				damage = damage + damage * (((sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_BOOST).getAmplifier() : 0) + 1) / 100d);
+			}
+			if (entity instanceof LivingEntity _livEnt16 && _livEnt16.hasEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE)) {
+				damage = damage - damage * (((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE).getAmplifier() : 0) + 1) / 100d);
+			}
 			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:decay_dmg")))) {
 				if (entity.getPersistentData().getBooleanOr("parasiteScytheActive", false)) {
 					entity.getPersistentData().putBoolean("parasiteScytheActive", false);
@@ -97,6 +100,15 @@ public class OnDamageDealtProcedure {
 							GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get()), "minigames:effect_length"), "minigames:decay");
 					damage = 0;
 				}
+			}
+			if (sourceentity instanceof LivingEntity _livEnt21 && _livEnt21.hasEffect(MinigamesModMobEffects.LIFESTEAL)) {
+				DungeonHealProcedure.execute(entity, sourceentity,
+						(damage * (sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.LIFESTEAL) ? _livEnt.getEffect(MinigamesModMobEffects.LIFESTEAL).getAmplifier() : 0)) / 100, "lifesteal");
+			}
+			if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.MENDING_MACE.get()) {
+				DungeonHealProcedure.execute(sourceentity, entity, damage, "weapon");
+				DungeonHealProcedure.execute(sourceentity, sourceentity, damage, "weapon");
+				damage = 0;
 			}
 			if (event instanceof LivingIncomingDamageEvent _event) {
 				_event.setAmount((float) damage);
@@ -116,7 +128,7 @@ public class OnDamageDealtProcedure {
 						}
 					}
 					if (!entitiesinrange.isEmpty()) {
-						target = entitiesinrange.get(Mth.nextInt(RandomSource.create(), 0, (int) (entitiesinrange.size() - 1))) instanceof Entity _entity29 ? _entity29 : null;
+						target = entitiesinrange.get(Mth.nextInt(RandomSource.create(), 0, (int) (entitiesinrange.size() - 1))) instanceof Entity _entity35 ? _entity35 : null;
 						{
 							Entity _ent = target;
 							if (_ent.level() instanceof ServerLevel _serverLevel) {

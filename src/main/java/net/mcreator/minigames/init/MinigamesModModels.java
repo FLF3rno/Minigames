@@ -33,6 +33,7 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelflavio_sweeper.LAYER_LOCATION, Modelflavio_sweeper::createBodyLayer);
 		event.registerLayerDefinition(Modelwinnercrown.LAYER_LOCATION, Modelwinnercrown::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat_right.LAYER_LOCATION, Modelpewseat_right::createBodyLayer);
+		event.registerLayerDefinition(Modelchurch_sharpener.LAYER_LOCATION, Modelchurch_sharpener::createBodyLayer);
 		event.registerLayerDefinition(Modelflavio_antenna.LAYER_LOCATION, Modelflavio_antenna::createBodyLayer);
 		event.registerLayerDefinition(Modelgrapple.LAYER_LOCATION, Modelgrapple::createBodyLayer);
 		event.registerLayerDefinition(Modelshortboard.LAYER_LOCATION, Modelshortboard::createBodyLayer);

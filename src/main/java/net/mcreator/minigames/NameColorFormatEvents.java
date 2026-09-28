@@ -9,11 +9,46 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
+import net.mcreator.minigames.util.ColorUtils;
+
 @EventBusSubscriber(modid = MinigamesMod.MODID)
 public class NameColorFormatEvents {
 	@SubscribeEvent
+	public static void onNameFormat(PlayerEvent.NameFormat event) {
+		Player player = event.getEntity();
+		if (player == null) {
+			return;
+		}
+		String nameStr = AccountSwapManager.getSwappedName(player.getUUID());
+		if (nameStr == null || nameStr.isEmpty()) {
+			nameStr = player.getName().getString();
+		}
+		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+		int rgb = ColorUtils.parseHex(vars.color);
+		if (rgb != -1 || AccountSwapManager.getSwappedName(player.getUUID()) != null) {
+			net.minecraft.network.chat.MutableComponent comp = Component.literal(nameStr);
+			if (rgb != -1) {
+				comp = comp.withStyle(style -> style.withColor(rgb));
+			}
+			if (player.getTeam() != null) {
+				event.setDisplayname(net.minecraft.world.scores.PlayerTeam.formatNameForTeam(player.getTeam(), comp));
+			} else {
+				event.setDisplayname(comp);
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public static void onTabListNameFormat(PlayerEvent.TabListNameFormat event) {
-		Component colored = coloredName(event.getEntity());
+		Player player = event.getEntity();
+		if (player == null) {
+			return;
+		}
+		String swapped = AccountSwapManager.getSwappedName(player.getUUID());
+		if (swapped != null && !swapped.isEmpty()) {
+			event.setDisplayName(Component.literal(swapped));
+		}
+		Component colored = coloredName(player);
 		if (colored != null) {
 			event.setDisplayName(colored);
 		}
@@ -35,7 +70,12 @@ public class NameColorFormatEvents {
 			return null;
 		}
 
-		Component coloredPlayerName = Component.literal(player.getName().getString())
+		String nameStr = AccountSwapManager.getSwappedName(player.getUUID());
+		if (nameStr == null || nameStr.isEmpty()) {
+			nameStr = player.getName().getString();
+		}
+
+		Component coloredPlayerName = Component.literal(nameStr)
 				.setStyle(Style.EMPTY.withColor(parsedColor));
 
 		if (player.getTeam() != null) {

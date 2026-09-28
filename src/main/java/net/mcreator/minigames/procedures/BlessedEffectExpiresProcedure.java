@@ -11,7 +11,7 @@ public class BlessedEffectExpiresProcedure {
 	public static void execute(LevelAccessor world, Entity entity, double amplifier) {
 		if (entity == null)
 			return;
-		PotionEffectExpiresProcedure.execute(world, entity, amplifier, "minigames:blessed");
+		PotionEffectExpiresProcedure.execute(world, entity, entity, amplifier, "minigames:blessed");
 		{
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {

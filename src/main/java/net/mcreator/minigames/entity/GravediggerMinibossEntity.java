@@ -49,7 +49,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.mcreator.minigames.procedures.AnimationAttackProcedure;
 import net.mcreator.minigames.client.model.animations.gravediggerAnimation;
 
-import java.lang.reflect.Constructor;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.Comparator;
 import java.util.List;
 
@@ -120,14 +120,41 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 	public String getTexture() {
 		return this.entityData.get(TEXTURE);
 	}
-	
+
+	public int getRoomID() {
+		int id = this.entityData.get(DATA_ID);
+		if (id == 0) {
+			id = this.getPersistentData().getIntOr("DataID", (int) this.getPersistentData().getDoubleOr("DataID", 0));
+			if (id != 0) {
+				this.entityData.set(DATA_ID, id);
+			}
+		}
+		return id;
+	}
+
+	public boolean isCurrentRoomActive() {
+		int roomID = getRoomID();
+		return roomID <= 0 || net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(this.level()).currentRoomID == roomID;
+	}
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new DigGraveGoal(this, 20));
 		this.goalSelector.addGoal(2, new MoveToCoarseDirtGoal(this, 1.3, 20));
 		this.goalSelector.addGoal(3, new ChargeAttackGoal(this, 1.2, 20, 13));
-		this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false) {
+			@Override
+			public boolean canUse() {
+				return GravediggerMinibossEntity.this.isCurrentRoomActive() && super.canUse();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return GravediggerMinibossEntity.this.isCurrentRoomActive() && super.canContinueToUse();
+			}
+		});
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 	}
 
@@ -176,52 +203,36 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.level().isClientSide() && !this.hasSeenPlayer) {
+		if (!this.level().isClientSide() && isCurrentRoomActive() && !this.hasSeenPlayer) {
 
 			if (this.tickCount % 10 == 0) {
 
 				Player nearestPlayer = this.level().getNearestPlayer(this, 60.0D);
 
-				if (nearestPlayer != null && this.getSensing().hasLineOfSight(nearestPlayer)) {
+				if (nearestPlayer != null && !nearestPlayer.isSpectator() && nearestPlayer.isAlive() && (this.getSensing().hasLineOfSight(nearestPlayer) || this.distanceToSqr(nearestPlayer) <= 400.0D)) {
 
 					this.hasSeenPlayer = true;
 
 					this.entityData.set(ANIM, 1000);
 					this.entityData.set(ANIM, 3);
 					MinigamesMod.queueServerWork(40, () -> {
-						Constructor<FallingBlockEntity> constructor = null;
-						try {
-							constructor = FallingBlockEntity.class.getDeclaredConstructor(
-									Level.class, double.class, double.class, double.class, BlockState.class
+						for (int i = 0; i < 10; i++) {
+							FallingBlockEntity fallingBlock = FallingBlockEntity.fall(
+									this.level(),
+									BlockPos.containing(this.getX(), this.getY() + 1.0D, this.getZ()),
+									Blocks.COARSE_DIRT.defaultBlockState()
 							);
-							constructor.setAccessible(true);
-						} catch (NoSuchMethodException e) {
-							e.printStackTrace();
-						}
+							if (fallingBlock != null) {
+								fallingBlock.time = 1;
+								fallingBlock.dropItem = false;
+								fallingBlock.setHurtsEntities(4.0f, 40);
 
-						if (constructor != null) {
-							for (int i = 0; i < 10; i++) {
-								try {
-									FallingBlockEntity fallingBlock = constructor.newInstance(
-											this.level(), this.getX(), this.getY() + 1.0D, this.getZ(), Blocks.COARSE_DIRT.defaultBlockState()
-									);
+								RandomSource random = this.getRandom();
+								double velocityX = (random.nextDouble() - 0.5D) * 1.2D;
+								double velocityZ = (random.nextDouble() - 0.5D) * 1.2D;
+								double velocityY = random.nextDouble() * 0.5D + 0.5D;
 
-									fallingBlock.time = 1;
-									fallingBlock.dropItem = false;
-									fallingBlock.setHurtsEntities(4.0f, 40);
-
-									RandomSource random = this.getRandom();
-									double velocityX = (random.nextDouble() - 0.5D) * 1.2D;
-									double velocityZ = (random.nextDouble() - 0.5D) * 1.2D;
-									double velocityY = random.nextDouble() * 0.5D + 0.5D;
-
-									fallingBlock.setDeltaMovement(velocityX, velocityY, velocityZ);
-
-									this.level().addFreshEntity(fallingBlock);
-
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
+								fallingBlock.setDeltaMovement(velocityX, velocityY, velocityZ);
 							}
 						}
 					});
@@ -397,11 +408,11 @@ public class GravediggerMinibossEntity extends Monster implements IDiggerMob, IC
 
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
-		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.15);
+		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.2);
 		builder = builder.add(Attributes.MAX_HEALTH, 200);
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 3);
-		builder = builder.add(Attributes.FOLLOW_RANGE, 16);
+		builder = builder.add(Attributes.FOLLOW_RANGE, 32);
 		builder = builder.add(Attributes.STEP_HEIGHT, 2);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 10.15);
 		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 3);

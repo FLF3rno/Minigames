@@ -665,5 +665,22 @@
         "stream": false
       }
     ]
+  },
+  "coin": {
+    "subtitle": "subtitles.coin",
+    "sounds": [
+      {
+        "name": "minigames:coin3",
+        "stream": false
+      },
+      {
+        "name": "minigames:coin2",
+        "stream": false
+      },
+      {
+        "name": "minigames:coin1",
+        "stream": false
+      }
+    ]
   }
 }

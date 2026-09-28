@@ -18,6 +18,10 @@ public abstract class LivingEntityJumpGravityMixin {
 	@Inject(method = "jumpFromGround", at = @At("HEAD"), cancellable = true)
 	private void minigames$jumpAlongGravityUp(CallbackInfo ci) {
 		if (!((Object) this instanceof LivingEntity living)) return;
+		if (net.mcreator.minigames.entity.ChurchSharpenerEntity.isVictimPinned(living)) {
+			ci.cancel();
+			return;
+		}
 		if (!(living instanceof Player)) return;
 		Direction gravity = GravityAccess.getGravity(living);
 		if (gravity == Direction.DOWN) return;

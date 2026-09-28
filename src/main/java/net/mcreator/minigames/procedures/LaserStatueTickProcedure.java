@@ -38,14 +38,32 @@ public class LaserStatueTickProcedure {
 		int cycleTick = entity.tickCount % 90;
 		if (!(entity.getEntityData().get(LaserStatueEntity.DATA_active))) { cycleTick = 0;}
 
-		int roomID = (int) entity.getPersistentData().getDoubleOr("DataID", 0);
+		int roomID = 0;
+		if (entity instanceof LaserStatueEntity laserStatue) {
+			roomID = laserStatue.getRoomID();
+		}
 		if (roomID == 0) {
-			roomID = entity.getPersistentData().getIntOr("DataID", 0);
+			roomID = (int) entity.getPersistentData().getDoubleOr("DataID", 0);
+			if (roomID == 0) {
+				roomID = entity.getPersistentData().getIntOr("DataID", 0);
+			}
 		}
 
-		boolean inCurrentRoom = MinigamesModVariables.MapVariables.get(world).inCombat
-				&& roomID > 0
-				&& (int) MinigamesModVariables.MapVariables.get(world).currentRoomID == roomID;
+		boolean inCombat = MinigamesModVariables.MapVariables.get(world).inCombat;
+		int currentRoomID = (int) MinigamesModVariables.MapVariables.get(world).currentRoomID;
+
+		boolean inCurrentRoom = inCombat && roomID > 0 && currentRoomID == roomID;
+
+		Vec3 doorOffset = MinigamesModVariables.MapVariables.get(world).DoorOffset;
+		if (inCurrentRoom && doorOffset != null && (doorOffset.x() != 0 || doorOffset.z() != 0)) {
+			int combatGridX = (int) Math.floor(doorOffset.x() / 29.0);
+			int combatGridZ = (int) Math.floor(doorOffset.z() / 29.0);
+			int statueGridX = (int) Math.floor(entity.getX() / 29.0);
+			int statueGridZ = (int) Math.floor(entity.getZ() / 29.0);
+			if (combatGridX != statueGridX || combatGridZ != statueGridZ) {
+				inCurrentRoom = false;
+			}
+		}
 
 		if (entity.getEntityData().get(LaserStatueEntity.DATA_active) && inCurrentRoom) {
 			if (cycleTick == 50) {
@@ -57,70 +75,78 @@ public class LaserStatueTickProcedure {
 			}
 
 			Vec3 start = new Vec3(entity.getX(), entity.getY() + 1.5, entity.getZ());
+			boolean hasTarget = false;
+			int statueGridX = (int) Math.floor(entity.getX() / 29.0);
+			int statueGridZ = (int) Math.floor(entity.getZ() / 29.0);
 
 			if (attack || telegraph) {
-				// Only target players within 32 blocks (inside the room), not across the whole world
 				for (Player targetPlayer : world.getEntitiesOfClass(Player.class, entity.getBoundingBox().inflate(32.0D))) {
 					if (targetPlayer.isCreative() || targetPlayer.isSpectator() || !targetPlayer.isAlive() || targetPlayer.hasEffect(MinigamesModMobEffects.BLESSED)) {
 						continue;
 					}
+					int playerGridX = (int) Math.floor(targetPlayer.getX() / 29.0);
+					int playerGridZ = (int) Math.floor(targetPlayer.getZ() / 29.0);
+					if (playerGridX != statueGridX || playerGridZ != statueGridZ) {
+						continue;
+					}
+					hasTarget = true;
 
 					Vec3 direction = targetPlayer.position().subtract(start);
 					if (direction.lengthSqr() < 1.0E-6D) {
 						direction = new Vec3(0, 0, 1);
-				} else {
-					direction = direction.normalize();
-				}
-
-				double maxDistance = 128.0;
-				Vec3 end = start.add(direction.scale(maxDistance));
-				BlockHitResult blockHit = world.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
-
-				if (blockHit.getType() == HitResult.Type.BLOCK) {
-					end = blockHit.getLocation();
-				}
-
-				if (telegraph) {
-					ParticleFlowHelperProcedure.execute(world, 50, 1, "linear", "minigames:blessed_particle", end, start);
-				}
-
-				if (attack) {
-					AABB box = new AABB(start, end).inflate(1.0);
-					List<Entity> candidates = world.getEntities(
-							entity,
-							box,
-							e -> e instanceof LivingEntity && e.isAlive()
-					);
-
-					List<Entity> hits = new ArrayList<>();
-					for (Entity e : candidates) {
-						AABB bb = e.getBoundingBox().inflate(0.3);
-						Optional<Vec3> intersection = bb.clip(start, end);
-						if (intersection.isPresent()) {
-							hits.add(e);
-						}
+					} else {
+						direction = direction.normalize();
 					}
 
-					for (Entity affectedEntity : hits) {
-						if (affectedEntity instanceof Player _player) {
-							if (!_player.hasEffect(MinigamesModMobEffects.BLESSED)) {
-								if (world instanceof ServerLevel serverLevel) {
-									_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 3.0F);
+					double maxDistance = 128.0;
+					Vec3 end = start.add(direction.scale(maxDistance));
+					BlockHitResult blockHit = world.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
+
+					if (blockHit.getType() == HitResult.Type.BLOCK) {
+						end = blockHit.getLocation();
+					}
+
+					if (telegraph) {
+						ParticleFlowHelperProcedure.execute(world, 50, 1, "linear", "minigames:blessed_particle", end, start);
+					}
+
+					if (attack) {
+						AABB box = new AABB(start, end).inflate(1.0);
+						List<Entity> candidates = world.getEntities(
+								entity,
+								box,
+								e -> e instanceof LivingEntity && e.isAlive()
+						);
+
+						List<Entity> hits = new ArrayList<>();
+						for (Entity e : candidates) {
+							AABB bb = e.getBoundingBox().inflate(0.3);
+							Optional<Vec3> intersection = bb.clip(start, end);
+							if (intersection.isPresent()) {
+								hits.add(e);
+							}
+						}
+
+						for (Entity affectedEntity : hits) {
+							if (affectedEntity instanceof Player _player) {
+								if (!_player.hasEffect(MinigamesModMobEffects.BLESSED)) {
+									if (world instanceof ServerLevel serverLevel) {
+										_player.hurtServer(serverLevel, serverLevel.damageSources().generic(), 3.0F);
+									}
 								}
 							}
 						}
-					}
 
-					RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 15, end.x, end.y, end.z, "beam", BEAM);
+						RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 15, end.x, end.y, end.z, "beam", BEAM);
+					}
 				}
 			}
 
-			if (attack && world instanceof Level _level) {
+			if (attack && hasTarget && world instanceof Level _level) {
 				if (!_level.isClientSide()) {
 					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:holy_laser")), SoundSource.HOSTILE, 4, 1);
 				}
 			}
-		}
 		}
 	}
 }

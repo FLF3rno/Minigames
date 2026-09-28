@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minigames:block/copycat_slab"
+    },
+    "type=top": {
+      "model": "minigames:block/copycat_slab_top"
+    },
+    "type=double": {
+      "model": "minigames:block/copycat_slab_full"
+    },
+    "type=north": {
+      "model": "minigames:block/copycat_slab_vertical"
+    },
+    "type=south": {
+      "model": "minigames:block/copycat_slab_vertical",
+      "y": 180
+    },
+    "type=west": {
+      "model": "minigames:block/copycat_slab_vertical",
+      "y": 270
+    },
+    "type=east": {
+      "model": "minigames:block/copycat_slab_vertical",
+      "y": 90
+    }
+  }
+}

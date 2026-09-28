@@ -14,11 +14,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.core.registries.Registries;
 
-import net.mcreator.minigames.procedures.SyncCrownedRemoveProcedure;
-import net.mcreator.minigames.procedures.StunnedEffectExpiresProcedure;
-import net.mcreator.minigames.procedures.PhantomEffectEndsProcedure;
-import net.mcreator.minigames.procedures.BlessedEffectExpiresProcedure;
-import net.mcreator.minigames.procedures.AscendingEffectExpiresProcedure;
+import net.mcreator.minigames.procedures.*;
 import net.mcreator.minigames.potion.*;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -38,6 +34,11 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> BLEED = REGISTRY.register("bleed", BleedMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> DECAY = REGISTRY.register("decay", DecayMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> BLOCK_HEAL = REGISTRY.register("block_heal", BlockHealMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> SPEED_BOOST = REGISTRY.register("speed_boost", SpeedBoostMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> GOLDEN = REGISTRY.register("golden", GoldenMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> DAMAGE_RESISTANCE = REGISTRY.register("damage_resistance", DamageResistanceMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> SLOWDOWN = REGISTRY.register("slowdown", SlowdownMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> LIFESTEAL = REGISTRY.register("lifesteal", LifestealMobEffect::new);
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {
@@ -66,6 +67,8 @@ public class MinigamesModMobEffects {
 			AscendingEffectExpiresProcedure.execute(entity);
 		} else if (effectInstance.is(PHANTOM)) {
 			PhantomEffectEndsProcedure.execute(entity);
+		} else if (effectInstance.is(GOLDEN)) {
+			GoldenEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
 		}
 	}
 }

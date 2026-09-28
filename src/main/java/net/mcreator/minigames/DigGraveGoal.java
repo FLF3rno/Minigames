@@ -33,7 +33,7 @@ public class DigGraveGoal<T extends PathfinderMob & IDiggerMob> extends Goal {
 			return false;
 		}
 		this.targetPos = this.findNearestCoarseDirt().orElse(null);
-		return this.targetPos != null && this.mob.distanceToSqr(this.targetPos.getX() + 0.5D, this.targetPos.getY() + 1.0D, this.targetPos.getZ() + 0.5D) <= 2.25D;
+		return this.targetPos != null && this.mob.distanceToSqr(this.targetPos.getX() + 0.5D, this.targetPos.getY() + 1.0D, this.targetPos.getZ() + 0.5D) <= 6.25D;
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class DigGraveGoal<T extends PathfinderMob & IDiggerMob> extends Goal {
 	private Optional<BlockPos> findNearestCoarseDirt() {
 		BlockPos origin = this.mob.blockPosition();
 		return BlockPos.betweenClosedStream(
-						origin.offset(-this.searchRadius, -3, -this.searchRadius),
-						origin.offset(this.searchRadius, 3, this.searchRadius)
+						origin.offset(-this.searchRadius, -6, -this.searchRadius),
+						origin.offset(this.searchRadius, 6, this.searchRadius)
 				)
 				.filter(pos -> this.mob.level().getBlockState(pos).is(Blocks.COARSE_DIRT))
 				.map(BlockPos::immutable)
@@ -69,7 +69,7 @@ public class DigGraveGoal<T extends PathfinderMob & IDiggerMob> extends Goal {
 		return this.mob.level().getEntitiesOfClass(
 						Player.class,
 						this.mob.getBoundingBox().inflate(this.searchRadius),
-						player -> player != null && player.isAlive() && !player.isSpectator() && this.mob.getSensing().hasLineOfSight(player)
+						player -> player != null && player.isAlive() && !player.isSpectator()
 				).stream()
 				.min(Comparator.comparingDouble(this.mob::distanceToSqr));
 	}

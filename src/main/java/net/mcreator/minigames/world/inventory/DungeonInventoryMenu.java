@@ -1,5 +1,6 @@
 package net.mcreator.minigames.world.inventory;
 
+import net.mcreator.minigames.init.MinigamesModItems;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
@@ -50,7 +51,8 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		this.entity = inv.player;
 		this.world = inv.player.level();
 		this.playerSlots = Math.max(0, Math.min(9, (int) inv.player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots));
-		this.backpackSlots = Math.max(0, Math.min(25, (int) inv.player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots));
+
+		this.backpackSlots = DungeonItemAccess.getBackpackSlots(inv.player);
 		addRelicSlots(inv);
 		addDynamicPlayerSlots(inv, this.playerSlots);
 		addDynamicBackpackSlots(inv, this.backpackSlots);
@@ -97,58 +99,47 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		boolean isDungeonItem = DungeonItemAccess.isDungeonItem(slotStack);
 
 		int relicStart = 0;
-		int relicEnd = 2; // 0, 1
+		int relicEnd = 2;
 		int hotbarStart = 2;
 		int hotbarEnd = 2 + this.playerSlots;
 		int backpackStart = hotbarEnd;
 		int backpackEnd = backpackStart + this.backpackSlots;
 
-		// 1. If clicking a Relic slot (0 or 1)
 		if (index >= relicStart && index < relicEnd) {
-			// Combat rule: cannot move relics out of relic slots
 			if (inCombat) {
 				return ItemStack.EMPTY;
 			}
-			// Relics move to backpack only; if no space, ignore
 			if (!this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
 				return ItemStack.EMPTY;
 			}
-		}
-		// 2. If clicking a Hotbar slot
-		else if (index >= hotbarStart && index < hotbarEnd) {
+		} else if (index >= hotbarStart && index < hotbarEnd) {
 			if (isRelic) {
-				// Relic should not be in hotbar, but if clicked, only move to relic slots or backpack
 				if (!this.moveItemStackTo(slotStack, relicStart, relicEnd, false)) {
 					if (inCombat || !this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
 						return ItemStack.EMPTY;
 					}
 				}
 			} else {
-				// Regular item or dungeon class item: moves to backpack
+				if (DungeonItemAccess.isHotbarLocked(slotStack)) {
+					return ItemStack.EMPTY;
+				}
 				if (inCombat && isDungeonItem) {
-					// Cannot move dungeon class items into backpack in combat
 					return ItemStack.EMPTY;
 				}
 				if (!this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
 					return ItemStack.EMPTY;
 				}
 			}
-		}
-		// 3. If clicking a Backpack slot
-		else if (index >= backpackStart && index < backpackEnd) {
+		} else if (index >= backpackStart && index < backpackEnd) {
 			if (isRelic) {
-				// Combat rule: cannot move relics in combat
 				if (inCombat) {
 					return ItemStack.EMPTY;
 				}
-				// Relics only move to relic slots; if no space, ignore
 				if (!this.moveItemStackTo(slotStack, relicStart, relicEnd, false)) {
 					return ItemStack.EMPTY;
 				}
 			} else {
-				// Move from backpack to hotbar
 				if (inCombat && isDungeonItem) {
-					// Cannot move dungeon class item out of backpack in combat
 					return ItemStack.EMPTY;
 				}
 				if (!this.moveItemStackTo(slotStack, hotbarStart, hotbarEnd, false)) {
@@ -175,6 +166,27 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 
 	@Override
 	public void clicked(int slotId, int button, ContainerInput clickType, Player player) {
+		if (slotId >= 0 && slotId < this.slots.size()) {
+			Slot slot = this.slots.get(slotId);
+			int containerSlot = slot.getContainerSlot();
+			boolean backpackSlot = isBackpackSlot(containerSlot);
+			boolean relicSlot = isRelicSlot(containerSlot);
+			ItemStack carried = this.getCarried();
+			ItemStack slotStack = slot.getItem();
+			if (backpackSlot && (DungeonItemAccess.isHotbarLocked(carried) || DungeonItemAccess.isHotbarLocked(slotStack))) {
+				return;
+			}
+			if (clickType == ContainerInput.SWAP && (backpackSlot || relicSlot)) {
+				ItemStack hotbarStack = player.getInventory().getItem(button);
+				if (backpackSlot && DungeonItemAccess.isHotbarLocked(hotbarStack)) {
+					return;
+				}
+				if (relicSlot) {
+					return;
+				}
+			}
+		}
+
 		if (isInCombat()) {
 			if (clickType == ContainerInput.THROW) {
 				if (slotId >= 0 && slotId < this.slots.size()) {
@@ -218,6 +230,13 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 			}
 		}
 		super.clicked(slotId, button, clickType, player);
+		DungeonItemAccess.dropUnavailableBackpackSlots(player);
+	}
+
+	@Override
+	public void removed(Player player) {
+		super.removed(player);
+		DungeonItemAccess.dropUnavailableBackpackSlots(player);
 	}
 
 	private boolean isInCombat() {
@@ -239,11 +258,9 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		final int SLOT_SIZE = 18;
 		final int SLOT_SPACING = 22;
 
-		// width of the visible main inventory (minimum 5 columns)
 		int visibleColumns = Math.max(5, playerSlots);
 		int mainWidth = visibleColumns * SLOT_SPACING + 8;
 
-		// hotbar is centered inside the main panel
 		int hotbarWidth = playerSlots * SLOT_SIZE;
 
 		int startX = (mainWidth - hotbarWidth) / 2 + 1;
@@ -299,7 +316,7 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 			int column = i / rows;
 			int row = i % rows;
 
-			addSlot(new Slot(
+			addSlot(new BackpackSlot(
 					inventory,
 					9 + i,
 					startX + column * SLOT_SPACING + 1,
@@ -333,6 +350,17 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		@Override
 		public boolean mayPlace(ItemStack stack) {
 			return !DungeonItemAccess.isRelic(stack);
+		}
+	}
+
+	private static class BackpackSlot extends Slot {
+		public BackpackSlot(Inventory inventory, int index, int x, int y) {
+			super(inventory, index, x, y);
+		}
+
+		@Override
+		public boolean mayPlace(ItemStack stack) {
+			return !DungeonItemAccess.isHotbarLocked(stack);
 		}
 	}
 

@@ -37,11 +37,13 @@ public record MinigamesSettingSyncMessage(String key, double doubleVal, boolean 
 
 	public static void handle(final MinigamesSettingSyncMessage message, final IPayloadContext context) {
 		context.enqueueWork(() -> {
-			if (context.flow() == PacketFlow.SERVERBOUND && context.player() instanceof ServerPlayer serverPlayer) {
-				MinigamesSettingsHelper.applySettingDirectly(message.key(), message.doubleVal(), message.boolVal(), message.isBoolean(), serverPlayer.level(), serverPlayer);
+			try {
+				if (context.flow() == PacketFlow.SERVERBOUND && context.player() instanceof ServerPlayer serverPlayer) {
+					MinigamesSettingsHelper.applySettingDirectly(message.key(), message.doubleVal(), message.boolVal(), message.isBoolean(), serverPlayer.level(), serverPlayer);
+				}
+			} catch (Throwable ignored) {
 			}
 		}).exceptionally(e -> {
-			context.connection().disconnect(net.minecraft.network.chat.Component.literal(e.getMessage()));
 			return null;
 		});
 	}

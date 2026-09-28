@@ -1,0 +1,8 @@
+{
+  "_fv": 89,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"call_procedure\" x=\"0\" y=\"0\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" inputs=\"5\"></mutation><field name=\"procedure\">ApplyEffect</field><field name=\"name0\">target</field><field name=\"name1\">hide</field><field name=\"name2\">level</field><field name=\"name3\">ticks</field><field name=\"name4\">effect</field><value name=\"arg0\"><block type=\"entity_from_deps\"></block></value><value name=\"arg1\"><block type=\"logic_boolean\"><field name=\"BOOL\">TRUE</field></block></value><value name=\"arg2\"><block type=\"math_number\"><field name=\"NUM\">1</field></block></value></block><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"item_nbt_text_set\"><value name=\"tagName\"><block type=\"text\"><field name=\"TEXT\">tintColor</field></block></value><value name=\"item\"><block type=\"itemstack_to_mcitem\"></block></value><value name=\"tagValue\"><block type=\"text\"><field name=\"TEXT\">0xD0F4B10B</field></block></value></block></next></block></xml>",
+    "skipDependencyNullCheck": false
+  }
+}

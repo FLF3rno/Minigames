@@ -17,8 +17,8 @@ import net.mcreator.minigames.init.MinigamesModItems;
 import java.util.ArrayList;
 
 public class PotionEffectExpiresProcedure {
-	public static void execute(LevelAccessor world, Entity target, double level, String potion) {
-		if (target == null || potion == null)
+	public static void execute(LevelAccessor world, Entity entity, Entity target, double level, String potion) {
+		if (entity == null || target == null || potion == null)
 			return;
 		String Potion = "";
 		double Level = 0;
@@ -28,7 +28,7 @@ public class PotionEffectExpiresProcedure {
 		Level = level - 1;
 		if (CheckRelicProcedure.execute(target, new ItemStack(MinigamesModItems.CRYSTALLIZED_POTION.get()))) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				DungeonHealProcedure.execute(entityiterator, ((entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)
+				DungeonHealProcedure.execute(entity, entityiterator, ((entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)
 						* GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(target, new ItemStack(MinigamesModItems.CRYSTALLIZED_POTION.get())), "minigames:heal_amount")) / 100, "relic");
 			}
 			if (world instanceof Level _level) {

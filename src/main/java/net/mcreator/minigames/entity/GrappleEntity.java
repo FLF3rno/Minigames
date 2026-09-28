@@ -35,6 +35,7 @@ import net.minecraft.world.InteractionHand;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.init.MinigamesModItems;
 import net.mcreator.minigames.item.GrapplingHookItem;
+import net.mcreator.minigames.UnmovableEntityHandler;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -213,17 +214,19 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 					return;
 				}
 
-				double speed = Math.min(0.5D, 0.04D + pullTicks * 0.002D);
-				Vec3 pull = toOwner.normalize().scale(speed);
-				Vec3 current = target.getDeltaMovement();
-				target.setDeltaMovement(
-						current.x * 0.6 + pull.x,
-						current.y * 0.6 + pull.y,
-						current.z * 0.6 + pull.z
-				);
-				target.hurtMarked = true;
-				if (target instanceof LivingEntity le) {
-					le.fallDistance = 0f;
+				if (!UnmovableEntityHandler.isUnmovable(target)) {
+					double speed = Math.min(0.5D, 0.04D + pullTicks * 0.002D);
+					Vec3 pull = toOwner.normalize().scale(speed);
+					Vec3 current = target.getDeltaMovement();
+					target.setDeltaMovement(
+							current.x * 0.6 + pull.x,
+							current.y * 0.6 + pull.y,
+							current.z * 0.6 + pull.z
+					);
+					target.hurtMarked = true;
+					if (target instanceof LivingEntity le) {
+						le.fallDistance = 0f;
+					}
 				}
 
 				setPos(target.getX(), target.getEyeY() - 0.1, target.getZ());
@@ -330,10 +333,12 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		}
 		final Entity resolvedOwner = owner != null ? owner : this.getOwner();
 		if (target != null && target.isAlive()) {
-			Vec3 toOwner = (resolvedOwner != null ? resolvedOwner.position() : this.position()).subtract(target.position()).normalize();
-			double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
-			target.setDeltaMovement(toOwner.scale(launchSpeed));
-			target.hurtMarked = true;
+			if (!UnmovableEntityHandler.isUnmovable(target)) {
+				Vec3 toOwner = (resolvedOwner != null ? resolvedOwner.position() : this.position()).subtract(target.position()).normalize();
+				double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
+				target.setDeltaMovement(toOwner.scale(launchSpeed));
+				target.hurtMarked = true;
+			}
 			if (target instanceof FallingBlockEntity fallingBlock) {
 				fallingBlock.setNoGravity(false);
 			}
@@ -361,10 +366,12 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 		Entity owner = this.getOwner();
 		Entity target = resolveTarget();
 		if (owner != null && target != null && target.isAlive()) {
-			Vec3 toOwner = owner.position().subtract(target.position()).normalize();
-			double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
-			target.setDeltaMovement(toOwner.scale(launchSpeed));
-			target.hurtMarked = true;
+			if (!UnmovableEntityHandler.isUnmovable(target)) {
+				Vec3 toOwner = owner.position().subtract(target.position()).normalize();
+				double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
+				target.setDeltaMovement(toOwner.scale(launchSpeed));
+				target.hurtMarked = true;
+			}
 			if (target instanceof FallingBlockEntity fallingBlock) {
 				fallingBlock.setNoGravity(false);
 			}

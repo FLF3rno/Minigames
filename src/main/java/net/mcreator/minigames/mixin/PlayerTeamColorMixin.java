@@ -15,6 +15,11 @@ public abstract class PlayerTeamColorMixin {
 	@Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
 	private void minigames$customGlowTeamColorPlayer(CallbackInfoReturnable<Integer> cir) {
 		Player player = (Player) (Object) this;
+		int clientGlow = net.mcreator.minigames.client.ClientGlowManager.getGlowColor(player);
+		if (clientGlow != -1) {
+			cir.setReturnValue(clientGlow);
+			return;
+		}
 		if (!player.hasEffect(net.minecraft.world.effect.MobEffects.GLOWING)) {
 			return;
 		}

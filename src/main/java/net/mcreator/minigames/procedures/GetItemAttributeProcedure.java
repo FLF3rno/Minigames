@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class GetItemAttributeProcedure {
 
-    public static double execute(ItemStack item, String attribute) {
+    public static double getBaseAttribute(ItemStack item, String attribute) {
         if (item == null || item.isEmpty() || attribute == null || attribute.isEmpty())
             return 0.0;
 
@@ -36,6 +36,12 @@ public class GetItemAttributeProcedure {
                 total += entry.modifier().amount();
             }
         }
+
+        return total;
+    }
+
+    public static double execute(ItemStack item, String attribute) {
+        double total = getBaseAttribute(item, attribute);
 
         CustomData customData =
                 item.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);

@@ -1,17 +1,23 @@
 {
   "replace": false,
   "values": [
-    "minigames:slam",
     "minigames:choice_bag_warrior",
     "minigames:plague_starter",
-    "minigames:box_of_fun",
-    "minigames:time_clock",
     "minigames:horseshoe",
-    "minigames:choice_bag_thief",
     "minigames:ghostifier",
     "minigames:volley_bomb",
+    "minigames:big_pocket",
+    "minigames:slam",
+    "minigames:detonator",
+    "minigames:berserk",
+    "minigames:box_of_fun",
+    "minigames:golden_mango",
+    "minigames:time_clock",
+    "minigames:choice_bag_thief",
+    "minigames:teleporter",
     "minigames:snatching_claw",
     "minigames:choice_bag_support",
+    "minigames:soul_curse",
     "minigames:human_cannonball"
   ]
 }

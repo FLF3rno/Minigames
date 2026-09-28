@@ -23,10 +23,23 @@ public class MinigamesSettingsScreen extends Screen {
 	private final Screen lastScreen;
 	private SettingsList list;
 	private KeyMapping selectedKeyMapping = null;
+	private ColorPickerPopup activeColorPicker = null;
 
 	public MinigamesSettingsScreen(Screen lastScreen) {
 		super(Component.literal("Minigames Settings"));
 		this.lastScreen = lastScreen;
+	}
+
+	public void openColorPicker(MinigamesSettingsHelper.ColorSettingRow row, SettingsList.ColorEntry entry) {
+		this.activeColorPicker = new ColorPickerPopup(this, row, () -> {
+			if (entry != null) {
+				entry.updateButton();
+			}
+		});
+	}
+
+	public void closeColorPicker() {
+		this.activeColorPicker = null;
 	}
 
 	@Override
@@ -50,10 +63,25 @@ public class MinigamesSettingsScreen extends Screen {
 	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 		guiGraphics.centeredText(this.font, this.title, this.width / 2, 12, 0xFFFFFFFF);
+
+		if (this.activeColorPicker != null) {
+			this.activeColorPicker.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+		}
 	}
 
 	@Override
 	public boolean keyPressed(KeyEvent event) {
+		if (this.activeColorPicker != null) {
+			if (this.activeColorPicker.keyPressed(event)) {
+				return true;
+			}
+			int key = InputConstants.getKey(event).getValue();
+			if (key == 256) {
+				this.closeColorPicker();
+				return true;
+			}
+			return true;
+		}
 		if (this.selectedKeyMapping != null) {
 			int key = InputConstants.getKey(event).getValue();
 			if (key == 256) {
@@ -81,6 +109,9 @@ public class MinigamesSettingsScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		if (this.activeColorPicker != null) {
+			return this.activeColorPicker.mouseClicked(event, doubleClick);
+		}
 		if (this.selectedKeyMapping != null) {
 			this.selectedKeyMapping.setKey(InputConstants.Type.MOUSE.getOrCreate(event.button()));
 			KeyMapping.resetMapping();
@@ -94,6 +125,22 @@ public class MinigamesSettingsScreen extends Screen {
 			return true;
 		}
 		return super.mouseClicked(event, doubleClick);
+	}
+
+	@Override
+	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+		if (this.activeColorPicker != null) {
+			return this.activeColorPicker.mouseDragged(event, dragX, dragY);
+		}
+		return super.mouseDragged(event, dragX, dragY);
+	}
+
+	@Override
+	public boolean mouseReleased(MouseButtonEvent event) {
+		if (this.activeColorPicker != null) {
+			return this.activeColorPicker.mouseReleased(event);
+		}
+		return super.mouseReleased(event);
 	}
 
 	@Override
@@ -117,6 +164,8 @@ public class MinigamesSettingsScreen extends Screen {
 					this.addEntry(new SettingEntry(doubleRow));
 				} else if (row instanceof MinigamesSettingsHelper.KeyMappingSettingRow keyRow) {
 					this.addEntry(new KeyMappingEntry(keyRow));
+				} else if (row instanceof MinigamesSettingsHelper.ColorSettingRow colorRow) {
+					this.addEntry(new ColorEntry(colorRow));
 				}
 			}
 		}
@@ -396,6 +445,63 @@ public class MinigamesSettingsScreen extends Screen {
 			@Override
 			public List<? extends NarratableEntry> narratables() {
 				return List.of(this.keyButton, this.resetButton);
+			}
+		}
+
+		public class ColorEntry extends SettingsList.Entry {
+			private final Component label;
+			private final MinigamesSettingsHelper.ColorSettingRow row;
+			private final Button colorButton;
+
+			public ColorEntry(MinigamesSettingsHelper.ColorSettingRow row) {
+				this.label = row.getLabel();
+				this.row = row;
+				this.colorButton = Button.builder(Component.empty(), b -> {
+					MinigamesSettingsScreen.this.openColorPicker(row, this);
+				}).bounds(0, 0, 130, 20).build();
+			}
+
+			public void updateButton() {
+			}
+
+			@Override
+			public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean hovered, float partialTicks) {
+				int buttonW = 130;
+				int buttonH = 20;
+				int buttonX = this.getContentRight() - buttonW - 6;
+				int buttonY = this.getContentYMiddle() - buttonH / 2;
+				this.colorButton.setPosition(buttonX, buttonY);
+				this.colorButton.setWidth(buttonW);
+				this.colorButton.setHeight(buttonH);
+
+				int colorRgb = 0xFF000000 | row.getColorInt();
+				graphics.fill(buttonX, buttonY, buttonX + buttonW, buttonY + buttonH, colorRgb);
+
+				boolean isHovered = (mouseX >= buttonX && mouseX <= buttonX + buttonW && mouseY >= buttonY && mouseY <= buttonY + buttonH) || this.colorButton.isFocused();
+				int borderColor = isHovered ? 0xFFFFFFFF : 0xFF2A2A2A;
+				graphics.fill(buttonX - 1, buttonY - 1, buttonX + buttonW + 1, buttonY, borderColor);
+				graphics.fill(buttonX - 1, buttonY + buttonH, buttonX + buttonW + 1, buttonY + buttonH + 1, borderColor);
+				graphics.fill(buttonX - 1, buttonY, buttonX, buttonY + buttonH, borderColor);
+				graphics.fill(buttonX + buttonW, buttonY, buttonX + buttonW + 1, buttonY + buttonH, borderColor);
+
+				if (isHovered) {
+					graphics.fill(buttonX, buttonY, buttonX + buttonW, buttonY + 1, 0x44FFFFFF);
+					graphics.fill(buttonX, buttonY + buttonH - 1, buttonX + buttonW, buttonY + buttonH, 0x44000000);
+				}
+
+				int textX = this.getContentX() + 6;
+				int textY = this.getContentYMiddle() - 9 / 2;
+				graphics.text(SettingsList.this.minecraft.font, this.label, textX, textY, 0xFFFFFFFF, true);
+			}
+
+			@Override
+			public List<? extends GuiEventListener> children() {
+				return List.of(this.colorButton);
+			}
+
+			@Override
+			public List<? extends NarratableEntry> narratables() {
+				return List.of(this.colorButton);
 			}
 		}
 	}

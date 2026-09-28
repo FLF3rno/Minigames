@@ -1,0 +1,19 @@
+{
+  "_fv": 89,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Lifesteal",
+    "icon": "lifesteal",
+    "color": {
+      "value": -12459427,
+      "falpha": 0.0
+    },
+    "onAddedSound": "",
+    "isInstant": false,
+    "mobEffectCategory": "BENEFICIAL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": []
+  }
+}

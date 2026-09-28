@@ -101,6 +101,10 @@ public class MinigamesModEntities {
 			EntityType.Builder.<BooklingEntity>of(BooklingEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.2f, 0.8f));
 	public static final DeferredHolder<EntityType<?>, EntityType<FlavioOmegaLaserScreenEntity>> FLAVIO_OMEGA_LASER_SCREEN = register("flavio_omega_laser_screen",
 			EntityType.Builder.<FlavioOmegaLaserScreenEntity>of(FlavioOmegaLaserScreenEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune().notInPeaceful().sized(0.6f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<ChurchSharpenerEntity>> CHURCH_SHARPENER = register("church_sharpener",
+			EntityType.Builder.<ChurchSharpenerEntity>of(ChurchSharpenerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1f, 2.6f));
+	public static final DeferredHolder<EntityType<?>, EntityType<CactusArrowEntity>> CACTUS_ARROW = register("cactus_arrow",
+			EntityType.Builder.<CactusArrowEntity>of(CactusArrowEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	// Start of user code block custom entities
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.1f, 0.1f));
@@ -142,6 +146,7 @@ public class MinigamesModEntities {
 		LaserStatueEntity.init(event);
 		BooklingEntity.init(event);
 		FlavioOmegaLaserScreenEntity.init(event);
+		ChurchSharpenerEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -176,5 +181,6 @@ public class MinigamesModEntities {
 		event.put(LASER_STATUE.get(), LaserStatueEntity.createAttributes().build());
 		event.put(BOOKLING.get(), BooklingEntity.createAttributes().build());
 		event.put(FLAVIO_OMEGA_LASER_SCREEN.get(), FlavioOmegaLaserScreenEntity.createAttributes().build());
+		event.put(CHURCH_SHARPENER.get(), ChurchSharpenerEntity.createAttributes().build());
 	}
 }

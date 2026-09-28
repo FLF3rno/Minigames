@@ -151,6 +151,34 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> CHOICE_BAG_WARRIOR;
 	public static final DeferredItem<Item> CHOICE_BAG_SUPPORT;
 	public static final DeferredItem<Item> CHOICE_BAG_THIEF;
+	public static final DeferredItem<Item> ADRENALINE_BLADE;
+	public static final DeferredItem<Item> MENDING_MACE;
+	public static final DeferredItem<Item> MIDAS_LONGSWORD;
+	public static final DeferredItem<Item> DETONATOR;
+	public static final DeferredItem<Item> GOLDEN_MANGO;
+	public static final DeferredItem<Item> BIG_POCKET;
+	public static final DeferredItem<Item> MOMENTUM;
+	public static final DeferredItem<Item> THRUSTERS_ROGUELIKE;
+	public static final DeferredItem<Item> BAT_ESSENCE;
+	public static final DeferredItem<Item> SPAWN_CHURCH_SHARPENER;
+	public static final DeferredItem<Item> ASCENSCION;
+	public static final DeferredItem<Item> BLAZING_BLADE;
+	public static final DeferredItem<Item> WORSHIPPERS_CROSS;
+	public static final DeferredItem<Item> CACTUS_CROSSBOW;
+	public static final DeferredItem<Item> BERSERK;
+	public static final DeferredItem<Item> TELEPORTER;
+	public static final DeferredItem<Item> SOUL_CURSE;
+	public static final DeferredItem<Item> BOXING_MASTERY;
+	public static final DeferredItem<Item> HEART_AMULET;
+	public static final DeferredItem<Item> JARONA;
+	public static final DeferredItem<Item> COPYCAT_BLOCK;
+	public static final DeferredItem<Item> COPYCAT_STAIR;
+	public static final DeferredItem<Item> COPYCAT_SLAB;
+	public static final DeferredItem<Item> COPYCAT_FENCE;
+	public static final DeferredItem<Item> COPYCAT_WALL;
+	public static final DeferredItem<Item> COPYCAT_GATE;
+	public static final DeferredItem<Item> COPYCAT_LAYER;
+	public static final DeferredItem<Item> COPYCAT_CORNER_SLICE;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -273,6 +301,34 @@ public class MinigamesModItems {
 		CHOICE_BAG_WARRIOR = register("choice_bag_warrior", ChoiceBagWarriorItem::new);
 		CHOICE_BAG_SUPPORT = register("choice_bag_support", ChoiceBagSupportItem::new);
 		CHOICE_BAG_THIEF = register("choice_bag_thief", ChoiceBagThiefItem::new);
+		ADRENALINE_BLADE = register("adrenaline_blade", AdrenalineBladeItem::new);
+		MENDING_MACE = register("mending_mace", MendingMaceItem::new);
+		MIDAS_LONGSWORD = register("midas_longsword", MidasLongswordItem::new);
+		DETONATOR = register("detonator", DetonatorItem::new);
+		GOLDEN_MANGO = register("golden_mango", GoldenMangoItem::new);
+		BIG_POCKET = register("big_pocket", BigPocketItem::new);
+		MOMENTUM = register("momentum", MomentumItem::new);
+		THRUSTERS_ROGUELIKE = register("thrusters_roguelike", ThrustersRoguelikeItem::new);
+		BAT_ESSENCE = register("bat_essence", BatEssenceItem::new);
+		SPAWN_CHURCH_SHARPENER = block(MinigamesModBlocks.SPAWN_CHURCH_SHARPENER);
+		ASCENSCION = block(MinigamesModBlocks.ASCENSCION);
+		BLAZING_BLADE = register("blazing_blade", BlazingBladeItem::new);
+		WORSHIPPERS_CROSS = register("worshippers_cross", WorshippersCrossItem::new);
+		CACTUS_CROSSBOW = register("cactus_crossbow", CactusCrossbowItem::new);
+		BERSERK = register("berserk", BerserkItem::new);
+		TELEPORTER = register("teleporter", TeleporterItem::new);
+		SOUL_CURSE = register("soul_curse", SoulCurseItem::new);
+		BOXING_MASTERY = register("boxing_mastery", BoxingMasteryItem::new);
+		HEART_AMULET = register("heart_amulet", HeartAmuletItem::new);
+		JARONA = register("jarona", JaronaItem::new);
+		COPYCAT_BLOCK = block(MinigamesModBlocks.COPYCAT_BLOCK);
+		COPYCAT_STAIR = block(MinigamesModBlocks.COPYCAT_STAIR);
+		COPYCAT_SLAB = block(MinigamesModBlocks.COPYCAT_SLAB);
+		COPYCAT_FENCE = block(MinigamesModBlocks.COPYCAT_FENCE);
+		COPYCAT_WALL = block(MinigamesModBlocks.COPYCAT_WALL);
+		COPYCAT_GATE = block(MinigamesModBlocks.COPYCAT_GATE);
+		COPYCAT_LAYER = block(MinigamesModBlocks.COPYCAT_LAYER);
+		COPYCAT_CORNER_SLICE = block(MinigamesModBlocks.COPYCAT_CORNER_SLICE);
 	}
 
 	// Start of user code block custom items
@@ -301,6 +357,7 @@ public class MinigamesModItems {
 		public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event) {
 			event.register(Identifier.parse("minigames:magma_dart/shockwave"), MagmaDartItem.ShockwaveProperty.MAP_CODEC);
 			event.register(Identifier.parse("minigames:blessed_cursed_crossbow/loadstate"), BlessedCursedCrossbowItem.LoadstateProperty.MAP_CODEC);
+			event.register(Identifier.parse("minigames:cactus_crossbow/loadstate"), CactusCrossbowItem.LoadstateProperty.MAP_CODEC);
 		}
 	}
 }

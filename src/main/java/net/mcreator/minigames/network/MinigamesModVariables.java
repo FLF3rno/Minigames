@@ -149,6 +149,7 @@ public class MinigamesModVariables {
 		clone.classColor = original.classColor;
 		clone.maximumLightLevel = original.maximumLightLevel;
 		clone.AlwaysShowReminder = original.AlwaysShowReminder;
+		clone.ShowSpleefBlockParticles = original.ShowSpleefBlockParticles;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -320,6 +321,7 @@ public class MinigamesModVariables {
 		public String bossName = "";
 		public boolean showBossBar = false;
 		public boolean SpawnItems = false;
+		public boolean forceDisableGlowingPlayerSetting = false;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -413,6 +415,7 @@ public class MinigamesModVariables {
 			bossName = nbt.getStringOr("bossName", "");
 			showBossBar = nbt.getBooleanOr("showBossBar", false);
 			SpawnItems = nbt.getBooleanOr("SpawnItems", false);
+			forceDisableGlowingPlayerSetting = nbt.getBooleanOr("forceDisableGlowingPlayerSetting", false);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -507,6 +510,7 @@ public class MinigamesModVariables {
 			nbt.putString("bossName", bossName);
 			nbt.putBoolean("showBossBar", showBossBar);
 			nbt.putBoolean("SpawnItems", SpawnItems);
+			nbt.putBoolean("forceDisableGlowingPlayerSetting", forceDisableGlowingPlayerSetting);
 			return nbt;
 		}
 
@@ -616,6 +620,7 @@ public class MinigamesModVariables {
 		public String classColor = "\"\"";
 		public double maximumLightLevel = 15.0;
 		public boolean AlwaysShowReminder = false;
+		public boolean ShowSpleefBlockParticles = true;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -665,6 +670,7 @@ public class MinigamesModVariables {
 			output.putString("classColor", classColor);
 			output.putDouble("maximumLightLevel", maximumLightLevel);
 			output.putBoolean("AlwaysShowReminder", AlwaysShowReminder);
+			output.putBoolean("ShowSpleefBlockParticles", ShowSpleefBlockParticles);
 		}
 
 		@Override
@@ -715,6 +721,7 @@ public class MinigamesModVariables {
 			classColor = input.getStringOr("classColor", "");
 			maximumLightLevel = input.getDoubleOr("maximumLightLevel", 0);
 			AlwaysShowReminder = input.getBooleanOr("AlwaysShowReminder", false);
+			ShowSpleefBlockParticles = input.getBooleanOr("ShowSpleefBlockParticles", false);
 		}
 
 		public void markSyncDirty() {

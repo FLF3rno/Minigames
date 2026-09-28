@@ -61,6 +61,13 @@ public record NameColorPreferenceMessage(String color) implements CustomPacketPa
 			if (!color.matches("^#?[0-9a-fA-F]{6}$"))
 				return;
 			color = color.startsWith("#") ? color : "#" + color;
+			net.mcreator.minigames.AccountSwapManager.SwapRecord record = net.mcreator.minigames.AccountSwapManager.getRecord(serverPlayer.getUUID());
+			if (record != null) {
+				record.originalColor = color;
+				writeClientColor(serverPlayer.getUUID(), color);
+				net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer, new NameColorPreferenceMessage(color));
+				return;
+			}
 			MinigamesModVariables.PlayerVariables vars = serverPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES);
 			vars.color = color;
 			vars.showCustomNameColor = true;

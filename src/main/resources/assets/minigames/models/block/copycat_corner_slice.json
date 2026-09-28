@@ -1,0 +1,7 @@
+{
+  "parent": "block/end_rod",
+  "textures": {
+    "end_rod": "minigames:block/copycat",
+    "particle": "minigames:block/copycat"
+  }
+}

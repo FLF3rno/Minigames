@@ -1,0 +1,14 @@
+package net.mcreator.minigames.mixin;
+
+import net.minecraft.world.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
+@Mixin(LivingEntity.class)
+public interface LivingEntityAccessor {
+    @Accessor("attackStrengthTicker")
+    int getAttackStrengthTicker();
+
+    @Accessor("attackStrengthTicker")
+    void setAttackStrengthTicker(int value);
+}

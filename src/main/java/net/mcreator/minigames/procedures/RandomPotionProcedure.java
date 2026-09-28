@@ -6,7 +6,7 @@ import net.minecraft.util.Mth;
 public class RandomPotionProcedure {
 	public static String execute() {
 		double rng = 0;
-		rng = Mth.nextInt(RandomSource.create(), 1, 8);
+		rng = Mth.nextInt(RandomSource.create(), 1, 13);
 		if (rng == 1) {
 			return "minigames:stunned";
 		} else if (rng == 2) {
@@ -23,6 +23,16 @@ public class RandomPotionProcedure {
 			return "minecraft:luck";
 		} else if (rng == 8) {
 			return "minecraft:unluck";
+		} else if (rng == 9) {
+			return "minigames:speed_boost";
+		} else if (rng == 10) {
+			return "minigames:damage_resistance";
+		} else if (rng == 11) {
+			return "minigames:golden";
+		} else if (rng == 12) {
+			return "minigames:slowdown";
+		} else if (rng == 13) {
+			return "minigames:lifesteal";
 		}
 		return "";
 	}

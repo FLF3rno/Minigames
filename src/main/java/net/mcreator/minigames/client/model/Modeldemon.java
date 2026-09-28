@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.EntityModel;
 
-// Made with Blockbench 5.1.4
+// Made with Blockbench 5.1.6
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 public class Modeldemon extends EntityModel<LivingEntityRenderState> {
@@ -43,7 +43,8 @@ public class Modeldemon extends EntityModel<LivingEntityRenderState> {
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
-		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(60, 72).addBox(-10.0F, -17.0F, -6.0F, 20.0F, 5.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(60, 72).addBox(-10.0F, -17.0F, -6.0F, 20.0F, 5.0F, 12.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
 		PartDefinition left_lef = body.addOrReplaceChild("left_lef", CubeListBuilder.create().texOffs(36, 91).addBox(-5.0F, -12.0F, -3.0F, 6.0F, 12.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, 0.0F, 0.0F));
 		PartDefinition right_leg = body.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(96, 89).addBox(-5.0F, -12.0F, -3.0F, 6.0F, 12.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 0.0F, 0.0F));
 		PartDefinition torso = body.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(0, 65).addBox(-17.0F, -15.0F, -6.0F, 19.0F, 15.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offset(7.55F, -17.0F, 0.45F));

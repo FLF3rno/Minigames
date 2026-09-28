@@ -56,6 +56,7 @@ public record ChoiceBagRewardMessage(String itemId) implements CustomPacketPaylo
 		}
 
 		ItemStack stack = new ItemStack(item);
+		net.mcreator.minigames.DungeonItemAccess.applyDefaultDungeonNBT(stack);
 		DungeonItemPickupMessage.tryPickupStack(player, stack, null);
 		player.closeContainer();
 	}

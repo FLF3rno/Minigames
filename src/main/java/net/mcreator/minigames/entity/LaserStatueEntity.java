@@ -20,15 +20,18 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.mcreator.minigames.init.MinigamesModAttributes;
 
 import net.mcreator.minigames.procedures.LaserStatueTickProcedure;
 import net.mcreator.minigames.procedures.LaserStatueHurtProcedure;
 import net.mcreator.minigames.client.model.animations.laser_statueAnimation;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 
 public class LaserStatueEntity extends Monster {
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(LaserStatueEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<Integer> ANIM = SynchedEntityData.defineId(LaserStatueEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> DATA_active = SynchedEntityData.defineId(LaserStatueEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Integer> DATA_ID = SynchedEntityData.defineId(LaserStatueEntity.class, EntityDataSerializers.INT);
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState1 = new AnimationState();
 
@@ -68,6 +71,7 @@ public class LaserStatueEntity extends Monster {
 		builder.define(TEXTURE, "laser_statue");
 		builder.define(ANIM, 0);
 		builder.define(DATA_active, true);
+		builder.define(DATA_ID, 0);
 	}
 
 	public void setTexture(String texture) {
@@ -114,6 +118,7 @@ public class LaserStatueEntity extends Monster {
 		valueOutput.putString("Texture", this.getTexture());
 		valueOutput.putBoolean("Dataactive", this.entityData.get(DATA_active));
 		valueOutput.putInt("Anim", this.entityData.get(ANIM));
+		valueOutput.putInt("DataID", this.entityData.get(DATA_ID));
 	}
 
 	@Override
@@ -122,6 +127,59 @@ public class LaserStatueEntity extends Monster {
 		this.setTexture(valueInput.getStringOr("Texture", "laser_statue"));
 		this.entityData.set(DATA_active, valueInput.getBooleanOr("Dataactive", true));
 		this.entityData.set(ANIM, valueInput.getIntOr("Anim", 0));
+		this.entityData.set(DATA_ID, valueInput.getIntOr("DataID", 0));
+	}
+
+	public int getRoomID() {
+		int id = this.entityData.get(DATA_ID);
+		if (id == 0) {
+			id = this.getPersistentData().getIntOr("DataID", (int) this.getPersistentData().getDoubleOr("DataID", 0));
+			if (id != 0) {
+				this.entityData.set(DATA_ID, id);
+			}
+		}
+		return id;
+	}
+
+	private boolean killingPartner = false;
+
+	public LaserStatueEntity findPartner() {
+		int myId = this.getRoomID();
+		int myGridX = (int) Math.floor(this.getX() / 29.0);
+		int myGridZ = (int) Math.floor(this.getZ() / 29.0);
+		for (LaserStatueEntity other : this.level().getEntitiesOfClass(LaserStatueEntity.class, this.getBoundingBox().inflate(32.0D))) {
+			if (other != this && other.isAlive()) {
+				int otherGridX = (int) Math.floor(other.getX() / 29.0);
+				int otherGridZ = (int) Math.floor(other.getZ() / 29.0);
+				if (myGridX == otherGridX && myGridZ == otherGridZ) {
+					if (myId <= 0 || other.getRoomID() <= 0 || other.getRoomID() == myId) {
+						return other;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void die(DamageSource damageSource) {
+		super.die(damageSource);
+		if (killingPartner) return;
+		killingPartner = true;
+		try {
+			LaserStatueEntity partner = findPartner();
+			if (partner != null && partner.isAlive()) {
+				partner.removeEffect(MinigamesModMobEffects.BLESSED);
+				if (this.level() instanceof ServerLevel serverLevel) {
+					partner.hurtServer(serverLevel, damageSource, Float.MAX_VALUE);
+				}
+				if (partner.isAlive()) {
+					partner.die(damageSource);
+				}
+			}
+		} finally {
+			killingPartner = false;
+		}
 	}
 
 	@Override
@@ -142,6 +200,7 @@ public class LaserStatueEntity extends Monster {
 	@Override
 	public void baseTick() {
 		super.baseTick();
+		getRoomID();
 		LaserStatueTickProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
@@ -170,6 +229,7 @@ public class LaserStatueEntity extends Monster {
 		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 100);
+		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 10);
 		return builder;
 	}
 }

@@ -1,4 +1,5 @@
 package net.mcreator.minigames.client.gui;
+import net.mcreator.minigames.init.MinigamesModItems;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -6,6 +7,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -16,6 +18,8 @@ import net.mcreator.minigames.init.MinigamesModScreens;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.procedures.DisplayYourselfProcedure;
 import net.mcreator.minigames.world.inventory.DungeonInventoryMenu;
+import net.mcreator.minigames.DungeonItemAccess;
+import net.minecraft.world.item.ItemStack;
 
 
 public class DungeonInventoryScreen extends AbstractContainerScreen<DungeonInventoryMenu>
@@ -82,6 +86,12 @@ public class DungeonInventoryScreen extends AbstractContainerScreen<DungeonInven
 		this.player = menu.entity;
 	}
 
+	@Override
+	protected void init() {
+		super.init();
+		this.leftPos = (this.width - (mainWidth() + 10 + backpackWidth())) / 2;
+		this.topPos = (this.height - PANEL_HEIGHT) / 2;
+	}
 
 	private int playerSlots() {
 
@@ -96,18 +106,8 @@ public class DungeonInventoryScreen extends AbstractContainerScreen<DungeonInven
 		);
 	}
 
-
 	private int backpackSlots() {
-
-		return Math.max(
-				0,
-				Math.min(
-						27,
-						(int) player.getData(
-								MinigamesModVariables.PLAYER_VARIABLES
-						).backpackSlots
-				)
-		);
+		return DungeonItemAccess.getBackpackSlots(this.player);
 	}
 
 

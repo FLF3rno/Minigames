@@ -2,14 +2,15 @@ package net.mcreator.minigames;
 
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.EnumSet; // Added for goal flags
+import java.util.EnumSet;
 
 import net.mcreator.minigames.entity.I.IDiggerMob;
 import net.mcreator.minigames.entity.I.IChargerMob;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.LivingEntity; // Changed from Player
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 
 public class ChargeAttackGoal<T extends PathfinderMob & IDiggerMob & IChargerMob> extends Goal {
@@ -39,7 +40,7 @@ public class ChargeAttackGoal<T extends PathfinderMob & IDiggerMob & IChargerMob
 
 	@Override
 	public boolean canContinueToUse() {
-		return this.targetEntity != null && this.targetEntity.isAlive() && !this.mob.isDigging() && this.findNearestCoarseDirt().isEmpty() && this.mob.getSensing().hasLineOfSight(this.targetEntity);
+		return this.targetEntity != null && this.targetEntity.isAlive() && !this.targetEntity.isSpectator() && !this.mob.isDigging() && this.findNearestCoarseDirt().isEmpty();
 	}
 
 	@Override
@@ -62,13 +63,15 @@ public class ChargeAttackGoal<T extends PathfinderMob & IDiggerMob & IChargerMob
 		if (this.targetEntity == null || this.mob.isDigging()) {
 			return;
 		}
-		if (!this.targetEntity.isAlive() || this.findNearestCoarseDirt().isPresent() || !this.mob.getSensing().hasLineOfSight(this.targetEntity)) {
+		if (!this.targetEntity.isAlive() || this.targetEntity.isSpectator() || this.findNearestCoarseDirt().isPresent()) {
 			this.stop();
 			return;
 		}
 		double distanceSqr = this.mob.distanceToSqr(this.targetEntity);
 		if (distanceSqr > 4.0D) {
-			this.mob.getNavigation().moveTo(this.targetEntity, this.speedModifier);
+			if (this.mob.getNavigation().isDone() || this.mob.tickCount % 10 == 0) {
+				this.mob.getNavigation().moveTo(this.targetEntity, this.speedModifier);
+			}
 			this.chargeTick = 0;
 			return;
 		}
@@ -78,7 +81,7 @@ public class ChargeAttackGoal<T extends PathfinderMob & IDiggerMob & IChargerMob
 		}
 		this.chargeTick++;
 		if (this.chargeTick >= this.chargeTicks) {
-			if (this.targetEntity.distanceToSqr(this.mob) <= 4.0D && this.mob.getSensing().hasLineOfSight(this.targetEntity)) {
+			if (this.targetEntity.distanceToSqr(this.mob) <= 9.0D) {
 				this.mob.doChargedAttack(this.targetEntity);
 			}
 			this.mob.stopAttackAnimation();
@@ -88,7 +91,7 @@ public class ChargeAttackGoal<T extends PathfinderMob & IDiggerMob & IChargerMob
 
 	private Optional<BlockPos> findNearestCoarseDirt() {
 		BlockPos origin = this.mob.blockPosition();
-		return BlockPos.betweenClosedStream(origin.offset(-this.searchRadius, -3, -this.searchRadius), origin.offset(this.searchRadius, 3, this.searchRadius))
+		return BlockPos.betweenClosedStream(origin.offset(-this.searchRadius, -6, -this.searchRadius), origin.offset(this.searchRadius, 6, this.searchRadius))
 				.filter(pos -> this.mob.level().getBlockState(pos).is(Blocks.COARSE_DIRT))
 				.map(BlockPos::immutable)
 				.min(Comparator.comparingDouble(pos -> pos.distSqr(origin)));
@@ -97,8 +100,13 @@ public class ChargeAttackGoal<T extends PathfinderMob & IDiggerMob & IChargerMob
 	private Optional<LivingEntity> findVisibleTarget() {
 		LivingEntity currentTarget = this.mob.getTarget();
 
-		if (currentTarget != null && currentTarget.isAlive() && this.mob.getSensing().hasLineOfSight(currentTarget) && this.mob.distanceToSqr(currentTarget) <= (this.searchRadius * this.searchRadius)) {
+		if (currentTarget != null && currentTarget.isAlive() && !currentTarget.isSpectator() && this.mob.distanceToSqr(currentTarget) <= (this.searchRadius * this.searchRadius)) {
 			return Optional.of(currentTarget);
+		}
+		Player nearestPlayer = this.mob.level().getNearestPlayer(this.mob, this.searchRadius);
+		if (nearestPlayer != null && nearestPlayer.isAlive() && !nearestPlayer.isSpectator()) {
+			this.mob.setTarget(nearestPlayer);
+			return Optional.of(nearestPlayer);
 		}
 		return Optional.empty();
 	}

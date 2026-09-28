@@ -41,6 +41,7 @@ public class BlessedArrowRenderer extends EntityRenderer<BlessedArrowEntity, Liv
 
 		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot - 90));
 		poseStack.mulPose(Axis.ZP.rotationDegrees(90 + state.xRot));
+		poseStack.translate(0.0D, -1.25D, 0.0D);
 
 		nodeCollector.submitModel(
 				model,

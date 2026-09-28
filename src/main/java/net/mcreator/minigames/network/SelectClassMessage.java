@@ -32,9 +32,6 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 		if (context.flow() == PacketFlow.SERVERBOUND) {
 			context.enqueueWork(() -> {
 				if (context.player() instanceof ServerPlayer serverPlayer) {
-					// Class selection is a one-time server-side action. Keyboard input can
-					// send the packet repeatedly before the client UI updates, so reject every
-					// packet after this player has already chosen a class.
 					String currentClass = serverPlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
 					if (currentClass != null && !currentClass.trim().isEmpty() && !currentClass.equalsIgnoreCase("none")) {
 						return;
@@ -47,9 +44,7 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 					ApplyClassProcedure.execute(serverPlayer, message.selectedClass);
 
 					net.minecraft.server.level.ServerLevel serverLevel = (net.minecraft.server.level.ServerLevel) serverPlayer.level();
-					for (ServerPlayer p : serverLevel.players()) {
-						serverLevel.playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.EXPERIENCE_ORB_PICKUP, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
-					}
+					serverLevel.playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), net.minecraft.sounds.SoundEvents.EXPERIENCE_ORB_PICKUP, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
 
 					java.util.List<ServerPlayer> playersInSelection = new java.util.ArrayList<>();
 					for (ServerPlayer player : serverLevel.players()) {
@@ -72,9 +67,7 @@ public record SelectClassMessage(String selectedClass) implements CustomPacketPa
 
 					if (allReady) {
 						MinigamesMod.queueServerWork(40, () -> {
-							for (ServerPlayer p : serverLevel.players()) {
-								serverLevel.playSound(null, p.getX(), p.getY(), p.getZ(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
-							}
+							serverLevel.playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
 							MinigamesMod.queueServerWork(40, () -> {
 								for (ServerPlayer p : serverLevel.players()) {
 									if (p.containerMenu instanceof net.mcreator.minigames.world.inventory.ClassSelectionRoguelikeMenu) {

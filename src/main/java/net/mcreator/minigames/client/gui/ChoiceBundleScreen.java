@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
@@ -114,13 +115,11 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 			}
 		}
 
-		// Ensure available pool has at least diamond if empty
 		List<Item> reelPool = new ArrayList<>(classPool);
 		if (reelPool.isEmpty()) {
 			reelPool.add(net.minecraft.world.item.Items.DIAMOND);
 		}
 
-		// Pick distinct winning/finishing items for each column so choices never have duplicate items
 		List<Item> distinctChoices = new ArrayList<>(reelPool);
 		java.util.Collections.shuffle(distinctChoices, random);
 		Item[] winningItems = new Item[NUM_COLUMNS];
@@ -146,7 +145,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 			reel.targetPosition = reel.targetIndex * ITEM_SPACING;
 			reel.totalDistance = reel.targetPosition;
-			reel.totalTicks = 70f + col * 25f; // ~3.5s to 6s for gradual deceleration
+			reel.totalTicks = 70f + col * 25f;
 			reel.elapsedTicks = 0f;
 			reel.position = 0f;
 			reel.stopped = false;
@@ -200,7 +199,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 	private int getColumnCenterX(int col) {
 		float screenCenter = this.width / 2.0f;
-		float spacing = (this.width * 0.6f) / 4.0f; // spacing between column centers
+		float spacing = (this.width * 0.6f) / 4.0f;
 		return Math.round(screenCenter + (col - 1) * spacing);
 	}
 
@@ -265,13 +264,13 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		if (classDungeon != null) {
 			classDungeon = classDungeon.trim().toLowerCase();
 			if (classDungeon.equals("warrior")) {
-				return 0xFFFF001F; // Red
+				return 0xFFFF001F;
 			} else if (classDungeon.equals("support")) {
-				return 0xFF09E2F6; // Light Blue
+				return 0xFF09E2F6;
 			} else if (classDungeon.equals("thief")) {
-				return 0xFFFFD700; // Gold / Yellow (as it currently was)
+				return 0xFFFFD700;
 			} else if (classDungeon.equals("mage")) {
-				return 0xFFFF7BFE; // Mage Purple / Pink
+				return 0xFFFF7BFE;
 			}
 		}
 		return 0xFFFFD700;
@@ -345,27 +344,56 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 				if (mouseX >= cx - 16 && mouseX <= cx + 16 && mouseY >= centerY - 16 && mouseY <= centerY + 16) {
 					if (reel.targetIndex >= 0 && reel.targetIndex < reel.tape.size()) {
 						ItemStack targetStack = new ItemStack(reel.tape.get(reel.targetIndex));
+						DungeonItemAccess.applyDefaultDungeonNBT(targetStack);
 						guiGraphics.setTooltipForNextFrame(this.font, targetStack, mouseX, mouseY);
 
 						List<WorldTooltipDefinitions.DefinitionCard> definitions = WorldTooltipDefinitions.getDefinitionCards(targetStack);
 						if (!definitions.isEmpty()) {
+							List<Component> tooltipLines = targetStack.getTooltipLines(
+								Item.TooltipContext.of(this.minecraft != null && this.minecraft.level != null ? this.minecraft.level : this.world),
+								this.minecraft != null ? this.minecraft.player : this.entity,
+								(this.minecraft != null && this.minecraft.options.advancedItemTooltips) ? TooltipFlag.Default.ADVANCED : TooltipFlag.Default.NORMAL
+							);
+							int tooltipWidth = 0;
+							for (Component line : tooltipLines) {
+								tooltipWidth = Math.max(tooltipWidth, this.font.width(line));
+							}
+							tooltipWidth += 16;
+
 							int defWidth = WorldTooltipDefinitions.getDefinitionsWidth(this.font, definitions) + 12;
 							int defHeight = WorldTooltipDefinitions.getDefinitionsHeight(definitions);
 
-							int defX = mouseX + 16;
-							if (defX + defWidth > this.width - 10) {
-								defX = mouseX - defWidth - 16;
+							int tooltipX = mouseX + 12;
+							if (tooltipX + tooltipWidth > this.width - 4) {
+								tooltipX = mouseX - 16 - tooltipWidth;
 							}
-							if (defX < 10) {
-								defX = 10;
+
+							int defX;
+							if (tooltipX >= mouseX) {
+								defX = tooltipX + tooltipWidth + 6;
+								if (defX + defWidth > this.width - 6) {
+									defX = tooltipX - 6 - defWidth;
+								}
+							} else {
+								defX = tooltipX - 6 - defWidth;
+								if (defX < 6) {
+									defX = tooltipX + tooltipWidth + 6;
+								}
+							}
+
+							if (defX + defWidth > this.width - 6) {
+								defX = this.width - defWidth - 6;
+							}
+							if (defX < 6) {
+								defX = 6;
 							}
 
 							int defY = mouseY - 12;
-							if (defY + defHeight > this.height - 10) {
-								defY = this.height - defHeight - 10;
+							if (defY + defHeight > this.height - 6) {
+								defY = this.height - defHeight - 6;
 							}
-							if (defY < 10) {
-								defY = 10;
+							if (defY < 6) {
+								defY = 6;
 							}
 
 							WorldTooltipDefinitions.renderDefinitions2D(guiGraphics, this.font, definitions, defX, defY);
@@ -411,9 +439,6 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 	public boolean keyPressed(KeyEvent event) {
 		int key = InputConstants.getKey(event).getValue();
 		if (key == 256) {
-			if (this.minecraft != null && this.minecraft.player != null) {
-				//this.minecraft.player.closeContainer();
-			}
 			return true;
 		}
 		return super.keyPressed(event);

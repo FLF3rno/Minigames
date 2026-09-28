@@ -1,0 +1,9 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "minigames:block/copycat",
+    "bottom": "minigames:block/copycat",
+    "top": "minigames:block/copycat",
+    "side": "minigames:block/copycat"
+  }
+}

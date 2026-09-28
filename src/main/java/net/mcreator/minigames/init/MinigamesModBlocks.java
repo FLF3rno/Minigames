@@ -108,6 +108,16 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SPAWN_FLAVIO_TRAPDOOR_3;
 	public static final DeferredBlock<Block> SPAWN_LASER_STATUE;
 	public static final DeferredBlock<Block> SPAWN_BOOKLING;
+	public static final DeferredBlock<Block> SPAWN_CHURCH_SHARPENER;
+	public static final DeferredBlock<Block> ASCENSCION;
+	public static final DeferredBlock<Block> COPYCAT_BLOCK;
+	public static final DeferredBlock<Block> COPYCAT_STAIR;
+	public static final DeferredBlock<Block> COPYCAT_SLAB;
+	public static final DeferredBlock<Block> COPYCAT_FENCE;
+	public static final DeferredBlock<Block> COPYCAT_WALL;
+	public static final DeferredBlock<Block> COPYCAT_GATE;
+	public static final DeferredBlock<Block> COPYCAT_LAYER;
+	public static final DeferredBlock<Block> COPYCAT_CORNER_SLICE;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -201,6 +211,16 @@ public class MinigamesModBlocks {
 		SPAWN_FLAVIO_TRAPDOOR_3 = register("spawn_flavio_trapdoor_3", SpawnFlavioTrapdoor3Block::new);
 		SPAWN_LASER_STATUE = register("spawn_laser_statue", SpawnLaserStatueBlock::new);
 		SPAWN_BOOKLING = register("spawn_bookling", SpawnBooklingBlock::new);
+		SPAWN_CHURCH_SHARPENER = register("spawn_church_sharpener", SpawnChurchSharpenerBlock::new);
+		ASCENSCION = register("ascenscion", AscenscionBlock::new);
+		COPYCAT_BLOCK = register("copycat_block", CopycatBlockBlock::new);
+		COPYCAT_STAIR = register("copycat_stair", CopycatStairBlock::new);
+		COPYCAT_SLAB = register("copycat_slab", CopycatSlabBlock::new);
+		COPYCAT_FENCE = register("copycat_fence", CopycatFenceBlock::new);
+		COPYCAT_WALL = register("copycat_wall", CopycatWallBlock::new);
+		COPYCAT_GATE = register("copycat_gate", CopycatGateBlock::new);
+		COPYCAT_LAYER = register("copycat_layer", CopycatLayerBlock::new);
+		COPYCAT_CORNER_SLICE = register("copycat_corner_slice", CopycatCornerSliceBlock::new);
 	}
 
 	// Start of user code block custom blocks

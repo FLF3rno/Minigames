@@ -88,6 +88,7 @@ public class LockSlots {
 					inventory.setItem(i, net.minecraft.world.item.ItemStack.EMPTY);
 				}
 			}
+			DungeonItemAccess.dropUnavailableBackpackSlots(player);
 		}
 	}
 

@@ -1,14 +1,20 @@
 {
   "replace": false,
   "values": [
-    "minigames:attack_speed_gem",
     "minigames:blacksmith_hammer",
+    "minigames:heart_amulet",
     "minigames:phase_cloak",
     "minigames:reaction_time",
+    "minigames:jarona",
+    "minigames:wireless_cauldron",
+    "minigames:plug",
+    "minigames:attack_speed_gem",
+    "minigames:momentum",
+    "minigames:bat_essence",
+    "minigames:thrusters_roguelike",
     "minigames:air_boots",
     "minigames:crystallized_potion",
     "minigames:cluster_bomb",
-    "minigames:wireless_cauldron",
-    "minigames:plug"
+    "minigames:boxing_mastery"
   ]
 }

@@ -13,11 +13,11 @@ import net.mcreator.minigames.UnmovableEntityHandler;
 public abstract class UnmovableItemEntityMixin {
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void minigames$onTickHead(CallbackInfo ci) {
-		UnmovableEntityHandler.setSelfLocomotion((Entity) (Object) this, true);
+		UnmovableEntityHandler.pushTickingEntity((Entity) (Object) this);
 	}
 
 	@Inject(method = "tick", at = @At("RETURN"))
 	private void minigames$onTickReturn(CallbackInfo ci) {
-		UnmovableEntityHandler.setSelfLocomotion((Entity) (Object) this, false);
+		UnmovableEntityHandler.popTickingEntity((Entity) (Object) this);
 	}
 }

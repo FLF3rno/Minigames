@@ -55,7 +55,7 @@ public class NameColorPreferenceClient {
 		writeClientColorNow(player.getUUID(), color);
 	}
 
-	private static String readClientColor(UUID playerId) {
+	public static String readClientColor(UUID playerId) {
 		if (playerId == null)
 			return null;
 		File file = new File((FMLPaths.GAMEDIR.get().toString() + "/config/minigames"), File.separator + "color.json");

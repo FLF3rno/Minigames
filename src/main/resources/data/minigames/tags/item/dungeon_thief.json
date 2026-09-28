@@ -1,16 +1,22 @@
 {
   "replace": false,
   "values": [
-    "minigames:blank_dagger",
     "minigames:the_finisher",
     "minigames:horseshoe",
-    "minigames:choice_bag_thief",
     "minigames:phase_cloak",
     "minigames:combo_dagger",
     "minigames:reaction_time",
-    "minigames:air_boots",
+    "minigames:jarona",
     "minigames:silent_assassin",
     "minigames:ghostifier",
-    "minigames:snatching_claw"
+    "minigames:blank_dagger",
+    "minigames:big_pocket",
+    "minigames:bat_essence",
+    "minigames:choice_bag_thief",
+    "minigames:air_boots",
+    "minigames:snatching_claw",
+    "minigames:soul_curse",
+    "minigames:cactus_crossbow",
+    "minigames:midas_longsword"
   ]
 }

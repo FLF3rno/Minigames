@@ -5,10 +5,16 @@
     "minigames:hammer",
     "minigames:power_harvester",
     "minigames:the_finisher",
-    "minigames:wind_scythe",
     "minigames:combo_dagger",
-    "minigames:stop_sign",
+    "minigames:blazing_blade",
     "minigames:silent_assassin",
-    "minigames:parasite_scythe"
+    "minigames:parasite_scythe",
+    "minigames:mending_mace",
+    "minigames:wind_scythe",
+    "minigames:worshippers_cross",
+    "minigames:stop_sign",
+    "minigames:adrenaline_blade",
+    "minigames:cactus_crossbow",
+    "minigames:midas_longsword"
   ]
 }

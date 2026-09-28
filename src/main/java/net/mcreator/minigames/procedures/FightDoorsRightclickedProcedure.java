@@ -100,40 +100,37 @@ public class FightDoorsRightclickedProcedure {
 							(MinigamesModVariables.MapVariables.get(world).DoorOffset.z() + middleOffset));
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				}
-				if (MinigamesModBlocks.FIGHT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
-						StartVoteProcedure.execute(world, entity, entity, "fight room");
-					} else {
-						VoteYesPressedProcedure.execute(world, entity);
-					}
-				} else if (MinigamesModBlocks.LOOT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
-						StartVoteProcedure.execute(world, entity, entity, "loot room");
-					} else {
-						VoteYesPressedProcedure.execute(world, entity);
-					}
-				} else if (MinigamesModBlocks.MINIBOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
-						StartVoteProcedure.execute(world, entity, entity, "miniboss room");
-					} else {
-						VoteYesPressedProcedure.execute(world, entity);
-					}
-				} else if (MinigamesModBlocks.BOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
-						StartVoteProcedure.execute(world, entity, entity, "boss room");
-					} else {
-						VoteYesPressedProcedure.execute(world, entity);
-					}
-				} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
-					if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
-						StartVoteProcedure.execute(world, entity, entity, "floor");
-					} else {
-						VoteYesPressedProcedure.execute(world, entity);
-					}
+			}
+			if (MinigamesModBlocks.FIGHT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
+					StartVoteProcedure.execute(world, entity, entity, "fight room");
+				} else {
+					VoteYesPressedProcedure.execute(world, entity);
 				}
-			} else {
-				if (entity instanceof ServerPlayer _player)
-					_player.sendSystemMessage(Component.literal("\u00A7cA vote is already active!"), true);
+			} else if (MinigamesModBlocks.LOOT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
+					StartVoteProcedure.execute(world, entity, entity, "loot room");
+				} else {
+					VoteYesPressedProcedure.execute(world, entity);
+				}
+			} else if (MinigamesModBlocks.MINIBOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
+					StartVoteProcedure.execute(world, entity, entity, "miniboss room");
+				} else {
+					VoteYesPressedProcedure.execute(world, entity);
+				}
+			} else if (MinigamesModBlocks.BOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
+					StartVoteProcedure.execute(world, entity, entity, "boss room");
+				} else {
+					VoteYesPressedProcedure.execute(world, entity);
+				}
+			} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
+					StartVoteProcedure.execute(world, entity, entity, "floor");
+				} else {
+					VoteYesPressedProcedure.execute(world, entity);
+				}
 			}
 		} else {
 			if (entity instanceof ServerPlayer _player)

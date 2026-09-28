@@ -1,0 +1,22 @@
+{
+  "_fv": 89,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Golden",
+    "icon": "golden",
+    "color": {
+      "value": -13312,
+      "falpha": 0.0
+    },
+    "onAddedSound": "",
+    "isInstant": false,
+    "mobEffectCategory": "HARMFUL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [],
+    "onStarted": "GoldenEffectStartedapplied",
+    "onActiveTick": "StunnedOnEffectActiveTick",
+    "onExpired": "GoldenEffectExpires"
+  }
+}

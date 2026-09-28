@@ -55,6 +55,24 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.CHOICE_BAG_WARRIOR.get());
 				tabData.accept(MinigamesModItems.CHOICE_BAG_SUPPORT.get());
 				tabData.accept(MinigamesModItems.CHOICE_BAG_THIEF.get());
+				tabData.accept(MinigamesModItems.ADRENALINE_BLADE.get());
+				tabData.accept(MinigamesModItems.MENDING_MACE.get());
+				tabData.accept(MinigamesModItems.MIDAS_LONGSWORD.get());
+				tabData.accept(MinigamesModItems.DETONATOR.get());
+				tabData.accept(MinigamesModItems.GOLDEN_MANGO.get());
+				tabData.accept(MinigamesModItems.BIG_POCKET.get());
+				tabData.accept(MinigamesModItems.MOMENTUM.get());
+				tabData.accept(MinigamesModItems.THRUSTERS_ROGUELIKE.get());
+				tabData.accept(MinigamesModItems.BAT_ESSENCE.get());
+				tabData.accept(MinigamesModItems.BLAZING_BLADE.get());
+				tabData.accept(MinigamesModItems.WORSHIPPERS_CROSS.get());
+				tabData.accept(MinigamesModItems.CACTUS_CROSSBOW.get());
+				tabData.accept(MinigamesModItems.BERSERK.get());
+				tabData.accept(MinigamesModItems.TELEPORTER.get());
+				tabData.accept(MinigamesModItems.SOUL_CURSE.get());
+				tabData.accept(MinigamesModItems.BOXING_MASTERY.get());
+				tabData.accept(MinigamesModItems.HEART_AMULET.get());
+				tabData.accept(MinigamesModItems.JARONA.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {
@@ -69,6 +87,14 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.TUFF_PEDESTAL.get().asItem());
 				tabData.accept(MinigamesModBlocks.RUBY_FROGLIGHT.get().asItem());
 				tabData.accept(MinigamesModBlocks.AZURE_FROGLIGHT.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_BLOCK.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_STAIR.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_SLAB.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_FENCE.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_WALL.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_GATE.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_LAYER.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_CORNER_SLICE.get().asItem());
 			}).withSearchBar().withTabsBefore(DUNGEON_ITEMS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_MOBS = REGISTRY.register("custom_mobs",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_mobs")).icon(() -> new ItemStack(MinigamesModBlocks.SPAWN_WORSHIPPER.get())).displayItems((parameters, tabData) -> {
@@ -101,6 +127,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_FLAVIO_TRAPDOOR_3.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_LASER_STATUE.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_BOOKLING.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_CHURCH_SHARPENER.get().asItem());
+				tabData.accept(MinigamesModBlocks.ASCENSCION.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {

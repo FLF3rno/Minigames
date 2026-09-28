@@ -30,6 +30,7 @@ public final class WorldTooltipDefinitions {
     private static final int BLESSED_COLOR = 0x84D4FF;
     private static final int BLEED_COLOR = 0xCF3041;
     private static final int LUCK_COLOR = 0x2AD56E;
+    private static final int GOLDEN_COLOR = 0xF4B10B;
     private static final int DEFINITION_TEXT = 0xEAE6D8;
     private static final int PADDING_X = 6;
     private static final int PADDING_Y = 6;
@@ -41,7 +42,6 @@ public final class WorldTooltipDefinitions {
     private static final int DEFINITION_TITLE_COLOR = 0xC77DFF;
     private static final int DEFINITION_GAP = 5;
     private static final List<DefinitionRule> DEFINITION_RULES = List.of(
-            //DEFINITION DI PROPRIERTIES
             new DefinitionRule(10,
                     stack -> DungeonItemAccess.isStolen(stack),
                     stack -> 0,
@@ -74,7 +74,6 @@ public final class WorldTooltipDefinitions {
                             )
                     )
             ),
-            //DEFINITION DI STATUS EFFECTS
             new DefinitionRule(5,
                     stack -> DungeonItemAccess.hasPhantom(stack),
                     stack -> 0,
@@ -86,7 +85,7 @@ public final class WorldTooltipDefinitions {
             new DefinitionRule(4,
                     stack -> DungeonItemAccess.hasBleed(stack),
                     stack -> 0,
-                    (stack, val) -> new DefinitionCard(10,
+                    (stack, val) -> new DefinitionCard(11,
                             DefinitionText.staticText("BLEED", Style.EMPTY.withBold(true).withColor(BLEED_COLOR)),
                             List.of(
                                     DefinitionText.staticText("Take damage based off of", Style.EMPTY.withColor(0xFFFFFFFF)),
@@ -97,11 +96,27 @@ public final class WorldTooltipDefinitions {
             new DefinitionRule(7,
                     stack -> DungeonItemAccess.hasLuck(stack),
                     stack -> 0,
-                    (stack, val) -> new DefinitionCard(10,
+                    (stack, val) -> new DefinitionCard(9,
                             DefinitionText.staticText("LUCK", Style.EMPTY.withBold(true).withColor(LUCK_COLOR)),
                             List.of(
                                     DefinitionText.staticText("Multiply chance based events by X", Style.EMPTY.withColor(0xFFFFFFFF)),
                                     DefinitionText.staticText("(Items dropping from monsters)", Style.EMPTY.withColor(0xFFFFFFFF))
+                            )
+                    )
+            ),
+            new DefinitionRule(8,
+                    stack -> DungeonItemAccess.hasGolden(stack),
+                    stack -> 0,
+                    (stack, val) -> new DefinitionCard(5,
+                            DefinitionText.staticText("GOLDEN", Style.EMPTY.withBold(true).withColor(GOLDEN_COLOR)),
+                            List.of(
+                                    DefinitionText.staticText("Stunned", Style.EMPTY.withColor(0xFFFBFF35)),
+                                    DefinitionText.fromComponent(centeredLine(
+                                            partialColorText("Taking ", 0xFFFFFFFF),
+                                            partialColorText("damage ", MONSTER_COLOR),
+                                            partialColorText("creates", 0xFFFFFFFF)
+                                    )),
+                                    DefinitionText.staticText("1 coin (per level)", Style.EMPTY.withColor(0xFFFFFFFF))
                             )
                     )
             ),
@@ -182,14 +197,12 @@ public final class WorldTooltipDefinitions {
             int definitionWidth = definition.width(font) + PADDING_X * 2;
             int definitionHeight = definition.height();
 
-            // Background & Border
             guiGraphics.fill(left, definitionTop, left + definitionWidth, definitionTop + definitionHeight, DEFINITION_BACKGROUND);
             guiGraphics.fill(left - 1, definitionTop - 1, left + definitionWidth + 1, definitionTop, DEFINITION_BORDER_LIGHT);
             guiGraphics.fill(left - 1, definitionTop + definitionHeight, left + definitionWidth + 1, definitionTop + definitionHeight + 1, DEFINITION_BORDER_DARK);
             guiGraphics.fill(left - 1, definitionTop, left, definitionTop + definitionHeight, DEFINITION_BORDER_LIGHT);
             guiGraphics.fill(left + definitionWidth, definitionTop, left + definitionWidth + 1, definitionTop + definitionHeight, DEFINITION_BORDER_DARK);
 
-            // Title
             Component renderedTitle = definition.title().render();
             float innerWidth = definition.width(font);
             if (renderedTitle.getStyle().getColor() == null) {
@@ -199,7 +212,6 @@ public final class WorldTooltipDefinitions {
             int titleY = definitionTop + PADDING_Y + 1;
             guiGraphics.text(font, renderedTitle, titleX, titleY, 0xFFFFFFFF, false);
 
-            // Lines
             List<DefinitionText> lines = definition.lines();
             int bodyHeight = lines.size() * LINE_HEIGHT;
             int bodyAreaTop = definitionTop + PADDING_Y + LINE_HEIGHT + TITLE_BODY_GAP;

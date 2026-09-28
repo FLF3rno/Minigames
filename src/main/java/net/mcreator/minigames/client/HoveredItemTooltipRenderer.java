@@ -88,7 +88,6 @@ public class HoveredItemTooltipRenderer {
         int nextIndex = 0;
         if (!tooltip.isEmpty()) {
             tooltip.set(0, tooltip.get(0).copy().setStyle(tooltip.get(0).getStyle().withColor(classInfo.color())));
-            //tooltip.add(1, Component.empty());
             nextIndex = 1;
         }
 
@@ -123,6 +122,14 @@ public class HoveredItemTooltipRenderer {
         Double attackCooldown = getDisplayedAttackCooldown(stack);
         if (attackCooldown != null && attackCooldown != 0) {
             tooltip.add(nextIndex++, Component.literal(formatDamage(attackCooldown) + "s Attack Cooldown").setStyle(Style.EMPTY.withColor(0xFF5555)));
+        }
+        Double range = getDisplayedRange(stack);
+        if (range != null) {
+            if (range != 0) {
+                int rangeColor = range < 0 ? 0xFF5555 : DAMAGE_COLOR;
+                String prefix = range > 0 ? "+" : "";
+                tooltip.add(nextIndex++, Component.literal(prefix + formatDamage(range) + " Attack Range").setStyle(Style.EMPTY.withColor(rangeColor)));
+            }
         }
         tooltip.add(Component.empty());
         tooltip.add(Component.literal(classInfo.label()).setStyle(Style.EMPTY.withBold(true).withColor(classInfo.color())));
@@ -167,8 +174,25 @@ public class HoveredItemTooltipRenderer {
         return !player.getInventory().getItem(34).isEmpty() && !player.getInventory().getItem(35).isEmpty();
     }
 
+    private static boolean hasOpenBackpackSlot(net.minecraft.world.entity.player.Player player) {
+        int backpackSlots = DungeonItemAccess.getBackpackSlots(player);
+        for (int i = 0; i < backpackSlots; i++) {
+            int slotIndex = 9 + i;
+            if (slotIndex < 34 && player.getInventory().getItem(slotIndex).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static boolean isFullForItem(net.minecraft.world.entity.player.Player player, ItemStack stack) {
-        return DungeonItemAccess.isRelic(stack) ? areRelicSlotsFull(player) : isInventoryFull(player);
+        if (DungeonItemAccess.isHotbarLocked(stack)) {
+            return isInventoryFull(player);
+        }
+        if (DungeonItemAccess.isRelic(stack)) {
+            return areRelicSlotsFull(player) && !hasOpenBackpackSlot(player);
+        }
+        return isInventoryFull(player) && !hasOpenBackpackSlot(player);
     }
 
     @SubscribeEvent
@@ -326,7 +350,6 @@ public class HoveredItemTooltipRenderer {
             WorldTooltipDefinitions.renderDefinitions(matrix, bufferSource, font, definitions, definitionLeft, definitionTop);
         }
 
-        // Flush background panels before rendering text so Sodium/Iris does not reorder text behind panels
         bufferSource.endBatch(textBackgroundSeeThrough());
 
         poseStack.translate(0.0F, 0.0F, 0.05F);
@@ -442,9 +465,6 @@ public class HoveredItemTooltipRenderer {
             return BASE_TEXT_SCALE * 0.8F;
         }
         double tooltipSize = minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).tooltipSize;
-        if (tooltipSize <= 0.0) {
-            tooltipSize = 0.8;
-        }
         return (float) (BASE_TEXT_SCALE * tooltipSize);
     }
 
@@ -694,6 +714,35 @@ public class HoveredItemTooltipRenderer {
         attackCooldown *= (1.0 + addMultipliedTotal) * (1 + forgedMultiplier / 100.0 + glitchedMultiplier / 100.0);
         attackCooldown /= 20;
         return attackCooldown	;
+    }
+
+    private static Double getDisplayedRange(ItemStack stack) {
+        ItemAttributeModifiers modifiers = stack.getOrDefault(net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+        double addValue = 0.0;
+        double addMultipliedBase = 0.0;
+        double addMultipliedTotal = 0.0;
+        boolean hasRange = false;
+
+        for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
+            if (entry.slot().test(net.minecraft.world.entity.EquipmentSlot.MAINHAND) && entry.attribute().is(Attributes.ENTITY_INTERACTION_RANGE)) {
+                hasRange = true;
+                double amount = entry.modifier().amount();
+                switch (entry.modifier().operation()) {
+                    case ADD_VALUE -> addValue += amount;
+                    case ADD_MULTIPLIED_BASE -> addMultipliedBase += amount;
+                    case ADD_MULTIPLIED_TOTAL -> addMultipliedTotal += amount;
+                }
+            }
+        }
+
+        if (!hasRange) {
+            return null;
+        }
+
+        double range = addValue;
+        range += range * addMultipliedBase;
+        range *= 1.0 + addMultipliedTotal;
+        return range;
     }
 
     private static String formatDamage(double damage) {

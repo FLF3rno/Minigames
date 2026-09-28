@@ -108,7 +108,7 @@
         "operation": "ADD_VALUE"
       },
       {
-        "equipmentSlot": "default",
+        "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ItemSize",
         "amount": 1.1,
         "operation": "ADD_VALUE"

@@ -11,17 +11,23 @@ import net.minecraft.world.entity.Entity;
 
 public class CheckRelicProcedure {
 	public static boolean execute(Entity target, ItemStack item) {
-		if (target == null)
-			return false;
+		return !getRelicStack(target, item).isEmpty();
+	}
+
+	public static ItemStack getRelicStack(Entity target, ItemStack item) {
+		if (target == null || item == null || item.isEmpty())
+			return ItemStack.EMPTY;
 		if (target instanceof Player) {
-			if ((getEntitySlot(target, 34)).getItem() == item.getItem()) {
-				return true;
-			} else if ((getEntitySlot(target, 35)).getItem() == item.getItem()) {
-				return true;
+			ItemStack s34 = getEntitySlot(target, 34);
+			if (s34.getItem() == item.getItem()) {
+				return s34;
 			}
-			return false;
+			ItemStack s35 = getEntitySlot(target, 35);
+			if (s35.getItem() == item.getItem()) {
+				return s35;
+			}
 		}
-		return false;
+		return ItemStack.EMPTY;
 	}
 
 	private static ItemStack getEntitySlot(Entity entity, int slot) {

@@ -30,6 +30,7 @@ import net.mcreator.minigames.init.MinigamesModItems;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.Comparator;
+import java.util.ArrayList;
 
 public class ExplodeProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity OwnedBy, boolean DamagePlayers, boolean OwnerImmune, double ExplosionDamage, double ExplosionKnockback, double ExplosionSize, String ExplosionType) {
@@ -167,13 +168,15 @@ public class ExplodeProcedure {
 				}
 			}
 		}
-		if (CheckRelicProcedure.execute(OwnedBy, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())) && !(type.substring(0, 1)).equals("$")) {
-			MinigamesMod.queueServerWork((int) GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(OwnedBy, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:ability_cooldown"), () -> {
-				ExplodeProcedure.execute(world, x, y, z, OwnedBy, DamagePlayers, OwnerImmune,
-						ExplosionDamage * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(OwnedBy, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
-						ExplosionKnockback * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(OwnedBy, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
-						ExplosionSize * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(OwnedBy, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100), "$" + ExplosionType);
-			});
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			if (CheckRelicProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())) && !(type.substring(0, 1)).equals("$")) {
+				MinigamesMod.queueServerWork((int) GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:ability_cooldown"), () -> {
+					ExplodeProcedure.execute(world, x, y, z, OwnedBy, DamagePlayers, OwnerImmune,
+							ExplosionDamage * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
+							ExplosionKnockback * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
+							ExplosionSize * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100), "$" + ExplosionType);
+				});
+			}
 		}
 	}
 }

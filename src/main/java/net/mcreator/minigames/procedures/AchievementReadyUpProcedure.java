@@ -7,6 +7,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
@@ -32,9 +33,17 @@ public class AchievementReadyUpProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/execute as @a at @s run playsound minecraft:block.beacon.activate ui @s ~ ~ ~ 1 1");
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			if ((entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Ready")) {
-				readyCount = readyCount + 1;
+		if (world instanceof ServerLevel _level) {
+			for (ServerPlayer player : _level.getServer().getPlayerList().getPlayers()) {
+				if ((player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Ready")) {
+					readyCount = readyCount + 1;
+				}
+			}
+		} else {
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
+				if ((entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Ready")) {
+					readyCount = readyCount + 1;
+				}
 			}
 		}
 		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) == readyCount) {

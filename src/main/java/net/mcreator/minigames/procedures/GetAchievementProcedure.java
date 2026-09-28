@@ -144,7 +144,7 @@ public class GetAchievementProcedure {
 			} else if (achievementNumber == 21) {
 				return category + "totem_of_undying";
 			} else if (achievementNumber == 22) {
-				return category + "spear_many_mobs";
+				return category + "walk_on_powder_snow_with_leather_boots";
 			} else if (achievementNumber == 23) {
 				return category + "summon_iron_golem";
 			} else if (achievementNumber == 24) {
@@ -162,7 +162,7 @@ public class GetAchievementProcedure {
 			} else if (achievementNumber == 30) {
 				return category + "adventuring_time";
 			} else if (achievementNumber == 31) {
-				return category + "play_jukebox_in:meadows";
+				return category + "play_jukebox_in_meadows";
 			} else if (achievementNumber == 32) {
 				return category + "spyglass_at_dragon";
 			} else if (achievementNumber == 33) {
@@ -242,7 +242,7 @@ public class GetAchievementProcedure {
 			} else if (achievementNumber == 26) {
 				return category + "kill_axolotl_target";
 			} else if (achievementNumber == 27) {
-				return category + "good_as_new";
+				return category + "repair_wolf_armor";
 			}
 		}
 		return category + "mine";

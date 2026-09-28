@@ -1,0 +1,25 @@
+{
+  "_fv": 89,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Speed Boost",
+    "icon": "speed_boost",
+    "color": {
+      "value": -14907461,
+      "falpha": 0.0
+    },
+    "onAddedSound": "",
+    "isInstant": false,
+    "mobEffectCategory": "BENEFICIAL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [
+      {
+        "attribute": "MOVEMENT_SPEED",
+        "amount": 0.001,
+        "operation": "ADD_VALUE"
+      }
+    ]
+  }
+}

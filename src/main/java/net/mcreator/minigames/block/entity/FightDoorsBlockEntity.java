@@ -1,53 +1,21 @@
 package net.mcreator.minigames.block.entity;
 
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.WorldlyContainer;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.network.chat.Component;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.minigames.init.MinigamesModBlockEntities;
 
-import javax.annotation.Nullable;
-
-import java.util.stream.IntStream;
-
-public class FightDoorsBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
-	private NonNullList<ItemStack> stacks = NonNullList.withSize(9, ItemStack.EMPTY);
-
+public class FightDoorsBlockEntity extends BlockEntity implements WorldlyContainer {
 	public FightDoorsBlockEntity(BlockPos position, BlockState state) {
 		super(MinigamesModBlockEntities.FIGHT_DOORS.get(), position, state);
-	}
-
-	@Override
-	public void preRemoveSideEffects(BlockPos blockpos, BlockState blockstate) {
-	}
-
-	@Override
-	public void loadAdditional(ValueInput valueInput) {
-		super.loadAdditional(valueInput);
-		if (!this.tryLoadLootTable(valueInput))
-			this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		ContainerHelper.loadAllItems(valueInput, this.stacks);
-	}
-
-	@Override
-	public void saveAdditional(ValueOutput valueOutput) {
-		super.saveAdditional(valueOutput);
-		if (!this.trySaveLootTable(valueOutput))
-			ContainerHelper.saveAllItems(valueOutput, this.stacks);
 	}
 
 	@Override
@@ -62,59 +30,54 @@ public class FightDoorsBlockEntity extends RandomizableContainerBlockEntity impl
 
 	@Override
 	public int getContainerSize() {
-		return stacks.size();
+		return 0;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		for (ItemStack itemstack : this.stacks)
-			if (!itemstack.isEmpty())
-				return false;
 		return true;
 	}
 
 	@Override
-	public Component getDefaultName() {
-		return Component.literal("fight_doors");
+	public ItemStack getItem(int slot) {
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inventory) {
-		return ChestMenu.threeRows(id, inventory);
+	public ItemStack removeItem(int slot, int amount) {
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public Component getDisplayName() {
-		return Component.literal("Fight Doors");
+	public ItemStack removeItemNoUpdate(int slot) {
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	protected NonNullList<ItemStack> getItems() {
-		return this.stacks;
+	public void setItem(int slot, ItemStack stack) {
 	}
 
 	@Override
-	protected void setItems(NonNullList<ItemStack> stacks) {
-		this.stacks = stacks;
+	public boolean stillValid(Player player) {
+		return false;
 	}
 
 	@Override
-	public boolean canPlaceItem(int index, ItemStack stack) {
-		return true;
+	public void clearContent() {
 	}
 
 	@Override
 	public int[] getSlotsForFace(Direction side) {
-		return IntStream.range(0, this.getContainerSize()).toArray();
+		return new int[0];
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack itemstack, @Nullable Direction direction) {
-		return this.canPlaceItem(index, itemstack);
+	public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction direction) {
+		return false;
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack itemstack, Direction direction) {
-		return true;
+	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction direction) {
+		return false;
 	}
 }

@@ -38,8 +38,7 @@ public class OnDungeonDeathProcedure {
 			return;
 
 		String registryName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
-		boolean isDungeonMob = entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"))) || registryName.contains("worshipper") || registryName.contains("candlehead")
-				|| registryName.contains("shield_angel");
+		boolean isDungeonMob = entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon")));
 
 		if (isDungeonMob) {
 			Entity killer = sourceentity;
@@ -51,14 +50,6 @@ public class OnDungeonDeathProcedure {
 				if (livingEntity.getAttributes().hasAttribute(MinigamesModAttributes.DROPPED_COINS)) {
 					baseCoins = livingEntity.getAttributeValue(MinigamesModAttributes.DROPPED_COINS);
 				}
-			}
-			if (baseCoins <= 0) {
-				if (registryName.contains("worshipper"))
-					baseCoins = 1;
-				else if (registryName.contains("candlehead"))
-					baseCoins = 3;
-				else if (registryName.contains("shield_angel"))
-					baseCoins = 5;
 			}
 			double killBonus = 0.0;
 			if (killer instanceof LivingEntity livingKiller) {

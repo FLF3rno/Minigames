@@ -52,7 +52,7 @@ public class TheFinisherItem extends Item {
 	@Override
 	public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
 		super.hurtEnemy(itemstack, entity, sourceentity);
-		TheFinisherSwingProcedure.execute(sourceentity, itemstack);
+		TheFinisherSwingProcedure.execute(entity, sourceentity, itemstack);
 	}
 
 	@Override

@@ -1,0 +1,35 @@
+{
+  "_fv": 89,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Slowdown",
+    "icon": "slowdown",
+    "color": {
+      "value": -20480,
+      "falpha": 0.0
+    },
+    "onAddedSound": "",
+    "isInstant": false,
+    "mobEffectCategory": "HARMFUL",
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "isCuredbyHoney": false,
+    "modifiers": [
+      {
+        "attribute": "MOVEMENT_SPEED",
+        "amount": -0.001,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "attribute": "ENTITY_GRAVITY",
+        "amount": -0.001,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "attribute": "ATTACK_SPEED",
+        "amount": -0.04,
+        "operation": "ADD_VALUE"
+      }
+    ]
+  }
+}

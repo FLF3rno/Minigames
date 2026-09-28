@@ -1,28 +1,27 @@
 package net.mcreator.minigames.client.gui;
 
-import net.minecraft.client.gui.components.WidgetSprites;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.mcreator.minigames.init.MinigamesModScreens;
+import net.mcreator.minigames.network.CustomizeGUIButtonMessage;
+import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.network.NameColorPreferenceMessage;
+import net.mcreator.minigames.world.inventory.CustomizeGUIMenu;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
-import net.minecraft.client.input.MouseButtonEvent;
-import net.mcreator.minigames.init.MinigamesModScreens;
-import net.mcreator.minigames.network.CustomizeGUIButtonMessage;
-import net.mcreator.minigames.network.MinigamesModVariables;
-import net.mcreator.minigames.world.inventory.CustomizeGUIMenu;
-
-import net.mcreator.minigames.procedures.CustomizeNameColorProcedure;
-import com.mojang.blaze3d.platform.InputConstants;
-
-import net.mcreator.minigames.network.NameColorPreferenceMessage;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu> implements MinigamesModScreens.ScreenAccessor {
 	private final Level world;
@@ -39,8 +38,12 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	private float selectedHue = 0.0f;
 	private float selectedSaturation = 1.0f;
 	private float selectedValue = 1.0f;
-
 	private int activeDragTarget = 0;
+	private boolean isUpdatingInternally = false;
+
+	private EditBox hexEditBox;
+	private Button copyButton;
+	private Button pasteButton;
 
 	public CustomizeGUIScreen(CustomizeGUIMenu container, Inventory inventory, Component text) {
 		super(container, inventory, text, 311, 112);
@@ -60,6 +63,34 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 		super.init();
 		loadCurrentColorIntoPicker();
 
+		this.hexEditBox = new EditBox(this.font, this.leftPos + 226, this.topPos + 54, 68, 16, Component.literal("Hex"));
+		this.hexEditBox.setMaxLength(7);
+		this.hexEditBox.setValue(getFormattedHex());
+		this.hexEditBox.setResponder(text -> {
+			if (isUpdatingInternally) {
+				return;
+			}
+			if (text != null && text.matches("^#?[0-9a-fA-F]{6}$")) {
+				String norm = text.startsWith("#") ? text.substring(1) : text;
+				try {
+					int rgb = Integer.parseInt(norm, 16);
+					float[] hsb = java.awt.Color.RGBtoHSB((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, null);
+					selectedHue = hsb[0];
+					selectedSaturation = hsb[1];
+					selectedValue = hsb[2];
+					updateCurrentColor();
+				} catch (Throwable ignored) {
+				}
+			}
+		});
+		this.addWidget(this.hexEditBox);
+
+		this.copyButton = Button.builder(Component.literal("Copy"), b -> copyHex()).bounds(this.leftPos + 226, this.topPos + 74, 32, 16).build();
+		this.addRenderableWidget(this.copyButton);
+
+		this.pasteButton = Button.builder(Component.literal("Paste"), b -> pasteHex()).bounds(this.leftPos + 262, this.topPos + 74, 32, 16).build();
+		this.addRenderableWidget(this.pasteButton);
+
 		this.addRenderableWidget(new ImageButton(
 				this.leftPos + 15,
 				this.topPos + 123,
@@ -74,9 +105,8 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 			@Override
 			public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 				int size = 36;
-
 				guiGraphics.blit(
-						net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+						RenderPipelines.GUI_TEXTURED,
 						isHoveredOrFocused() ? IMAGE_4 : GAME_COMPASS,
 						getX() - (size - width) / 2,
 						getY() - (size - height) / 2,
@@ -92,12 +122,20 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	@Override
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+		if (this.hexEditBox != null) {
+			this.hexEditBox.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTicks);
+		}
+	}
+
+	@Override
 	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTicks);
-		guiGraphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
-		guiGraphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + 4, this.topPos + 99, 0, 0, 41, 51, 41, 51);
-		guiGraphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 268, this.topPos + 99, 0, 0, 41, 51, 41, 51);
-		guiGraphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + 272, this.topPos + 113, 0, 0, 32, 32, 32, 32);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, this.leftPos + 4, this.topPos + 99, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, this.leftPos + 268, this.topPos + 99, 0, 0, 41, 51, 41, 51);
+		guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_2, this.leftPos + 272, this.topPos + 113, 0, 0, 32, 32, 32, 32);
 		renderHsvMap(guiGraphics);
 		renderHueBar(guiGraphics);
 		renderSelectedColorSwatch(guiGraphics);
@@ -107,14 +145,21 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 
 	@Override
 	public void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
-		guiGraphics.text(this.font, Component.literal("Customize your name!"), 5, 5, -12829636, false);
-		guiGraphics.text(this.font, resolveDisplayName(), 6, 98, resolveGuiDisplayTextColor(), true);
+		guiGraphics.text(this.font, Component.literal("Customize your name!"), 18, 8, -12829636, false);
+		Component name = resolveDisplayName();
+		guiGraphics.centeredText(this.font, name, 260, 43, resolveGuiDisplayTextColor());
 	}
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
 		if (event.button() == 0) {
+			if (this.hexEditBox != null && this.hexEditBox.mouseClicked(event, doubleClick)) {
+				return true;
+			}
 			if (tryStartColorPickerDrag(event.x(), event.y())) {
+				if (this.hexEditBox != null) {
+					this.hexEditBox.setFocused(false);
+				}
 				return true;
 			}
 		}
@@ -139,14 +184,14 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	private boolean tryStartColorPickerDrag(double mouseX, double mouseY) {
-		int mapX = this.leftPos + 48;
+		int mapX = this.leftPos + 18;
 		int mapY = this.topPos + 22;
-		int mapW = 220;
+		int mapW = 180;
 		int mapH = 72;
 
-		int hueX = this.leftPos + 278;
+		int hueX = this.leftPos + 204;
 		int hueY = this.topPos + 22;
-		int hueW = 14;
+		int hueW = 16;
 		int hueH = 72;
 
 		if (mouseX >= mapX && mouseX < mapX + mapW && mouseY >= mapY && mouseY < mapY + mapH) {
@@ -165,9 +210,9 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	private void updateColorFromDrag(double mouseX, double mouseY) {
-		int mapX = this.leftPos + 48;
+		int mapX = this.leftPos + 18;
 		int mapY = this.topPos + 22;
-		int mapW = 220;
+		int mapW = 180;
 		int mapH = 72;
 
 		int hueY = this.topPos + 22;
@@ -181,11 +226,45 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 			selectedValue = Math.max(0f, Math.min(1f, selectedValue));
 
 			updateCurrentColor();
+			syncEditBoxText();
 		} else if (activeDragTarget == 2) {
 			selectedHue = (float) ((mouseY - hueY) / (double) (hueH - 1));
 			selectedHue = Math.max(0f, Math.min(1f, selectedHue));
 
 			updateCurrentColor();
+			syncEditBoxText();
+		}
+	}
+
+	private String getFormattedHex() {
+		int rgb = java.awt.Color.HSBtoRGB(selectedHue, selectedSaturation, selectedValue) & 0xFFFFFF;
+		return String.format(java.util.Locale.ROOT, "#%06X", rgb);
+	}
+
+	private void syncEditBoxText() {
+		if (hexEditBox != null) {
+			isUpdatingInternally = true;
+			hexEditBox.setValue(getFormattedHex());
+			isUpdatingInternally = false;
+		}
+	}
+
+	private void copyHex() {
+		Minecraft.getInstance().keyboardHandler.setClipboard(getFormattedHex());
+	}
+
+	private void pasteHex() {
+		String clip = Minecraft.getInstance().keyboardHandler.getClipboard();
+		if (clip != null) {
+			String trimmed = clip.trim();
+			if (trimmed.matches("^#?[0-9a-fA-F]{6}$")) {
+				if (!trimmed.startsWith("#")) {
+					trimmed = "#" + trimmed;
+				}
+				if (hexEditBox != null) {
+					hexEditBox.setValue(trimmed);
+				}
+			}
 		}
 	}
 
@@ -196,16 +275,31 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 				selectedValue);
 
 		String hex = String.format("#%06X", rgb & 0xFFFFFF);
-		entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
-
-		if (minecraft.player != null) {
-			minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+		if (this.minecraft != null && this.minecraft.player != null) {
+			net.mcreator.minigames.AccountSwapManager.SwapRecord record = net.mcreator.minigames.AccountSwapManager.getRecord(this.minecraft.player.getUUID());
+			if (record != null) {
+				record.originalColor = hex;
+			} else {
+				this.minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+				if (entity != null) {
+					entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+				}
+			}
 			ClientPacketDistributor.sendToServer(new NameColorPreferenceMessage(hex));
+			net.mcreator.minigames.client.NameColorPreferenceClient.writeClientColorNow(this.minecraft.player.getUUID(), hex);
 		}
 	}
 
 	@Override
 	public boolean keyPressed(KeyEvent event) {
+		if (this.hexEditBox != null && this.hexEditBox.isFocused()) {
+			int key = InputConstants.getKey(event).getValue();
+			if (key == 256) {
+				this.hexEditBox.setFocused(false);
+				return true;
+			}
+			return this.hexEditBox.keyPressed(event);
+		}
 		int key = InputConstants.getKey(event).getValue();
 		if (key == 256) {
 			this.minecraft.player.closeContainer();
@@ -215,9 +309,9 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	private void renderHsvMap(GuiGraphicsExtractor guiGraphics) {
-		int x0 = this.leftPos + 48;
+		int x0 = this.leftPos + 18;
 		int y0 = this.topPos + 22;
-		int w = 220;
+		int w = 180;
 		int h = 72;
 		for (int px = 0; px < w; px++) {
 			float sat = px / (float) (w - 1);
@@ -227,9 +321,9 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	private void renderHueBar(GuiGraphicsExtractor guiGraphics) {
-		int x0 = this.leftPos + 278;
+		int x0 = this.leftPos + 204;
 		int y0 = this.topPos + 22;
-		int w = 14;
+		int w = 16;
 		int h = 72;
 		int[] hues = new int[] { 0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0xFF00FF, 0xFF0000 };
 		int segmentHeight = Math.max(1, h / 6);
@@ -241,50 +335,51 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	private void renderSelectedColorSwatch(GuiGraphicsExtractor guiGraphics) {
-		int swatchColor = 0xFF000000 | resolveGuiDisplayTextColor();
-		guiGraphics.fill(this.leftPos + 22, this.topPos + 22, this.leftPos + 40, this.topPos + 94, swatchColor);
+		int swatchColor = resolveGuiDisplayTextColor();
+		guiGraphics.fill(this.leftPos + 226, this.topPos + 22, this.leftPos + 226 + 68, this.topPos + 22 + 18, swatchColor);
 	}
 
 	private void renderSelector(GuiGraphicsExtractor guiGraphics) {
-		int mapX = this.leftPos + 48;
+		int mapX = this.leftPos + 18;
 		int mapY = this.topPos + 22;
-		int mapW = 220;
+		int mapW = 180;
 		int mapH = 72;
 
 		int selectorX = mapX + Math.round(selectedSaturation * (mapW - 1));
 		int selectorY = mapY + Math.round((1f - selectedValue) * (mapH - 1));
 
 		guiGraphics.blit(
-				net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+				RenderPipelines.GUI_TEXTURED,
 				COLOR_SELECTOR,
 				selectorX - 4,
 				selectorY - 4,
-				0,0,
-				8,8,
-				8,8
+				0, 0,
+				8, 8,
+				8, 8
 		);
 
-		int hueX = this.leftPos + 278;
+		int hueX = this.leftPos + 204;
 		int hueY = this.topPos + 22;
+		int hueW = 16;
 		int hueH = 72;
 
 		int hueSelectorY = hueY + Math.round(selectedHue * (hueH - 1));
 
 		guiGraphics.blit(
-				net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+				RenderPipelines.GUI_TEXTURED,
 				COLOR_SELECTOR,
-				hueX + 3,
+				hueX + (hueW - 8) / 2,
 				hueSelectorY - 4,
-				0,0,
-				8,8,
-				8,8
+				0, 0,
+				8, 8,
+				8, 8
 		);
 	}
 
 	private void renderHsvBorders(GuiGraphicsExtractor guiGraphics) {
-		drawMinecraftFrame(guiGraphics, this.leftPos + 48, this.topPos + 22, 220, 72);
-		drawMinecraftFrame(guiGraphics, this.leftPos + 278, this.topPos + 22, 14, 72);
-		drawMinecraftFrame(guiGraphics, this.leftPos + 22, this.topPos + 22, 18, 72);
+		drawMinecraftFrame(guiGraphics, this.leftPos + 18, this.topPos + 22, 180, 72);
+		drawMinecraftFrame(guiGraphics, this.leftPos + 204, this.topPos + 22, 16, 72);
+		drawMinecraftFrame(guiGraphics, this.leftPos + 226, this.topPos + 22, 68, 18);
 	}
 
 	private void drawMinecraftFrame(GuiGraphicsExtractor guiGraphics, int x, int y, int w, int h) {
@@ -302,37 +397,49 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	}
 
 	private int resolveGuiDisplayTextColor() {
-		String color = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
-		if (this.minecraft != null && this.minecraft.player != null) {
-			String localColor = this.minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
-			if (localColor != null && !localColor.isEmpty()) {
-				color = localColor;
-			}
-		}
-		if (color != null && color.matches("^#?[0-9a-fA-F]{6}$")) {
-			String normalized = color.startsWith("#") ? color.substring(1) : color;
-			return Integer.parseInt(normalized, 16);
-		}
-		return java.awt.Color.HSBtoRGB(selectedHue, selectedSaturation, selectedValue) & 0xFFFFFF;
+		int rgb = java.awt.Color.HSBtoRGB(selectedHue, selectedSaturation, selectedValue) & 0xFFFFFF;
+		return 0xFF000000 | rgb;
 	}
 
 	private void loadCurrentColorIntoPicker() {
-		String color = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+		String color = null;
+		if (this.minecraft != null && this.minecraft.player != null) {
+			net.mcreator.minigames.AccountSwapManager.SwapRecord record = net.mcreator.minigames.AccountSwapManager.getRecord(this.minecraft.player.getUUID());
+			if (record != null && record.originalColor != null && !record.originalColor.isEmpty()) {
+				color = record.originalColor;
+			} else {
+				String diskColor = net.mcreator.minigames.client.NameColorPreferenceClient.readClientColor(this.minecraft.player.getUUID());
+				if (diskColor != null && !diskColor.isEmpty()) {
+					color = diskColor;
+				} else {
+					color = this.minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+				}
+			}
+		}
+		if ((color == null || color.isEmpty()) && entity != null) {
+			color = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+		}
 		if (color == null || !color.matches("^#?[0-9a-fA-F]{6}$")) {
 			return;
 		}
 		String normalized = color.startsWith("#") ? color.substring(1) : color;
-		int rgb = Integer.parseInt(normalized, 16);
-		float[] hsb = java.awt.Color.RGBtoHSB((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, null);
-		selectedHue = hsb[0];
-		selectedSaturation = hsb[1];
-		selectedValue = hsb[2];
+		try {
+			int rgb = Integer.parseInt(normalized, 16);
+			float[] hsb = java.awt.Color.RGBtoHSB((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, null);
+			selectedHue = hsb[0];
+			selectedSaturation = hsb[1];
+			selectedValue = hsb[2];
+		} catch (Throwable ignored) {
+		}
 	}
 
 	private Component resolveDisplayName() {
 		if (this.minecraft != null && this.minecraft.player != null) {
 			return Component.literal(this.minecraft.player.getGameProfile().name());
 		}
-		return entity.getName();
+		if (entity != null) {
+			return entity.getName();
+		}
+		return Component.literal("Player");
 	}
 }

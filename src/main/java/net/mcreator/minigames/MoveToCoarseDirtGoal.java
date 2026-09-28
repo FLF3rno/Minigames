@@ -2,6 +2,7 @@ package net.mcreator.minigames;
 
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.EnumSet;
 
 import net.mcreator.minigames.entity.I.IDiggerMob;
 import net.minecraft.core.BlockPos;
@@ -13,18 +14,18 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
-import net.mcreator.minigames.entity.GravediggerEntity;
-
 public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends Goal {
 	private final T mob;
 	private final double speedModifier;
 	private final int searchRadius;
 	private BlockPos targetPos;
+	private int stuckTicks;
 
-		public MoveToCoarseDirtGoal(T mob, double speedModifier, int searchRadius) {
+	public MoveToCoarseDirtGoal(T mob, double speedModifier, int searchRadius) {
 		this.mob = mob;
 		this.speedModifier = speedModifier;
 		this.searchRadius = searchRadius;
+		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 
 	@Override
@@ -45,6 +46,7 @@ public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends 
 
 	@Override
 	public void start() {
+		this.stuckTicks = 0;
 		this.targetPos = this.findNearestCoarseDirt().orElse(null);
 		if (this.targetPos != null) {
 			this.mob.getNavigation().moveTo(this.targetPos.getX() + 0.5D, this.targetPos.getY() + 1.0D, this.targetPos.getZ() + 0.5D, this.speedModifier);
@@ -54,6 +56,7 @@ public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends 
 	@Override
 	public void stop() {
 		this.targetPos = null;
+		this.stuckTicks = 0;
 		this.mob.getNavigation().stop();
 	}
 
@@ -68,13 +71,23 @@ public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends 
 			return;
 		}
 		PathNavigation navigation = this.mob.getNavigation();
-		if (this.mob.distanceToSqr(this.targetPos.getX() + 0.5D, this.targetPos.getY() + 1.0D, this.targetPos.getZ() + 0.5D) <= 2.25D) {
+		double distSqr = this.mob.distanceToSqr(this.targetPos.getX() + 0.5D, this.targetPos.getY() + 1.0D, this.targetPos.getZ() + 0.5D);
+		if (distSqr <= 6.25D) {
 			this.mob.beginDigging(this.targetPos);
 			navigation.stop();
 			this.targetPos = null;
 			return;
 		}
-		if (navigation.isDone()) {
+		this.stuckTicks++;
+		if (this.stuckTicks > 140) {
+			if (distSqr <= 16.0D) {
+				this.mob.beginDigging(this.targetPos);
+			}
+			navigation.stop();
+			this.targetPos = null;
+			return;
+		}
+		if (navigation.isDone() || this.mob.tickCount % 10 == 0) {
 			navigation.moveTo(this.targetPos.getX() + 0.5D, this.targetPos.getY() + 1.0D, this.targetPos.getZ() + 0.5D, this.speedModifier);
 		}
 	}
@@ -82,7 +95,7 @@ public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends 
 	private Optional<BlockPos> findNearestCoarseDirt() {
 		Level level = this.mob.level();
 		BlockPos origin = this.mob.blockPosition();
-		return BlockPos.betweenClosedStream(origin.offset(-this.searchRadius, -3, -this.searchRadius), origin.offset(this.searchRadius, 3, this.searchRadius))
+		return BlockPos.betweenClosedStream(origin.offset(-this.searchRadius, -6, -this.searchRadius), origin.offset(this.searchRadius, 6, this.searchRadius))
 			.filter(pos -> level.getBlockState(pos).is(Blocks.COARSE_DIRT))
 			.map(BlockPos::immutable)
 			.min(Comparator.comparingDouble(pos -> pos.distSqr(origin)));
@@ -90,7 +103,7 @@ public class MoveToCoarseDirtGoal<T extends PathfinderMob & IDiggerMob> extends 
 
 	private Optional<Player> findVisiblePlayer() {
 		AABB searchBox = this.mob.getBoundingBox().inflate(this.searchRadius);
-		return this.mob.level().getEntitiesOfClass(Player.class, searchBox, player -> player.isAlive() && this.mob.getSensing().hasLineOfSight(player)).stream()
+		return this.mob.level().getEntitiesOfClass(Player.class, searchBox, player -> player != null && player.isAlive() && !player.isSpectator()).stream()
 			.min(Comparator.comparingDouble(this.mob::distanceToSqr));
 	}
 }

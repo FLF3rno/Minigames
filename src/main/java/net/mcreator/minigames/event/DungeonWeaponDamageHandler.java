@@ -2,6 +2,8 @@ package net.mcreator.minigames.event;
 
 import net.mcreator.minigames.DungeonItemAccess;
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModItems;
+import net.mcreator.minigames.procedures.CheckRelicProcedure;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,12 +22,19 @@ public class DungeonWeaponDamageHandler {
 			boolean playingDungeons = player.level() != null
 					&& MinigamesModVariables.MapVariables.get(player.level()).playingDungeons;
 
-			if (playingDungeons && !DungeonItemAccess.isDungeonWeapon(mainHand)) {
+			boolean isBoxing = net.mcreator.minigames.procedures.BoxingMasteryHandler.isBoxing(player);
+
+			if (playingDungeons && !DungeonItemAccess.isDungeonWeapon(mainHand) && !isBoxing) {
 				event.setCanceled(true);
 				return;
 			}
 
-			if (DungeonItemAccess.isDungeonItem(mainHand)) {
+			if (isBoxing) {
+				double baseDamage = player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+				if (event.getAmount() < baseDamage) {
+					event.setAmount((float) baseDamage);
+				}
+			} else if (DungeonItemAccess.isDungeonItem(mainHand)) {
 				double baseDamage = player.getAttributeValue(Attributes.ATTACK_DAMAGE);
 				double finalForcedDamage = baseDamage + 1.0;
 				if (event.getAmount() < finalForcedDamage) {

@@ -20,6 +20,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.MinigamesMod;
+import net.mcreator.minigames.entity.CandleheadEntity;
+import net.mcreator.minigames.entity.DemonEntity;
+import net.mcreator.minigames.entity.GravediggerEntity;
+import net.mcreator.minigames.entity.GravediggerMinibossEntity;
+import net.mcreator.minigames.entity.LaserStatueEntity;
+import net.mcreator.minigames.entity.PreacherEntity;
+import net.mcreator.minigames.entity.SculklingEntity;
+import net.mcreator.minigames.entity.ShieldAngelEntity;
+import net.mcreator.minigames.entity.WorshipperEntity;
 
 public class SpawnStructureDungeonProcedure {
 
@@ -67,30 +76,36 @@ public class SpawnStructureDungeonProcedure {
 			if (!(world instanceof ServerLevel _level))
 				return;
 
-			double dx = MinigamesModVariables.MapVariables
-					.get(world).dungeonRoomSize.x();
-
-			double dz = MinigamesModVariables.MapVariables
-					.get(world).dungeonRoomSize.z();
-
-			if (rotation.equals("clockwise_90")) {
-				dx = -dx;
-			} else if (rotation.equals("counterclockwise_90")) {
-				dz = -dz;
-			} else if (rotation.equals("180")) {
-				dx = -dx;
-				dz = -dz;
+			double sizeX = MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x();
+			double sizeZ = MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z();
+			if (sizeX <= 0) {
+				sizeX = 29;
+			}
+			if (sizeZ <= 0) {
+				sizeZ = 29;
 			}
 
-			int minX = (int) Math.floor(Math.min(structureX, structureX + dx));
-			int maxX = (int) Math.floor(Math.max(structureX, structureX + dx));
-			int minZ = (int) Math.floor(Math.min(structureZ, structureZ + dz));
-			int maxZ = (int) Math.floor(Math.max(structureZ, structureZ + dz));
+			int minX = (int) Math.floor(structureX);
+			int maxX = minX + (int) sizeX - 1;
+			int minZ = (int) Math.floor(structureZ);
+			int maxZ = minZ + (int) sizeZ - 1;
+
+			if (rotation.equals("clockwise_90")) {
+				minX = (int) Math.floor(structureX) - (int) sizeX + 1;
+				maxX = (int) Math.floor(structureX);
+			} else if (rotation.equals("counterclockwise_90")) {
+				minZ = (int) Math.floor(structureZ) - (int) sizeZ + 1;
+				maxZ = (int) Math.floor(structureZ);
+			} else if (rotation.equals("180")) {
+				minX = (int) Math.floor(structureX) - (int) sizeX + 1;
+				maxX = (int) Math.floor(structureX);
+				minZ = (int) Math.floor(structureZ) - (int) sizeZ + 1;
+				maxZ = (int) Math.floor(structureZ);
+			}
 
 			int minY = 0;
 			int maxY = 200;
 
-			// init blocks
 			for (int xPos = minX; xPos <= maxX; xPos++) {
 				for (int yPos = minY; yPos <= maxY; yPos++) {
 					for (int zPos = minZ; zPos <= maxZ; zPos++) {
@@ -115,7 +130,6 @@ public class SpawnStructureDungeonProcedure {
 				}
 			}
 
-			// tag mobs
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(
 							CommandSource.NULL,
@@ -130,13 +144,13 @@ public class SpawnStructureDungeonProcedure {
 					).withSuppressedOutput(),
 
 					"/execute in minigames:dungeon_dimension as @e[type=#minigames:dungeon,x="
-							+ new java.text.DecimalFormat("##").format(structureX)
+							+ minX
 							+ ",y=0,z="
-							+ new java.text.DecimalFormat("##").format(structureZ)
+							+ minZ
 							+ ",dx="
-							+ new java.text.DecimalFormat("##").format(dx)
+							+ ((int) sizeX - 1)
 							+ ",dy=200,dz="
-							+ new java.text.DecimalFormat("##").format(dz)
+							+ ((int) sizeZ - 1)
 							+ "] run data modify entity @s DataID set value "
 							+ roomId
 			);
@@ -161,10 +175,38 @@ public class SpawnStructureDungeonProcedure {
 
 					entityiterator.getPersistentData()
 							.putInt("DataID", roomId);
+					entityiterator.getPersistentData()
+							.putDouble("DataID", roomId);
+					if (entityiterator instanceof LaserStatueEntity _laser) {
+						_laser.getEntityData().set(LaserStatueEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof CandleheadEntity _candle) {
+						_candle.getEntityData().set(CandleheadEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof DemonEntity _demon) {
+						_demon.getEntityData().set(DemonEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof GravediggerEntity _grave) {
+						_grave.getEntityData().set(GravediggerEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof GravediggerMinibossEntity _graveMini) {
+						_graveMini.getEntityData().set(GravediggerMinibossEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof PreacherEntity _preacher) {
+						_preacher.getEntityData().set(PreacherEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof SculklingEntity _sculk) {
+						_sculk.getEntityData().set(SculklingEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof ShieldAngelEntity _shield) {
+						_shield.getEntityData().set(ShieldAngelEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof WorshipperEntity _worship) {
+						_worship.getEntityData().set(WorshipperEntity.DATA_ID, roomId);
+					}
 				}
 			}
 
-			// tag blocks
 			for (int xPos = minX; xPos <= maxX; xPos++) {
 				for (int yPos = minY; yPos <= maxY; yPos++) {
 					for (int zPos = minZ; zPos <= maxZ; zPos++) {

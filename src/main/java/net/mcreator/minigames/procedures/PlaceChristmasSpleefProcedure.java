@@ -2,6 +2,7 @@ package net.mcreator.minigames.procedures;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
@@ -57,9 +58,8 @@ public class PlaceChristmasSpleefProcedure {
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).spleefMapMiddleX.z() - 30)));
 		MinigamesModVariables.MapVariables.get(world).currentMapSpleef = "christmas";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "gamerule snowAccumulationHeight 0");
+		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.MAX_SNOW_ACCUMULATION_HEIGHT, 0, world.getServer());
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "time set midnight");

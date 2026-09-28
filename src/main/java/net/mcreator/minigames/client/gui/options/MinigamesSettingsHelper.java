@@ -28,6 +28,11 @@ public class MinigamesSettingsHelper {
 		void apply(double value, Level level, Player player);
 	}
 
+	@FunctionalInterface
+	public interface ColorApplier {
+		void apply(String hexColor, Level level, Player player);
+	}
+
 	public interface SettingRow {
 		default void applyToWorld(Level level, Player player) {
 		}
@@ -135,19 +140,26 @@ public class MinigamesSettingsHelper {
 		}
 
 		public boolean getValue() {
-			return MinigamesSettingsConfig.getBoolean(key, defaultValue);
+			try {
+				return MinigamesSettingsConfig.getBoolean(key, defaultValue);
+			} catch (Throwable ignored) {
+				return defaultValue;
+			}
 		}
 
 		public void setValue(boolean value) {
-			MinigamesSettingsConfig.setBoolean(key, value);
-			if (FMLEnvironment.getDist().isClient()) {
-				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-				if (mc.level != null && applier != null) {
-					applier.apply(value, mc.level, mc.player);
+			try {
+				MinigamesSettingsConfig.setBoolean(key, value);
+				if (FMLEnvironment.getDist().isClient()) {
+					net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+					if (mc.level != null && applier != null) {
+						applier.apply(value, mc.level, mc.player);
+					}
+					if (mc.getConnection() != null) {
+						ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(key, 0.0, value, true));
+					}
 				}
-				if (mc.getConnection() != null) {
-					ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(key, 0.0, value, true));
-				}
+			} catch (Throwable ignored) {
 			}
 		}
 
@@ -162,7 +174,10 @@ public class MinigamesSettingsHelper {
 		@Override
 		public void applyToWorld(Level level, Player player) {
 			if (applier != null) {
-				applier.apply(getValue(), level, player);
+				try {
+					applier.apply(getValue(), level, player);
+				} catch (Throwable ignored) {
+				}
 			}
 		}
 	}
@@ -213,20 +228,27 @@ public class MinigamesSettingsHelper {
 		}
 
 		public double getValue() {
-			return MinigamesSettingsConfig.getDouble(key, defaultValue);
+			try {
+				return MinigamesSettingsConfig.getDouble(key, defaultValue);
+			} catch (Throwable ignored) {
+				return defaultValue;
+			}
 		}
 
 		public void setValue(double value) {
-			double clamped = Math.max(min, Math.min(max, value));
-			MinigamesSettingsConfig.setDouble(key, clamped);
-			if (FMLEnvironment.getDist().isClient()) {
-				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-				if (mc.level != null && applier != null) {
-					applier.apply(clamped, mc.level, mc.player);
+			try {
+				double clamped = Math.max(min, Math.min(max, value));
+				MinigamesSettingsConfig.setDouble(key, clamped);
+				if (FMLEnvironment.getDist().isClient()) {
+					net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+					if (mc.level != null && applier != null) {
+						applier.apply(clamped, mc.level, mc.player);
+					}
+					if (mc.getConnection() != null) {
+						ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(key, clamped, false, false));
+					}
 				}
-				if (mc.getConnection() != null) {
-					ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(key, clamped, false, false));
-				}
+			} catch (Throwable ignored) {
 			}
 		}
 
@@ -246,7 +268,10 @@ public class MinigamesSettingsHelper {
 		@Override
 		public void applyToWorld(Level level, Player player) {
 			if (applier != null) {
-				applier.apply(getValue(), level, player);
+				try {
+					applier.apply(getValue(), level, player);
+				} catch (Throwable ignored) {
+				}
 			}
 		}
 	}
@@ -297,24 +322,31 @@ public class MinigamesSettingsHelper {
 		}
 
 		public double getValue() {
-			return MinigamesSettingsConfig.getDouble(key, defaultValue);
+			try {
+				return MinigamesSettingsConfig.getDouble(key, defaultValue);
+			} catch (Throwable ignored) {
+				return defaultValue;
+			}
 		}
 
 		public void setValue(double value) {
-			double clamped = Math.max(min, Math.min(max, value));
-			if (step > 0) {
-				clamped = Math.round((clamped - min) / step) * step + min;
-				clamped = Math.max(min, Math.min(max, clamped));
-			}
-			MinigamesSettingsConfig.setDouble(key, clamped);
-			if (FMLEnvironment.getDist().isClient()) {
-				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-				if (mc.level != null && applier != null) {
-					applier.apply(clamped, mc.level, mc.player);
+			try {
+				double clamped = Math.max(min, Math.min(max, value));
+				if (step > 0) {
+					clamped = Math.round((clamped - min) / step) * step + min;
+					clamped = Math.max(min, Math.min(max, clamped));
 				}
-				if (mc.getConnection() != null) {
-					ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(key, clamped, false, false));
+				MinigamesSettingsConfig.setDouble(key, clamped);
+				if (FMLEnvironment.getDist().isClient()) {
+					net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+					if (mc.level != null && applier != null) {
+						applier.apply(clamped, mc.level, mc.player);
+					}
+					if (mc.getConnection() != null) {
+						ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(key, clamped, false, false));
+					}
 				}
+			} catch (Throwable ignored) {
 			}
 		}
 
@@ -329,7 +361,10 @@ public class MinigamesSettingsHelper {
 		@Override
 		public void applyToWorld(Level level, Player player) {
 			if (applier != null) {
-				applier.apply(getValue(), level, player);
+				try {
+					applier.apply(getValue(), level, player);
+				} catch (Throwable ignored) {
+				}
 			}
 		}
 	}
@@ -358,6 +393,87 @@ public class MinigamesSettingsHelper {
 
 		public KeyMapping getKeyMapping() {
 			return keyMappingSupplier != null ? keyMappingSupplier.get() : null;
+		}
+	}
+
+	public static class ColorSettingRow implements SettingRow {
+		private final String key;
+		private final Component label;
+		private final String defaultValue;
+		private final java.util.function.Supplier<String> getter;
+		private final ColorApplier applier;
+
+		public ColorSettingRow(String key, Component label, String defaultValue, ColorApplier applier) {
+			this(key, label, defaultValue, null, applier);
+		}
+
+		public ColorSettingRow(String key, Component label, String defaultValue, java.util.function.Supplier<String> getter, ColorApplier applier) {
+			this.key = key;
+			this.label = label;
+			this.defaultValue = defaultValue;
+			this.getter = getter;
+			this.applier = applier;
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public Component getLabel() {
+			return label;
+		}
+
+		public String getDefaultValue() {
+			return defaultValue;
+		}
+
+		public String getValue() {
+			try {
+				if (getter != null) {
+					String val = getter.get();
+					if (val != null && !val.isEmpty()) {
+						return val;
+					}
+				}
+				return MinigamesSettingsConfig.getString(key, defaultValue);
+			} catch (Throwable ignored) {
+				return defaultValue;
+			}
+		}
+
+		public void setValue(String hex) {
+			try {
+				MinigamesSettingsConfig.setString(key, hex);
+				if (FMLEnvironment.getDist().isClient()) {
+					Minecraft mc = Minecraft.getInstance();
+					if (applier != null) {
+						applier.apply(hex, mc.level, mc.player);
+					}
+				}
+			} catch (Throwable ignored) {
+			}
+		}
+
+		public int getColorInt() {
+			try {
+				String c = getValue();
+				if (c != null && c.matches("^#?[0-9a-fA-F]{6}$")) {
+					String norm = c.startsWith("#") ? c.substring(1) : c;
+					return Integer.parseInt(norm, 16);
+				}
+			} catch (Throwable ignored) {
+			}
+			return 0xFFFFFF;
+		}
+
+		@Override
+		public void applyToWorld(Level level, Player player) {
+			if (applier != null) {
+				try {
+					applier.apply(getValue(), level, player);
+				} catch (Throwable ignored) {
+				}
+			}
 		}
 	}
 
@@ -415,49 +531,66 @@ public class MinigamesSettingsHelper {
 		ROWS.add(new KeyMappingSettingRow(null, keyMappingSupplier));
 	}
 
+	public static void addColor(String key, Component label, String defaultValue, ColorApplier applier) {
+		ROWS.add(new ColorSettingRow(key, label, defaultValue, applier));
+	}
+
+	public static void addColor(String key, Component label, String defaultValue, java.util.function.Supplier<String> getter, ColorApplier applier) {
+		ROWS.add(new ColorSettingRow(key, label, defaultValue, getter, applier));
+	}
+
 	public static void syncToWorld(Level level, Player player) {
 		for (SettingRow row : ROWS) {
-			row.applyToWorld(level, player);
+			try {
+				row.applyToWorld(level, player);
+			} catch (Throwable ignored) {
+			}
 		}
 	}
 
 	public static void applySettingDirectly(String key, double doubleVal, boolean boolVal, boolean isBoolean, Level level, Player player) {
 		for (SettingRow row : ROWS) {
-			if (isBoolean && row instanceof BooleanSettingRow bRow && bRow.getKey().equals(key)) {
-				if (bRow.applier != null) {
-					bRow.applier.apply(boolVal, level, player);
+			try {
+				if (isBoolean && row instanceof BooleanSettingRow bRow && bRow.getKey().equals(key)) {
+					if (bRow.applier != null) {
+						bRow.applier.apply(boolVal, level, player);
+					}
+					return;
+				} else if (!isBoolean && row instanceof DoubleSettingRow dRow && dRow.getKey().equals(key)) {
+					if (dRow.applier != null) {
+						dRow.applier.apply(doubleVal, level, player);
+					}
+					return;
+				} else if (!isBoolean && row instanceof DoubleSliderSettingRow dsRow && dsRow.getKey().equals(key)) {
+					if (dsRow.applier != null) {
+						dsRow.applier.apply(doubleVal, level, player);
+					}
+					return;
 				}
-				return;
-			} else if (!isBoolean && row instanceof DoubleSettingRow dRow && dRow.getKey().equals(key)) {
-				if (dRow.applier != null) {
-					dRow.applier.apply(doubleVal, level, player);
-				}
-				return;
-			} else if (!isBoolean && row instanceof DoubleSliderSettingRow dsRow && dsRow.getKey().equals(key)) {
-				if (dsRow.applier != null) {
-					dsRow.applier.apply(doubleVal, level, player);
-				}
-				return;
+			} catch (Throwable ignored) {
 			}
 		}
 	}
 
 	public static void syncClientToServer() {
-		if (!FMLEnvironment.getDist().isClient()) {
-			return;
-		}
-		Minecraft mc = Minecraft.getInstance();
-		if (mc.getConnection() == null) {
-			return;
-		}
-		for (SettingRow row : ROWS) {
-			if (row instanceof BooleanSettingRow bRow) {
-				ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(bRow.getKey(), 0.0, bRow.getValue(), true));
-			} else if (row instanceof DoubleSettingRow dRow) {
-				ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(dRow.getKey(), dRow.getValue(), false, false));
-			} else if (row instanceof DoubleSliderSettingRow dsRow) {
-				ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(dsRow.getKey(), dsRow.getValue(), false, false));
+		try {
+			if (!FMLEnvironment.getDist().isClient()) {
+				return;
 			}
+			Minecraft mc = Minecraft.getInstance();
+			if (mc.getConnection() == null) {
+				return;
+			}
+			for (SettingRow row : ROWS) {
+				if (row instanceof BooleanSettingRow bRow) {
+					ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(bRow.getKey(), 0.0, bRow.getValue(), true));
+				} else if (row instanceof DoubleSettingRow dRow) {
+					ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(dRow.getKey(), dRow.getValue(), false, false));
+				} else if (row instanceof DoubleSliderSettingRow dsRow) {
+					ClientPacketDistributor.sendToServer(new MinigamesSettingSyncMessage(dsRow.getKey(), dsRow.getValue(), false, false));
+				}
+			}
+		} catch (Throwable ignored) {
 		}
 	}
 
@@ -468,6 +601,55 @@ public class MinigamesSettingsHelper {
 		MinigamesSettingsHelper.addKeyMapping(MinigamesModKeyMappings.VOTE_YES);
 		MinigamesSettingsHelper.addKeyMapping(MinigamesModKeyMappings.VOTE_NO);
 
+		addColor("nameColor", Component.literal("Name Color"), "#FFFFFF",
+				() -> {
+					if (FMLEnvironment.getDist().isClient()) {
+						try {
+							Minecraft mc = Minecraft.getInstance();
+							if (mc.player != null) {
+								net.mcreator.minigames.AccountSwapManager.SwapRecord record = net.mcreator.minigames.AccountSwapManager.getRecord(mc.player.getUUID());
+								if (record != null && record.originalColor != null && !record.originalColor.isEmpty()) {
+									return record.originalColor;
+								}
+								String diskColor = net.mcreator.minigames.client.NameColorPreferenceClient.readClientColor(mc.player.getUUID());
+								if (diskColor != null && !diskColor.isEmpty()) {
+									return diskColor;
+								}
+								String c = mc.player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+								if (c != null && !c.isEmpty()) {
+									return c;
+								}
+							}
+						} catch (Throwable ignored) {
+						}
+					}
+					return MinigamesSettingsConfig.getString("nameColor", "#FFFFFF");
+				},
+				(hex, level, player) -> {
+					if (player != null) {
+						try {
+							net.mcreator.minigames.AccountSwapManager.SwapRecord record = net.mcreator.minigames.AccountSwapManager.getRecord(player.getUUID());
+							if (record != null) {
+								record.originalColor = hex;
+							} else {
+								player.getData(MinigamesModVariables.PLAYER_VARIABLES).color = hex;
+								if (level != null && !level.isClientSide()) {
+									player.getData(MinigamesModVariables.PLAYER_VARIABLES).markSyncDirty();
+								}
+							}
+							if (FMLEnvironment.getDist().isClient()) {
+								Minecraft mc = Minecraft.getInstance();
+								if (mc.getConnection() != null) {
+									ClientPacketDistributor.sendToServer(new net.mcreator.minigames.network.NameColorPreferenceMessage(hex));
+								}
+								net.mcreator.minigames.client.NameColorPreferenceClient.writeClientColorNow(player.getUUID(), hex);
+							}
+						} catch (Throwable ignored) {
+						}
+					}
+				}
+		);
+
 		addDoubleSlider("timerScale", Component.literal("Timer Scale"), 2.5, 0.5, 5.0, 0.5,
 				val -> Component.literal(String.format(java.util.Locale.ROOT, "%.1fx", val)),
 				(val, level, player) -> {
@@ -477,6 +659,14 @@ public class MinigamesSettingsHelper {
 						vars.markSyncDirty();
 					}
 				}
+		);
+
+		addBoolean("lowFire", Component.literal("Low Fire"), false,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Enabled");
+					default -> Component.literal("Disabled");
+				},
+				null
 		);
 
 		Identifier achievementRunIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/achievementrunicon.png");
@@ -499,12 +689,76 @@ public class MinigamesSettingsHelper {
 		Identifier crownHuntIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/crownhunt.png");
 		addHeader(Component.literal("Crown Hunt"), true, crownHuntIcon, 19, 19);
 
+		addBoolean("ShowCrownAnimation", Component.literal("Crown Steal Animation"), true,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Show");
+					default -> Component.literal("Never Show");
+				},
+				null
+		);
+
 		Identifier spleefIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/snowball.png");
 		addHeader(Component.literal("Spleef"), true, spleefIcon, 16, 16);
+
+		addBoolean("ShowSpleefBlockParticles", Component.literal("Spleef Block Break Particles"), true,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Always Show");
+					default -> Component.literal("Never Show");
+				},
+				(val, level, player) -> {
+					if (player != null) {
+						MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						vars.ShowSpleefBlockParticles = val;
+						vars.markSyncDirty();
+					}
+				}
+		);
+
+		addBoolean("ShowSteampunkSmoke", Component.literal("Steampunk Smoke Particles"), true,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Show");
+					default -> Component.literal("Never Show");
+				},
+				(val, level, player) -> {
+					if (!val && FMLEnvironment.getDist().isClient()) {
+						try {
+							net.minecraft.client.Minecraft.getInstance().particleEngine.clearParticles();
+						} catch (Throwable ignored) {
+						}
+					}
+				}
+		);
 
 		Identifier roguelikeIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/roguelike.png");
 		addHeader(Component.literal("Roguelike"), true, roguelikeIcon, 16, 16);
 
 		addKeyMapping(net.mcreator.minigames.init.MinigamesModKeyMappings.DASH);
+
+		addBoolean("roguelikePlayerGlowing", Component.literal("Glowing Teammates"), true,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Glowing");
+					default -> Component.literal("Disabled");
+				},
+				null
+		);
+
+		addBoolean("roguelikeSuppressSwingNotReady", Component.literal("Don't Animate Swing When Not Ready"), true,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Enabled");
+					default -> Component.literal("Disabled");
+				},
+				null
+		);
+
+		addDoubleSlider("tooltipSize", Component.literal("Tooltip Scale"), 0.8, 0, 2.5, 0.1,
+				val -> Component.literal(String.format(java.util.Locale.ROOT, "%.1fx", val)),
+				(val, level, player) -> {
+					if (player != null) {
+						MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						vars.tooltipSize = val;
+						vars.markSyncDirty();
+					}
+				}
+		);
 	}
 }

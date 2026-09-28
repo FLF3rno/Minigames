@@ -15,12 +15,17 @@
     "LightningBoltMixin",
     "UnmovableEntityMixin",
     "UnmovableLivingEntityMixin",
-    "UnmovableItemEntityMixin"
+    "UnmovableItemEntityMixin",
+    "ItemCooldownsAccessor",
+    "LivingEntityAccessor",
+    "CooldownInstanceAccessor",
+    "ItemCooldownsMixin",
+    "PlayerIdentityMixin",
+    "PlayerNameColorMixin"
   ],
   "client": [
     "GuiAccessor",
     "EntityTeamColorMixin",
-    "PlayerNameColorMixin",
     "DebugEntryPositionMixin",
     "ExperienceBarRendererMixin",
     "EffectsInInventoryMixin",
@@ -30,7 +35,15 @@
     "GameRendererMixin",
     "PhantomRenderTypeMixin",
     "LivingEntityRenderStateMixin",
-    "PhantomEntityRendererMixin"
+    "PhantomEntityRendererMixin",
+    "ParticleEngineMixin",
+    "GoldenRenderMixin",
+    "FlameFeatureRendererMixin",
+    "AbstractClientPlayerMixin",
+    "PlayerInfoMixin",
+    "PlayerTabOverlayMixin",
+    "PlayerAnimationSmoothResetMixin",
+    "LocalPlayerSwingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

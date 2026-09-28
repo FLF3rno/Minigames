@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/crossbow",
+  "textures": {
+    "layer0": "minigames:item/weapon_cactus_crossbow_arrow"
+  }
+}

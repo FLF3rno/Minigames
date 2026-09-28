@@ -35,7 +35,7 @@ public class ChooseRandomDungeonItemProcedure {
 		if ((className).equals("thief")) {
 			stolenrng = Mth.nextInt(RandomSource.create(), 1, 100);
 			if (stolenrng <= stolenChance / 2) {
-				finalClass = "support";
+				finalClass = "warrior";
 			} else if (stolenrng <= stolenChance) {
 				finalClass = "support";
 			}

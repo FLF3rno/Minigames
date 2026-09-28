@@ -1,5 +1,6 @@
 package net.mcreator.minigames.mixin;
 
+import net.mcreator.minigames.client.ClientGlowManager;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.util.ColorUtils;
 import net.minecraft.world.entity.Entity;
@@ -14,12 +15,30 @@ public class EntityTeamColorMixin {
 	@Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
 	private void minigames$customGlow(CallbackInfoReturnable<Integer> cir) {
 		Entity entity = (Entity) (Object) this;
+		int clientGlow = ClientGlowManager.getGlowColor(entity);
+		if (clientGlow != -1) {
+			cir.setReturnValue(clientGlow);
+			return;
+		}
+
 		if (!(entity instanceof Player player)) return;
 
 		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
 		int rgb = ColorUtils.parseHex(vars.color);
 		if (rgb != -1) {
 			cir.setReturnValue(rgb);
+		}
+	}
+
+	@Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
+	private void minigames$customIsGlowing(CallbackInfoReturnable<Boolean> cir) {
+		Entity entity = (Entity) (Object) this;
+		if (ClientGlowManager.isSuppressed(entity.getId())) {
+			cir.setReturnValue(false);
+			return;
+		}
+		if (ClientGlowManager.isGlowing(entity)) {
+			cir.setReturnValue(true);
 		}
 	}
 }

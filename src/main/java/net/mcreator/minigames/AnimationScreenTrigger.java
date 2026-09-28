@@ -1,5 +1,6 @@
 package net.mcreator.minigames;
 
+import net.mcreator.minigames.client.gui.options.MinigamesSettingsConfig;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +16,9 @@ import java.util.ArrayList;
 public class AnimationScreenTrigger {
 
     public static void startAnimation(int length, String animationType, float speed) {
+        if ("crown".equalsIgnoreCase(animationType) && !MinigamesSettingsConfig.getBoolean("ShowCrownAnimation", true)) {
+            return;
+        }
         Minecraft.getInstance().execute(() -> {
             double guiScale = Minecraft.getInstance().getWindow().getGuiScale();
             double targetScale = 3.0;

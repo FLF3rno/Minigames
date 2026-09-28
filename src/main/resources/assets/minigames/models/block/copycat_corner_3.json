@@ -1,0 +1,21 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "minigames:block/copycat",
+    "texture": "minigames:block/copycat"
+  },
+  "elements": [
+    {
+      "from": [ 8, 0, 8 ],
+      "to": [ 16, 8, 16 ],
+      "faces": {
+        "down":  { "uv": [ 8, 8, 16, 16 ], "texture": "#texture", "cullface": "down" },
+        "up":    { "uv": [ 8, 8, 16, 16 ], "texture": "#texture" },
+        "north": { "uv": [ 0, 8, 8, 16 ], "texture": "#texture" },
+        "south": { "uv": [ 8, 8, 16, 16 ], "texture": "#texture", "cullface": "south" },
+        "west":  { "uv": [ 8, 8, 16, 16 ], "texture": "#texture" },
+        "east":  { "uv": [ 0, 8, 8, 16 ], "texture": "#texture", "cullface": "east" }
+      }
+    }
+  ]
+}

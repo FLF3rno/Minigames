@@ -7,9 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.LightCoordsUtil;
-import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.client.ClientGlowManager;
 
 @Mixin(LightCoordsUtil.class)
 public class LightCoordsUtilMixin {
@@ -24,23 +23,10 @@ public class LightCoordsUtilMixin {
                 return;
             }
 
-            Minecraft mc = Minecraft.getInstance();
-            if (mc == null || mc.player == null) {
-                return;
-            }
-
-            var variables = mc.player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-
-            int minLight = Mth.clamp((int) variables.minimumLightLevel, 0, 15);
-
-            int maxLight = Mth.clamp((int) variables.maximumLightLevel, 0, 15);
-
-            if (minLight > maxLight) {
-                minLight = maxLight;
-            }
+            int minLight = ClientGlowManager.getMinLight();
+            int maxLight = ClientGlowManager.getMaxLight();
 
             int newBlockLight = Mth.clamp(blockLight, minLight, maxLight);
-
             int newSkyLight = Mth.clamp(skyLight, minLight, maxLight);
 
             cir.setReturnValue((newBlockLight << 4) | (newSkyLight << 20));

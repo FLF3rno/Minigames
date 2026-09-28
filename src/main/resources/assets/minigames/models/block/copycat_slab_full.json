@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "minigames:block/copycat",
+    "bottom": "minigames:block/copycat",
+    "top": "minigames:block/copycat",
+    "side": "minigames:block/copycat"
+  }
+}

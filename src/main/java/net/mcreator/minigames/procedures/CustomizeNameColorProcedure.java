@@ -35,6 +35,15 @@ public class CustomizeNameColorProcedure {
     if (!normalized.startsWith("#"))
         normalized = "#" + normalized;
 
+    if (entity instanceof Player player) {
+        net.mcreator.minigames.AccountSwapManager.SwapRecord record = net.mcreator.minigames.AccountSwapManager.getRecord(player.getUUID());
+        if (record != null) {
+            record.originalColor = normalized;
+            savePlayerColor(entity, normalized);
+            return;
+        }
+    }
+
     {
         MinigamesModVariables.PlayerVariables vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
         vars.color = normalized;

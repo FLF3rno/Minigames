@@ -47,14 +47,6 @@ public class AchievementStrongholdPlacementTickProcedure {
 		if (pos == null) {
 			return;
 		}
-
-		for (ServerPlayer player : level.players()) {
-			if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 96 * 96) {
-				player.sendSystemMessage(Component.literal("Achievement stronghold debug: player is in placement range at "
-						+ pos.getX() + " " + pos.getY() + " " + pos.getZ()));
-			}
-		}
-
 		forceLoadChunkSquare(level, pos, 20);
 
 		level.getServer().getCommands().performPrefixedCommand(

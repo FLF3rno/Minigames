@@ -3,14 +3,20 @@
   "values": [
     "minigames:hammer",
     "minigames:power_harvester",
-    "minigames:attack_speed_gem",
     "minigames:blacksmith_hammer",
-    "minigames:slam",
     "minigames:choice_bag_warrior",
+    "minigames:blazing_blade",
+    "minigames:volley_bomb",
+    "minigames:plug",
+    "minigames:attack_speed_gem",
+    "minigames:momentum",
+    "minigames:slam",
+    "minigames:detonator",
+    "minigames:berserk",
     "minigames:wind_scythe",
     "minigames:blank_sword",
-    "minigames:volley_bomb",
-    "minigames:human_cannonball",
-    "minigames:plug"
+    "minigames:adrenaline_blade",
+    "minigames:boxing_mastery",
+    "minigames:human_cannonball"
   ]
 }

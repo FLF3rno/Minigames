@@ -35,7 +35,8 @@ public class MinigamesSettingsConfig {
 				if (parsed != null) {
 					cache = parsed;
 				}
-			} catch (Exception ignored) {
+			} catch (Throwable ignored) {
+				cache = new JsonObject();
 			}
 		}
 		return cache;
@@ -45,8 +46,26 @@ public class MinigamesSettingsConfig {
 		JsonObject json = getJson();
 		if (json.has(key)) {
 			try {
-				return json.get(key).getAsBoolean();
-			} catch (Exception ignored) {
+				com.google.gson.JsonElement elem = json.get(key);
+				if (elem != null && elem.isJsonPrimitive()) {
+					com.google.gson.JsonPrimitive prim = elem.getAsJsonPrimitive();
+					if (prim.isBoolean()) {
+						return prim.getAsBoolean();
+					}
+					if (prim.isString()) {
+						String s = prim.getAsString();
+						if ("true".equalsIgnoreCase(s)) {
+							return true;
+						}
+						if ("false".equalsIgnoreCase(s)) {
+							return false;
+						}
+					}
+					if (prim.isNumber()) {
+						return prim.getAsNumber().intValue() != 0;
+					}
+				}
+			} catch (Throwable ignored) {
 			}
 		}
 		return defaultValue;
@@ -62,14 +81,46 @@ public class MinigamesSettingsConfig {
 		JsonObject json = getJson();
 		if (json.has(key)) {
 			try {
-				return json.get(key).getAsDouble();
-			} catch (Exception ignored) {
+				com.google.gson.JsonElement elem = json.get(key);
+				if (elem != null && elem.isJsonPrimitive()) {
+					com.google.gson.JsonPrimitive prim = elem.getAsJsonPrimitive();
+					if (prim.isNumber()) {
+						return prim.getAsDouble();
+					}
+					if (prim.isString()) {
+						return Double.parseDouble(prim.getAsString());
+					}
+					if (prim.isBoolean()) {
+						return prim.getAsBoolean() ? 1.0 : 0.0;
+					}
+				}
+			} catch (Throwable ignored) {
 			}
 		}
 		return defaultValue;
 	}
 
 	public static synchronized void setDouble(String key, double value) {
+		JsonObject json = getJson();
+		json.addProperty(key, value);
+		save();
+	}
+
+	public static synchronized String getString(String key, String defaultValue) {
+		JsonObject json = getJson();
+		if (json.has(key)) {
+			try {
+				com.google.gson.JsonElement elem = json.get(key);
+				if (elem != null && elem.isJsonPrimitive()) {
+					return elem.getAsString();
+				}
+			} catch (Throwable ignored) {
+			}
+		}
+		return defaultValue;
+	}
+
+	public static synchronized void setString(String key, String value) {
 		JsonObject json = getJson();
 		json.addProperty(key, value);
 		save();

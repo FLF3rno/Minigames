@@ -23,6 +23,7 @@ import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AchievementGameEndProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -48,11 +49,13 @@ public class AchievementGameEndProcedure {
 			MinigamesModVariables.MapVariables.get(world).waypoints = true;
 			MinigamesModVariables.MapVariables.get(world).minimap = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
+			List<? extends Player> playersForCompass = (world instanceof ServerLevel _sl ? _sl.getServer().getPlayerList().getPlayers() : world.players());
+			for (Entity entityiterator : new ArrayList<>(playersForCompass)) {
 				GrantGameCompassProcedure.execute(world, entityiterator);
 			}
 		});
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
+		List<? extends Player> allPlayers = (world instanceof ServerLevel _sl ? _sl.getServer().getPlayerList().getPlayers() : world.players());
+		for (Entity entityiterator : new ArrayList<>(allPlayers)) {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.timerSpeed = 0;

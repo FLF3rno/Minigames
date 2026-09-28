@@ -2,15 +2,21 @@
   "replace": false,
   "values": [
     "minigames:blessed_cursed_crossbow",
+    "minigames:heart_amulet",
     "minigames:plague_starter",
+    "minigames:parasite_scythe",
+    "minigames:mending_mace",
+    "minigames:wireless_cauldron",
     "minigames:box_of_fun",
+    "minigames:golden_mango",
+    "minigames:thrusters_roguelike",
     "minigames:time_clock",
+    "minigames:worshippers_cross",
+    "minigames:teleporter",
     "minigames:stop_sign",
     "minigames:crystallized_potion",
     "minigames:blank_long_sword",
     "minigames:cluster_bomb",
-    "minigames:parasite_scythe",
-    "minigames:choice_bag_support",
-    "minigames:wireless_cauldron"
+    "minigames:choice_bag_support"
   ]
 }

@@ -16,7 +16,7 @@ public class BreakSnowProcedure {
 			return;
 		if ((world.getBlockState(BlockPos.containing(x, y, z))).is(BlockTags.create(Identifier.parse("minigames:spleefables")))) {
 			if (!world.isClientSide()) {
-				BlockBreakSimulationProcedure.execute(world, x, y, z, world.getBlockState(BlockPos.containing(x, y, z)), false, true);
+				BlockBreakSimulationProcedure.execute(world, x, y, z, world.getBlockState(BlockPos.containing(x, y, z)), true, true);
 			}
 			if (MinigamesModVariables.MapVariables.get(world).glueY.contains(Math.round(y))) {
 				world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.SPREADING_GLUE.get().defaultBlockState(), 3);

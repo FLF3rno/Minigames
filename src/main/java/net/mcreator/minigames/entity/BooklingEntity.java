@@ -25,6 +25,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
+import net.mcreator.minigames.init.MinigamesModAttributes;
 
 import net.mcreator.minigames.procedures.BooklingTickProcedure;
 import net.mcreator.minigames.client.model.animations.booklingAnimation;
@@ -185,6 +186,7 @@ public class BooklingEntity extends Monster {
 		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 1);
+		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 4);
 		return builder;
 	}
 }

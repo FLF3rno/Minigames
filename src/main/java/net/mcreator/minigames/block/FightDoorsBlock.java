@@ -65,7 +65,7 @@ public class FightDoorsBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Override
 	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return Shapes.empty();
+		return shapes.apply(state);
 	}
 
 	@Override
@@ -126,8 +126,7 @@ public class FightDoorsBlock extends Block implements SimpleWaterloggedBlock, En
 
 	@Override
 	public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		return tileEntity instanceof MenuProvider menuProvider ? menuProvider : null;
+		return null;
 	}
 
 	@Override

@@ -29,6 +29,15 @@ public class ApplyEffectProcedure {
 			if ((effect).equals("minigames:stunned")) {
 				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.STUNNED, (int) ticks, (int) (level - 1), (!hide), false));
+				if (!world.isClientSide()) {
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(target.getX(), target.getY(), target.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.zombie_villager.cure")), SoundSource.HOSTILE, 1, 1);
+						} else {
+							_level.playLocalSound((target.getX()), (target.getY()), (target.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.zombie_villager.cure")), SoundSource.HOSTILE, 1, 1, false);
+						}
+					}
+				}
 			} else if ((effect).equals("minigames:blessed")) {
 				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, (int) ticks, (int) (level - 1), (!hide), false));
@@ -53,6 +62,30 @@ public class ApplyEffectProcedure {
 			} else if ((effect).equals("minecraft:unluck") || (effect).equals("minigames:unluck")) {
 				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MobEffects.UNLUCK, (int) ticks, (int) (level - 1), (!hide), false));
+			} else if ((effect).equals("minigames:extra_speed") || (effect).equals("minigames:speed_boost")) {
+				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.SPEED_BOOST, (int) ticks, (int) (level - 1), (!hide), false));
+			} else if ((effect).equals("minigames:damage_resistance")) {
+				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.DAMAGE_RESISTANCE, (int) ticks, (int) (level - 1), (!hide), false));
+			} else if ((effect).equals("minigames:golden")) {
+				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.GOLDEN, (int) ticks, (int) (level - 1), (!hide), false));
+				if (!world.isClientSide()) {
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(target.getX(), target.getY(), target.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.zombie_villager.cure")), SoundSource.HOSTILE, 1, 1);
+						} else {
+							_level.playLocalSound((target.getX()), (target.getY()), (target.getZ()), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.zombie_villager.cure")), SoundSource.HOSTILE, 1, 1, false);
+						}
+					}
+				}
+			} else if ((effect).equals("minigames:slowdown")) {
+				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.SLOWDOWN, (int) ticks, (int) (level - 1), (!hide), false));
+			} else if ((effect).equals("minigames:lifesteal")) {
+				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.LIFESTEAL, (int) ticks, (int) (level - 1), (!hide), false));
 			} else {
 				{
 					Entity _ent = target;

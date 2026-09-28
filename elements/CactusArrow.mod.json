@@ -1,0 +1,19 @@
+{
+  "_fv": 89,
+  "_type": "projectile",
+  "definition": {
+    "projectileItem": "Blocks.AIR",
+    "showParticles": true,
+    "actionSound": "",
+    "igniteFire": false,
+    "disableGravity": true,
+    "disableDiscarding": false,
+    "power": 1.0,
+    "damage": 5.0,
+    "knockback": 5,
+    "entityModel": "Modelarrowmodel",
+    "customModelTexture": "blessed_arrow.png",
+    "modelWidth": 0.5,
+    "modelHeight": 0.5
+  }
+}

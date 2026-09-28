@@ -1,0 +1,36 @@
+{
+  "multipart": [
+    {
+      "when": { "c0": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_0" }
+    },
+    {
+      "when": { "c1": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_1" }
+    },
+    {
+      "when": { "c2": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_2" }
+    },
+    {
+      "when": { "c3": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_3" }
+    },
+    {
+      "when": { "c4": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_4" }
+    },
+    {
+      "when": { "c5": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_5" }
+    },
+    {
+      "when": { "c6": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_6" }
+    },
+    {
+      "when": { "c7": "true" },
+      "apply": { "model": "minigames:block/copycat_corner_7" }
+    }
+  ]
+}

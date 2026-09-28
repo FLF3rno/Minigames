@@ -26,6 +26,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -113,13 +114,40 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 		return this.entityData.get(TEXTURE);
 	}
 
+	public int getRoomID() {
+		int id = this.entityData.get(DATA_ID);
+		if (id == 0) {
+			id = this.getPersistentData().getIntOr("DataID", (int) this.getPersistentData().getDoubleOr("DataID", 0));
+			if (id != 0) {
+				this.entityData.set(DATA_ID, id);
+			}
+		}
+		return id;
+	}
+
+	public boolean isCurrentRoomActive() {
+		int roomID = getRoomID();
+		return roomID <= 0 || net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(this.level()).currentRoomID == roomID;
+	}
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new DigGraveGoal(this, 20));
 		this.goalSelector.addGoal(2, new MoveToCoarseDirtGoal(this, 1.3, 20));
 		this.goalSelector.addGoal(3, new ChargeAttackGoal(this, 1.2, 20, 13));
-		this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false) {
+			@Override
+			public boolean canUse() {
+				return GravediggerEntity.this.isCurrentRoomActive() && super.canUse();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return GravediggerEntity.this.isCurrentRoomActive() && super.canContinueToUse();
+			}
+		});
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 	}
 
@@ -325,14 +353,14 @@ public class GravediggerEntity extends Monster implements IDiggerMob, IChargerMo
 
 	public static AttributeSupplier.Builder createAttributes() {
 		AttributeSupplier.Builder builder = Mob.createMobAttributes();
-		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.15);
+		builder = builder.add(Attributes.MOVEMENT_SPEED, 0.2);
 		builder = builder.add(Attributes.MAX_HEALTH, 50);
 		builder = builder.add(Attributes.ARMOR, 0);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 7);
-		builder = builder.add(Attributes.FOLLOW_RANGE, 24);
-		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
+		builder = builder.add(Attributes.FOLLOW_RANGE, 32);
+		builder = builder.add(Attributes.STEP_HEIGHT, 0.8);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 0.15);
-		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 3);
+		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 0);
 		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 10);
 		return builder;
 	}

@@ -1,6 +1,8 @@
 package net.mcreator.minigames;
 
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.opengl.GlStateManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +30,7 @@ public class HealthBar {
     private static final TagKey<EntityType<?>> DUNGEON_BOSS_TAG = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("minigames", "dungeon_boss"));
 
     @SubscribeEvent
-    public static void onRenderLevelStage(RenderLevelStageEvent.AfterOpaqueFeatures event) {
+    public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentBlocks event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) return;
 
@@ -38,6 +40,9 @@ public class HealthBar {
         double camX = cameraPosition.x;
         double camY = cameraPosition.y;
         double camZ = cameraPosition.z;
+        MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
+
+        boolean anyRendered = false;
 
         for (LivingEntity entity : mc.level.getEntitiesOfClass(
                 LivingEntity.class,
@@ -58,15 +63,24 @@ public class HealthBar {
             poseStack.translate(x, y, z);
 
             poseStack.mulPose(camera.rotation());
-            poseStack.scale(-0.025F, -0.025F, 0.025F);
+            poseStack.scale(0.025F, -0.025F, 0.025F);
 
             PoseStack.Pose pose = poseStack.last();
             if (pose != null) {
+                if (!anyRendered) {
+                    GlStateManager._disableDepthTest();
+                    anyRendered = true;
+                }
                 Matrix4f matrix = pose.pose();
-                renderBar(matrix, entity, entity.getHealth(), entity.getMaxHealth());
+                renderBar(matrix, buffers, entity, entity.getHealth(), entity.getMaxHealth());
             }
 
             poseStack.popPose();
+        }
+
+        if (anyRendered) {
+            buffers.endBatch();
+            GlStateManager._enableDepthTest();
         }
     }
 
@@ -124,7 +138,7 @@ public class HealthBar {
                 && entityDistance <= blockDistance + 1e-6;
     }
 
-    private static void renderBar(Matrix4f matrix, LivingEntity entity, float health, float maxHealth) {
+    private static void renderBar(Matrix4f matrix, MultiBufferSource.BufferSource buffers, LivingEntity entity, float health, float maxHealth) {
         float healthRatio = Math.max(0.0F, Math.min(health / maxHealth, 1.0F));
 
         int width = 60;
@@ -138,7 +152,6 @@ public class HealthBar {
         int b;
 
         String override = "";
-
         String rawOverride = "";
 
         try {
@@ -183,17 +196,12 @@ public class HealthBar {
             override = override.substring(2);
         }
 
-        boolean parsed = false;
-        int parsedHex = 0;
-
         if (override.matches("^[0-9a-fA-F]{6}$")) {
-            parsedHex = Integer.parseInt(override, 16);
+            int parsedHex = Integer.parseInt(override, 16);
 
             r = (parsedHex >> 16) & 0xFF;
             g = (parsedHex >> 8) & 0xFF;
             b = parsedHex & 0xFF;
-
-            parsed = true;
         } else {
             if (healthRatio >= 0.99f) {
                 r = 0;
@@ -218,67 +226,32 @@ public class HealthBar {
             }
         }
 
-        MultiBufferSource.BufferSource buffers =
-                Minecraft.getInstance().renderBuffers().bufferSource();
-
-        VertexConsumer bgConsumer = buffers.getBuffer(RenderTypes.debugQuads());
-
-        drawQuad(
-                bgConsumer,
-                matrix,
-                -halfWidth - 1,
-                -1,
-                halfWidth + 1,
-                height + 1,
-                0,
-                0,
-                0,
-                180,
-                -0.02f
-        );
-
-        buffers.endBatch(RenderTypes.debugQuads());
+        VertexConsumer consumer = buffers.getBuffer(RenderTypes.textBackgroundSeeThrough());
+        int bgColor = 0xB4000000;
+        drawQuad(consumer, matrix, -halfWidth - 1, -1, halfWidth + 1, height + 1, bgColor, 0.0F);
+        buffers.endBatch(RenderTypes.textBackgroundSeeThrough());
 
         if (fillWidth > 0) {
-            VertexConsumer fillConsumer = buffers.getBuffer(RenderTypes.debugQuads());
-
-            drawQuad(
-                    fillConsumer,
-                    matrix,
-                    halfWidth - fillWidth,
-                    0,
-                    halfWidth,
-                    height,
-                    r,
-                    g,
-                    b,
-                    255,
-                    0.02f
-            );
-
-            buffers.endBatch(RenderTypes.debugQuads());
+            VertexConsumer fillConsumer = buffers.getBuffer(RenderTypes.textBackgroundSeeThrough());
+            int fgColor = (255 << 24) | (r << 16) | (g << 8) | b;
+            drawQuad(fillConsumer, matrix, -halfWidth, 0, -halfWidth + fillWidth, height, fgColor, 0.03F);
+            buffers.endBatch(RenderTypes.textBackgroundSeeThrough());
         }
-
     }
 
     private static void drawQuad(
             VertexConsumer vertexConsumer,
             Matrix4f matrix,
-            float x1,
-            float y1,
-            float x2,
-            float y2,
-            int r,
-            int g,
-            int b,
-            int a,
+            float left,
+            float top,
+            float right,
+            float bottom,
+            int color,
             float z
     ) {
-        int color = (a << 24) | (r << 16) | (g << 8) | b;
-
-        vertexConsumer.addVertex(matrix, x1, y1, z).setColor(color);
-        vertexConsumer.addVertex(matrix, x1, y2, z).setColor(color);
-        vertexConsumer.addVertex(matrix, x2, y2, z).setColor(color);
-        vertexConsumer.addVertex(matrix, x2, y1, z).setColor(color);
+        vertexConsumer.addVertex(matrix, left, top, z).setColor(color).setLight(15728880);
+        vertexConsumer.addVertex(matrix, left, bottom, z).setColor(color).setLight(15728880);
+        vertexConsumer.addVertex(matrix, right, bottom, z).setColor(color).setLight(15728880);
+        vertexConsumer.addVertex(matrix, right, top, z).setColor(color).setLight(15728880);
     }
 }

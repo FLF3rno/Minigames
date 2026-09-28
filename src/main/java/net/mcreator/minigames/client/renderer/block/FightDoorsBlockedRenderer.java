@@ -19,15 +19,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.animation.KeyframeAnimation;
-import net.minecraft.client.animation.AnimationDefinition;
 
 import net.mcreator.minigames.init.MinigamesModBlockEntities;
-import net.mcreator.minigames.client.model.Modelhalfblock_barred;
+import net.mcreator.minigames.client.model.Modelhalfblock;
 import net.mcreator.minigames.block.entity.FightDoorsBlockedBlockEntity;
 import net.mcreator.minigames.block.FightDoorsBlockedBlock;
-
-import java.util.Map;
 
 import com.mojang.math.Axis;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -38,8 +34,8 @@ public class FightDoorsBlockedRenderer implements BlockEntityRenderer<FightDoors
 	private final Identifier texture;
 
 	FightDoorsBlockedRenderer(BlockEntityRendererProvider.Context context) {
-		this.model = new CustomHierarchicalModel(context.bakeLayer(Modelhalfblock_barred.LAYER_LOCATION));
-		this.texture = Identifier.parse("minigames:textures/block/door.png");
+		this.model = new CustomHierarchicalModel(context.bakeLayer(Modelhalfblock.LAYER_LOCATION));
+		this.texture = Identifier.parse("minigames:textures/block/door_locked.png");
 	}
 
 	@Override
@@ -52,8 +48,6 @@ public class FightDoorsBlockedRenderer implements BlockEntityRenderer<FightDoors
 		BlockEntityRenderState.extractBase(blockEntity, state, breakProgress);
 		state.blockEntity = blockEntity;
 		state.blockState = blockEntity.getBlockState();
-		int tickCount = (int) blockEntity.getLevel().getGameTime();
-		state.entityRenderState.ageInTicks = tickCount + partialTicks;
 	}
 
 	@Override
@@ -71,7 +65,6 @@ public class FightDoorsBlockedRenderer implements BlockEntityRenderer<FightDoors
 			case SOUTH -> poseStack.mulPose(Axis.YP.rotationDegrees(180));
 		}
 		poseStack.translate(0, -1, 0);
-		model.setupBlockEntityAnim(renderState.blockEntity, renderState.entityRenderState);
 		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0, null);
 		poseStack.popPose();
 	}
@@ -87,22 +80,9 @@ public class FightDoorsBlockedRenderer implements BlockEntityRenderer<FightDoors
 		protected BlockState blockState;
 	}
 
-	private static final class CustomHierarchicalModel extends Modelhalfblock_barred {
+	private static final class CustomHierarchicalModel extends Modelhalfblock {
 		public CustomHierarchicalModel(ModelPart root) {
 			super(root);
-		}
-
-		private KeyframeAnimation safeBake(AnimationDefinition source) {
-			try {
-				return source.bake(root);
-			} catch (IllegalArgumentException e) {
-				return new AnimationDefinition(0, false, Map.of()).bake(root);
-			}
-		}
-
-		public void setupBlockEntityAnim(FightDoorsBlockedBlockEntity blockEntity, LivingEntityRenderState state) {
-			this.root().getAllParts().forEach(ModelPart::resetPose);
-			super.setupAnim(state);
 		}
 	}
 }

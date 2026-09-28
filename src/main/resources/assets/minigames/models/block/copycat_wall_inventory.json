@@ -1,0 +1,7 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "minigames:block/copycat",
+    "particle": "minigames:block/copycat"
+  }
+}

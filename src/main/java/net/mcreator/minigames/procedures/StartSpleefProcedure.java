@@ -45,7 +45,7 @@ public class StartSpleefProcedure {
 			MinigamesModVariables.MapVariables.get(world).nightVision = false;
 			MinigamesModVariables.MapVariables.get(world).minimap = false;
 			MinigamesModVariables.MapVariables.get(world).waypoints = false;
-			MinigamesModVariables.MapVariables.get(world).removeEffects = false;
+			MinigamesModVariables.MapVariables.get(world).removeEffects = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(

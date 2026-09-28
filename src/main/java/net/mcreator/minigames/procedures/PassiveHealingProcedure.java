@@ -35,7 +35,7 @@ public class PassiveHealingProcedure {
 						_vars.healCD = 0;
 						_vars.markSyncDirty();
 					}
-					DungeonHealProcedure.execute(entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealAmount, "passive");
+					DungeonHealProcedure.execute(entity, entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealAmount, "passive");
 				} else {
 					{
 						MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);

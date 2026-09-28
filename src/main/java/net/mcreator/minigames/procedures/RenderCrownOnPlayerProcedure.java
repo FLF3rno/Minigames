@@ -130,6 +130,8 @@ public class RenderCrownOnPlayerProcedure {
 	private static void execute(@Nullable Event event, Entity entity, RenderPlayerEvent playerRenderEvent) {
 		if (entity == null || playerRenderEvent == null)
 			return;
+		if (Minecraft.getInstance().options.getCameraType().isFirstPerson() && (entity == Minecraft.getInstance().player || entity == Minecraft.getInstance().getCameraEntity()))
+			return;
 		if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).isCrowned
 				&& !((entity instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get())) {
 			{

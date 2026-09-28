@@ -14,10 +14,6 @@ import java.util.UUID;
 public class MinigamesSettingsSyncHandler {
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		Player player = event.getEntity();
-		if (player != null && player.level() != null) {
-			MinigamesSettingsHelper.syncToWorld(player.level(), player);
-		}
 	}
 
 	@EventBusSubscriber(Dist.CLIENT)
@@ -36,8 +32,11 @@ public class MinigamesSettingsSyncHandler {
 			if (lastPlayerId == null || !lastPlayerId.equals(currentId)) {
 				lastPlayerId = currentId;
 				if (mc.level != null) {
-					MinigamesSettingsHelper.syncToWorld(mc.level, player);
-					MinigamesSettingsHelper.syncClientToServer();
+					try {
+						MinigamesSettingsHelper.syncToWorld(mc.level, player);
+						MinigamesSettingsHelper.syncClientToServer();
+					} catch (Throwable ignored) {
+					}
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minigames:copycat_slab",
     "minigames:polished_cinnabar_slab",
     "minigames:polished_sulfur_slab",
     "minigames:cinnabar_brick_slab",

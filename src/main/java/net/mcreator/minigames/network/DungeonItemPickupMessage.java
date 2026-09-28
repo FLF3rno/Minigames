@@ -81,18 +81,26 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		double py = itemEntity != null ? itemEntity.getY() : player.getY();
 		double pz = itemEntity != null ? itemEntity.getZ() : player.getZ();
 
-		ItemPickedUpDungeonProcedure.execute(
-			player.level(),
-			px, 
-			py, 
-			pz, 
-			player,
-			entityStack
-		);
+		boolean isHotbarLocked = DungeonItemAccess.isHotbarLocked(entityStack);
 
 		int inserted;
 
-		if (isRelic) {
+		if (isHotbarLocked) {
+			if (isInventoryFull(player)) {
+				if (itemEntity != null) {
+					player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
+				}
+				return;
+			}
+			if (insertIntoHotbarSlot(player, entityStack.copy())) {
+				inserted = entityStack.getCount();
+			} else {
+				if (itemEntity != null) {
+					player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
+				}
+				return;
+			}
+		} else if (isRelic) {
 			inserted = tryInsertRelic(player.getInventory(), entityStack.copy());
 			if (inserted <= 0) {
 				if (insertIntoBackpackSlot(player, entityStack.copy())) {
@@ -136,6 +144,15 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 			}
 		}
 
+		ItemPickedUpDungeonProcedure.execute(
+			player.level(),
+			px, 
+			py, 
+			pz, 
+			player,
+			entityStack
+		);
+
 		player.containerMenu.broadcastChanges();
 
 		float pitch = ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F;
@@ -145,12 +162,24 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 
 	public static boolean insertIntoBackpackSlot(ServerPlayer player, ItemStack stack) {
 		Inventory inv = player.getInventory();
-		double backpackSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots;
-		int backpackSlots = Math.max(0, Math.min(25, (int) backpackSlotsVal));
+		int backpackSlots = DungeonItemAccess.getBackpackSlots(player);
 		for (int i = 0; i < backpackSlots; i++) {
 			int slotIndex = 9 + i;
-			if (slotIndex < 36 && inv.getItem(slotIndex).isEmpty()) {
+			if (slotIndex < 34 && inv.getItem(slotIndex).isEmpty()) {
 				inv.setItem(slotIndex, stack);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean insertIntoHotbarSlot(ServerPlayer player, ItemStack stack) {
+		Inventory inv = player.getInventory();
+		double playerSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
+		int hotbarSlots = Math.max(0, Math.min(9, (int) playerSlotsVal));
+		for (int i = 0; i < hotbarSlots; i++) {
+			if (inv.getItem(i).isEmpty()) {
+				inv.setItem(i, stack);
 				return true;
 			}
 		}
@@ -162,7 +191,6 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 		double playerSlotsVal = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
 		int hotbarSlots = Math.max(0, Math.min(9, (int) playerSlotsVal));
 
-		// 1. Hotbar first (slots 0 to hotbarSlots - 1)
 		for (int i = 0; i < hotbarSlots; i++) {
 			if (inv.getItem(i).isEmpty()) {
 				inv.setItem(i, stack);
@@ -170,7 +198,6 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 			}
 		}
 
-		// 2. Backpack slots (slots 9 to 9 + backpackSlots - 1)
 		if (insertIntoBackpackSlot(player, stack)) {
 			return true;
 		}

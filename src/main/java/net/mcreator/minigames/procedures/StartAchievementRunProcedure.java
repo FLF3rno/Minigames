@@ -46,7 +46,7 @@ public class StartAchievementRunProcedure {
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
 		MinigamesModVariables.MapVariables.get(world).removeEffects = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
+		for (Entity entityiterator : (world instanceof ServerLevel _sl ? new ArrayList<>(_sl.getServer().getPlayerList().getPlayers()) : new ArrayList<>(world.players()))) {
 			if (!MinigamesModVariables.MapVariables.get(world).achievementHunterMode) {
 				if (entityiterator instanceof ServerPlayer _ent) {
 					BlockPos _bpos = BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ());

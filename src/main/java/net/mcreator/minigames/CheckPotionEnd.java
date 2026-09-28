@@ -39,7 +39,7 @@ public class CheckPotionEnd {
                 int amp = 0; 
                 String effectName = BuiltInRegistries.MOB_EFFECT.getKey(effect).toString();
                 
-                PotionEffectExpiresProcedure.execute(player.level(), player, (double) amp, effectName);
+                PotionEffectExpiresProcedure.execute(player.level(), player, player, (double) amp, effectName);
             }
         }
 

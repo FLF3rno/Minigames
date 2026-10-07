@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minigames:blessed_cursed_crossbow"
+    "minigames:blessed_cursed_crossbow",
+    "minigames:cactus_crossbow"
   ]
 }

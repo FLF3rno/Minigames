@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.tags.TagKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
@@ -91,7 +93,29 @@ public class ExplodeProcedure {
 					Zloop = z + ExplosionSize;
 					for (int _i3 = 0; _i3 < (int) (ExplosionSize * 2); _i3++) {
 						Zloop = Zloop - 1;
-						BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, true);
+						if (!(world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop))).is(BlockTags.create(Identifier.parse("minigames:replace")))
+								&& (world.getBlockState(BlockPos.containing(Xloop, Yloop + 1, Zloop))).is(BlockTags.create(Identifier.parse("minigames:replace")))) {
+							BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, true);
+						}
+					}
+				}
+			}
+		} else if ((type).equals("shatter_glass")) {
+			Xloop = x + ExplosionSize;
+			Yloop = y + ExplosionSize;
+			Zloop = z + ExplosionSize;
+			for (int _i1 = 0; _i1 < (int) (ExplosionSize * 2); _i1++) {
+				Xloop = Xloop - 1;
+				Yloop = y + ExplosionSize;
+				for (int _i2 = 0; _i2 < (int) (ExplosionSize * 2); _i2++) {
+					Yloop = Yloop - 1;
+					Zloop = z + ExplosionSize;
+					for (int _i3 = 0; _i3 < (int) (ExplosionSize * 2); _i3++) {
+						Zloop = Zloop - 1;
+						if ((world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop))).is(BlockTags.create(Identifier.parse("minigames:shatterable")))) {
+							BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, true);
+							world.setBlock(BlockPos.containing(Xloop, Yloop, Zloop), Blocks.AIR.defaultBlockState(), 3);
+						}
 					}
 				}
 			}
@@ -99,51 +123,50 @@ public class ExplodeProcedure {
 		{
 			final Vec3 _center = new Vec3(x, y, z);
 			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(ExplosionSize / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-				if (origin == entityiterator) {
-					if (!ownerImmune) {
-						{
-							Entity _ent = entityiterator;
-							if (_ent.level() instanceof ServerLevel _serverLevel) {
-								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
-										(float) (damage * (1 - Math.min(20,
-												Math.max((entityiterator instanceof LivingEntity _livingEntity9 && _livingEntity9.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity9.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-														(entityiterator instanceof LivingEntity _livingEntity10 && _livingEntity10.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity10.getAttribute(Attributes.ARMOR).getValue() : 0)
-																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity11 && _livingEntity11.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																		? _livingEntity11.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
-																		: 0) + 8)))
-												/ 25)));
+				if ((entityiterator.position()).distanceTo((new Vec3(x, y, z))) <= ExplosionSize) {
+					if (origin == entityiterator) {
+						if (!ownerImmune) {
+							{
+								Entity _ent = entityiterator;
+								if (_ent.level() instanceof ServerLevel _serverLevel) {
+									_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)), (float) (damage * (1 - Math.min(20,
+											Math.max((entityiterator instanceof LivingEntity _livingEntity20 && _livingEntity20.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity20.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+													(entityiterator instanceof LivingEntity _livingEntity21 && _livingEntity21.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity21.getAttribute(Attributes.ARMOR).getValue() : 0)
+															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity22 && _livingEntity22.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																	? _livingEntity22.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																	: 0) + 8)))
+											/ 25)));
+								}
 							}
 						}
-					}
-				} else if (entityiterator instanceof ServerPlayer || entityiterator instanceof Player) {
-					if (canDamagePlayers) {
-						{
-							Entity _ent = entityiterator;
-							if (_ent.level() instanceof ServerLevel _serverLevel) {
-								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
-										(float) (damage * (1 - Math.min(20,
-												Math.max((entityiterator instanceof LivingEntity _livingEntity16 && _livingEntity16.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity16.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-														(entityiterator instanceof LivingEntity _livingEntity17 && _livingEntity17.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity17.getAttribute(Attributes.ARMOR).getValue() : 0)
-																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity18 && _livingEntity18.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																		? _livingEntity18.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
-																		: 0) + 8)))
-												/ 25)));
+					} else if (entityiterator instanceof ServerPlayer || entityiterator instanceof Player) {
+						if (canDamagePlayers) {
+							{
+								Entity _ent = entityiterator;
+								if (_ent.level() instanceof ServerLevel _serverLevel) {
+									_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)), (float) (damage * (1 - Math.min(20,
+											Math.max((entityiterator instanceof LivingEntity _livingEntity27 && _livingEntity27.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity27.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+													(entityiterator instanceof LivingEntity _livingEntity28 && _livingEntity28.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity28.getAttribute(Attributes.ARMOR).getValue() : 0)
+															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity29 && _livingEntity29.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																	? _livingEntity29.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																	: 0) + 8)))
+											/ 25)));
+								}
 							}
 						}
-					}
-				} else {
-					if (!((type).equals("tesla") && entityiterator.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"))))) {
-						{
-							Entity _ent = entityiterator;
-							if (_ent.level() instanceof ServerLevel _serverLevel) {
-								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)),
-										(float) (damage * (1 - Math.min(20,
-												Math.max((entityiterator instanceof LivingEntity _livingEntity22 && _livingEntity22.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity22.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
-														(entityiterator instanceof LivingEntity _livingEntity23 && _livingEntity23.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity23.getAttribute(Attributes.ARMOR).getValue() : 0)
-																- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity24 && _livingEntity24.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
-																		? _livingEntity24.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
-																		: 0) + 8)))
-												/ 25)));
+					} else {
+						if (!((type).equals("tesla") && entityiterator.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"))))) {
+							{
+								Entity _ent = entityiterator;
+								if (_ent.level() instanceof ServerLevel _serverLevel) {
+									_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.EXPLOSION)), (float) (damage * (1 - Math.min(20,
+											Math.max((entityiterator instanceof LivingEntity _livingEntity33 && _livingEntity33.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity33.getAttribute(Attributes.ARMOR).getValue() : 0) / 5,
+													(entityiterator instanceof LivingEntity _livingEntity34 && _livingEntity34.getAttributes().hasAttribute(Attributes.ARMOR) ? _livingEntity34.getAttribute(Attributes.ARMOR).getValue() : 0)
+															- (4 * damage) / ((entityiterator instanceof LivingEntity _livingEntity35 && _livingEntity35.getAttributes().hasAttribute(Attributes.ARMOR_TOUGHNESS)
+																	? _livingEntity35.getAttribute(Attributes.ARMOR_TOUGHNESS).getValue()
+																	: 0) + 8)))
+											/ 25)));
+								}
 							}
 						}
 					}
@@ -154,16 +177,18 @@ public class ExplodeProcedure {
 			{
 				final Vec3 _center = new Vec3(x, y, z);
 				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(ExplosionSize / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-					Dcoords = new Vec3((entityiterator.getX() - x), (entityiterator.getY() - y), (entityiterator.getZ() - z));
-					length = Math.sqrt(Dcoords.x() * Dcoords.x() + Dcoords.y() * Dcoords.y() + Dcoords.z() * Dcoords.z());
-					if (entityiterator instanceof Player || entityiterator instanceof ServerPlayer) {
-						{
-							MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-							_vars.performKnockback = new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback));
-							_vars.markSyncDirty();
+					if ((entityiterator.position()).distanceTo((new Vec3(x, y, z))) <= ExplosionSize) {
+						Dcoords = new Vec3((entityiterator.getX() - x), (entityiterator.getY() - y), (entityiterator.getZ() - z));
+						length = Math.sqrt(Dcoords.x() * Dcoords.x() + Dcoords.y() * Dcoords.y() + Dcoords.z() * Dcoords.z());
+						if (entityiterator instanceof Player || entityiterator instanceof ServerPlayer) {
+							{
+								MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+								_vars.performKnockback = new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback));
+								_vars.markSyncDirty();
+							}
+						} else {
+							entityiterator.setDeltaMovement(new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback)));
 						}
-					} else {
-						entityiterator.setDeltaMovement(new Vec3(((Dcoords.x() / length) * ExplosionKnockback), ((Dcoords.y() / length) * ExplosionKnockback + 1), ((Dcoords.z() / length) * ExplosionKnockback)));
 					}
 				}
 			}

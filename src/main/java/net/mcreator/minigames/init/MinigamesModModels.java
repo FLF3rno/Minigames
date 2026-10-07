@@ -26,6 +26,7 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelchain.LAYER_LOCATION, Modelchain::createBodyLayer);
 		event.registerLayerDefinition(Modelworshipper.LAYER_LOCATION, Modelworshipper::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat_left.LAYER_LOCATION, Modelpewseat_left::createBodyLayer);
+		event.registerLayerDefinition(Modelcrypt_lurker.LAYER_LOCATION, Modelcrypt_lurker::createBodyLayer);
 		event.registerLayerDefinition(Modeltesla_coil_flavio.LAYER_LOCATION, Modeltesla_coil_flavio::createBodyLayer);
 		event.registerLayerDefinition(Modelblessing_dispenser.LAYER_LOCATION, Modelblessing_dispenser::createBodyLayer);
 		event.registerLayerDefinition(Modelcandlehead.LAYER_LOCATION, Modelcandlehead::createBodyLayer);
@@ -48,9 +49,11 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modeldemon.LAYER_LOCATION, Modeldemon::createBodyLayer);
 		event.registerLayerDefinition(Modelflavio_clock_cannon.LAYER_LOCATION, Modelflavio_clock_cannon::createBodyLayer);
 		event.registerLayerDefinition(Modelpreacher.LAYER_LOCATION, Modelpreacher::createBodyLayer);
+		event.registerLayerDefinition(Modelgiant_bell.LAYER_LOCATION, Modelgiant_bell::createBodyLayer);
 		event.registerLayerDefinition(Modelstunned.LAYER_LOCATION, Modelstunned::createBodyLayer);
 		event.registerLayerDefinition(Modelgravedigger.LAYER_LOCATION, Modelgravedigger::createBodyLayer);
 		event.registerLayerDefinition(Modelspider.LAYER_LOCATION, Modelspider::createBodyLayer);
+		event.registerLayerDefinition(Modeltesla_coil.LAYER_LOCATION, Modeltesla_coil::createBodyLayer);
 		event.registerLayerDefinition(Modeldart.LAYER_LOCATION, Modeldart::createBodyLayer);
 		event.registerLayerDefinition(Modelhalfblock_barred.LAYER_LOCATION, Modelhalfblock_barred::createBodyLayer);
 	}

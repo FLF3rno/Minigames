@@ -24,10 +24,7 @@ public class ChangeGravity {
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
-		Entity entity = event.getEntity();
-		Direction gravityDir = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).gravity;
-		boolean enabled = gravityDir != Direction.DOWN;
-		execute(entity, gravityDir, enabled);
+		// Physics is handled synchronously in GravityTravelHandler
 	}
 
 	public static void execute(Entity entity, Direction gravityDir, boolean enabled) {

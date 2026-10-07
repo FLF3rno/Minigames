@@ -17,11 +17,23 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mcreator.minigames.block.entity.CopycatBlockEntity;
+
+import net.minecraft.world.level.block.state.StateDefinition;
 
 public class CopycatBlockBlock extends Block implements EntityBlock {
 	public CopycatBlockBlock(BlockBehaviour.Properties properties) {
-		super(properties.strength(1f, 10f).noOcclusion());
+		super(properties.strength(1f, 10f).noOcclusion().lightLevel(state -> state.hasProperty(CopycatHelper.LIGHT_LEVEL) ? state.getValue(CopycatHelper.LIGHT_LEVEL) : 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(CopycatHelper.LIGHT_LEVEL, 0).setValue(CopycatHelper.TRANSPARENT, false));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(CopycatHelper.LIGHT_LEVEL, CopycatHelper.TRANSPARENT);
 	}
 
 	@Override
@@ -73,5 +85,37 @@ public class CopycatBlockBlock extends Block implements EntityBlock {
 	@Override
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		CopycatHelper.stepOn(level, pos, state, entity);
+	}
+
+	@Override
+	protected boolean propagatesSkylightDown(BlockState state) {
+		return state.hasProperty(CopycatHelper.TRANSPARENT) && state.getValue(CopycatHelper.TRANSPARENT);
+	}
+
+	@Override
+	protected int getLightDampening(BlockState state) {
+		return (state.hasProperty(CopycatHelper.TRANSPARENT) && state.getValue(CopycatHelper.TRANSPARENT)) ? 0 : 15;
+	}
+
+	@Override
+	public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
+		BlockEntity be = level.getBlockEntity(pos);
+		if (be instanceof CopycatBlockEntity copycat && copycat.hasMaterial()) {
+			return copycat.getMaterial().getShadeBrightness(level, pos);
+		}
+		return (state.hasProperty(CopycatHelper.TRANSPARENT) && state.getValue(CopycatHelper.TRANSPARENT)) ? 1.0F : 0.2F;
+	}
+
+	@Override
+	protected VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		if (state.hasProperty(CopycatHelper.TRANSPARENT) && state.getValue(CopycatHelper.TRANSPARENT)) {
+			return Shapes.empty();
+		}
+		return super.getVisualShape(state, level, pos, context);
+	}
+
+	@Override
+	protected boolean useShapeForLightOcclusion(BlockState state) {
+		return false;
 	}
 }

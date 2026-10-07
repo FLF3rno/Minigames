@@ -43,6 +43,7 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SupportItemPedestalBlockEntity>> SUPPORT_ITEM_PEDESTAL = register("support_item_pedestal", MinigamesModBlocks.SUPPORT_ITEM_PEDESTAL, SupportItemPedestalBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThiefItemPedestalBlockEntity>> THIEF_ITEM_PEDESTAL = register("thief_item_pedestal", MinigamesModBlocks.THIEF_ITEM_PEDESTAL, ThiefItemPedestalBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MageItemPedestalBlockEntity>> MAGE_ITEM_PEDESTAL = register("mage_item_pedestal", MinigamesModBlocks.MAGE_ITEM_PEDESTAL, MageItemPedestalBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GiantBellBlockEntity>> GIANT_BELL = register("giant_bell", MinigamesModBlocks.GIANT_BELL, GiantBellBlockEntity::new);
 	// Start of user code block custom block entities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AscenscionBlockEntity>> ASCENSCION = register("ascenscion", MinigamesModBlocks.ASCENSCION, AscenscionBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FightDoorsBlockEntity>> FIGHT_DOORS = register("fight_doors", MinigamesModBlocks.FIGHT_DOORS, FightDoorsBlockEntity::new);
@@ -54,7 +55,8 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpreadingIceBlockEntity>> SPREADING_ICE = register("spreading_ice", MinigamesModBlocks.SPREADING_ICE, SpreadingIceBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CopycatBlockEntity>> COPYCAT = REGISTRY.register("copycat",
 			() -> new BlockEntityType<>(CopycatBlockEntity::new, java.util.Set.of(MinigamesModBlocks.COPYCAT_BLOCK.get(), MinigamesModBlocks.COPYCAT_SLAB.get(), MinigamesModBlocks.COPYCAT_STAIR.get(), MinigamesModBlocks.COPYCAT_WALL.get(),
-					MinigamesModBlocks.COPYCAT_FENCE.get(), MinigamesModBlocks.COPYCAT_GATE.get(), MinigamesModBlocks.COPYCAT_LAYER.get(), MinigamesModBlocks.COPYCAT_CORNER_SLICE.get())));
+					MinigamesModBlocks.COPYCAT_FENCE.get(), MinigamesModBlocks.COPYCAT_GATE.get(), MinigamesModBlocks.COPYCAT_LAYER.get(), MinigamesModBlocks.COPYCAT_CORNER_SLICE.get(), MinigamesModBlocks.COPYCAT_CHAIN.get())));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyboxSimulationBlockEntity>> SKYBOX_SIMULATION = register("skybox_simulation", MinigamesModBlocks.SKYBOX_SIMULATION, SkyboxSimulationBlockEntity::new);
 
 	// End of user code block custom block entities
 	private static <T extends BlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> register(String registryname, DeferredHolder<Block, Block> block, BlockEntityType.BlockEntitySupplier<T> supplier) {
@@ -84,5 +86,6 @@ public class MinigamesModBlockEntities {
 		event.registerBlockEntity(Capabilities.Item.BLOCK, SUPPORT_ITEM_PEDESTAL.get(), WorldlyContainerWrapper::new);
 		event.registerBlockEntity(Capabilities.Item.BLOCK, THIEF_ITEM_PEDESTAL.get(), WorldlyContainerWrapper::new);
 		event.registerBlockEntity(Capabilities.Item.BLOCK, MAGE_ITEM_PEDESTAL.get(), WorldlyContainerWrapper::new);
+		event.registerBlockEntity(Capabilities.Item.BLOCK, GIANT_BELL.get(), WorldlyContainerWrapper::new);
 	}
 }

@@ -23,10 +23,15 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.mcreator.minigames.block.entity.CopycatBlockEntity;
 
 @EventBusSubscriber
 public class CopycatHelper {
+	public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
+	public static final BooleanProperty TRANSPARENT = BooleanProperty.create("transparent");
+
 	public static boolean isCopycatBlock(Block block) {
 		return block instanceof CopycatBlockBlock
 			|| block instanceof CopycatSlabBlock
@@ -35,7 +40,8 @@ public class CopycatHelper {
 			|| block instanceof CopycatFenceBlock
 			|| block instanceof CopycatGateBlock
 			|| block instanceof CopycatLayerBlock
-			|| block instanceof CopycatCornerSliceBlock;
+			|| block instanceof CopycatCornerSliceBlock
+			|| block instanceof CopycatChainBlock;
 	}
 
 	@SubscribeEvent
@@ -69,6 +75,16 @@ public class CopycatHelper {
 			if (be.hasMaterial()) {
 				if (!level.isClientSide()) {
 					BlockState prev = be.getMaterial();
+					BlockState next = state;
+					if (state.hasProperty(LIGHT_LEVEL)) {
+						next = next.setValue(LIGHT_LEVEL, 0);
+					}
+					if (state.hasProperty(TRANSPARENT)) {
+						next = next.setValue(TRANSPARENT, false);
+					}
+					if (next != state) {
+						level.setBlock(pos, next, 3);
+					}
 					be.setMaterial(Blocks.AIR.defaultBlockState());
 					if (!player.isCreative()) {
 						Block.popResource(level, pos, new ItemStack(prev.getBlock()));
@@ -80,7 +96,7 @@ public class CopycatHelper {
 			}
 		}
 
-		if (!stack.isEmpty() && stack.getItem() instanceof BlockItem blockItem) {
+		if (!be.hasMaterial() && !stack.isEmpty() && stack.getItem() instanceof BlockItem blockItem) {
 			Block block = blockItem.getBlock();
 			if (!isCopycatBlock(block) && !block.defaultBlockState().isAir()) {
 				if (!level.isClientSide()) {
@@ -100,6 +116,20 @@ public class CopycatHelper {
 					}
 					if (be.hasMaterial() && !player.isCreative()) {
 						Block.popResource(level, pos, new ItemStack(be.getMaterial().getBlock()));
+					}
+					int light = targetMaterial.getLightEmission(level, pos);
+					if (light <= 0) light = targetMaterial.getLightEmission();
+					light = Math.max(0, Math.min(15, light));
+					BlockState next = state;
+					if (state.hasProperty(LIGHT_LEVEL)) {
+						next = next.setValue(LIGHT_LEVEL, light);
+					}
+					if (state.hasProperty(TRANSPARENT)) {
+						boolean isTrans = !targetMaterial.canOcclude() || targetMaterial.propagatesSkylightDown();
+						next = next.setValue(TRANSPARENT, isTrans);
+					}
+					if (next != state) {
+						level.setBlock(pos, next, 3);
 					}
 					be.setMaterial(targetMaterial);
 					SoundType sound = targetMaterial.getSoundType(level, pos, player);

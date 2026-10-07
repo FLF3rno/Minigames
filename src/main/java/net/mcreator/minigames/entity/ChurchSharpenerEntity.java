@@ -189,11 +189,50 @@ public class ChurchSharpenerEntity extends Monster {
 		return this.entityData.get(TEXTURE);
 	}
 
+	public int getRoomID() {
+		int id = this.entityData.get(DATA_ID);
+		if (id == 0) {
+			id = this.getPersistentData().getIntOr("DataID", (int) this.getPersistentData().getDoubleOr("DataID", 0));
+			if (id != 0) {
+				this.entityData.set(DATA_ID, id);
+			}
+		}
+		return id;
+	}
+
+	public boolean isCurrentRoomActive() {
+		int roomID = getRoomID();
+		var mapVars = net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(this.level());
+		if (roomID > 0) {
+			return mapVars.currentRoomID == roomID;
+		}
+		if (!mapVars.playingDungeons) {
+			return true;
+		}
+		Player player = this.level().getNearestPlayer(this, 64.0);
+		if (player == null) return false;
+		int playerGridX = (int) Math.floor(player.getX() / 29.0);
+		int playerGridZ = (int) Math.floor(player.getZ() / 29.0);
+		int entityGridX = (int) Math.floor(this.getX() / 29.0);
+		int entityGridZ = (int) Math.floor(this.getZ() / 29.0);
+		return playerGridX == entityGridX && playerGridZ == entityGridZ;
+	}
+
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true) {
+			@Override
+			public boolean canUse() {
+				return ChurchSharpenerEntity.this.isCurrentRoomActive() && super.canUse();
+			}
+
+			@Override
+			public boolean canContinueToUse() {
+				return ChurchSharpenerEntity.this.isCurrentRoomActive() && super.canContinueToUse();
+			}
+		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 
@@ -373,6 +412,10 @@ public class ChurchSharpenerEntity extends Monster {
 				if (this.entityData.get(ANIM) != 0) {
 					this.entityData.set(ANIM, 0);
 				}
+				if (!this.isCurrentRoomActive()) {
+					this.stateTicks = 20;
+					return;
+				}
 				this.stateTicks--;
 				if (this.stateTicks == 42 || this.stateTicks == 19) {
 					this.level().playSound(null, this.getX(), this.getY(), this.getZ(), MinigamesModSounds.PVP_SWORDSHIT.get(), SoundSource.HOSTILE, 1.0F, 0.6F);
@@ -403,6 +446,14 @@ public class ChurchSharpenerEntity extends Monster {
 					}
 				}
 			} else if (this.state == STATE_CHARGING) {
+				if (!this.isCurrentRoomActive()) {
+					this.state = STATE_SHARPENING;
+					this.stateTicks = 50;
+					this.entityData.set(ANIM, 0);
+					this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
+					this.setTarget(null);
+					return;
+				}
 				this.soundTicks++;
 				if (this.soundTicks % 2 == 0) {
 					this.level().playSound(null, this.getX(), this.getY(), this.getZ(), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.witch.throw")), SoundSource.HOSTILE, 0.7F, 2.0F);

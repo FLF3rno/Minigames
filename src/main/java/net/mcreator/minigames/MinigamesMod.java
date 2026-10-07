@@ -63,6 +63,9 @@ public class MinigamesMod {
 		// Start of user code block mod init
 		net.mcreator.minigames.ModDataAttachments.ATTACHMENTS.register(modEventBus);
 		net.mcreator.minigames.init.MinigamesModCustomParticleTypes.REGISTRY.register(modEventBus);
+		if (FMLEnvironment.getDist().isClient()) {
+			modEventBus.addListener(net.mcreator.minigames.client.CopycatClientHandler::onModifyBakingResult);
+		}
 		// End of user code block mod init
 	}
 

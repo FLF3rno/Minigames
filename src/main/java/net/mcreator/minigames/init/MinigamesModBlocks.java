@@ -118,6 +118,10 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> COPYCAT_GATE;
 	public static final DeferredBlock<Block> COPYCAT_LAYER;
 	public static final DeferredBlock<Block> COPYCAT_CORNER_SLICE;
+	public static final DeferredBlock<Block> COPYCAT_CHAIN;
+	public static final DeferredBlock<Block> SKYBOX_SIMULATION;
+	public static final DeferredBlock<Block> SPAWN_CRYPT_LURKER;
+	public static final DeferredBlock<Block> GIANT_BELL;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -221,6 +225,10 @@ public class MinigamesModBlocks {
 		COPYCAT_GATE = register("copycat_gate", CopycatGateBlock::new);
 		COPYCAT_LAYER = register("copycat_layer", CopycatLayerBlock::new);
 		COPYCAT_CORNER_SLICE = register("copycat_corner_slice", CopycatCornerSliceBlock::new);
+		COPYCAT_CHAIN = register("copycat_chain", CopycatChainBlock::new);
+		SKYBOX_SIMULATION = register("skybox_simulation", SkyboxSimulationBlock::new);
+		SPAWN_CRYPT_LURKER = register("spawn_crypt_lurker", SpawnCryptLurkerBlock::new);
+		GIANT_BELL = register("giant_bell", GiantBellBlock::new);
 	}
 
 	// Start of user code block custom blocks

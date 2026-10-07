@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.mcreator.minigames.client.ClientGlowManager;
 import net.mcreator.minigames.entity.CandleheadEntity;
+import net.mcreator.minigames.entity.CryptLurkerEntity;
 import net.mcreator.minigames.entity.DemonEntity;
 import net.mcreator.minigames.entity.GravediggerEntity;
 import net.mcreator.minigames.entity.GravediggerMinibossEntity;
@@ -81,6 +82,8 @@ public class SummonMinionProcedure {
 				shield.getEntityData().set(ShieldAngelEntity.DATA_ID, dataID);
 			} else if (spawned instanceof WorshipperEntity worship) {
 				worship.getEntityData().set(WorshipperEntity.DATA_ID, dataID);
+			} else if (spawned instanceof CryptLurkerEntity crypt) {
+				crypt.getEntityData().set(CryptLurkerEntity.DATA_ID, dataID);
 			}
 		}
 

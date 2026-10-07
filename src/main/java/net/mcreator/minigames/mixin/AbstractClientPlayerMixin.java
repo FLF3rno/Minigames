@@ -20,4 +20,22 @@ public class AbstractClientPlayerMixin {
 			cir.setReturnValue(skin);
 		}
 	}
+
+	@Inject(method = "updateBob", at = @At("HEAD"), cancellable = true)
+	private void minigames$gravityUpdateBob(org.spongepowered.asm.mixin.injection.callback.CallbackInfo ci) {
+		AbstractClientPlayer player = (AbstractClientPlayer) (Object) this;
+		net.minecraft.core.Direction gravity = net.mcreator.minigames.gravity.GravityAccess.getGravity(player);
+		if (gravity == net.minecraft.core.Direction.DOWN) return;
+
+		float tBob;
+		if (player.onGround() && !player.isDeadOrDying() && !player.isSwimming()) {
+			net.minecraft.world.phys.Vec3 perp = net.mcreator.minigames.gravity.GravityOrientation.getPerpendicularComponent(player.getDeltaMovement(), gravity);
+			tBob = Math.min(0.1F, (float) perp.length());
+		} else {
+			tBob = 0.0F;
+		}
+
+		player.avatarState().updateBob(tBob);
+		ci.cancel();
+	}
 }

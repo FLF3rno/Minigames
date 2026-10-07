@@ -17,6 +17,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.mcreator.minigames.client.gui.options.MinigamesSettingsConfig;
 import net.mcreator.minigames.entity.CandleheadEntity;
+import net.mcreator.minigames.entity.ChurchSharpenerEntity;
 import net.minecraft.network.chat.TextColor;
 import net.mcreator.minigames.entity.DemonEntity;
 import net.mcreator.minigames.entity.GravediggerEntity;
@@ -202,6 +203,9 @@ public class ClientGlowManager {
 		}
 		if (entity instanceof CandleheadEntity e) {
 			return e.getEntityData().get(CandleheadEntity.DATA_ID);
+		}
+		if (entity instanceof ChurchSharpenerEntity e) {
+			return e.getRoomID();
 		}
 		if (entity instanceof DemonEntity e) {
 			return e.getEntityData().get(DemonEntity.DATA_ID);

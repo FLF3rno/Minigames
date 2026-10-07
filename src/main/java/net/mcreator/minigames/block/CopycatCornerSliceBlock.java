@@ -4,11 +4,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ClipContext;
@@ -18,6 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -64,17 +72,17 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 	}
 
 	public CopycatCornerSliceBlock(BlockBehaviour.Properties properties) {
-		super(properties.strength(1f, 10f).noOcclusion());
+		super(properties.strength(1f, 10f).noOcclusion().lightLevel(state -> state.hasProperty(CopycatHelper.LIGHT_LEVEL) ? state.getValue(CopycatHelper.LIGHT_LEVEL) : 0));
 		BlockState defaultState = this.defaultBlockState();
 		for (int i = 0; i < 8; i++) {
 			defaultState = defaultState.setValue(CORNERS[i], i == 0);
 		}
-		this.registerDefaultState(defaultState);
+		this.registerDefaultState(defaultState.setValue(CopycatHelper.LIGHT_LEVEL, 0));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(C0, C1, C2, C3, C4, C5, C6, C7);
+		builder.add(C0, C1, C2, C3, C4, C5, C6, C7, CopycatHelper.LIGHT_LEVEL);
 	}
 
 	@Override
@@ -125,12 +133,41 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 		return -1;
 	}
 
+	public static int getSavedCornersMask(ItemStack stack) {
+		if (stack.has(DataComponents.BLOCK_ENTITY_DATA)) {
+			TypedEntityData<?> data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+			if (data != null) {
+				CompoundTag tag = data.getUnsafe();
+				if (tag != null && tag.contains("corners_mask")) {
+					return tag.getIntOr("corners_mask", 0);
+				}
+			}
+		}
+		if (stack.has(DataComponents.CUSTOM_DATA)) {
+			CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+			if (customData != null) {
+				CompoundTag tag = customData.copyTag();
+				if (tag.contains("corners_mask")) {
+					return tag.getIntOr("corners_mask", 0);
+				}
+			}
+		}
+		return 0;
+	}
+
+	public static boolean hasSavedStructure(ItemStack stack) {
+		return getSavedCornersMask(stack) > 0;
+	}
+
 	@Override
 	public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
 		if (context.getPlayer() != null && (context.getPlayer().isSpectator() || !context.getPlayer().mayBuild())) {
 			return false;
 		}
 		if (context.getItemInHand().is(this.asItem())) {
+			if (hasSavedStructure(context.getItemInHand())) {
+				return false;
+			}
 			int target = getTargetOctant(state, context.getClickedPos(), context.getClickedFace(), context.getClickLocation());
 			return target != -1;
 		}
@@ -139,6 +176,15 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		ItemStack stack = context.getItemInHand();
+		int savedMask = getSavedCornersMask(stack);
+		if (savedMask > 0) {
+			BlockState state = this.defaultBlockState();
+			for (int i = 0; i < 8; i++) {
+				state = state.setValue(CORNERS[i], (savedMask & (1 << i)) != 0);
+			}
+			return state;
+		}
 		BlockPos pos = context.getClickedPos();
 		BlockState existingState = context.getLevel().getBlockState(pos);
 		if (existingState.is(this)) {
@@ -161,6 +207,40 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 			state = state.setValue(CORNERS[i], i == octant);
 		}
 		return state;
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		if (!level.isClientSide()) {
+			BlockEntity be = level.getBlockEntity(pos);
+			if (be instanceof CopycatBlockEntity copycat) {
+				applySavedData(copycat, stack);
+			}
+		}
+	}
+
+	private static void applySavedData(CopycatBlockEntity copycat, ItemStack stack) {
+		CompoundTag tag = null;
+		if (stack.has(DataComponents.BLOCK_ENTITY_DATA)) {
+			TypedEntityData<?> ted = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+			if (ted != null) {
+				tag = ted.getUnsafe();
+			}
+		}
+		if (tag == null && stack.has(DataComponents.CUSTOM_DATA)) {
+			CustomData cd = stack.get(DataComponents.CUSTOM_DATA);
+			if (cd != null) {
+				tag = cd.copyTag();
+			}
+		}
+		if (tag != null && tag.contains("material")) {
+			BlockState.CODEC.parse(NbtOps.INSTANCE, tag.get("material")).result().ifPresent(mat -> {
+				if (mat != null && !mat.isAir()) {
+					copycat.setMaterial(mat);
+				}
+			});
+		}
 	}
 
 	@Override
@@ -235,12 +315,50 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 			return InteractionResult.PASS;
 		}
 		if (stack.is(this.asItem())) {
+			if (hasSavedStructure(stack)) {
+				return InteractionResult.PASS;
+			}
 			int target = getTargetOctant(state, pos, hitResult.getDirection(), hitResult.getLocation());
 			if (target != -1) {
 				return InteractionResult.PASS;
 			}
 		}
 		return CopycatHelper.handleUseItemOn(stack, state, level, pos, player, hand, hitResult);
+	}
+
+	@Override
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
+		return createCloneStack(level, pos, state, includeData);
+	}
+
+	@Override
+	protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+		return createCloneStack(level, pos, state, includeData);
+	}
+
+	private ItemStack createCloneStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+		ItemStack stack = new ItemStack(this.asItem());
+		if (includeData) {
+			BlockEntity be = level.getBlockEntity(pos);
+			if (be instanceof CopycatBlockEntity cbe) {
+				CompoundTag tag = new CompoundTag();
+				int mask = 0;
+				for (int i = 0; i < 8; i++) {
+					if (state.getValue(CORNERS[i])) {
+						mask |= (1 << i);
+					}
+				}
+				tag.putInt("corners_mask", mask);
+				if (cbe.hasMaterial()) {
+					BlockState.CODEC.encodeStart(NbtOps.INSTANCE, cbe.getMaterial()).result().ifPresent(elem -> {
+						tag.put("material", elem);
+					});
+				}
+				TypedEntityData<BlockEntityType<?>> ted = TypedEntityData.of(cbe.getType(), tag);
+				stack.set(DataComponents.BLOCK_ENTITY_DATA, ted);
+			}
+		}
+		return stack;
 	}
 
 	@Override

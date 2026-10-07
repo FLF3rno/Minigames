@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -20,9 +21,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.mcreator.minigames.block.entity.CopycatBlockEntity;
 
+import net.minecraft.world.level.block.state.StateDefinition;
+
 public class CopycatStairBlock extends StairBlock implements EntityBlock {
 	public CopycatStairBlock(BlockBehaviour.Properties properties) {
-		super(Blocks.AIR.defaultBlockState(), properties.strength(1f, 10f).noOcclusion());
+		super(Blocks.AIR.defaultBlockState(), properties.strength(1f, 10f).noOcclusion().lightLevel(state -> state.hasProperty(CopycatHelper.LIGHT_LEVEL) ? state.getValue(CopycatHelper.LIGHT_LEVEL) : 0));
+		this.registerDefaultState(this.defaultBlockState().setValue(CopycatHelper.LIGHT_LEVEL, 0));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(CopycatHelper.LIGHT_LEVEL);
 	}
 
 	@Override

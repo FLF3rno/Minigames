@@ -1,28 +1,196 @@
 {
-  "variants": {
-    "layers=1": {
-      "model": "minigames:block/copycat_layer_1"
+  "multipart": [
+    {
+      "when": { "facing": "up", "layers": "1" },
+      "apply": { "model": "minigames:block/copycat_layer_1" }
     },
-    "layers=2": {
-      "model": "minigames:block/copycat_layer_2"
+    {
+      "when": { "facing": "down", "layers": "1" },
+      "apply": { "model": "minigames:block/copycat_layer_1", "x": 180 }
     },
-    "layers=3": {
-      "model": "minigames:block/copycat_layer_3"
+    {
+      "when": { "facing": "north", "layers": "1" },
+      "apply": { "model": "minigames:block/copycat_layer_1", "x": 90 }
     },
-    "layers=4": {
-      "model": "minigames:block/copycat_layer_4"
+    {
+      "when": { "facing": "south", "layers": "1" },
+      "apply": { "model": "minigames:block/copycat_layer_1", "x": 90, "y": 180 }
     },
-    "layers=5": {
-      "model": "minigames:block/copycat_layer_5"
+    {
+      "when": { "facing": "west", "layers": "1" },
+      "apply": { "model": "minigames:block/copycat_layer_1", "x": 90, "y": 270 }
     },
-    "layers=6": {
-      "model": "minigames:block/copycat_layer_6"
+    {
+      "when": { "facing": "east", "layers": "1" },
+      "apply": { "model": "minigames:block/copycat_layer_1", "x": 90, "y": 90 }
     },
-    "layers=7": {
-      "model": "minigames:block/copycat_layer_7"
+    {
+      "when": { "facing": "up", "layers": "2" },
+      "apply": { "model": "minigames:block/copycat_layer_2" }
     },
-    "layers=8": {
-      "model": "minigames:block/copycat_block"
+    {
+      "when": { "facing": "down", "layers": "2" },
+      "apply": { "model": "minigames:block/copycat_layer_2", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "2" },
+      "apply": { "model": "minigames:block/copycat_layer_2", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "2" },
+      "apply": { "model": "minigames:block/copycat_layer_2", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "2" },
+      "apply": { "model": "minigames:block/copycat_layer_2", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "2" },
+      "apply": { "model": "minigames:block/copycat_layer_2", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "up", "layers": "3" },
+      "apply": { "model": "minigames:block/copycat_layer_3" }
+    },
+    {
+      "when": { "facing": "down", "layers": "3" },
+      "apply": { "model": "minigames:block/copycat_layer_3", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "3" },
+      "apply": { "model": "minigames:block/copycat_layer_3", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "3" },
+      "apply": { "model": "minigames:block/copycat_layer_3", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "3" },
+      "apply": { "model": "minigames:block/copycat_layer_3", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "3" },
+      "apply": { "model": "minigames:block/copycat_layer_3", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "up", "layers": "4" },
+      "apply": { "model": "minigames:block/copycat_layer_4" }
+    },
+    {
+      "when": { "facing": "down", "layers": "4" },
+      "apply": { "model": "minigames:block/copycat_layer_4", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "4" },
+      "apply": { "model": "minigames:block/copycat_layer_4", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "4" },
+      "apply": { "model": "minigames:block/copycat_layer_4", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "4" },
+      "apply": { "model": "minigames:block/copycat_layer_4", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "4" },
+      "apply": { "model": "minigames:block/copycat_layer_4", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "up", "layers": "5" },
+      "apply": { "model": "minigames:block/copycat_layer_5" }
+    },
+    {
+      "when": { "facing": "down", "layers": "5" },
+      "apply": { "model": "minigames:block/copycat_layer_5", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "5" },
+      "apply": { "model": "minigames:block/copycat_layer_5", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "5" },
+      "apply": { "model": "minigames:block/copycat_layer_5", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "5" },
+      "apply": { "model": "minigames:block/copycat_layer_5", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "5" },
+      "apply": { "model": "minigames:block/copycat_layer_5", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "up", "layers": "6" },
+      "apply": { "model": "minigames:block/copycat_layer_6" }
+    },
+    {
+      "when": { "facing": "down", "layers": "6" },
+      "apply": { "model": "minigames:block/copycat_layer_6", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "6" },
+      "apply": { "model": "minigames:block/copycat_layer_6", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "6" },
+      "apply": { "model": "minigames:block/copycat_layer_6", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "6" },
+      "apply": { "model": "minigames:block/copycat_layer_6", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "6" },
+      "apply": { "model": "minigames:block/copycat_layer_6", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "up", "layers": "7" },
+      "apply": { "model": "minigames:block/copycat_layer_7" }
+    },
+    {
+      "when": { "facing": "down", "layers": "7" },
+      "apply": { "model": "minigames:block/copycat_layer_7", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "7" },
+      "apply": { "model": "minigames:block/copycat_layer_7", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "7" },
+      "apply": { "model": "minigames:block/copycat_layer_7", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "7" },
+      "apply": { "model": "minigames:block/copycat_layer_7", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "7" },
+      "apply": { "model": "minigames:block/copycat_layer_7", "x": 90, "y": 90 }
+    },
+    {
+      "when": { "facing": "up", "layers": "8" },
+      "apply": { "model": "minigames:block/copycat_block" }
+    },
+    {
+      "when": { "facing": "down", "layers": "8" },
+      "apply": { "model": "minigames:block/copycat_block", "x": 180 }
+    },
+    {
+      "when": { "facing": "north", "layers": "8" },
+      "apply": { "model": "minigames:block/copycat_block", "x": 90 }
+    },
+    {
+      "when": { "facing": "south", "layers": "8" },
+      "apply": { "model": "minigames:block/copycat_block", "x": 90, "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "layers": "8" },
+      "apply": { "model": "minigames:block/copycat_block", "x": 90, "y": 270 }
+    },
+    {
+      "when": { "facing": "east", "layers": "8" },
+      "apply": { "model": "minigames:block/copycat_block", "x": 90, "y": 90 }
     }
-  }
+  ]
 }

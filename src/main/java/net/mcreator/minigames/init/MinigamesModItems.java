@@ -179,6 +179,15 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> COPYCAT_GATE;
 	public static final DeferredItem<Item> COPYCAT_LAYER;
 	public static final DeferredItem<Item> COPYCAT_CORNER_SLICE;
+	public static final DeferredItem<Item> COPYCAT_CHAIN;
+	public static final DeferredItem<Item> SKYBOX_SIMULATION;
+	public static final DeferredItem<Item> SPAWN_CRYPT_LURKER;
+	public static final DeferredItem<Item> GIANT_BELL;
+	public static final DeferredItem<Item> SICK_SICKLE;
+	public static final DeferredItem<Item> BEATER;
+	public static final DeferredItem<Item> POTHEIST;
+	public static final DeferredItem<Item> IMMOVABLE;
+	public static final DeferredItem<Item> EMPTY_HEART_AMULET;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -329,6 +338,15 @@ public class MinigamesModItems {
 		COPYCAT_GATE = block(MinigamesModBlocks.COPYCAT_GATE);
 		COPYCAT_LAYER = block(MinigamesModBlocks.COPYCAT_LAYER);
 		COPYCAT_CORNER_SLICE = block(MinigamesModBlocks.COPYCAT_CORNER_SLICE);
+		COPYCAT_CHAIN = block(MinigamesModBlocks.COPYCAT_CHAIN);
+		SKYBOX_SIMULATION = block(MinigamesModBlocks.SKYBOX_SIMULATION);
+		SPAWN_CRYPT_LURKER = block(MinigamesModBlocks.SPAWN_CRYPT_LURKER);
+		GIANT_BELL = block(MinigamesModBlocks.GIANT_BELL);
+		SICK_SICKLE = register("sick_sickle", SickSickleItem::new);
+		BEATER = register("beater", BeaterItem::new);
+		POTHEIST = register("potheist", PotheistItem::new);
+		IMMOVABLE = register("immovable", ImmovableItem::new);
+		EMPTY_HEART_AMULET = register("empty_heart_amulet", EmptyHeartAmuletItem::new);
 	}
 
 	// Start of user code block custom items

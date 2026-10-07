@@ -49,13 +49,13 @@ public class CopycatSlabBlock extends Block implements EntityBlock, SimpleWaterl
 	private static final VoxelShape EAST_SHAPE = Block.box(8, 0, 0, 16, 16, 16);
 
 	public CopycatSlabBlock(BlockBehaviour.Properties properties) {
-		super(properties.strength(1f, 10f).noOcclusion());
-		this.registerDefaultState(this.defaultBlockState().setValue(TYPE, CopycatSlabType.BOTTOM).setValue(WATERLOGGED, false));
+		super(properties.strength(1f, 10f).noOcclusion().lightLevel(state -> state.hasProperty(CopycatHelper.LIGHT_LEVEL) ? state.getValue(CopycatHelper.LIGHT_LEVEL) : 0));
+		this.registerDefaultState(this.defaultBlockState().setValue(TYPE, CopycatSlabType.BOTTOM).setValue(WATERLOGGED, false).setValue(CopycatHelper.LIGHT_LEVEL, 0));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(TYPE, WATERLOGGED);
+		builder.add(TYPE, WATERLOGGED, CopycatHelper.LIGHT_LEVEL);
 	}
 
 	@Override
@@ -105,36 +105,19 @@ public class CopycatSlabBlock extends Block implements EntityBlock, SimpleWaterl
 		}
 		FluidState fluid = context.getLevel().getFluidState(pos);
 		Direction face = context.getClickedFace();
-		Vec3 hit = context.getClickLocation();
-		double rx = hit.x - pos.getX();
-		double ry = hit.y - pos.getY();
-		double rz = hit.z - pos.getZ();
-
 		CopycatSlabType slabType;
 		if (face == Direction.UP) {
-			if (rx < 0.25) slabType = CopycatSlabType.WEST;
-			else if (rx > 0.75) slabType = CopycatSlabType.EAST;
-			else if (rz < 0.25) slabType = CopycatSlabType.NORTH;
-			else if (rz > 0.75) slabType = CopycatSlabType.SOUTH;
-			else slabType = CopycatSlabType.BOTTOM;
+			slabType = CopycatSlabType.BOTTOM;
 		} else if (face == Direction.DOWN) {
-			if (rx < 0.25) slabType = CopycatSlabType.WEST;
-			else if (rx > 0.75) slabType = CopycatSlabType.EAST;
-			else if (rz < 0.25) slabType = CopycatSlabType.NORTH;
-			else if (rz > 0.75) slabType = CopycatSlabType.SOUTH;
-			else slabType = CopycatSlabType.TOP;
+			slabType = CopycatSlabType.TOP;
 		} else {
-			if (ry < 0.25) slabType = CopycatSlabType.BOTTOM;
-			else if (ry > 0.75) slabType = CopycatSlabType.TOP;
-			else {
-				slabType = switch (face) {
-					case NORTH -> CopycatSlabType.SOUTH;
-					case SOUTH -> CopycatSlabType.NORTH;
-					case WEST -> CopycatSlabType.EAST;
-					case EAST -> CopycatSlabType.WEST;
-					default -> CopycatSlabType.BOTTOM;
-				};
-			}
+			slabType = switch (face) {
+				case NORTH -> CopycatSlabType.SOUTH;
+				case SOUTH -> CopycatSlabType.NORTH;
+				case WEST -> CopycatSlabType.EAST;
+				case EAST -> CopycatSlabType.WEST;
+				default -> CopycatSlabType.BOTTOM;
+			};
 		}
 		return this.defaultBlockState().setValue(TYPE, slabType).setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}

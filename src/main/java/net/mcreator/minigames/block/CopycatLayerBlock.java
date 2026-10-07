@@ -14,12 +14,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -28,33 +32,44 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mcreator.minigames.block.entity.CopycatBlockEntity;
 
 public class CopycatLayerBlock extends Block implements EntityBlock {
+	public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
 	public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
 
-	private static final VoxelShape[] SHAPES = new VoxelShape[] {
-		Shapes.empty(),
-		Block.box(0, 0, 0, 16, 2, 16),
-		Block.box(0, 0, 0, 16, 4, 16),
-		Block.box(0, 0, 0, 16, 6, 16),
-		Block.box(0, 0, 0, 16, 8, 16),
-		Block.box(0, 0, 0, 16, 10, 16),
-		Block.box(0, 0, 0, 16, 12, 16),
-		Block.box(0, 0, 0, 16, 14, 16),
-		Block.box(0, 0, 0, 16, 16, 16)
-	};
+	private static final VoxelShape[][] SHAPES = new VoxelShape[6][9];
+
+	static {
+		for (Direction dir : Direction.values()) {
+			int d = dir.get3DDataValue();
+			SHAPES[d][0] = Shapes.empty();
+			for (int i = 1; i <= 8; i++) {
+				int size = i * 2;
+				SHAPES[d][i] = switch (dir) {
+					case DOWN -> Block.box(0, 16 - size, 0, 16, 16, 16);
+					case UP -> Block.box(0, 0, 0, 16, size, 16);
+					case NORTH -> Block.box(0, 0, 16 - size, 16, 16, 16);
+					case SOUTH -> Block.box(0, 0, 0, 16, 16, size);
+					case WEST -> Block.box(16 - size, 0, 0, 16, 16, 16);
+					case EAST -> Block.box(0, 0, 0, size, 16, 16);
+				};
+			}
+		}
+	}
 
 	public CopycatLayerBlock(BlockBehaviour.Properties properties) {
-		super(properties.strength(1f, 10f).noOcclusion());
-		this.registerDefaultState(this.defaultBlockState().setValue(LAYERS, 1));
+		super(properties.strength(1f, 10f).noOcclusion().lightLevel(state -> state.hasProperty(CopycatHelper.LIGHT_LEVEL) ? state.getValue(CopycatHelper.LIGHT_LEVEL) : 0));
+		this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.UP).setValue(LAYERS, 1).setValue(CopycatHelper.LIGHT_LEVEL, 0));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(LAYERS);
+		builder.add(FACING, LAYERS, CopycatHelper.LIGHT_LEVEL);
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPES[state.getValue(LAYERS)];
+		Direction facing = state.hasProperty(FACING) ? state.getValue(FACING) : Direction.UP;
+		int layers = state.hasProperty(LAYERS) ? state.getValue(LAYERS) : 1;
+		return SHAPES[facing.get3DDataValue()][layers];
 	}
 
 	@Override
@@ -65,7 +80,7 @@ public class CopycatLayerBlock extends Block implements EntityBlock {
 		int layers = state.getValue(LAYERS);
 		if (context.getItemInHand().is(this.asItem()) && layers < 8) {
 			if (context.replacingClickedOnBlock()) {
-				return context.getClickedFace() == Direction.UP;
+				return context.getClickedFace() == state.getValue(FACING);
 			}
 			return true;
 		}
@@ -79,7 +94,17 @@ public class CopycatLayerBlock extends Block implements EntityBlock {
 			int layers = existingState.getValue(LAYERS);
 			return existingState.setValue(LAYERS, Math.min(8, layers + 1));
 		}
-		return this.defaultBlockState();
+		return this.defaultBlockState().setValue(FACING, context.getClickedFace());
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 
 	@Override

@@ -21,7 +21,12 @@
     "CooldownInstanceAccessor",
     "ItemCooldownsMixin",
     "PlayerIdentityMixin",
-    "PlayerNameColorMixin"
+    "PlayerNameColorMixin",
+    "LivingEntityTravelGravityMixin",
+    "EntityGravityMixin",
+    "PlayerGravityMixin",
+    "ServerGamePacketListenerImplMixin",
+    "GiantBellRaycastMixin"
   ],
   "client": [
     "GuiAccessor",
@@ -43,7 +48,17 @@
     "PlayerInfoMixin",
     "PlayerTabOverlayMixin",
     "PlayerAnimationSmoothResetMixin",
-    "LocalPlayerSwingMixin"
+    "LocalPlayerSwingMixin",
+    "CameraRotationGravityMixin",
+    "LivingEntityRendererGravityMixin",
+    "EntityHitboxDebugRendererMixin",
+    "LocalPlayerGravityMixin",
+    "ScreenEffectRendererGravityMixin",
+    "IrisShaderPackMixin",
+    "IrisIdMapMixin",
+    "IrisIncludeGraphMixin",
+    "IrisLanguageMapMixin",
+    "SoundBufferLibraryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

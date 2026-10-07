@@ -15,6 +15,9 @@ import net.mcreator.minigames.gravity.GravityMath;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityJumpGravityMixin {
+	@org.spongepowered.asm.mixin.Shadow
+	protected abstract float getJumpPower();
+
 	@Inject(method = "jumpFromGround", at = @At("HEAD"), cancellable = true)
 	private void minigames$jumpAlongGravityUp(CallbackInfo ci) {
 		if (!((Object) this instanceof LivingEntity living)) return;
@@ -26,10 +29,28 @@ public abstract class LivingEntityJumpGravityMixin {
 		Direction gravity = GravityAccess.getGravity(living);
 		if (gravity == Direction.DOWN) return;
 
-		Vec3 jumpVec = GravityMath.up(gravity).scale(0.42D);
-		Vec3 motion = living.getDeltaMovement();
-		living.setDeltaMovement(motion.add(jumpVec));
-		living.setDeltaMovement(living.getDeltaMovement());
+		float jumpPower = this.getJumpPower();
+		Vec3 up = net.mcreator.minigames.gravity.GravityOrientation.getUpVector(gravity);
+		Vec3 down = net.mcreator.minigames.gravity.GravityOrientation.getDownVector(gravity);
+		Vec3 vel = living.getDeltaMovement();
+		Vec3 perpendicular = vel.subtract(down.scale(vel.dot(down)));
+		Vec3 jumpVel = perpendicular.add(up.scale(jumpPower));
+
+		if (living.isSprinting()) {
+			Vec3 look = living.getViewVector(1.0F);
+			Vec3 forward = look.subtract(down.scale(look.dot(down)));
+			if (forward.lengthSqr() < 1.0E-6) {
+				Vec3 fallback = living.getForward();
+				forward = fallback.subtract(down.scale(fallback.dot(down)));
+			}
+			if (forward.lengthSqr() > 1.0E-6) {
+				forward = forward.normalize();
+				jumpVel = jumpVel.add(forward.scale(0.2));
+			}
+		}
+
+		living.setDeltaMovement(jumpVel);
+		living.setOnGround(false);
 		ci.cancel();
 	}
 }

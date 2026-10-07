@@ -1,28 +1,63 @@
 {
-  "variants": {
-    "type=bottom": {
-      "model": "minigames:block/copycat_slab"
+  "multipart": [
+    {
+      "when": {
+        "type": "bottom"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab"
+      }
     },
-    "type=top": {
-      "model": "minigames:block/copycat_slab_top"
+    {
+      "when": {
+        "type": "top"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab_top"
+      }
     },
-    "type=double": {
-      "model": "minigames:block/copycat_slab_full"
+    {
+      "when": {
+        "type": "double"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab_full"
+      }
     },
-    "type=north": {
-      "model": "minigames:block/copycat_slab_vertical"
+    {
+      "when": {
+        "type": "north"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab_vertical"
+      }
     },
-    "type=south": {
-      "model": "minigames:block/copycat_slab_vertical",
-      "y": 180
+    {
+      "when": {
+        "type": "south"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab_vertical",
+        "y": 180
+      }
     },
-    "type=west": {
-      "model": "minigames:block/copycat_slab_vertical",
-      "y": 270
+    {
+      "when": {
+        "type": "west"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab_vertical",
+        "y": 270
+      }
     },
-    "type=east": {
-      "model": "minigames:block/copycat_slab_vertical",
-      "y": 90
+    {
+      "when": {
+        "type": "east"
+      },
+      "apply": {
+        "model": "minigames:block/copycat_slab_vertical",
+        "y": 90
+      }
     }
-  }
+  ]
 }

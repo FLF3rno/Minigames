@@ -21,6 +21,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.entity.CandleheadEntity;
+import net.mcreator.minigames.entity.ChurchSharpenerEntity;
+import net.mcreator.minigames.entity.CryptLurkerEntity;
 import net.mcreator.minigames.entity.DemonEntity;
 import net.mcreator.minigames.entity.GravediggerEntity;
 import net.mcreator.minigames.entity.GravediggerMinibossEntity;
@@ -122,7 +124,15 @@ public class SpawnStructureDungeonProcedure {
 							continue;
 						}
 
-						refreshBlock(_level, pos, state);
+						if (state.hasBlockEntity()) {
+							BlockEntity be = _level.getBlockEntity(pos);
+							if (be != null) {
+								be.setChanged();
+								_level.sendBlockUpdated(pos, state, state, 3);
+							}
+						} else {
+							refreshBlock(_level, pos, state);
+						}
 
 						_level.updateNeighborsAt(pos, block);
 						_level.scheduleTick(pos, block, 1);
@@ -203,6 +213,12 @@ public class SpawnStructureDungeonProcedure {
 					}
 					if (entityiterator instanceof WorshipperEntity _worship) {
 						_worship.getEntityData().set(WorshipperEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof CryptLurkerEntity _crypt) {
+						_crypt.getEntityData().set(CryptLurkerEntity.DATA_ID, roomId);
+					}
+					if (entityiterator instanceof ChurchSharpenerEntity _sharpener) {
+						_sharpener.getEntityData().set(ChurchSharpenerEntity.DATA_ID, roomId);
 					}
 				}
 			}

@@ -1,16 +1,24 @@
 {
   "replace": false,
   "values": [
-    "minigames:blank_dagger",
     "minigames:hammer",
     "minigames:power_harvester",
     "minigames:the_finisher",
-    "minigames:wind_scythe",
+    "minigames:beater",
     "minigames:combo_dagger",
-    "minigames:stop_sign",
-    "minigames:blank_sword",
+    "minigames:blazing_blade",
     "minigames:silent_assassin",
+    "minigames:parasite_scythe",
+    "minigames:mending_mace",
+    "minigames:potheist",
+    "minigames:blank_dagger",
+    "minigames:wind_scythe",
+    "minigames:worshippers_cross",
+    "minigames:stop_sign",
+    "minigames:sick_sickle",
+    "minigames:blank_sword",
+    "minigames:adrenaline_blade",
     "minigames:blank_long_sword",
-    "minigames:parasite_scythe"
+    "minigames:midas_longsword"
   ]
 }

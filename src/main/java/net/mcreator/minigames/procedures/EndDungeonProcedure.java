@@ -53,6 +53,8 @@ public class EndDungeonProcedure {
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, true, world.getServer());
 		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.ADVANCE_WEATHER, true, world.getServer());
+		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 128, world.getServer());
 	}
 }

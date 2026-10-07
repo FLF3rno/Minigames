@@ -98,6 +98,8 @@ public class StartDungeonProcedure {
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.LOCATOR_BAR, false, world.getServer());
 		if (world instanceof ServerLevel _serverLevel)
+			_serverLevel.getGameRules().set(GameRules.ADVANCE_WEATHER, false, world.getServer());
+		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 0, world.getServer());
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
@@ -109,9 +111,9 @@ public class StartDungeonProcedure {
 						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"execute in minigames:dungeon_dimension run tp @a 0 200 0");
 			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _switchworld14 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-				if (_switchworld14 != null) {
-					worldSwitch14(_switchworld14, x, y, z);
+				LevelAccessor _switchworld15 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+				if (_switchworld15 != null) {
+					worldSwitch15(_switchworld15, x, y, z);
 				}
 			}
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
@@ -121,7 +123,7 @@ public class StartDungeonProcedure {
 		});
 	}
 
-	private static void worldSwitch14(LevelAccessor world, double x, double y, double z) {
+	private static void worldSwitch15(LevelAccessor world, double x, double y, double z) {
 		ChooseFloorProcedure.execute(world, x, y, z, 1);
 	}
 }

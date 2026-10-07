@@ -21,21 +21,23 @@ public class GravityCommand {
 	public static void registerCommand(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal("gravity")
 
-				.then(Commands.argument("rotation", StringArgumentType.word()).executes(arguments -> {
-					Level world = arguments.getSource().getUnsidedLevel();
-					double x = arguments.getSource().getPosition().x();
-					double y = arguments.getSource().getPosition().y();
-					double z = arguments.getSource().getPosition().z();
-					Entity entity = arguments.getSource().getEntity();
-					if (entity == null && world instanceof ServerLevel _servLevel)
-						entity = FakePlayerFactory.getMinecraft(_servLevel);
-					Direction direction = Direction.DOWN;
-					if (entity != null)
-						direction = entity.getDirection();
+				.then(Commands.argument("rotation", StringArgumentType.word())
+					.suggests((ctx, builder) -> net.minecraft.commands.SharedSuggestionProvider.suggest(new String[]{"down", "up", "north", "south", "west", "east"}, builder))
+					.executes(arguments -> {
+						Level world = arguments.getSource().getUnsidedLevel();
+						double x = arguments.getSource().getPosition().x();
+						double y = arguments.getSource().getPosition().y();
+						double z = arguments.getSource().getPosition().z();
+						Entity entity = arguments.getSource().getEntity();
+						if (entity == null && world instanceof ServerLevel _servLevel)
+							entity = FakePlayerFactory.getMinecraft(_servLevel);
+						Direction direction = Direction.DOWN;
+						if (entity != null)
+							direction = entity.getDirection();
 
-					DebugGravityProcedure.execute(arguments, entity);
-					return 0;
-				})));
+						DebugGravityProcedure.execute(arguments, entity);
+						return 0;
+					})));
 	}
 
 }

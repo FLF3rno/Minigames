@@ -16723,7 +16723,7 @@
           "src/main/resources/assets/minigames/models/block/copycat_block.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatStair",
@@ -16743,7 +16743,7 @@
           "src/main/resources/assets/minigames/models/block/copycat_stair.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatSlab",
@@ -16763,7 +16763,7 @@
           "src/main/resources/assets/minigames/items/copycat_slab.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatFence",
@@ -16783,7 +16783,7 @@
           "src/main/resources/assets/minigames/models/block/copycat_fence_inventory.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatWall",
@@ -16804,7 +16804,7 @@
           "src/main/resources/assets/minigames/models/block/copycat_wall_inventory.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatGate",
@@ -16825,7 +16825,7 @@
           "src/main/resources/data/minigames/loot_table/blocks/copycat_gate.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatLayer",
@@ -16843,7 +16843,7 @@
           "src/main/resources/data/minigames/loot_table/blocks/copycat_layer.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
     },
     {
       "name": "CopycatCornerSlice",
@@ -16861,7 +16861,488 @@
           "src/main/resources/assets/minigames/models/block/copycat_corner_slice.json"
         ]
       },
-      "path": "~/General/Copycat Blocks"
+      "path": "~/General/Blocks/Copycat Blocks"
+    },
+    {
+      "name": "CopycatChain",
+      "type": "block",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "copycat_chain",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/copycat_chain.json",
+          "src/main/resources/assets/minigames/models/item/copycat_chain.json",
+          "src/main/resources/assets/minigames/models/block/copycat_chain.json",
+          "src/main/java/net/mcreator/minigames/block/CopycatChainBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/copycat_chain.json",
+          "src/main/resources/assets/minigames/items/copycat_chain.json"
+        ]
+      },
+      "path": "~/General/Blocks/Copycat Blocks"
+    },
+    {
+      "name": "SkyboxSimulation",
+      "type": "block",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "skybox_simulation",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/blockstates/skybox_simulation.json",
+          "src/main/resources/assets/minigames/models/block/skybox_simulation.json",
+          "src/main/resources/data/minigames/loot_table/blocks/skybox_simulation.json",
+          "src/main/resources/assets/minigames/models/item/skybox_simulation.json",
+          "src/main/resources/assets/minigames/items/skybox_simulation.json",
+          "src/main/java/net/mcreator/minigames/block/SkyboxSimulationBlock.java"
+        ]
+      },
+      "path": "~/General/Blocks"
+    },
+    {
+      "name": "SpawnCryptLurker",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_crypt_lurker",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/loot_table/blocks/spawn_crypt_lurker.json",
+          "src/main/resources/assets/minigames/items/spawn_crypt_lurker.json",
+          "src/main/java/net/mcreator/minigames/block/SpawnCryptLurkerBlock.java",
+          "src/main/resources/assets/minigames/models/block/spawn_crypt_lurker.json",
+          "src/main/resources/assets/minigames/blockstates/spawn_crypt_lurker.json",
+          "src/main/resources/assets/minigames/models/item/spawn_crypt_lurker.json"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Crypt Lurker"
+    },
+    {
+      "name": "SpawnCryptLurkerBlockAdded",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_crypt_lurker_block_added",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnCryptLurkerBlockAddedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Crypt Lurker"
+    },
+    {
+      "name": "CryptLurker",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "crypt_lurker",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/entity/CryptLurkerEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/CryptLurkerRenderer.java",
+          "src/main/resources/assets/minigames/items/crypt_lurker_spawn_egg.json"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Crypt Lurker"
+    },
+    {
+      "name": "GiantBell",
+      "type": "block",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "giant_bell",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/renderer/block/GiantBellRenderer.java",
+          "src/main/resources/assets/minigames/models/block/giant_bell.json",
+          "src/main/resources/assets/minigames/items/giant_bell.json",
+          "src/main/resources/assets/minigames/models/item/giant_bell.json",
+          "src/main/resources/assets/minigames/blockstates/giant_bell.json",
+          "src/main/java/net/mcreator/minigames/block/entity/GiantBellBlockEntity.java",
+          "src/main/java/net/mcreator/minigames/block/GiantBellBlock.java",
+          "src/main/resources/data/minigames/loot_table/blocks/giant_bell.json"
+        ]
+      },
+      "path": "~/Dungeon/Special Blocks"
+    },
+    {
+      "name": "GiantBellRing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "giant_bell_ring",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GiantBellRingProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Special Blocks"
+    },
+    {
+      "name": "SickSickle",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sick_sickle",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SickSickleItem.java",
+          "src/main/resources/assets/minigames/items/sick_sickle.json",
+          "src/main/resources/assets/minigames/models/item/sick_sickle.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Sick Sickle"
+    },
+    {
+      "name": "SickSickleDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sick_sickle_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SickSickleDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Sick Sickle"
+    },
+    {
+      "name": "SickSickleHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "sick_sickle_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SickSickleHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Sick Sickle"
+    },
+    {
+      "name": "Beater",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "beater",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/beater.json",
+          "src/main/java/net/mcreator/minigames/item/BeaterItem.java",
+          "src/main/resources/assets/minigames/models/item/beater.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Beater"
+    },
+    {
+      "name": "BeaterDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "beater_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BeaterDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Beater"
+    },
+    {
+      "name": "BeaterHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "beater_hit",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BeaterHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Beater"
+    },
+    {
+      "name": "Potheist",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "potheist",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/PotheistItem.java",
+          "src/main/resources/assets/minigames/models/item/potheist.json",
+          "src/main/resources/assets/minigames/items/potheist.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Potheist"
+    },
+    {
+      "name": "PotheistDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "potheist_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PotheistDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Potheist"
+    },
+    {
+      "name": "PotheistHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "potheist_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PotheistHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Potheist"
+    },
+    {
+      "name": "ReturnAllPotionEffects",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "return_all_potion_effects",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "arraylist",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReturnAllPotionEffectsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Potion"
+    },
+    {
+      "name": "ReturnAllPotionEffectDuration",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "return_all_potion_effect_duration",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "arraylist",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReturnAllPotionEffectDurationProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Potion"
+    },
+    {
+      "name": "ReturnAllPotionEffectAmplifier",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "return_all_potion_effect_amplifier",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "arraylist",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReturnAllPotionEffectAmplifierProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Potion"
+    },
+    {
+      "name": "Immovable",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "immovable",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/immovable.json",
+          "src/main/java/net/mcreator/minigames/item/ImmovableItem.java",
+          "src/main/resources/assets/minigames/models/item/immovable.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "ImmovableDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "immovable_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ImmovableDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "ImmovableTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "immovable_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ImmovableTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "ImmovableDropped",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "immovable_dropped",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ImmovableDroppedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "EmptyHeartAmulet",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "empty_heart_amulet",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/EmptyHeartAmuletItem.java",
+          "src/main/resources/assets/minigames/items/empty_heart_amulet.json",
+          "src/main/resources/assets/minigames/models/item/empty_heart_amulet.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "EmptyHeartAmuletDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "empty_heart_amulet_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/EmptyHeartAmuletDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
     }
   ],
   "variable_elements": [
@@ -17440,12 +17921,6 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
-    },
-    {
-      "name": "healCD",
-      "type": "number",
-      "scope": "player_persistent",
-      "value": "0"
     },
     {
       "name": "PassiveHealCooldown",
@@ -18177,7 +18652,9 @@
       "Blocks.FIREFLY_BUSH",
       "Blocks.LEAF_LITTER",
       "Blocks.SNOW_LAYER",
-      "Blocks.VINE"
+      "Blocks.VINE",
+      "Blocks.VOID_AIR",
+      "Blocks.CAVE_AIR"
     ],
     "ITEMS:mod:spleef_powerup": [
       "CUSTOM:IceDart",
@@ -18276,7 +18753,8 @@
       "CUSTOM:ThrustersRoguelike",
       "CUSTOM:WorshippersCross",
       "CUSTOM:Teleporter",
-      "CUSTOM:HeartAmulet"
+      "CUSTOM:HeartAmulet",
+      "CUSTOM:Beater"
     ],
     "ITEMS:mod:dungeon_thief": [
       "CUSTOM:BlankDagger",
@@ -18295,7 +18773,8 @@
       "CUSTOM:BatEssence",
       "CUSTOM:CactusCrossbow",
       "CUSTOM:SoulCurse",
-      "CUSTOM:Jarona"
+      "CUSTOM:Jarona",
+      "CUSTOM:Potheist"
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
@@ -18314,7 +18793,9 @@
       "CUSTOM:Momentum",
       "CUSTOM:BlazingBlade",
       "CUSTOM:Berserk",
-      "CUSTOM:BoxingMastery"
+      "CUSTOM:BoxingMastery",
+      "CUSTOM:SickSickle",
+      "CUSTOM:Immovable"
     ],
     "ITEMS:mod:dungeon_type_relic": [
       "CUSTOM:CrystallizedPotion",
@@ -18331,7 +18812,8 @@
       "CUSTOM:BatEssence",
       "CUSTOM:BoxingMastery",
       "CUSTOM:HeartAmulet",
-      "CUSTOM:Jarona"
+      "CUSTOM:Jarona",
+      "CUSTOM:Immovable"
     ],
     "ENTITIES:mod:dungeon": [
       "CUSTOM:Worshipper",
@@ -18351,7 +18833,8 @@
       "CUSTOM:LaserStatue",
       "CUSTOM:Bookling",
       "CUSTOM:FlavioSweeper",
-      "CUSTOM:ChurchSharpener"
+      "CUSTOM:ChurchSharpener",
+      "CUSTOM:CryptLurker"
     ],
     "ENTITIES:mod:blesser": [
       "CUSTOM:ShieldAngel",
@@ -18415,7 +18898,10 @@
       "CUSTOM:MidasLongsword",
       "CUSTOM:BlazingBlade",
       "CUSTOM:WorshippersCross",
-      "CUSTOM:CactusCrossbow"
+      "CUSTOM:CactusCrossbow",
+      "CUSTOM:SickSickle",
+      "CUSTOM:Beater",
+      "CUSTOM:Potheist"
     ],
     "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
       "CUSTOM:SelfDamage",
@@ -18488,13 +18974,22 @@
       "CUSTOM:BlankLongSword",
       "CUSTOM:SilentAssassin",
       "CUSTOM:PowerHarvester",
-      "CUSTOM:ParasiteScythe"
+      "CUSTOM:ParasiteScythe",
+      "CUSTOM:AdrenalineBlade",
+      "CUSTOM:MendingMace",
+      "CUSTOM:MidasLongsword",
+      "CUSTOM:BlazingBlade",
+      "CUSTOM:WorshippersCross",
+      "CUSTOM:SickSickle",
+      "CUSTOM:Beater",
+      "CUSTOM:Potheist"
     ],
     "ITEMS:mod:weapontype_bow": [
       "Blocks.BEDROCK"
     ],
     "ITEMS:mod:weapontype_crossbow": [
-      "CUSTOM:BlessedCursedCrossbow"
+      "CUSTOM:BlessedCursedCrossbow",
+      "CUSTOM:CactusCrossbow"
     ],
     "ITEMS:mod:weapontype_throwing": [
       "Blocks.BEDROCK"
@@ -18567,13 +19062,51 @@
       "CUSTOM:FlavioOmegaLaserScreen",
       "CUSTOM:BlessingDispenser",
       "EntityItem",
-      "CUSTOM:Gravedigger"
+      "CUSTOM:Gravedigger",
+      "CUSTOM:CryptLurker"
     ],
     "ITEMS:mod:hotbar_locked": [
       "CUSTOM:BigPocket"
     ],
     "BLOCKS:minecraft:wooden_fences": [
       "~CopycatFence@CUSTOM:CopycatFence"
+    ],
+    "BLOCKS:mod:shatterable": [
+      "Blocks.GLASS",
+      "Blocks.TINTED_GLASS",
+      "Blocks.STAINED_GLASS#0",
+      "Blocks.STAINED_GLASS#1",
+      "Blocks.STAINED_GLASS#2",
+      "Blocks.STAINED_GLASS#3",
+      "Blocks.STAINED_GLASS#4",
+      "Blocks.STAINED_GLASS#5",
+      "Blocks.STAINED_GLASS#6",
+      "Blocks.STAINED_GLASS#7",
+      "Blocks.STAINED_GLASS#8",
+      "Blocks.STAINED_GLASS#9",
+      "Blocks.STAINED_GLASS#10",
+      "Blocks.STAINED_GLASS#11",
+      "Blocks.STAINED_GLASS#12",
+      "Blocks.STAINED_GLASS#13",
+      "Blocks.STAINED_GLASS#14",
+      "Blocks.STAINED_GLASS#15",
+      "Blocks.GLASS_PANE",
+      "Blocks.STAINED_GLASS_PANE#0",
+      "Blocks.STAINED_GLASS_PANE#1",
+      "Blocks.STAINED_GLASS_PANE#2",
+      "Blocks.STAINED_GLASS_PANE#3",
+      "Blocks.STAINED_GLASS_PANE#4",
+      "Blocks.STAINED_GLASS_PANE#5",
+      "Blocks.STAINED_GLASS_PANE#6",
+      "Blocks.STAINED_GLASS_PANE#7",
+      "Blocks.STAINED_GLASS_PANE#8",
+      "Blocks.STAINED_GLASS_PANE#9",
+      "Blocks.STAINED_GLASS_PANE#10",
+      "Blocks.STAINED_GLASS_PANE#11",
+      "Blocks.STAINED_GLASS_PANE#12",
+      "Blocks.STAINED_GLASS_PANE#13",
+      "Blocks.STAINED_GLASS_PANE#14",
+      "Blocks.STAINED_GLASS_PANE#15"
     ]
   },
   "tab_element_order": {},
@@ -19027,14 +19560,24 @@
       "item.minigames.boxing_mastery": "Boxing Mastery",
       "item.minigames.heart_amulet": "Heart Amulet",
       "item.minigames.jarona": "Jarona",
-      "item.minigames.copycat_block": "Copycat Block",
+      "item.minigames.copycat_block": "Copycat Connecting Block",
       "item.minigames.copycat_stair": "Copycat Stair",
       "item.minigames.copycat_slab": "Copycat Slab",
       "item.minigames.copycat_fence": "Copycat Fence",
       "item.minigames.copycat_wall": "Copycat Wall",
       "item.minigames.copycat_gate": "Copycat Fence Gate",
       "item.minigames.copycat_layer": "Copycat Layer",
-      "item.minigames.copycat_corner_slice": "Copycat Corner Slice"
+      "item.minigames.copycat_corner_slice": "Copycat Byte",
+      "item.minigames.copycat_chain": "Copycat Chains",
+      "item.minigames.skybox_simulation": "Skybox Simulation",
+      "item.minigames.spawn_crypt_lurker": "Spawn Crypt Lurker",
+      "entity.minigames.crypt_lurker": "Crypt Lurker",
+      "item.minigames.giant_bell": "Giant Bell",
+      "item.minigames.sick_sickle": "Sick Sickle",
+      "item.minigames.beater": "Beater",
+      "item.minigames.potheist": "Potheist",
+      "item.minigames.immovable": "Immovable",
+      "item.minigames.empty_heart_amulet": "Empty Heart Amulet"
     }
   },
   "metadata": {
@@ -19223,6 +19766,10 @@
                       {
                         "name": "Cactus Crossbow",
                         "children": []
+                      },
+                      {
+                        "name": "Potheist",
+                        "children": []
                       }
                     ]
                   },
@@ -19281,6 +19828,10 @@
                       },
                       {
                         "name": "Blazing Blade",
+                        "children": []
+                      },
+                      {
+                        "name": "Sick Sickle",
                         "children": []
                       }
                     ]
@@ -19344,6 +19895,10 @@
                       },
                       {
                         "name": "Worshippers Cross",
+                        "children": []
+                      },
+                      {
+                        "name": "Beater",
                         "children": []
                       }
                     ]
@@ -19568,6 +20123,10 @@
               {
                 "name": "Sharpener",
                 "children": []
+              },
+              {
+                "name": "Crypt Lurker",
+                "children": []
               }
             ]
           },
@@ -19693,7 +20252,12 @@
           },
           {
             "name": "Blocks",
-            "children": []
+            "children": [
+              {
+                "name": "Copycat Blocks",
+                "children": []
+              }
+            ]
           },
           {
             "name": "Lighting",
@@ -19705,10 +20269,6 @@
           },
           {
             "name": "Account Swap",
-            "children": []
-          },
-          {
-            "name": "Copycat Blocks",
             "children": []
           }
         ]

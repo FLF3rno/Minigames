@@ -73,6 +73,11 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.BOXING_MASTERY.get());
 				tabData.accept(MinigamesModItems.HEART_AMULET.get());
 				tabData.accept(MinigamesModItems.JARONA.get());
+				tabData.accept(MinigamesModItems.SICK_SICKLE.get());
+				tabData.accept(MinigamesModItems.BEATER.get());
+				tabData.accept(MinigamesModItems.POTHEIST.get());
+				tabData.accept(MinigamesModItems.IMMOVABLE.get());
+				tabData.accept(MinigamesModItems.EMPTY_HEART_AMULET.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {
@@ -95,6 +100,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.COPYCAT_GATE.get().asItem());
 				tabData.accept(MinigamesModBlocks.COPYCAT_LAYER.get().asItem());
 				tabData.accept(MinigamesModBlocks.COPYCAT_CORNER_SLICE.get().asItem());
+				tabData.accept(MinigamesModBlocks.COPYCAT_CHAIN.get().asItem());
+				tabData.accept(MinigamesModBlocks.SKYBOX_SIMULATION.get().asItem());
 			}).withSearchBar().withTabsBefore(DUNGEON_ITEMS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_MOBS = REGISTRY.register("custom_mobs",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_mobs")).icon(() -> new ItemStack(MinigamesModBlocks.SPAWN_WORSHIPPER.get())).displayItems((parameters, tabData) -> {
@@ -129,6 +136,8 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_BOOKLING.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_CHURCH_SHARPENER.get().asItem());
 				tabData.accept(MinigamesModBlocks.ASCENSCION.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_CRYPT_LURKER.get().asItem());
+				tabData.accept(MinigamesModBlocks.GIANT_BELL.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {

@@ -57,5 +57,6 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.FLAVIO_OMEGA_LASER_SCREEN.get(), FlavioOmegaLaserScreenRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.CHURCH_SHARPENER.get(), ChurchSharpenerRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.CACTUS_ARROW.get(), CactusArrowRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.CRYPT_LURKER.get(), CryptLurkerRenderer::new);
 	}
 }

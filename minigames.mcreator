@@ -4357,7 +4357,7 @@
           "src/main/java/net/mcreator/minigames/client/screens/TeammateOverlayOverlay.java"
         ]
       },
-      "path": "~/Dungeon/Team Overlay"
+      "path": "~/Dungeon/Overlays/Team Overlay"
     },
     {
       "name": "RepairValue",
@@ -5048,7 +5048,7 @@
           "src/main/resources/data/minigames/loot_table/blocks/spawn_shield_angel.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Shield Angel"
     },
     {
       "name": "SpawnShieldAngelBlockAdded",
@@ -5079,7 +5079,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnShieldAngelBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Shield Angel"
     },
     {
       "name": "ShieldAngel",
@@ -5094,7 +5094,7 @@
           "src/main/java/net/mcreator/minigames/entity/ShieldAngelEntity.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Shield Angel"
     },
     {
       "name": "SpawnTwoRoomProcedure",
@@ -5887,7 +5887,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShieldAngelSpawnProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Shield Angel"
     },
     {
       "name": "ShieldAngelTick",
@@ -5906,7 +5906,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShieldAngelTickProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Shield Angel"
     },
     {
       "name": "ShieldAngelHurt",
@@ -5929,7 +5929,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ShieldAngelHurtProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Shield Angel"
     },
     {
       "name": "VotePopup",
@@ -6631,42 +6631,6 @@
         ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ChangeGravityExecuteProcedure.java"
-        ]
-      },
-      "path": "~/General/Gravity"
-    },
-    {
-      "name": "Gravity",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "gravity",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/GravityCommand.java"
-        ]
-      },
-      "path": "~/General/Gravity"
-    },
-    {
-      "name": "DebugGravity",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debug_gravity",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "arguments",
-            "type": "cmdcontext"
-          },
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/DebugGravityProcedure.java"
         ]
       },
       "path": "~/General/Gravity"
@@ -17343,6 +17307,665 @@
         ]
       },
       "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "GravityBoots",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "gravity_boots",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/gravity_boots.json",
+          "src/main/java/net/mcreator/minigames/item/GravityBootsItem.java",
+          "src/main/resources/assets/minigames/models/item/gravity_boots.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "GravityBootsDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "gravity_boots_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GravityBootsDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "QuickdrawCrossbow",
+      "type": "item",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "quickdraw_crossbow",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/quickdraw_crossbow.json",
+          "src/main/java/net/mcreator/minigames/item/QuickdrawCrossbowItem.java",
+          "src/main/resources/assets/minigames/models/item/quickdraw_crossbow_4.json",
+          "src/main/resources/assets/minigames/models/item/quickdraw_crossbow_3.json",
+          "src/main/resources/assets/minigames/models/item/quickdraw_crossbow_0.json",
+          "src/main/resources/assets/minigames/models/item/quickdraw_crossbow.json",
+          "src/main/resources/assets/minigames/models/item/quickdraw_crossbow_1.json",
+          "src/main/resources/assets/minigames/models/item/quickdraw_crossbow_2.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Quickdraw Crossbow"
+    },
+    {
+      "name": "QuickdrawCrossbowDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "quickdraw_crossbow_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/QuickdrawCrossbowDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Weapons/Quickdraw Crossbow"
+    },
+    {
+      "name": "LongLongLongsword",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "long_long_longsword",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/LongLongLongswordItem.java",
+          "src/main/resources/assets/minigames/items/long_long_longsword.json",
+          "src/main/resources/assets/minigames/models/item/long_long_longsword.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Weapons/Long Long Longsword"
+    },
+    {
+      "name": "SoulsmithKatana",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "soulsmith_katana",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/soulsmith_katana.json",
+          "src/main/java/net/mcreator/minigames/item/SoulsmithKatanaItem.java",
+          "src/main/resources/assets/minigames/models/item/soulsmith_katana.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Soulsmith Katana"
+    },
+    {
+      "name": "SoulsmithKatanaDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "soulsmith_katana_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SoulsmithKatanaDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Soulsmith Katana"
+    },
+    {
+      "name": "SoulsmithKatanaHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "soulsmith_katana_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SoulsmithKatanaHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Weapons/Soulsmith Katana"
+    },
+    {
+      "name": "PotionExplosion",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "potion_explosion",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/potion_explosion.json",
+          "src/main/java/net/mcreator/minigames/item/PotionExplosionItem.java",
+          "src/main/resources/assets/minigames/items/potion_explosion.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Potion Explosion"
+    },
+    {
+      "name": "PotionExplotionDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "potion_explotion_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PotionExplotionDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Potion Explosion"
+    },
+    {
+      "name": "PotionExplosionRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "potion_explosion_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PotionExplosionRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Utilities/Potion Explosion"
+    },
+    {
+      "name": "Feast",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "feast",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/FeastItem.java",
+          "src/main/resources/assets/minigames/models/item/feast.json",
+          "src/main/resources/assets/minigames/items/feast.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Feast"
+    },
+    {
+      "name": "FeastDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "feast_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FeastDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Feast"
+    },
+    {
+      "name": "FeastRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "feast_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FeastRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Utility/Feast"
+    },
+    {
+      "name": "Obsidianification",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "obsidianification",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/potion/ObsidianificationMobEffect.java"
+        ]
+      },
+      "path": "~/Dungeon/Items"
+    },
+    {
+      "name": "ObsidianIdle",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "obsidian_idle",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/obsidian_idle.json",
+          "src/main/java/net/mcreator/minigames/item/ObsidianIdleItem.java",
+          "src/main/resources/assets/minigames/items/obsidian_idle.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Obsidian Idle"
+    },
+    {
+      "name": "ObsidianIdleDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "obsidian_idle_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ObsidianIdleDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Obsidian Idle"
+    },
+    {
+      "name": "ObsidianIdleRightclicked",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "obsidian_idle_rightclicked",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ObsidianIdleRightclickedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Utilities/Obsidian Idle"
+    },
+    {
+      "name": "Supportive",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "supportive",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/supportive.json",
+          "src/main/java/net/mcreator/minigames/item/SupportiveItem.java",
+          "src/main/resources/assets/minigames/models/item/supportive.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "SupportiveDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "supportive_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SupportiveDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "SupportiveArrowHit",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "supportive_arrow_hit",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SupportiveArrowHitProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Warrior/Relic"
+    },
+    {
+      "name": "ExplorersCharm",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "explorers_charm",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/explorers_charm.json",
+          "src/main/java/net/mcreator/minigames/item/ExplorersCharmItem.java",
+          "src/main/resources/assets/minigames/items/explorers_charm.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "ExplorersCharmDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "explorers_charm_description",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExplorersCharmDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "ExplorersCharmTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "explorers_charm_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExplorersCharmTickProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "ExplorersCharmDropped",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "explorers_charm_dropped",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExplorersCharmDroppedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Support/Relic"
+    },
+    {
+      "name": "Friction",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "friction",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/FrictionItem.java",
+          "src/main/resources/assets/minigames/models/item/friction.json",
+          "src/main/resources/assets/minigames/items/friction.json"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "FrictionDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "friction_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FrictionDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "FrictionUtilityUsed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "friction_utility_used",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/FrictionUtilityUsedProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Thief/Relic"
+    },
+    {
+      "name": "RoomEnemyAmountDisplay",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "room_enemy_amount_display",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RoomEnemyAmountDisplayProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Overlays/Fight Overlay"
+    },
+    {
+      "name": "RoomEnemyAmount",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "room_enemy_amount",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/RoomEnemyAmountOverlay.java"
+        ]
+      },
+      "path": "~/Dungeon/Overlays/Fight Overlay"
+    },
+    {
+      "name": "EnemyAmountReturn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "enemy_amount_return",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/EnemyAmountReturnProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Overlays/Fight Overlay"
     }
   ],
   "variable_elements": [
@@ -18209,6 +18832,12 @@
       "type": "logic",
       "scope": "map",
       "value": "false"
+    },
+    {
+      "name": "currentRoomType",
+      "type": "string",
+      "scope": "map",
+      "value": "none"
     }
   ],
   "sound_elements": [
@@ -18754,7 +19383,11 @@
       "CUSTOM:WorshippersCross",
       "CUSTOM:Teleporter",
       "CUSTOM:HeartAmulet",
-      "CUSTOM:Beater"
+      "CUSTOM:Beater",
+      "CUSTOM:EmptyHeartAmulet",
+      "CUSTOM:LongLongLongsword",
+      "CUSTOM:Feast",
+      "CUSTOM:ExplorersCharm"
     ],
     "ITEMS:mod:dungeon_thief": [
       "CUSTOM:BlankDagger",
@@ -18774,7 +19407,11 @@
       "CUSTOM:CactusCrossbow",
       "CUSTOM:SoulCurse",
       "CUSTOM:Jarona",
-      "CUSTOM:Potheist"
+      "CUSTOM:Potheist",
+      "CUSTOM:GravityBoots",
+      "CUSTOM:SoulsmithKatana",
+      "CUSTOM:ObsidianIdle",
+      "CUSTOM:Friction"
     ],
     "ITEMS:mod:dungeon_warrior": [
       "CUSTOM:BlankSword",
@@ -18795,7 +19432,10 @@
       "CUSTOM:Berserk",
       "CUSTOM:BoxingMastery",
       "CUSTOM:SickSickle",
-      "CUSTOM:Immovable"
+      "CUSTOM:Immovable",
+      "CUSTOM:QuickdrawCrossbow",
+      "CUSTOM:PotionExplosion",
+      "CUSTOM:Supportive"
     ],
     "ITEMS:mod:dungeon_type_relic": [
       "CUSTOM:CrystallizedPotion",
@@ -18813,7 +19453,12 @@
       "CUSTOM:BoxingMastery",
       "CUSTOM:HeartAmulet",
       "CUSTOM:Jarona",
-      "CUSTOM:Immovable"
+      "CUSTOM:Immovable",
+      "CUSTOM:EmptyHeartAmulet",
+      "CUSTOM:GravityBoots",
+      "CUSTOM:Supportive",
+      "CUSTOM:ExplorersCharm",
+      "CUSTOM:Friction"
     ],
     "ENTITIES:mod:dungeon": [
       "CUSTOM:Worshipper",
@@ -18881,7 +19526,10 @@
       "CUSTOM:BigPocket",
       "CUSTOM:Berserk",
       "CUSTOM:Teleporter",
-      "CUSTOM:SoulCurse"
+      "CUSTOM:SoulCurse",
+      "CUSTOM:PotionExplosion",
+      "CUSTOM:Feast",
+      "CUSTOM:ObsidianIdle"
     ],
     "ITEMS:mod:dungeon_type_weapon": [
       "CUSTOM:WindScythe",
@@ -18901,7 +19549,10 @@
       "CUSTOM:CactusCrossbow",
       "CUSTOM:SickSickle",
       "CUSTOM:Beater",
-      "CUSTOM:Potheist"
+      "CUSTOM:Potheist",
+      "CUSTOM:QuickdrawCrossbow",
+      "CUSTOM:LongLongLongsword",
+      "CUSTOM:SoulsmithKatana"
     ],
     "DAMAGE_TYPES:minecraft:bypasses_cooldown": [
       "CUSTOM:SelfDamage",
@@ -18982,14 +19633,17 @@
       "CUSTOM:WorshippersCross",
       "CUSTOM:SickSickle",
       "CUSTOM:Beater",
-      "CUSTOM:Potheist"
+      "CUSTOM:Potheist",
+      "CUSTOM:LongLongLongsword",
+      "CUSTOM:SoulsmithKatana"
     ],
     "ITEMS:mod:weapontype_bow": [
       "Blocks.BEDROCK"
     ],
     "ITEMS:mod:weapontype_crossbow": [
       "CUSTOM:BlessedCursedCrossbow",
-      "CUSTOM:CactusCrossbow"
+      "CUSTOM:CactusCrossbow",
+      "CUSTOM:QuickdrawCrossbow"
     ],
     "ITEMS:mod:weapontype_throwing": [
       "Blocks.BEDROCK"
@@ -19107,6 +19761,20 @@
       "Blocks.STAINED_GLASS_PANE#13",
       "Blocks.STAINED_GLASS_PANE#14",
       "Blocks.STAINED_GLASS_PANE#15"
+    ],
+    "ENTITIES:mod:arrow": [
+      "CUSTOM:IceDartProjectile",
+      "CUSTOM:SnowbombProjectile",
+      "CUSTOM:Grapple",
+      "CUSTOM:MagmaDartProjectile",
+      "CUSTOM:GlueProjectile",
+      "CUSTOM:VolcanicSpew",
+      "CUSTOM:VolleybombEntity",
+      "CUSTOM:BlessedArrow",
+      "CUSTOM:Cannonball",
+      "CUSTOM:CactusArrow",
+      "EntityArrow",
+      "EntitySpectralArrow"
     ]
   },
   "tab_element_order": {},
@@ -19577,7 +20245,19 @@
       "item.minigames.beater": "Beater",
       "item.minigames.potheist": "Potheist",
       "item.minigames.immovable": "Immovable",
-      "item.minigames.empty_heart_amulet": "Empty Heart Amulet"
+      "item.minigames.empty_heart_amulet": "Empty Heart Amulet",
+      "item.minigames.gravity_boots": "Gravity Boots",
+      "item.minigames.quickdraw_crossbow": "Quickdraw Crossbow",
+      "item.minigames.long_long_longsword": "Long Long Longsword",
+      "item.minigames.soulsmith_katana": "Soulsmith Katana",
+      "item.minigames.potion_explosion": "Potion Explosion",
+      "item.minigames.feast": "Feast",
+      "effect.minigames.obsidianification": "Obsidianification",
+      "item.minigames.obsidian_idle": "Obsidian Idle",
+      "item.minigames.supportive": "Supportive",
+      "item.minigames.explorers_charm": "Explorer\u0027s Charm",
+      "item.minigames.friction": "Friction",
+      "gui.minigames.room_enemy_amount.label_empty": ""
     }
   },
   "metadata": {
@@ -19770,6 +20450,10 @@
                       {
                         "name": "Potheist",
                         "children": []
+                      },
+                      {
+                        "name": "Soulsmith Katana",
+                        "children": []
                       }
                     ]
                   },
@@ -19794,6 +20478,10 @@
                       },
                       {
                         "name": "Soul Curse",
+                        "children": []
+                      },
+                      {
+                        "name": "Obsidian Idle",
                         "children": []
                       }
                     ]
@@ -19833,6 +20521,10 @@
                       {
                         "name": "Sick Sickle",
                         "children": []
+                      },
+                      {
+                        "name": "Quickdraw Crossbow",
+                        "children": []
                       }
                     ]
                   },
@@ -19857,6 +20549,10 @@
                       },
                       {
                         "name": "Berserk",
+                        "children": []
+                      },
+                      {
+                        "name": "Potion Explosion",
                         "children": []
                       }
                     ]
@@ -19900,6 +20596,10 @@
                       {
                         "name": "Beater",
                         "children": []
+                      },
+                      {
+                        "name": "Long Long Longsword",
+                        "children": []
                       }
                     ]
                   },
@@ -19924,6 +20624,10 @@
                       },
                       {
                         "name": "Teleporter",
+                        "children": []
+                      },
+                      {
+                        "name": "Feast",
                         "children": []
                       }
                     ]
@@ -19975,10 +20679,6 @@
           },
           {
             "name": "Inventory",
-            "children": []
-          },
-          {
-            "name": "Team Overlay",
             "children": []
           },
           {
@@ -20127,6 +20827,10 @@
               {
                 "name": "Crypt Lurker",
                 "children": []
+              },
+              {
+                "name": "Shield Angel",
+                "children": []
               }
             ]
           },
@@ -20150,6 +20854,19 @@
           {
             "name": "Special Blocks",
             "children": []
+          },
+          {
+            "name": "Overlays",
+            "children": [
+              {
+                "name": "Team Overlay",
+                "children": []
+              },
+              {
+                "name": "Fight Overlay",
+                "children": []
+              }
+            ]
           }
         ]
       },

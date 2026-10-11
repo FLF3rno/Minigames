@@ -760,5 +760,18 @@ public class MinigamesSettingsHelper {
 					}
 				}
 		);
+
+		addDoubleSlider("itemOpacity", Component.literal("Item Opacity"), 1.0, 0.0, 1.0, 0.05,
+				val -> Component.literal((int) Math.round(val * 100) + "%"),
+				null
+		);
+
+		addBoolean("disableSkyboxBlock", Component.literal("Disable Skybox Block"), false,
+				val -> switch (val ? 1 : 0) {
+					case 1 -> Component.literal("Enabled");
+					default -> Component.literal("Disabled");
+				},
+				null
+		);
 	}
 }

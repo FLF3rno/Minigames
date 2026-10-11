@@ -125,7 +125,6 @@ public class MinigamesModVariables {
 		clone.votedYes = original.votedYes;
 		clone.voted = original.voted;
 		clone.voteCooldown = original.voteCooldown;
-		clone.healCD = original.healCD;
 		clone.PassiveHealCooldown = original.PassiveHealCooldown;
 		clone.PassiveHealAmount = original.PassiveHealAmount;
 		clone.gravity = original.gravity;
@@ -322,6 +321,7 @@ public class MinigamesModVariables {
 		public boolean showBossBar = false;
 		public boolean SpawnItems = false;
 		public boolean forceDisableGlowingPlayerSetting = false;
+		public String currentRoomType = "none";
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -416,6 +416,7 @@ public class MinigamesModVariables {
 			showBossBar = nbt.getBooleanOr("showBossBar", false);
 			SpawnItems = nbt.getBooleanOr("SpawnItems", false);
 			forceDisableGlowingPlayerSetting = nbt.getBooleanOr("forceDisableGlowingPlayerSetting", false);
+			currentRoomType = nbt.getStringOr("currentRoomType", "");
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -511,6 +512,7 @@ public class MinigamesModVariables {
 			nbt.putBoolean("showBossBar", showBossBar);
 			nbt.putBoolean("SpawnItems", SpawnItems);
 			nbt.putBoolean("forceDisableGlowingPlayerSetting", forceDisableGlowingPlayerSetting);
+			nbt.putString("currentRoomType", currentRoomType);
 			return nbt;
 		}
 
@@ -596,7 +598,6 @@ public class MinigamesModVariables {
 		public boolean votedYes = false;
 		public boolean voted = false;
 		public double voteCooldown = 0;
-		public double healCD = 0;
 		public double PassiveHealCooldown = 80.0;
 		public double PassiveHealAmount = 1.0;
 		public Direction gravity = Direction.DOWN;
@@ -646,7 +647,6 @@ public class MinigamesModVariables {
 			output.putBoolean("votedYes", votedYes);
 			output.putBoolean("voted", voted);
 			output.putDouble("voteCooldown", voteCooldown);
-			output.putDouble("healCD", healCD);
 			output.putDouble("PassiveHealCooldown", PassiveHealCooldown);
 			output.putDouble("PassiveHealAmount", PassiveHealAmount);
 			output.putInt("gravity", gravity.get3DDataValue());
@@ -697,7 +697,6 @@ public class MinigamesModVariables {
 			votedYes = input.getBooleanOr("votedYes", false);
 			voted = input.getBooleanOr("voted", false);
 			voteCooldown = input.getDoubleOr("voteCooldown", 0);
-			healCD = input.getDoubleOr("healCD", 0);
 			PassiveHealCooldown = input.getDoubleOr("PassiveHealCooldown", 0);
 			PassiveHealAmount = input.getDoubleOr("PassiveHealAmount", 0);
 			gravity = Direction.from3DDataValue(input.getIntOr("gravity", 0));

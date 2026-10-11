@@ -3,7 +3,9 @@
   "values": [
     "minigames:hammer",
     "minigames:power_harvester",
+    "minigames:potion_explosion",
     "minigames:blacksmith_hammer",
+    "minigames:supportive",
     "minigames:choice_bag_warrior",
     "minigames:blazing_blade",
     "minigames:volley_bomb",
@@ -14,6 +16,7 @@
     "minigames:slam",
     "minigames:detonator",
     "minigames:berserk",
+    "minigames:quickdraw_crossbow",
     "minigames:wind_scythe",
     "minigames:sick_sickle",
     "minigames:blank_sword",

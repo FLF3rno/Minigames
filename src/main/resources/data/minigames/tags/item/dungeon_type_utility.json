@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
+    "minigames:potion_explosion",
+    "minigames:obsidian_idle",
     "minigames:choice_bag_warrior",
     "minigames:plague_starter",
     "minigames:horseshoe",
+    "minigames:feast",
     "minigames:ghostifier",
     "minigames:volley_bomb",
     "minigames:big_pocket",

@@ -464,5 +464,17 @@
   "item.minigames.beater": "Beater",
   "item.minigames.potheist": "Potheist",
   "item.minigames.immovable": "Immovable",
-  "item.minigames.empty_heart_amulet": "Empty Heart Amulet"
+  "item.minigames.empty_heart_amulet": "Empty Heart Amulet",
+  "item.minigames.gravity_boots": "Gravity Boots",
+  "item.minigames.quickdraw_crossbow": "Quickdraw Crossbow",
+  "item.minigames.long_long_longsword": "Long Long Longsword",
+  "item.minigames.soulsmith_katana": "Soulsmith Katana",
+  "item.minigames.potion_explosion": "Potion Explosion",
+  "item.minigames.feast": "Feast",
+  "effect.minigames.obsidianification": "Obsidianification",
+  "item.minigames.obsidian_idle": "Obsidian Idle",
+  "item.minigames.supportive": "Supportive",
+  "item.minigames.explorers_charm": "Explorer's Charm",
+  "item.minigames.friction": "Friction",
+  "gui.minigames.room_enemy_amount.label_empty": ""
 }

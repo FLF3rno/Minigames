@@ -6,7 +6,6 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.core.component.DataComponents;
 
 import net.mcreator.minigames.init.MinigamesModItems;
@@ -59,6 +58,13 @@ public class SpawnDungeonItemProcedure {
 				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
 			}
 		}
+		if (item.getItem() == MinigamesModItems.OBSIDIAN_IDLE.get()) {
+			{
+				final String _tagName = "obsidianification";
+				final boolean _tagValue = true;
+				CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean(_tagName, _tagValue));
+			}
+		}
 		if (world instanceof ServerLevel _level) {
 			ItemEntity entityToSpawn = new ItemEntity(_level, x, (y - 10), z, new ItemStack(Blocks.AIR));
 			entityToSpawn.setPickUpDelay(10);
@@ -67,9 +73,6 @@ public class SpawnDungeonItemProcedure {
 		}
 		if (!world.isClientSide()) {
 			if (world instanceof ServerLevel _level) {
-				if (!_level.getEntitiesOfClass(ItemEntity.class, new AABB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5), e -> !e.getItem().isEmpty()).isEmpty()) {
-					return;
-				}
 				ItemEntity entityToSpawn = new ItemEntity(_level, x, y, z, item);
 				entityToSpawn.setDeltaMovement(0, 0, 0);
 				entityToSpawn.setPickUpDelay(10);

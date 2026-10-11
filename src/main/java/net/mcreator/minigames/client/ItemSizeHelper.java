@@ -38,4 +38,32 @@ public class ItemSizeHelper {
     public static float getItemScale(ItemStack stack, InteractionHand hand) {
         return getItemScale(stack, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
     }
+
+    public static boolean isInRoguelike(net.minecraft.world.level.Level level) {
+        if (level == null) {
+            return false;
+        }
+        try {
+            if (net.mcreator.minigames.network.MinigamesModVariables.MapVariables.get(level).playingDungeons) {
+                return true;
+            }
+            if (level.dimension().identifier().toString().equals("minigames:dungeon_dimension")) {
+                return true;
+            }
+        } catch (Throwable ignored) {
+        }
+        return false;
+    }
+
+    public static float getItemOpacity(net.minecraft.world.level.Level level) {
+        if (!isInRoguelike(level)) {
+            return 1.0f;
+        }
+        try {
+            double val = net.mcreator.minigames.client.gui.options.MinigamesSettingsConfig.getDouble("itemOpacity", 1.0);
+            return (float) Math.max(0.0, Math.min(1.0, val));
+        } catch (Throwable ignored) {
+            return 1.0f;
+        }
+    }
 }

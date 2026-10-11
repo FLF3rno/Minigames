@@ -188,6 +188,16 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> POTHEIST;
 	public static final DeferredItem<Item> IMMOVABLE;
 	public static final DeferredItem<Item> EMPTY_HEART_AMULET;
+	public static final DeferredItem<Item> GRAVITY_BOOTS;
+	public static final DeferredItem<Item> QUICKDRAW_CROSSBOW;
+	public static final DeferredItem<Item> LONG_LONG_LONGSWORD;
+	public static final DeferredItem<Item> SOULSMITH_KATANA;
+	public static final DeferredItem<Item> POTION_EXPLOSION;
+	public static final DeferredItem<Item> FEAST;
+	public static final DeferredItem<Item> OBSIDIAN_IDLE;
+	public static final DeferredItem<Item> SUPPORTIVE;
+	public static final DeferredItem<Item> EXPLORERS_CHARM;
+	public static final DeferredItem<Item> FRICTION;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -347,6 +357,16 @@ public class MinigamesModItems {
 		POTHEIST = register("potheist", PotheistItem::new);
 		IMMOVABLE = register("immovable", ImmovableItem::new);
 		EMPTY_HEART_AMULET = register("empty_heart_amulet", EmptyHeartAmuletItem::new);
+		GRAVITY_BOOTS = register("gravity_boots", GravityBootsItem::new);
+		QUICKDRAW_CROSSBOW = register("quickdraw_crossbow", QuickdrawCrossbowItem::new);
+		LONG_LONG_LONGSWORD = register("long_long_longsword", LongLongLongswordItem::new);
+		SOULSMITH_KATANA = register("soulsmith_katana", SoulsmithKatanaItem::new);
+		POTION_EXPLOSION = register("potion_explosion", PotionExplosionItem::new);
+		FEAST = register("feast", FeastItem::new);
+		OBSIDIAN_IDLE = register("obsidian_idle", ObsidianIdleItem::new);
+		SUPPORTIVE = register("supportive", SupportiveItem::new);
+		EXPLORERS_CHARM = register("explorers_charm", ExplorersCharmItem::new);
+		FRICTION = register("friction", FrictionItem::new);
 	}
 
 	// Start of user code block custom items
@@ -376,6 +396,7 @@ public class MinigamesModItems {
 			event.register(Identifier.parse("minigames:magma_dart/shockwave"), MagmaDartItem.ShockwaveProperty.MAP_CODEC);
 			event.register(Identifier.parse("minigames:blessed_cursed_crossbow/loadstate"), BlessedCursedCrossbowItem.LoadstateProperty.MAP_CODEC);
 			event.register(Identifier.parse("minigames:cactus_crossbow/loadstate"), CactusCrossbowItem.LoadstateProperty.MAP_CODEC);
+			event.register(Identifier.parse("minigames:quickdraw_crossbow/loadstate"), QuickdrawCrossbowItem.LoadstateProperty.MAP_CODEC);
 		}
 	}
 }

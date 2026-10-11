@@ -15,4 +15,5 @@ public class SkyboxSimulationRenderState extends BlockEntityRenderState {
 	public float rainLevel = 0.0f;
 	public boolean isSpaceSky = false;
 	public byte facesMask = 0;
+	public boolean disableSkybox = false;
 }

@@ -23,7 +23,7 @@ public class StartRoomProcedure {
 					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL,
 							new Vec3((MinigamesModVariables.MapVariables.get(world).DoorOffset.x()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y()), (MinigamesModVariables.MapVariables.get(world).DoorOffset.z())), Vec2.ZERO, _level,
 							LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "execute in minigames:dungeon_dimension run tp @a ~ ~ ~");
-		MinigamesMod.queueServerWork(3, () -> {
+		MinigamesMod.queueServerWork(11, () -> {
 			MinigamesModVariables.MapVariables.get(world).startingEnemies = MinigamesModVariables.MapVariables.get(world).aliveEnemies;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		});

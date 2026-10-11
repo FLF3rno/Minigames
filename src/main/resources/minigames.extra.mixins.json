@@ -26,7 +26,9 @@
     "EntityGravityMixin",
     "PlayerGravityMixin",
     "ServerGamePacketListenerImplMixin",
-    "GiantBellRaycastMixin"
+    "GiantBellRaycastMixin",
+    "PlayerFoodMixin",
+    "FoodDataMixin"
   ],
   "client": [
     "GuiAccessor",

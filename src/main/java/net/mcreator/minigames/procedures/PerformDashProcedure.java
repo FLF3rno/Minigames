@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
@@ -12,6 +13,7 @@ import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
@@ -42,10 +44,6 @@ public class PerformDashProcedure {
 				extraImpulse = extraImpulse + 1;
 				entity.setDeltaMovement(new Vec3((extraImpulse * entity.getLookAngle().x * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength),
 						(extraImpulse * entity.getLookAngle().y * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength), (extraImpulse * entity.getLookAngle().z * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength)));
-				entity.hurtMarked = true;
-				if (entity instanceof net.minecraft.server.level.ServerPlayer _sp) {
-					_sp.connection.send(new net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket(_sp));
-				}
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.dashCooldown = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).maxDashCooldown;
@@ -88,6 +86,27 @@ public class PerformDashProcedure {
 							|| (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.BLANK_LONG_SWORD.get()) {
 						ModifyPercentageCooldownProcedure.execute(world, entity, entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, true, true,
 								GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.MOMENTUM.get())), "minigames:effect_potency"));
+					}
+				}
+				if (CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.GRAVITY_BOOTS.get()))) {
+					if (Direction.DOWN == (entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(30)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+							.getDirection())) {
+						ChangeGravityExecuteProcedure.execute(Direction.UP, entity);
+					} else if (Direction.UP == (entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(30)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+							.getDirection())) {
+						ChangeGravityExecuteProcedure.execute(Direction.DOWN, entity);
+					} else if (Direction.NORTH == (entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(30)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+							.getDirection())) {
+						ChangeGravityExecuteProcedure.execute(Direction.SOUTH, entity);
+					} else if (Direction.SOUTH == (entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(30)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+							.getDirection())) {
+						ChangeGravityExecuteProcedure.execute(Direction.NORTH, entity);
+					} else if (Direction.WEST == (entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(30)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+							.getDirection())) {
+						ChangeGravityExecuteProcedure.execute(Direction.EAST, entity);
+					} else if (Direction.EAST == (entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(30)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+							.getDirection())) {
+						ChangeGravityExecuteProcedure.execute(Direction.WEST, entity);
 					}
 				}
 			}

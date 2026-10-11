@@ -49,17 +49,38 @@ public class GoldenTextureManager {
             if (tex instanceof DynamicTexture dt && dt.getPixels() != null && !dt.getPixels().isClosed()) {
                 baseImage = dt.getPixels();
             } else {
-                Optional<Resource> resOpt = Minecraft.getInstance().getResourceManager().getResource(original);
-                if (resOpt.isPresent()) {
-                    InputStream is = resOpt.get().open();
-                    baseImage = NativeImage.read(is);
-                    mustCloseBase = true;
+                String path = original.getPath();
+                String normPath = path;
+                if (!normPath.startsWith("textures/")) {
+                    normPath = "textures/" + normPath;
+                }
+                if (!normPath.endsWith(".png")) {
+                    normPath = normPath + ".png";
+                }
+                Identifier fixed = Identifier.fromNamespaceAndPath(original.getNamespace(), normPath);
+
+                AbstractTexture fixedTex = Minecraft.getInstance().getTextureManager().getTexture(fixed);
+                if (fixedTex instanceof DynamicTexture dt && dt.getPixels() != null && !dt.getPixels().isClosed()) {
+                    baseImage = dt.getPixels();
+                } else {
+                    Optional<Resource> resOpt = Minecraft.getInstance().getResourceManager().getResource(original);
+                    if (!resOpt.isPresent()) {
+                        resOpt = Minecraft.getInstance().getResourceManager().getResource(fixed);
+                    }
+                    if (!resOpt.isPresent() && !original.getPath().endsWith(".png")) {
+                        Identifier withPng = Identifier.fromNamespaceAndPath(original.getNamespace(), original.getPath() + ".png");
+                        resOpt = Minecraft.getInstance().getResourceManager().getResource(withPng);
+                    }
+                    if (resOpt.isPresent()) {
+                        InputStream is = resOpt.get().open();
+                        baseImage = NativeImage.read(is);
+                        mustCloseBase = true;
+                    }
                 }
             }
 
             if (baseImage == null) {
-                CACHE.put(original, original);
-                return original;
+                return GOLD_MATERIAL_LOCATION;
             }
 
             int w = baseImage.getWidth();
@@ -108,8 +129,7 @@ public class GoldenTextureManager {
             CACHE.put(original, dynamicId);
             return dynamicId;
         } catch (Exception e) {
-            CACHE.put(original, original);
-            return original;
+            return GOLD_MATERIAL_LOCATION;
         } finally {
             if (mustCloseBase && baseImage != null) {
                 try {

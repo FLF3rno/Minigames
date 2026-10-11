@@ -41,13 +41,13 @@ public class KilledDungeonMobProcedure {
 		ItemStack itemstack = ItemStack.EMPTY;
 		double rng = 0;
 		double rngTarget = 0;
-		if (entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon")))) {
+		if (entity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"))) && !entity.getPersistentData().getBooleanOr("respawned", false)) {
 			rng = Mth.nextInt(RandomSource.create(), 1, 100);
 			rngTarget = 1;
-			if (sourceentity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MobEffects.LUCK)) {
+			if (sourceentity instanceof LivingEntity _livEnt3 && _livEnt3.hasEffect(MobEffects.LUCK)) {
 				rngTarget = rngTarget + (sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.LUCK) ? _livEnt.getEffect(MobEffects.LUCK).getAmplifier() : 0) + 1;
 			}
-			if (sourceentity instanceof LivingEntity _livEnt4 && _livEnt4.hasEffect(MobEffects.UNLUCK)) {
+			if (sourceentity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MobEffects.UNLUCK)) {
 				rngTarget = rngTarget - ((sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MobEffects.UNLUCK) ? _livEnt.getEffect(MobEffects.UNLUCK).getAmplifier() : 0) + 1);
 			}
 			if (rng <= rngTarget) {

@@ -5,6 +5,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import net.neoforged.api.distmarker.Dist;
@@ -58,8 +59,14 @@ public class FirstPersonItemSizeHandler {
             return;
         }
 
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null) {
+            return;
+        }
+
         float scale = ItemSizeHelper.getItemScale(stack, event.getHand());
-        if (scale == 1.0f) {
+        float opacity = ItemSizeHelper.getItemOpacity(mc.level);
+        if (scale == 1.0f && opacity >= 0.999f) {
             return;
         }
 
@@ -68,15 +75,27 @@ public class FirstPersonItemSizeHandler {
             return;
         }
 
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null) {
-            return;
-        }
-
         event.setCanceled(true);
 
         try {
-            ScalingSubmitNodeCollector scalingCollector = new ScalingSubmitNodeCollector(event.getSubmitNodeCollector(), scale);
+            boolean isMainHand = (event.getHand() == InteractionHand.MAIN_HAND);
+            HumanoidArm arm = isMainHand ? mc.player.getMainArm() : mc.player.getMainArm().getOpposite();
+            boolean isRightArm = (arm == HumanoidArm.RIGHT);
+            float xDirection = isRightArm ? 1.0f : -1.0f;
+
+            event.getPoseStack().pushPose();
+
+            if (scale != 1.0f) {
+                float diff = scale - 1.0f;
+                // Move towards screen edge (+X right for right arm, -X left for left arm),
+                // downwards (-Y), and further away from the eyes (-Z):
+                float xOffset = xDirection * diff * 0.35f;
+                float yOffset = -diff * 0.22f;
+                float zOffset = -diff * 0.28f;
+                event.getPoseStack().translate(xOffset, yOffset, zOffset);
+            }
+
+            ScalingSubmitNodeCollector scalingCollector = new ScalingSubmitNodeCollector(event.getSubmitNodeCollector(), scale, opacity);
             ItemInHandRenderer renderer = mc.gameRenderer.itemInHandRenderer;
             renderArm.invoke(
                 renderer,
@@ -91,6 +110,8 @@ public class FirstPersonItemSizeHandler {
                 scalingCollector,
                 event.getPackedLight()
             );
+
+            event.getPoseStack().popPose();
         } catch (Exception e) {
             MinigamesMod.LOGGER.error("Error invoking renderArmWithItem with scaling", e);
         }

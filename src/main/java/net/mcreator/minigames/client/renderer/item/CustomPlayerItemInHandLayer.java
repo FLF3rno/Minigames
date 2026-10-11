@@ -2,6 +2,7 @@ package net.mcreator.minigames.client.renderer.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.effects.SpearAnimations;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwingAnimationType;
 import net.mcreator.minigames.client.ItemSizeHelper;
+import net.mcreator.minigames.client.renderer.ScalingSubmitNodeCollector;
 
 public class CustomPlayerItemInHandLayer extends PlayerItemInHandLayer<AvatarRenderState, PlayerModel> {
 
@@ -40,16 +42,20 @@ public class CustomPlayerItemInHandLayer extends PlayerItemInHandLayer<AvatarRen
         EquipmentSlot slot = (arm == state.mainArm) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
         float scale = ItemSizeHelper.getItemScale(itemStack, slot);
 
+        Minecraft mc = Minecraft.getInstance();
+        float opacity = 1.0f;
+        if (mc.getCameraEntity() != null && state.id == mc.getCameraEntity().getId()) {
+            opacity = ItemSizeHelper.getItemOpacity(mc.level);
+        }
+
+        SubmitNodeCollector collectorToUse = submitNodeCollector;
+        if (scale != 1.0f || opacity < 0.999f) {
+            collectorToUse = new ScalingSubmitNodeCollector(submitNodeCollector, scale, opacity);
+        }
+
         InteractionHand currentHand = arm == state.mainArm ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
         if (state.isUsingItem && state.useItemHand == currentHand && state.attackTime < 1.0E-5F && !state.heldOnHead.isEmpty()) {
-            if (scale != 1.0f) {
-                poseStack.pushPose();
-                poseStack.scale(scale, scale, scale);
-                super.submitArmWithItem(state, item, itemStack, arm, poseStack, submitNodeCollector, lightCoords);
-                poseStack.popPose();
-            } else {
-                super.submitArmWithItem(state, item, itemStack, arm, poseStack, submitNodeCollector, lightCoords);
-            }
+            super.submitArmWithItem(state, item, itemStack, arm, poseStack, collectorToUse, lightCoords);
             return;
         }
 
@@ -72,11 +78,7 @@ public class CustomPlayerItemInHandLayer extends PlayerItemInHandLayer<AvatarRen
             (arm == HumanoidArm.RIGHT ? state.rightArmPose : state.leftArmPose).animateUseItem(state, poseStack, ticksUsingItem, arm, itemStack);
         }
 
-        if (scale != 1.0f) {
-            poseStack.scale(scale, scale, scale);
-        }
-
-        item.submit(poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
+        item.submit(poseStack, collectorToUse, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         poseStack.popPose();
     }
 }

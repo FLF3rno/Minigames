@@ -86,6 +86,9 @@ public class ApplyEffectProcedure {
 			} else if ((effect).equals("minigames:lifesteal")) {
 				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
 					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.LIFESTEAL, (int) ticks, (int) (level - 1), (!hide), false));
+			} else if ((effect).equals("minigames:obsidianification")) {
+				if (target instanceof LivingEntity _entity && !_entity.level().isClientSide())
+					_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.OBSIDIANIFICATION, (int) ticks, (int) (level - 1), (!hide), false));
 			} else {
 				{
 					Entity _ent = target;

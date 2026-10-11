@@ -136,6 +136,8 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	private static float cachedGameTime = 0.0f;
 	private static float cachedRainLevel = 0.0f;
 	private static boolean cachedIsSpaceSky = false;
+	private static final int CYAN_COLOR = 0x00FFFF;
+	private static boolean cachedDisableSkybox = false;
 	private static float lastTwinkleGameTime = -999.0f;
 
 	// =========================================================================
@@ -346,10 +348,13 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 					cachedIsSpaceSky = false;
 				}
 
+				cachedDisableSkybox = net.mcreator.minigames.client.gui.options.MinigamesSettingsConfig.getBoolean("disableSkyboxBlock", false);
+
 				// Reset the global batch and corner cache for the new frame
 				resetAllBatches();
 			}
 
+			state.disableSkybox = cachedDisableSkybox;
 			state.isSpaceSky = (state.skyType == SkyboxSimulationBlock.SkyType.DYNAMIC) && cachedIsSpaceSky;
 			state.celestialAngle = cachedCelestialAngle;
 			state.gameTime = cachedGameTime;
@@ -418,6 +423,11 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 			}
 		}
 
+		if (state.disableSkybox) {
+			batchCyan(poseStack, collector, activeFacesMask, bx, by, bz);
+			return;
+		}
+
 		if (state.skyType == SkyboxSimulationBlock.SkyType.END || state.isSpaceSky) {
 			batchPortal(poseStack, collector, RenderTypes.endPortal(), false, activeFacesMask, bx, by, bz);
 		} else if (state.skyType == SkyboxSimulationBlock.SkyType.GATEWAY) {
@@ -427,6 +437,30 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 			batchStars(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 			batchSun(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 			batchMoon(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
+		}
+	}
+
+	private void batchCyan(PoseStack poseStack, SubmitNodeCollector collector, int activeFacesMask, double bx, double by, double bz) {
+		if (!atmoSubmitted) {
+			atmoSubmitted = true;
+			atmoOriginX = bx; atmoOriginY = by; atmoOriginZ = bz;
+			collector.submitCustomGeometry(poseStack, RenderTypes.entitySolid(WHITE_TEXTURE), SkyboxSimulationBlockEntityRenderer::renderBatchedAtmosphere);
+		}
+
+		double dx = bx - atmoOriginX;
+		double dy = by - atmoOriginY;
+		double dz = bz - atmoOriginZ;
+
+		for (int i = 0; i < 6; i++) {
+			if ((activeFacesMask & (1 << i)) == 0) continue;
+			FaceData data = FACE_DATA_ARRAY[i];
+
+			addAtmoQuad(
+				(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z), CYAN_COLOR,
+				(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z), CYAN_COLOR,
+				(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z), CYAN_COLOR,
+				(float) (dx + data.c3x), (float) (dy + data.c3y), (float) (dz + data.c3z), CYAN_COLOR
+			);
 		}
 	}
 

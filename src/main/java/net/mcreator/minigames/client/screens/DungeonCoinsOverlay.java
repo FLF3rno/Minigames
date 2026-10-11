@@ -29,10 +29,8 @@ public class DungeonCoinsOverlay {
 			world = entity.level();
 		}
 		if (ShowDungeonCoinsProcedure.execute(world)) {
-			// Render icon 2x bigger (32x32)
 			event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, 5, h - 37, 0, 0, 32, 32, 32, 32);
 
-			// Render text 2x bigger
 			event.getGuiGraphics().pose().pushMatrix();
 			event.getGuiGraphics().pose().translate(40, h - 30);
 			event.getGuiGraphics().pose().scale(2.0F, 2.0F);

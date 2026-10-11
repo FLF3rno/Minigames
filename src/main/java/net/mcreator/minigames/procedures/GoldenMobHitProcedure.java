@@ -39,22 +39,24 @@ public class GoldenMobHitProcedure {
 			return;
 		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.GOLDEN)) {
 			if (sourceentity instanceof Player && !world.isClientSide()) {
-				MinigamesModVariables.MapVariables.get(world).dungeonCoins = MinigamesModVariables.MapVariables.get(world).dungeonCoins
-						+ (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.GOLDEN) ? _livEnt.getEffect(MinigamesModMobEffects.GOLDEN).getAmplifier() : 0) + 1;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				if (world instanceof Level _level) {
-					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:coin")), SoundSource.NEUTRAL, 1, 1);
-					} else {
-						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:coin")), SoundSource.NEUTRAL, 1, 1, false);
-					}
-				}
-				MinigamesModVariables.MapVariables.get(world).showCoins = true;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				MinigamesMod.queueServerWork(100, () -> {
-					MinigamesModVariables.MapVariables.get(world).showCoins = false;
+				if (!entity.getPersistentData().getBooleanOr("respawned", false)) {
+					MinigamesModVariables.MapVariables.get(world).dungeonCoins = MinigamesModVariables.MapVariables.get(world).dungeonCoins
+							+ (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.GOLDEN) ? _livEnt.getEffect(MinigamesModMobEffects.GOLDEN).getAmplifier() : 0) + 1;
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				});
+					if (world instanceof Level _level) {
+						if (!_level.isClientSide()) {
+							_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:coin")), SoundSource.NEUTRAL, 1, 1);
+						} else {
+							_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:coin")), SoundSource.NEUTRAL, 1, 1, false);
+						}
+					}
+					MinigamesModVariables.MapVariables.get(world).showCoins = true;
+					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+					MinigamesMod.queueServerWork(100, () -> {
+						MinigamesModVariables.MapVariables.get(world).showCoins = false;
+						MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+					});
+				}
 			}
 		}
 	}

@@ -68,23 +68,26 @@ public final class DungeonItemAccess {
 			return item;
 		}
 		Item rawItem = item.getItem();
-		if (rawItem == net.mcreator.minigames.init.MinigamesModItems.BLACKSMITH_HAMMER.get()) {
+		if (rawItem == MinigamesModItems.BLACKSMITH_HAMMER.get()) {
 			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("isForged", true));
 		}
-		if (rawItem == net.mcreator.minigames.init.MinigamesModItems.GHOSTIFIER.get() ||
-				rawItem == net.mcreator.minigames.init.MinigamesModItems.PHASE_CLOAK.get()) {
+		if (rawItem == MinigamesModItems.GHOSTIFIER.get() ||
+				rawItem == MinigamesModItems.PHASE_CLOAK.get()) {
 			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("phantom", true));
 			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("blessed", true));
 		}
-		if (rawItem == net.mcreator.minigames.init.MinigamesModItems.SILENT_ASSASSIN.get()) {
+		if (rawItem == MinigamesModItems.SILENT_ASSASSIN.get()) {
 			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("bleed", true));
 		}
-		if (rawItem == net.mcreator.minigames.init.MinigamesModItems.HORSESHOE.get()) {
+		if (rawItem == MinigamesModItems.HORSESHOE.get()) {
 			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("luck", true));
 		}
 		if (rawItem == MinigamesModItems.MIDAS_LONGSWORD.get() ||
 				rawItem == MinigamesModItems.GOLDEN_MANGO.get() ) {
 			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("golden", true));
+		}
+		if (rawItem == MinigamesModItems.OBSIDIAN_IDLE.get()) {
+			CustomData.update(DataComponents.CUSTOM_DATA, item, tag -> tag.putBoolean("obsidianification", true));
 		}
 		return item;
 	}
@@ -147,6 +150,10 @@ public final class DungeonItemAccess {
 
 	public static boolean hasGolden(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("golden", false);
+	}
+
+	public static boolean hasObsidianification(ItemStack stack) {
+		return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("obsidianification", false);
 	}
 
 	public static int getBackpackBonus(Player player) {

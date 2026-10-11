@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
-import net.mcreator.minigames.network.PlayScreenAnimationMessage;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -32,24 +31,38 @@ public class WonVoteProcedure {
 				StartSpleefProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 4) {
 				StartRoomProcedure.execute(world);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "fight";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 5) {
 				StartRoomProcedure.execute(world);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "loot";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 6) {
 				StartRoomProcedure.execute(world);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "miniboss";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 7) {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 						_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 200, 1, false, false));
 				}
-				PlayScreenAnimationMessage.sendToAll(world, 150, "roguelike_boss", 1.0f);
-				MinigamesMod.queueServerWork(200, () -> {
+				if (world.isClientSide()) {
+					PlayBossCutsceneProcedure.execute();
+				}
+				MinigamesMod.queueServerWork(100, () -> {
 					StartBossProcedure.execute(world);
 					StartRoomProcedure.execute(world);
 				});
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "boss";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {
 				StartRoomProcedure.execute(world);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "challenge";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 9) {
 				StartRoomProcedure.execute(world);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "fight";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
 		} else {
 			if (entity instanceof ServerPlayer _player)

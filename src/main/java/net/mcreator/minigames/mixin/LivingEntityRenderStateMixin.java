@@ -18,6 +18,9 @@ public abstract class LivingEntityRenderStateMixin implements PhantomRenderState
 	private boolean minigames_golden;
 
 	@Unique
+	private boolean minigames_obsidian;
+
+	@Unique
 	private Direction minigames_gravity = Direction.DOWN;
 
 	@Override
@@ -38,6 +41,16 @@ public abstract class LivingEntityRenderStateMixin implements PhantomRenderState
 	@Override
 	public void minigames_setGolden(boolean golden) {
 		this.minigames_golden = golden;
+	}
+
+	@Override
+	public boolean minigames_isObsidian() {
+		return this.minigames_obsidian;
+	}
+
+	@Override
+	public void minigames_setObsidian(boolean obsidian) {
+		this.minigames_obsidian = obsidian;
 	}
 
 	@Override

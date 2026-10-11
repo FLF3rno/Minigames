@@ -150,6 +150,8 @@ public class ShieldAngelEntity extends Monster {
 			return false;
 		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
 			return false;
+		if (damagesource.is(DamageTypes.IN_WALL))
+			return false;
 		return super.hurtServer(level, damagesource, amount);
 	}
 

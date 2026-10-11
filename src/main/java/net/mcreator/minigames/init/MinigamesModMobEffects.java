@@ -39,6 +39,7 @@ public class MinigamesModMobEffects {
 	public static final DeferredHolder<MobEffect, MobEffect> DAMAGE_RESISTANCE = REGISTRY.register("damage_resistance", DamageResistanceMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> SLOWDOWN = REGISTRY.register("slowdown", SlowdownMobEffect::new);
 	public static final DeferredHolder<MobEffect, MobEffect> LIFESTEAL = REGISTRY.register("lifesteal", LifestealMobEffect::new);
+	public static final DeferredHolder<MobEffect, MobEffect> OBSIDIANIFICATION = REGISTRY.register("obsidianification", ObsidianificationMobEffect::new);
 
 	@SubscribeEvent
 	public static void onEffectRemoved(MobEffectEvent.Remove event) {
@@ -68,6 +69,8 @@ public class MinigamesModMobEffects {
 		} else if (effectInstance.is(PHANTOM)) {
 			PhantomEffectEndsProcedure.execute(entity);
 		} else if (effectInstance.is(GOLDEN)) {
+			GoldenEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+		} else if (effectInstance.is(OBSIDIANIFICATION)) {
 			GoldenEffectExpiresProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
 		}
 	}

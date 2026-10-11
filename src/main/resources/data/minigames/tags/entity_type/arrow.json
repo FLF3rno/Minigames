@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "arrow",
+    "minigames:cannonball",
+    "minigames:grapple",
+    "minigames:magma_dart_projectile",
+    "minigames:blessed_arrow",
+    "spectral_arrow",
+    "minigames:volleybomb_entity",
+    "minigames:cactus_arrow",
+    "minigames:snowbomb_projectile",
+    "minigames:glue_projectile",
+    "minigames:ice_dart_projectile",
+    "minigames:volcanic_spew"
+  ]
+}

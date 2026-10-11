@@ -23,7 +23,7 @@ public class SpawnFourRoomProcedureProcedure {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			prefix = "dungeon_four_";
 			if ((MinigamesModVariables.MapVariables.get(world).floorTypeDungeon).equals("church")) {
-				rng = Mth.nextInt(RandomSource.create(), 1, 5);
+				rng = Mth.nextInt(RandomSource.create(), 1, 7);
 			}
 			structureX = x;
 			structureY = y;
@@ -35,6 +35,8 @@ public class SpawnFourRoomProcedureProcedure {
 				structureY = structureY - 21;
 			} else if (rng == 4) {
 				structureY = structureY - 18;
+			} else if (rng == 6) {
+				structureY = structureY - 1;
 			}
 			rotation = "none";
 			SpawnStructureDungeonProcedure.execute(world, Mth.nextInt(RandomSource.create(), 1, 999999999), structureX, structureY, structureZ, rotation, spawnRoomName);

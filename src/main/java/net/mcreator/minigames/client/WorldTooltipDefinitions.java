@@ -31,6 +31,7 @@ public final class WorldTooltipDefinitions {
     private static final int BLEED_COLOR = 0xCF3041;
     private static final int LUCK_COLOR = 0x2AD56E;
     private static final int GOLDEN_COLOR = 0xF4B10B;
+    private static final int OBSIDIAN_COLOR = 0xa400ff;
     private static final int DEFINITION_TEXT = 0xEAE6D8;
     private static final int PADDING_X = 6;
     private static final int PADDING_Y = 6;
@@ -43,7 +44,7 @@ public final class WorldTooltipDefinitions {
     private static final int DEFINITION_GAP = 5;
     private static final List<DefinitionRule> DEFINITION_RULES = List.of(
             new DefinitionRule(10,
-                    stack -> DungeonItemAccess.isStolen(stack),
+                    DungeonItemAccess::isStolen,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(10,
                             DefinitionText.staticText("STOLEN", Style.EMPTY.withBold(true).withColor(THIEF_COLOR)),
@@ -53,7 +54,7 @@ public final class WorldTooltipDefinitions {
             ),
             new DefinitionRule(11,
                     stack -> DungeonItemAccess.Forged(stack) != 0 || DungeonItemAccess.isForged(stack),
-                    stack -> DungeonItemAccess.Forged(stack),
+                    DungeonItemAccess::Forged,
                     (stack, amount) -> new DefinitionCard(11,
                             DefinitionText.staticText("FORGED", Style.EMPTY.withBold(true).withColor(FORGED_COLOR)),
                             List.of(
@@ -64,7 +65,7 @@ public final class WorldTooltipDefinitions {
                     )
             ),
             new DefinitionRule(9,
-                    stack -> DungeonItemAccess.isGlitched(stack),
+                    DungeonItemAccess::isGlitched,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(9,
                             DefinitionText.animatedGlitch("GLITCHED"),
@@ -75,7 +76,7 @@ public final class WorldTooltipDefinitions {
                     )
             ),
             new DefinitionRule(5,
-                    stack -> DungeonItemAccess.hasPhantom(stack),
+                    DungeonItemAccess::hasPhantom,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(10,
                             DefinitionText.staticText("PHANTOM", Style.EMPTY.withBold(true).withColor(PHANTOM_COLOR)),
@@ -83,7 +84,7 @@ public final class WorldTooltipDefinitions {
                     )
             ),
             new DefinitionRule(4,
-                    stack -> DungeonItemAccess.hasBleed(stack),
+                    DungeonItemAccess::hasBleed,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(11,
                             DefinitionText.staticText("BLEED", Style.EMPTY.withBold(true).withColor(BLEED_COLOR)),
@@ -94,7 +95,7 @@ public final class WorldTooltipDefinitions {
                     )
             ),
             new DefinitionRule(7,
-                    stack -> DungeonItemAccess.hasLuck(stack),
+                    DungeonItemAccess::hasLuck,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(9,
                             DefinitionText.staticText("LUCK", Style.EMPTY.withBold(true).withColor(LUCK_COLOR)),
@@ -105,7 +106,7 @@ public final class WorldTooltipDefinitions {
                     )
             ),
             new DefinitionRule(8,
-                    stack -> DungeonItemAccess.hasGolden(stack),
+                    DungeonItemAccess::hasGolden,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(5,
                             DefinitionText.staticText("GOLDEN", Style.EMPTY.withBold(true).withColor(GOLDEN_COLOR)),
@@ -120,8 +121,26 @@ public final class WorldTooltipDefinitions {
                             )
                     )
             ),
+            new DefinitionRule(3,
+                    DungeonItemAccess::hasObsidianification,
+                    stack -> 0,
+                    (stack, val) -> new DefinitionCard(4,
+                            DefinitionText.staticText("OBSIDIANIFICATION", Style.EMPTY.withBold(true).withColor(OBSIDIAN_COLOR)),
+                            List.of(
+                                    DefinitionText.staticText("Stunned", Style.EMPTY.withColor(0xFFFBFF35)),
+                                    DefinitionText.staticText("Immune", Style.EMPTY.withColor(0xFFb7b6b6)),
+                                    DefinitionText.fromComponent(centeredLine(
+                                            partialColorText("Touching ", 0xFFFFFFFF),
+                                            partialColorText("monsters ", MONSTER_COLOR),
+                                            partialColorText("deals ", 0xFFFFFFFF),
+                                            partialColorText("damage ", MONSTER_COLOR)
+                                    )),
+                                    DefinitionText.staticText("based off of your velocity", Style.EMPTY.withColor(0xFFFFFFFF))
+                            )
+                    )
+            ),
             new DefinitionRule(6,
-                    stack -> DungeonItemAccess.hasBlessed(stack),
+                    DungeonItemAccess::hasBlessed,
                     stack -> 0,
                     (stack, val) -> new DefinitionCard(6,
                             DefinitionText.staticText("BLESSED", Style.EMPTY.withBold(true).withColor(BLESSED_COLOR)),

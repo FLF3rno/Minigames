@@ -59,7 +59,7 @@ public class OnDungeonDeathProcedure {
 			}
 			double playerMultiplier = world.players().size() * 0.75 + 0.25;
 			double earned = baseCoins * killBonus * playerMultiplier;
-			if (earned > 0) {
+			if (earned > 0 && !entity.getPersistentData().getBooleanOr("respawned", false)) {
 				MinigamesModVariables.MapVariables.get(world).dungeonCoins += earned;
 				MinigamesModVariables.MapVariables.get(world).showCoins = true;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();

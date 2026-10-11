@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minigames:obsidian_idle",
     "minigames:the_finisher",
     "minigames:horseshoe",
     "minigames:phase_cloak",
@@ -12,11 +13,14 @@
     "minigames:potheist",
     "minigames:blank_dagger",
     "minigames:big_pocket",
+    "minigames:gravity_boots",
+    "minigames:friction",
     "minigames:bat_essence",
     "minigames:choice_bag_thief",
     "minigames:air_boots",
     "minigames:snatching_claw",
     "minigames:soul_curse",
+    "minigames:soulsmith_katana",
     "minigames:cactus_crossbow",
     "minigames:midas_longsword"
   ]

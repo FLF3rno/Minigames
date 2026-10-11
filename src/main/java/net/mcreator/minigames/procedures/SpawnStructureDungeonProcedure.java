@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
+import net.mcreator.minigames.init.MinigamesModBlocks;
 import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.entity.CandleheadEntity;
 import net.mcreator.minigames.entity.ChurchSharpenerEntity;
@@ -253,6 +254,15 @@ public class SpawnStructureDungeonProcedure {
 										state,
 										3
 								);
+							}
+
+							if (state.getBlock() == MinigamesModBlocks.FIGHT_DOORS.get()) {
+								FightDoorsBlockedCheckProcedure.execute(_level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), state);
+							} else if (state.getBlock() == MinigamesModBlocks.LOOT_DOORS.get()
+									|| state.getBlock() == MinigamesModBlocks.MINIBOSS_DOORS.get()
+									|| state.getBlock() == MinigamesModBlocks.BOSS_DOORS.get()
+									|| state.getBlock() == MinigamesModBlocks.FLOOR_DOORS.get()) {
+								ReplaceDoorProcedure.execute(_level, blockPos.getX(), blockPos.getY(), blockPos.getZ());
 							}
 						}
 

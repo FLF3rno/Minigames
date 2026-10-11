@@ -2,8 +2,10 @@ package net.mcreator.minigames.mixin;
 
 import net.mcreator.minigames.client.GoldenRenderState;
 import net.mcreator.minigames.client.GoldenTextureManager;
+import net.mcreator.minigames.client.ObsidianTextureManager;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.GoldenStateSyncMessage;
+import net.mcreator.minigames.network.ObsidianStateSyncMessage;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -35,6 +37,8 @@ public abstract class GoldenRenderMixin<T extends LivingEntity, S extends Living
 		if (state instanceof GoldenRenderState goldenState) {
 			boolean isGolden = entity != null && (entity.hasEffect(MinigamesModMobEffects.GOLDEN) || GoldenStateSyncMessage.isGoldenOnClient(entity.getId()));
 			goldenState.minigames_setGolden(isGolden);
+			boolean isObsidian = entity != null && (entity.hasEffect(MinigamesModMobEffects.OBSIDIANIFICATION) || ObsidianStateSyncMessage.isObsidianOnClient(entity.getId()));
+			goldenState.minigames_setObsidian(isObsidian);
 		}
 	}
 
@@ -50,14 +54,43 @@ public abstract class GoldenRenderMixin<T extends LivingEntity, S extends Living
 		boolean appearGlowing,
 		CallbackInfoReturnable<RenderType> cir
 	) {
-		if (state instanceof GoldenRenderState goldenState && goldenState.minigames_isGolden() && !appearGlowing) {
-			Identifier original = this.getTextureLocation(state);
-			Identifier goldenTexture = GoldenTextureManager.getGoldenTexture(original);
-			if (forceTransparent) {
-				cir.setReturnValue(RenderTypes.entityTranslucentCullItemTarget(goldenTexture));
-			} else if (isBodyVisible) {
-				cir.setReturnValue(this.model.renderType(goldenTexture));
+		if (state instanceof GoldenRenderState goldenState && !appearGlowing) {
+			if (goldenState.minigames_isObsidian()) {
+				Identifier original = this.getTextureLocation(state);
+				Identifier obsidianTexture = ObsidianTextureManager.getObsidianTexture(original);
+				// Solid obsidian with NO transparency - use entity cutout without culling instead of translucent
+				cir.setReturnValue(RenderTypes.entityCutout(obsidianTexture, false));
+			} else if (goldenState.minigames_isGolden()) {
+				Identifier original = this.getTextureLocation(state);
+				Identifier goldenTexture = GoldenTextureManager.getGoldenTexture(original);
+				if (forceTransparent) {
+					cir.setReturnValue(RenderTypes.entityTranslucentCullItemTarget(goldenTexture));
+				} else if (isBodyVisible) {
+					cir.setReturnValue(this.model.renderType(goldenTexture));
+				}
 			}
+		}
+	}
+
+	@Inject(
+		method = "isBodyVisible",
+		at = @At("HEAD"),
+		cancellable = true
+	)
+	private void minigames_isBodyVisible(S state, CallbackInfoReturnable<Boolean> cir) {
+		if (state instanceof GoldenRenderState goldenState && (goldenState.minigames_isGolden() || goldenState.minigames_isObsidian())) {
+			cir.setReturnValue(true);
+		}
+	}
+
+	@Inject(
+		method = "shouldRenderLayers",
+		at = @At("HEAD"),
+		cancellable = true
+	)
+	private void minigames_shouldRenderLayers(S state, CallbackInfoReturnable<Boolean> cir) {
+		if (state instanceof GoldenRenderState goldenState && (goldenState.minigames_isObsidian() || goldenState.minigames_isGolden())) {
+			cir.setReturnValue(false);
 		}
 	}
 
@@ -67,7 +100,7 @@ public abstract class GoldenRenderMixin<T extends LivingEntity, S extends Living
 		cancellable = true
 	)
 	private void minigames_getGoldenModelTint(S state, CallbackInfoReturnable<Integer> cir) {
-		if (state instanceof GoldenRenderState goldenState && goldenState.minigames_isGolden()) {
+		if (state instanceof GoldenRenderState goldenState && (goldenState.minigames_isGolden() || goldenState.minigames_isObsidian())) {
 			cir.setReturnValue(-1);
 		}
 	}

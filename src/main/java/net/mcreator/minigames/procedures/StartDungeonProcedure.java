@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Direction;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
@@ -40,6 +41,9 @@ public class StartDungeonProcedure {
 		if (world instanceof Level _level)
 			_level.getScoreboard().addPlayerTeam("dungeon_mobs");
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			if (!(entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).gravity == Direction.DOWN)) {
+				ChangeGravityExecuteProcedure.execute(Direction.DOWN, entityiterator);
+			}
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.showOnlyHearts = true;
@@ -105,15 +109,17 @@ public class StartDungeonProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
 		AnimationScreenTrigger.startAnimation(200, "fade_in_fill", 1f);
+		MinigamesModVariables.MapVariables.get(world).currentRoomType = "spawn";
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(20, () -> {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 						"execute in minigames:dungeon_dimension run tp @a 0 200 0");
 			if (world instanceof ServerLevel _origLevel) {
-				LevelAccessor _switchworld15 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
-				if (_switchworld15 != null) {
-					worldSwitch15(_switchworld15, x, y, z);
+				LevelAccessor _switchworld16 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));
+				if (_switchworld16 != null) {
+					worldSwitch16(_switchworld16, x, y, z);
 				}
 			}
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
@@ -123,7 +129,7 @@ public class StartDungeonProcedure {
 		});
 	}
 
-	private static void worldSwitch15(LevelAccessor world, double x, double y, double z) {
+	private static void worldSwitch16(LevelAccessor world, double x, double y, double z) {
 		ChooseFloorProcedure.execute(world, x, y, z, 1);
 	}
 }

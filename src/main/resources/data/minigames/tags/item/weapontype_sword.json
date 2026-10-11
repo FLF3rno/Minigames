@@ -7,6 +7,7 @@
     "minigames:beater",
     "minigames:combo_dagger",
     "minigames:blazing_blade",
+    "minigames:long_long_longsword",
     "minigames:silent_assassin",
     "minigames:parasite_scythe",
     "minigames:mending_mace",
@@ -19,6 +20,7 @@
     "minigames:blank_sword",
     "minigames:adrenaline_blade",
     "minigames:blank_long_sword",
+    "minigames:soulsmith_katana",
     "minigames:midas_longsword"
   ]
 }

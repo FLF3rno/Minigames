@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.DifficultyInstance;
@@ -52,6 +53,7 @@ public class ShieldAngelEntity extends Monster {
 		setNoAi(false);
 		setPersistenceRequired();
 		this.moveControl = new FlyingMoveControl(this, 10, true);
+		this.setNoGravity(true);
 		refreshDimensions();
 	}
 
@@ -116,17 +118,37 @@ public class ShieldAngelEntity extends Monster {
 	}
 
 	@Override
-	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
-		double x = this.getX();
-		double y = this.getY();
-		double z = this.getZ();
-		Level world = this.level();
-		Entity entity = this;
-		Entity sourceentity = damagesource.getEntity();
-		Entity immediatesourceentity = damagesource.getDirectEntity();
+	public boolean isInvulnerableTo(ServerLevel level, DamageSource damagesource) {
+		if (damagesource.is(DamageTypes.IN_WALL))
+			return true;
+		if (damagesource.is(DamageTypes.IN_FIRE) || damagesource.is(DamageTypes.ON_FIRE) || damagesource.is(DamageTypes.LAVA) || damagesource.is(DamageTypes.HOT_FLOOR))
+			return true;
+		if (damagesource.is(DamageTypes.FALL) || damagesource.is(DamageTypes.CACTUS) || damagesource.is(DamageTypes.DROWN))
+			return true;
+		if (damagesource.is(DamageTypes.LIGHTNING_BOLT) || damagesource.is(DamageTypes.DRAGON_BREATH))
+			return true;
+		if (damagesource.is(DamageTypes.EXPLOSION) || damagesource.is(DamageTypes.PLAYER_EXPLOSION))
+			return true;
+		if (damagesource.is(DamageTypes.TRIDENT))
+			return true;
+		if (damagesource.is(DamageTypes.FALLING_ANVIL))
+			return true;
+		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
+			return true;
+		if (damagesource.getDirectEntity() instanceof AbstractArrow)
+			return true;
+		if (damagesource.getDirectEntity() instanceof AbstractThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud || damagesource.typeHolder().is(NeoForgeMod.POISON_DAMAGE))
+			return true;
+		return super.isInvulnerableTo(level, damagesource);
+	}
 
-		ShieldAngelHurtProcedure.execute(world, entity);
-		if (damagesource.is(DamageTypes.IN_FIRE))
+	@Override
+	public void checkDespawn() {
+	}
+
+	@Override
+	public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
+		if (damagesource.is(DamageTypes.IN_FIRE) || damagesource.is(DamageTypes.ON_FIRE) || damagesource.is(DamageTypes.LAVA) || damagesource.is(DamageTypes.HOT_FLOOR))
 			return false;
 		if (damagesource.getDirectEntity() instanceof AbstractArrow)
 			return false;
@@ -152,6 +174,16 @@ public class ShieldAngelEntity extends Monster {
 			return false;
 		if (damagesource.is(DamageTypes.IN_WALL))
 			return false;
+
+		double x = this.getX();
+		double y = this.getY();
+		double z = this.getZ();
+		Level world = this.level();
+		Entity entity = this;
+		Entity sourceentity = damagesource.getEntity();
+		Entity immediatesourceentity = damagesource.getDirectEntity();
+
+		ShieldAngelHurtProcedure.execute(world, entity);
 		return super.hurtServer(level, damagesource, amount);
 	}
 
@@ -191,6 +223,12 @@ public class ShieldAngelEntity extends Monster {
 	public void tick() {
 		super.tick();
 		if (this.level().isClientSide()) {
+			int currentAnim = this.entityData.get(ANIM);
+			if (currentAnim == 0) {
+				this.animationState0.startIfStopped(this.tickCount);
+			} else {
+				this.animationState0.stop();
+			}
 			if (this.animationState0.isStarted()) {
 				float elapsedSeconds = this.animationState0.getTimeInMillis(this.tickCount) / 1000.0F;
 				if (elapsedSeconds >= shieldagentAnimation.rotate.lengthInSeconds()) {
@@ -225,6 +263,10 @@ public class ShieldAngelEntity extends Monster {
 	}
 
 	@Override
+	public void travel(Vec3 travelVector) {
+	}
+
+	@Override
 	protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 	}
 
@@ -236,12 +278,36 @@ public class ShieldAngelEntity extends Monster {
 	@Override
 	public void aiStep() {
 		super.aiStep();
+		this.setDeltaMovement(0, 0, 0);
 		this.setNoGravity(true);
+	}
+
+	@Override
+	public boolean isPushable() {
+		return false;
+	}
+
+	@Override
+	protected void doPush(Entity entityIn) {
+	}
+
+	@Override
+	protected void pushEntities() {
 	}
 
 	@Override
 	protected float getFlyingSpeed() {
 		return (float) this.getAttributeValue(Attributes.FLYING_SPEED);
+	}
+
+	@Override
+	public boolean checkSpawnObstruction(net.minecraft.world.level.LevelReader level) {
+		return true;
+	}
+
+	@Override
+	public boolean checkSpawnRules(net.minecraft.world.level.LevelAccessor level, EntitySpawnReason reason) {
+		return true;
 	}
 
 	public static void init(RegisterSpawnPlacementsEvent event) {
@@ -257,6 +323,7 @@ public class ShieldAngelEntity extends Monster {
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 10);
 		builder = builder.add(Attributes.FLYING_SPEED, 0);
+		builder = builder.add(Attributes.GRAVITY, 0);
 		return builder;
 	}
 }

@@ -136,7 +136,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	private static float cachedGameTime = 0.0f;
 	private static float cachedRainLevel = 0.0f;
 	private static boolean cachedIsSpaceSky = false;
-	private static final int CYAN_COLOR = 0x00FFFF;
+	private static final int CYAN_COLOR = 0x98DDF9;
 	private static boolean cachedDisableSkybox = false;
 	private static float lastTwinkleGameTime = -999.0f;
 

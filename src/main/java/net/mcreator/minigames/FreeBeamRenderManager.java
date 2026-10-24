@@ -36,6 +36,8 @@ public class FreeBeamRenderManager {
         PoseStack poseStack = event.getPoseStack();
         MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
         Vec3 cameraPos = mc.gameRenderer.getMainCamera().position();
+        VertexConsumer buffer = bufferSource.getBuffer(RenderTypes.lightning());
+        boolean renderedAny = false;
 
         for (Player player : mc.level.players()) {
             try {
@@ -44,19 +46,14 @@ public class FreeBeamRenderManager {
                 }
 
                 Vec3 origin = getGroundOrigin(player);
-
-                poseStack.pushPose();
-                poseStack.translate(
-                        origin.x - cameraPos.x,
-                        origin.y - cameraPos.y,
-                        origin.z - cameraPos.z
-                );
-
-                renderBeam(poseStack, bufferSource);
-
-                poseStack.popPose();
+                renderBeam(buffer, origin, cameraPos);
+                renderedAny = true;
             } catch (Exception ignored) {
             }
+        }
+
+        if (renderedAny) {
+            bufferSource.endBatch(RenderTypes.lightning());
         }
     }
 
@@ -91,11 +88,13 @@ public class FreeBeamRenderManager {
     }
 
     private static void renderBeam(
-            PoseStack poseStack,
-            MultiBufferSource bufferSource
+            VertexConsumer buffer,
+            Vec3 origin,
+            Vec3 cameraPos
     ) {
-        VertexConsumer buffer = bufferSource.getBuffer(RenderTypes.lightning());
-        Matrix4f matrix = poseStack.last().pose();
+        float ox = (float) (origin.x - cameraPos.x);
+        float oy = (float) (origin.y - cameraPos.y);
+        float oz = (float) (origin.z - cameraPos.z);
 
         float r = 1.0F;
         float g = 0.78F;
@@ -103,8 +102,8 @@ public class FreeBeamRenderManager {
         float alpha = 0.75F;
 
         addFace(
-                matrix,
                 buffer,
+                ox, oy, oz,
                 -BASE_RADIUS, -BASE_RADIUS,
                 -TOP_RADIUS, -TOP_RADIUS,
                 BASE_RADIUS, -BASE_RADIUS,
@@ -113,8 +112,8 @@ public class FreeBeamRenderManager {
         );
 
         addFace(
-                matrix,
                 buffer,
+                ox, oy, oz,
                 BASE_RADIUS, BASE_RADIUS,
                 TOP_RADIUS, TOP_RADIUS,
                 -BASE_RADIUS, BASE_RADIUS,
@@ -123,8 +122,8 @@ public class FreeBeamRenderManager {
         );
 
         addFace(
-                matrix,
                 buffer,
+                ox, oy, oz,
                 BASE_RADIUS, -BASE_RADIUS,
                 TOP_RADIUS, -TOP_RADIUS,
                 BASE_RADIUS, BASE_RADIUS,
@@ -133,8 +132,8 @@ public class FreeBeamRenderManager {
         );
 
         addFace(
-                matrix,
                 buffer,
+                ox, oy, oz,
                 -BASE_RADIUS, BASE_RADIUS,
                 -TOP_RADIUS, TOP_RADIUS,
                 -BASE_RADIUS, -BASE_RADIUS,
@@ -144,8 +143,8 @@ public class FreeBeamRenderManager {
     }
 
     private static void addFace(
-            Matrix4f matrix,
             VertexConsumer buffer,
+            float ox, float oy, float oz,
             float x1Bottom,
             float z1Bottom,
             float x1Top,
@@ -159,28 +158,28 @@ public class FreeBeamRenderManager {
             float b,
             float alpha
     ) {
-        buffer.addVertex(matrix, x1Bottom, 0.0F, z1Bottom)
+        buffer.addVertex(ox + x1Bottom, oy + 0.0F, oz + z1Bottom)
                 .setColor(r, g, b, alpha)
                 .setUv(0.0F, 1.0F)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(15728880)
                 .setNormal(0.0F, 1.0F, 0.0F);
 
-        buffer.addVertex(matrix, x1Top, BEAM_HEIGHT, z1Top)
+        buffer.addVertex(ox + x1Top, oy + BEAM_HEIGHT, oz + z1Top)
                 .setColor(r, g, b, alpha)
                 .setUv(0.0F, 0.0F)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(15728880)
                 .setNormal(0.0F, 1.0F, 0.0F);
 
-        buffer.addVertex(matrix, x2Top, BEAM_HEIGHT, z2Top)
+        buffer.addVertex(ox + x2Top, oy + BEAM_HEIGHT, oz + z2Top)
                 .setColor(r, g, b, alpha)
                 .setUv(1.0F, 0.0F)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(15728880)
                 .setNormal(0.0F, 1.0F, 0.0F);
 
-        buffer.addVertex(matrix, x2Bottom, 0.0F, z2Bottom)
+        buffer.addVertex(ox + x2Bottom, oy + 0.0F, oz + z2Bottom)
                 .setColor(r, g, b, alpha)
                 .setUv(1.0F, 1.0F)
                 .setOverlay(OverlayTexture.NO_OVERLAY)

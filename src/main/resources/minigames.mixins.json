@@ -2,9 +2,7 @@
   "required": true,
   "package": "net.mcreator.minigames.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "RelicInventoryMixin"
-  ],
+  "mixins": [],
   "client": [
     "PlayerAnimationMixin",
     "PlayerAnimationRendererMixin",

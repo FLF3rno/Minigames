@@ -155,7 +155,10 @@ public class FlavioOmegaLaserEntity extends Monster {
 			canPitch = true;
 			canYaw = true;
 		} else if (total == 2) {
-			if (screenIndex == 1) canPitch = true;
+			if (screenIndex == 1) {
+				canPitch = true;
+				canYaw = true;
+			}
 		} else if (total == 3) {
 			if (screenIndex == 1) canPitch = true;
 			if (screenIndex == 2) canYaw = true;
@@ -274,11 +277,20 @@ public class FlavioOmegaLaserEntity extends Monster {
 	}
 
 	@Override
+	public float getViewYRot(float partialTick) {
+		return this.getYRot() + this.getHeadYaw();
+	}
+
+	@Override
+	public float getViewXRot(float partialTick) {
+		return this.getHeadPitch();
+	}
+
+	@Override
 	public void tick() {
 		super.tick();
 		if (this.level().isClientSide()) {
 			// Align camera entity view angles with cannon body + head aim
-			this.setYRot(this.getYRot());
 			this.setYHeadRot(this.getYRot() + this.getHeadYaw());
 			this.setXRot(this.getHeadPitch());
 

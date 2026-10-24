@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,6 +46,18 @@ public class ApplyTelegraphProcedure {
             int ticks,
             int attackId
     ) {
+        execute(world, x, y, z, ticks, attackId, -1);
+    }
+
+    public static void execute(
+            LevelAccessor world,
+            double x,
+            double y,
+            double z,
+            int ticks,
+            int attackId,
+            int sourceEntityId
+    ) {
         if (!(world instanceof Level level) || !level.isClientSide())
             return;
 
@@ -54,9 +67,15 @@ public class ApplyTelegraphProcedure {
         TELEGRAPHS.add(
                 new Telegraph(
                         new Vec3(x, y, z),
-                        ticks
+                        ticks,
+                        sourceEntityId
                 )
         );
+    }
+
+    public static void clearForEntity(int entityId) {
+        if (entityId < 0) return;
+        TELEGRAPHS.removeIf(t -> t.sourceEntityId == entityId);
     }
 
     @SubscribeEvent
@@ -68,6 +87,11 @@ public class ApplyTelegraphProcedure {
 
             if (telegraph.ticks <= 0) {
                 TELEGRAPHS.remove(telegraph);
+            } else if (telegraph.sourceEntityId >= 0 && Minecraft.getInstance().level != null) {
+                Entity entity = Minecraft.getInstance().level.getEntity(telegraph.sourceEntityId);
+                if (entity == null || !entity.isAlive() || (entity instanceof LivingEntity living && living.isDeadOrDying())) {
+                    TELEGRAPHS.remove(telegraph);
+                }
             }
         }
     }
@@ -384,13 +408,16 @@ public class ApplyTelegraphProcedure {
 
         private final Vec3 pos;
         private int ticks;
+        private final int sourceEntityId;
 
         private Telegraph(
                 Vec3 pos,
-                int ticks
+                int ticks,
+                int sourceEntityId
         ) {
             this.pos = pos;
             this.ticks = ticks;
+            this.sourceEntityId = sourceEntityId;
         }
     }
 }

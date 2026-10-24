@@ -28,14 +28,13 @@ public class PlayerInfoMixin {
 		String swapped = AccountSwapClient.getSwappedName(info.getProfile().id());
 		if (swapped != null && !swapped.isEmpty()) {
 			Component original = cir.getReturnValue();
-			if (original != null && original.getString().contains(swapped)) {
-				return;
+			String swappedColor = AccountSwapClient.getSwappedColor(info.getProfile().id());
+			int colorRgb = net.mcreator.minigames.util.ColorUtils.parseHex(swappedColor);
+			net.minecraft.network.chat.Style style = (original != null) ? original.getStyle() : net.minecraft.network.chat.Style.EMPTY;
+			if (colorRgb != -1) {
+				style = style.withColor(colorRgb);
 			}
-			if (original != null) {
-				cir.setReturnValue(Component.literal(swapped).setStyle(original.getStyle()));
-			} else {
-				cir.setReturnValue(Component.literal(swapped));
-			}
+			cir.setReturnValue(Component.literal(swapped).setStyle(style));
 		}
 	}
 }

@@ -88,16 +88,8 @@ public class ItemPickedUpDungeonProcedure {
 												? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip23)
 												: -1)) {
 									ExplodeProcedure.execute(world, spawnRoomX, y, spawnRoomZ, entity, false, true, 0, 0, 0.5, "normal");
-									for (ItemEntity ie : world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(new Vec3(spawnRoomX, y, spawnRoomZ), 2, 2, 2))) {
-										if (!ie.level().isClientSide()) {
-											ie.discard();
-										}
-									}
-									BlockPos otherPos = BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ);
-									BlockEntity otherBe = world.getBlockEntity(otherPos);
-									if (otherBe != null) {
-										otherBe.getPersistentData().putBoolean("empty", true);
-									}
+									if (!(findEntityInWorldRange(world, ItemEntity.class, spawnRoomX, y, spawnRoomZ, 2)).level().isClientSide())
+										(findEntityInWorldRange(world, ItemEntity.class, spawnRoomX, y, spawnRoomZ, 2)).discard();
 								}
 							}
 						}

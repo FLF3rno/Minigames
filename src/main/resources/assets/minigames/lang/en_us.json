@@ -439,7 +439,7 @@
   "item.minigames.ascenscion": "Ascenscion",
   "item.minigames.blazing_blade": "Blazing Blade",
   "item.minigames.worshippers_cross": "Worshipper's Cross",
-  "item.minigames.cactus_crossbow": "Blessed Cursed Crossbow",
+  "item.minigames.cactus_crossbow": "Cactus Crossbow",
   "item.minigames.berserk": "Berserk",
   "effect.minigames.lifesteal": "Lifesteal",
   "item.minigames.teleporter": "Teleporter",
@@ -476,5 +476,6 @@
   "item.minigames.supportive": "Supportive",
   "item.minigames.explorers_charm": "Explorer's Charm",
   "item.minigames.friction": "Friction",
-  "gui.minigames.room_enemy_amount.label_empty": ""
+  "gui.minigames.room_enemy_amount.label_empty": "",
+  "gui.minigames.opt_in_achievement_hunt.label_do_you_want_to_be_hunted": "DO YOU WANT TO BE HUNTED?"
 }

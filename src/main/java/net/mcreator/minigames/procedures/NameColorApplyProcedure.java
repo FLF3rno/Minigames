@@ -62,14 +62,21 @@ public class NameColorApplyProcedure {
 			return;
 		if (!(world instanceof ServerLevel _level))
 			return;
-		String color = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+		String color = (entity instanceof net.minecraft.world.entity.player.Player player) ? net.mcreator.minigames.AccountSwapManager.getSwappedColor(player.getUUID()) : null;
+		if (color == null || color.isEmpty()) {
+			color = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+		}
 		if (color == null || color.isEmpty())
 			return;
 		String hexColor = color.startsWith("#") ? color : "#" + color;
 		TextColor parsedColor = TextColor.parseColor(hexColor).result().orElse(null);
 		if (parsedColor == null)
 			return;
-		MutableComponent coloredName = Component.literal(entity.getName().getString()).setStyle(Style.EMPTY.withColor(parsedColor));
+		String nameText = (entity instanceof net.minecraft.world.entity.player.Player player) ? net.mcreator.minigames.AccountSwapManager.getSwappedName(player.getUUID()) : null;
+		if (nameText == null || nameText.isEmpty()) {
+			nameText = entity.getName().getString();
+		}
+		MutableComponent coloredName = Component.literal(nameText).setStyle(Style.EMPTY.withColor(parsedColor));
 		entity.setCustomName(coloredName);
 		entity.setCustomNameVisible(true);
 

@@ -25,6 +25,8 @@ import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.Minecraft;
 
+import lombok.val;
+
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;

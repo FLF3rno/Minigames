@@ -8,6 +8,11 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import net.mcreator.minigames.gravity.GravityAccess;
+import net.mcreator.minigames.gravity.GravityOrientation;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
+
 @EventBusSubscriber
 public class KeybindPressedProcedure {
 
@@ -67,11 +72,23 @@ public class KeybindPressedProcedure {
 					doubleJumpsUsed + 1
 			);
 
-			entity.setDeltaMovement(
-					entity.getDeltaMovement().x() * 1.1,
-					0.42D,
-					entity.getDeltaMovement().z() * 1.1
-			);
+			Direction gravity = GravityAccess.getGravity(entity);
+			if (gravity == null) gravity = Direction.DOWN;
+			Vec3 vel = entity.getDeltaMovement();
+
+			if (gravity == Direction.DOWN) {
+				entity.setDeltaMovement(
+						vel.x * 1.1,
+						0.42D,
+						vel.z * 1.1
+				);
+			} else {
+				Vec3 up = GravityOrientation.getUpVector(gravity);
+				Vec3 down = GravityOrientation.getDownVector(gravity);
+				Vec3 perp = vel.subtract(down.scale(vel.dot(down)));
+				Vec3 jumpVel = perp.scale(1.1).add(up.scale(0.42D));
+				entity.setDeltaMovement(jumpVel);
+			}
 		}
 	}
 }

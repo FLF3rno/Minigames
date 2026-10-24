@@ -23,6 +23,8 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 
 import javax.annotation.Nullable;
 
+import java.util.ArrayList;
+
 @EventBusSubscriber
 public class AchievementHunterAnimationProcedure {
 	@SubscribeEvent
@@ -40,13 +42,24 @@ public class AchievementHunterAnimationProcedure {
 			if (level != level.getServer().getLevel(Level.OVERWORLD))
 				return;
 		}
-		if (MinigamesModVariables.MapVariables.get(world).playingAchievement && MinigamesModVariables.MapVariables.get(world).achievementHunterMode) {
+		if (MinigamesModVariables.MapVariables.get(world).playingAchievement && MinigamesModVariables.MapVariables.get(world).achievementHunterMode && MinigamesModVariables.MapVariables.get(world).hunterAnimation <= 105) {
+			if (MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.isEmpty()) {
+				for (Entity entityiterator : new ArrayList<>(world.players())) {
+					MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.add(entityiterator);
+					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				}
+			}
 			MinigamesModVariables.MapVariables.get(world).hunterAnimation = MinigamesModVariables.MapVariables.get(world).hunterAnimation + 1;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			if (world.getServer() == null || world.getServer().getPlayerList().getPlayers().isEmpty()) {
 				return;
 			}
-			player = world.getServer().getPlayerList().getPlayers().get(RandomSource.create().nextInt(world.getServer().getPlayerList().getPlayers().size()));
+			player = ((MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement
+					.get(net.minecraft.util.Mth.nextInt(RandomSource.create(), 0, (int) MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.size() - 1)) instanceof Entity _entity4 ? _entity4 : null));
+			if (MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.size() == 1 && MinigamesModVariables.MapVariables.get(world).hunterAnimation < 105) {
+				MinigamesModVariables.MapVariables.get(world).hunterAnimation = 105;
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			}
 			if (MinigamesModVariables.MapVariables.get(world).hunterAnimation % 15 == 0 && MinigamesModVariables.MapVariables.get(world).hunterAnimation < 105) {
 				if (MinigamesModVariables.MapVariables.get(world).WinnerList.isEmpty()) {
 					MinigamesModVariables.MapVariables.get(world).WinnerList.add((player.getStringUUID()));
@@ -60,10 +73,16 @@ public class AchievementHunterAnimationProcedure {
 							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"/execute as @a at @s run playsound minecraft:block.note_block.pling ui @s ~ ~ ~ 1 1.1");
 			} else if (MinigamesModVariables.MapVariables.get(world).hunterAnimation == 105) {
+				MinigamesModVariables.MapVariables.get(world).hunterAnimation = 106;
 				MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID = player.getStringUUID();
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				MinigamesModVariables.MapVariables.get(world).WinnerList.set(0, (player.getStringUUID()));
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				if (MinigamesModVariables.MapVariables.get(world).WinnerList.isEmpty()) {
+					MinigamesModVariables.MapVariables.get(world).WinnerList.add((player.getStringUUID()));
+					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				} else {
+					MinigamesModVariables.MapVariables.get(world).WinnerList.set(0, (player.getStringUUID()));
+					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				}
 				if (world instanceof Level _level)
 					_level.getScoreboard().addPlayerTeam("hunted");
 				{
@@ -85,6 +104,7 @@ public class AchievementHunterAnimationProcedure {
 							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 							"/execute as @a at @s run playsound minecraft:block.note_block.pling ui @s ~ ~ ~ 1 2");
 				UpdateTablistProcedure.execute(player);
+				MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.clear();
 			}
 		}
 	}

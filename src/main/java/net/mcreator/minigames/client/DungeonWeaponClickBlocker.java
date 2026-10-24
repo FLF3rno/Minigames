@@ -37,13 +37,11 @@ public class DungeonWeaponClickBlocker {
 
 		Minecraft minecraft = Minecraft.getInstance();
 		Player player = minecraft.player;
-		if (player == null)
+		if (player == null || player.level() == null)
 			return;
 
+		boolean playingDungeons = ItemSizeHelper.isInRoguelike(player.level());
 		ItemStack mainHand = player.getMainHandItem();
-		boolean playingDungeons = player.level() != null
-				&& MinigamesModVariables.MapVariables.get(player.level()).playingDungeons;
-
 		boolean isBoxing = BoxingMasteryHandler.isBoxing(player);
 
 		if (playingDungeons && !DungeonItemAccess.isDungeonWeapon(mainHand) && !isBoxing) {
@@ -53,13 +51,16 @@ public class DungeonWeaponClickBlocker {
 			return;
 		}
 
+		if (!playingDungeons && !isBoxing)
+			return;
+
 		boolean onCooldown = player.getAttackStrengthScale(0f) < 1.0f
 				|| player.getCooldowns().isOnCooldown(mainHand)
 				|| (getAttackCooldownAttribute(mainHand) > 0 && player.getCooldowns().isOnCooldown(mainHand));
 
 		if (onCooldown) {
 			event.setCanceled(true);
-			boolean suppressSwing = !playingDungeons || MinigamesSettingsConfig.getBoolean("roguelikeSuppressSwingNotReady", true);
+			boolean suppressSwing = MinigamesSettingsConfig.getBoolean("roguelikeSuppressSwingNotReady", true);
 			if (suppressSwing) {
 				event.setSwingHand(false);
 				suppressNextSwing = true;

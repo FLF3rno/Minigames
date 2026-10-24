@@ -35,8 +35,8 @@ public abstract class LivingEntityGravityStateMixin {
 			Direction prev = minigames_lastGravity;
 			minigames_lastGravity = gravity;
 			if (player.level().isClientSide()) {
-				net.minecraft.world.phys.Vec3 offset = net.mcreator.minigames.gravity.GravityOrientation.calculatePositionOffset(player, prev, gravity);
-				player.setPos(player.getX() + offset.x, player.getY() + offset.y, player.getZ() + offset.z);
+				net.minecraft.world.phys.Vec3 safePos = net.mcreator.minigames.gravity.GravityOrientation.calculateSafePosition(player, prev, gravity);
+				player.setPos(safePos.x, safePos.y, safePos.z);
 			}
 			player.refreshDimensions();
 		}

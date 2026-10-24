@@ -20,9 +20,9 @@ public class AnimationScreenTrigger {
             return;
         }
         Minecraft.getInstance().execute(() -> {
-            double guiScale = Minecraft.getInstance().getWindow().getGuiScale();
+            double guiScale = Math.max(1.0, Minecraft.getInstance().getWindow().getGuiScale());
             double targetScale = 3.0;
-            float scaleFactor = (float) (guiScale / targetScale);
+            float scaleFactor = (float) (targetScale / guiScale);
             int x = Math.round(Minecraft.getInstance().getWindow().getGuiScaledWidth() / scaleFactor);
             int y = Math.round(Minecraft.getInstance().getWindow().getGuiScaledHeight() / scaleFactor);
             AnimationManager manager = new AnimationManager(length, speed);

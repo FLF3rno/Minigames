@@ -25,7 +25,7 @@ public class SpawnCryptLurkerBlockAddedProcedure {
 		if (spawn == true) {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = MinigamesModEntities.CRYPT_LURKER.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
+				Entity entityToSpawn = MinigamesModEntities.CHURCH_SHARPENER.get().spawn(_level, BlockPos.containing(x, y, z), EntitySpawnReason.MOB_SUMMONED);
 				if (entityToSpawn != null) {
 					entityToSpawn.setDeltaMovement(0, 0, 0);
 				}

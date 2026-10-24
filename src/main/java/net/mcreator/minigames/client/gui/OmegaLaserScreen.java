@@ -50,8 +50,8 @@ public class OmegaLaserScreen extends Screen {
 	private static final int KNOB_DRAW_SIZE = 64;
 	private static final int KNOB_HIT_RADIUS = 28;
 
-	private static final int KNOB_OFFSET_X = -15;
-	private static final int KNOB_OFFSET_Y = 14;
+	private static final int KNOB_OFFSET_X = 0;
+	private static final int KNOB_OFFSET_Y = 0;
 
 	public OmegaLaserScreen(int laserEntityId, int screenIndex, int totalPlayers) {
 		super(Component.literal("Omega Laser Controls"));
@@ -101,10 +101,14 @@ public class OmegaLaserScreen extends Screen {
 	protected void init() {
 		super.init();
 
-		udCenterX = this.width / 4;
+		if (roleUpDown && roleLeftRight) {
+			udCenterX = this.width / 4;
+			lrCenterX = (this.width * 3) / 4;
+		} else {
+			udCenterX = this.width / 2;
+			lrCenterX = this.width / 2;
+		}
 		udCenterY = this.height / 2;
-
-		lrCenterX = (this.width * 3) / 4;
 		lrCenterY = this.height / 2;
 
 		fireButtonX = this.width / 2;

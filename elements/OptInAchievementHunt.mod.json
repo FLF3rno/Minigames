@@ -1,0 +1,58 @@
+{
+  "_fv": 89,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_do_you_want_to_be_hunted",
+          "text": {
+            "fixedValue": "DO YOU WANT TO BE HUNTED?"
+          },
+          "color": {
+            "value": -65536,
+            "falpha": 0.0
+          },
+          "hasShadow": true,
+          "anchorPoint": "CENTER",
+          "x": 148,
+          "y": 81,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voteyes.png",
+          "use1Xscale": false,
+          "anchorPoint": "CENTER",
+          "x": 199,
+          "y": 98,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "dungeoncoins16x.png",
+          "use1Xscale": false,
+          "anchorPoint": "CENTER",
+          "x": 205,
+          "y": 62,
+          "locked": false
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

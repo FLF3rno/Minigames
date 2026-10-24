@@ -1,5 +1,10 @@
 package net.mcreator.minigames;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,12 +16,16 @@ import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import net.mcreator.minigames.network.AccountSwapSyncMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -44,6 +53,7 @@ public class AccountSwapManager {
 
 		public UUID partnerUUID;
 		public String swappedName;
+		public String swappedColor;
 		public UUID swappedSkinUUID;
 		public String swappedSkinName;
 		public double partnerMaxHealth;
@@ -88,21 +98,74 @@ public class AccountSwapManager {
 		}
 	}
 
+	public static class SoulIdentity {
+		public final UUID ownerUUID;
+		public final String name;
+		public final UUID skinUUID;
+		public final String skinName;
+		public final String color;
+		public final String classDungeon;
+		public final String classColor;
+		public final double maxHealth;
+		public final float health;
+		public final float absorption;
+		public final List<ItemStack> items;
+		public final int selectedSlot;
+		public final List<MobEffectInstance> effects;
+
+		public SoulIdentity(
+			UUID ownerUUID,
+			String name,
+			UUID skinUUID,
+			String skinName,
+			String color,
+			String classDungeon,
+			String classColor,
+			double maxHealth,
+			float health,
+			float absorption,
+			List<ItemStack> items,
+			int selectedSlot,
+			List<MobEffectInstance> effects
+		) {
+			this.ownerUUID = ownerUUID;
+			this.name = name;
+			this.skinUUID = skinUUID;
+			this.skinName = skinName;
+			this.color = color;
+			this.classDungeon = classDungeon;
+			this.classColor = classColor;
+			this.maxHealth = maxHealth;
+			this.health = health;
+			this.absorption = absorption;
+			this.items = items;
+			this.selectedSlot = selectedSlot;
+			this.effects = effects;
+		}
+	}
+
 	private static final Map<UUID, SwapRecord> ACTIVE_SWAPS = new ConcurrentHashMap<>();
 	private static final Map<UUID, String> CLIENT_SWAPPED_NAMES = new ConcurrentHashMap<>();
+	private static final Map<UUID, String> CLIENT_SWAPPED_COLORS = new ConcurrentHashMap<>();
 
-	public static void handleClientSync(UUID playerUUID, String swappedName, UUID skinOwnerUUID, String skinOwnerName, boolean isReset) {
+	public static void handleClientSync(UUID playerUUID, String swappedName, String swappedColor, UUID skinOwnerUUID, String skinOwnerName, boolean isReset) {
 		if (isReset) {
 			CLIENT_SWAPPED_NAMES.remove(playerUUID);
+			CLIENT_SWAPPED_COLORS.remove(playerUUID);
 		} else {
 			if (swappedName != null && !swappedName.isEmpty()) {
 				CLIENT_SWAPPED_NAMES.put(playerUUID, swappedName);
 			} else {
 				CLIENT_SWAPPED_NAMES.remove(playerUUID);
 			}
+			if (swappedColor != null && !swappedColor.isEmpty()) {
+				CLIENT_SWAPPED_COLORS.put(playerUUID, swappedColor);
+			} else {
+				CLIENT_SWAPPED_COLORS.remove(playerUUID);
+			}
 		}
 		if (FMLEnvironment.getDist().isClient()) {
-			net.mcreator.minigames.client.AccountSwapClient.handleSync(playerUUID, swappedName, skinOwnerUUID, skinOwnerName, isReset);
+			net.mcreator.minigames.client.AccountSwapClient.handleSync(playerUUID, swappedName, swappedColor, skinOwnerUUID, skinOwnerName, isReset);
 		}
 	}
 
@@ -117,6 +180,17 @@ public class AccountSwapManager {
 		return CLIENT_SWAPPED_NAMES.get(playerUUID);
 	}
 
+	public static String getSwappedColor(UUID playerUUID) {
+		if (playerUUID == null) {
+			return null;
+		}
+		SwapRecord record = ACTIVE_SWAPS.get(playerUUID);
+		if (record != null) {
+			return record.swappedColor;
+		}
+		return CLIENT_SWAPPED_COLORS.get(playerUUID);
+	}
+
 	public static SwapRecord getRecord(UUID playerUUID) {
 		if (playerUUID == null) {
 			return null;
@@ -126,6 +200,74 @@ public class AccountSwapManager {
 
 	public static void clearClientSwaps() {
 		CLIENT_SWAPPED_NAMES.clear();
+		CLIENT_SWAPPED_COLORS.clear();
+	}
+
+	public static String resolvePlayerColor(ServerPlayer player) {
+		if (player == null) {
+			return "#FFFFFF";
+		}
+		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+		if (vars.color != null && vars.color.matches("^#?[0-9a-fA-F]{6}$")) {
+			return vars.color.startsWith("#") ? vars.color : "#" + vars.color;
+		}
+		File file = new File(FMLPaths.GAMEDIR.get().toString() + "/config/minigames", "color.json");
+		if (file.exists()) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+				JsonObject json = new Gson().fromJson(reader, JsonObject.class);
+				if (json != null) {
+					String key = player.getUUID().toString();
+					if (json.has(key)) {
+						String val = json.get(key).getAsString();
+						if (val != null && val.matches("^#?[0-9a-fA-F]{6}$")) {
+							return val.startsWith("#") ? val : "#" + val;
+						}
+					}
+				}
+			} catch (Exception ignored) {
+			}
+		}
+		return "#FFFFFF";
+	}
+
+	private static SoulIdentity getCurrentSoul(ServerPlayer player) {
+		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+		SwapRecord record = ACTIVE_SWAPS.get(player.getUUID());
+		UUID ownerUUID;
+		String name;
+		UUID skinUUID;
+		String skinName;
+		String color;
+
+		if (record != null && record.partnerUUID != null) {
+			ownerUUID = record.partnerUUID;
+			name = (record.swappedName != null) ? record.swappedName : player.getGameProfile().name();
+			skinUUID = (record.swappedSkinUUID != null) ? record.swappedSkinUUID : player.getUUID();
+			skinName = (record.swappedSkinName != null) ? record.swappedSkinName : player.getGameProfile().name();
+			color = (record.swappedColor != null && !record.swappedColor.isEmpty()) ? record.swappedColor : resolvePlayerColor(player);
+		} else {
+			ownerUUID = player.getUUID();
+			name = player.getGameProfile().name();
+			skinUUID = player.getUUID();
+			skinName = player.getGameProfile().name();
+			color = resolvePlayerColor(player);
+		}
+
+		return new SoulIdentity(
+			ownerUUID,
+			name,
+			skinUUID,
+			skinName,
+			color,
+			vars.classDungeon,
+			vars.classColor,
+			player.getAttribute(Attributes.MAX_HEALTH).getBaseValue(),
+			player.getHealth(),
+			player.getAbsorptionAmount(),
+			copyInventory(player.getInventory()),
+			player.getInventory().getSelectedSlot(),
+			copyEffects(player.getActiveEffects())
+		);
 	}
 
 	public static void swapAccounts(
@@ -161,7 +303,7 @@ public class AccountSwapManager {
 				player1.getGameProfile().name(),
 				vars1.classDungeon,
 				vars1.classColor,
-				vars1.color,
+				resolvePlayerColor(player1),
 				vars1.showCustomNameColor,
 				player1.getAttribute(Attributes.MAX_HEALTH).getBaseValue(),
 				player1.getHealth(),
@@ -181,7 +323,7 @@ public class AccountSwapManager {
 				player2.getGameProfile().name(),
 				vars2.classDungeon,
 				vars2.classColor,
-				vars2.color,
+				resolvePlayerColor(player2),
 				vars2.showCustomNameColor,
 				player2.getAttribute(Attributes.MAX_HEALTH).getBaseValue(),
 				player2.getHealth(),
@@ -192,126 +334,180 @@ public class AccountSwapManager {
 			);
 		}
 
-		record1.partnerUUID = player2.getUUID();
-		record2.partnerUUID = player1.getUUID();
+		SoulIdentity soul1 = getCurrentSoul(player1);
+		SoulIdentity soul2 = getCurrentSoul(player2);
 
-		record1.swapClass = swapClass;
-		record2.swapClass = swapClass;
-		record1.swapEffects = swapEffects;
-		record2.swapEffects = swapEffects;
-		record1.swapHearts = swapHearts;
-		record2.swapHearts = swapHearts;
-		record1.swapInventory = swapInventory;
-		record2.swapInventory = swapInventory;
-		record1.swapName = swapName;
-		record2.swapName = swapName;
-		record1.swapSkin = swapSkin;
-		record2.swapSkin = swapSkin;
+		if (soul2.ownerUUID.equals(player1.getUUID())) {
+			restoreToOriginalSoul(player1, record1, soul2, swapInventory, swapHearts, swapEffects, swapClass);
+		} else {
+			applySoul(player1, record1, soul2, swapClass, swapEffects, swapHearts, swapInventory, swapName, swapSkin);
+		}
+
+		if (soul1.ownerUUID.equals(player2.getUUID())) {
+			restoreToOriginalSoul(player2, record2, soul1, swapInventory, swapHearts, swapEffects, swapClass);
+		} else {
+			applySoul(player2, record2, soul1, swapClass, swapEffects, swapHearts, swapInventory, swapName, swapSkin);
+		}
+	}
+
+	private static void applySoul(
+		ServerPlayer player,
+		SwapRecord record,
+		SoulIdentity incomingSoul,
+		boolean swapClass,
+		boolean swapEffects,
+		boolean swapHearts,
+		boolean swapInventory,
+		boolean swapName,
+		boolean swapSkin
+	) {
+		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+
+		record.partnerUUID = incomingSoul.ownerUUID;
+		record.swapClass = swapClass;
+		record.swapEffects = swapEffects;
+		record.swapHearts = swapHearts;
+		record.swapInventory = swapInventory;
+		record.swapName = swapName;
+		record.swapSkin = swapSkin;
 
 		if (swapClass) {
-			String tempClass = vars1.classDungeon;
-			String tempClassColor = vars1.classColor;
-			vars1.classDungeon = vars2.classDungeon;
-			vars1.classColor = vars2.classColor;
-			vars2.classDungeon = tempClass;
-			vars2.classColor = tempClassColor;
-			vars1.markSyncDirty();
-			vars2.markSyncDirty();
+			vars.classDungeon = incomingSoul.classDungeon;
+			vars.classColor = incomingSoul.classColor;
+			vars.markSyncDirty();
 		}
 
 		if (swapHearts) {
-			double maxHp1 = player1.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
-			double maxHp2 = player2.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
-			float curHp1 = player1.getHealth();
-			float curHp2 = player2.getHealth();
-			float abs1 = player1.getAbsorptionAmount();
-			float abs2 = player2.getAbsorptionAmount();
-
-			record1.partnerMaxHealth = maxHp2;
-			record2.partnerMaxHealth = maxHp1;
-
-			player1.getAttribute(Attributes.MAX_HEALTH).setBaseValue(maxHp2);
-			player2.getAttribute(Attributes.MAX_HEALTH).setBaseValue(maxHp1);
-
-			player1.setHealth(Math.min(curHp2, (float) maxHp2));
-			player2.setHealth(Math.min(curHp1, (float) maxHp1));
-
-			player1.setAbsorptionAmount(abs2);
-			player2.setAbsorptionAmount(abs1);
+			record.partnerMaxHealth = incomingSoul.maxHealth;
+			player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(incomingSoul.maxHealth);
+			player.setHealth(Math.min(incomingSoul.health, (float) incomingSoul.maxHealth));
+			player.setAbsorptionAmount(incomingSoul.absorption);
 		}
 
 		if (swapEffects) {
-			List<MobEffectInstance> eff1 = new ArrayList<>(player1.getActiveEffects());
-			List<MobEffectInstance> eff2 = new ArrayList<>(player2.getActiveEffects());
-			player1.removeAllEffects();
-			player2.removeAllEffects();
-			for (MobEffectInstance inst : eff2) {
-				player1.addEffect(new MobEffectInstance(inst));
-			}
-			for (MobEffectInstance inst : eff1) {
-				player2.addEffect(new MobEffectInstance(inst));
+			player.removeAllEffects();
+			for (MobEffectInstance inst : incomingSoul.effects) {
+				player.addEffect(new MobEffectInstance(inst));
 			}
 		}
 
 		if (swapInventory) {
-			swapInventories(player1, player2);
+			applySoulInventory(player, incomingSoul);
 		}
 
 		if (swapName) {
-			record1.swappedName = player2.getGameProfile().name();
-			record2.swappedName = player1.getGameProfile().name();
-
-			String tempColor = vars1.color;
-			boolean tempShowColor = vars1.showCustomNameColor;
-			vars1.color = vars2.color;
-			vars1.showCustomNameColor = vars2.showCustomNameColor;
-			vars2.color = tempColor;
-			vars2.showCustomNameColor = tempShowColor;
-			vars1.markSyncDirty();
-			vars2.markSyncDirty();
+			record.swappedName = incomingSoul.name;
+			record.swappedColor = incomingSoul.color;
+			vars.color = incomingSoul.color;
+			vars.showCustomNameColor = true;
+			vars.markSyncDirty();
 		} else {
-			record1.swappedName = null;
-			record2.swappedName = null;
+			record.swappedName = null;
+			record.swappedColor = null;
 		}
 
 		if (swapSkin) {
-			record1.swappedSkinUUID = player2.getUUID();
-			record1.swappedSkinName = player2.getGameProfile().name();
-			record2.swappedSkinUUID = player1.getUUID();
-			record2.swappedSkinName = player1.getGameProfile().name();
+			record.swappedSkinUUID = incomingSoul.skinUUID;
+			record.swappedSkinName = incomingSoul.skinName;
 		} else {
-			record1.swappedSkinUUID = null;
-			record1.swappedSkinName = null;
-			record2.swappedSkinUUID = null;
-			record2.swappedSkinName = null;
+			record.swappedSkinUUID = null;
+			record.swappedSkinName = null;
 		}
 
-		ACTIVE_SWAPS.put(player1.getUUID(), record1);
-		ACTIVE_SWAPS.put(player2.getUUID(), record2);
+		ACTIVE_SWAPS.put(player.getUUID(), record);
 
 		if (swapName) {
-			player1.refreshDisplayName();
-			player2.refreshDisplayName();
-			player1.refreshTabListName();
-			player2.refreshTabListName();
-			net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player1));
-			net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player2));
+			player.refreshDisplayName();
+			player.refreshTabListName();
+			TextColor parsed = TextColor.parseColor(incomingSoul.color).result().orElse(null);
+			Style st = (parsed != null) ? Style.EMPTY.withColor(parsed) : Style.EMPTY;
+			player.setCustomName(Component.literal(incomingSoul.name).setStyle(st));
+			player.setCustomNameVisible(true);
+			net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player));
 		}
 
 		PacketDistributor.sendToAllPlayers(new AccountSwapSyncMessage(
-			player1.getUUID(),
-			record1.swappedName,
-			record1.swappedSkinUUID,
-			record1.swappedSkinName,
+			player.getUUID(),
+			record.swappedName,
+			record.swappedColor,
+			record.swappedSkinUUID,
+			record.swappedSkinName,
 			false
 		));
+	}
+
+	private static void restoreToOriginalSoul(
+		ServerPlayer player,
+		SwapRecord record,
+		SoulIdentity incomingSoul,
+		boolean swapInventory,
+		boolean swapHearts,
+		boolean swapEffects,
+		boolean swapClass
+	) {
+		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+
+		vars.color = record.originalColor;
+		vars.showCustomNameColor = record.originalShowCustomNameColor;
+		if (swapClass) {
+			vars.classDungeon = record.originalClassDungeon;
+			vars.classColor = record.originalClassColor;
+		}
+		vars.markSyncDirty();
+
+		if (swapHearts) {
+			player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(record.originalMaxHealth);
+			player.setHealth(Math.min(incomingSoul.health, (float) record.originalMaxHealth));
+			player.setAbsorptionAmount(incomingSoul.absorption);
+		}
+
+		if (swapEffects) {
+			player.removeAllEffects();
+			for (MobEffectInstance inst : incomingSoul.effects) {
+				player.addEffect(new MobEffectInstance(inst));
+			}
+		}
+
+		if (swapInventory) {
+			applySoulInventory(player, incomingSoul);
+		}
+
+		record.swappedName = null;
+		record.swappedColor = null;
+		record.swappedSkinUUID = null;
+		record.swappedSkinName = null;
+
+		ACTIVE_SWAPS.remove(player.getUUID());
+
+		player.refreshDisplayName();
+		player.refreshTabListName();
+		TextColor parsed = TextColor.parseColor(record.originalColor).result().orElse(null);
+		Style st = (parsed != null) ? Style.EMPTY.withColor(parsed) : Style.EMPTY;
+		player.setCustomName(Component.literal(record.originalName).setStyle(st));
+		net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player));
+
 		PacketDistributor.sendToAllPlayers(new AccountSwapSyncMessage(
-			player2.getUUID(),
-			record2.swappedName,
-			record2.swappedSkinUUID,
-			record2.swappedSkinName,
-			false
+			player.getUUID(),
+			"",
+			"",
+			null,
+			"",
+			true
 		));
+	}
+
+	private static void applySoulInventory(ServerPlayer player, SoulIdentity soul) {
+		Inventory inv = player.getInventory();
+		int size = Math.min(soul.items.size(), inv.getContainerSize());
+		for (int i = 0; i < size; i++) {
+			inv.setItem(i, soul.items.get(i).copy());
+		}
+		if (soul.selectedSlot >= 0 && soul.selectedSlot < 9) {
+			inv.setSelectedSlot(soul.selectedSlot);
+		}
+		inv.setChanged();
+		player.containerMenu.broadcastChanges();
+		player.inventoryMenu.broadcastChanges();
 	}
 
 	public static void swapWithDummy(
@@ -351,7 +547,7 @@ public class AccountSwapManager {
 				player.getGameProfile().name(),
 				vars.classDungeon,
 				vars.classColor,
-				vars.color,
+				resolvePlayerColor(player),
 				vars.showCustomNameColor,
 				player.getAttribute(Attributes.MAX_HEALTH).getBaseValue(),
 				player.getHealth(),
@@ -411,11 +607,13 @@ public class AccountSwapManager {
 
 		if (swapName) {
 			record.swappedName = name;
+			record.swappedColor = "#FFAA00";
 			vars.color = "#FFAA00";
 			vars.showCustomNameColor = true;
 			vars.markSyncDirty();
 		} else {
 			record.swappedName = null;
+			record.swappedColor = null;
 		}
 
 		if (swapSkin) {
@@ -437,6 +635,7 @@ public class AccountSwapManager {
 		PacketDistributor.sendToAllPlayers(new AccountSwapSyncMessage(
 			player.getUUID(),
 			record.swappedName,
+			record.swappedColor,
 			record.swappedSkinUUID,
 			record.swappedSkinName,
 			false
@@ -479,6 +678,7 @@ public class AccountSwapManager {
 				PacketDistributor.sendToAllPlayers(new AccountSwapSyncMessage(
 					record.originalUUID,
 					"",
+					"",
 					null,
 					"",
 					true
@@ -495,8 +695,12 @@ public class AccountSwapManager {
 			vars.showCustomNameColor = record.originalShowCustomNameColor;
 			vars.markSyncDirty();
 			record.swappedName = null;
+			record.swappedColor = null;
 			player.refreshDisplayName();
 			player.refreshTabListName();
+			TextColor parsed = TextColor.parseColor(record.originalColor).result().orElse(null);
+			Style st = (parsed != null) ? Style.EMPTY.withColor(parsed) : Style.EMPTY;
+			player.setCustomName(Component.literal(record.originalName).setStyle(st));
 			net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player));
 		}
 
@@ -527,6 +731,7 @@ public class AccountSwapManager {
 
 		PacketDistributor.sendToAllPlayers(new AccountSwapSyncMessage(
 			player.getUUID(),
+			"",
 			"",
 			null,
 			"",
@@ -593,6 +798,7 @@ public class AccountSwapManager {
 				PacketDistributor.sendToPlayer(player, new AccountSwapSyncMessage(
 					record.originalUUID,
 					record.swappedName,
+					record.swappedColor,
 					record.swappedSkinUUID,
 					record.swappedSkinName,
 					false
@@ -619,6 +825,7 @@ public class AccountSwapManager {
 				PacketDistributor.sendToAllPlayers(new AccountSwapSyncMessage(
 					record.originalUUID,
 					record.swappedName,
+					record.swappedColor,
 					record.swappedSkinUUID,
 					record.swappedSkinName,
 					false
@@ -634,6 +841,7 @@ public class AccountSwapManager {
 				PacketDistributor.sendToPlayer(player, new AccountSwapSyncMessage(
 					record.originalUUID,
 					record.swappedName,
+					record.swappedColor,
 					record.swappedSkinUUID,
 					record.swappedSkinName,
 					false

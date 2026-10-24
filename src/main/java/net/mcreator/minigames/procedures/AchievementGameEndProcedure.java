@@ -23,7 +23,6 @@ import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AchievementGameEndProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
@@ -38,7 +37,6 @@ public class AchievementGameEndProcedure {
 		}
 		MinigamesModVariables.MapVariables.get(world).playingAchievement = false;
 		MinigamesModVariables.MapVariables.get(world).achievementHunterMode = false;
-		MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = false;
 		MinigamesModVariables.MapVariables.get(world).showWinscreen = true;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(160, () -> {
@@ -49,13 +47,11 @@ public class AchievementGameEndProcedure {
 			MinigamesModVariables.MapVariables.get(world).waypoints = true;
 			MinigamesModVariables.MapVariables.get(world).minimap = true;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-			List<? extends Player> playersForCompass = (world instanceof ServerLevel _sl ? _sl.getServer().getPlayerList().getPlayers() : world.players());
-			for (Entity entityiterator : new ArrayList<>(playersForCompass)) {
+			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				GrantGameCompassProcedure.execute(world, entityiterator);
 			}
 		});
-		List<? extends Player> allPlayers = (world instanceof ServerLevel _sl ? _sl.getServer().getPlayerList().getPlayers() : world.players());
-		for (Entity entityiterator : new ArrayList<>(allPlayers)) {
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 				_vars.timerSpeed = 0;

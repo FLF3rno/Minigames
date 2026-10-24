@@ -23,8 +23,12 @@ public class NameColorFormatEvents {
 		if (nameStr == null || nameStr.isEmpty()) {
 			nameStr = player.getName().getString();
 		}
-		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		int rgb = ColorUtils.parseHex(vars.color);
+		String colorStr = AccountSwapManager.getSwappedColor(player.getUUID());
+		if (colorStr == null || colorStr.isEmpty()) {
+			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			colorStr = vars.color;
+		}
+		int rgb = ColorUtils.parseHex(colorStr);
 		if (rgb != -1 || AccountSwapManager.getSwappedName(player.getUUID()) != null) {
 			net.minecraft.network.chat.MutableComponent comp = Component.literal(nameStr);
 			if (rgb != -1) {
@@ -59,12 +63,16 @@ public class NameColorFormatEvents {
 			return null;
 		}
 
-		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		if (vars.color == null || vars.color.isEmpty()) {
+		String colorStr = AccountSwapManager.getSwappedColor(player.getUUID());
+		if (colorStr == null || colorStr.isEmpty()) {
+			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			colorStr = vars.color;
+		}
+		if (colorStr == null || colorStr.isEmpty()) {
 			return null;
 		}
 
-		String hex = vars.color.startsWith("#") ? vars.color : "#" + vars.color;
+		String hex = colorStr.startsWith("#") ? colorStr : "#" + colorStr;
 		TextColor parsedColor = TextColor.parseColor(hex).result().orElse(null);
 		if (parsedColor == null) {
 			return null;

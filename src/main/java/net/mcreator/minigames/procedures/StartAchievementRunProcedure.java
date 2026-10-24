@@ -30,6 +30,7 @@ import net.mcreator.minigames.world.inventory.DisplayAchievmenMenu;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
+import net.mcreator.minigames.util.DimensionResetHelper;
 
 import java.util.Optional;
 import java.util.ArrayList;
@@ -39,6 +40,9 @@ import io.netty.buffer.Unpooled;
 public class StartAchievementRunProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		double achievement = 0;
+		if (world instanceof ServerLevel _level) {
+			DimensionResetHelper.resetRunDimensions(_level.getServer());
+		}
 		RollAchievementProcedure.execute(world, x, y, z);
 		MinigamesModVariables.MapVariables.get(world).playingAchievement = true;
 		MinigamesModVariables.MapVariables.get(world).ShowTimer = true;

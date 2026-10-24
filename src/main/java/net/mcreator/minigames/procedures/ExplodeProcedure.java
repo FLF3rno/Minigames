@@ -113,7 +113,7 @@ public class ExplodeProcedure {
 					for (int _i3 = 0; _i3 < (int) (ExplosionSize * 2); _i3++) {
 						Zloop = Zloop - 1;
 						if ((world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop))).is(BlockTags.create(Identifier.parse("minigames:shatterable")))) {
-							BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, true);
+							BlockBreakSimulationProcedure.execute(world, Xloop, Yloop, Zloop, world.getBlockState(BlockPos.containing(Xloop, Yloop, Zloop)), true, false);
 							world.setBlock(BlockPos.containing(Xloop, Yloop, Zloop), Blocks.AIR.defaultBlockState(), 3);
 						}
 					}

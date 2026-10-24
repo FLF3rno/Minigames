@@ -25,15 +25,30 @@ public class PlayerTabOverlayMixin {
 			swapped = net.mcreator.minigames.client.AccountSwapClient.getSwappedName(info.getProfile().id());
 		}
 		if (swapped != null && !swapped.isEmpty()) {
+			String swappedColor = AccountSwapManager.getSwappedColor(info.getProfile().id());
+			if (swappedColor == null || swappedColor.isEmpty()) {
+				swappedColor = net.mcreator.minigames.client.AccountSwapClient.getSwappedColor(info.getProfile().id());
+			}
+			int colorRgb = net.mcreator.minigames.util.ColorUtils.parseHex(swappedColor);
+
 			Component tabName = info.getTabListDisplayName();
 			if (tabName != null && tabName.getString().contains(swapped)) {
-				cir.setReturnValue(minigames$decorate(info, tabName.copy()));
+				MutableComponent result = tabName.copy();
+				if (colorRgb != -1) {
+					result = result.withStyle(style -> style.withColor(colorRgb));
+				}
+				cir.setReturnValue(minigames$decorate(info, result));
 			} else if (tabName != null) {
-				MutableComponent swappedComp = Component.literal(swapped).setStyle(tabName.getStyle());
+				net.minecraft.network.chat.Style style = (colorRgb != -1) ? tabName.getStyle().withColor(colorRgb) : tabName.getStyle();
+				MutableComponent swappedComp = Component.literal(swapped).setStyle(style);
 				MutableComponent base = PlayerTeam.formatNameForTeam(info.getTeam(), swappedComp);
 				cir.setReturnValue(minigames$decorate(info, base));
 			} else {
-				MutableComponent base = PlayerTeam.formatNameForTeam(info.getTeam(), Component.literal(swapped));
+				MutableComponent swappedComp = Component.literal(swapped);
+				if (colorRgb != -1) {
+					swappedComp = swappedComp.withStyle(style -> style.withColor(colorRgb));
+				}
+				MutableComponent base = PlayerTeam.formatNameForTeam(info.getTeam(), swappedComp);
 				cir.setReturnValue(minigames$decorate(info, base));
 			}
 		}

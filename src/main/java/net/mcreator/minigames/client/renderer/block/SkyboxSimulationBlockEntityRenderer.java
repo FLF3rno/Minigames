@@ -371,6 +371,15 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	private static float camForwardZ = 1.0f;
 
 	private static void updateCameraForward(CameraRenderState camera) {
+		net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+		if (mc.gameRenderer != null && mc.gameRenderer.getMainCamera() != null) {
+			Vector3f fw = new Vector3f(0.0f, 0.0f, -1.0f).rotate(mc.gameRenderer.getMainCamera().rotation());
+			camForwardX = fw.x();
+			camForwardY = fw.y();
+			camForwardZ = fw.z();
+			return;
+		}
+
 		float xRot = camera.xRot;
 		float yRot = camera.yRot;
 		if (xRot != lastCamXRot || yRot != lastCamYRot) {
@@ -378,9 +387,17 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 			lastCamYRot = yRot;
 			float radPitch = (float) Math.toRadians(xRot);
 			float radYaw = (float) Math.toRadians(yRot);
-			camForwardX = (float) (-Math.sin(radYaw) * Math.cos(radPitch));
-			camForwardY = (float) -Math.sin(radPitch);
-			camForwardZ = (float) (Math.cos(radYaw) * Math.cos(radPitch));
+			Vector3f fallbackFw = new Vector3f(
+				(float) (-Math.sin(radYaw) * Math.cos(radPitch)),
+				(float) -Math.sin(radPitch),
+				(float) (Math.cos(radYaw) * Math.cos(radPitch))
+			);
+			if (net.mcreator.minigames.gravity.client.GravityCameraTransition.isNonDefault()) {
+				fallbackFw.rotate(net.mcreator.minigames.gravity.client.GravityCameraTransition.getCurrentRotation());
+			}
+			camForwardX = fallbackFw.x();
+			camForwardY = fallbackFw.y();
+			camForwardZ = fallbackFw.z();
 		}
 	}
 

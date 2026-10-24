@@ -17,19 +17,28 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -38,7 +47,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mcreator.minigames.block.entity.CopycatBlockEntity;
 
-public class CopycatCornerSliceBlock extends Block implements EntityBlock {
+public class CopycatCornerSliceBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final BooleanProperty C0 = BooleanProperty.create("c0");
 	public static final BooleanProperty C1 = BooleanProperty.create("c1");
 	public static final BooleanProperty C2 = BooleanProperty.create("c2");
@@ -71,18 +81,27 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 		}
 	}
 
+	public static boolean isFull(BlockState state) {
+		for (int i = 0; i < 8; i++) {
+			if (!state.getValue(CORNERS[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public CopycatCornerSliceBlock(BlockBehaviour.Properties properties) {
 		super(properties.strength(1f, 10f).noOcclusion().lightLevel(state -> state.hasProperty(CopycatHelper.LIGHT_LEVEL) ? state.getValue(CopycatHelper.LIGHT_LEVEL) : 0));
 		BlockState defaultState = this.defaultBlockState();
 		for (int i = 0; i < 8; i++) {
 			defaultState = defaultState.setValue(CORNERS[i], i == 0);
 		}
-		this.registerDefaultState(defaultState.setValue(CopycatHelper.LIGHT_LEVEL, 0));
+		this.registerDefaultState(defaultState.setValue(CopycatHelper.LIGHT_LEVEL, 0).setValue(WATERLOGGED, false));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(C0, C1, C2, C3, C4, C5, C6, C7, CopycatHelper.LIGHT_LEVEL);
+		builder.add(C0, C1, C2, C3, C4, C5, C6, C7, CopycatHelper.LIGHT_LEVEL, WATERLOGGED);
 	}
 
 	@Override
@@ -175,22 +194,32 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 	}
 
 	@Override
+	protected boolean canBeReplaced(BlockState state, Fluid fluid) {
+		return false;
+	}
+
+	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		ItemStack stack = context.getItemInHand();
+		BlockPos pos = context.getClickedPos();
+		boolean waterlogged = context.getLevel().getFluidState(pos).getType() == Fluids.WATER;
 		int savedMask = getSavedCornersMask(stack);
 		if (savedMask > 0) {
 			BlockState state = this.defaultBlockState();
 			for (int i = 0; i < 8; i++) {
 				state = state.setValue(CORNERS[i], (savedMask & (1 << i)) != 0);
 			}
-			return state;
+			return state.setValue(WATERLOGGED, waterlogged && !isFull(state));
 		}
-		BlockPos pos = context.getClickedPos();
 		BlockState existingState = context.getLevel().getBlockState(pos);
 		if (existingState.is(this)) {
 			int target = getTargetOctant(existingState, pos, context.getClickedFace(), context.getClickLocation());
 			if (target != -1) {
-				return existingState.setValue(CORNERS[target], true);
+				BlockState newState = existingState.setValue(CORNERS[target], true);
+				if (isFull(newState)) {
+					newState = newState.setValue(WATERLOGGED, false);
+				}
+				return newState;
 			}
 		}
 		Vec3 hit = context.getClickLocation();
@@ -206,7 +235,30 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 		for (int i = 0; i < 8; i++) {
 			state = state.setValue(CORNERS[i], i == octant);
 		}
-		return state;
+		return state.setValue(WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	public FluidState getFluidState(BlockState state) {
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+	}
+
+	@Override
+	public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
+		return !isFull(state) && SimpleWaterloggedBlock.super.placeLiquid(level, pos, state, fluidState);
+	}
+
+	@Override
+	public boolean canPlaceLiquid(LivingEntity entity, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
+		return !isFull(state) && SimpleWaterloggedBlock.super.canPlaceLiquid(entity, level, pos, state, fluid);
+	}
+
+	@Override
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+		if (state.getValue(WATERLOGGED)) {
+			tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		}
+		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
 	}
 
 	@Override
@@ -294,7 +346,7 @@ public class CopycatCornerSliceBlock extends Block implements EntityBlock {
 				if (be != null && be.hasMaterial() && !player.isCreative()) {
 					Block.popResource(level, pos, new ItemStack(be.getMaterial().getBlock()));
 				}
-				level.removeBlock(pos, false);
+				level.setBlock(pos, state.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 			} else {
 				level.setBlock(pos, state.setValue(CORNERS[clickedOct], false), Block.UPDATE_ALL);
 			}

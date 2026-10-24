@@ -17,5 +17,6 @@ public class VoteYesPressedProcedure {
 				_vars.markSyncDirty();
 			}
 		}
+		ShowHunterOptInProcedure.execute(world, entity);
 	}
 }

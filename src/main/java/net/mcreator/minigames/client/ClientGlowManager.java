@@ -88,6 +88,22 @@ public class ClientGlowManager {
 	}
 
 	public static boolean isRoguelikePlayerGlowingActive() {
+		return isRoguelikePlayerGlowingActive(null);
+	}
+
+	public static boolean isRoguelikePlayerGlowingActive(Entity entity) {
+		Minecraft mc = Minecraft.getInstance();
+		var level = (entity != null && entity.level() != null) ? entity.level() : (mc != null ? mc.level : null);
+		if (level == null) {
+			return false;
+		}
+		try {
+			if (!ItemSizeHelper.isInRoguelike(level)) {
+				return false;
+			}
+		} catch (Throwable ignored) {
+			return false;
+		}
 		if (isForceDisableGlowingActive()) {
 			return false;
 		}
@@ -128,7 +144,7 @@ public class ClientGlowManager {
 		if (entry != null) {
 			return entry.color != -2;
 		}
-		if (isRoguelikePlayerGlowingActive() && entity instanceof Player player) {
+		if (isRoguelikePlayerGlowingActive(entity) && entity instanceof Player player) {
 			if (!player.isRemoved() && !player.isSpectator() && !player.isInvisible()) {
 				return true;
 			}
@@ -155,7 +171,7 @@ public class ClientGlowManager {
 		if (entry != null) {
 			return entry.color == -2 ? -1 : entry.color;
 		}
-		if (isRoguelikePlayerGlowingActive() && entity instanceof Player player) {
+		if (isRoguelikePlayerGlowingActive(entity) && entity instanceof Player player) {
 			return getPlayerChosenColor(player);
 		}
 		if (isBatEssenceActive()) {

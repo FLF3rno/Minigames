@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ChatScreen;
 
 import net.mcreator.minigames.MinigamesModPlayerAnimationAPI;
+import net.mcreator.minigames.client.ItemSizeHelper;
 
 import java.util.WeakHashMap;
 import java.util.Map;
@@ -92,7 +93,7 @@ public abstract class PlayerAnimationSmoothResetMixin {
 	@Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)V", at = @At("HEAD"))
 	public void onSetupAnimHead(AvatarRenderState renderState, CallbackInfo ci) {
 		Player player = (Player) renderState.getRenderData(MinigamesModPlayerAnimationAPI.ClientAttachments.PLAYER);
-		if (player == null) {
+		if (player == null || !ItemSizeHelper.isInRoguelike(player.level())) {
 			return;
 		}
 		CompoundTag data = player.getPersistentData();
@@ -107,7 +108,7 @@ public abstract class PlayerAnimationSmoothResetMixin {
 			return;
 		}
 		Player player = (Player) renderState.getRenderData(MinigamesModPlayerAnimationAPI.ClientAttachments.PLAYER);
-		if (player == null) {
+		if (player == null || !ItemSizeHelper.isInRoguelike(player.level())) {
 			return;
 		}
 		PlayerModel model = (PlayerModel) (Object) this;

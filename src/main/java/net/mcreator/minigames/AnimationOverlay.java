@@ -45,9 +45,9 @@ public class AnimationOverlay {
 
 					int sw = graphics.guiWidth();
 					int sh = graphics.guiHeight();
-					double guiScale = Minecraft.getInstance().getWindow().getGuiScale();
+					double guiScale = Math.max(1.0, Minecraft.getInstance().getWindow().getGuiScale());
 					double targetScale = 3.0; // Standard reference GUI scale
-					float scaleFactor = (float) (guiScale / targetScale);
+					float scaleFactor = (float) (targetScale / guiScale);
 
 					graphics.pose().pushMatrix();
 					graphics.pose().scale(scaleFactor, scaleFactor);

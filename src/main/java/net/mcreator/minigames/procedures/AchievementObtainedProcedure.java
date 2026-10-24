@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
 import net.minecraft.advancements.AdvancementHolder;
+import net.mcreator.minigames.util.DynamicAchievementList;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -78,6 +79,16 @@ public class AchievementObtainedProcedure {
 
 	@Nullable
 	public static AdvancementHolder getTargetAdvancement(ServerLevel serverLevel) {
+		AdvancementHolder current = DynamicAchievementList.getCurrentTarget(serverLevel);
+		if (current != null) {
+			return current;
+		}
+		int index = (int) MinigamesModVariables.MapVariables.get(serverLevel).Achievement;
+		AdvancementHolder fromIndex = DynamicAchievementList.getByIndex(serverLevel, index);
+		if (fromIndex != null) {
+			DynamicAchievementList.setCurrentTarget(fromIndex.id());
+			return fromIndex;
+		}
 		String rawPath = GetAchievementProcedure.execute(
 				MinigamesModVariables.MapVariables.get(serverLevel).AchievementCategory,
 				MinigamesModVariables.MapVariables.get(serverLevel).Achievement
@@ -91,7 +102,7 @@ public class AchievementObtainedProcedure {
 		} else if ("adventure/spear_many_mobs".equals(path)) {
 			path = "adventure/walk_on_powder_snow_with_leather_boots";
 		}
-		Identifier targetId = Identifier.tryParse("minecraft:" + path);
+		Identifier targetId = rawPath.contains(":") ? Identifier.tryParse(rawPath) : Identifier.tryParse("minecraft:" + path);
 		if (targetId == null) {
 			return null;
 		}

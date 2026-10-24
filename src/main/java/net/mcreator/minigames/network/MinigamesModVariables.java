@@ -322,6 +322,9 @@ public class MinigamesModVariables {
 		public boolean SpawnItems = false;
 		public boolean forceDisableGlowingPlayerSetting = false;
 		public String currentRoomType = "none";
+		public ArrayList<Object> wantsToBeHuntedAchievement = new ArrayList<>();
+		public boolean ShowOptInAchievement = false;
+		public double AchievementHunterOptInTimer = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -417,6 +420,9 @@ public class MinigamesModVariables {
 			SpawnItems = nbt.getBooleanOr("SpawnItems", false);
 			forceDisableGlowingPlayerSetting = nbt.getBooleanOr("forceDisableGlowingPlayerSetting", false);
 			currentRoomType = nbt.getStringOr("currentRoomType", "");
+			wantsToBeHuntedAchievement = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("wantsToBeHuntedAchievement"), lookupProvider);
+			ShowOptInAchievement = nbt.getBooleanOr("ShowOptInAchievement", false);
+			AchievementHunterOptInTimer = nbt.getDoubleOr("AchievementHunterOptInTimer", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -513,6 +519,9 @@ public class MinigamesModVariables {
 			nbt.putBoolean("SpawnItems", SpawnItems);
 			nbt.putBoolean("forceDisableGlowingPlayerSetting", forceDisableGlowingPlayerSetting);
 			nbt.putString("currentRoomType", currentRoomType);
+			nbt.put("wantsToBeHuntedAchievement", NbtArrayLists.saveGlobalMap(wantsToBeHuntedAchievement));
+			nbt.putBoolean("ShowOptInAchievement", ShowOptInAchievement);
+			nbt.putDouble("AchievementHunterOptInTimer", AchievementHunterOptInTimer);
 			return nbt;
 		}
 

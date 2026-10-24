@@ -37,6 +37,12 @@ ordering="AFTER"
 side="BOTH"
 
 
+[[dependencies.minigames]]
+modId="photon_plugin"
+type="optional"
+versionRange="[0,)"
+ordering="NONE"
+side="BOTH"
 
 
 # Start of user code block dependencies configuration

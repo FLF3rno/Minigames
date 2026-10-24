@@ -17,7 +17,11 @@ import java.util.OptionalInt;
 import java.util.OptionalDouble;
 
 import com.mojang.math.Axis;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
+import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.systems.RenderPass;
@@ -134,7 +138,7 @@ public class RenderUtils {
 			bufferBuilder.addVertex(1.0F, 0.0F, -1.0F).setUv(1.0F, 0.0F);
 			bufferBuilder.addVertex(1.0F, 0.0F, 1.0F).setUv(1.0F, 1.0F);
 			bufferBuilder.addVertex(-1.0F, 0.0F, 1.0F).setUv(0.0F, 1.0F);
-			try (MeshData mesh = bufferBuilder.buildOrThrow()) {
+			try (com.mojang.blaze3d.vertex.MeshData mesh = bufferBuilder.buildOrThrow()) {
 				return RenderSystem.getDevice().createBuffer(() -> "minigames Sun", 32, mesh.vertexBuffer());
 			}
 		}
@@ -156,7 +160,7 @@ public class RenderUtils {
 				bufferBuilder.addVertex(1.0F, 0.0F, 1.0F).setUv(f13, f14);
 				bufferBuilder.addVertex(-1.0F, 0.0F, 1.0F).setUv(f15, f14);
 			}
-			try (MeshData mesh = bufferBuilder.buildOrThrow()) {
+			try (com.mojang.blaze3d.vertex.MeshData mesh = bufferBuilder.buildOrThrow()) {
 				return RenderSystem.getDevice().createBuffer(() -> "minigames Moon", 32, mesh.vertexBuffer());
 			}
 		}
@@ -175,7 +179,7 @@ public class RenderUtils {
 			addSkyboxFace(bufferBuilder, -size, -size, -distance, 1.0F / 4.0F, 2.0F / 3.0F, size, -size, -distance, 2.0F / 4.0F, 2.0F / 3.0F, size, size, -distance, 2.0F / 4.0F, 1.0F / 3.0F, -size, size, -distance, 1.0F / 4.0F, 1.0F / 3.0F, color);
 			addSkyboxFace(bufferBuilder, distance, -size, -size, 2.0F / 4.0F, 2.0F / 3.0F, distance, -size, size, 3.0F / 4.0F, 2.0F / 3.0F, distance, size, size, 3.0F / 4.0F, 1.0F / 3.0F, distance, size, -size, 2.0F / 4.0F, 1.0F / 3.0F, color);
 			addSkyboxFace(bufferBuilder, size, -size, distance, 3.0F / 4.0F, 2.0F / 3.0F, -size, -size, distance, 4.0F / 4.0F, 2.0F / 3.0F, -size, size, distance, 4.0F / 4.0F, 1.0F / 3.0F, size, size, distance, 3.0F / 4.0F, 1.0F / 3.0F, color);
-			try (MeshData meshData = bufferBuilder.buildOrThrow()) {
+			try (com.mojang.blaze3d.vertex.MeshData meshData = bufferBuilder.buildOrThrow()) {
 				return RenderSystem.getDevice().createBuffer(() -> "minigames Skybox", 40, meshData.vertexBuffer());
 			}
 		}

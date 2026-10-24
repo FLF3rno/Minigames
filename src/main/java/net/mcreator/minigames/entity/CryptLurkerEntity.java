@@ -5,6 +5,7 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -85,9 +86,11 @@ public class CryptLurkerEntity extends Monster {
 					break;
 				case -2 :
 					this.animationState1.stop();
+					ClientTelegraphHelper.clear(this.getId());
 					break;
 				case 0 :
 					this.animationState1.stop();
+					ClientTelegraphHelper.clear(this.getId());
 					break;
 				case 1 :
 					this.animationState1.start(this.tickCount);
@@ -113,14 +116,21 @@ public class CryptLurkerEntity extends Monster {
 			for (int dx = -r; dx <= r; dx++) {
 				for (int dz = -r; dz <= r; dz++) {
 					if (dx * dx + dz * dz <= 17.5) {
-						ApplyTelegraphProcedure.execute(entity.level(), cx + dx, cy, cz + dz, 25, 0);
+						ApplyTelegraphProcedure.execute(entity.level(), cx + dx, cy, cz + dz, 25, 0, entity.getId());
 					}
 				}
 			}
 		}
+
+		private static void clear(int entityId) {
+			ApplyTelegraphProcedure.clearForEntity(entityId);
+		}
 	}
 
 	public void performSlamExplosion() {
+		if (this.isDeadOrDying() || !this.isAlive()) {
+			return;
+		}
 		if (this.level() instanceof ServerLevel serverLevel) {
 			double ex = this.getX();
 			double ey = this.getY();
@@ -212,7 +222,7 @@ public class CryptLurkerEntity extends Monster {
 
 		@Override
 		public boolean canUse() {
-			if (!this.mob.isCurrentRoomActive()) {
+			if (this.mob.isDeadOrDying() || !this.mob.isAlive() || !this.mob.isCurrentRoomActive()) {
 				return false;
 			}
 			LivingEntity target = this.mob.getTarget();
@@ -221,7 +231,7 @@ public class CryptLurkerEntity extends Monster {
 
 		@Override
 		public boolean canContinueToUse() {
-			if (!this.mob.isCurrentRoomActive()) {
+			if (this.mob.isDeadOrDying() || !this.mob.isAlive() || !this.mob.isCurrentRoomActive()) {
 				return false;
 			}
 			LivingEntity target = this.mob.getTarget();
@@ -262,6 +272,22 @@ public class CryptLurkerEntity extends Monster {
 	}
 
 	@Override
+	public void die(DamageSource damageSource) {
+		this.slamTicks = 0;
+		this.slamCooldown = 0;
+		this.entityData.set(ANIM, 0);
+		super.die(damageSource);
+	}
+
+	@Override
+	public void remove(Entity.RemovalReason reason) {
+		super.remove(reason);
+		if (this.level().isClientSide()) {
+			ClientTelegraphHelper.clear(this.getId());
+		}
+	}
+
+	@Override
 	public void addAdditionalSaveData(ValueOutput valueOutput) {
 		super.addAdditionalSaveData(valueOutput);
 		valueOutput.putString("Texture", this.getTexture());
@@ -279,6 +305,14 @@ public class CryptLurkerEntity extends Monster {
 	public void tick() {
 		super.tick();
 		if (!this.level().isClientSide()) {
+			if (this.isDeadOrDying() || !this.isAlive()) {
+				if (this.slamTicks > 0) {
+					this.slamTicks = 0;
+					this.entityData.set(ANIM, 0);
+				}
+				return;
+			}
+
 			if (!this.isCurrentRoomActive()) {
 				if (this.getTarget() != null) {
 					this.setTarget(null);
@@ -329,6 +363,14 @@ public class CryptLurkerEntity extends Monster {
 				}
 			}
 		} else {
+			if (this.isDeadOrDying() || !this.isAlive()) {
+				if (this.animationState1.isStarted()) {
+					this.animationState1.stop();
+				}
+				ClientTelegraphHelper.clear(this.getId());
+				return;
+			}
+
 			this.animationState0.animateWhen(AnimationWalkingProcedure.execute(this), this.tickCount);
 			if (this.animationState1.isStarted()) {
 				float elapsedSeconds = this.animationState1.getTimeInMillis(this.tickCount) / 1000.0F;

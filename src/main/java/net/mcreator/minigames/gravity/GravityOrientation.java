@@ -127,6 +127,62 @@ public final class GravityOrientation {
 		return vecPlayerToWorld(relativePosOffset, prevGravity);
 	}
 
+	public static Vec3 calculateSafePosition(net.minecraft.world.entity.Entity entity, Direction prevGravity, Direction newGravity) {
+		Vec3 currentPos = entity.position();
+		Vec3 offset = calculatePositionOffset(entity, prevGravity, newGravity);
+		Vec3 targetPos = currentPos.add(offset);
+
+		if (entity.level() == null) {
+			return targetPos;
+		}
+
+		net.minecraft.world.entity.EntityDimensions dimensions = entity.getDimensions(entity.getPose());
+		float width = dimensions.width();
+		float height = dimensions.height();
+		AABB localBox = new AABB(-width / 2.0D, 0.0D, -width / 2.0D, width / 2.0D, height, width / 2.0D);
+
+		java.util.function.Predicate<Vec3> isSafe = pos -> {
+			AABB box = boxPlayerToWorld(localBox, newGravity).move(pos);
+			return entity.level().noCollision(entity, box);
+		};
+
+		if (isSafe.test(targetPos)) {
+			return targetPos;
+		}
+
+		for (double t = 0.8D; t >= 0.0D; t -= 0.2D) {
+			Vec3 candidate = currentPos.add(offset.scale(t));
+			if (isSafe.test(candidate)) {
+				return candidate;
+			}
+		}
+
+		Vec3[] nudges = new Vec3[] {
+			getUpVector(newGravity).scale(0.1D),
+			getUpVector(newGravity).scale(0.25D),
+			getUpVector(newGravity).scale(0.5D),
+			getUpVector(prevGravity).scale(0.1D),
+			getUpVector(prevGravity).scale(0.25D),
+			getUpVector(prevGravity).scale(0.5D),
+			getDownVector(prevGravity).scale(0.1D),
+			getDownVector(prevGravity).scale(0.25D),
+			getDownVector(prevGravity).scale(0.5D)
+		};
+
+		for (Vec3 nudge : nudges) {
+			Vec3 candidate = targetPos.add(nudge);
+			if (isSafe.test(candidate)) {
+				return candidate;
+			}
+			candidate = currentPos.add(nudge);
+			if (isSafe.test(candidate)) {
+				return candidate;
+			}
+		}
+
+		return currentPos;
+	}
+
 	public static Vec3 getDownVector(Direction gravity) {
 		if (gravity == null) return new Vec3(0, -1, 0);
 		return new Vec3(gravity.getStepX(), gravity.getStepY(), gravity.getStepZ());

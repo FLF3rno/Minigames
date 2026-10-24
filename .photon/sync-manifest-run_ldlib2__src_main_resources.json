@@ -1,0 +1,21 @@
+[
+  "",
+  "assets",
+  "assets/ldlib2",
+  "assets/ldlib2/models",
+  "assets/ldlib2/resources",
+  "assets/ldlib2/resources/global",
+  "assets/ldlib2/resources/global/gradient.gradient.nbt",
+  "assets/ldlib2/resources/global/gradient2.gradient.nbt",
+  "assets/ldlib2/resources/global/new_res.material.nbt",
+  "assets/ldlib2/resources/new_res.material.nbt",
+  "assets/ldlib2/resources/new_res.material_1.nbt",
+  "assets/ldlib2/resources/new_res.material_2.nbt",
+  "assets/ldlib2/resources/new_res.material_3.nbt",
+  "assets/ldlib2/shaders",
+  "assets/ldlib2/shaders/core",
+  "assets/ldlib2/textures",
+  "assets/photon",
+  "assets/photon/fx",
+  "assets/photon/fx/fireworktest.fx"
+]

@@ -19,6 +19,7 @@ import java.util.UUID;
 public record AccountSwapSyncMessage(
 	UUID playerUUID,
 	String swappedName,
+	String swappedColor,
 	UUID skinOwnerUUID,
 	String skinOwnerName,
 	boolean isReset
@@ -29,6 +30,7 @@ public record AccountSwapSyncMessage(
 		(RegistryFriendlyByteBuf buffer, AccountSwapSyncMessage message) -> {
 			buffer.writeUUID(message.playerUUID());
 			buffer.writeUtf(message.swappedName() == null ? "" : message.swappedName());
+			buffer.writeUtf(message.swappedColor() == null ? "" : message.swappedColor());
 			buffer.writeBoolean(message.skinOwnerUUID() != null);
 			if (message.skinOwnerUUID() != null) {
 				buffer.writeUUID(message.skinOwnerUUID());
@@ -39,10 +41,11 @@ public record AccountSwapSyncMessage(
 		(RegistryFriendlyByteBuf buffer) -> {
 			UUID playerUUID = buffer.readUUID();
 			String swappedName = buffer.readUtf();
+			String swappedColor = buffer.readUtf();
 			UUID skinOwnerUUID = buffer.readBoolean() ? buffer.readUUID() : null;
 			String skinOwnerName = buffer.readUtf();
 			boolean isReset = buffer.readBoolean();
-			return new AccountSwapSyncMessage(playerUUID, swappedName, skinOwnerUUID, skinOwnerName, isReset);
+			return new AccountSwapSyncMessage(playerUUID, swappedName, swappedColor, skinOwnerUUID, skinOwnerName, isReset);
 		}
 	);
 
@@ -57,6 +60,7 @@ public record AccountSwapSyncMessage(
 				AccountSwapManager.handleClientSync(
 					message.playerUUID(),
 					message.swappedName(),
+					message.swappedColor(),
 					message.skinOwnerUUID(),
 					message.skinOwnerName(),
 					message.isReset()

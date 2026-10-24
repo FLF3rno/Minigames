@@ -750,7 +750,7 @@ public class MinigamesSettingsHelper {
 				null
 		);
 
-		addDoubleSlider("tooltipSize", Component.literal("Tooltip Scale"), 0.8, 0, 2.5, 0.1,
+		addDoubleSlider("tooltipSize", Component.literal("Dropped Item Tooltip Scale"), 0.8, 0, 2.5, 0.1,
 				val -> Component.literal(String.format(java.util.Locale.ROOT, "%.1fx", val)),
 				(val, level, player) -> {
 					if (player != null) {

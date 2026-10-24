@@ -11,8 +11,6 @@ public class StartBossProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if ((MinigamesModVariables.MapVariables.get(world).bossName).equals("Flavio")) {
 			net.mcreator.minigames.FlavioFightManager.reset();
-			net.mcreator.minigames.FlavioFightManager.isFightActive = true;
-			net.mcreator.minigames.FlavioFightManager.phase = 1;
 			SpawnSingleMachineProcedure.execute(world);
 		}
 	}

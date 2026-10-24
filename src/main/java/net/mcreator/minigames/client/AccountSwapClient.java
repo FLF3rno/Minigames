@@ -14,18 +14,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 public class AccountSwapClient {
-	public record SwappedIdentity(String swappedName, UUID skinOwnerUUID, String skinOwnerName) {}
+	public record SwappedIdentity(String swappedName, String swappedColor, UUID skinOwnerUUID, String skinOwnerName) {}
 
 	private static final Map<UUID, SwappedIdentity> SWAPPED_PLAYERS = new ConcurrentHashMap<>();
 	private static final Map<UUID, Supplier<PlayerSkin>> SKIN_LOOKUP_CACHE = new ConcurrentHashMap<>();
 	private static final ThreadLocal<Boolean> RESOLVING_ORIGINAL = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
-	public static void handleSync(UUID playerUUID, String swappedName, UUID skinOwnerUUID, String skinOwnerName, boolean isReset) {
+	public static void handleSync(UUID playerUUID, String swappedName, String swappedColor, UUID skinOwnerUUID, String skinOwnerName, boolean isReset) {
 		if (isReset) {
 			SWAPPED_PLAYERS.remove(playerUUID);
 		} else {
 			SWAPPED_PLAYERS.put(playerUUID, new SwappedIdentity(
 				(swappedName != null && !swappedName.isEmpty()) ? swappedName : null,
+				(swappedColor != null && !swappedColor.isEmpty()) ? swappedColor : null,
 				skinOwnerUUID,
 				skinOwnerName
 			));
@@ -51,6 +52,17 @@ public class AccountSwapClient {
 			return identity.swappedName();
 		}
 		return net.mcreator.minigames.AccountSwapManager.getSwappedName(playerUUID);
+	}
+
+	public static String getSwappedColor(UUID playerUUID) {
+		if (playerUUID == null) {
+			return null;
+		}
+		SwappedIdentity identity = SWAPPED_PLAYERS.get(playerUUID);
+		if (identity != null && identity.swappedColor() != null) {
+			return identity.swappedColor();
+		}
+		return net.mcreator.minigames.AccountSwapManager.getSwappedColor(playerUUID);
 	}
 
 	public static PlayerSkin getSkin(UUID playerUUID) {

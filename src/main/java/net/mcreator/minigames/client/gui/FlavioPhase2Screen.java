@@ -151,10 +151,24 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 		}
 	}
 
+	private float getScaleFactor() {
+		double guiScale = Math.max(1.0, Minecraft.getInstance().getWindow().getGuiScale());
+		double targetScale = 3.0;
+		return (float) (targetScale / guiScale);
+	}
+
+	private float getVirtualWidth() {
+		return width / getScaleFactor();
+	}
+
+	private float getVirtualHeight() {
+		return height / getScaleFactor();
+	}
+
 	private float getCellSize() {
 		return Math.min(
 				CELL_SIZE,
-				(width * GRID_SCREEN_WIDTH) / GRID_WIDTH
+				(getVirtualWidth() * GRID_SCREEN_WIDTH) / GRID_WIDTH
 		);
 	}
 
@@ -163,7 +177,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	}
 
 	private float getGridStartX() {
-		return (width - getGridWidth()) / 2f;
+		return (getVirtualWidth() - getGridWidth()) / 2f;
 	}
 
 	private float getGridX(int column) {
@@ -238,11 +252,13 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	}
 
 	private void updatePlayer() {
-		float targetScreenY = getMazeScreenY(currentRow);
+		if (currentRow > 0) {
+			float targetScreenY = getMazeScreenY(currentRow);
 
-		if (targetScreenY < PLAYER_TOP_LIMIT) {
-			float excess = PLAYER_TOP_LIMIT - targetScreenY;
-			mazeOffset += excess;
+			if (targetScreenY < PLAYER_TOP_LIMIT) {
+				float excess = PLAYER_TOP_LIMIT - targetScreenY;
+				mazeOffset += excess;
+			}
 		}
 
 		if (!isClimbing) {
@@ -299,7 +315,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 
 	private float getMazeScreenY(int row) {
 		float firstRowY =
-				height * 0.50f - ROW_HEIGHT;
+				getVirtualHeight() * 0.50f - ROW_HEIGHT;
 
 		return firstRowY
 				- row * ROW_HEIGHT
@@ -341,7 +357,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 
 			if (
 					screenY < -ROW_HEIGHT * 2f
-							|| screenY > height + ROW_HEIGHT * 2f
+							|| screenY > getVirtualHeight() + ROW_HEIGHT * 2f
 			)
 				continue;
 
@@ -537,15 +553,15 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 							| b;
 
 			int y1 =
-					i * height / strips;
+					Math.round(i * getVirtualHeight() / strips);
 
 			int y2 =
-					(i + 1) * height / strips;
+					Math.round((i + 1) * getVirtualHeight() / strips);
 
 			guiGraphics.fill(
 					0,
 					y1,
-					width,
+					Math.round(getVirtualWidth()),
 					y2,
 					color
 			);
@@ -752,7 +768,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 
 			if (
 					screenY < -ROW_HEIGHT * 2f
-							|| screenY > height + ROW_HEIGHT * 2f
+							|| screenY > getVirtualHeight() + ROW_HEIGHT * 2f
 			)
 				continue;
 
@@ -809,21 +825,23 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	private void renderDeathZone(
 			GuiGraphicsExtractor guiGraphics
 	) {
+		float vHeight = getVirtualHeight();
+		float vWidth = getVirtualWidth();
 		int top =
-				height - DEATH_ZONE_HEIGHT;
+				Math.round(vHeight - DEATH_ZONE_HEIGHT);
 
 		guiGraphics.fill(
 				0,
 				top,
-				width,
-				height,
+				Math.round(vWidth),
+				Math.round(vHeight),
 				0x88000000
 		);
 
 		guiGraphics.fill(
 				0,
 				top,
-				width,
+				Math.round(vWidth),
 				top + 2,
 				0xAA441111
 		);
@@ -831,7 +849,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 
 	private boolean isInDeathZone() {
 		return playerVisualY + PLAYER_SIZE
-				>= height - DEATH_ZONE_HEIGHT;
+				>= getVirtualHeight() - DEATH_ZONE_HEIGHT;
 	}
 
 	private void loseGame() {
@@ -899,8 +917,8 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 		guiGraphics.fill(
 				0,
 				0,
-				width,
-				height,
+				Math.round(getVirtualWidth()),
+				Math.round(getVirtualHeight()),
 				(alpha << 24) | 0xFFFFFF
 		);
 	}
@@ -1011,6 +1029,10 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 			int mouseY,
 			float partialTicks
 	) {
+		float scaleFactor = getScaleFactor();
+		guiGraphics.pose().pushMatrix();
+		guiGraphics.pose().scale(scaleFactor, scaleFactor);
+
 		renderBackgroundGradient(guiGraphics);
 		renderMaze(guiGraphics);
 		renderTrail(guiGraphics);
@@ -1018,6 +1040,8 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 		renderKeybindTutorial(guiGraphics);
 		renderDeathZone(guiGraphics);
 		renderVictoryFade(guiGraphics);
+
+		guiGraphics.pose().popMatrix();
 	}
 
 	@Override
@@ -1050,5 +1074,11 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	@Override
 	public void init() {
 		super.init();
+		if (gameStarted) {
+			playerTargetX = getGridX(playerGridX);
+			if (!isClimbing) {
+				playerVisualX = playerTargetX;
+			}
+		}
 	}
 }

@@ -107,7 +107,10 @@ public class TeammateOverlayOverlay {
 
             int playerNameColor = getPlayerNameColor(teammate);
             ClassDisplay classDisplay = getClassDisplay(teammate.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon);
-            String playerName = teammate.getGameProfile().name();
+            String playerName = net.mcreator.minigames.client.AccountSwapClient.getSwappedName(teammate.getUUID());
+            if (playerName == null || playerName.isEmpty()) {
+                playerName = teammate.getGameProfile().name();
+            }
             String classLabel = classDisplay.label();
             drawCenteredHeader(event, teammate, playerName, classLabel, withFullAlpha(playerNameColor), withFullAlpha(classDisplay.color()), rowY);
             drawHealthBar(event, teammate, rowY);
@@ -135,6 +138,10 @@ public class TeammateOverlayOverlay {
     }
 
     private static PlayerSkin getPlayerSkin(Player player) {
+        PlayerSkin swapped = net.mcreator.minigames.client.AccountSwapClient.getSkin(player.getUUID());
+        if (swapped != null) {
+            return swapped;
+        }
         if (player instanceof AbstractClientPlayer clientPlayer) {
             return clientPlayer.getSkin();
         }
@@ -344,7 +351,10 @@ public class TeammateOverlayOverlay {
     }
 
     private static int getPlayerNameColor(Player player) {
-        String color = player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+        String color = net.mcreator.minigames.client.AccountSwapClient.getSwappedColor(player.getUUID());
+        if (color == null || color.isEmpty()) {
+            color = player.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+        }
         if (color == null || !color.matches("^#?[0-9a-fA-F]{6}$"))
             return DEFAULT_TEXT_COLOR;
         String normalized = color.startsWith("#") ? color.substring(1) : color;

@@ -39,8 +39,12 @@ public class PlayerNameColorMixin {
 			}
 		}
 
-		MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-		int rgb = ColorUtils.parseHex(vars.color);
+		String colorStr = AccountSwapManager.getSwappedColor(player.getUUID());
+		if (colorStr == null || colorStr.isEmpty()) {
+			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			colorStr = vars.color;
+		}
+		int rgb = ColorUtils.parseHex(colorStr);
 		if (rgb != -1 && base != null) {
 			MutableComponent colored = base.copy().withStyle(style -> style.withColor(rgb));
 			cir.setReturnValue(colored);

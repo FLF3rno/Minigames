@@ -4,8 +4,11 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.tags.TagKey;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.Identifier;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
@@ -17,6 +20,7 @@ public class ShieldAngelHurtProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
+		double angels = 0;
 		if ((entity instanceof ShieldAngelEntity _datEntI ? _datEntI.getEntityData().get(ShieldAngelEntity.DATA_timeSinceLastHit) : 0) >= (entity instanceof ShieldAngelEntity _datEntI
 				? _datEntI.getEntityData().get(ShieldAngelEntity.DATA_cooldown)
 				: 0)) {
@@ -31,16 +35,31 @@ public class ShieldAngelHurtProcedure {
 				if (entity instanceof ShieldAngelEntity _datEntSetI)
 					_datEntSetI.getEntityData().set(ShieldAngelEntity.DATA_HP, (int) ((entity instanceof ShieldAngelEntity _datEntI ? _datEntI.getEntityData().get(ShieldAngelEntity.DATA_HP) : 0) - 1));
 			} else {
+				angels = 0;
 				{
 					final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(100 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 						if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == entity.getPersistentData().getDoubleOr("DataID", 0)) {
-							{
-								Entity _ent = entityiterator;
-								if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-									_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(),
-											_ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
-											"/effect clear @s minigames:blessed");
+							if (entityiterator.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:blesser")))) {
+								if (entityiterator == entity) {
+									angels = angels + 1;
+								}
+							}
+						}
+					}
+				}
+				{
+					final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
+					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(100 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
+						if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == entity.getPersistentData().getDoubleOr("DataID", 0)) {
+							if (!(angels > 0)) {
+								{
+									Entity _ent = entityiterator;
+									if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
+										_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(),
+												_ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
+												"/effect clear @s minigames:blessed");
+									}
 								}
 							}
 						}

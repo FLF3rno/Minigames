@@ -21,10 +21,11 @@ public class WonVoteProcedure {
 			if (MinigamesModVariables.MapVariables.get(world).voteType == 0) {
 				StartAchievementRunProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 1) {
+				MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.clear();
+				MinigamesModVariables.MapVariables.get(world).AchievementHunterOptInTimer = 200;
 				MinigamesModVariables.MapVariables.get(world).achievementHunterMode = true;
-				MinigamesModVariables.MapVariables.get(world).randomHunterAchievement = true;
+				MinigamesModVariables.MapVariables.get(world).ShowOptInAchievement = true;
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				StartAchievementRunProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 2) {
 				ResetCrownHuntProcedure.execute(world, x, y, z);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 3) {
@@ -46,15 +47,13 @@ public class WonVoteProcedure {
 					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 						_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, 200, 1, false, false));
 				}
-				if (world.isClientSide()) {
-					PlayBossCutsceneProcedure.execute();
-				}
-				MinigamesMod.queueServerWork(100, () -> {
+				net.mcreator.minigames.network.PlayScreenAnimationMessage.sendToAll(world, 150, "roguelike_boss", 1.0f);
+				MinigamesMod.queueServerWork(150, () -> {
 					StartBossProcedure.execute(world);
 					StartRoomProcedure.execute(world);
+					MinigamesModVariables.MapVariables.get(world).currentRoomType = "boss";
+					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				});
-				MinigamesModVariables.MapVariables.get(world).currentRoomType = "boss";
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 8) {
 				StartRoomProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "challenge";

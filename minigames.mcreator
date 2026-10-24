@@ -8989,47 +8989,6 @@
       "path": "~/Dungeon/Items/Warrior/Relic"
     },
     {
-      "name": "RelicEquipped",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "relic_equipped",
-      "metadata": {
-        "dependencies": [],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/RelicEquippedProcedure.java"
-        ]
-      },
-      "path": "~/Dungeon/Events/Relics"
-    },
-    {
-      "name": "RelicUnequipped",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "relic_unequipped",
-      "metadata": {
-        "dependencies": [],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/RelicUnequippedProcedure.java"
-        ]
-      },
-      "path": "~/Dungeon/Events/Relics"
-    },
-    {
-      "name": "RelicInventory",
-      "type": "mixin",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "relic_inventory",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/mixin/RelicInventoryMixin.java"
-        ]
-      },
-      "path": "~/Dungeon/Events/Relics"
-    },
-    {
       "name": "ItemDroppedDungeon",
       "type": "procedure",
       "compiles": true,
@@ -11076,7 +11035,7 @@
       "name": "GetAchievement",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "get_achievement",
       "metadata": {
         "dependencies": [
@@ -11453,7 +11412,7 @@
       "name": "ModifiersAchievement",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "modifiers_achievement",
       "metadata": {
         "dependencies": [
@@ -12197,20 +12156,6 @@
         ]
       },
       "path": "~/General/Animation"
-    },
-    {
-      "name": "PlayBossCutscene",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "play_boss_cutscene",
-      "metadata": {
-        "dependencies": [],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/PlayBossCutsceneProcedure.java"
-        ]
-      },
-      "path": "~/Dungeon/Cutscene"
     },
     {
       "name": "ChargeExecuteGoal",
@@ -17966,6 +17911,61 @@
         ]
       },
       "path": "~/Dungeon/Overlays/Fight Overlay"
+    },
+    {
+      "name": "OptInAchievementHunt",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "opt_in_achievement_hunt",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/client/screens/OptInAchievementHuntOverlay.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "ShowHunterOptIn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_hunter_opt_in",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ShowHunterOptInProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "SelectSpecificHunter",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_specific_hunter",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SelectSpecificHunterProcedure.java"
+        ]
+      },
+      "path": "~/Achievement Run/Hunter Mode"
     }
   ],
   "variable_elements": [
@@ -18838,6 +18838,24 @@
       "type": "string",
       "scope": "map",
       "value": "none"
+    },
+    {
+      "name": "wantsToBeHuntedAchievement",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "ShowOptInAchievement",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "AchievementHunterOptInTimer",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [
@@ -19601,9 +19619,9 @@
     ],
     "ITEMS:minecraft:enchantable/durability": [
       "~SoulCurse@CUSTOM:SoulCurse",
+      "~ChoiceBagThief@CUSTOM:ChoiceBagThief",
       "~ChoiceBagSupport@CUSTOM:ChoiceBagSupport",
       "~ChoiceBagWarrior@CUSTOM:ChoiceBagWarrior",
-      "~ChoiceBagThief@CUSTOM:ChoiceBagThief",
       "~Horseshoe@CUSTOM:Horseshoe",
       "~SnatchingClaw@CUSTOM:SnatchingClaw",
       "~SnowShovel@CUSTOM:SnowShovel",
@@ -19657,43 +19675,34 @@
       "CUSTOM:FlavioTrapdoor2",
       "CUSTOM:FlavioTrapdoor3"
     ],
-    "ITEMS:minecraft:head_armor": [
-      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
-    ],
     "BLOCKS:minecraft:stairs": [
-      "~CopycatStair@CUSTOM:CopycatStair",
       "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
       "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
       "~CinnabarStairs@CUSTOM:CinnabarStairs",
       "~SulfurBrickStairs@CUSTOM:SulfurBrickStairs",
       "~PolishedSulfurStairs@CUSTOM:PolishedSulfurStairs",
       "~SulfurStairs@CUSTOM:SulfurStairs",
-      "~CastleStairs@CUSTOM:CastleStairs"
+      "~CastleStairs@CUSTOM:CastleStairs",
+      "~CopycatStair@CUSTOM:CopycatStair"
     ],
     "BLOCKS:minecraft:walls": [
-      "~CopycatWall@CUSTOM:CopycatWall",
       "~CinnabarBrickWall@CUSTOM:CinnabarBrickWall",
       "~PolishedCinnabarWall@CUSTOM:PolishedCinnabarWall",
       "~CinnabarWall@CUSTOM:CinnabarWall",
       "~SulfurBrickWall@CUSTOM:SulfurBrickWall",
       "~PolishedSulfurWall@CUSTOM:PolishedSulfurWall",
       "~SulfurWall@CUSTOM:SulfurWall",
-      "~ChiseledQuartzWall@CUSTOM:ChiseledQuartzWall"
+      "~ChiseledQuartzWall@CUSTOM:ChiseledQuartzWall",
+      "~CopycatWall@CUSTOM:CopycatWall"
     ],
     "BLOCKS:minecraft:slabs": [
-      "~CopycatSlab@CUSTOM:CopycatSlab",
       "~CinnabarBrickSlab@CUSTOM:CinnabarBrickSlab",
       "~PolishedCinnabarSlab@CUSTOM:PolishedCinnabarSlab",
       "~CinnabarSlab@CUSTOM:CinnabarSlab",
       "~SulfurBrickSlab@CUSTOM:SulfurBrickSlab",
       "~PolishedSulfurSlab@CUSTOM:PolishedSulfurSlab",
-      "~SulfurSlab@CUSTOM:SulfurSlab"
-    ],
-    "BLOCKS:minecraft:mineable/pickaxe": [
-      "~TuffPedestal@CUSTOM:TuffPedestal"
-    ],
-    "BLOCKS:minecraft:needs_stone_tool": [
-      "~TuffPedestal@CUSTOM:TuffPedestal"
+      "~SulfurSlab@CUSTOM:SulfurSlab",
+      "~CopycatSlab@CUSTOM:CopycatSlab"
     ],
     "ENTITIES:mod:buried_miniboss": [
       "CUSTOM:Worshipper",
@@ -19775,6 +19784,15 @@
       "CUSTOM:CactusArrow",
       "EntityArrow",
       "EntitySpectralArrow"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
+    ],
+    "BLOCKS:minecraft:mineable/pickaxe": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "BLOCKS:minecraft:needs_stone_tool": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
     ]
   },
   "tab_element_order": {},
@@ -20220,7 +20238,7 @@
       "item.minigames.ascenscion": "Ascenscion",
       "item.minigames.blazing_blade": "Blazing Blade",
       "item.minigames.worshippers_cross": "Worshipper\u0027s Cross",
-      "item.minigames.cactus_crossbow": "Blessed Cursed Crossbow",
+      "item.minigames.cactus_crossbow": "Cactus Crossbow",
       "item.minigames.berserk": "Berserk",
       "effect.minigames.lifesteal": "Lifesteal",
       "item.minigames.teleporter": "Teleporter",
@@ -20257,7 +20275,8 @@
       "item.minigames.supportive": "Supportive",
       "item.minigames.explorers_charm": "Explorer\u0027s Charm",
       "item.minigames.friction": "Friction",
-      "gui.minigames.room_enemy_amount.label_empty": ""
+      "gui.minigames.room_enemy_amount.label_empty": "",
+      "gui.minigames.opt_in_achievement_hunt.label_do_you_want_to_be_hunted": "DO YOU WANT TO BE HUNTED?"
     }
   },
   "metadata": {
@@ -21004,7 +21023,9 @@
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],
-    "mcreatorDependencies": [],
+    "mcreatorDependencies": [
+      "photon_plugin"
+    ],
     "currentGenerator": "neoforge-26.1.2",
     "credits": "FL_F3rno",
     "modElementsPackage": "net.mcreator.minigames"

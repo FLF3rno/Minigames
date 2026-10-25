@@ -36,7 +36,7 @@ public class AchievementInitiateGameProcedure {
 					_vars.markSyncDirty();
 				}
 			});
-			int pvpDelay = (int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive + 80);
+			int pvpDelay = (int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive * 20 + 80);
 			MinigamesMod.queueServerWork(pvpDelay, () -> {
 				for (ServerPlayer player : serverLevel.getServer().getPlayerList().getPlayers()) {
 					MinigamesModVariables.PlayerVariables _vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);

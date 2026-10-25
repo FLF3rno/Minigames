@@ -33,30 +33,33 @@ public class HeadStartProcedure {
 		if (entity == null)
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode && MinigamesModVariables.MapVariables.get(world).playingAchievement) {
-			if ((world instanceof ServerLevel _level0 ? getEntityFromUUID(_level0, MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) : null) != null) {
-				if (!(entity.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
-					if (TimerSecondsProcedure.execute(entity) < MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
-						if (!(entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.IMMOBILIZED))) {
-							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, (int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive * 20), 1, false, false));
-							{
-								MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
-								_vars.TimerColor = "DB2300";
-								_vars.markSyncDirty();
-							}
-							{
-								MinigamesModVariables.PlayerVariables _vars = (world instanceof ServerLevel _level4 ? getEntityFromUUID(_level4, MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) : null)
-										.getData(MinigamesModVariables.PLAYER_VARIABLES);
-								_vars.TimerColor = "FFCA47";
-								_vars.markSyncDirty();
-							}
-						}
-					} else if (TimerSecondsProcedure.execute(entity) >= MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
-						if (entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MinigamesModMobEffects.IMMOBILIZED)) {
-							if (entity instanceof LivingEntity _entity)
-								_entity.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
-						}
+			if (TimerSecondsProcedure.execute(entity) < MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
+				if ((entity.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					if (!_vars.TimerColor.equals("FFCA47")) {
+						_vars.TimerColor = "FFCA47";
+						_vars.markSyncDirty();
 					}
+				} else {
+					if (!(entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(MinigamesModMobEffects.IMMOBILIZED))) {
+						if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+							_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.IMMOBILIZED, (int) (MinigamesModVariables.MapVariables.get(world).WhenPVPActive * 20), 1, false, false));
+					}
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					if (!_vars.TimerColor.equals("DB2300")) {
+						_vars.TimerColor = "DB2300";
+						_vars.markSyncDirty();
+					}
+				}
+			} else {
+				if (entity instanceof LivingEntity _livEnt5 && _livEnt5.hasEffect(MinigamesModMobEffects.IMMOBILIZED)) {
+					if (entity instanceof LivingEntity _entity)
+						_entity.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
+				}
+				MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+				if (_vars.TimerColor.equals("DB2300") || _vars.TimerColor.equals("FFCA47")) {
+					_vars.TimerColor = "C7C7C7";
+					_vars.markSyncDirty();
 				}
 			}
 		}

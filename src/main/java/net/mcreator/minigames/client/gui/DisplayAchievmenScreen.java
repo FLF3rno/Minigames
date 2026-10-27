@@ -1,5 +1,16 @@
 package net.mcreator.minigames.client.gui;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.RemotePlayer;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.util.FormattedCharSequence;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -33,6 +44,7 @@ import java.util.Arrays;
 import com.mojang.blaze3d.platform.InputConstants;
 
 public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchievmenMenu> implements MinigamesModScreens.ScreenAccessor {
+	private final Map<UUID, RemotePlayer> dummyPlayers = new HashMap<>();
 	private final Level world;
 	private final int x, y, z;
 	private final Player entity;
@@ -97,7 +109,8 @@ public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchie
 		}
 		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
 		//render all players evenly spread
-		playersRender(guiGraphics,(this.width / 8) * 3, (int) ((this.width / 8) * 5.5f), world.players().size());
+		List<Player> players = getPlayersToRender();
+		playersRender(guiGraphics, (this.width / 8) * 3, (int) ((this.width / 8) * 5.5f), players);
 	}
 	@Override
 	protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
@@ -125,44 +138,73 @@ public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchie
 		guiGraphics.pose().popMatrix();
 
 	}
-	private void playersRender(GuiGraphicsExtractor guiGraphics, int fromX, int toX, int amount)
-	{
-		int line, gap;
-		line = toX - fromX;
-		gap = line / (amount + 1);
-		for (int pN = 1; pN < (amount + 1); pN++)
-		{
-			Player foundPlayer = null;
-			for (Player iteratePlayer : world.players()) {
-				if (iteratePlayer.getData(MinigamesModVariables.PLAYER_VARIABLES).team == pN) {
-					foundPlayer = iteratePlayer;
-					break;
+	@Override
+	public void removed() {
+		super.removed();
+		dummyPlayers.clear();
+	}
+
+	private List<Player> getPlayersToRender() {
+		List<Player> list = new ArrayList<>();
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.getConnection() != null) {
+			for (PlayerInfo info : mc.getConnection().getOnlinePlayers()) {
+				UUID uuid = info.getProfile().id();
+				Player player = this.world.getPlayerByUUID(uuid);
+				if (player == null && this.world instanceof ClientLevel clientLevel) {
+					player = dummyPlayers.computeIfAbsent(uuid, id -> new RemotePlayer(clientLevel, info.getProfile()));
+				}
+				if (player != null) {
+					list.add(player);
 				}
 			}
-			if (foundPlayer != null) {
-				renderSpecificPlayer(guiGraphics, foundPlayer, fromX + gap * pN, foundPlayer);
+		}
+		if (list.isEmpty()) {
+			for (Player p : this.world.players()) {
+				list.add(p);
 			}
 		}
+		list.sort((p1, p2) -> {
+			int t1 = net.mcreator.minigames.client.AchievementLobbyClient.getTeam(p1.getUUID(), (int) p1.getData(MinigamesModVariables.PLAYER_VARIABLES).team);
+			int t2 = net.mcreator.minigames.client.AchievementLobbyClient.getTeam(p2.getUUID(), (int) p2.getData(MinigamesModVariables.PLAYER_VARIABLES).team);
+			if (t1 != t2) {
+				return Integer.compare(t1, t2);
+			}
+			return p1.getName().getString().compareToIgnoreCase(p2.getName().getString());
+		});
+		return list;
 	}
-	private void renderSpecificPlayer(GuiGraphicsExtractor guiGraphics, LivingEntity entity, int x, Player player)
-	{
+
+	private void playersRender(GuiGraphicsExtractor guiGraphics, int fromX, int toX, List<Player> players) {
+		int amount = players.size();
+		if (amount == 0)
+			return;
+		int line = toX - fromX;
+		int gap = line / (amount + 1);
+		for (int i = 0; i < amount; i++) {
+			Player p = players.get(i);
+			renderSpecificPlayer(guiGraphics, p, fromX + gap * (i + 1), p);
+		}
+	}
+
+	private void renderSpecificPlayer(GuiGraphicsExtractor guiGraphics, LivingEntity entity, int x, Player player) {
 		int boxWidth = 25;
 		int x0 = x - boxWidth / 2;
 		int x1 = x + boxWidth / 2;
 		int y0 = this.topPos + 140;
-		InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x0, y0 , x1, this.topPos + 140 + 100, 25, -entity.getBbHeight() / (2.0f * entity.getScale()), 0f, 0, entity);
+		InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x0, y0, x1, this.topPos + 140 + 100, 25, -entity.getBbHeight() / (2.0f * entity.getScale()), 0f, 0, entity);
 
-		if (Objects.equals(player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState, "Ready")) {
-			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0-4, y0, 0, 0, 33, 50, 33, 50, 0xFF05fa1b);
-		}
-		else if (Objects.equals(player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState, "Rerolling")) {
-			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0-4, y0, 0, 0, 33, 50, 33, 50, 0xFF0e56f1);
+		String state = net.mcreator.minigames.client.AchievementLobbyClient.getState(player.getUUID(), player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState);
+		if (Objects.equals(state, "Ready")) {
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0 - 4, y0, 0, 0, 33, 50, 33, 50, 0xFF05fa1b);
+		} else if (Objects.equals(state, "Rerolling")) {
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPOTLIGHT, x0 - 4, y0, 0, 0, 33, 50, 33, 50, 0xFF0e56f1);
 		}
 
-		if ((player.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID) && MinigamesModVariables.MapVariables.get(world).achievementHunterMode
-				&& MinigamesModVariables.MapVariables.get(world).playingAchievement)
-		{
-			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, HUNTED, x0+4, y0-17, 0, 0, 16, 16, 16, 16);
+		if ((player.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)
+				&& MinigamesModVariables.MapVariables.get(world).achievementHunterMode
+				&& MinigamesModVariables.MapVariables.get(world).playingAchievement) {
+			guiGraphics.blit(RenderPipelines.GUI_TEXTURED, HUNTED, x0 + 4, y0 - 17, 0, 0, 16, 16, 16, 16);
 		}
 	}
 
@@ -187,6 +229,7 @@ public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchie
 	@Override
 	public void init() {
 		super.init();
+		ClientPacketDistributor.sendToServer(new net.mcreator.minigames.network.AchievementLobbyRequestMessage());
 		button_im_ready = Button.builder(Component.translatable("gui.minigames.display_achievmen.button_im_ready"), e -> {
 			int x = DisplayAchievmenScreen.this.x;
 			int y = DisplayAchievmenScreen.this.y;
@@ -212,9 +255,14 @@ public class DisplayAchievmenScreen extends AbstractContainerScreen<DisplayAchie
 		this.addRenderableWidget(imagebutton_reroll);
 	}
 
+	private int reqTick = 0;
+
 	@Override
 	protected void containerTick() {
 		super.containerTick();
-		this.button_im_ready.visible = !Objects.equals(entity.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState, "Ready");
+		this.button_im_ready.visible = !Objects.equals(net.mcreator.minigames.client.AchievementLobbyClient.getState(entity.getUUID(), entity.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState), "Ready");
+		if (++reqTick % 20 == 0) {
+			ClientPacketDistributor.sendToServer(new net.mcreator.minigames.network.AchievementLobbyRequestMessage());
+		}
 	}
 }

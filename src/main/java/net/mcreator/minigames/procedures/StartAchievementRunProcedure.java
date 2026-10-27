@@ -72,6 +72,7 @@ public class StartAchievementRunProcedure {
 					}, _bpos);
 				}
 			} else {
+				HuntedCoordsProcedure.reset();
 				MinigamesModVariables.MapVariables.get(world).hunterAnimation = 0;
 				MinigamesModVariables.MapVariables.get(world).showWinscreen = true;
 				MinigamesModVariables.MapVariables.get(world).animateHunter = true;

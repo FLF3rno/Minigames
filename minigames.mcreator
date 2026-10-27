@@ -652,7 +652,7 @@
       "name": "CompassHunterSprite",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "compass_hunter_sprite",
       "metadata": {
         "dependencies": [
@@ -11833,7 +11833,7 @@
       "name": "HeadStart",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "head_start",
       "metadata": {
         "dependencies": [
@@ -11856,7 +11856,7 @@
       "name": "HuntedCoords",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "hunted_coords",
       "metadata": {
         "dependencies": [

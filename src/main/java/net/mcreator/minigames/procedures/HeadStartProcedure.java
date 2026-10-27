@@ -33,8 +33,14 @@ public class HeadStartProcedure {
 		if (entity == null)
 			return;
 		if (MinigamesModVariables.MapVariables.get(world).achievementHunterMode && MinigamesModVariables.MapVariables.get(world).playingAchievement) {
+			String hunterUUID = MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID;
+			if (hunterUUID == null || hunterUUID.isEmpty() || hunterUUID.equals("\"\""))
+				return;
 			if (TimerSecondsProcedure.execute(entity) < MinigamesModVariables.MapVariables.get(world).WhenPVPActive) {
-				if ((entity.getStringUUID()).equals(MinigamesModVariables.MapVariables.get(world).hunterAchievementUUID)) {
+				if ((entity.getStringUUID()).equals(hunterUUID)) {
+					if (entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.IMMOBILIZED)) {
+						_livEnt.removeEffect(MinigamesModMobEffects.IMMOBILIZED);
+					}
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					if (!_vars.TimerColor.equals("FFCA47")) {
 						_vars.TimerColor = "FFCA47";

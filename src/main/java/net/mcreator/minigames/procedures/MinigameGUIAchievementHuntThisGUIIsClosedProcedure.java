@@ -14,7 +14,12 @@ public class MinigameGUIAchievementHuntThisGUIIsClosedProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		MinigamesModVariables.MapVariables.get(world).WhenPVPActive = Math.round(parseDouble((entity instanceof Player _entity0 && _entity0.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu0) ? _menu0.getMenuState(0, "hunt", "") : ""));
+		double huntTime = parseDouble((entity instanceof Player _entity0 && _entity0.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu0) ? _menu0.getMenuState(0, "hunt", "") : "");
+		if (huntTime <= 0) {
+			MinigamesModVariables.MapVariables.get(world).WhenPVPActive = 30;
+		} else {
+			MinigamesModVariables.MapVariables.get(world).WhenPVPActive = Math.round(huntTime);
+		}
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		if (((entity instanceof Player _entity1 && _entity1.containerMenu instanceof MinigamesModMenus.MenuAccessor _menu1) && _menu1.getMenuState(1, "keepinventory", false)) == true) {
 			if (world instanceof ServerLevel _origLevel) {

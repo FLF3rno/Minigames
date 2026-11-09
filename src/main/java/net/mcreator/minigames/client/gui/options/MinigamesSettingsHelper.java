@@ -115,13 +115,15 @@ public class MinigamesSettingsHelper {
 	public static class BooleanSettingRow implements SettingRow {
 		private final String key;
 		private final Component label;
+		private final Component description;
 		private final boolean defaultValue;
 		private final Function<Boolean, Component> displayMapper;
 		private final BooleanApplier applier;
 
-		public BooleanSettingRow(String key, Component label, boolean defaultValue, Function<Boolean, Component> displayMapper, BooleanApplier applier) {
+		public BooleanSettingRow(String key, Component label, Component description, boolean defaultValue, Function<Boolean, Component> displayMapper, BooleanApplier applier) {
 			this.key = key;
 			this.label = label;
+			this.description = description;
 			this.defaultValue = defaultValue;
 			this.displayMapper = displayMapper;
 			this.applier = applier;
@@ -133,6 +135,10 @@ public class MinigamesSettingsHelper {
 
 		public Component getLabel() {
 			return label;
+		}
+
+		public Component getDescription() {
+			return description;
 		}
 
 		public boolean getDefaultValue() {
@@ -279,6 +285,7 @@ public class MinigamesSettingsHelper {
 	public static class DoubleSliderSettingRow implements SettingRow {
 		private final String key;
 		private final Component label;
+		private final Component description;
 		private final double defaultValue;
 		private final double min;
 		private final double max;
@@ -286,9 +293,10 @@ public class MinigamesSettingsHelper {
 		private final Function<Double, Component> displayMapper;
 		private final DoubleApplier applier;
 
-		public DoubleSliderSettingRow(String key, Component label, double defaultValue, double min, double max, double step, Function<Double, Component> displayMapper, DoubleApplier applier) {
+		public DoubleSliderSettingRow(String key, Component label, Component description, double defaultValue, double min, double max, double step, Function<Double, Component> displayMapper, DoubleApplier applier) {
 			this.key = key;
 			this.label = label;
+			this.description = description;
 			this.defaultValue = defaultValue;
 			this.min = min;
 			this.max = max;
@@ -303,6 +311,10 @@ public class MinigamesSettingsHelper {
 
 		public Component getLabel() {
 			return label;
+		}
+
+		public Component getDescription() {
+			return description;
 		}
 
 		public double getDefaultValue() {
@@ -503,16 +515,16 @@ public class MinigamesSettingsHelper {
 		ROWS.add(new HeaderRow(text, centered, leftTexture, rightTexture, iconWidth, iconHeight, texWidth, texHeight));
 	}
 
-	public static void addBoolean(String key, Component label, boolean defaultValue, Function<Boolean, Component> displayMapper, BooleanApplier applier) {
-		ROWS.add(new BooleanSettingRow(key, label, defaultValue, displayMapper, applier));
+	public static void addBoolean(String key, Component label, Component description, boolean defaultValue, Function<Boolean, Component> displayMapper, BooleanApplier applier) {
+		ROWS.add(new BooleanSettingRow(key, label, description, defaultValue, displayMapper, applier));
 	}
 
 	public static void addDouble(String key, Component label, double defaultValue, double min, double max, double step, Function<Double, Component> displayMapper, DoubleApplier applier) {
 		ROWS.add(new DoubleSettingRow(key, label, defaultValue, min, max, step, displayMapper, applier));
 	}
 
-	public static void addDoubleSlider(String key, Component label, double defaultValue, double min, double max, double step, Function<Double, Component> displayMapper, DoubleApplier applier) {
-		ROWS.add(new DoubleSliderSettingRow(key, label, defaultValue, min, max, step, displayMapper, applier));
+	public static void addDoubleSlider(String key, Component label, Component description, double defaultValue, double min, double max, double step, Function<Double, Component> displayMapper, DoubleApplier applier) {
+		ROWS.add(new DoubleSliderSettingRow(key, label, description, defaultValue, min, max, step, displayMapper, applier));
 	}
 
 	public static void addKeyMapping(Component label, KeyMapping keyMapping) {
@@ -650,7 +662,7 @@ public class MinigamesSettingsHelper {
 				}
 		);
 
-		addDoubleSlider("timerScale", Component.literal("Timer Scale"), 2.5, 0.5, 5.0, 0.5,
+		addDoubleSlider("timerScale", Component.literal("Timer Scale"), Component.literal("Modify the scale of the standard timer present in some minigames"), 2.5, 0.5, 5.0, 0.5,
 				val -> Component.literal(String.format(java.util.Locale.ROOT, "%.1fx", val)),
 				(val, level, player) -> {
 					if (player != null) {
@@ -661,7 +673,7 @@ public class MinigamesSettingsHelper {
 				}
 		);
 
-		addBoolean("lowFire", Component.literal("Low Fire"), false,
+		addBoolean("lowFire", Component.literal("Low Fire"), Component.literal("Makes the flame textures while on fire lower, increasing visibility"), true,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Enabled");
 					default -> Component.literal("Disabled");
@@ -672,7 +684,7 @@ public class MinigamesSettingsHelper {
 		Identifier achievementRunIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/achievementrunicon.png");
 		addHeader(Component.literal("Achievement Run"), true, achievementRunIcon, 33, 13);
 
-		addBoolean("AlwaysShowReminder", Component.literal("Always Show Reminder"), true,
+		addBoolean("AlwaysShowReminder", Component.literal("Always Show Reminder"), Component.literal("Always display which achievement needs to be obtained to win"), false,
 			val -> switch (val ? 1 : 0) {
 				case 1 -> Component.literal("Always Show");
 				default -> Component.literal("Only Show in Inventory");
@@ -689,7 +701,7 @@ public class MinigamesSettingsHelper {
 		Identifier crownHuntIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/crownhunt.png");
 		addHeader(Component.literal("Crown Hunt"), true, crownHuntIcon, 19, 19);
 
-		addBoolean("ShowCrownAnimation", Component.literal("Crown Steal Animation"), true,
+		addBoolean("ShowCrownAnimation", Component.literal("Crown Steal Animation"), Component.literal("Display an animation when a player with a crown is killed"), true,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Show");
 					default -> Component.literal("Never Show");
@@ -700,7 +712,7 @@ public class MinigamesSettingsHelper {
 		Identifier spleefIcon = Identifier.fromNamespaceAndPath("minigames", "textures/screens/snowball.png");
 		addHeader(Component.literal("Spleef"), true, spleefIcon, 16, 16);
 
-		addBoolean("ShowSpleefBlockParticles", Component.literal("Spleef Block Break Particles"), true,
+		addBoolean("ShowSpleefBlockParticles", Component.literal("Spleef Block Break Particles"), Component.literal("Toggle the particles of breaking blocks while in the Spleef minigame"), true,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Always Show");
 					default -> Component.literal("Never Show");
@@ -714,7 +726,7 @@ public class MinigamesSettingsHelper {
 				}
 		);
 
-		addBoolean("ShowSteampunkSmoke", Component.literal("Steampunk Smoke Particles"), true,
+		addBoolean("ShowSteampunkSmoke", Component.literal("Steampunk Smoke Particles"), Component.literal("Toggle the smoke particles produced in the steampunk map (for performance)"), true,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Show");
 					default -> Component.literal("Never Show");
@@ -734,7 +746,7 @@ public class MinigamesSettingsHelper {
 
 		addKeyMapping(net.mcreator.minigames.init.MinigamesModKeyMappings.DASH);
 
-		addBoolean("roguelikePlayerGlowing", Component.literal("Glowing Teammates"), true,
+		addBoolean("roguelikePlayerGlowing", Component.literal("Glowing Teammates"), Component.literal("Toggle players having the glowing effect"), true,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Glowing");
 					default -> Component.literal("Disabled");
@@ -742,7 +754,7 @@ public class MinigamesSettingsHelper {
 				null
 		);
 
-		addBoolean("roguelikeSuppressSwingNotReady", Component.literal("Don't Animate Swing When Not Ready"), true,
+		addBoolean("roguelikeSuppressSwingNotReady", Component.literal("Don't Animate Swing When Not Ready"), Component.literal("Block swing animations of items while the attack cooldown is not ready if enabled"), true,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Enabled");
 					default -> Component.literal("Disabled");
@@ -750,7 +762,7 @@ public class MinigamesSettingsHelper {
 				null
 		);
 
-		addDoubleSlider("tooltipSize", Component.literal("Dropped Item Tooltip Scale"), 0.8, 0, 2.5, 0.1,
+		addDoubleSlider("tooltipSize", Component.literal("Dropped Item Tooltip Scale"), Component.literal("Modify the scale of descriptions of hovered dropped items"), 0.8, 0, 2.5, 0.1,
 				val -> Component.literal(String.format(java.util.Locale.ROOT, "%.1fx", val)),
 				(val, level, player) -> {
 					if (player != null) {
@@ -761,12 +773,12 @@ public class MinigamesSettingsHelper {
 				}
 		);
 
-		addDoubleSlider("itemOpacity", Component.literal("Item Opacity"), 1.0, 0.0, 1.0, 0.05,
+		addDoubleSlider("itemOpacity", Component.literal("Item Opacity"), Component.literal("Turn items in hand transparent for better visibility"), 1.0, 0.0, 1.0, 0.05,
 				val -> Component.literal((int) Math.round(val * 100) + "%"),
 				null
 		);
 
-		addBoolean("disableSkyboxBlock", Component.literal("Skybox Block"), false,
+		addBoolean("disableSkyboxBlock", Component.literal("Skybox Block"), Component.literal("Disable Skybox Blocks' effects (for performance)"), false,
 				val -> switch (val ? 1 : 0) {
 					case 1 -> Component.literal("Disabled");
 					default -> Component.literal("Enabled");

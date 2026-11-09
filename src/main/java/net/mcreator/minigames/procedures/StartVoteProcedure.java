@@ -58,13 +58,19 @@ public class StartVoteProcedure {
 				MinigamesModVariables.MapVariables.get(world).voteType = 9;
 				MinigamesModVariables.MapVariables.get(world).VotingMessage = "Wants to start the Floor";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			} else if ((type).equals("roguelike")) {
+				MinigamesModVariables.MapVariables.get(world).voteType = 10;
+				MinigamesModVariables.MapVariables.get(world).VotingMessage = "Wants to start a Roguelike run";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				{
-					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-					_vars.votedYes = false;
-					_vars.voted = false;
-					_vars.markSyncDirty();
+			if (!world.isClientSide() && world.getServer() != null) {
+				for (Entity entityiterator : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
+					{
+						MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						_vars.votedYes = false;
+						_vars.voted = false;
+						_vars.markSyncDirty();
+					}
 				}
 			}
 			{

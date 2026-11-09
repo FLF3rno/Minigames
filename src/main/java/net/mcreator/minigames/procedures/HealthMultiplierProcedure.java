@@ -18,7 +18,7 @@ public class HealthMultiplierProcedure {
 		if (entity instanceof LivingEntity le) {
 			var maxHpAttr = le.getAttribute(Attributes.MAX_HEALTH);
 			if (maxHpAttr != null) {
-				double scaled = le.getMaxHealth() * (1 + (world.players().size() - 1) * 1.5);
+				double scaled = le.getMaxHealth() * (1 + (world.players().size() - 1) * 0.75);
 				maxHpAttr.setBaseValue(scaled * 0.9f);
 				le.setHealth((float) scaled);
 			}

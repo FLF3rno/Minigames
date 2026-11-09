@@ -12,6 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -110,6 +113,17 @@ public class SkyboxSimulationBlock extends Block implements EntityBlock {
 	@Override
 	public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
 		return 1.0f;
+	}
+
+	@Override
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+		if (level instanceof Level l && l.isClientSide()) {
+			BlockEntity be = level.getBlockEntity(pos);
+			if (be instanceof SkyboxSimulationBlockEntity sbe) {
+				sbe.cachedFaces = -1;
+			}
+		}
+		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
 	}
 
 	@Override

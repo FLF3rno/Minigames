@@ -96,7 +96,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ExtraDamage",
-        "amount": 10.0,
+        "amount": 8.0,
         "operation": "ADD_VALUE"
       }
     ]

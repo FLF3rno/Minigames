@@ -10,7 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.component.DataComponents;
 
-import net.mcreator.minigames.world.inventory.StartGameMenu;
+import net.mcreator.minigames.world.inventory.RoguelikeStartGameMenu;
 import net.mcreator.minigames.init.MinigamesModItems;
 
 @EventBusSubscriber
@@ -19,7 +19,7 @@ public class DungeonCompassInventoryCapability extends ItemAccessItemHandler {
 	public static void onItemDropped(ItemTossEvent event) {
 		if (event.getEntity().getItem().getItem() == MinigamesModItems.DUNGEON_COMPASS.get()) {
 			Player player = event.getPlayer();
-			if (player.containerMenu instanceof StartGameMenu)
+			if (player.containerMenu instanceof RoguelikeStartGameMenu)
 				player.closeContainer();
 		}
 	}

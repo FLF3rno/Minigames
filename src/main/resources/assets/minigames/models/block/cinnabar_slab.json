@@ -1,9 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "particle": "minigames:block/26.2_cinnabar",
-    "bottom": "minigames:block/26.2_cinnabar",
-    "top": "minigames:block/26.2_cinnabar",
-    "side": "minigames:block/26.2_cinnabar"
-  }
-}

@@ -4745,7 +4745,7 @@
           "src/main/resources/assets/minigames/items/quartz_chains.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "CustomBlocks",
@@ -4777,7 +4777,7 @@
           "src/main/resources/assets/minigames/models/block/chiseled_quartz_wall_post.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "SpruceBoard",
@@ -4797,7 +4797,7 @@
           "src/main/resources/data/minigames/loot_table/blocks/spruce_board.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "SprucePew",
@@ -4817,7 +4817,7 @@
           "src/main/resources/assets/minigames/items/spruce_pew.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "SprucePewRight",
@@ -4837,7 +4837,7 @@
           "src/main/java/net/mcreator/minigames/block/entity/SprucePewRightBlockEntity.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "SprucePewLeft",
@@ -4857,7 +4857,7 @@
           "src/main/resources/assets/minigames/models/item/spruce_pew_left.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "SpruceShortBoard",
@@ -4877,7 +4877,7 @@
           "src/main/resources/data/minigames/loot_table/blocks/spruce_short_board.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "CustomMobs",
@@ -4906,7 +4906,7 @@
           "src/main/java/net/mcreator/minigames/block/SpawnWorshipperBlock.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Worshipper"
     },
     {
       "name": "SpawnWorshipperBlockAdded",
@@ -4937,7 +4937,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnWorshipperBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Worshipper"
     },
     {
       "name": "Worshipper",
@@ -4952,7 +4952,7 @@
           "src/main/java/net/mcreator/minigames/client/renderer/WorshipperRenderer.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Worshipper"
     },
     {
       "name": "HealthMultiplier",
@@ -4984,7 +4984,7 @@
           "src/main/resources/assets/minigames/items/spawn_candlehead.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Candlehead"
     },
     {
       "name": "SpawnCandleheadBlockAdded",
@@ -5015,7 +5015,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnCandleheadBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Candlehead"
     },
     {
       "name": "Candlehead",
@@ -5030,7 +5030,7 @@
           "src/main/java/net/mcreator/minigames/entity/CandleheadEntity.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Candlehead"
     },
     {
       "name": "SpawnShieldAngel",
@@ -5597,7 +5597,7 @@
           "src/main/java/net/mcreator/minigames/procedures/CandleheadOnEntityTickUpdateProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Candlehead"
     },
     {
       "name": "DungeonItems",
@@ -5621,7 +5621,7 @@
           "src/main/java/net/mcreator/minigames/entity/VolcanicSpewEntity.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Candlehead"
     },
     {
       "name": "VolcanicSpewFlying",
@@ -5652,7 +5652,7 @@
           "src/main/java/net/mcreator/minigames/procedures/VolcanicSpewFlyingProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Candlehead"
     },
     {
       "name": "Dash",
@@ -6341,10 +6341,6 @@
       "registry_name": "change_current_room_id_value",
       "metadata": {
         "dependencies": [
-          {
-            "name": "ID",
-            "type": "number"
-          },
           {
             "name": "world",
             "type": "world"
@@ -7192,7 +7188,7 @@
           "src/main/java/net/mcreator/minigames/block/IntersectingEndRodsBlock.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Blocks"
+      "path": "~/Dungeon/Special Blocks"
     },
     {
       "name": "Gravedigger",
@@ -7236,35 +7232,6 @@
       "path": "~/Dungeon/Mob Goals"
     },
     {
-      "name": "SulfurBlock",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_block",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/blockstates/sulfur_block.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurBlockBlock.java",
-          "src/main/resources/assets/minigames/models/item/sulfur_block.json",
-          "src/main/resources/assets/minigames/items/sulfur_block.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_block.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_block.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "Update262tab",
-      "type": "tab",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "update_262tab",
-      "metadata": {
-        "files": []
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
       "name": "PotentSulfur",
       "type": "block",
       "compiles": true,
@@ -7278,498 +7245,6 @@
           "src/main/resources/assets/minigames/models/item/potent_sulfur.json",
           "src/main/resources/assets/minigames/items/potent_sulfur.json",
           "src/main/resources/assets/minigames/blockstates/potent_sulfur.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedSulfur",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_sulfur",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/item/polished_sulfur.json",
-          "src/main/resources/assets/minigames/items/polished_sulfur.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurBlock.java",
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "ChiseledSulfur",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "chiseled_sulfur",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/item/chiseled_sulfur.json",
-          "src/main/java/net/mcreator/minigames/block/ChiseledSulfurBlock.java",
-          "src/main/resources/assets/minigames/models/block/chiseled_sulfur.json",
-          "src/main/resources/data/minigames/loot_table/blocks/chiseled_sulfur.json",
-          "src/main/resources/assets/minigames/blockstates/chiseled_sulfur.json",
-          "src/main/resources/assets/minigames/items/chiseled_sulfur.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurBricks",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_bricks",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/block/SulfurBricksBlock.java",
-          "src/main/resources/assets/minigames/models/block/sulfur_bricks.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_bricks.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_bricks.json",
-          "src/main/resources/assets/minigames/items/sulfur_bricks.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_bricks.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurSlab",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_slab",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_slab.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurSlabBlock.java",
-          "src/main/resources/assets/minigames/models/item/sulfur_slab.json",
-          "src/main/resources/assets/minigames/items/sulfur_slab.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_slab_full.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_slab.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_slab.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_slab_top.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurStairs",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_stairs",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/block/SulfurStairsBlock.java",
-          "src/main/resources/assets/minigames/models/block/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_stairs_inner.json",
-          "src/main/resources/assets/minigames/items/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_stairs.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurWall",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_wall",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/items/sulfur_wall.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_wall.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_wall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_wall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_wall_side_tall.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/sulfur_wall_post.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_wall.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedSulfurSlab",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_sulfur_slab",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab_full.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurSlabBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_slab_top.json",
-          "src/main/resources/assets/minigames/models/item/polished_sulfur_slab.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_slab.json",
-          "src/main/resources/assets/minigames/items/polished_sulfur_slab.json",
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur_slab.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedSulfurStairs",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_sulfur_stairs",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs_inner.json",
-          "src/main/resources/assets/minigames/items/polished_sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/item/polished_sulfur_stairs.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurStairsBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_stairs.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedSulfurWall",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_sulfur_wall",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/items/polished_sulfur_wall.json",
-          "src/main/resources/assets/minigames/blockstates/polished_sulfur_wall.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_post.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_sulfur_wall.json",
-          "src/main/resources/assets/minigames/models/item/polished_sulfur_wall.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall_side_tall.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedSulfurWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_sulfur_wall.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurBrickSlab",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_brick_slab",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_slab_full.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_slab_top.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_slab.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_brick_slab.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurBrickSlabBlock.java",
-          "src/main/resources/assets/minigames/items/sulfur_brick_slab.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurBrickStairs",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_brick_stairs",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/item/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/items/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_stairs_inner.json",
-          "src/main/java/net/mcreator/minigames/block/SulfurBrickStairsBlock.java",
-          "src/main/resources/assets/minigames/blockstates/sulfur_brick_stairs.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "SulfurBrickWall",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "sulfur_brick_wall",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/block/SulfurBrickWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_side_tall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall.json",
-          "src/main/resources/assets/minigames/items/sulfur_brick_wall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_post.json",
-          "src/main/resources/assets/minigames/models/item/sulfur_brick_wall.json",
-          "src/main/resources/assets/minigames/blockstates/sulfur_brick_wall.json",
-          "src/main/resources/assets/minigames/models/block/sulfur_brick_wall_inventory.json",
-          "src/main/resources/data/minigames/loot_table/blocks/sulfur_brick_wall.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "Cinnabar",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/item/cinnabar.json",
-          "src/main/resources/assets/minigames/items/cinnabar.json",
-          "src/main/resources/assets/minigames/blockstates/cinnabar.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBlock.java"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedCinnabar",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_cinnabar",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar.json",
-          "src/main/resources/assets/minigames/items/polished_cinnabar.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar.json",
-          "src/main/resources/assets/minigames/blockstates/polished_cinnabar.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "ChiseledCinnabar",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "chiseled_cinnabar",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/blockstates/chiseled_cinnabar.json",
-          "src/main/resources/assets/minigames/items/chiseled_cinnabar.json",
-          "src/main/resources/assets/minigames/models/item/chiseled_cinnabar.json",
-          "src/main/java/net/mcreator/minigames/block/ChiseledCinnabarBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/chiseled_cinnabar.json",
-          "src/main/resources/assets/minigames/models/block/chiseled_cinnabar.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarBricks",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_bricks",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/items/cinnabar_bricks.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_bricks.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_bricks.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBricksBlock.java",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_bricks.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_bricks.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarSlab",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_slab",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/blockstates/cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_slab_top.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_slab_full.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_slab.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarSlabBlock.java",
-          "src/main/resources/assets/minigames/models/block/cinnabar_slab.json",
-          "src/main/resources/assets/minigames/items/cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_slab.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarStairs",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_stairs",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/cinnabar_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_stairs.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarStairsBlock.java",
-          "src/main/resources/assets/minigames/items/cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_stairs_inner.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_stairs.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarWall",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_wall",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarWallBlock.java",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_wall.json",
-          "src/main/resources/assets/minigames/items/cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall_post.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall_side_tall.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_wall_inventory.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedCinnabarSlab",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_cinnabar_slab",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab_full.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarSlabBlock.java",
-          "src/main/resources/assets/minigames/items/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_slab.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar_slab.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_slab_top.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedCinnabarStairs",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_cinnabar_stairs",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs_outer.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/items/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_stairs.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarStairsBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_stairs_inner.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "PolishedCinnabarWall",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "polished_cinnabar_wall",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_post.json",
-          "src/main/resources/data/minigames/loot_table/blocks/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/items/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/blockstates/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/item/polished_cinnabar_wall.json",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall_side_tall.json",
-          "src/main/java/net/mcreator/minigames/block/PolishedCinnabarWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/polished_cinnabar_wall.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarBrickSlab",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_brick_slab",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBrickSlabBlock.java",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab_full.json",
-          "src/main/resources/assets/minigames/items/cinnabar_brick_slab.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_slab_top.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarBrickStairs",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_brick_stairs",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/block/CinnabarBrickStairsBlock.java",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/items/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/item/cinnabar_brick_stairs.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs_outer.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_stairs_inner.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
-      "name": "CinnabarBrickWall",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cinnabar_brick_wall",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/minigames/models/item/cinnabar_brick_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_inventory.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_post.json",
-          "src/main/resources/assets/minigames/items/cinnabar_brick_wall.json",
-          "src/main/resources/data/minigames/loot_table/blocks/cinnabar_brick_wall.json",
-          "src/main/java/net/mcreator/minigames/block/CinnabarBrickWallBlock.java",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall.json",
-          "src/main/resources/assets/minigames/blockstates/cinnabar_brick_wall.json",
-          "src/main/resources/assets/minigames/models/block/cinnabar_brick_wall_side_tall.json"
         ]
       },
       "path": "~/General/Vanilla Blocks/26.2"
@@ -7940,7 +7415,7 @@
           "src/main/resources/assets/minigames/models/item/spawn_preacher.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "SpawnPreacherBlockAdded",
@@ -7971,7 +7446,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnPreacherBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "Preacher",
@@ -7986,7 +7461,7 @@
           "src/main/java/net/mcreator/minigames/client/renderer/PreacherRenderer.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "PropertiesList",
@@ -8043,7 +7518,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PreacherTickProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "MagmaExplodeCD",
@@ -8122,7 +7597,7 @@
           "src/main/java/net/mcreator/minigames/entity/PreachingShotEntity.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "PreachingShotTick",
@@ -8153,7 +7628,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PreachingShotTickProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "PreachingShotHit",
@@ -8184,7 +7659,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PreachingShotHitProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Preacher"
     },
     {
       "name": "SpawnDemon",
@@ -8202,7 +7677,7 @@
           "src/main/resources/assets/minigames/items/spawn_demon.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Demon"
     },
     {
       "name": "SpawnDemonBlockAdded",
@@ -8233,7 +7708,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnDemonBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Demon"
     },
     {
       "name": "VolleyBomb",
@@ -9047,7 +8522,7 @@
           "src/main/java/net/mcreator/minigames/procedures/OnDamageDealtProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Damage"
     },
     {
       "name": "PhaseCloak",
@@ -10002,7 +9477,7 @@
           "src/main/java/net/mcreator/minigames/client/renderer/DemonRenderer.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Demon"
     },
     {
       "name": "DemonTick",
@@ -10037,7 +9512,7 @@
           "src/main/java/net/mcreator/minigames/procedures/DemonTickProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Demon"
     },
     {
       "name": "Sculkling",
@@ -10052,7 +9527,7 @@
           "src/main/java/net/mcreator/minigames/client/renderer/SculklingRenderer.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Sculkling"
     },
     {
       "name": "SpawnSculkling",
@@ -10070,7 +9545,7 @@
           "src/main/resources/assets/minigames/models/block/spawn_sculkling.json"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Sculkling"
     },
     {
       "name": "SpawnSculklingBlockAdded",
@@ -10101,7 +9576,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnSculklingBlockAddedProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Floors/Church/Monsters"
+      "path": "~/Dungeon/Mob/Sculkling"
     },
     {
       "name": "SpawnMinibossRoomProcedure",
@@ -10869,7 +10344,7 @@
           "src/main/java/net/mcreator/minigames/procedures/PlayerTookDamageProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Damage"
     },
     {
       "name": "DamageBoost",
@@ -12300,7 +11775,7 @@
           "src/main/java/net/mcreator/minigames/procedures/IsBackstabProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Damage"
     },
     {
       "name": "CanBackstab",
@@ -12320,7 +11795,7 @@
           "src/main/java/net/mcreator/minigames/procedures/CanBackstabProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Events"
+      "path": "~/Dungeon/Events/Damage"
     },
     {
       "name": "Bleed",
@@ -14295,7 +13770,7 @@
       "name": "ApplyClass",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "apply_class",
       "metadata": {
         "dependencies": [
@@ -17966,6 +17441,238 @@
         ]
       },
       "path": "~/Achievement Run/Hunter Mode"
+    },
+    {
+      "name": "VoteRoomIDValue",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vote_room_id_value",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "ID",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/VoteRoomIDValueProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "CheckAllPlayersRelic",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "check_all_players_relic",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CheckAllPlayersRelicProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Relics"
+    },
+    {
+      "name": "ReturnAllPlayersRelicItemstack",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "return_all_players_relic_itemstack",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "itemstack",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReturnAllPlayersRelicItemstackProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Relics"
+    },
+    {
+      "name": "ClearSculklings",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "clear_sculklings",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ClearSculklingsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Mob/Demon"
+    },
+    {
+      "name": "ApplyLaser",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "apply_laser",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "beamWidth",
+            "type": "number"
+          },
+          {
+            "name": "ticks",
+            "type": "number"
+          },
+          {
+            "name": "color",
+            "type": "string"
+          },
+          {
+            "name": "target",
+            "type": "vector"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ApplyLaserProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Visual"
+    },
+    {
+      "name": "RoguelikeStartGame",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "roguelike_start_game",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/world/inventory/RoguelikeStartGameMenu.java",
+          "src/main/java/net/mcreator/minigames/network/RoguelikeStartGameButtonMessage.java",
+          "src/main/java/net/mcreator/minigames/client/gui/RoguelikeStartGameScreen.java"
+        ]
+      }
+    },
+    {
+      "name": "StartRoguelike",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_roguelike",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartRoguelikeProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "PopulateRoomDeck",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "populate_room_deck",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PopulateRoomDeckProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Floors/Rooms"
+    },
+    {
+      "name": "ReturnDamageRoguelike",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "return_damage_roguelike",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "damagesource",
+            "type": "damagesource"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "amount",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "return_type": "number",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ReturnDamageRoguelikeProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Events/Damage"
     }
   ],
   "variable_elements": [
@@ -18856,6 +18563,42 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "voteRoomID",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "roguelike_two",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "roguelike_one",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "roguelike_four",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "roguelike_loot",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "roguelike_miniboss",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
     }
   ],
   "sound_elements": [
@@ -18980,176 +18723,6 @@
       ],
       "category": "player",
       "subtitle": "Player is ascending"
-    },
-    {
-      "name": "update_sulfur_step",
-      "files": [
-        "step1",
-        "step2",
-        "step3",
-        "step4",
-        "step5",
-        "step6",
-        "step7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_sulfur_place",
-      "files": [
-        "place1",
-        "place2",
-        "place3",
-        "place4",
-        "place5",
-        "place6",
-        "place7",
-        "place8"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_sulfur_hit",
-      "files": [
-        "hit1",
-        "hit2",
-        "hit3",
-        "hit4",
-        "hit5",
-        "hit6",
-        "hit7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_sulfur_break",
-      "files": [
-        "break1",
-        "break2",
-        "break3",
-        "break4",
-        "break5",
-        "break6",
-        "break7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_potent_sulfur_step",
-      "files": [
-        "step1",
-        "step2",
-        "step3",
-        "step4",
-        "step5",
-        "step6",
-        "step7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_potent_sulfur_hit",
-      "files": [
-        "hit1",
-        "hit2",
-        "hit3",
-        "hit4",
-        "hit5",
-        "hit6",
-        "hit7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_potent_sulfur_break",
-      "files": [
-        "break1",
-        "break2",
-        "break3",
-        "break4",
-        "break5",
-        "break6",
-        "break7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_potent_sulfur_place",
-      "files": [
-        "place1",
-        "place2",
-        "place3",
-        "place4",
-        "place5",
-        "place6",
-        "place7",
-        "place8"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_cinnabar_break",
-      "files": [
-        "break1",
-        "break2",
-        "break3",
-        "break4",
-        "break5",
-        "break6",
-        "break7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_cinnabar_hit",
-      "files": [
-        "hit1",
-        "hit2",
-        "hit3",
-        "hit4",
-        "hit5",
-        "hit6",
-        "hit7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_cinnabar_place",
-      "files": [
-        "place1",
-        "place2",
-        "place3",
-        "place4",
-        "place5",
-        "place6",
-        "place7"
-      ],
-      "category": "block",
-      "subtitle": ""
-    },
-    {
-      "name": "update_cinnabar_step",
-      "files": [
-        "step1",
-        "step2",
-        "step3",
-        "step4",
-        "step5",
-        "step6",
-        "step7"
-      ],
-      "category": "block",
-      "subtitle": ""
     },
     {
       "name": "volleybomb_hit",
@@ -19676,32 +19249,14 @@
       "CUSTOM:FlavioTrapdoor3"
     ],
     "BLOCKS:minecraft:stairs": [
-      "~CinnabarBrickStairs@CUSTOM:CinnabarBrickStairs",
-      "~PolishedCinnabarStairs@CUSTOM:PolishedCinnabarStairs",
-      "~CinnabarStairs@CUSTOM:CinnabarStairs",
-      "~SulfurBrickStairs@CUSTOM:SulfurBrickStairs",
-      "~PolishedSulfurStairs@CUSTOM:PolishedSulfurStairs",
-      "~SulfurStairs@CUSTOM:SulfurStairs",
       "~CastleStairs@CUSTOM:CastleStairs",
       "~CopycatStair@CUSTOM:CopycatStair"
     ],
     "BLOCKS:minecraft:walls": [
-      "~CinnabarBrickWall@CUSTOM:CinnabarBrickWall",
-      "~PolishedCinnabarWall@CUSTOM:PolishedCinnabarWall",
-      "~CinnabarWall@CUSTOM:CinnabarWall",
-      "~SulfurBrickWall@CUSTOM:SulfurBrickWall",
-      "~PolishedSulfurWall@CUSTOM:PolishedSulfurWall",
-      "~SulfurWall@CUSTOM:SulfurWall",
       "~ChiseledQuartzWall@CUSTOM:ChiseledQuartzWall",
       "~CopycatWall@CUSTOM:CopycatWall"
     ],
     "BLOCKS:minecraft:slabs": [
-      "~CinnabarBrickSlab@CUSTOM:CinnabarBrickSlab",
-      "~PolishedCinnabarSlab@CUSTOM:PolishedCinnabarSlab",
-      "~CinnabarSlab@CUSTOM:CinnabarSlab",
-      "~SulfurBrickSlab@CUSTOM:SulfurBrickSlab",
-      "~PolishedSulfurSlab@CUSTOM:PolishedSulfurSlab",
-      "~SulfurSlab@CUSTOM:SulfurSlab",
       "~CopycatSlab@CUSTOM:CopycatSlab"
     ],
     "ENTITIES:mod:buried_miniboss": [
@@ -19724,7 +19279,6 @@
       "CUSTOM:FlavioOmegaLaser",
       "CUSTOM:FlavioOmegaLaserScreen",
       "CUSTOM:BlessingDispenser",
-      "EntityItem",
       "CUSTOM:Gravedigger",
       "CUSTOM:CryptLurker"
     ],
@@ -20020,47 +19574,20 @@
       "item.minigames.empty_coarse_dirt": "Empty Coarse Dirt",
       "item.minigames.intersecting_end_rods": "Intersecting End Rods",
       "entity.minigames.gravedigger": "Churchgoer",
-      "item.minigames.sulfur_block": "Sulfur",
       "subtitles.update_sulfur_step": "",
       "subtitles.update_sulfur_place": "",
       "subtitles.update_sulfur_hit": "",
       "subtitles.break": "",
       "subtitles.update_sulfur_break": "",
-      "item_group.minigames.update_262tab": "26.2 Blocks",
       "item.minigames.potent_sulfur": "Potent Sulfur",
       "subtitles.update_potent_sulfur_step": "",
       "subtitles.update_potent_sulfur_hit": "",
       "subtitles.update_potent_sulfur_break": "",
       "subtitles.update_potent_sulfur_place": "",
-      "item.minigames.polished_sulfur": "Polished Sulfur",
-      "item.minigames.chiseled_sulfur": "Chiseled Sulfur",
-      "item.minigames.sulfur_bricks": "Sulfur Bricks",
-      "item.minigames.sulfur_slab": "Sulfur Slab",
-      "item.minigames.sulfur_stairs": "Sulfur Stairs",
-      "item.minigames.sulfur_wall": "Sulfur Wall",
-      "item.minigames.polished_sulfur_slab": "Polished Sulfur Slab",
-      "item.minigames.polished_sulfur_stairs": "Polished Sulfur Stairs",
-      "item.minigames.polished_sulfur_wall": "Polished Sulfur Wall",
-      "item.minigames.sulfur_brick_slab": "Sulfur Brick Slab",
-      "item.minigames.sulfur_brick_stairs": "Sulfur Brick Stairs",
-      "item.minigames.sulfur_brick_wall": "Sulfur Brick Wall",
-      "item.minigames.cinnabar": "Cinnabar",
       "subtitles.update_cinnabar_break": "",
       "subtitles.update_cinnabar_hit": "",
       "subtitles.update_cinnabar_place": "",
       "subtitles.update_cinnabar_step": "",
-      "item.minigames.polished_cinnabar": "Polished Cinnabar",
-      "item.minigames.chiseled_cinnabar": "Chiseled Cinnabar",
-      "item.minigames.cinnabar_bricks": "Cinnabar Bricks",
-      "item.minigames.cinnabar_slab": "Cinnabar Slab",
-      "item.minigames.cinnabar_stairs": "Cinnabar Stairs",
-      "item.minigames.cinnabar_wall": "Cinnabar Wall",
-      "item.minigames.polished_cinnabar_slab": "Polished Cinnabar Slab",
-      "item.minigames.polished_cinnabar_stairs": "Polished Cinnabar Stairs",
-      "item.minigames.polished_cinnabar_wall": "Polished Cinnabar Wall",
-      "item.minigames.cinnabar_brick_slab": "Cinnabar Brick Slab",
-      "item.minigames.cinnabar_brick_stairs": "Cinnabar Brick Stairs",
-      "item.minigames.cinnabar_brick_wall": "Cinnabar Brick Wall",
       "item.minigames.fight_doors_blocked": "Fight Doors (Unusable)",
       "item.minigames.loot_doors": "Loot Doors",
       "item.minigames.miniboss_doors": "Miniboss Doors",
@@ -20276,7 +19803,18 @@
       "item.minigames.explorers_charm": "Explorer\u0027s Charm",
       "item.minigames.friction": "Friction",
       "gui.minigames.room_enemy_amount.label_empty": "",
-      "gui.minigames.opt_in_achievement_hunt.label_do_you_want_to_be_hunted": "DO YOU WANT TO BE HUNTED?"
+      "gui.minigames.opt_in_achievement_hunt.label_do_you_want_to_be_hunted": "DO YOU WANT TO BE HUNTED?",
+      "gui.minigames.roguelike_start_game.label_run": "Run",
+      "gui.minigames.roguelike_start_game.tooltip_mine_blocks_under_opponents_to_e": "Mine blocks under opponents to eliminate them and obtain powerups",
+      "gui.minigames.roguelike_start_game.label_achievement": "Roguelike",
+      "gui.minigames.roguelike_start_game.label_hunt": "Hunt",
+      "gui.minigames.roguelike_start_game.tooltip_achievement_run": "A roguelike mode. With dashes!",
+      "gui.minigames.roguelike_start_game.label_crown": "Crown",
+      "gui.minigames.roguelike_start_game.tooltip_achievement_hunt": "One player is hunted while trying to obtain an achievement",
+      "gui.minigames.roguelike_start_game.label_spleef": "Spleef",
+      "gui.minigames.roguelike_start_game.tooltip_change_player_name": "Change player name",
+      "gui.minigames.roguelike_start_game.tooltip_steal_the_crown_from_other_playe": "Steal the crown from other players and avoid getting it stolen to win",
+      "gui.minigames.roguelike_start_game.label_still_pretty_alpha": "STILL PRETTY ALPHA"
     }
   },
   "metadata": {
@@ -20414,19 +19952,6 @@
           {
             "name": "Floors",
             "children": [
-              {
-                "name": "Church",
-                "children": [
-                  {
-                    "name": "Blocks",
-                    "children": []
-                  },
-                  {
-                    "name": "Monsters",
-                    "children": []
-                  }
-                ]
-              },
               {
                 "name": "Rooms",
                 "children": []
@@ -20750,6 +20275,10 @@
               {
                 "name": "Keybind",
                 "children": []
+              },
+              {
+                "name": "Damage",
+                "children": []
               }
             ]
           },
@@ -20850,6 +20379,26 @@
               {
                 "name": "Shield Angel",
                 "children": []
+              },
+              {
+                "name": "Demon",
+                "children": []
+              },
+              {
+                "name": "Worshipper",
+                "children": []
+              },
+              {
+                "name": "Candlehead",
+                "children": []
+              },
+              {
+                "name": "Preacher",
+                "children": []
+              },
+              {
+                "name": "Sculkling",
+                "children": []
               }
             ]
           },
@@ -20933,15 +20482,6 @@
             "children": []
           },
           {
-            "name": "Vanilla Blocks",
-            "children": [
-              {
-                "name": "26.2",
-                "children": []
-              }
-            ]
-          },
-          {
             "name": "Particles",
             "children": []
           },
@@ -21006,6 +20546,15 @@
           {
             "name": "Account Swap",
             "children": []
+          },
+          {
+            "name": "Vanilla Blocks",
+            "children": [
+              {
+                "name": "26.2",
+                "children": []
+              }
+            ]
           }
         ]
       }

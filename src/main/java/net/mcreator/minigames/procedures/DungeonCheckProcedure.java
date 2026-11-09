@@ -16,6 +16,7 @@ public class DungeonCheckProcedure {
 				&& MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon == MinigamesModVariables.MapVariables.get(world).lootRoomPlacedDungeon) {
 			spawnRoomX = MinigamesModVariables.MapVariables.get(world).dungeonSize.x();
 			spawnRoomZ = MinigamesModVariables.MapVariables.get(world).dungeonSize.z();
+			PopulateRoomDeckProcedure.execute(world);
 			SpawnFloorProcedure.execute(world, x, y, z);
 		} else {
 			SpawnGridProcedure.execute(world, x, y, z, MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon, MinigamesModVariables.MapVariables.get(world).roomLimitDungeon.z(),

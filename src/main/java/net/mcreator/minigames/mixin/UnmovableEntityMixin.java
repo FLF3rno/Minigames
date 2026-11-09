@@ -1,7 +1,10 @@
 package net.mcreator.minigames.mixin;
 
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,7 +31,7 @@ public abstract class UnmovableEntityMixin {
 	@Inject(method = "push(DDD)V", at = @At("HEAD"), cancellable = true)
 	private void minigames$onPush(double x, double y, double z, CallbackInfo ci) {
 		Entity self = (Entity) (Object) this;
-		if (UnmovableEntityHandler.isUnmovable(self)) {
+		if (UnmovableEntityHandler.isUnmovable(self) || (self instanceof LivingEntity livingEntity && livingEntity.hasEffect(MinigamesModMobEffects.ASCENDING))) {
 			ci.cancel();
 		}
 	}
@@ -36,7 +39,7 @@ public abstract class UnmovableEntityMixin {
 	@Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("HEAD"), cancellable = true)
 	private void minigames$onPushEntity(Entity entity, CallbackInfo ci) {
 		Entity self = (Entity) (Object) this;
-		if (UnmovableEntityHandler.isUnmovable(self)) {
+		if (UnmovableEntityHandler.isUnmovable(self) || (self instanceof LivingEntity livingEntity && livingEntity.hasEffect(MinigamesModMobEffects.ASCENDING))) {
 			ci.cancel();
 		}
 	}

@@ -37,7 +37,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 			"minigames", "textures/screens/square.png"
 	);
 
-	private static final int OBJECTIVE = 100;
+	private static final int OBJECTIVE = 75;
 	private static final int GRID_WIDTH = 5;
 	private static final float CELL_SIZE = 48f;
 	private static final float PLAYER_SIZE = 48f;
@@ -252,7 +252,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	}
 
 	private void updatePlayer() {
-		if (currentRow > 0) {
+		if (currentRow > 1) {
 			float targetScreenY = getMazeScreenY(currentRow);
 
 			if (targetScreenY < PLAYER_TOP_LIMIT) {
@@ -308,7 +308,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 	}
 
 	private void updateMaze() {
-		if (currentRow > 0) {
+		if (currentRow > 1) {
 			mazeOffset += MAZE_SCROLL_SPEED;
 		}
 	}

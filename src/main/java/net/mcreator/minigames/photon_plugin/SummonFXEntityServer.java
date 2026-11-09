@@ -49,6 +49,8 @@ public final class SummonFXEntityServer {
         private boolean forcedDeath = false;
         private boolean allowMulti = false;
         private AutoRotate autoRotate = AutoRotate.NONE;
+        private Integer colorR, colorG, colorB;
+        private Integer duration;
 
         protected EffectBuilder(List<Entity> entities) {
             this.entities = entities;
@@ -94,6 +96,30 @@ public final class SummonFXEntityServer {
             return this;
         }
 
+        public EffectBuilder color(double r, double g, double b) {
+            this.colorR = Math.clamp((int) Math.round(r), 0, 255);
+            this.colorG = Math.clamp((int) Math.round(g), 0, 255);
+            this.colorB = Math.clamp((int) Math.round(b), 0, 255);
+            return this;
+        }
+
+        public EffectBuilder color(int argb) {
+            this.colorR = (argb >> 16) & 0xFF;
+            this.colorG = (argb >> 8) & 0xFF;
+            this.colorB = argb & 0xFF;
+            return this;
+        }
+
+        public EffectBuilder duration(double ticks) {
+            this.duration = Math.max(1, (int) Math.round(ticks));
+            return this;
+        }
+
+        public EffectBuilder duration(int ticks) {
+            this.duration = Math.max(1, ticks);
+            return this;
+        }
+
         public void send() {
             try {
                 if (this.effectName == null) {
@@ -135,6 +161,23 @@ public final class SummonFXEntityServer {
                         effectPacket.setAllowMulti(this.allowMulti);
                         effectPacket.setAutoRotate(toPhotonAutoRotate(this.autoRotate));
                         PacketDistributor.sendToAllPlayers(effectPacket);
+
+                        if (this.colorR != null || this.duration != null) {
+                            var modifyPacket = new ModifyEntityEffectPacket();
+                            List<Integer> ids = new ArrayList<>();
+                            for (Entity entity : sanitizedEntities) {
+                                ids.add(entity.getId());
+                            }
+                            modifyPacket.setEntityIds(ids);
+                            modifyPacket.setName(this.effectName);
+                            if (this.colorR != null) {
+                                modifyPacket.setColor(this.colorR, this.colorG, this.colorB);
+                            }
+                            if (this.duration != null) {
+                                modifyPacket.setDuration(this.duration);
+                            }
+                            PacketDistributor.sendToAllPlayers(modifyPacket);
+                        }
                     } catch (Exception e) {
                         LOGGER.error("[SummonFXEntityServer] Critical error while sending packet for effect '{}': {}", this.effectName, e.getMessage(), e);
                     }

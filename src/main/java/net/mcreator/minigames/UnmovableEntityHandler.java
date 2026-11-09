@@ -1,5 +1,6 @@
 package net.mcreator.minigames;
 
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
@@ -84,7 +85,7 @@ public class UnmovableEntityHandler {
 
 	@SubscribeEvent
 	public static void onLivingKnockBack(LivingKnockBackEvent event) {
-		if (isUnmovable(event.getEntity())) {
+		if (isUnmovable(event.getEntity()) || (event.getEntity().hasEffect(MinigamesModMobEffects.ASCENDING))) {
 			event.setCanceled(true);
 			return;
 		}

@@ -149,36 +149,6 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_CRYPT_LURKER.get().asItem());
 				tabData.accept(MinigamesModBlocks.GIANT_BELL.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
-	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> UPDATE_262TAB = REGISTRY.register("update_262tab",
-			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.update_262tab")).icon(() -> new ItemStack(MinigamesModBlocks.SULFUR_BLOCK.get())).displayItems((parameters, tabData) -> {
-				tabData.accept(MinigamesModBlocks.SULFUR_BLOCK.get().asItem());
-				tabData.accept(MinigamesModBlocks.POTENT_SULFUR.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR.get().asItem());
-				tabData.accept(MinigamesModBlocks.CHISELED_SULFUR.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_BRICKS.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_SLAB.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_STAIRS.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_WALL.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR_SLAB.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR_STAIRS.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_SULFUR_WALL.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_BRICK_SLAB.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_BRICK_STAIRS.get().asItem());
-				tabData.accept(MinigamesModBlocks.SULFUR_BRICK_WALL.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR.get().asItem());
-				tabData.accept(MinigamesModBlocks.CHISELED_CINNABAR.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_BRICKS.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_SLAB.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_STAIRS.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_WALL.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR_SLAB.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR_STAIRS.get().asItem());
-				tabData.accept(MinigamesModBlocks.POLISHED_CINNABAR_WALL.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_BRICK_SLAB.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_BRICK_STAIRS.get().asItem());
-				tabData.accept(MinigamesModBlocks.CINNABAR_BRICK_WALL.get().asItem());
-			}).withTabsBefore(CUSTOM_MOBS.getId()).build());
 
 	@SubscribeEvent
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {

@@ -58,12 +58,7 @@ public class FreeBeamRenderManager {
     }
 
     private static boolean shouldRenderAscensionBeam(Player player) {
-        MobEffectInstance effect = player.getEffect(MinigamesModMobEffects.ASCENDING);
-        MinigamesModVariables.PlayerVariables vars =
-                player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-
-        return effect != null
-                || (vars != null && (vars.ascendingActive || vars.ascendingTimer > 0));
+        return player.hasEffect(MinigamesModMobEffects.ASCENDING);
     }
 
     private static Vec3 getGroundOrigin(Player player) {

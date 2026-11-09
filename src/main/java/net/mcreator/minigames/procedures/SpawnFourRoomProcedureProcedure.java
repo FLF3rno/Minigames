@@ -18,24 +18,23 @@ public class SpawnFourRoomProcedureProcedure {
 		double structureY = 0;
 		String spawnRoomName = "";
 		String rotation = "";
-		String prefix = "";
 		if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("structure") instanceof BooleanProperty _withbp2 ? blockstate.setValue(_withbp2, true) : blockstate)) {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
-			prefix = "dungeon_four_";
-			if ((MinigamesModVariables.MapVariables.get(world).floorTypeDungeon).equals("church")) {
-				rng = Mth.nextInt(RandomSource.create(), 1, 7);
-			}
+			rng = Mth.nextInt(RandomSource.create(), 1, (int) MinigamesModVariables.MapVariables.get(world).roguelike_four.size());
 			structureX = x;
 			structureY = y;
 			structureZ = z;
-			spawnRoomName = prefix + "" + MinigamesModVariables.MapVariables.get(world).floorTypeDungeon + "_" + new java.text.DecimalFormat("##").format(rng);
-			if (rng == 1) {
+			spawnRoomName = MinigamesModVariables.MapVariables.get(world).roguelike_four.get((int) (rng - 1)) instanceof String _str7 ? _str7 : "";
+			if (MinigamesModVariables.MapVariables.get(world).roguelike_four.size() > 1) {
+				MinigamesModVariables.MapVariables.get(world).roguelike_four.remove((int) (rng - 1));
+			}
+			if (("dungeon_four_church_1").equals(spawnRoomName)) {
 				structureY = structureY - 1;
-			} else if (rng == 2) {
+			} else if (("dungeon_four_church_2").equals(spawnRoomName)) {
 				structureY = structureY - 21;
-			} else if (rng == 4) {
+			} else if (("dungeon_four_church_4").equals(spawnRoomName)) {
 				structureY = structureY - 18;
-			} else if (rng == 6) {
+			} else if (("dungeon_four_church_6").equals(spawnRoomName)) {
 				structureY = structureY - 1;
 			}
 			rotation = "none";

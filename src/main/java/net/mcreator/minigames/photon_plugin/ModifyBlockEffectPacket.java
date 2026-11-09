@@ -27,6 +27,10 @@ public class ModifyBlockEffectPacket implements CustomPacketPayload {
     private double rotationX, rotationY, rotationZ;
     private boolean hasScale;
     private double scaleX, scaleY, scaleZ;
+    private boolean hasColor;
+    private int colorR, colorG, colorB;
+    private boolean hasDuration;
+    private int duration;
 
     public ModifyBlockEffectPacket() {
     }
@@ -59,6 +63,18 @@ public class ModifyBlockEffectPacket implements CustomPacketPayload {
         this.scaleX = x;
         this.scaleY = y;
         this.scaleZ = z;
+    }
+
+    public void setColor(int r, int g, int b) {
+        this.hasColor = true;
+        this.colorR = Math.clamp(r, 0, 255);
+        this.colorG = Math.clamp(g, 0, 255);
+        this.colorB = Math.clamp(b, 0, 255);
+    }
+
+    public void setDuration(int duration) {
+        this.hasDuration = true;
+        this.duration = Math.max(1, duration);
     }
 
     @Override
@@ -96,6 +112,18 @@ public class ModifyBlockEffectPacket implements CustomPacketPayload {
             buf.writeDouble(scaleX);
             buf.writeDouble(scaleY);
             buf.writeDouble(scaleZ);
+        }
+
+        buf.writeBoolean(hasColor);
+        if (hasColor) {
+            buf.writeVarInt(colorR);
+            buf.writeVarInt(colorG);
+            buf.writeVarInt(colorB);
+        }
+
+        buf.writeBoolean(hasDuration);
+        if (hasDuration) {
+            buf.writeVarInt(duration);
         }
     }
 
@@ -135,6 +163,18 @@ public class ModifyBlockEffectPacket implements CustomPacketPayload {
             packet.scaleZ = buf.readDouble();
         }
 
+        packet.hasColor = buf.readBoolean();
+        if (packet.hasColor) {
+            packet.colorR = buf.readVarInt();
+            packet.colorG = buf.readVarInt();
+            packet.colorB = buf.readVarInt();
+        }
+
+        packet.hasDuration = buf.readBoolean();
+        if (packet.hasDuration) {
+            packet.duration = buf.readVarInt();
+        }
+
         return packet;
     }
 
@@ -162,6 +202,12 @@ public class ModifyBlockEffectPacket implements CustomPacketPayload {
             }
             if (packet.hasScale) {
                 builder.scale(packet.scaleX, packet.scaleY, packet.scaleZ);
+            }
+            if (packet.hasColor) {
+                builder.color(packet.colorR, packet.colorG, packet.colorB);
+            }
+            if (packet.hasDuration) {
+                builder.duration(packet.duration);
             }
             builder.send();
         }

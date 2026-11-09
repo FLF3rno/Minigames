@@ -59,8 +59,8 @@ public class FlavioFightManager {
 	public static int MachinesAlive = 5;
 
 	public static void reset() {
-		phase = 0;
-		isFightActive = false;
+		phase = 1;
+		isFightActive = true;
 		dispensersAlive = 2;
 		playersDoneP2 = 0;
 		completedPhase2Players.clear();
@@ -72,8 +72,8 @@ public class FlavioFightManager {
 			return;
 		}
 		if (!world.isClientSide()) {
-            phase++;
-        }
+			phase++;
+		}
 		switch ((int) phase) {
 			case 2: 
 				startPhase2(world); 
@@ -134,8 +134,6 @@ public class FlavioFightManager {
 			MinigamesModVariables.MapVariables.get(world).showBossBar = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			MinigamesMod.queueServerWork(297, () -> {
-				MinigamesModVariables.MapVariables.get(world).showBossBar = true;
-				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 				if (entityiterator instanceof ServerPlayer player) {
 					BlockPos pos = BlockPos.containing(0, 0, 0);
 
@@ -171,7 +169,9 @@ public class FlavioFightManager {
 	}
 
 	private static void startPhase3(LevelAccessor world) {
-		MachinesAlive = 3;
+		MinigamesModVariables.MapVariables.get(world).showBossBar = true;
+		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+		MachinesAlive = 2;
 		if (!(world instanceof ServerLevel currentLevel))
 			return;
 
@@ -222,6 +222,8 @@ public class FlavioFightManager {
 			living.removeEffect(MinigamesModMobEffects.BLOCK_HEAL);
 			removeCageNear(world, living.getX(), living.getY(), living.getZ());
 			completedPhase2Players.add(living.getUUID());
+		} else {
+			playersDoneP2++;
 		}
 
 		int totalPlayers = world.players().size();
@@ -231,6 +233,7 @@ public class FlavioFightManager {
 				doneCount++;
 			}
 		}
+		doneCount = Math.max(doneCount, playersDoneP2);
 
 		if (doneCount >= totalPlayers && totalPlayers > 0) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {

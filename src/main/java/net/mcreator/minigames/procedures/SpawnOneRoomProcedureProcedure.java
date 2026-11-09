@@ -18,25 +18,24 @@ public class SpawnOneRoomProcedureProcedure {
 		double structureY = 0;
 		String spawnRoomName = "";
 		String rotation = "";
-		String prefix = "";
 		if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("structure") instanceof BooleanProperty _withbp2 ? blockstate.setValue(_withbp2, true) : blockstate)) {
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
-			prefix = "dungeon_one_";
-			if ((MinigamesModVariables.MapVariables.get(world).floorTypeDungeon).equals("church")) {
-				rng = Mth.nextInt(RandomSource.create(), 1, 1);
-			}
+			rng = Mth.nextInt(RandomSource.create(), 1, (int) MinigamesModVariables.MapVariables.get(world).roguelike_one.size());
 			structureX = x;
 			structureY = y;
 			structureZ = z;
-			spawnRoomName = prefix + "" + MinigamesModVariables.MapVariables.get(world).floorTypeDungeon + "_" + new java.text.DecimalFormat("##").format(rng);
+			spawnRoomName = MinigamesModVariables.MapVariables.get(world).roguelike_one.get((int) (rng - 1)) instanceof String _str7 ? _str7 : "";
+			if (MinigamesModVariables.MapVariables.get(world).roguelike_one.size() > 1) {
+				MinigamesModVariables.MapVariables.get(world).roguelike_one.remove((int) (rng - 1));
+			}
 			rotation = "none";
-			if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _withbp8 ? blockstate.setValue(_withbp8, true) : blockstate)) {
+			if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("clockwise") instanceof BooleanProperty _withbp12 ? blockstate.setValue(_withbp12, true) : blockstate)) {
 				structureX = x + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() - 1;
 				rotation = "clockwise_90";
-			} else if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _withbp13 ? blockstate.setValue(_withbp13, true) : blockstate)) {
+			} else if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("anticlockwise") instanceof BooleanProperty _withbp17 ? blockstate.setValue(_withbp17, true) : blockstate)) {
 				rotation = "counterclockwise_90";
 				structureZ = z + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() - 1;
-			} else if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("flipped") instanceof BooleanProperty _withbp18 ? blockstate.setValue(_withbp18, true) : blockstate)) {
+			} else if (blockstate == (blockstate.getBlock().getStateDefinition().getProperty("flipped") instanceof BooleanProperty _withbp22 ? blockstate.setValue(_withbp22, true) : blockstate)) {
 				structureX = x + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() - 1;
 				structureZ = z + MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() - 1;
 				rotation = "180";

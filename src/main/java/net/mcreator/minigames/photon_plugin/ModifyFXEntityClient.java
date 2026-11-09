@@ -1,6 +1,16 @@
 package net.mcreator.minigames.photon_plugin;
 
 import com.lowdragmc.photon.client.fx.EntityEffectExecutor;
+import com.lowdragmc.photon.client.fx.FXRuntime;
+import com.lowdragmc.photon.client.gameobject.IFXObject;
+import com.lowdragmc.photon.client.gameobject.emitter.aratrail.AraTrailEmitter;
+import com.lowdragmc.photon.client.gameobject.emitter.beam.BeamEmitter;
+import com.lowdragmc.photon.client.gameobject.emitter.data.number.NumberFunction;
+import com.lowdragmc.photon.client.gameobject.emitter.data.number.color.Color;
+import com.lowdragmc.photon.client.gameobject.emitter.particle.ParticleEmitter;
+import com.lowdragmc.photon.client.gameobject.emitter.trail.TrailEmitter;
+import com.lowdragmc.photon.client.gameobject.particle.IParticle;
+import com.lowdragmc.photon.client.gameobject.particle.TileParticle;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
@@ -11,6 +21,7 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public final class ModifyFXEntityClient {
 
@@ -38,6 +49,8 @@ public final class ModifyFXEntityClient {
         private Double offsetX, offsetY, offsetZ;
         private Double rotationX, rotationY, rotationZ;
         private Double scaleX, scaleY, scaleZ;
+        private Integer colorR, colorG, colorB;
+        private Integer duration;
 
         protected ModifyBuilder(List<Entity> entities) {
             this.entities = entities;
@@ -69,6 +82,30 @@ public final class ModifyFXEntityClient {
             return this;
         }
 
+        public ModifyBuilder color(double r, double g, double b) {
+            this.colorR = Math.clamp((int) Math.round(r), 0, 255);
+            this.colorG = Math.clamp((int) Math.round(g), 0, 255);
+            this.colorB = Math.clamp((int) Math.round(b), 0, 255);
+            return this;
+        }
+
+        public ModifyBuilder color(int argb) {
+            this.colorR = (argb >> 16) & 0xFF;
+            this.colorG = (argb >> 8) & 0xFF;
+            this.colorB = argb & 0xFF;
+            return this;
+        }
+
+        public ModifyBuilder duration(double ticks) {
+            this.duration = Math.max(1, (int) Math.round(ticks));
+            return this;
+        }
+
+        public ModifyBuilder duration(int ticks) {
+            this.duration = Math.max(1, ticks);
+            return this;
+        }
+
         public int send() {
             if (!FMLEnvironment.getDist().isClient()) {
                 return 0;
@@ -80,8 +117,8 @@ public final class ModifyFXEntityClient {
                     return 0;
                 }
 
-                if (this.offsetX == null && this.rotationX == null && this.scaleX == null) {
-                    LOGGER.warn("[ModifyFXEntityClient] No characteristic (offset/rotation/scale) was set to modify{}.", describeEffect());
+                if (this.offsetX == null && this.rotationX == null && this.scaleX == null && this.colorR == null && this.duration == null) {
+                    LOGGER.warn("[ModifyFXEntityClient] No characteristic (offset/rotation/scale/color/duration) was set to modify{}.", describeEffect());
                     return 0;
                 }
 
@@ -109,7 +146,9 @@ public final class ModifyFXEntityClient {
                     modifiedCount += ClientDispatcher.applyToEntity(entity, targetLocation,
                             this.offsetX, this.offsetY, this.offsetZ,
                             this.rotationX, this.rotationY, this.rotationZ,
-                            this.scaleX, this.scaleY, this.scaleZ);
+                            this.scaleX, this.scaleY, this.scaleZ,
+                            this.colorR, this.colorG, this.colorB,
+                            this.duration);
                 }
                 return modifiedCount;
             } catch (Exception e) {
@@ -125,6 +164,69 @@ public final class ModifyFXEntityClient {
         }
     }
 
+    static void applyColorAndDurationToRuntime(FXRuntime runtime, Integer colorR, Integer colorG, Integer colorB, Integer duration) {
+        if (runtime == null || (colorR == null && duration == null)) {
+            return;
+        }
+        Integer argb = (colorR != null && colorG != null && colorB != null)
+                ? ((0xFF << 24) | ((colorR & 0xFF) << 16) | ((colorG & 0xFF) << 8) | (colorB & 0xFF))
+                : null;
+
+        for (IFXObject obj : runtime.getObjects().values()) {
+            if (obj instanceof ParticleEmitter emitter) {
+                if (argb != null) {
+                    emitter.runtime().startColor.set(new Color(argb));
+                }
+                if (duration != null) {
+                    emitter.runtime().duration.set(duration);
+                    emitter.runtime().startLifetime.set(NumberFunction.constant(duration));
+                }
+                applyToLiveParticles(emitter, argb, duration);
+            } else if (obj instanceof BeamEmitter beam) {
+                if (argb != null) {
+                    beam.runtime().color.set(new Color(argb));
+                }
+                if (duration != null) {
+                    beam.runtime().duration.set(duration);
+                }
+            } else if (obj instanceof TrailEmitter trail) {
+                if (duration != null) {
+                    trail.runtime().duration.set(duration);
+                }
+            } else if (obj instanceof AraTrailEmitter araTrail) {
+                if (duration != null) {
+                    araTrail.runtime().duration.set(duration);
+                }
+            }
+        }
+    }
+
+    private static void applyToLiveParticles(ParticleEmitter emitter, Integer argb, Integer duration) {
+        try {
+            if (emitter.waitToAdded != null) {
+                for (IParticle p : emitter.waitToAdded) {
+                    if (p instanceof TileParticle tile) {
+                        if (argb != null) tile.setARGBColor(argb);
+                        if (duration != null) tile.setLifetime(duration);
+                    }
+                }
+            }
+            if (emitter.getParticles() != null) {
+                for (Queue<IParticle> queue : emitter.getParticles().values()) {
+                    if (queue != null) {
+                        for (IParticle p : queue) {
+                            if (p instanceof TileParticle tile) {
+                                if (argb != null) tile.setARGBColor(argb);
+                                if (duration != null) tile.setLifetime(duration);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
     private static final class ClientDispatcher {
 
         private ClientDispatcher() {
@@ -133,7 +235,9 @@ public final class ModifyFXEntityClient {
         static int applyToEntity(Entity entity, Identifier targetLocation,
                                   Double offsetX, Double offsetY, Double offsetZ,
                                   Double rotationX, Double rotationY, Double rotationZ,
-                                  Double scaleX, Double scaleY, Double scaleZ) {
+                                  Double scaleX, Double scaleY, Double scaleZ,
+                                  Integer colorR, Integer colorG, Integer colorB,
+                                  Integer duration) {
             if (entity == null) return 0;
 
             var activeEffects = EntityEffectExecutor.CACHE.get(entity);
@@ -177,6 +281,8 @@ public final class ModifyFXEntityClient {
                         runtime.getRoot().updateScale(new Vector3f(
                                 scaleX.floatValue(), scaleY.floatValue(), scaleZ.floatValue()));
                     }
+
+                    applyColorAndDurationToRuntime(runtime, colorR, colorG, colorB, duration);
 
                     modifiedCount++;
                 } catch (Exception e) {

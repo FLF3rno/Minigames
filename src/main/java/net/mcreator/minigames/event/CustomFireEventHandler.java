@@ -27,9 +27,6 @@ public class CustomFireEventHandler {
 			return;
 		}
 		LivingEntity living = event.getEntity();
-		if (CustomFireHelper.isTouchingSoulFire(living)) {
-			CustomFireHelper.setSoulFireColor(living);
-		}
 		boolean isFire = event.getSource().is(DamageTypeTags.IS_FIRE);
 		if (isFire && CustomFireHelper.isDungeonEntity(living)) {
 			long gameTime = living.level().getGameTime();
@@ -46,68 +43,44 @@ public class CustomFireEventHandler {
 		if (!(living.level() instanceof ServerLevel serverLevel)) {
 			return;
 		}
-		CustomFireHelper.FireData data = CustomFireHelper.getFireData(living.getId());
-		double customDamage = 0;
-		UUID sourceUuid = null;
-		int sourceId = -1;
-		boolean hasCustomFire = false;
-		if (data != null) {
-			customDamage = data.damage();
-			sourceUuid = data.sourceUuid();
-			sourceId = data.sourceId();
-			hasCustomFire = true;
-		} else if (living.getPersistentData().contains("CustomFire_Damage")) {
-			customDamage = living.getPersistentData().getDoubleOr("CustomFire_Damage", 0);
-			String uuidStr = living.getPersistentData().getStringOr("CustomFire_SourceUUID", "");
-			if (!uuidStr.isEmpty()) {
-				try {
-					sourceUuid = UUID.fromString(uuidStr);
-				} catch (Exception ignored) {
-				}
-			}
-			sourceId = living.getPersistentData().getIntOr("CustomFire_SourceId", -1);
-			hasCustomFire = true;
+		if (!living.getPersistentData().contains("CustomFire_Damage")) {
+			return;
 		}
-		if (hasCustomFire) {
-			if (customDamage <= 0) {
-				event.setCanceled(true);
-				return;
-			}
+		double customDamage = living.getPersistentData().getDoubleOr("CustomFire_Damage", 0);
+		if (customDamage <= 0) {
 			event.setCanceled(true);
-			Entity sourceEntity = null;
-			if (sourceUuid != null) {
-				sourceEntity = serverLevel.getEntity(sourceUuid);
+			return;
+		}
+		String uuidStr = living.getPersistentData().getStringOr("CustomFire_SourceUUID", "");
+		Entity sourceEntity = null;
+		if (!uuidStr.isEmpty()) {
+			try {
+				sourceEntity = serverLevel.getEntity(UUID.fromString(uuidStr));
+			} catch (Exception ignored) {
 			}
-			if (sourceEntity == null && sourceId != -1) {
-				sourceEntity = serverLevel.getEntity(sourceId);
-			}
-			DamageSource customSource = (sourceEntity != null && sourceEntity.isAlive())
-					? serverLevel.damageSources().source(DamageTypes.ON_FIRE, sourceEntity, sourceEntity)
-					: serverLevel.damageSources().onFire();
-			float finalDamage = (float) customDamage;
+		}
+		if (sourceEntity != null && sourceEntity.isAlive()) {
+			event.setCanceled(true);
+			DamageSource customSource = serverLevel.damageSources().source(DamageTypes.ON_FIRE, sourceEntity, sourceEntity);
 			CustomFireHelper.setHandlingCustomDamage(true);
 			try {
-				living.hurtServer(serverLevel, customSource, finalDamage);
+				living.hurtServer(serverLevel, customSource, (float) customDamage);
 			} finally {
 				CustomFireHelper.setHandlingCustomDamage(false);
 			}
+		} else {
+			event.setAmount((float) customDamage);
 		}
 	}
 
 	@SubscribeEvent
 	public static void onEntityTick(EntityTickEvent.Post event) {
 		Entity entity = event.getEntity();
-		if (entity.isOnFire()) {
-			if (CustomFireHelper.isTouchingSoulFire(entity)) {
-				CustomFireHelper.setSoulFireColor(entity);
-			}
-		} else {
+		if (!entity.isOnFire()) {
 			if (entity.level().isClientSide()) {
 				CustomFireHelper.clearClientFire(entity.getId());
-			} else if (entity.getRemainingFireTicks() <= 0) {
-				if (entity.getPersistentData().contains("CustomFire_Color") || CustomFireHelper.getFireData(entity.getId()) != null) {
-					CustomFireHelper.clearFire(entity);
-				}
+			} else if (entity.getRemainingFireTicks() <= 0 && entity.getPersistentData().contains("CustomFire_Color")) {
+				CustomFireHelper.clearFire(entity);
 			}
 		}
 	}

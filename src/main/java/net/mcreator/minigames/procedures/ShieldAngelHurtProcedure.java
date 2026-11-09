@@ -39,9 +39,9 @@ public class ShieldAngelHurtProcedure {
 				{
 					final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(100 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-						if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == entity.getPersistentData().getDoubleOr("DataID", 0)) {
+						if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == (entity instanceof ShieldAngelEntity _datEntI ? _datEntI.getEntityData().get(ShieldAngelEntity.DATA_ID) : 0)) {
 							if (entityiterator.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:blesser")))) {
-								if (entityiterator == entity) {
+								if (!(entityiterator == entity)) {
 									angels = angels + 1;
 								}
 							}
@@ -51,7 +51,7 @@ public class ShieldAngelHurtProcedure {
 				{
 					final Vec3 _center = new Vec3((entity.getX()), (entity.getY()), (entity.getZ()));
 					for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(100 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-						if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == entity.getPersistentData().getDoubleOr("DataID", 0)) {
+						if (entityiterator.getPersistentData().getDoubleOr("DataID", 0) == (entity instanceof ShieldAngelEntity _datEntI ? _datEntI.getEntityData().get(ShieldAngelEntity.DATA_ID) : 0)) {
 							if (!(angels > 0)) {
 								{
 									Entity _ent = entityiterator;

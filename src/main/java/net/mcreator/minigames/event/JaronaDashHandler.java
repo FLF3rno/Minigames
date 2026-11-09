@@ -1,5 +1,6 @@
 package net.mcreator.minigames.event;
 
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -106,15 +107,16 @@ public class JaronaDashHandler {
 
 		if (!enemies.isEmpty()) {
 			LivingEntity hitMonster = enemies.get(0);
-			player.setDeltaMovement(Vec3.ZERO);
+			if (!player.hasEffect(MinigamesModMobEffects.PHANTOM)) {
+			player.setDeltaMovement(Vec3.ZERO); }
 			player.hurtMarked = true;
 			if (player instanceof ServerPlayer serverPlayer) {
 				serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
 			}
 			player.getPersistentData().remove("jaronaDashTicks");
 
-			double attackDamage = player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-			float totalDamage = (float) (attackDamage + 1.0);
+			double attackDamage = GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(player, new ItemStack(MinigamesModItems.JARONA.get())), "minigames:attack_cooldown");
+			float totalDamage = (float) (attackDamage);
 
 			if (world instanceof ServerLevel serverLevel) {
 				hitMonster.hurtServer(serverLevel, serverLevel.damageSources().playerAttack(player), totalDamage);

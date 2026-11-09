@@ -1,7 +1,0 @@
-{
-  "parent": "block/wall_inventory",
-  "textures": {
-    "wall": "minigames:block/26.2_cinnabar",
-    "particle": "minigames:block/26.2_cinnabar"
-  }
-}

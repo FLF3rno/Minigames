@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
@@ -22,8 +23,6 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.init.MinigamesModItems;
 
-import java.util.ArrayList;
-
 public class PerformDashProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
@@ -33,17 +32,21 @@ public class PerformDashProcedure {
 		if (!(entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.IMMOBILIZED)) && !(entity instanceof LivingEntity _livEnt1 && _livEnt1.hasEffect(MinigamesModMobEffects.ASCENDING))
 				&& !net.mcreator.minigames.entity.ChurchSharpenerEntity.isVictimPinned(entity)) {
 			if (entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashCooldown <= 0 && entity.getData(MinigamesModVariables.PLAYER_VARIABLES).canDash) {
+				if (entity == null || world.isClientSide())
+					return;
 				extraImpulse = 0;
 				thrustersActive = false;
-				for (Entity entityiterator : new ArrayList<>(world.players())) {
-					if (CheckRelicProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get()))) {
-						thrustersActive = true;
-						extraImpulse = GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get())), "minigames:effect_potency") / 100 + extraImpulse;
-					}
+				if (CheckAllPlayersRelicProcedure.execute(world, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get()))) {
+					thrustersActive = true;
+					extraImpulse = GetItemAttributeProcedure.execute(ReturnAllPlayersRelicItemstackProcedure.execute(world, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get())), "minigames:effect_potency") / 100 + extraImpulse;
 				}
 				extraImpulse = extraImpulse + 1;
 				entity.setDeltaMovement(new Vec3((extraImpulse * entity.getLookAngle().x * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength),
 						(extraImpulse * entity.getLookAngle().y * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength), (extraImpulse * entity.getLookAngle().z * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength)));
+				entity.hurtMarked = true;
+				if (entity instanceof net.minecraft.server.level.ServerPlayer _sp) {
+					_sp.connection.send(new ClientboundSetEntityMotionPacket(_sp));
+				}
 				{
 					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.dashCooldown = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).maxDashCooldown;

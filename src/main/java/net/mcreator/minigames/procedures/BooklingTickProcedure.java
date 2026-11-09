@@ -144,13 +144,11 @@ public class BooklingTickProcedure {
 				}
 				Player target = (Player) rawTarget;
 
-				// Only require line of sight to start; continue firing on selected target even when line of sight is broken
 				if (bookling.aimTicks == 0 && !bookling.hasLineOfSight(target)) {
 					bookling.getNavigation().moveTo(target, 1.0D);
 					return;
 				}
 
-				// Look at target & face it with 180-degree offset (compensating for model rotation)
 				Vec3 targetCenter = target.getBoundingBox().getCenter();
 				Vec3 shootFrom = bookling.position().add(0, 0.45D, 0);
 				Vec3 aimDir = targetCenter.subtract(shootFrom);
@@ -163,7 +161,6 @@ public class BooklingTickProcedure {
 				bookling.setYBodyRot(yaw);
 				bookling.getLookControl().setLookAt(bookling.getX() - aimDir.x, target.getEyeY(), bookling.getZ() - aimDir.z, 30.0F, 30.0F);
 
-				// Root in place during aiming and firing
 				bookling.getNavigation().stop();
 				bookling.setDeltaMovement(0, bookling.getDeltaMovement().y, 0);
 
@@ -171,7 +168,6 @@ public class BooklingTickProcedure {
 				int countInterval = 5;
 				int aimThreshold = totalAmmo * countInterval + 6;
 
-				// Aiming & counting shots phase
 				bookling.aimTicks++;
 
 				if (bookling.aimTicks < aimThreshold) {
@@ -188,13 +184,11 @@ public class BooklingTickProcedure {
 					return;
 				}
 
-				// Shooting phase (aimTicks >= aimThreshold)
 				if (bookling.shootCooldown > 0) {
 					bookling.shootCooldown--;
 				} else {
-					bookling.shootCooldown = 14;
+					bookling.shootCooldown = 8;
 
-					// Play shoot animation each time a shot is fired
 					bookling.getEntityData().set(BooklingEntity.ANIM, 1000);
 					bookling.getEntityData().set(BooklingEntity.ANIM, 1);
 
@@ -209,25 +203,20 @@ public class BooklingTickProcedure {
 					double speed = 1.25D;
 					Vec3 velocity = spreadDir.scale(speed);
 
-					// Raycast collision for block obstacles (walls, floors, obstacles)
 					Vec3 reach = shootFrom.add(spreadDir.scale(16.0D));
 					ClipContext clipCtx = new ClipContext(shootFrom, reach, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, bookling);
 					BlockHitResult blockHit = serverLevel.clip(clipCtx);
 					Vec3 endPoint = blockHit.getType() != HitResult.Type.MISS ? blockHit.getLocation() : reach;
 
-					// Clamp particle lifetime so particles stop at the wall and never go through
 					double distanceToWall = shootFrom.distanceTo(endPoint);
 					int particleLifetime = Math.max(1, (int) Math.round(distanceToWall / speed));
 
-					// Spawn custom_enchant particle stream packet
 					PacketDistributor.sendToPlayersInDimension(serverLevel,
 							new SpawnCustomParticleMessage("minigames:custom_enchant", shootFrom.x, shootFrom.y, shootFrom.z, velocity.x, velocity.y, velocity.z, particleLifetime));
 
-					// Shoot sound
 					serverLevel.playSound(null, bookling.getX(), bookling.getY(), bookling.getZ(),
 							BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.arrow.shoot")), SoundSource.HOSTILE, 0.7F, 1.4F + rand.nextFloat() * 0.4F);
 
-					// Piercing entity damage: damages all valid entities along the stream up to the wall
 					AABB searchBox = new AABB(shootFrom, endPoint).inflate(1.0D);
 					List<Entity> candidates = serverLevel.getEntities(bookling, searchBox,
 							e -> e instanceof LivingEntity living && living.isAlive() && !living.isAlliedTo(bookling)
@@ -242,11 +231,9 @@ public class BooklingTickProcedure {
 						}
 					}
 
-					// Decrement ammo
 					int currentAmmo = bookling.getEntityData().get(BooklingEntity.DATA_ammo) - 1;
 					bookling.getEntityData().set(BooklingEntity.DATA_ammo, currentAmmo);
 
-					// Out of ammo: stop firing & unfreeze
 					if (currentAmmo <= 0) {
 						bookling.aimTicks = 0;
 						bookling.shootCooldown = 0;

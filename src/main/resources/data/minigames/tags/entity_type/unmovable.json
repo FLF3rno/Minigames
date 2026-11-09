@@ -13,7 +13,6 @@
     "minigames:crypt_lurker",
     "minigames:gravedigger_miniboss",
     "minigames:flavio_clock_cannon",
-    "minigames:flavio_trapdoor",
-    "item"
+    "minigames:flavio_trapdoor"
   ]
 }

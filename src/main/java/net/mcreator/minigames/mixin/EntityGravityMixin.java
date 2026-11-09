@@ -1,8 +1,10 @@
 package net.mcreator.minigames.mixin;
 
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.core.Direction;
@@ -61,6 +63,38 @@ public abstract class EntityGravityMixin {
 
 		Vec3 eyeOffset = GravityOrientation.vecPlayerToWorld(0, player.getEyeHeight(), 0, gravity);
 		cir.setReturnValue(new Vec3(player.getX() + eyeOffset.x, player.getY() + eyeOffset.y, player.getZ() + eyeOffset.z));
+	}
+
+	@Inject(
+			method = "getLookAngle()Lnet/minecraft/world/phys/Vec3;",
+			at = @At("RETURN"),
+			cancellable = true
+	)
+	private void minigames$gravityLookAngle(CallbackInfoReturnable<Vec3> cir) {
+		if (!((Object) this instanceof Player player)) return;
+		Direction gravity = GravityAccess.getGravity(player);
+		if (gravity == Direction.DOWN) return;
+
+		cir.setReturnValue(GravityOrientation.vecPlayerToWorld(cir.getReturnValue(), gravity));
+	}
+
+	private boolean minigames$customSpawned = false;
+
+	@Inject(
+			method = "setPos(DDD)V",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	private void minigames$gravityProjectileSpawn(double x, double y, double z, CallbackInfo ci) {
+		if (!minigames$customSpawned && (Object) this instanceof AbstractArrow arrow && arrow.getOwner() instanceof Player player) {
+			Direction gravity = GravityAccess.getGravity(player);
+			if (gravity != Direction.DOWN) {
+				minigames$customSpawned = true;
+				Vec3 spawnPos = player.getEyePosition().add(player.getLookAngle().scale(0.3));
+				ci.cancel();
+				((Entity) (Object) this).setPosRaw(spawnPos.x, spawnPos.y, spawnPos.z);
+			}
+		}
 	}
 
 	@Inject(

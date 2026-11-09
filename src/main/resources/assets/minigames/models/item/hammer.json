@@ -1,6 +1,7 @@
 {
-  "parent": "item/handheld",
+  "parent": "minigames:custom/hammer_item",
   "textures": {
-    "layer0": "minigames:item/weapon_hammer"
+    "0": "minigames:block/weapon_hammer",
+    "particle": "minigames:item/weapon_hammer"
   }
 }

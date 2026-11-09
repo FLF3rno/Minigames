@@ -40,7 +40,7 @@ public class VoteManagerProcedure {
 		if (MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 			numberOfPlayersThatAreWillingToParticipateInYourBuffoonery = 0;
 			numberOfPlayersThatFuckingHateYourIdea = 0;
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
+			for (Entity entityiterator : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
 				if (entityiterator instanceof Player) {
 					if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).voted) {
 						if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).votedYes) {

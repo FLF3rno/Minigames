@@ -325,6 +325,12 @@ public class MinigamesModVariables {
 		public ArrayList<Object> wantsToBeHuntedAchievement = new ArrayList<>();
 		public boolean ShowOptInAchievement = false;
 		public double AchievementHunterOptInTimer = 0;
+		public double voteRoomID = 0;
+		public ArrayList<Object> roguelike_two = new ArrayList<>();
+		public ArrayList<Object> roguelike_one = new ArrayList<>();
+		public ArrayList<Object> roguelike_four = new ArrayList<>();
+		public ArrayList<Object> roguelike_loot = new ArrayList<>();
+		public ArrayList<Object> roguelike_miniboss = new ArrayList<>();
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -423,6 +429,12 @@ public class MinigamesModVariables {
 			wantsToBeHuntedAchievement = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("wantsToBeHuntedAchievement"), lookupProvider);
 			ShowOptInAchievement = nbt.getBooleanOr("ShowOptInAchievement", false);
 			AchievementHunterOptInTimer = nbt.getDoubleOr("AchievementHunterOptInTimer", 0);
+			voteRoomID = nbt.getDoubleOr("voteRoomID", 0);
+			roguelike_two = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_two"), lookupProvider);
+			roguelike_one = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_one"), lookupProvider);
+			roguelike_four = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_four"), lookupProvider);
+			roguelike_loot = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_loot"), lookupProvider);
+			roguelike_miniboss = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_miniboss"), lookupProvider);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -522,6 +534,12 @@ public class MinigamesModVariables {
 			nbt.put("wantsToBeHuntedAchievement", NbtArrayLists.saveGlobalMap(wantsToBeHuntedAchievement));
 			nbt.putBoolean("ShowOptInAchievement", ShowOptInAchievement);
 			nbt.putDouble("AchievementHunterOptInTimer", AchievementHunterOptInTimer);
+			nbt.putDouble("voteRoomID", voteRoomID);
+			nbt.put("roguelike_two", NbtArrayLists.saveGlobalMap(roguelike_two));
+			nbt.put("roguelike_one", NbtArrayLists.saveGlobalMap(roguelike_one));
+			nbt.put("roguelike_four", NbtArrayLists.saveGlobalMap(roguelike_four));
+			nbt.put("roguelike_loot", NbtArrayLists.saveGlobalMap(roguelike_loot));
+			nbt.put("roguelike_miniboss", NbtArrayLists.saveGlobalMap(roguelike_miniboss));
 			return nbt;
 		}
 

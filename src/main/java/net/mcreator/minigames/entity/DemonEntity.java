@@ -1,5 +1,8 @@
 package net.mcreator.minigames.entity;
 
+import net.mcreator.minigames.procedures.ClearSculklingsProcedure;
+import net.mcreator.minigames.procedures.ShieldAngelHurtProcedure;
+import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 import net.minecraft.world.level.Level;
@@ -126,6 +129,12 @@ public class DemonEntity extends Monster {
     public void baseTick() {
         super.baseTick();
         DemonTickProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
+        ClearSculklingsProcedure.execute(level, this.getX(), this.getY(), this.getZ(), this);
+        return super.hurtServer(level, damagesource, amount);
     }
 
     @Override

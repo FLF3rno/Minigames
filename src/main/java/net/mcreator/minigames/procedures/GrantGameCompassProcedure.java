@@ -19,6 +19,9 @@ public class GrantGameCompassProcedure {
 		if (entity.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
 			setStackInSlot(_resourceHandler, 0, ItemResource.of(new ItemStack(MinigamesModItems.GAME_COMPASS.get())), 1);
 		}
+		if (entity.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
+			setStackInSlot(_resourceHandler, 1, ItemResource.of(new ItemStack(MinigamesModItems.DUNGEON_COMPASS.get())), 1);
+		}
 		if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 			if (entity.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
 				setStackInSlot(_resourceHandler, 1, ItemResource.of(new ItemStack(MinigamesModItems.REPLAY_SPLEEF.get())), 1);

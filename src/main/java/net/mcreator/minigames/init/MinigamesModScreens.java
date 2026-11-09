@@ -28,6 +28,7 @@ public class MinigamesModScreens {
 		event.register(MinigamesModMenus.FLAVIO_PHASE_2.get(), FlavioPhase2Screen::new);
 		event.register(MinigamesModMenus.CHOICE_BUNDLE.get(), ChoiceBundleScreen::new);
 		event.register(MinigamesModMenus.CLASS_SELECTION_ROGUELIKE.get(), ClassSelectionRoguelikeScreen::new);
+		event.register(MinigamesModMenus.ROGUELIKE_START_GAME.get(), RoguelikeStartGameScreen::new);
 	}
 
 	public interface ScreenAccessor {

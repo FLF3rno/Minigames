@@ -5,6 +5,7 @@ import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.util.AchievementStrongholdTargets;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -112,5 +113,7 @@ public class TeleportAchievementProcedure {
         if (overworld.getLevelData() instanceof WritableLevelData levelData) {
             levelData.setSpawn(LevelData.RespawnData.of(Level.OVERWORLD, targetPos, 0.0F, 0.0F));
         }
+        overworld.getGameRules().set(GameRules.FALL_DAMAGE, true, world.getServer());
+
     }
 }

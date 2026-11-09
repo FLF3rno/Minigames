@@ -17,7 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.FriendlyByteBuf;
 
-import net.mcreator.minigames.world.inventory.StartGameMenu;
+import net.mcreator.minigames.world.inventory.RoguelikeStartGameMenu;
 import net.mcreator.minigames.procedures.GameCompassInHandProcedure;
 
 import javax.annotation.Nullable;
@@ -44,7 +44,7 @@ public class DungeonCompassItem extends Item {
 					FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
 					packetBuffer.writeBlockPos(entity.blockPosition());
 					packetBuffer.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);
-					return new StartGameMenu(id, inventory, packetBuffer);
+					return new RoguelikeStartGameMenu(id, inventory, packetBuffer);
 				}
 			}, buf -> {
 				buf.writeBlockPos(entity.blockPosition());

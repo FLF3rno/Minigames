@@ -32,8 +32,12 @@ public class EndDungeonProcedure {
 					_vars.PassiveHealCooldown = 80;
 					_vars.PassiveHealAmount = 1;
 					_vars.minimumLightLevel = 0;
+					_vars.classDungeon = "none";
 					_vars.markSyncDirty();
 				}
+				if (entityiterator instanceof Player _player)
+					_player.getInventory().clearContent();
+				GrantGameCompassProcedure.execute(world, entityiterator);
 			}
 		}
 		MinigamesModVariables.MapVariables.get(world).removeEffects = true;

@@ -74,7 +74,7 @@ public class ItemPickedUpDungeonProcedure {
 				}
 			}
 			if (explodeOtherPedestals) {
-				range = 12;
+				range = 20;
 				spawnRoomX = x + Math.round(range / 2);
 				spawnRoomZ = z + Math.round(range / 2);
 				for (int _i1 = 0; _i1 < (int) range; _i1++) {

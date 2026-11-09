@@ -39,6 +39,8 @@ public final class ModifyFXBlockServer {
         private Double offsetX, offsetY, offsetZ;
         private Double rotationX, rotationY, rotationZ;
         private Double scaleX, scaleY, scaleZ;
+        private Integer colorR, colorG, colorB;
+        private Integer duration;
 
         protected ModifyBuilder(List<BlockPos> positions) {
             this.positions = positions;
@@ -70,6 +72,30 @@ public final class ModifyFXBlockServer {
             return this;
         }
 
+        public ModifyBuilder color(double r, double g, double b) {
+            this.colorR = Math.clamp((int) Math.round(r), 0, 255);
+            this.colorG = Math.clamp((int) Math.round(g), 0, 255);
+            this.colorB = Math.clamp((int) Math.round(b), 0, 255);
+            return this;
+        }
+
+        public ModifyBuilder color(int argb) {
+            this.colorR = (argb >> 16) & 0xFF;
+            this.colorG = (argb >> 8) & 0xFF;
+            this.colorB = argb & 0xFF;
+            return this;
+        }
+
+        public ModifyBuilder duration(double ticks) {
+            this.duration = Math.max(1, (int) Math.round(ticks));
+            return this;
+        }
+
+        public ModifyBuilder duration(int ticks) {
+            this.duration = Math.max(1, ticks);
+            return this;
+        }
+
         public void send() {
             try {
                 if (this.positions == null || this.positions.isEmpty()) {
@@ -77,8 +103,8 @@ public final class ModifyFXBlockServer {
                     return;
                 }
 
-                if (this.offsetX == null && this.rotationX == null && this.scaleX == null) {
-                    LOGGER.warn("[ModifyFXBlockServer] No characteristic (offset/rotation/scale) was set to modify{}.", describeEffect());
+                if (this.offsetX == null && this.rotationX == null && this.scaleX == null && this.colorR == null && this.duration == null) {
+                    LOGGER.warn("[ModifyFXBlockServer] No characteristic (offset/rotation/scale/color/duration) was set to modify{}.", describeEffect());
                     return;
                 }
 
@@ -116,6 +142,12 @@ public final class ModifyFXBlockServer {
                         }
                         if (this.scaleX != null) {
                             packet.setScale(this.scaleX, this.scaleY, this.scaleZ);
+                        }
+                        if (this.colorR != null) {
+                            packet.setColor(this.colorR, this.colorG, this.colorB);
+                        }
+                        if (this.duration != null) {
+                            packet.setDuration(this.duration);
                         }
 
                         PacketDistributor.sendToAllPlayers(packet);

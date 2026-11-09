@@ -3,6 +3,7 @@ package net.mcreator.minigames.procedures;
 import net.mcreator.minigames.entity.FlavioTrapdoor2Entity;
 import net.mcreator.minigames.entity.FlavioTrapdoor3Entity;
 import net.mcreator.minigames.entity.FlavioTrapdoorEntity;
+import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,13 +23,7 @@ public class AntennaTickProcedure {
 
 	private static final Map<Integer, List<Vec3>> STRIKE_POSITIONS = new HashMap<>();
 
-	public static void execute(
-			LevelAccessor world,
-			double x,
-			double y,
-			double z,
-			Entity entity
-	) {
+	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
 
@@ -90,7 +85,7 @@ public class AntennaTickProcedure {
 			strikePositions.clear();
 
 			for (Player player : world.players()) {
-
+				if (player.hasEffect(MinigamesModMobEffects.BLESSED)) return;
 				double strikeX =
 						Math.floor(player.getX()) + 0.5D;
 

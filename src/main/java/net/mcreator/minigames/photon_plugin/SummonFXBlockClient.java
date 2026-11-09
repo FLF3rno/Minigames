@@ -40,6 +40,8 @@ public final class SummonFXBlockClient {
         private boolean forcedDeath = false;
         private boolean allowMulti = false;
         private boolean checkState = false;
+        private Integer colorR, colorG, colorB;
+        private Integer duration;
 
         protected EffectBuilder(BlockPos pos) {
             this.pos = pos;
@@ -85,6 +87,30 @@ public final class SummonFXBlockClient {
             return this;
         }
 
+        public EffectBuilder color(double r, double g, double b) {
+            this.colorR = Math.clamp((int) Math.round(r), 0, 255);
+            this.colorG = Math.clamp((int) Math.round(g), 0, 255);
+            this.colorB = Math.clamp((int) Math.round(b), 0, 255);
+            return this;
+        }
+
+        public EffectBuilder color(int argb) {
+            this.colorR = (argb >> 16) & 0xFF;
+            this.colorG = (argb >> 8) & 0xFF;
+            this.colorB = argb & 0xFF;
+            return this;
+        }
+
+        public EffectBuilder duration(double ticks) {
+            this.duration = Math.max(1, (int) Math.round(ticks));
+            return this;
+        }
+
+        public EffectBuilder duration(int ticks) {
+            this.duration = Math.max(1, ticks);
+            return this;
+        }
+
         public void send() {
             if (!FMLEnvironment.getDist().isClient()) {
                 return;
@@ -103,7 +129,8 @@ public final class SummonFXBlockClient {
                 }
 
                 ClientDispatcher.dispatch(this.pos, this.effectName, this.offset, this.rotation, this.scale,
-                        this.delay, this.forcedDeath, this.allowMulti, this.checkState);
+                        this.delay, this.forcedDeath, this.allowMulti, this.checkState,
+                        this.colorR, this.colorG, this.colorB, this.duration);
             } catch (Exception e) {
                 LOGGER.error("[SummonFXBlockClient] Failed to start effect '{}'. Cause: {}", this.effectName, e.getMessage(), e);
             }
@@ -116,7 +143,8 @@ public final class SummonFXBlockClient {
         }
 
         static void dispatch(BlockPos pos, String effectName, Vec3 offset, Vec3 rotation, Vec3 scale,
-                             int delay, boolean forcedDeath, boolean allowMulti, boolean checkState) {
+                             int delay, boolean forcedDeath, boolean allowMulti, boolean checkState,
+                             Integer colorR, Integer colorG, Integer colorB, Integer duration) {
             try {
                 var level = Minecraft.getInstance().level;
                 if (level == null || !level.isLoaded(pos)) {
@@ -145,6 +173,7 @@ public final class SummonFXBlockClient {
                 effect.setAllowMulti(allowMulti);
                 effect.setCheckState(checkState);
                 effect.start();
+                ModifyFXEntityClient.applyColorAndDurationToRuntime(effect.getRuntime(), colorR, colorG, colorB, duration);
             } catch (Exception e) {
                 LOGGER.error("[SummonFXBlockClient] Failed to start effect '{}'. Cause: {}", effectName, e.getMessage(), e);
             }

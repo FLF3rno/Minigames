@@ -34,7 +34,7 @@ public class KeybindPressedProcedure {
 			return;
 		}
 
-		if (!CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.AIR_BOOTS.get()))) {
+		if (!CheckAllPlayersRelicProcedure.execute(mc.level, new ItemStack(MinigamesModItems.AIR_BOOTS.get()))) {
 			return;
 		}
 

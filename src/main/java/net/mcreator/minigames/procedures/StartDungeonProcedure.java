@@ -23,7 +23,6 @@ import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.MinigamesMod;
-import net.mcreator.minigames.AnimationScreenTrigger;
 
 import java.util.ArrayList;
 
@@ -108,7 +107,7 @@ public class StartDungeonProcedure {
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
-		AnimationScreenTrigger.startAnimation(200, "fade_in_fill", 1f);
+		net.mcreator.minigames.network.PlayScreenAnimationMessage.sendToAll(world, 200, "fade_in_fill", 1f);
 		MinigamesModVariables.MapVariables.get(world).currentRoomType = "spawn";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(20, () -> {

@@ -27,6 +27,9 @@ public class LaserStatueTickProcedure {
 	private static final Identifier BEAM = Identifier.fromNamespaceAndPath("minigames", "textures/entities/beam_renderer/holy_laser.png");
 
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (world == null || entity == null || world.isClientSide()) {
+			return;
+		}
 
 		boolean attack = false;
 		boolean telegraph = false;
@@ -91,7 +94,8 @@ public class LaserStatueTickProcedure {
 					}
 					hasTarget = true;
 
-					Vec3 direction = targetPlayer.position().subtract(start);
+					Vec3 targetPos = targetPlayer.getBoundingBox().getCenter();
+					Vec3 direction = targetPos.subtract(start);
 					if (direction.lengthSqr() < 1.0E-6D) {
 						direction = new Vec3(0, 0, 1);
 					} else {
@@ -137,15 +141,14 @@ public class LaserStatueTickProcedure {
 							}
 						}
 
-						RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 15, end.x, end.y, end.z, "beam", BEAM);
+						//RenderBeamXYZProcedure.execute(entity, true, start.x, start.y, start.z, 2, 15, end.x, end.y, end.z, "beam", BEAM);
+						ApplyLaserProcedure.execute(entity, start, end, 0.3, 15, "#92d1ff");
 					}
 				}
 			}
 
 			if (attack && hasTarget && world instanceof Level _level) {
-				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:holy_laser")), SoundSource.HOSTILE, 4, 1);
-				}
+				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:holy_laser")), SoundSource.HOSTILE, 4, 1);
 			}
 		}
 	}

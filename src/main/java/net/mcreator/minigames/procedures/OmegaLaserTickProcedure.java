@@ -52,11 +52,9 @@ public class OmegaLaserTickProcedure {
 		double y = laser.getY();
 		double z = laser.getZ();
 
-		// Trigger fire animation
 		laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 1000);
 		laser.getEntityData().set(FlavioOmegaLaserEntity.ANIM, 0);
 
-		// Calculate beam direction based on cannon body rotation + head yaw & pitch
 		float totalYaw = laser.getYRot() + laser.getHeadYaw();
 		float totalPitch = laser.getHeadPitch();
 
@@ -106,52 +104,19 @@ public class OmegaLaserTickProcedure {
 			livingEntity1.removeEffect(MinigamesModMobEffects.BLESSED);
 		}
 
-		// Screenshake
 		for (Player p : level.players()) {
 			ApplyScreenshakeProcedure.execute(1, 30);
 		}
 
-		// Light and chunks
-		AffectLightingMin(level, -8);
-		AffectLightingMax(level, -8);
-		if (level.isClientSide()) {
-			UpdateChunkProcedure.execute(x, z);
-		}
 
-		// Render beam
+		// beam
 		RenderBeamXYZProcedure.execute(laser, true, start.x, start.y, start.z, 2, 30, end.x, end.y, end.z, "beam", BEAM);
 
-		// Sound
 		if (!level.isClientSide()) {
 			level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:laser_cannon_impact")), SoundSource.HOSTILE, 4, 1);
 		}
 	}
 
-	private static void AffectLightingMin(LevelAccessor world, int change) {
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			{
-				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.minimumLightLevel += change;
-				_vars.markSyncDirty();
-			}
-		}
-	}
-	private static void AffectLightingMax(LevelAccessor world, int change) {
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			{
-				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.maximumLightLevel += change;
-				_vars.markSyncDirty();
-			}
-		}
-	}
-
-	private static Entity findFurthestEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range, java.util.function.Predicate<Entity> predicate) {
-		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), predicate).stream()
-				.filter(e -> e.isAlive() && (!(e instanceof Player p) || !p.isSpectator()))
-				.max(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z)))
-				.orElse(null);
-	}
 
 	private static Entity findEntityInWorldRange(LevelAccessor world, Class<? extends Entity> clazz, double x, double y, double z, double range, java.util.function.Predicate<Entity> predicate) {
 		return (Entity) world.getEntitiesOfClass(clazz, AABB.ofSize(new Vec3(x, y, z), range, range, range), predicate).stream().sorted(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).findFirst().orElse(null);

@@ -42,6 +42,8 @@ public final class ModifyFXBlockClient {
         private Double offsetX, offsetY, offsetZ;
         private Double rotationX, rotationY, rotationZ;
         private Double scaleX, scaleY, scaleZ;
+        private Integer colorR, colorG, colorB;
+        private Integer duration;
 
         protected ModifyBuilder(List<BlockPos> positions) {
             this.positions = positions;
@@ -73,6 +75,30 @@ public final class ModifyFXBlockClient {
             return this;
         }
 
+        public ModifyBuilder color(double r, double g, double b) {
+            this.colorR = Math.clamp((int) Math.round(r), 0, 255);
+            this.colorG = Math.clamp((int) Math.round(g), 0, 255);
+            this.colorB = Math.clamp((int) Math.round(b), 0, 255);
+            return this;
+        }
+
+        public ModifyBuilder color(int argb) {
+            this.colorR = (argb >> 16) & 0xFF;
+            this.colorG = (argb >> 8) & 0xFF;
+            this.colorB = argb & 0xFF;
+            return this;
+        }
+
+        public ModifyBuilder duration(double ticks) {
+            this.duration = Math.max(1, (int) Math.round(ticks));
+            return this;
+        }
+
+        public ModifyBuilder duration(int ticks) {
+            this.duration = Math.max(1, ticks);
+            return this;
+        }
+
         public int send() {
             if (!FMLEnvironment.getDist().isClient()) {
                 return 0;
@@ -84,8 +110,8 @@ public final class ModifyFXBlockClient {
                     return 0;
                 }
 
-                if (this.offsetX == null && this.rotationX == null && this.scaleX == null) {
-                    LOGGER.warn("[ModifyFXBlockClient] No characteristic (offset/rotation/scale) was set to modify{}.", describeEffect());
+                if (this.offsetX == null && this.rotationX == null && this.scaleX == null && this.colorR == null && this.duration == null) {
+                    LOGGER.warn("[ModifyFXBlockClient] No characteristic (offset/rotation/scale/color/duration) was set to modify{}.", describeEffect());
                     return 0;
                 }
 
@@ -113,7 +139,9 @@ public final class ModifyFXBlockClient {
                     modifiedCount += ClientDispatcher.applyToPos(pos, targetLocation,
                             this.offsetX, this.offsetY, this.offsetZ,
                             this.rotationX, this.rotationY, this.rotationZ,
-                            this.scaleX, this.scaleY, this.scaleZ);
+                            this.scaleX, this.scaleY, this.scaleZ,
+                            this.colorR, this.colorG, this.colorB,
+                            this.duration);
                 }
                 return modifiedCount;
             } catch (Exception e) {
@@ -137,7 +165,9 @@ public final class ModifyFXBlockClient {
         static int applyToPos(BlockPos pos, Identifier targetLocation,
                                Double offsetX, Double offsetY, Double offsetZ,
                                Double rotationX, Double rotationY, Double rotationZ,
-                               Double scaleX, Double scaleY, Double scaleZ) {
+                               Double scaleX, Double scaleY, Double scaleZ,
+                               Integer colorR, Integer colorG, Integer colorB,
+                               Integer duration) {
             if (pos == null) return 0;
 
             var activeEffects = BlockEffectExecutor.CACHE.get(pos);
@@ -182,6 +212,8 @@ public final class ModifyFXBlockClient {
                         runtime.getRoot().updateScale(new Vector3f(
                                 scaleX.floatValue(), scaleY.floatValue(), scaleZ.floatValue()));
                     }
+
+                    ModifyFXEntityClient.applyColorAndDurationToRuntime(runtime, colorR, colorG, colorB, duration);
 
                     modifiedCount++;
                 } catch (Exception e) {

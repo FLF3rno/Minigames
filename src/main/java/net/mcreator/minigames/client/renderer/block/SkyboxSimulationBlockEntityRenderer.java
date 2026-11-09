@@ -282,6 +282,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		atmoQuadCount = 0;
 		atmoSubmitted = false;
 		atmoMergeRun = 0;
+		atmoLastFaceDir = -1;
 		starQuadCount = 0;
 		starSubmitted = false;
 		sunQuadCount = 0;
@@ -291,9 +292,11 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		portalQuadCount = 0;
 		portalSubmitted = false;
 		portalMergeRun = 0;
+		portalLastFaceDir = -1;
 		gatewayQuadCount = 0;
 		gatewaySubmitted = false;
 		gatewayMergeRun = 0;
+		gatewayLastFaceDir = -1;
 	}
 
 	@Override
@@ -309,10 +312,15 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		if (level != null) {
 			if (be.cachedFaces == -1) {
 				byte mask = 0;
+				boolean allNeighborsLoaded = true;
 				BlockPos pos = be.getBlockPos();
 				for (int i = 0; i < 6; i++) {
 					Direction dir = DIRECTIONS[i];
 					BlockPos neighborPos = pos.relative(dir);
+					if (!level.hasChunkAt(neighborPos)) {
+						allNeighborsLoaded = false;
+						continue;
+					}
 					BlockState neighborState = level.getBlockState(neighborPos);
 					if (!(neighborState.getBlock() instanceof SkyboxSimulationBlock)) {
 						if (!neighborState.isSolidRender() || !neighborState.canOcclude() || neighborState.isAir()) {
@@ -320,11 +328,15 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 						}
 					}
 				}
-				be.cachedFaces = mask;
+				if (allNeighborsLoaded) {
+					be.cachedFaces = mask;
+				}
+				state.facesMask = mask;
+			} else {
+				state.facesMask = be.cachedFaces;
 			}
 
-			state.facesMask = be.cachedFaces;
-			if (be.cachedFaces == 0) {
+			if (state.facesMask == 0) {
 				return;
 			}
 
@@ -424,22 +436,6 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		int activeFacesMask = (state.facesMask & 0xFF) & visibleMask;
 		if (activeFacesMask == 0) return;
 
-		// Safe wide-angle view culling (culls blocks behind camera or >85 degrees off-axis)
-		if (camera != null) {
-			double fx = (bx + 0.5) - cx;
-			double fy = (by + 0.5) - cy;
-			double fz = (bz + 0.5) - cz;
-			double distSqr = fx * fx + fy * fy + fz * fz;
-
-			if (distSqr >= 9.0) { // Keep everything within 3m safe radius
-				updateCameraForward(camera);
-				double dot = fx * camForwardX + fy * camForwardY + fz * camForwardZ;
-				if (dot <= 0.0 || (dot * dot) < distSqr * 0.0075) {
-					return;
-				}
-			}
-		}
-
 		if (state.disableSkybox) {
 			batchCyan(poseStack, collector, activeFacesMask, bx, by, bz);
 			return;
@@ -473,6 +469,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 			FaceData data = FACE_DATA_ARRAY[i];
 
 			addAtmoQuad(
+				i,
 				(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z), CYAN_COLOR,
 				(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z), CYAN_COLOR,
 				(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z), CYAN_COLOR,
@@ -500,6 +497,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 				if ((activeFacesMask & (1 << i)) != 0) {
 					FaceData data = FACE_DATA_ARRAY[i];
 					addGatewayQuad(
+						i,
 						(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z),
 						(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z),
 						(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z),
@@ -520,6 +518,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 				if ((activeFacesMask & (1 << i)) != 0) {
 					FaceData data = FACE_DATA_ARRAY[i];
 					addPortalQuad(
+						i,
 						(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z),
 						(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z),
 						(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z),
@@ -531,10 +530,12 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	}
 
 	private static int portalMergeRun = 0;
+	private static int portalLastFaceDir = -1;
 	private static int gatewayMergeRun = 0;
+	private static int gatewayLastFaceDir = -1;
 
-	private static void addPortalQuad(float x0, float y0, float z0, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
-		if (portalQuadCount > 0 && portalMergeRun < 4) {
+	private static void addPortalQuad(int faceDir, float x0, float y0, float z0, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
+		if (portalQuadCount > 0 && portalMergeRun < 4 && portalLastFaceDir == faceDir) {
 			int prevPosOff = (portalQuadCount - 1) * 12;
 			if (portalPos[prevPosOff + 6] == x1 && portalPos[prevPosOff + 7] == y1 && portalPos[prevPosOff + 8] == z1
 				&& portalPos[prevPosOff + 9] == x0 && portalPos[prevPosOff + 10] == y0 && portalPos[prevPosOff + 11] == z0) {
@@ -560,10 +561,11 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		portalPos[off + 9] = x3; portalPos[off + 10] = y3; portalPos[off + 11] = z3;
 		portalQuadCount++;
 		portalMergeRun = 1;
+		portalLastFaceDir = faceDir;
 	}
 
-	private static void addGatewayQuad(float x0, float y0, float z0, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
-		if (gatewayQuadCount > 0 && gatewayMergeRun < 4) {
+	private static void addGatewayQuad(int faceDir, float x0, float y0, float z0, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
+		if (gatewayQuadCount > 0 && gatewayMergeRun < 4 && gatewayLastFaceDir == faceDir) {
 			int prevPosOff = (gatewayQuadCount - 1) * 12;
 			if (gatewayPos[prevPosOff + 6] == x1 && gatewayPos[prevPosOff + 7] == y1 && gatewayPos[prevPosOff + 8] == z1
 				&& gatewayPos[prevPosOff + 9] == x0 && gatewayPos[prevPosOff + 10] == y0 && gatewayPos[prevPosOff + 11] == z0) {
@@ -589,6 +591,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		gatewayPos[off + 9] = x3; gatewayPos[off + 10] = y3; gatewayPos[off + 11] = z3;
 		gatewayQuadCount++;
 		gatewayMergeRun = 1;
+		gatewayLastFaceDir = faceDir;
 	}
 
 	public static void renderBatchedPortal(PoseStack.Pose pose, VertexConsumer consumer) {
@@ -602,6 +605,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		portalQuadCount = 0;
 		portalSubmitted = false;
 		portalMergeRun = 0;
+		portalLastFaceDir = -1;
 	}
 
 	public static void renderBatchedGateway(PoseStack.Pose pose, VertexConsumer consumer) {
@@ -615,6 +619,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		gatewayQuadCount = 0;
 		gatewaySubmitted = false;
 		gatewayMergeRun = 0;
+		gatewayLastFaceDir = -1;
 	}
 
 	// =========================================================================
@@ -708,6 +713,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 			int c3 = cornerColors[corners[3]];
 
 			addAtmoQuad(
+				i,
 				(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z), c0,
 				(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z), c1,
 				(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z), c2,
@@ -717,12 +723,14 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	}
 
 	private static int atmoMergeRun = 0;
+	private static int atmoLastFaceDir = -1;
 
-	private static void addAtmoQuad(float x0, float y0, float z0, int c0,
+	private static void addAtmoQuad(int faceDir,
+									float x0, float y0, float z0, int c0,
 									float x1, float y1, float z1, int c1,
 									float x2, float y2, float z2, int c2,
 									float x3, float y3, float z3, int c3) {
-		if (atmoQuadCount > 0 && atmoMergeRun < 4) {
+		if (atmoQuadCount > 0 && atmoMergeRun < 4 && atmoLastFaceDir == faceDir) {
 			int prevPosOff = (atmoQuadCount - 1) * 12;
 			if (atmoPos[prevPosOff + 6] == x1 && atmoPos[prevPosOff + 7] == y1 && atmoPos[prevPosOff + 8] == z1
 				&& atmoPos[prevPosOff + 9] == x0 && atmoPos[prevPosOff + 10] == y0 && atmoPos[prevPosOff + 11] == z0) {
@@ -762,6 +770,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 
 		atmoQuadCount++;
 		atmoMergeRun = 1;
+		atmoLastFaceDir = faceDir;
 	}
 
 	public static void renderBatchedAtmosphere(PoseStack.Pose pose, VertexConsumer consumer) {
@@ -784,6 +793,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		atmoQuadCount = 0;
 		atmoSubmitted = false;
 		atmoMergeRun = 0;
+		atmoLastFaceDir = -1;
 	}
 
 	private static int getOrComputeCornerRgb(int wx, int wy, int wz,

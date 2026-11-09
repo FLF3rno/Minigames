@@ -1,9 +1,0 @@
-{
-  "parent": "block/cube_bottom_top",
-  "textures": {
-    "particle": "minigames:block/26.2_polished_cinnabar",
-    "bottom": "minigames:block/26.2_polished_cinnabar",
-    "top": "minigames:block/26.2_polished_cinnabar",
-    "side": "minigames:block/26.2_polished_cinnabar"
-  }
-}

@@ -34,14 +34,17 @@ public class WonVoteProcedure {
 				StartRoomProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "fight";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				ChangeCurrentRoomIDValueProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 5) {
 				StartRoomProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "loot";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				ChangeCurrentRoomIDValueProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 6) {
 				StartRoomProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "miniboss";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				ChangeCurrentRoomIDValueProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 7) {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
@@ -49,6 +52,7 @@ public class WonVoteProcedure {
 				}
 				net.mcreator.minigames.network.PlayScreenAnimationMessage.sendToAll(world, 150, "roguelike_boss", 1.0f);
 				MinigamesMod.queueServerWork(150, () -> {
+					ChangeCurrentRoomIDValueProcedure.execute(world);
 					StartBossProcedure.execute(world);
 					StartRoomProcedure.execute(world);
 					MinigamesModVariables.MapVariables.get(world).currentRoomType = "boss";
@@ -58,9 +62,15 @@ public class WonVoteProcedure {
 				StartRoomProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "challenge";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				ChangeCurrentRoomIDValueProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 9) {
 				StartRoomProcedure.execute(world);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "fight";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				ChangeCurrentRoomIDValueProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 10) {
+				StartDungeonProcedure.execute(world, x, y, z);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "starting";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
 		} else {

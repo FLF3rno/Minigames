@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.mcreator.minigames.network.CustomFireStateSyncMessage;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
@@ -15,35 +14,32 @@ import net.minecraft.client.resources.model.sprite.AtlasManager;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.Mth;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.scores.PlayerTeam;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.scores.PlayerTeam;
-
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CustomFireHelper {
@@ -51,9 +47,6 @@ public class CustomFireHelper {
 	public static final ContextKey<Integer> FIRE_COLOR_KEY = new ContextKey<>(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "fire_color"));
 	public static final TagKey<EntityType<?>> DUNGEON_TAG = TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:dungeon"));
 
-	public record FireData(int entityId, UUID sourceUuid, int sourceId, double damage, int color) {}
-
-	private static final Map<Integer, FireData> SERVER_FIRE_DATA = new ConcurrentHashMap<>();
 	private static final Map<Integer, Integer> CLIENT_FIRE_COLORS = new ConcurrentHashMap<>();
 	private static final ThreadLocal<Boolean> HANDLING_CUSTOM_DAMAGE = ThreadLocal.withInitial(() -> false);
 
@@ -93,19 +86,12 @@ public class CustomFireHelper {
 			return false;
 		}
 		AABB box = entity.getBoundingBox().inflate(0.1, 0.2, 0.1);
-		int minX = Mth.floor(box.minX);
-		int maxX = Mth.floor(box.maxX);
-		int minY = Mth.floor(box.minY);
-		int maxY = Mth.floor(box.maxY);
-		int minZ = Mth.floor(box.minZ);
-		int maxZ = Mth.floor(box.maxZ);
 		BlockPos.MutableBlockPos mpos = new BlockPos.MutableBlockPos();
 		Level level = entity.level();
-		for (int x = minX; x <= maxX; x++) {
-			for (int y = minY; y <= maxY; y++) {
-				for (int z = minZ; z <= maxZ; z++) {
-					mpos.set(x, y, z);
-					BlockState state = level.getBlockState(mpos);
+		for (int x = Mth.floor(box.minX); x <= Mth.floor(box.maxX); x++) {
+			for (int y = Mth.floor(box.minY); y <= Mth.floor(box.maxY); y++) {
+				for (int z = Mth.floor(box.minZ); z <= Mth.floor(box.maxZ); z++) {
+					BlockState state = level.getBlockState(mpos.set(x, y, z));
 					if (state.is(Blocks.SOUL_FIRE) || state.is(Blocks.SOUL_CAMPFIRE)) {
 						return true;
 					}
@@ -131,25 +117,15 @@ public class CustomFireHelper {
 		entity.setRemainingFireTicks(fireTicks);
 		entity.clearFreeze();
 		int parsedColor = parseColor(color);
-		UUID sourceUuid = sourceentity != null ? sourceentity.getUUID() : null;
-		int sourceId = sourceentity != null ? sourceentity.getId() : -1;
 		CompoundTag data = entity.getPersistentData();
 		data.putDouble("CustomFire_Damage", damage);
 		data.putInt("CustomFire_Color", parsedColor);
-		if (sourceUuid != null) {
-			data.putString("CustomFire_SourceUUID", sourceUuid.toString());
-			data.putInt("CustomFire_SourceId", sourceId);
-		}
-		SERVER_FIRE_DATA.put(entity.getId(), new FireData(entity.getId(), sourceUuid, sourceId, damage, parsedColor));
-		if (world instanceof ServerLevel serverLevel) {
-			CustomFireStateSyncMessage msg = new CustomFireStateSyncMessage(entity.getId(), parsedColor);
-			PacketDistributor.sendToPlayersTrackingEntity(entity, msg);
-			if (entity instanceof ServerPlayer serverPlayer) {
-				PacketDistributor.sendToPlayer(serverPlayer, msg);
-			}
+		if (sourceentity != null) {
+			data.putString("CustomFire_SourceUUID", sourceentity.getUUID().toString());
 		} else {
-			CLIENT_FIRE_COLORS.put(entity.getId(), parsedColor);
+			data.remove("CustomFire_SourceUUID");
 		}
+		syncColor(entity, parsedColor);
 	}
 
 	public static void setSoulFire(LevelAccessor world, Entity entity, Entity sourceentity, double damage, double ticks) {
@@ -160,82 +136,42 @@ public class CustomFireHelper {
 		setOnFire(world, entity, null, 2.0, ticks, "soul_fire");
 	}
 
-	public static void setSoulFireColor(Entity entity) {
+	public static void clearFire(Entity entity) {
 		if (entity == null) {
 			return;
 		}
-		int entityId = entity.getId();
 		CompoundTag data = entity.getPersistentData();
-		data.putInt("CustomFire_Color", SOUL_FIRE_COLOR);
-		FireData existing = SERVER_FIRE_DATA.get(entityId);
-		double damage = existing != null ? existing.damage() : 2.0;
-		UUID sourceUuid = existing != null ? existing.sourceUuid() : null;
-		int sourceId = existing != null ? existing.sourceId() : -1;
-		SERVER_FIRE_DATA.put(entityId, new FireData(entityId, sourceUuid, sourceId, damage, SOUL_FIRE_COLOR));
+		boolean hadCustom = data.contains("CustomFire_Color") || data.contains("CustomFire_Damage");
+		data.remove("CustomFire_Damage");
+		data.remove("CustomFire_Color");
+		data.remove("CustomFire_SourceUUID");
+		CLIENT_FIRE_COLORS.remove(entity.getId());
+		if (hadCustom) {
+			syncColor(entity, 0);
+		}
+	}
+
+	private static void syncColor(Entity entity, int color) {
 		if (entity.level() instanceof ServerLevel) {
-			CustomFireStateSyncMessage msg = new CustomFireStateSyncMessage(entityId, SOUL_FIRE_COLOR);
+			CustomFireStateSyncMessage msg = new CustomFireStateSyncMessage(entity.getId(), color);
 			PacketDistributor.sendToPlayersTrackingEntity(entity, msg);
 			if (entity instanceof ServerPlayer serverPlayer) {
 				PacketDistributor.sendToPlayer(serverPlayer, msg);
 			}
 		} else {
-			CLIENT_FIRE_COLORS.put(entityId, SOUL_FIRE_COLOR);
+			handleClientSync(entity.getId(), color);
 		}
-	}
-
-	public static void clearFire(Entity entity) {
-		if (entity == null) {
-			return;
-		}
-		int entityId = entity.getId();
-		CompoundTag data = entity.getPersistentData();
-		data.remove("CustomFire_Damage");
-		data.remove("CustomFire_Color");
-		data.remove("CustomFire_SourceUUID");
-		data.remove("CustomFire_SourceId");
-		boolean removed = SERVER_FIRE_DATA.remove(entityId) != null;
-		CLIENT_FIRE_COLORS.remove(entityId);
-		if (removed && entity.level() instanceof ServerLevel) {
-			CustomFireStateSyncMessage msg = new CustomFireStateSyncMessage(entityId, 0);
-			PacketDistributor.sendToPlayersTrackingEntity(entity, msg);
-			if (entity instanceof ServerPlayer serverPlayer) {
-				PacketDistributor.sendToPlayer(serverPlayer, msg);
-			}
-		}
-	}
-
-	public static FireData getFireData(int entityId) {
-		return SERVER_FIRE_DATA.get(entityId);
 	}
 
 	public static int getFireColor(Entity entity) {
 		if (entity == null) {
 			return 0;
 		}
-		int entityId = entity.getId();
-		if (entity.level().isClientSide()) {
-			if (isTouchingSoulFire(entity)) {
-				CLIENT_FIRE_COLORS.put(entityId, SOUL_FIRE_COLOR);
-				return SOUL_FIRE_COLOR;
-			}
-			Integer clientColor = CLIENT_FIRE_COLORS.get(entityId);
-			if (clientColor != null && clientColor != 0) {
-				return clientColor;
-			}
-			int persistentColor = entity.getPersistentData().getIntOr("CustomFire_Color", 0);
-			if (persistentColor != 0) {
-				CLIENT_FIRE_COLORS.put(entityId, persistentColor);
-				return persistentColor;
-			}
-			return 0;
-		}
 		if (isTouchingSoulFire(entity)) {
-			setSoulFireColor(entity);
 			return SOUL_FIRE_COLOR;
 		}
-		FireData serverData = SERVER_FIRE_DATA.get(entityId);
-		if (serverData != null) {
-			return serverData.color();
+		if (entity.level().isClientSide()) {
+			return CLIENT_FIRE_COLORS.getOrDefault(entity.getId(), 0);
 		}
 		return entity.getPersistentData().getIntOr("CustomFire_Color", 0);
 	}
@@ -245,11 +181,7 @@ public class CustomFireHelper {
 	}
 
 	public static boolean isSoulFire(Entity entity) {
-		if (!isOnFire(entity)) {
-			return false;
-		}
-		int color = getFireColor(entity);
-		return color == SOUL_FIRE_COLOR || isTouchingSoulFire(entity);
+		return isOnFire(entity) && getFireColor(entity) == SOUL_FIRE_COLOR;
 	}
 
 	public static String getFireType(Entity entity) {
@@ -257,64 +189,23 @@ public class CustomFireHelper {
 			return "NONE";
 		}
 		int color = getFireColor(entity);
-		if (color == SOUL_FIRE_COLOR || isTouchingSoulFire(entity)) {
+		if (color == SOUL_FIRE_COLOR) {
 			return "SOUL";
 		}
-		if (color == 0) {
-			return "NORMAL";
-		}
-		return "CUSTOM";
+		return color == 0 ? "NORMAL" : "CUSTOM";
 	}
 
 	public static String getFireColorHex(Entity entity) {
 		int color = getFireColor(entity);
-		if (color == 0) {
-			return "#FF8000";
-		}
-		return String.format(Locale.ROOT, "#%06X", (0xFFFFFF & color));
+		return color == 0 ? "#FF8000" : String.format(Locale.ROOT, "#%06X", (0xFFFFFF & color));
 	}
 
 	public static int getRemainingFireTicks(Entity entity) {
-		if (entity == null) {
-			return 0;
-		}
-		return Math.max(0, entity.getRemainingFireTicks());
+		return entity == null ? 0 : Math.max(0, entity.getRemainingFireTicks());
 	}
 
 	public static double getRemainingFireSeconds(Entity entity) {
-		if (entity == null) {
-			return 0.0;
-		}
-		return Math.max(0, entity.getRemainingFireTicks()) / 20.0;
-	}
-
-	public static Integer findEntityFireColorAt(double x, double y, double z) {
-		Minecraft mc = Minecraft.getInstance();
-		if (mc.level == null) {
-			return null;
-		}
-		if (mc.player != null && (mc.player.isOnFire() || isTouchingSoulFire(mc.player))) {
-			double dx = mc.player.getX() - x;
-			double dy = mc.player.getY() - y;
-			double dz = mc.player.getZ() - z;
-			if (dx * dx + dy * dy + dz * dz < 4.0) {
-				int c = getFireColor(mc.player);
-				if (c != 0) {
-					return c;
-				}
-			}
-		}
-		AABB box = new AABB(x - 0.7, y - 0.7, z - 0.7, x + 0.7, y + 2.5, z + 0.7);
-		List<Entity> list = mc.level.getEntities((Entity) null, box);
-		for (Entity e : list) {
-			if (e.isOnFire() || isTouchingSoulFire(e)) {
-				int c = getFireColor(e);
-				if (c != 0) {
-					return c;
-				}
-			}
-		}
-		return null;
+		return getRemainingFireTicks(entity) / 20.0;
 	}
 
 	public static int parseColor(String color) {
@@ -330,7 +221,6 @@ public class CustomFireHelper {
 		switch (clean) {
 			case "soul":
 			case "soul_fire":
-			case "soulfire":
 			case "blue":
 			case "light_blue":
 			case "ice":

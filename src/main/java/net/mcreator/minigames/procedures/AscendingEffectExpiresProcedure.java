@@ -46,9 +46,7 @@ public class AscendingEffectExpiresProcedure {
         entity.getPersistentData().remove("lockYRot");
         MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
         _vars.ascendingActive = false;
-        if (_vars.ascendingTimer < 0) {
             _vars.ascendingTimer = 0;
-        }
         _vars.markSyncDirty();
 
     }

@@ -11,6 +11,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.client.Minecraft;
 
+import net.mcreator.minigames.FlavioFightManager;
+
 import java.util.ArrayList;
 
 public class FailFlavioPhase2Procedure {
@@ -20,9 +22,10 @@ public class FailFlavioPhase2Procedure {
 				Entity _ent = entityiterator;
 				if (_ent.level() instanceof ServerLevel _serverLevel) {
 					_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))),
-							(float) (40 / ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) * 1.2)));
+							(float) (34 / ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) * 1.2)));
 				}
 			}
+			net.mcreator.minigames.FlavioFightManager.completePhase2(world);
 		}
 	}
 }

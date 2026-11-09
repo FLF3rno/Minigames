@@ -39,7 +39,6 @@ import io.netty.buffer.Unpooled;
 
 public class StartAchievementRunProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		double achievement = 0;
 		if (world instanceof ServerLevel _level) {
 			DimensionResetHelper.resetRunDimensions(_level.getServer());
 		}
@@ -109,18 +108,18 @@ public class StartAchievementRunProcedure {
 				_vars.AchievementLobbyState = "";
 				_vars.markSyncDirty();
 			}
-			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide()) {
 				_entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 60, 19, false, false));
-			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.INSTANT_HEALTH, 60, 19, false, false));
-			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MinigamesModMobEffects.BLESSED, 1000000, 19, false, false));
-			if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 1000000, 19, false, false));
-			if (entityiterator instanceof ServerPlayer _player)
+			}
+			if (entityiterator instanceof ServerPlayer _player) {
 				_player.setGameMode(GameType.SURVIVAL);
-			if (entityiterator instanceof Player _player)
 				_player.getInventory().clearContent();
+				_player.setExperienceLevels(0);
+			}
+
 			ClearEnderchestProcedure.execute(entityiterator);
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
@@ -132,48 +131,38 @@ public class StartAchievementRunProcedure {
 				_vars.markSyncDirty();
 			}
 		}
-		if (world instanceof ServerLevel _level)
+		if (world instanceof ServerLevel _level) {
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "worldborder set 50000000");
-		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "xp set @a 0 levels ");
-		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands()
 					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "xp set @a 0");
-		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "advancement revoke @a everything");
-		if (world instanceof ServerLevel _serverLevel)
-			_serverLevel.getGameRules().set(GameRules.ADVANCE_WEATHER, true, world.getServer());
-		if (world instanceof ServerLevel _serverLevel)
-			_serverLevel.getGameRules().set(GameRules.ADVANCE_TIME, true, world.getServer());
-		if (world instanceof ServerLevel _serverLevel)
-			_serverLevel.getGameRules().set(GameRules.LOCATOR_BAR, false, world.getServer());
-		if (world instanceof ServerLevel _level) {
+			_level.getGameRules().set(GameRules.ADVANCE_WEATHER, true, world.getServer());
+			_level.getGameRules().set(GameRules.ADVANCE_TIME, true, world.getServer());
+			_level.getGameRules().set(GameRules.LOCATOR_BAR, false, world.getServer());
+			_level.getGameRules().set(GameRules.FALL_DAMAGE, false, world.getServer());
 			ServerClockManager _clockManager = _level.getServer().clockManager();
 			Optional<Holder<WorldClock>> _clock = _level.dimensionType().defaultClock();
-			if (_clock.isPresent())
-				_clockManager.setTotalTicks(_clock.get(), 0);
-		}
-		if (world instanceof ServerLevel _level)
+			if (_clock.isPresent()) _clockManager.setTotalTicks(_clock.get(), 0);
 			_level.getServer().getCommands().performPrefixedCommand(
 					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/weather clear");
-		if (MinigamesModVariables.MapVariables.get(world).AchievementModifier == 1) {
-			if (world instanceof ServerLevel _level) {
-				ServerClockManager _clockManager = _level.getServer().clockManager();
-				Optional<Holder<WorldClock>> _clock = _level.dimensionType().defaultClock();
-				if (_clock.isPresent())
-					_clockManager.setTotalTicks(_clock.get(), 18000);
-			}
-			if (world instanceof ServerLevel _serverLevel)
-				_serverLevel.getGameRules().set(GameRules.ADVANCE_TIME, false, world.getServer());
-		} else if (MinigamesModVariables.MapVariables.get(world).AchievementModifier == 2) {
-			if (world instanceof ServerLevel _level)
+			//modifiers
+			// 1 = always night
+			// 2 = always thunder
+			if (MinigamesModVariables.MapVariables.get(world).AchievementModifier == 1) {
+					_clockManager = _level.getServer().clockManager();
+					_clock = _level.dimensionType().defaultClock();
+					if (_clock.isPresent()) _clockManager.setTotalTicks(_clock.get(), 18000);
+					_level.getGameRules().set(GameRules.ADVANCE_TIME, false, world.getServer());
+
+			} else if (MinigamesModVariables.MapVariables.get(world).AchievementModifier == 2) {
 				_level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/weather thunder");
-			if (world instanceof ServerLevel _serverLevel)
-				_serverLevel.getGameRules().set(GameRules.ADVANCE_WEATHER, false, world.getServer());
+				_level.getGameRules().set(GameRules.ADVANCE_WEATHER, false, world.getServer());
+			}
 		}
 	}
 }

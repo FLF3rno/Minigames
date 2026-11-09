@@ -45,32 +45,25 @@ public class AscendingActiveProcedure {
                     player.getInventory().setSelectedSlot(8);
                 }
             }
-            
-            if (!entity.level().isClientSide()) {
-				double targetX = entity.getPersistentData().getDouble("immobileX").orElse(entity.getX());
-				double targetZ = entity.getPersistentData().getDouble("immobileZ").orElse(entity.getZ());
-                
-                if (Math.abs(entity.getX() - targetX) > 0.1 || Math.abs(entity.getZ() - targetZ) > 0.1) {
-                    if (entity instanceof ServerPlayer sp) {
-                        sp.connection.teleport(targetX, y, targetZ, entity.getYRot(), entity.getXRot());
-                    } else {
-                        entity.teleportTo(targetX, y, targetZ);
-                    }
-                }
-            }
-            
+
             var effectInstance = livEnt.getEffect(MinigamesModMobEffects.ASCENDING);
             if (effectInstance != null) {
                 double amp = effectInstance.getAmplifier();
                 double up = (amp / 100d);
                 entity.setDeltaMovement(new Vec3(0, up, 0));
             }
-        } else if (entity instanceof Player player && nbt.getBoolean("ascendingSlotSaved").orElse(false)) {
-            int previousSlot = nbt.getInt("ascendingPreviousSlot").orElse(0);
-            if (previousSlot < 0 || previousSlot > 8) previousSlot = 0;
-            player.getInventory().setSelectedSlot(previousSlot);
-            nbt.remove("ascendingPreviousSlot");
-            nbt.putBoolean("ascendingSlotSaved", false);
+        } else if (entity instanceof Player player) {
+            if (nbt.getBoolean("ascendingSlotSaved").orElse(false)) {
+                int previousSlot = nbt.getInt("ascendingPreviousSlot").orElse(0);
+                if (previousSlot < 0 || previousSlot > 8) previousSlot = 0;
+                player.getInventory().setSelectedSlot(previousSlot);
+                nbt.remove("ascendingPreviousSlot");
+                nbt.putBoolean("ascendingSlotSaved", false);
+                AscendingEffectExpiresProcedure.execute(player);
+            } else if (entity.level().isClientSide() && !nbt.contains("InAscenscionBeam") && "minigames:ascend".equals(nbt.getStringOr("PlayerCurrentAnimation", ""))) {
+                nbt.remove("PlayerCurrentAnimation");
+                nbt.putBoolean("ResetPlayerAnimation", true);
+            }
         }
     }
 }

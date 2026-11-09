@@ -44,7 +44,7 @@ public class DemonTickProcedure {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					ApplyEffectProcedure.execute(world, entityiterator, false, 1, 100, "minecraft:darkness");
 				}
-				for (int _i1 = 0; _i1 < 6; _i1++) {
+				for (int _i1 = 0; _i1 < 9; _i1++) {
 					SummonMinionProcedure.execute(world, x, y + 1, z, entity, 0, Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), 0, "minigames:sculkling");
 				}
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 50) {

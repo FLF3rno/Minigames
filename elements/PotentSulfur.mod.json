@@ -50,9 +50,7 @@
     "maxStackSize": 64,
     "rarity": "COMMON",
     "immuneToFire": false,
-    "creativeTabs": [
-      "CUSTOM:Update262tab"
-    ],
+    "creativeTabs": [],
     "destroyTool": "Not specified",
     "customDrop": "",
     "dropAmount": 1,
@@ -89,11 +87,11 @@
     "isNotColidable": false,
     "soundOnStep": "STONE",
     "isCustomSoundType": true,
-    "breakSound": "CUSTOM:update_potent_sulfur_break",
+    "breakSound": "CUSTOM:teameliminated",
     "fallSound": "entity.generic.big_fall",
-    "hitSound": "CUSTOM:update_potent_sulfur_hit",
-    "placeSound": "CUSTOM:update_potent_sulfur_place",
-    "stepSound": "CUSTOM:update_potent_sulfur_step",
+    "hitSound": "CUSTOM:pop",
+    "placeSound": "CUSTOM:hypnotized",
+    "stepSound": "CUSTOM:thruster",
     "luminance": {
       "fixedValue": 0.0
     },

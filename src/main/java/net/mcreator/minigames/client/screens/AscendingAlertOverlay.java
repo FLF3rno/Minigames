@@ -30,12 +30,7 @@ public class AscendingAlertOverlay {
 
 		Player ascendingPlayer = null;
 		for (Player player : local.level().players()) {
-			if (player == null) {
-				continue;
-			}
-			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-			MobEffectInstance ascendingEffect = player.getEffect(MinigamesModMobEffects.ASCENDING);
-			if (vars != null && (vars.ascendingActive || vars.ascendingTimer > 0 || ascendingEffect != null)) {
+			if (player != null && player.hasEffect(MinigamesModMobEffects.ASCENDING)) {
 				ascendingPlayer = player;
 				break;
 			}

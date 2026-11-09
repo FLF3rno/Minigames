@@ -2,9 +2,9 @@
   "_fv": 89,
   "_type": "item",
   "definition": {
-    "renderType": 0,
+    "renderType": 1,
     "texture": "weapon_hammer",
-    "customModelName": "Tool",
+    "customModelName": "hammer_item:default",
     "guiTexture": "",
     "customProperties": {},
     "states": [],
@@ -89,12 +89,6 @@
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:EffectLength",
         "amount": 200.0,
-        "operation": "ADD_VALUE"
-      },
-      {
-        "equipmentSlot": "default",
-        "attribute": "CUSTOM:ItemSize",
-        "amount": 1.2,
         "operation": "ADD_VALUE"
       }
     ]

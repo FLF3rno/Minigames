@@ -1,0 +1,92 @@
+{
+  "_fv": 89,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 421,
+    "height": 198,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_achievementrunicon",
+          "image": "roguelike.png",
+          "hoveredImage": "roguelike.png",
+          "onClick": "StartRoguelike",
+          "x": 195,
+          "y": 105,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_achievement_run",
+          "text": {
+            "fixedValue": "A roguelike mode. With dashes!"
+          },
+          "width": 39,
+          "height": 37,
+          "x": 191,
+          "y": 103,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "roguelike_menu.png",
+          "use1Xscale": true,
+          "x": -24,
+          "y": -37,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_achievement",
+          "text": {
+            "fixedValue": "Roguelike"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "hasShadow": true,
+          "x": 187,
+          "y": 6,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_still_pretty_alpha",
+          "text": {
+            "fixedValue": "STILL PRETTY ALPHA"
+          },
+          "color": {
+            "value": -65536,
+            "falpha": 0.0
+          },
+          "hasShadow": true,
+          "x": 159,
+          "y": 19,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

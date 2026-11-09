@@ -18,9 +18,6 @@ public abstract class FlameFeatureRendererMixin {
 	@Inject(method = "renderFlame", at = @At("HEAD"), cancellable = true)
 	private void renderCustomFlame(PoseStack.Pose pose, MultiBufferSource bufferSource, EntityRenderState state, Quaternionf rotation, AtlasManager atlasManager, CallbackInfo ci) {
 		Integer color = state.getRenderData(CustomFireHelper.FIRE_COLOR_KEY);
-		if (color == null || color == 0) {
-			color = CustomFireHelper.findEntityFireColorAt(state.x, state.y, state.z);
-		}
 		if (color != null && color != 0) {
 			CustomFireHelper.renderCustomEntityFlame(pose, bufferSource, state, rotation, atlasManager, color);
 			ci.cancel();

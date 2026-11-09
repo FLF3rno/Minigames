@@ -38,5 +38,25 @@ public class ApplyClassProcedure {
 				_vars.markSyncDirty();
 			}
 		}
+
+		if (entity instanceof net.minecraft.world.entity.player.Player _player) {
+			java.util.List<net.minecraft.world.item.ItemStack> itemsToGive = new java.util.ArrayList<>();
+			if ((selectClass).equals("warrior")) {
+				itemsToGive.add(new net.minecraft.world.item.ItemStack(net.mcreator.minigames.init.MinigamesModItems.BLANK_SWORD.get()));
+				itemsToGive.add(new net.minecraft.world.item.ItemStack(net.mcreator.minigames.init.MinigamesModItems.CHOICE_BAG_WARRIOR.get()));
+			} else if ((selectClass).equals("support")) {
+				itemsToGive.add(new net.minecraft.world.item.ItemStack(net.mcreator.minigames.init.MinigamesModItems.BLANK_LONG_SWORD.get()));
+				itemsToGive.add(new net.minecraft.world.item.ItemStack(net.mcreator.minigames.init.MinigamesModItems.CHOICE_BAG_SUPPORT.get()));
+			} else if ((selectClass).equals("thief")) {
+				itemsToGive.add(new net.minecraft.world.item.ItemStack(net.mcreator.minigames.init.MinigamesModItems.BLANK_DAGGER.get()));
+				itemsToGive.add(new net.minecraft.world.item.ItemStack(net.mcreator.minigames.init.MinigamesModItems.CHOICE_BAG_THIEF.get()));
+			}
+
+			for (net.minecraft.world.item.ItemStack stack : itemsToGive) {
+				if (!_player.addItem(stack)) {
+					_player.drop(stack, false);
+				}
+			}
+		}
 	}
 }

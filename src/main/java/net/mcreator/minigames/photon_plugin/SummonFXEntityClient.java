@@ -50,6 +50,8 @@ public final class SummonFXEntityClient {
         private boolean forcedDeath = false;
         private boolean allowMulti = false;
         private AutoRotate autoRotate = AutoRotate.NONE;
+        private Integer colorR, colorG, colorB;
+        private Integer duration;
 
         protected EffectBuilder(List<Entity> entities) {
             this.entities = entities;
@@ -95,6 +97,30 @@ public final class SummonFXEntityClient {
             return this;
         }
 
+        public EffectBuilder color(double r, double g, double b) {
+            this.colorR = Math.clamp((int) Math.round(r), 0, 255);
+            this.colorG = Math.clamp((int) Math.round(g), 0, 255);
+            this.colorB = Math.clamp((int) Math.round(b), 0, 255);
+            return this;
+        }
+
+        public EffectBuilder color(int argb) {
+            this.colorR = (argb >> 16) & 0xFF;
+            this.colorG = (argb >> 8) & 0xFF;
+            this.colorB = argb & 0xFF;
+            return this;
+        }
+
+        public EffectBuilder duration(double ticks) {
+            this.duration = Math.max(1, (int) Math.round(ticks));
+            return this;
+        }
+
+        public EffectBuilder duration(int ticks) {
+            this.duration = Math.max(1, ticks);
+            return this;
+        }
+
         public void send() {
             if (!FMLEnvironment.getDist().isClient()) {
                 return;
@@ -123,7 +149,8 @@ public final class SummonFXEntityClient {
                 }
 
                 ClientDispatcher.dispatch(sanitizedEntities, this.effectName, this.offset, this.rotation,
-                        this.scale, this.delay, this.forcedDeath, this.allowMulti, this.autoRotate);
+                        this.scale, this.delay, this.forcedDeath, this.allowMulti, this.autoRotate,
+                        this.colorR, this.colorG, this.colorB, this.duration);
             } catch (Exception e) {
                 LOGGER.error("[SummonFXEntityClient] Failed to execute effect '{}'. Cause: {}", this.effectName, e.getMessage(), e);
             }
@@ -136,7 +163,8 @@ public final class SummonFXEntityClient {
         }
 
         static void dispatch(List<Entity> entities, String effectName, Vec3 offset, Vec3 rotation, Vec3 scale,
-                             int delay, boolean forcedDeath, boolean allowMulti, AutoRotate autoRotateMode) {
+                             int delay, boolean forcedDeath, boolean allowMulti, AutoRotate autoRotateMode,
+                             Integer colorR, Integer colorG, Integer colorB, Integer duration) {
             Identifier location = resolveEffectLocation(effectName);
             if (location == null) {
                 LOGGER.warn("[SummonFXEntityClient] Invalid effect name '{}' could not be parsed into an Identifier.", effectName);
@@ -168,6 +196,7 @@ public final class SummonFXEntityClient {
                         effect.setForcedDeath(forcedDeath);
                         effect.setAllowMulti(allowMulti);
                         effect.start();
+                        ModifyFXEntityClient.applyColorAndDurationToRuntime(effect.getRuntime(), colorR, colorG, colorB, duration);
                     }
                 } catch (Exception e) {
                     LOGGER.error("[SummonFXEntityClient] Critical error while executing effect '{}': {}", effectName, e.getMessage(), e);

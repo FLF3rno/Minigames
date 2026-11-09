@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
@@ -15,8 +16,10 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
-
+import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.network.chat.MutableComponent;
 import java.util.List;
 
 public class MinigamesSettingsScreen extends Screen {
@@ -153,6 +156,12 @@ public class MinigamesSettingsScreen extends Screen {
 	public class SettingsList extends ContainerObjectSelectionList<SettingsList.Entry> {
 		public SettingsList(Minecraft minecraft, int width, int height, int y, int itemHeight) {
 			super(minecraft, width, height, y, itemHeight);
+			resetSettingsScreen();
+		}
+
+		public void resetSettingsScreen() {
+			double scroll = this.scrollAmount();
+			this.clearEntries();
 			for (MinigamesSettingsHelper.SettingRow row : MinigamesSettingsHelper.ROWS) {
 				if (row instanceof MinigamesSettingsHelper.HeaderRow header) {
 					this.addEntry(new HeaderEntry(header));
@@ -162,20 +171,26 @@ public class MinigamesSettingsScreen extends Screen {
 					this.addEntry(new SliderEntry(sliderRow));
 				} else if (row instanceof MinigamesSettingsHelper.DoubleSettingRow doubleRow) {
 					this.addEntry(new SettingEntry(doubleRow));
-				} else if (row instanceof MinigamesSettingsHelper.KeyMappingSettingRow keyRow) {
-					this.addEntry(new KeyMappingEntry(keyRow));
+				}  else if (row instanceof MinigamesSettingsHelper.KeyMappingSettingRow keyRow) {
+				this.addEntry(new KeyMappingEntry(keyRow));
+				KeyMapping key = keyRow.getKeyMapping();
+				if (key != null && !key.isUnbound()) {
+					for (KeyMapping other : this.minecraft.options.keyMappings) {
+						if ((other != key && key.same(other)) || other.hasKeyModifierConflict(key)) {
+							Component redLabel = Component.literal("  ").append(other.getDisplayName()).withStyle(ChatFormatting.RED);
+							this.addEntry(new KeyMappingEntry(redLabel, other));
+						}
+					}
+				}
 				} else if (row instanceof MinigamesSettingsHelper.ColorSettingRow colorRow) {
 					this.addEntry(new ColorEntry(colorRow));
 				}
 			}
+			this.setScrollAmount(scroll);
 		}
 
 		public void updateKeyEntries() {
-			for (Entry entry : this.children()) {
-				if (entry instanceof KeyMappingEntry keyEntry) {
-					keyEntry.updateButtonMessages();
-				}
-			}
+			resetSettingsScreen();
 		}
 
 		@Override
@@ -249,7 +264,9 @@ public class MinigamesSettingsScreen extends Screen {
 				this.button = Button.builder(row.getButtonMessage(), b -> {
 					row.toggle();
 					b.setMessage(row.getButtonMessage());
-				}).bounds(0, 0, 130, 20).build();
+				}).bounds(0, 0, 130, 20)
+						.tooltip(Tooltip.create(row.getDescription()))
+						.build();
 			}
 
 			public SettingEntry(MinigamesSettingsHelper.DoubleSettingRow row) {
@@ -320,6 +337,7 @@ public class MinigamesSettingsScreen extends Screen {
 					}
 				};
 				this.slider.setMessage(row.getButtonMessage());
+				this.slider.setTooltip(Tooltip.create(row.getDescription()));
 			}
 
 			@Override
@@ -356,8 +374,11 @@ public class MinigamesSettingsScreen extends Screen {
 			private final Button resetButton;
 
 			public KeyMappingEntry(MinigamesSettingsHelper.KeyMappingSettingRow row) {
-				this.label = row.getLabel();
-				this.keyMapping = row.getKeyMapping();
+				this(row.getLabel(), row.getKeyMapping());
+			}
+			public KeyMappingEntry(Component label, KeyMapping keyMapping) {
+				this.label = label;
+				this.keyMapping = keyMapping;
 				this.keyButton = Button.builder(getKeyButtonMessage(), b -> {
 					MinigamesSettingsScreen.this.selectedKeyMapping = this.keyMapping;
 					MinigamesSettingsScreen.this.list.updateKeyEntries();
@@ -378,13 +399,33 @@ public class MinigamesSettingsScreen extends Screen {
 				if (this.keyMapping != null) {
 					this.resetButton.active = !this.keyMapping.isDefault();
 				}
+				updateButtonMessages();
 			}
 
 			public void updateButtonMessages() {
-				this.keyButton.setMessage(getKeyButtonMessage());
-				if (this.keyMapping != null) {
-					this.resetButton.active = !this.keyMapping.isDefault();
+				if (this.keyMapping == null) {
+					return;
 				}
+				this.resetButton.active = !this.keyMapping.isDefault();
+				boolean hasConflict = false;
+				MutableComponent conflictTooltip = Component.empty();
+				if (!this.keyMapping.isUnbound() && Minecraft.getInstance().options != null) {
+					for (KeyMapping other : Minecraft.getInstance().options.keyMappings) {
+						if ((other != this.keyMapping && this.keyMapping.same(other)) || other.hasKeyModifierConflict(this.keyMapping)) {
+							if (hasConflict) {
+								conflictTooltip.append(", ");
+							}
+							hasConflict = true;
+							conflictTooltip.append(other.getDisplayName());
+						}
+					}
+				}
+				if (hasConflict) {
+					this.keyButton.setTooltip(Tooltip.create(Component.translatable("controls.keybinds.duplicateKeybinds", conflictTooltip)));
+				} else {
+					this.keyButton.setTooltip(null);
+				}
+				this.keyButton.setMessage(getKeyButtonMessage());
 			}
 
 			private Component getKeyButtonMessage() {

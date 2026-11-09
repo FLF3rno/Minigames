@@ -22,34 +22,44 @@ public class FightDoorsRightclickedProcedure {
 		boolean rotatedX = false;
 		double middleOffset = 0;
 		double pos = 0;
+		double id = 0;
 		if (!MinigamesModVariables.MapVariables.get(world).inCombat) {
+			if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getDirection()) == Direction.NORTH) {
+				id = getBlockNBTNumber(world, BlockPos.containing(x, y, z + 1), "DataID");
+			} else if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+					.getDirection()) == Direction.SOUTH) {
+				id = getBlockNBTNumber(world, BlockPos.containing(x, y, z - 1), "DataID");
+			} else if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+					.getDirection()) == Direction.WEST) {
+				id = getBlockNBTNumber(world, BlockPos.containing(x + 1, y, z), "DataID");
+			} else if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
+					.getDirection()) == Direction.EAST) {
+				id = getBlockNBTNumber(world, BlockPos.containing(x - 1, y, z), "DataID");
+			}
 			if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 				MinigamesModVariables.MapVariables.get(world).DoorPosition = new Vec3(x, y, z);
 				MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3(x, y, z);
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+				VoteRoomIDValueProcedure.execute(world, id);
 				if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getDirection()) == Direction.NORTH) {
 					MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((x + 0.5), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y()), (z + 2));
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 					rotatedX = true;
-					ChangeCurrentRoomIDValueProcedure.execute(world, getBlockNBTNumber(world, BlockPos.containing(x, y, z + 1), "DataID"));
 				} else if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
 						.getDirection()) == Direction.SOUTH) {
 					MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((x + 0.5), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y()), (z - 1));
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 					rotatedX = true;
-					ChangeCurrentRoomIDValueProcedure.execute(world, getBlockNBTNumber(world, BlockPos.containing(x, y, z - 1), "DataID"));
 				} else if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
 						.getDirection()) == Direction.WEST) {
 					MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((x + 2), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y()), (z + 0.5));
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 					rotatedX = false;
-					ChangeCurrentRoomIDValueProcedure.execute(world, getBlockNBTNumber(world, BlockPos.containing(x + 1, y, z), "DataID"));
 				} else if ((entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(4.5)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
 						.getDirection()) == Direction.EAST) {
 					MinigamesModVariables.MapVariables.get(world).DoorOffset = new Vec3((x - 1), (MinigamesModVariables.MapVariables.get(world).DoorOffset.y()), (z + 0.5));
 					MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 					rotatedX = false;
-					ChangeCurrentRoomIDValueProcedure.execute(world, getBlockNBTNumber(world, BlockPos.containing(x - 1, y, z), "DataID"));
 				}
 				middleOffset = 0;
 				pos = 0;
@@ -105,31 +115,41 @@ public class FightDoorsRightclickedProcedure {
 				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 					StartVoteProcedure.execute(world, entity, entity, "fight room");
 				} else {
-					VoteYesPressedProcedure.execute(world, entity);
+					if (id == MinigamesModVariables.MapVariables.get(world).voteRoomID) {
+						VoteYesPressedProcedure.execute(world, entity);
+					}
 				}
 			} else if (MinigamesModBlocks.LOOT_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 					StartVoteProcedure.execute(world, entity, entity, "loot room");
 				} else {
-					VoteYesPressedProcedure.execute(world, entity);
+					if (id == MinigamesModVariables.MapVariables.get(world).voteRoomID) {
+						VoteYesPressedProcedure.execute(world, entity);
+					}
 				}
 			} else if (MinigamesModBlocks.MINIBOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 					StartVoteProcedure.execute(world, entity, entity, "miniboss room");
 				} else {
-					VoteYesPressedProcedure.execute(world, entity);
+					if (id == MinigamesModVariables.MapVariables.get(world).voteRoomID) {
+						VoteYesPressedProcedure.execute(world, entity);
+					}
 				}
 			} else if (MinigamesModBlocks.BOSS_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 					StartVoteProcedure.execute(world, entity, entity, "boss room");
 				} else {
-					VoteYesPressedProcedure.execute(world, entity);
+					if (id == MinigamesModVariables.MapVariables.get(world).voteRoomID) {
+						VoteYesPressedProcedure.execute(world, entity);
+					}
 				}
 			} else if (MinigamesModBlocks.FLOOR_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
 				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
 					StartVoteProcedure.execute(world, entity, entity, "floor");
 				} else {
-					VoteYesPressedProcedure.execute(world, entity);
+					if (id == MinigamesModVariables.MapVariables.get(world).voteRoomID) {
+						VoteYesPressedProcedure.execute(world, entity);
+					}
 				}
 			}
 		} else {

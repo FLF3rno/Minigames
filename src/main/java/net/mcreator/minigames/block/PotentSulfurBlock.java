@@ -9,8 +9,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 public class PotentSulfurBlock extends Block {
 	public PotentSulfurBlock(BlockBehaviour.Properties properties) {
-		super(properties.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:update_potent_sulfur_break")),
-				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:update_potent_sulfur_step")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:update_potent_sulfur_place")),
-				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:update_potent_sulfur_hit")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.big_fall")))).strength(1f, 10f));
+		super(properties.sound(new DeferredSoundType(1.0f, 1.0f, () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:teameliminated")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:thruster")),
+				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:hypnotized")), () -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:pop")),
+				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.generic.big_fall")))).strength(1f, 10f));
 	}
 }

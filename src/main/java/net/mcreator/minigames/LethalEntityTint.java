@@ -3,6 +3,7 @@ package net.mcreator.minigames;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.init.MinigamesModRenderStateModifiers;
+import net.mcreator.minigames.procedures.GetItemAttributeProcedure;
 import net.mcreator.minigames.procedures.ReturnDamageRoguelikeProcedure;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -32,8 +33,6 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 		value = Dist.CLIENT
 )
 public class LethalEntityTint {
-	private static int lastCalculatedTick = -1;
-	private static double cachedPlayerDamage = 0;
 	private static final int DEFAULT_TINT_COLOR = 0xD0FF0000;
 
 	@SubscribeEvent
@@ -77,14 +76,11 @@ public class LethalEntityTint {
 
 			LivingEntity entity = state.getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
 			if (entity == null) return;
-			if (player.tickCount != lastCalculatedTick) {
-				lastCalculatedTick = player.tickCount;
-				cachedPlayerDamage = ReturnDamageRoguelikeProcedure.execute(Minecraft.getInstance().level, player.damageSources().playerAttack(player),
-						entity, player, player.getAttributeValue(Attributes.ATTACK_DAMAGE));
-			}
-
+			CustomData customData =
+					player.getMainHandItem().getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 			if (player.distanceToSqr(entity) > 550 || entity instanceof Player ||
-				entity.isInvisible() || entity.getHealth() > cachedPlayerDamage
+				entity.isInvisible() || entity.getHealth() > ReturnDamageRoguelikeProcedure.execute(Minecraft.getInstance().level, player.damageSources().playerAttack(player),
+					entity, player, GetItemAttributeProcedure.getBaseAttribute(player.getMainHandItem(), "minecraft:attack_damage") + 1)
 			) {
 				return;
 			}

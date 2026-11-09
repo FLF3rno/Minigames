@@ -1,6 +1,7 @@
 {
-  "parent": "item/handheld",
+  "parent": "minigames:custom/obsidian_idol",
   "textures": {
-    "layer0": "minigames:item/utility_obsidian_idle"
+    "0": "minigames:block/utility_obsidian_idol",
+    "particle": "minigames:item/utility_obsidian_idol"
   }
 }

@@ -132,9 +132,9 @@ public class DemonEntity extends Monster {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel level, DamageSource damagesource, float amount) {
-        ClearSculklingsProcedure.execute(level, this.getX(), this.getY(), this.getZ(), this);
-        return super.hurtServer(level, damagesource, amount);
+    public void die(DamageSource damagesource) {
+        ClearSculklingsProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+        super.die(damagesource);
     }
 
     @Override

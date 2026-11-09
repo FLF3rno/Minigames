@@ -17641,7 +17641,7 @@
     {
       "name": "ReturnDamageRoguelike",
       "type": "procedure",
-      "compiles": false,
+      "compiles": true,
       "locked_code": false,
       "registry_name": "return_damage_roguelike",
       "metadata": {
@@ -19828,7 +19828,7 @@
       "item.minigames.potion_explosion": "Potion Explosion",
       "item.minigames.feast": "Feast",
       "effect.minigames.obsidianification": "Obsidianification",
-      "item.minigames.obsidian_idle": "Obsidian Idle",
+      "item.minigames.obsidian_idle": "Obsidian Idol",
       "item.minigames.supportive": "Supportive",
       "item.minigames.explorers_charm": "Explorer\u0027s Charm",
       "item.minigames.friction": "Friction",

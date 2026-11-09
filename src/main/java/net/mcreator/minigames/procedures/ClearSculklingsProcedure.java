@@ -22,11 +22,13 @@ public class ClearSculklingsProcedure {
 		{
 			final Vec3 _center = new Vec3(x, y, z);
 			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(12 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-				if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_ID) : 0) == (entityiterator instanceof SculklingEntity _datEntI ? _datEntI.getEntityData().get(SculklingEntity.DATA_ID) : 0)) {
-					{
-						Entity _ent = entityiterator;
-						if (_ent.level() instanceof ServerLevel _serverLevel) {
-							_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))), 100);
+				if (entityiterator instanceof SculklingEntity) {
+					if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_ID) : 0) == (entityiterator instanceof SculklingEntity _datEntI ? _datEntI.getEntityData().get(SculklingEntity.DATA_ID) : 0)) {
+						{
+							Entity _ent = entityiterator;
+							if (_ent.level() instanceof ServerLevel _serverLevel) {
+								_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))), 100);
+							}
 						}
 					}
 				}

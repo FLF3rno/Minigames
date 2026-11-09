@@ -8,7 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.tags.TagKey;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.component.DataComponents;
@@ -30,32 +29,21 @@ public class ReturnDamageRoguelikeProcedure {
 			return 0;
 		} else if (MinigamesModVariables.MapVariables.get(world).playingDungeons && entity instanceof Player && sourceentity instanceof Player) {
 			return 0;
-		} else {
-			damage = amount * (1 + (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("forged", 0) * 0.01
-					+ (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("glitched", 0) * 0.01);
-			if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.BAT_ESSENCE.get()))) {
-				damage = damage + damage * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.BAT_ESSENCE.get())), "minigames:extra_damage") / 100);
-			}
-			if (IsBackstabProcedure.execute(sourceentity, entity) && CanBackstabProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) {
-				damage = damage * GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage");
-			}
-			if (sourceentity instanceof LivingEntity _livEnt10 && _livEnt10.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST)) {
-				damage = damage + damage * (((sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_BOOST).getAmplifier() : 0) + 1) / 100d);
-			}
-			if (entity instanceof LivingEntity _livEnt12 && _livEnt12.hasEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE)) {
-				damage = damage - damage * (((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE).getAmplifier() : 0) + 1) / 100d);
-			}
-			if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:decay_dmg")))) {
-				if (entity.getPersistentData().getBooleanOr("parasiteScytheActive", false)) {
-					entity.getPersistentData().putBoolean("parasiteScytheActive", false);
-					damage = 0;
-				}
-			}
-			if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.MENDING_MACE.get()) {
-				damage = 0;
-			}
-			return damage;
 		}
-		return 0;
+		damage = amount * (1 + (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("forged", 0) * 0.01
+				+ (sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getDoubleOr("glitched", 0) * 0.01);
+		if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.BAT_ESSENCE.get()))) {
+			damage = damage + damage * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.BAT_ESSENCE.get())), "minigames:extra_damage") / 100);
+		}
+		if (IsBackstabProcedure.execute(sourceentity, entity) && CanBackstabProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY)) {
+			damage = damage * GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage");
+		}
+		if (sourceentity instanceof LivingEntity _livEnt10 && _livEnt10.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST)) {
+			damage = damage + damage * (((sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_BOOST).getAmplifier() : 0) + 1) / 100d);
+		}
+		if (entity instanceof LivingEntity _livEnt12 && _livEnt12.hasEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE)) {
+			damage = damage - damage * (((entity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_RESISTANCE).getAmplifier() : 0) + 1) / 100d);
+		}
+		return damage;
 	}
 }

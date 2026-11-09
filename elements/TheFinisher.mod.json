@@ -47,6 +47,7 @@
     "inventoryStackSize": 99,
     "onEntityHitWith": "TheFinisherSwing",
     "onItemInInventoryTick": "BreakWeapon",
+    "onItemInUseTick": "OnKillItemInHand",
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
@@ -100,6 +101,12 @@
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ItemSize",
         "amount": 1.3,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": "CUSTOM:ShowOneShottableMobs",
+        "amount": 1.0,
         "operation": "ADD_VALUE"
       }
     ]

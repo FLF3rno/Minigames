@@ -78,10 +78,10 @@ public class StunnableEntityTint {
 				return;
 			}
 
-			LivingEntity entity =
-					state.getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
+			LivingEntity entity = state.getRenderData(MinigamesModRenderStateModifiers.LIVING_ENTITY);
 
 			if (entity == null ||
+					player.distanceToSqr(entity) > 550 ||
 					entity instanceof Player ||
 					entity.isInvisible() ||
 					entity.getHealth() < entity.getMaxHealth()) {

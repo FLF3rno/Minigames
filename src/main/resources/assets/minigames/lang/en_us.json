@@ -461,5 +461,6 @@
   "gui.minigames.roguelike_start_game.label_spleef": "Spleef",
   "gui.minigames.roguelike_start_game.tooltip_change_player_name": "Change player name",
   "gui.minigames.roguelike_start_game.tooltip_steal_the_crown_from_other_playe": "Steal the crown from other players and avoid getting it stolen to win",
-  "gui.minigames.roguelike_start_game.label_still_pretty_alpha": "STILL PRETTY ALPHA"
+  "gui.minigames.roguelike_start_game.label_still_pretty_alpha": "STILL PRETTY ALPHA",
+  "attribute.minigames.show_one_shottable_mobs": "Show Full Health Mobs"
 }

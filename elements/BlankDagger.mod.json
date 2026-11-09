@@ -46,6 +46,7 @@
     "inventorySize": 9,
     "inventoryStackSize": 99,
     "onItemInInventoryTick": "BreakWeapon",
+    "onItemInUseTick": "OnKillItemInHand",
     "enableRanged": false,
     "shootConstantly": false,
     "rangedItemChargesPower": false,
@@ -93,6 +94,12 @@
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:RepairValue",
         "amount": 15.0,
+        "operation": "ADD_VALUE"
+      },
+      {
+        "equipmentSlot": "mainhand",
+        "attribute": "CUSTOM:ShowOneShottableMobs",
+        "amount": 1.0,
         "operation": "ADD_VALUE"
       }
     ]

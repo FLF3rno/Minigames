@@ -16,7 +16,7 @@ public class PopulateRoomDeckProcedure {
 		if (world instanceof ServerLevel level) server = level.getServer();
 		if (server == null) {return;}
 
-		
+
 		String prefix = MinigamesModVariables.MapVariables.get(world).floorTypeDungeon;
 		MinigamesModVariables.MapVariables.get(world).roguelike_two.clear();
 		MinigamesModVariables.MapVariables.get(world).roguelike_one.clear();

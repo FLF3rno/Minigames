@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 
+import net.mcreator.minigames.procedures.OnKillItemInHandProcedure;
 import net.mcreator.minigames.procedures.BreakWeaponProcedure;
 import net.mcreator.minigames.procedures.BlankDaggerDescriptionProcedure;
 import net.mcreator.minigames.init.MinigamesModAttributes;
@@ -25,13 +26,13 @@ import java.util.function.Consumer;
 
 public class BlankDaggerItem extends Item {
 	public BlankDaggerItem(Item.Properties properties) {
-		super(properties.stacksTo(1).fireResistant()
-				.attributes(ItemAttributeModifiers.builder()
-						.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_0"), 2.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-						.add(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_1"), -1.65, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-						.add(MinigamesModAttributes.SALVAGE_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_2"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-						.add(MinigamesModAttributes.COINS_ON_KILL, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_3"), 50, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-						.add(MinigamesModAttributes.REPAIR_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_4"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
+		super(properties.stacksTo(1).fireResistant().attributes(ItemAttributeModifiers.builder()
+				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_0"), 2.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ATTACK_SPEED, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_1"), -1.65, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(MinigamesModAttributes.SALVAGE_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_2"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(MinigamesModAttributes.COINS_ON_KILL, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_3"), 50, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(MinigamesModAttributes.REPAIR_VALUE, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_4"), 15, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(MinigamesModAttributes.SHOW_ONE_SHOTTABLE_MOBS, new AttributeModifier(Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "blank_dagger_5"), 1, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
 	}
 
 	@Override
@@ -49,6 +50,8 @@ public class BlankDaggerItem extends Item {
 	@Override
 	public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
 		super.inventoryTick(itemstack, world, entity, equipmentSlot);
+		if (equipmentSlot == EquipmentSlot.MAINHAND)
+			OnKillItemInHandProcedure.execute(itemstack);
 		BreakWeaponProcedure.execute();
 	}
 

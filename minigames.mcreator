@@ -17641,7 +17641,7 @@
     {
       "name": "ReturnDamageRoguelike",
       "type": "procedure",
-      "compiles": true,
+      "compiles": false,
       "locked_code": false,
       "registry_name": "return_damage_roguelike",
       "metadata": {
@@ -17673,6 +17673,36 @@
         ]
       },
       "path": "~/Dungeon/Events/Damage"
+    },
+    {
+      "name": "OnKillItemInHand",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "on_kill_item_in_hand",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/OnKillItemInHandProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Items/Helper"
+    },
+    {
+      "name": "ShowOneShottableMobs",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "show_one_shottable_mobs",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Items/Attributes"
     }
   ],
   "variable_elements": [
@@ -19814,7 +19844,8 @@
       "gui.minigames.roguelike_start_game.label_spleef": "Spleef",
       "gui.minigames.roguelike_start_game.tooltip_change_player_name": "Change player name",
       "gui.minigames.roguelike_start_game.tooltip_steal_the_crown_from_other_playe": "Steal the crown from other players and avoid getting it stolen to win",
-      "gui.minigames.roguelike_start_game.label_still_pretty_alpha": "STILL PRETTY ALPHA"
+      "gui.minigames.roguelike_start_game.label_still_pretty_alpha": "STILL PRETTY ALPHA",
+      "attribute.minigames.show_one_shottable_mobs": "Show Full Health Mobs"
     }
   },
   "metadata": {

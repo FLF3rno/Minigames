@@ -172,6 +172,12 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SUPPORTIVE;
 	public static final DeferredItem<Item> EXPLORERS_CHARM;
 	public static final DeferredItem<Item> FRICTION;
+	public static final DeferredItem<Item> SPAWN_PRIEST;
+	public static final DeferredItem<Item> SHOP_TP_MARKER_BLOCK;
+	public static final DeferredItem<Item> EMPTY_SHOP_PEDESTAL;
+	public static final DeferredItem<Item> SINGLE_SHOP_PEDESTAL;
+	public static final DeferredItem<Item> TEAM_SHOP_PEDESTAL;
+	public static final DeferredItem<Item> SHOP_DOORS;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -315,6 +321,12 @@ public class MinigamesModItems {
 		SUPPORTIVE = register("supportive", SupportiveItem::new);
 		EXPLORERS_CHARM = register("explorers_charm", ExplorersCharmItem::new);
 		FRICTION = register("friction", FrictionItem::new);
+		SPAWN_PRIEST = block(MinigamesModBlocks.SPAWN_PRIEST);
+		SHOP_TP_MARKER_BLOCK = block(MinigamesModBlocks.SHOP_TP_MARKER_BLOCK);
+		EMPTY_SHOP_PEDESTAL = block(MinigamesModBlocks.EMPTY_SHOP_PEDESTAL);
+		SINGLE_SHOP_PEDESTAL = block(MinigamesModBlocks.SINGLE_SHOP_PEDESTAL);
+		TEAM_SHOP_PEDESTAL = block(MinigamesModBlocks.TEAM_SHOP_PEDESTAL);
+		SHOP_DOORS = block(MinigamesModBlocks.SHOP_DOORS);
 	}
 
 	// Start of user code block custom items

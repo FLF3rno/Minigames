@@ -1,0 +1,19 @@
+sourceSets {
+    devmod {
+        java {
+            srcDirs = ['devmod/src/main/java']
+        }
+        resources {
+            srcDirs = ['devmod/src/main/resources']
+        }
+        compileClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+tasks.register('buildDevMod', Jar) {
+    dependsOn 'compileDevmodJava', 'processDevmodResources'
+    from sourceSets.devmod.output
+    destinationDirectory = file('run/mods')
+    archiveFileName = 'dungeon_dev_mod-1.0.0.jar'
+}

@@ -71,7 +71,7 @@ public class VotePopupOverlay {
             int voteIconRenderHeight = 32;
             int voteIconFrameSize = 32;
             event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, SPRITE_0, (w / 2) - (voteIconRenderWidth / 2), iconY, 0, voteIconIndex * voteIconFrameSize, voteIconRenderWidth, voteIconRenderHeight, voteIconFrameSize, voteIconFrameSize, voteIconFrameSize,
-                    voteIconFrameSize * 11); //change this for more icons
+                    voteIconFrameSize * 12); //change this for more icons
             drawPlayerFace(
                     event,
                     getVotingPlayerSkin(),

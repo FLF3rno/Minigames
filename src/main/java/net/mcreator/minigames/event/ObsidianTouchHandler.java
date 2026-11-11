@@ -69,7 +69,6 @@ public class ObsidianTouchHandler {
 
 		double speed = Math.max(targetSpeed, obsSpeed);
 
-		// If barely moving, don't damage to avoid micro-damage when idling next to the entity
 		if (speed < 0.08) {
 			return;
 		}
@@ -79,11 +78,10 @@ public class ObsidianTouchHandler {
 			LAST_DAMAGE_TICK.clear();
 		}
 
-		float damage = (float) Math.max(1.0f, speed * 10.0f);
+		float damage = (float) Math.max(1.0f, speed * 17.5f);
 		DamageSource damageSource = new DamageSource(serverLevel.holderOrThrow(DamageTypes.FLY_INTO_WALL), obsidianEntity);
 		touchedEntity.hurtServer(serverLevel, damageSource, damage);
 
-		// Rebound slightly off the solid obsidian
 		Vec3 motion = touchedEntity.getDeltaMovement();
 		double reboundX = -motion.x * 0.4;
 		double reboundZ = -motion.z * 0.4;

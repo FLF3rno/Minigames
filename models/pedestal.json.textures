@@ -35,6 +35,12 @@
       "map": {
         "0": "minecraft:quartz_pillar"
       }
+    },
+    "gold": {
+      "name": "gold",
+      "map": {
+        "0": "minecraft:gold_block"
+      }
     }
   }
 }

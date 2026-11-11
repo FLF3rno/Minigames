@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+
+[[mixins]]
+config="dungeon_dev_mod.mixins.json"
+
+[[mods]]
+modId="dungeon_dev_mod"
+version="1.0.0"
+displayName="Dungeon Dev Mod"
+description="Dev mod for generating an empty world with all dungeon_ structures and structure blocks."
+authors="FL_F3rno"
+
+[[dependencies.dungeon_dev_mod]]
+modId="neoforge"
+type="required"
+versionRange="[26.1.2.95,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.dungeon_dev_mod]]
+modId="minecraft"
+type="required"
+versionRange="[26.1.2]"
+ordering="AFTER"
+side="BOTH"

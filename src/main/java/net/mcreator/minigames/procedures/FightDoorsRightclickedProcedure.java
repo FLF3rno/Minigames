@@ -151,6 +151,14 @@ public class FightDoorsRightclickedProcedure {
 						VoteYesPressedProcedure.execute(world, entity);
 					}
 				}
+			} else if (MinigamesModBlocks.SHOP_DOORS.get() == (world.getBlockState(BlockPos.containing(x, y, z))).getBlock()) {
+				if (!MinigamesModVariables.MapVariables.get(world).ActiveVote) {
+					StartVoteProcedure.execute(world, entity, entity, "shop");
+				} else {
+					if (id == MinigamesModVariables.MapVariables.get(world).voteRoomID) {
+						VoteYesPressedProcedure.execute(world, entity);
+					}
+				}
 			}
 		} else {
 			if (entity instanceof ServerPlayer _player)

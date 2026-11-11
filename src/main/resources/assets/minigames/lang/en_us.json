@@ -462,5 +462,12 @@
   "gui.minigames.roguelike_start_game.tooltip_change_player_name": "Change player name",
   "gui.minigames.roguelike_start_game.tooltip_steal_the_crown_from_other_playe": "Steal the crown from other players and avoid getting it stolen to win",
   "gui.minigames.roguelike_start_game.label_still_pretty_alpha": "STILL PRETTY ALPHA",
-  "attribute.minigames.show_one_shottable_mobs": "Show Full Health Mobs"
+  "attribute.minigames.show_one_shottable_mobs": "Show Full Health Mobs",
+  "entity.minigames.priest": "Priest",
+  "item.minigames.spawn_priest": "Spawn Priest",
+  "item.minigames.shop_tp_marker_block": "Shop TP Marker",
+  "item.minigames.empty_shop_pedestal": "Empty Shop Pedestal",
+  "item.minigames.single_shop_pedestal": "Single Shop Pedestal",
+  "item.minigames.team_shop_pedestal": "Team Shop Pedestal",
+  "item.minigames.shop_doors": "Shop Doors"
 }

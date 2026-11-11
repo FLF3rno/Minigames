@@ -20,5 +20,6 @@
   "assets/photon",
   "assets/photon/fx",
   "assets/photon/fx/fireworktest.fx",
-  "assets/photon/fx/laser.fx"
+  "assets/photon/fx/laser.fx",
+  "assets/photon/fx/priest.fx"
 ]

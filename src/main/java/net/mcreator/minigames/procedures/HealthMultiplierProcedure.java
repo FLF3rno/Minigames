@@ -19,7 +19,7 @@ public class HealthMultiplierProcedure {
 			var maxHpAttr = le.getAttribute(Attributes.MAX_HEALTH);
 			if (maxHpAttr != null) {
 				double scaled = le.getMaxHealth() * (1 + (world.players().size() - 1) * 0.75);
-				maxHpAttr.setBaseValue(scaled * 0.9f);
+				maxHpAttr.setBaseValue(scaled * 1f);
 				le.setHealth((float) scaled);
 			}
 		}

@@ -52,6 +52,7 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LootDoorsBlockEntity>> LOOT_DOORS = register("loot_doors", MinigamesModBlocks.LOOT_DOORS, LootDoorsBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MinibossDoorsBlockEntity>> MINIBOSS_DOORS = register("miniboss_doors", MinigamesModBlocks.MINIBOSS_DOORS, MinibossDoorsBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BossDoorsBlockEntity>> BOSS_DOORS = register("boss_doors", MinigamesModBlocks.BOSS_DOORS, BossDoorsBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ShopDoorsBlockEntity>> SHOP_DOORS = register("shop_doors", MinigamesModBlocks.SHOP_DOORS, ShopDoorsBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpreadingIceBlockEntity>> SPREADING_ICE = register("spreading_ice", MinigamesModBlocks.SPREADING_ICE, SpreadingIceBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CopycatBlockEntity>> COPYCAT = REGISTRY.register("copycat",
 			() -> new BlockEntityType<>(CopycatBlockEntity::new, java.util.Set.of(MinigamesModBlocks.COPYCAT_BLOCK.get(), MinigamesModBlocks.COPYCAT_SLAB.get(), MinigamesModBlocks.COPYCAT_STAIR.get(), MinigamesModBlocks.COPYCAT_WALL.get(),

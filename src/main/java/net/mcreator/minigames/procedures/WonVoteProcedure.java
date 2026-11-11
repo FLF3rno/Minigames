@@ -1,11 +1,17 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -71,6 +77,14 @@ public class WonVoteProcedure {
 			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 10) {
 				StartDungeonProcedure.execute(world, x, y, z);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "starting";
+				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+			} else if (MinigamesModVariables.MapVariables.get(world).voteType == 11) {
+				if (world instanceof ServerLevel _level)
+					_level.getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							"/tp @a 15 155 31 facing 15 163 0");
+				SpawnShopRoomProcedure.execute(world, 0, 250, 0);
+				MinigamesModVariables.MapVariables.get(world).currentRoomType = "shop";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}
 		} else {

@@ -1,5 +1,7 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -82,7 +84,7 @@ public class NameColorApplyProcedure {
 
 		if (entity instanceof ServerPlayer serverPlayer) {
 			serverPlayer.refreshTabListName();
-			serverPlayer.connection.send(new net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket(net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, serverPlayer));
+			net.neoforged.neoforge.server.ServerLifecycleHooks.getCurrentServer().getPlayerList().broadcastAll(new ClientboundPlayerInfoUpdatePacket(net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, serverPlayer));
 		}
 	}
 }

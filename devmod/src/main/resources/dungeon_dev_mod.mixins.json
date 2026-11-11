@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mcreator.dungeondev.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "StructureBlockEntityMixin",
+    "ServerboundSetStructureBlockPacketMixin",
+    "NbtIoMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

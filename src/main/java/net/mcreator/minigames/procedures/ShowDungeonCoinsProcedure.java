@@ -6,6 +6,6 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 
 public class ShowDungeonCoinsProcedure {
 	public static boolean execute(LevelAccessor world) {
-		return MinigamesModVariables.MapVariables.get(world).showCoins;
+		return MinigamesModVariables.MapVariables.get(world).showCoins || (MinigamesModVariables.MapVariables.get(world).currentRoomType).equals("shop");
 	}
 }

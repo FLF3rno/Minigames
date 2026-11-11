@@ -107,6 +107,8 @@ public class MinigamesModEntities {
 			EntityType.Builder.<CactusArrowEntity>of(CactusArrowEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 	public static final DeferredHolder<EntityType<?>, EntityType<CryptLurkerEntity>> CRYPT_LURKER = register("crypt_lurker",
 			EntityType.Builder.<CryptLurkerEntity>of(CryptLurkerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(2f, 3f));
+	public static final DeferredHolder<EntityType<?>, EntityType<PriestEntity>> PRIEST = register("priest",
+			EntityType.Builder.<PriestEntity>of(PriestEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.1f, 1.8f));
 	// Start of user code block custom entities
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.1f, 0.1f));
@@ -150,6 +152,7 @@ public class MinigamesModEntities {
 		FlavioOmegaLaserScreenEntity.init(event);
 		ChurchSharpenerEntity.init(event);
 		CryptLurkerEntity.init(event);
+		PriestEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -186,5 +189,6 @@ public class MinigamesModEntities {
 		event.put(FLAVIO_OMEGA_LASER_SCREEN.get(), FlavioOmegaLaserScreenEntity.createAttributes().build());
 		event.put(CHURCH_SHARPENER.get(), ChurchSharpenerEntity.createAttributes().build());
 		event.put(CRYPT_LURKER.get(), CryptLurkerEntity.createAttributes().build());
+		event.put(PRIEST.get(), PriestEntity.createAttributes().build());
 	}
 }

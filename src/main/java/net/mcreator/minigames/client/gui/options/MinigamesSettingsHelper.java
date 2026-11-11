@@ -777,13 +777,5 @@ public class MinigamesSettingsHelper {
 				val -> Component.literal((int) Math.round(val * 100) + "%"),
 				null
 		);
-
-		addBoolean("disableSkyboxBlock", Component.literal("Skybox Block"), Component.literal("Disable Skybox Blocks' effects (for performance)"), false,
-				val -> switch (val ? 1 : 0) {
-					case 1 -> Component.literal("Disabled");
-					default -> Component.literal("Enabled");
-				},
-				null
-		);
 	}
 }

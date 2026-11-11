@@ -149,7 +149,6 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.SPAWN_CRYPT_LURKER.get().asItem());
 				tabData.accept(MinigamesModBlocks.GIANT_BELL.get().asItem());
 				tabData.accept(MinigamesModBlocks.SPAWN_PRIEST.get().asItem());
-				tabData.accept(MinigamesModBlocks.SHOP_TP_MARKER_BLOCK.get().asItem());
 				tabData.accept(MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().asItem());
 				tabData.accept(MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get().asItem());
 				tabData.accept(MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get().asItem());

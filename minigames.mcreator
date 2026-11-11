@@ -17835,55 +17835,6 @@
       "path": "~/Dungeon/Floors/Rooms"
     },
     {
-      "name": "ShopTPMarkerBlock",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "shop_tp_marker_block",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/minigames/loot_table/blocks/shop_tp_marker_block.json",
-          "src/main/resources/assets/minigames/models/block/shop_tp_marker_block.json",
-          "src/main/java/net/mcreator/minigames/block/ShopTPMarkerBlockBlock.java",
-          "src/main/resources/assets/minigames/items/shop_tp_marker_block.json",
-          "src/main/resources/assets/minigames/models/item/shop_tp_marker_block.json",
-          "src/main/resources/assets/minigames/blockstates/shop_tp_marker_block.json"
-        ]
-      },
-      "path": "~/Dungeon/Shop"
-    },
-    {
-      "name": "ShopTPMarkerExecute",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "shop_tp_marker_execute",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/ShopTPMarkerExecuteProcedure.java"
-        ]
-      },
-      "path": "~/Dungeon/Shop"
-    },
-    {
       "name": "EmptyShopPedestal",
       "type": "block",
       "compiles": true,
@@ -17955,6 +17906,37 @@
         ]
       },
       "path": "~/Dungeon/Doors"
+    },
+    {
+      "name": "SelectPedestalTypeShop",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "select_pedestal_type_shop",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SelectPedestalTypeShopProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
     }
   ],
   "variable_elements": [
@@ -20101,7 +20083,6 @@
       "attribute.minigames.show_one_shottable_mobs": "Show Full Health Mobs",
       "entity.minigames.priest": "Priest",
       "item.minigames.spawn_priest": "Spawn Priest",
-      "item.minigames.shop_tp_marker_block": "Shop TP Marker",
       "item.minigames.empty_shop_pedestal": "Empty Shop Pedestal",
       "item.minigames.single_shop_pedestal": "Single Shop Pedestal",
       "item.minigames.team_shop_pedestal": "Team Shop Pedestal",

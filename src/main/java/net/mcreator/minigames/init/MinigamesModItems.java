@@ -173,7 +173,6 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> EXPLORERS_CHARM;
 	public static final DeferredItem<Item> FRICTION;
 	public static final DeferredItem<Item> SPAWN_PRIEST;
-	public static final DeferredItem<Item> SHOP_TP_MARKER_BLOCK;
 	public static final DeferredItem<Item> EMPTY_SHOP_PEDESTAL;
 	public static final DeferredItem<Item> SINGLE_SHOP_PEDESTAL;
 	public static final DeferredItem<Item> TEAM_SHOP_PEDESTAL;
@@ -322,7 +321,6 @@ public class MinigamesModItems {
 		EXPLORERS_CHARM = register("explorers_charm", ExplorersCharmItem::new);
 		FRICTION = register("friction", FrictionItem::new);
 		SPAWN_PRIEST = block(MinigamesModBlocks.SPAWN_PRIEST);
-		SHOP_TP_MARKER_BLOCK = block(MinigamesModBlocks.SHOP_TP_MARKER_BLOCK);
 		EMPTY_SHOP_PEDESTAL = block(MinigamesModBlocks.EMPTY_SHOP_PEDESTAL);
 		SINGLE_SHOP_PEDESTAL = block(MinigamesModBlocks.SINGLE_SHOP_PEDESTAL);
 		TEAM_SHOP_PEDESTAL = block(MinigamesModBlocks.TEAM_SHOP_PEDESTAL);

@@ -1,6 +1,13 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -22,6 +29,10 @@ public class DungeonCheckProcedure {
 			SpawnGridProcedure.execute(world, x, y, z, MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon, MinigamesModVariables.MapVariables.get(world).roomLimitDungeon.z(),
 					MinigamesModVariables.MapVariables.get(world).minibossRoomsDungeon, MinigamesModVariables.MapVariables.get(world).roomLimitDungeon.x(), MinigamesModVariables.MapVariables.get(world).dungeonSize.x(),
 					MinigamesModVariables.MapVariables.get(world).dungeonSize.z(), MinigamesModVariables.MapVariables.get(world).secretRoomDungeon);
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"/fill -70 128 -67 -100 100 -100 air");
 		}
 	}
 }

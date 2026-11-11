@@ -1,6 +1,16 @@
 {
   "ultrawarm": false,
-  "natural": false,
+  "natural": true,
+  "default_clock": "minecraft:overworld",
+  "timelines": "#minecraft:in_overworld",
+  "attributes": {
+    "minecraft:visual/ambient_light_color": "#0a0a0a",
+    "minecraft:visual/cloud_color": "#ccffffff",
+    "minecraft:visual/cloud_height": 192.33,
+    "minecraft:visual/fog_color": "#c0d8ff",
+    "minecraft:visual/sky_color": "#78a7ff"
+  },
+  "skybox": "overworld",
   "piglin_safe": true,
   "respawn_anchor_works": false,
   "bed_works": false,
@@ -21,5 +31,5 @@
   },
   "monster_spawn_block_light_limit": 0,
   "has_ender_dragon_fight": false,
-  "effects": "minigames:dungeon_dimension"
+  "effects": "minecraft:overworld"
 }

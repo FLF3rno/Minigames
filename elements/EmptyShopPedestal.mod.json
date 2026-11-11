@@ -101,7 +101,7 @@
     "canRedstoneConnect": false,
     "hasCustomOpacity": true,
     "lightOpacity": 0,
-    "tickRate": 0,
+    "tickRate": 10,
     "tickRandomly": false,
     "isReplaceable": false,
     "canProvidePower": false,
@@ -157,6 +157,7 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
+    "onTickUpdate": "SelectPedestalTypeShop",
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

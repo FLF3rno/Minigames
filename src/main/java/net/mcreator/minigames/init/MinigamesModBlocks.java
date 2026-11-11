@@ -97,7 +97,6 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SPAWN_CRYPT_LURKER;
 	public static final DeferredBlock<Block> GIANT_BELL;
 	public static final DeferredBlock<Block> SPAWN_PRIEST;
-	public static final DeferredBlock<Block> SHOP_TP_MARKER_BLOCK;
 	public static final DeferredBlock<Block> EMPTY_SHOP_PEDESTAL;
 	public static final DeferredBlock<Block> SINGLE_SHOP_PEDESTAL;
 	public static final DeferredBlock<Block> TEAM_SHOP_PEDESTAL;
@@ -184,7 +183,6 @@ public class MinigamesModBlocks {
 		SPAWN_CRYPT_LURKER = register("spawn_crypt_lurker", SpawnCryptLurkerBlock::new);
 		GIANT_BELL = register("giant_bell", GiantBellBlock::new);
 		SPAWN_PRIEST = register("spawn_priest", SpawnPriestBlock::new);
-		SHOP_TP_MARKER_BLOCK = register("shop_tp_marker_block", ShopTPMarkerBlockBlock::new);
 		EMPTY_SHOP_PEDESTAL = register("empty_shop_pedestal", EmptyShopPedestalBlock::new);
 		SINGLE_SHOP_PEDESTAL = register("single_shop_pedestal", SingleShopPedestalBlock::new);
 		TEAM_SHOP_PEDESTAL = register("team_shop_pedestal", TeamShopPedestalBlock::new);

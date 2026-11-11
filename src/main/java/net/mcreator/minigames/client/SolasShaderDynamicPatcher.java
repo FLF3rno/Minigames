@@ -8,9 +8,19 @@ import java.util.regex.Pattern;
 
 public class SolasShaderDynamicPatcher {
 	private static volatile boolean solasActive = false;
+	// True once deferred1 has been patched to paint the real Solas sky onto "live sky" skybox pixels.
+	private static volatile boolean liveSkyPatched = false;
 
 	public static boolean isSolasActive() {
 		return solasActive;
+	}
+
+	/**
+	 * True when Solas is the active shader pack and its deferred pass will replace dynamic skybox
+	 * block pixels with the shader's own sky. The block renderer can then skip its procedural sky.
+	 */
+	public static boolean isLiveSkyReady() {
+		return solasActive && liveSkyPatched && IrisCompat.isShaderPackInUse();
 	}
 
 	public static void setSolasActive(boolean active) {
@@ -25,6 +35,7 @@ public class SolasShaderDynamicPatcher {
 		if (name.endsWith("shaders.properties")) {
 			boolean isSolas = content.contains("SOLAS_BY_SEPTONIOUS") || content.contains("screen.OF=");
 			setSolasActive(isSolas);
+			liveSkyPatched = false;
 			if (isSolas) {
 				return patchShadersProperties(content);
 			}
@@ -190,6 +201,11 @@ public class SolasShaderDynamicPatcher {
 		return content;
 	}
 
+	// Fixed-look skybox states keep their own colours (10088); the dynamic state shows the live Solas sky (10089).
+	private static final String SKYBOX_FIXED_ENTRIES = "minigames:skybox_simulation:sky_type=end minigames:skybox_simulation:sky_type=gateway "
+			+ "minigames:skybox_simulation:sky_type=day minigames:skybox_simulation:sky_type=sunset minigames:skybox_simulation:sky_type=night";
+	private static final String SKYBOX_LIVE_ENTRIES = "minigames:skybox_simulation:sky_type=dynamic";
+
 	private static String patchBlockProperties(String content) {
 		content = content.replace("minigames:ruby_froglight", "");
 		content = content.replace("minigames:azure_froglight", "");
@@ -199,12 +215,16 @@ public class SolasShaderDynamicPatcher {
 			if (m.find()) {
 				String fullM = m.group(1);
 				String nl = fullM.contains("\r\n") ? "\r\n" : "\n";
-				String add = "block.10086=minigames:ruby_froglight" + nl + "block.10087=minigames:azure_froglight" + nl + "block.10088=minigames:skybox_simulation" + nl;
+				String add = "block.10086=minigames:ruby_froglight" + nl + "block.10087=minigames:azure_froglight" + nl
+						+ "block.10088=" + SKYBOX_FIXED_ENTRIES + nl + "block.10089=" + SKYBOX_LIVE_ENTRIES + nl;
 				content = content.substring(0, m.end()) + add + content.substring(m.end());
 			}
 		}
 		if (!content.contains("block.10088=")) {
-			content = "block.10088=minigames:skybox_simulation\n" + content;
+			content = "block.10088=" + SKYBOX_FIXED_ENTRIES + "\n" + content;
+		}
+		if (!content.contains("block.10089=")) {
+			content = "block.10089=" + SKYBOX_LIVE_ENTRIES + "\n" + content;
 		}
 		return content;
 	}
@@ -222,9 +242,9 @@ public class SolasShaderDynamicPatcher {
 			// FSH: insert uniforms
 			content = content.replace("uniform int currentRenderedItemId;", "uniform int currentRenderedItemId;\nuniform int blockEntityId;\nuniform int entityId;");
 
-			// FSH: check isSkybox
+			// FSH: check isSkybox (10088 = fixed-look skybox, 10089 = live Solas sky)
 			content = content.replace("float lightningBolt = float(mat == 1);",
-					"float lightningBolt = float(mat == 1);\n\tbool isSkybox = (mat == 10088 || blockEntityId == 10088 || entityId == 10088);");
+					"float lightningBolt = float(mat == 1);\n\tbool isLiveSky = (mat == 10089 || blockEntityId == 10089 || entityId == 10089);\n\tbool isSkybox = isLiveSky || (mat == 10088 || blockEntityId == 10088 || entityId == 10088);");
 
 			// FSH: guard PBR
 			content = content.replace("getMaterials(smoothness, metalness, f0, emission, subsurface, porosity, ao, newNormal, newCoord, dcdx, dcdy, tbnMatrix);",
@@ -234,8 +254,8 @@ public class SolasShaderDynamicPatcher {
 			content = content.replace("if (lightningBolt < 0.5) {",
 					"if (isSkybox) {\n\t\t// Skybox simulation: bypass lighting and directional shading\n\t} else if (lightningBolt < 0.5) {");
 
-			// FSH: output mask (0.65 in colortex3.b)
-			content = content.replace("0.25, 1.0);", "(isSkybox ? 0.65 : 0.25), 1.0);");
+			// FSH: output mask in colortex3.b (0.65 = fixed skybox, 0.75 = live sky)
+			content = content.replace("0.25, 1.0);", "(isLiveSky ? 0.75 : (isSkybox ? 0.65 : 0.25)), 1.0);");
 			content = content.replace("gl_FragData[3] = vec4(fresnel3, 1.0);", "gl_FragData[3] = isSkybox ? vec4(0.0) : vec4(fresnel3, 1.0);");
 		}
 		return content;
@@ -243,13 +263,14 @@ public class SolasShaderDynamicPatcher {
 
 	private static String patchGbuffersBlock(String content) {
 		if (!content.contains("10088")) {
-			content = content.replace("if (blockEntityId != 9999) {", "if (blockEntityId != 9999 && blockEntityId != 10088) {");
+			String isSkyboxExpr = "(blockEntityId == 10088 || blockEntityId == 10089)";
+			content = content.replace("if (blockEntityId != 9999) {", "if (blockEntityId != 9999 && !" + isSkyboxExpr + ") {");
 			content = content.replace("} else {\n        vec3 shadow = vec3(0.0);",
-					"} else if (blockEntityId == 10088) {\n        // Skybox simulation: bypass lighting\n    } else {\n        vec3 shadow = vec3(0.0);");
+					"} else if " + isSkyboxExpr + " {\n        // Skybox simulation: bypass lighting\n    } else {\n        vec3 shadow = vec3(0.0);");
 			content = content.replace("} else {\r\n        vec3 shadow = vec3(0.0);",
-					"} else if (blockEntityId == 10088) {\r\n        // Skybox simulation: bypass lighting\r\n    } else {\r\n        vec3 shadow = vec3(0.0);");
-			content = content.replace("0.0, 1.0);", "(blockEntityId == 10088 ? 0.65 : 0.0), 1.0);");
-			content = content.replace("gl_FragData[3] = vec4(fresnel3, 1.0);", "gl_FragData[3] = (blockEntityId == 10088) ? vec4(0.0) : vec4(fresnel3, 1.0);");
+					"} else if " + isSkyboxExpr + " {\r\n        // Skybox simulation: bypass lighting\r\n    } else {\r\n        vec3 shadow = vec3(0.0);");
+			content = content.replace("0.0, 1.0);", "(blockEntityId == 10089 ? 0.75 : (blockEntityId == 10088 ? 0.65 : 0.0)), 1.0);");
+			content = content.replace("gl_FragData[3] = vec4(fresnel3, 1.0);", "gl_FragData[3] = " + isSkyboxExpr + " ? vec4(0.0) : vec4(fresnel3, 1.0);");
 		}
 		return content;
 	}
@@ -258,7 +279,7 @@ public class SolasShaderDynamicPatcher {
 		if (!content.contains("skyboxMaskAO")) {
 			content = content.replace("uniform sampler2D depthtex0;", "uniform sampler2D depthtex0;\nuniform sampler2D colortex3;");
 			content = content.replace("if (z < 1.0) {",
-					"float skyboxMaskAO = texture2D(colortex3, texCoord.xy).b;\n    if (skyboxMaskAO > 0.60 && skyboxMaskAO < 0.70) {\n        ao = 1.0;\n    } else if (z < 1.0) {");
+					"float skyboxMaskAO = texture2D(colortex3, texCoord.xy).b;\n    if (skyboxMaskAO > 0.60 && skyboxMaskAO < 0.80) {\n        ao = 1.0;\n    } else if (z < 1.0) {");
 		}
 		return content;
 	}
@@ -271,10 +292,27 @@ public class SolasShaderDynamicPatcher {
 			content = content.replace("#if defined SS_SHADOWS || defined PBR || defined GENERATED_SPECULAR\r\nuniform sampler2D colortex3;\r\n#endif",
 					"uniform sampler2D colortex3;");
 
-			// Declare skybox mask check before fog
-			String fogAnchor = "//Apply fog before the clouds in Overworld";
-			content = content.replace(fogAnchor,
-					"float skyboxMaskDef = texture2D(colortex3, texCoord).b;\n\tbool isSkyboxPixel = (skyboxMaskDef > 0.60 && skyboxMaskDef < 0.70);\n\n\t" + fogAnchor);
+			// Declare the skybox masks right after the depth fetch so every later stage can use them.
+			// 0.65 = fixed-look skybox (keep its colours), 0.75 = live sky (replace with the shader's sky).
+			String depthAnchor = "float z0 = texture2D(depthtex0, texCoord).r;";
+			int depthIdx = content.indexOf(depthAnchor);
+			if (depthIdx == -1) {
+				return content;
+			}
+			int insertAt = depthIdx + depthAnchor.length();
+			content = content.substring(0, insertAt)
+					+ "\n\tfloat skyboxMaskDef = texture2D(colortex3, texCoord).b;"
+					+ "\n\tbool isSkyboxPixel = (skyboxMaskDef > 0.60 && skyboxMaskDef < 0.80);"
+					+ "\n\tbool isLiveSkyPixel = (skyboxMaskDef > 0.70 && skyboxMaskDef < 0.80);"
+					+ content.substring(insertAt);
+
+			// Live sky: Solas already computes skyColor for every pixel, so painting it onto the
+			// skybox faces is free. Covers the vanilla, Distant Horizons and Voxy branches.
+			String skyAssign = "z0 == 1.0) color = skyColor;";
+			if (content.contains(skyAssign)) {
+				content = content.replace(skyAssign, "z0 == 1.0 || isLiveSkyPixel) color = skyColor;");
+				liveSkyPatched = true;
+			}
 
 			// Bypass in DH
 			content = content.replace("if (z0 != 1.0) {", "if (z0 != 1.0 && !isSkyboxPixel) {");

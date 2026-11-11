@@ -106,8 +106,8 @@ public class SpawnStructureDungeonProcedure {
 				maxZ = (int) Math.floor(structureZ);
 			}
 
-			int minY = -10;
-			int maxY = 70;
+			int minY = 0;
+			int maxY = 200;
 
 			for (int xPos = minX; xPos <= maxX; xPos++) {
 				for (int yPos = minY; yPos <= maxY; yPos++) {

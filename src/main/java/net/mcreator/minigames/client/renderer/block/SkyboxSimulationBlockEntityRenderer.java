@@ -1,12 +1,16 @@
 package net.mcreator.minigames.client.renderer.block;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
@@ -21,8 +25,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.block.SkyboxSimulationBlock;
 import net.mcreator.minigames.block.entity.SkyboxSimulationBlockEntity;
+import net.mcreator.minigames.client.IrisCompat;
+import net.mcreator.minigames.client.SkyCaptureManager;
+import net.mcreator.minigames.client.SolasShaderDynamicPatcher;
 import net.mcreator.minigames.init.MinigamesModBlockEntities;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import org.joml.Vector3f;
@@ -136,9 +144,8 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	private static float cachedGameTime = 0.0f;
 	private static float cachedRainLevel = 0.0f;
 	private static boolean cachedIsSpaceSky = false;
-	private static final int CYAN_COLOR = 0x98DDF9;
-	private static boolean cachedDisableSkybox = false;
 	private static float lastTwinkleGameTime = -999.0f;
+	private static float lastLoggedCelestialAngle = -999.0f;
 
 	// =========================================================================
 	// GLOBAL ROOM BATCHING BUFFERS
@@ -182,6 +189,12 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	private static int gatewayQuadCount = 0;
 	private static boolean gatewaySubmitted = false;
 	private static double gatewayOriginX, gatewayOriginY, gatewayOriginZ;
+
+	private static int skyPortalCapacity = 4096;
+	private static float[] skyPortalPos = new float[skyPortalCapacity * 12];
+	private static int skyPortalQuadCount = 0;
+	private static boolean skyPortalSubmitted = false;
+	private static double skyPortalOriginX, skyPortalOriginY, skyPortalOriginZ;
 
 	static {
 		FACE_DATA.put(Direction.DOWN, new FaceData(Direction.DOWN,
@@ -297,6 +310,10 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		gatewaySubmitted = false;
 		gatewayMergeRun = 0;
 		gatewayLastFaceDir = -1;
+		skyPortalQuadCount = 0;
+		skyPortalSubmitted = false;
+		skyPortalMergeRun = 0;
+		skyPortalLastFaceDir = -1;
 	}
 
 	@Override
@@ -347,10 +364,34 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 				lastPartialTick = partialTick;
 				lastGameTime = gameTime;
 
-				if (level.dimensionType().hasFixedTime()) {
-					cachedCelestialAngle = ((gameTime + partialTick) % 48000.0f) / 48000.0f;
-				} else {
-					cachedCelestialAngle = ((Math.floorMod(level.getOverworldClockTime(), 48000L) + partialTick) / 48000.0f);
+				long clockTicks = 0L;
+				boolean foundClock = false;
+				try {
+					if (level.dimensionType().defaultClock().isPresent()) {
+						clockTicks = level.getDefaultClockTime();
+						foundClock = true;
+					}
+				} catch (Throwable ignored) {
+				}
+				if (!foundClock) {
+					try {
+						clockTicks = level.getOverworldClockTime();
+						foundClock = true;
+					} catch (Throwable ignored) {
+					}
+				}
+				if (!foundClock || (clockTicks == 0L && level.dimensionType().hasFixedTime())) {
+					clockTicks = gameTime;
+				}
+
+				float fraction = ((float) Math.floorMod(clockTicks, 24000L) + partialTick) / 24000.0f - 0.25f;
+				if (fraction < 0.0f) {
+					fraction += 1.0f;
+				}
+				cachedCelestialAngle = fraction;
+				if (Math.abs(fraction - lastLoggedCelestialAngle) > 0.04f) {
+					lastLoggedCelestialAngle = fraction;
+					MinigamesMod.LOGGER.info("[SkyboxRenderer] Time clockTicks={}, celestialAngle={}", clockTicks, fraction);
 				}
 				cachedGameTime = (float) gameTime + partialTick;
 				cachedRainLevel = level.getRainLevel(partialTick);
@@ -360,17 +401,20 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 					cachedIsSpaceSky = false;
 				}
 
-				cachedDisableSkybox = net.mcreator.minigames.client.gui.options.MinigamesSettingsConfig.getBoolean("disableSkyboxBlock", false);
-
 				// Reset the global batch and corner cache for the new frame
 				resetAllBatches();
 			}
 
-			state.disableSkybox = cachedDisableSkybox;
 			state.isSpaceSky = (state.skyType == SkyboxSimulationBlock.SkyType.DYNAMIC) && cachedIsSpaceSky;
 			state.celestialAngle = cachedCelestialAngle;
 			state.gameTime = cachedGameTime;
 			state.rainLevel = cachedRainLevel;
+
+			if (state.skyType == SkyboxSimulationBlock.SkyType.DYNAMIC) {
+				if (!IrisCompat.isShaderPackInUse()) {
+					SkyCaptureManager.requestCapture();
+				}
+			}
 		} else {
 			state.facesMask = 0;
 		}
@@ -413,6 +457,14 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		}
 	}
 
+	private static String lastRenderMode = "";
+	private static void logRenderMode(String mode) {
+		if (!mode.equals(lastRenderMode)) {
+			lastRenderMode = mode;
+			MinigamesMod.LOGGER.info("[SkyboxRenderer] Dynamic sky mode changed to: {}", mode);
+		}
+	}
+
 	@Override
 	public void submit(SkyboxSimulationRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
 		if (state.facesMask == 0) return;
@@ -436,45 +488,32 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		int activeFacesMask = (state.facesMask & 0xFF) & visibleMask;
 		if (activeFacesMask == 0) return;
 
-		if (state.disableSkybox) {
-			batchCyan(poseStack, collector, activeFacesMask, bx, by, bz);
-			return;
-		}
-
-		if (state.skyType == SkyboxSimulationBlock.SkyType.END || state.isSpaceSky) {
+		if (state.skyType == SkyboxSimulationBlock.SkyType.END) {
 			batchPortal(poseStack, collector, RenderTypes.endPortal(), false, activeFacesMask, bx, by, bz);
 		} else if (state.skyType == SkyboxSimulationBlock.SkyType.GATEWAY) {
 			batchPortal(poseStack, collector, RenderTypes.endGateway(), true, activeFacesMask, bx, by, bz);
+		} else if (state.skyType == SkyboxSimulationBlock.SkyType.DYNAMIC) {
+			if (SolasShaderDynamicPatcher.isLiveSkyReady()) {
+				logRenderMode("SOLAS_LIVE_SKY");
+				batchLiveSkySolas(poseStack, collector, activeFacesMask, bx, by, bz);
+			} else if (SkyCaptureManager.hasFreshCapture()) {
+				logRenderMode("VANILLA_SKY_PORTAL");
+				batchSkyPortal(poseStack, collector, SkyCaptureManager.skyPortalRenderType(), activeFacesMask, bx, by, bz);
+			} else if (state.isSpaceSky) {
+				logRenderMode("SPACE_SKY");
+				batchPortal(poseStack, collector, RenderTypes.endPortal(), false, activeFacesMask, bx, by, bz);
+			} else {
+				logRenderMode("PROCEDURAL_FALLBACK");
+				batchAtmosphere(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
+				batchStars(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
+				batchSun(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
+				batchMoon(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
+			}
 		} else {
 			batchAtmosphere(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 			batchStars(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 			batchSun(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 			batchMoon(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
-		}
-	}
-
-	private void batchCyan(PoseStack poseStack, SubmitNodeCollector collector, int activeFacesMask, double bx, double by, double bz) {
-		if (!atmoSubmitted) {
-			atmoSubmitted = true;
-			atmoOriginX = bx; atmoOriginY = by; atmoOriginZ = bz;
-			collector.submitCustomGeometry(poseStack, RenderTypes.entitySolid(WHITE_TEXTURE), SkyboxSimulationBlockEntityRenderer::renderBatchedAtmosphere);
-		}
-
-		double dx = bx - atmoOriginX;
-		double dy = by - atmoOriginY;
-		double dz = bz - atmoOriginZ;
-
-		for (int i = 0; i < 6; i++) {
-			if ((activeFacesMask & (1 << i)) == 0) continue;
-			FaceData data = FACE_DATA_ARRAY[i];
-
-			addAtmoQuad(
-				i,
-				(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z), CYAN_COLOR,
-				(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z), CYAN_COLOR,
-				(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z), CYAN_COLOR,
-				(float) (dx + data.c3x), (float) (dy + data.c3y), (float) (dz + data.c3z), CYAN_COLOR
-			);
 		}
 	}
 
@@ -620,6 +659,106 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		gatewaySubmitted = false;
 		gatewayMergeRun = 0;
 		gatewayLastFaceDir = -1;
+	}
+
+	// =========================================================================
+	// BATCHING: Sky Portal (Vanilla / Resource Pack live sky)
+	// =========================================================================
+
+	private static int skyPortalMergeRun = 0;
+	private static int skyPortalLastFaceDir = -1;
+
+	private void batchSkyPortal(PoseStack poseStack, SubmitNodeCollector collector, RenderType renderType,
+								int activeFacesMask, double bx, double by, double bz) {
+		if (!skyPortalSubmitted) {
+			skyPortalSubmitted = true;
+			skyPortalOriginX = bx; skyPortalOriginY = by; skyPortalOriginZ = bz;
+			collector.submitCustomGeometry(poseStack, renderType, SkyboxSimulationBlockEntityRenderer::renderBatchedSkyPortal);
+		}
+		double dx = bx - skyPortalOriginX;
+		double dy = by - skyPortalOriginY;
+		double dz = bz - skyPortalOriginZ;
+		for (int i = 0; i < 6; i++) {
+			if ((activeFacesMask & (1 << i)) != 0) {
+				FaceData data = FACE_DATA_ARRAY[i];
+				addSkyPortalQuad(
+					i,
+					(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z),
+					(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z),
+					(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z),
+					(float) (dx + data.c3x), (float) (dy + data.c3y), (float) (dz + data.c3z)
+				);
+			}
+		}
+	}
+
+	private static void addSkyPortalQuad(int faceDir, float x0, float y0, float z0, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3) {
+		if (skyPortalQuadCount > 0 && skyPortalMergeRun < 4 && skyPortalLastFaceDir == faceDir) {
+			int prevPosOff = (skyPortalQuadCount - 1) * 12;
+			if (skyPortalPos[prevPosOff + 6] == x1 && skyPortalPos[prevPosOff + 7] == y1 && skyPortalPos[prevPosOff + 8] == z1
+				&& skyPortalPos[prevPosOff + 9] == x0 && skyPortalPos[prevPosOff + 10] == y0 && skyPortalPos[prevPosOff + 11] == z0) {
+				skyPortalPos[prevPosOff + 6] = x2;
+				skyPortalPos[prevPosOff + 7] = y2;
+				skyPortalPos[prevPosOff + 8] = z2;
+				skyPortalPos[prevPosOff + 9] = x3;
+				skyPortalPos[prevPosOff + 10] = y3;
+				skyPortalPos[prevPosOff + 11] = z3;
+				skyPortalMergeRun++;
+				return;
+			}
+		}
+
+		if (skyPortalQuadCount >= skyPortalCapacity) {
+			skyPortalCapacity *= 2;
+			skyPortalPos = Arrays.copyOf(skyPortalPos, skyPortalCapacity * 12);
+		}
+		int off = skyPortalQuadCount * 12;
+		skyPortalPos[off] = x0; skyPortalPos[off + 1] = y0; skyPortalPos[off + 2] = z0;
+		skyPortalPos[off + 3] = x1; skyPortalPos[off + 4] = y1; skyPortalPos[off + 5] = z1;
+		skyPortalPos[off + 6] = x2; skyPortalPos[off + 7] = y2; skyPortalPos[off + 8] = z2;
+		skyPortalPos[off + 9] = x3; skyPortalPos[off + 10] = y3; skyPortalPos[off + 11] = z3;
+		skyPortalQuadCount++;
+		skyPortalMergeRun = 1;
+		skyPortalLastFaceDir = faceDir;
+	}
+
+	public static void renderBatchedSkyPortal(PoseStack.Pose pose, VertexConsumer consumer) {
+		for (int q = 0; q < skyPortalQuadCount; q++) {
+			int off = q * 12;
+			consumer.addVertex(pose, skyPortalPos[off], skyPortalPos[off + 1], skyPortalPos[off + 2]);
+			consumer.addVertex(pose, skyPortalPos[off + 3], skyPortalPos[off + 4], skyPortalPos[off + 5]);
+			consumer.addVertex(pose, skyPortalPos[off + 6], skyPortalPos[off + 7], skyPortalPos[off + 8]);
+			consumer.addVertex(pose, skyPortalPos[off + 9], skyPortalPos[off + 10], skyPortalPos[off + 11]);
+		}
+		skyPortalQuadCount = 0;
+		skyPortalSubmitted = false;
+		skyPortalMergeRun = 0;
+		skyPortalLastFaceDir = -1;
+	}
+
+	private void batchLiveSkySolas(PoseStack poseStack, SubmitNodeCollector collector, int activeFacesMask, double bx, double by, double bz) {
+		if (!atmoSubmitted) {
+			atmoSubmitted = true;
+			atmoOriginX = bx; atmoOriginY = by; atmoOriginZ = bz;
+			collector.submitCustomGeometry(poseStack, RenderTypes.entitySolid(WHITE_TEXTURE), SkyboxSimulationBlockEntityRenderer::renderBatchedAtmosphere);
+		}
+
+		double dx = bx - atmoOriginX;
+		double dy = by - atmoOriginY;
+		double dz = bz - atmoOriginZ;
+
+		for (int i = 0; i < 6; i++) {
+			if ((activeFacesMask & (1 << i)) == 0) continue;
+			FaceData data = FACE_DATA_ARRAY[i];
+
+			addAtmoQuad(
+				i,
+				(float) (dx + data.c0x), (float) (dy + data.c0y), (float) (dz + data.c0z), 0xFFFFFF,
+				(float) (dx + data.c1x), (float) (dy + data.c1y), (float) (dz + data.c1z), 0xFFFFFF,
+				(float) (dx + data.c2x), (float) (dy + data.c2y), (float) (dz + data.c2z), 0xFFFFFF,
+				(float) (dx + data.c3x), (float) (dy + data.c3y), (float) (dz + data.c3z), 0xFFFFFF
+			);
+		}
 	}
 
 	// =========================================================================

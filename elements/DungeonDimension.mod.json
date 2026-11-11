@@ -18,7 +18,7 @@
     "useCustomEffects": true,
     "hasClouds": true,
     "cloudHeight": 192,
-    "skyType": "NONE",
+    "skyType": "NORMAL",
     "sunHeightAffectsFog": false,
     "canRespawnHere": false,
     "hasFog": false,

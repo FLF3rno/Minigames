@@ -41,6 +41,7 @@ public class MinigamesModAttributes {
 	public static final DeferredHolder<Attribute, Attribute> EFFECT_POTENCY_2 = REGISTRY.register("effect_potency_2", () -> new RangedAttribute("attribute.minigames.effect_potency_2", 0d, 0d, 1000000d).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> ITEM_SIZE = REGISTRY.register("item_size", () -> new RangedAttribute("attribute.minigames.item_size", 1d, 0.01d, 100000d).setSyncable(true));
 	public static final DeferredHolder<Attribute, Attribute> SHOW_ONE_SHOTTABLE_MOBS = REGISTRY.register("show_one_shottable_mobs", () -> new RangedAttribute("attribute.minigames.show_one_shottable_mobs", 0d, 0d, 1d).setSyncable(true));
+	public static final DeferredHolder<Attribute, Attribute> PRICE = REGISTRY.register("price", () -> new RangedAttribute("attribute.minigames.price", 0d, 0d, 1000000d).setSyncable(true).setSentiment(Attribute.Sentiment.NEUTRAL));
 
 	@SubscribeEvent
 	public static void addAttributes(EntityAttributeModificationEvent event) {
@@ -66,5 +67,6 @@ public class MinigamesModAttributes {
 		event.add(EntityType.PLAYER, EFFECT_POTENCY_2);
 		event.add(EntityType.PLAYER, ITEM_SIZE);
 		event.add(EntityType.PLAYER, SHOW_ONE_SHOTTABLE_MOBS);
+		event.add(EntityType.PLAYER, PRICE);
 	}
 }

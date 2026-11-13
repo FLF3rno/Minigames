@@ -290,5 +290,47 @@
         "stream": false
       }
     ]
+  },
+  "pickupcoin": {
+    "subtitle": "subtitles.pickupcoin",
+    "sounds": [
+      {
+        "name": "minigames:pickupcoin3",
+        "stream": false
+      },
+      {
+        "name": "minigames:pickupcoin2",
+        "stream": false
+      },
+      {
+        "name": "minigames:pickupcoin1",
+        "stream": false
+      }
+    ]
+  },
+  "grind_item": {
+    "subtitle": "subtitles.grind_item",
+    "sounds": [
+      {
+        "name": "minigames:grind_item_3",
+        "stream": false
+      },
+      {
+        "name": "minigames:grind_item_2",
+        "stream": false
+      },
+      {
+        "name": "minigames:grind_item",
+        "stream": false
+      }
+    ]
+  },
+  "grinder_idle": {
+    "sounds": [
+      {
+        "name": "minigames:grinder_idle",
+        "stream": false
+      }
+    ]
   }
 }

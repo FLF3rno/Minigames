@@ -30,17 +30,9 @@ public class AchievementRerollProcedure {
 			_vars.markSyncDirty();
 		}
 		rerollCount = 0;
-		if (world instanceof ServerLevel _level) {
-			for (net.minecraft.server.level.ServerPlayer player : _level.getServer().getPlayerList().getPlayers()) {
-				if ((player.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Rerolling")) {
-					rerollCount = rerollCount + 1;
-				}
-			}
-		} else {
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				if ((entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Rerolling")) {
-					rerollCount = rerollCount + 1;
-				}
+		for (Entity entityiterator : new ArrayList<>(world.players())) {
+			if ((entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).AchievementLobbyState).equals("Rerolling")) {
+				rerollCount = rerollCount + 1;
 			}
 		}
 		if ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) == rerollCount) {

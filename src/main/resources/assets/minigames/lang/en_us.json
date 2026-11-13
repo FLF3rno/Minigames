@@ -468,5 +468,12 @@
   "item.minigames.empty_shop_pedestal": "Empty Shop Pedestal",
   "item.minigames.single_shop_pedestal": "Single Shop Pedestal",
   "item.minigames.team_shop_pedestal": "Team Shop Pedestal",
-  "item.minigames.shop_doors": "Shop Doors"
+  "item.minigames.shop_doors": "Shop Doors",
+  "item.minigames.item_chipper": "Item Chipper",
+  "item.minigames.roguelike_coin": "Roguelike Coin",
+  "subtitles.pickupcoin": "Coin is picked uo",
+  "subtitles.grind_item": "Item is grinded into coins",
+  "subtitles.grinder_idle": "",
+  "attribute.minigames.price": "Price",
+  "item.minigames.slot_upgrade": "+1 Hotbar Slot"
 }

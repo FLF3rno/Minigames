@@ -70,9 +70,11 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 			return;
 		}
 
-		String classDungeon = player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
-		if (!DungeonItemAccess.canClassPickUp(entityStack, classDungeon)) {
-			return;
+		if (!player.isCreative()) {
+			String classDungeon = player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
+			if (!DungeonItemAccess.canClassPickUp(entityStack, classDungeon)) {
+				return;
+			}
 		}
 
 		boolean isRelic = DungeonItemAccess.isRelic(entityStack);
@@ -152,6 +154,16 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 			player,
 			entityStack
 		);
+
+		net.minecraft.core.BlockPos belowPos = net.minecraft.core.BlockPos.containing(px, py - 0.5, pz);
+		net.minecraft.world.level.block.state.BlockState belowState = player.level().getBlockState(belowPos);
+		if (belowState.getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get()
+				|| belowState.getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get()) {
+			player.level().setBlock(belowPos, net.mcreator.minigames.init.MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().defaultBlockState(), 3);
+		} else if (player.level().getBlockState(belowPos.below()).getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get()
+				|| player.level().getBlockState(belowPos.below()).getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get()) {
+			player.level().setBlock(belowPos.below(), net.mcreator.minigames.init.MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().defaultBlockState(), 3);
+		}
 
 		player.containerMenu.broadcastChanges();
 

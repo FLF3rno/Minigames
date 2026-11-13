@@ -25,6 +25,7 @@ public class MinigamesModModels {
 		event.registerLayerDefinition(Modelintersecting_end_rod.LAYER_LOCATION, Modelintersecting_end_rod::createBodyLayer);
 		event.registerLayerDefinition(Modelchain.LAYER_LOCATION, Modelchain::createBodyLayer);
 		event.registerLayerDefinition(Modelworshipper.LAYER_LOCATION, Modelworshipper::createBodyLayer);
+		event.registerLayerDefinition(Modelitemchipper.LAYER_LOCATION, Modelitemchipper::createBodyLayer);
 		event.registerLayerDefinition(Modelpewseat_left.LAYER_LOCATION, Modelpewseat_left::createBodyLayer);
 		event.registerLayerDefinition(Modelcrypt_lurker.LAYER_LOCATION, Modelcrypt_lurker::createBodyLayer);
 		event.registerLayerDefinition(Modeltesla_coil_flavio.LAYER_LOCATION, Modeltesla_coil_flavio::createBodyLayer);

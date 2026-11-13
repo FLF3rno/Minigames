@@ -104,7 +104,8 @@ public class ApplyEffectProcedure {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					if (entityiterator.isAlive()) {
 						if (!(entityiterator == target)) {
-							ApplyEffectProcedure.execute(world, entityiterator, hide, level, GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.WIRELESS_CAULDRON.get()), "minigames:effect_length") / 20, effect);
+							ApplyEffectProcedure.execute(world, entityiterator, hide, level,
+									net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(target, new ItemStack(MinigamesModItems.WIRELESS_CAULDRON.get())), "minigames:effect_length") / 20, effect);
 						}
 						if (world.isClientSide()) {
 							if (world instanceof Level _level) {

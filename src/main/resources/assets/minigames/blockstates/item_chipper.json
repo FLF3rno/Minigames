@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minigames:block/item_chipper"
+    },
+    "facing=east": {
+      "model": "minigames:block/item_chipper",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "minigames:block/item_chipper",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minigames:block/item_chipper",
+      "y": 270
+    }
+  }
+}

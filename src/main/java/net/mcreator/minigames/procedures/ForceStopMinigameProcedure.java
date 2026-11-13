@@ -21,6 +21,8 @@ public class ForceStopMinigameProcedure {
 				OnWinCrownHuntProcedure.execute(world);
 			} else if (MinigamesModVariables.MapVariables.get(world).playingSpleef) {
 				StopSpleefProcedure.execute(world);
+			} else if (MinigamesModVariables.MapVariables.get(world).playingDungeons) {
+				EndDungeonProcedure.execute(world);
 			}
 		} else {
 			if (entity instanceof ServerPlayer _player)

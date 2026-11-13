@@ -20,6 +20,8 @@ public final class DungeonItemAccess {
 	public static final TagKey<Item> DUNGEON_TYPE_RELIC = itemTag("minigames:dungeon_type_relic");
 	public static final TagKey<Item> DUNGEON_TYPE_WEAPON = itemTag("minigames:dungeon_type_weapon");
 	public static final TagKey<Item> HOTBAR_LOCKED = itemTag("minigames:hotbar_locked");
+	public static final TagKey<Item> DUNGEON_SHOP = itemTag("minigames:dungeon_shop");
+	public static final TagKey<Item> DUNGEON_SHOP_TEAM = itemTag("minigames:dungeon_shop_team");
 
 	private DungeonItemAccess() {
 	}
@@ -28,8 +30,20 @@ public final class DungeonItemAccess {
 		return stack != null && !stack.isEmpty() && stack.is(HOTBAR_LOCKED);
 	}
 
+	public static boolean isShopItem(ItemStack stack) {
+		return stack != null && !stack.isEmpty() && (stack.is(DUNGEON_SHOP) || stack.is(DUNGEON_SHOP_TEAM));
+	}
+
 	public static boolean isDungeonItem(ItemStack stack) {
-		return stack.is(DUNGEON_WARRIOR) || stack.is(DUNGEON_THIEF) || stack.is(DUNGEON_SUPPORT) || stack.is(DUNGEON_MAGE);
+		if (stack == null || stack.isEmpty()) {
+			return false;
+		}
+		return stack.is(DUNGEON_WARRIOR)
+				|| stack.is(DUNGEON_THIEF)
+				|| stack.is(DUNGEON_SUPPORT)
+				|| stack.is(DUNGEON_MAGE)
+				|| stack.is(DUNGEON_SHOP)
+				|| stack.is(DUNGEON_SHOP_TEAM);
 	}
 
 	public static boolean isDungeonWeapon(ItemStack stack) {
@@ -238,6 +252,47 @@ public final class DungeonItemAccess {
 		if (dropped && player.containerMenu != null) {
 			player.containerMenu.broadcastChanges();
 		}
+	}
+
+		public static void setItemAttribute(ItemStack item, String attribute, double value, String slotStr, String operationStr) {
+		if (item == null || item.isEmpty() || attribute == null || attribute.isEmpty())
+			return;
+
+		java.util.Optional<net.minecraft.core.Holder.Reference<net.minecraft.world.entity.ai.attributes.Attribute>> attrHolder =
+				net.minecraft.core.registries.BuiltInRegistries.ATTRIBUTE.get(Identifier.parse(attribute));
+		if (attrHolder.isEmpty())
+			return;
+
+		net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attrTarget = attrHolder.get();
+
+		net.minecraft.world.entity.EquipmentSlotGroup slotGroup;
+		try {
+			slotGroup = net.minecraft.world.entity.EquipmentSlotGroup.valueOf(slotStr.toUpperCase());
+		} catch (Exception e) {
+			slotGroup = net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND;
+		}
+
+		net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation operation;
+		try {
+			operation = net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.valueOf(operationStr.toUpperCase());
+		} catch (Exception e) {
+			operation = net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
+		}
+
+		net.minecraft.world.item.component.ItemAttributeModifiers existing =
+				item.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, net.minecraft.world.item.component.ItemAttributeModifiers.EMPTY);
+		net.minecraft.world.item.component.ItemAttributeModifiers.Builder builder = net.minecraft.world.item.component.ItemAttributeModifiers.builder();
+
+		for (net.minecraft.world.item.component.ItemAttributeModifiers.Entry entry : existing.modifiers()) {
+			if (!entry.attribute().equals(attrTarget) || entry.slot() != slotGroup) {
+				builder.add(entry.attribute(), entry.modifier(), entry.slot());
+			}
+		}
+
+		Identifier modifierId = Identifier.fromNamespaceAndPath(
+				"minigames", "modifier_" + Identifier.parse(attribute).getPath().toLowerCase());
+		builder.add(attrTarget, new net.minecraft.world.entity.ai.attributes.AttributeModifier(modifierId, value, operation), slotGroup);
+		item.set(DataComponents.ATTRIBUTE_MODIFIERS, builder.build());
 	}
 
 	private static TagKey<Item> itemTag(String id) {

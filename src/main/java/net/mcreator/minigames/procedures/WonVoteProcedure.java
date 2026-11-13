@@ -92,8 +92,8 @@ public class WonVoteProcedure {
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
 							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
-							"/execute in minigames:dungeon_dimension run tp @a -85 5 -69 facing -85 13 -100");
-				SpawnShopRoomProcedure.execute(world, -100, 0, -100);
+							"/execute in minigames:dungeon_dimension run tp @a -85 105 -69 facing -85 113 -100");
+				SpawnShopRoomProcedure.execute(world, -100, 100, -100);
 				MinigamesModVariables.MapVariables.get(world).currentRoomType = "shop";
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 			}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minigames:block/itemchipper",
+    "particle": "minigames:block/itemchipper"
+  }
+}

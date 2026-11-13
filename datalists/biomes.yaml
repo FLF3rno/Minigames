@@ -1,0 +1,130 @@
+- ocean:
+  readable_name: "Ocean"
+- plains:
+  readable_name: "Plains"
+- desert:
+  readable_name: "Desert"
+- mountains:
+  readable_name: "Windswept hills"
+- forest:
+  readable_name: "Forest"
+- taiga:
+  readable_name: "Taiga"
+- mangrove_swamp:
+  readable_name: "Mangrove swamp"
+- swamp:
+  readable_name: "Swamp"
+- river:
+  readable_name: "River"
+- nether:
+  readable_name: "Nether wastes"
+- the_end:
+  readable_name: "The End"
+- frozen_ocean:
+  readable_name: "Frozen ocean"
+- frozen_river:
+  readable_name: "Frozen river"
+- snowy_tundra:
+  readable_name: "Snowy plains"
+- mushroom_fields:
+  readable_name: "Mushroom fields"
+- beaches:
+  readable_name: "Beach"
+- jungle:
+  readable_name: "Jungle"
+- jungle_edge:
+  readable_name: "Sparse jungle"
+- deep_ocean:
+  readable_name: "Deep ocean"
+- stone_beach:
+  readable_name: "Stony shore"
+- cold_beach:
+  readable_name: "Snowy beach"
+- birch_forest:
+  readable_name: "Birch forest"
+- roofed_forest:
+  readable_name: "Dark forest"
+- taiga_cold:
+  readable_name: "Snowy taiga"
+- redwood_taiga:
+  readable_name: "Old growth pine taiga"
+- extreme_hills_with_trees:
+  readable_name: "Windswept forest"
+- savanna:
+  readable_name: "Savanna"
+- savanna_rock:
+  readable_name: "Savanna plateau"
+- badlands:
+  readable_name: "Badlands"
+- wooded_badlands_plateau:
+  readable_name: "Wooded badlands"
+- warm_ocean:
+  readable_name: "Warm ocean"
+- lukewarm_ocean:
+  readable_name: "Lukewarm ocean"
+- cold_ocean:
+  readable_name: "Cold ocean"
+- deep_lukewarm_ocean:
+  readable_name: "Deep lukewarm ocean"
+- deep_cold_ocean:
+  readable_name: "Deep cold ocean"
+- deep_frozen_ocean:
+  readable_name: "Deep frozen ocean"
+- mutated_plains:
+  readable_name: "Sunflower plains"
+- mutated_extreme_hills:
+  readable_name: "Windswept gravelly hills"
+- mutated_forest:
+  readable_name: "Flower forest"
+- mutated_ice_flats:
+  readable_name: "Ice spikes"
+- mutated_birch_forest:
+  readable_name: "Old growth birch forest"
+- mutated_redwood_taiga:
+  readable_name: "Old growth spruce taiga"
+- mutated_savanna:
+  readable_name: "Windswept savanna"
+- mutated_mesa:
+  readable_name: "Eroded badlands"
+- bamboo_jungle:
+  readable_name: "Bamboo jungle"
+- small_end_islands:
+  readable_name: "Small End islands"
+- end_midlands:
+  readable_name: "End midlands"
+- end_highlands:
+  readable_name: "End highlands"
+- end_barrens:
+  readable_name: "End barrens"
+- void:
+  readable_name: "The void"
+- soul_sand_valley:
+  readable_name: "Soul sand valley"
+- crimson_forest:
+  readable_name: "Crimson forest"
+- warped_forest:
+  readable_name: "Warped forest"
+- basalt_deltas:
+  readable_name: "Basalt deltas"
+- dripstone_caves:
+  readable_name: "Dripstone caves"
+- lush_caves:
+  readable_name: "Lush caves"
+- deep_dark:
+  readable_name: "Deep dark"
+- meadow:
+  readable_name: "Meadow"
+- cherry_grove:
+  readable_name: "Cherry grove"
+- grove:
+  readable_name: "Grove"
+- snowy_slopes:
+  readable_name: "Snow slopes"
+- frozen_peaks:
+  readable_name: "Frozen peaks"
+- jagged_peaks:
+  readable_name: "Jagged peaks"
+- stony_peaks:
+  readable_name: "Stony peaks"
+- pale_garden:
+  readable_name: "Pale garden"

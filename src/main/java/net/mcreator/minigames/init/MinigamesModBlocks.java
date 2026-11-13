@@ -101,6 +101,7 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SINGLE_SHOP_PEDESTAL;
 	public static final DeferredBlock<Block> TEAM_SHOP_PEDESTAL;
 	public static final DeferredBlock<Block> SHOP_DOORS;
+	public static final DeferredBlock<Block> ITEM_CHIPPER;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -187,6 +188,7 @@ public class MinigamesModBlocks {
 		SINGLE_SHOP_PEDESTAL = register("single_shop_pedestal", SingleShopPedestalBlock::new);
 		TEAM_SHOP_PEDESTAL = register("team_shop_pedestal", TeamShopPedestalBlock::new);
 		SHOP_DOORS = register("shop_doors", ShopDoorsBlock::new);
+		ITEM_CHIPPER = register("item_chipper", ItemChipperBlock::new);
 	}
 
 	// Start of user code block custom blocks

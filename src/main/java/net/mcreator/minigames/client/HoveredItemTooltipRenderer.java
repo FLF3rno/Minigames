@@ -1,5 +1,6 @@
 package net.mcreator.minigames.client;
 
+import net.mcreator.minigames.procedures.GetItemAttributeProcedure;
 import net.minecraft.client.Camera;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -152,7 +153,7 @@ public class HoveredItemTooltipRenderer {
         if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && event.getAction() == GLFW.GLFW_PRESS && currentTargetItem != null) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.screen == null && mc.player != null) {
-                if (!isFullForItem(mc.player, currentTargetItem.getItem())) {
+                if (canCurrentPlayerPickUp(currentTargetItem.getItem(), mc) && !isFullForItem(mc.player, currentTargetItem.getItem())) {
                     ClientPacketDistributor.sendToServer(new DungeonItemPickupMessage(currentTargetItem.getId()));
                 }
             }
@@ -296,7 +297,13 @@ public class HoveredItemTooltipRenderer {
 
         Style promptStyle = (canPickUp && !full) ? goldBold : redBold;
         String fullPrompt;
-        if (!canPickUp) {
+        if (DungeonItemAccess.isShopItem(itemEntity.getItem())) {
+            if (GetItemAttributeProcedure.execute(itemEntity.getItem(), "minigames:price") <= MinigamesModVariables.MapVariables.get(minecraft.level).dungeonCoins)
+                promptStyle = goldBold;
+            else
+                promptStyle = redBold;
+            fullPrompt = "BUY  \uE002" + (int) GetItemAttributeProcedure.execute(itemEntity.getItem(), "minigames:price");
+        } else if (!canPickUp) {
             fullPrompt = "WRONG CLASS";
         } else if (full) {
             fullPrompt = isRelic ? "RELIC SLOTS FULL" : "INVENTORY FULL";
@@ -310,7 +317,11 @@ public class HoveredItemTooltipRenderer {
         if (oneLine) {
             maxWidth = Math.max(maxWidth, fullPromptWidth);
         } else {
-            if (!canPickUp) {
+            if (DungeonItemAccess.isShopItem(itemEntity.getItem())) {
+                maxWidth = Math.max(maxWidth, font.width(Component.literal("BUY").setStyle(promptStyle)));
+                maxWidth = Math.max(maxWidth, font.width(Component.literal("\uE002" + (int) GetItemAttributeProcedure.execute(itemEntity.getItem(), "minigames:price")).setStyle(promptStyle)));
+            }
+            else if (!canPickUp) {
                 maxWidth = Math.max(maxWidth, font.width(Component.literal("WRONG").setStyle(promptStyle)));
                 maxWidth = Math.max(maxWidth, font.width(Component.literal("CLASS").setStyle(promptStyle)));
             } else if (full) {
@@ -449,12 +460,21 @@ public class HoveredItemTooltipRenderer {
         if (stack.is(DungeonItemAccess.DUNGEON_MAGE)) {
             return new ClassInfo("MAGE ONLY", MAGE_COLOR);
         }
+        if (stack.is(DungeonItemAccess.DUNGEON_SHOP_TEAM)) {
+            return new ClassInfo("FOR EVERYONE", 0xFFD700);
+        }
+        if (stack.is(DungeonItemAccess.DUNGEON_SHOP)) {
+            return new ClassInfo("INDIVIDUAL", 0xFFFFFF);
+        }
         return null;
     }
 
     private static boolean canCurrentPlayerPickUp(ItemStack stack, Minecraft minecraft) {
         if (minecraft.player == null) {
             return false;
+        }
+        if (minecraft.player.isCreative()) {
+            return true;
         }
         String classDungeon = minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
         return DungeonItemAccess.canClassPickUp(stack, classDungeon);

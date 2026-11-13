@@ -1,0 +1,71 @@
+{
+  "args0": [
+    {
+      "type": "field_number",
+      "name": "tries",
+      "value": 128,
+      "min": 1,
+      "max": 4096,
+      "precision": 1
+    },
+    {
+      "type": "field_number",
+      "name": "xzSpread",
+      "value": 7,
+      "min": 0,
+      "max": 16,
+      "precision": 1
+    },
+    {
+      "type": "field_number",
+      "name": "ySpread",
+      "value": 3,
+      "min": 0,
+      "max": 16,
+      "precision": 1
+    },
+    {
+      "type": "input_value",
+      "name": "block",
+      "check": "BlockStateProvider"
+    },
+    {
+      "type": "input_value",
+      "name": "condition",
+      "check": "BlockPredicate"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_checkbox",
+      "name": "schedule_tick"
+    }
+  ],
+  "inputsInline": false,
+  "output": "Feature",
+  "colour": 0,
+  "extensions": [
+    "add_image_to_bsp_inputs"
+  ],
+  "mcreator": {
+    "toolbox_id": "features",
+    "toolbox_init": [
+      "<value name=\"block\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>",
+      "<value name=\"condition\"><block type=\"block_predicate_is_air\"></block></value>"
+    ],
+    "inputs": [
+      "block",
+      "condition"
+    ],
+    "fields": [
+      "tries",
+      "xzSpread",
+      "ySpread",
+      "schedule_tick"
+    ]
+  }
+}

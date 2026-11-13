@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: net.mcreator.Launcher
+MCreator-Version: 2026.2
+Build-Date: 33518
+Build-Is-Snapshot: false
+

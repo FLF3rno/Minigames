@@ -16,6 +16,14 @@
             "chars": [
                 "\uE001"
             ]
+        },{
+            "type": "bitmap",
+            "file": "minigames:font/dungeon_coin.png",
+            "height": 8,
+            "ascent": 8,
+            "chars": [
+                "\uE002"
+            ]
         }
         
     ]

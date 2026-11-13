@@ -11545,8 +11545,7 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/PlayingMinigameProcedure.java"
         ]
-      },
-      "path": "~/General/Forcestop"
+      }
     },
     {
       "name": "UpdateTablist",
@@ -17595,7 +17594,8 @@
           "src/main/java/net/mcreator/minigames/network/RoguelikeStartGameButtonMessage.java",
           "src/main/java/net/mcreator/minigames/client/gui/RoguelikeStartGameScreen.java"
         ]
-      }
+      },
+      "path": "~/Dungeon"
     },
     {
       "name": "StartRoguelike",
@@ -17617,7 +17617,8 @@
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/StartRoguelikeProcedure.java"
         ]
-      }
+      },
+      "path": "~/Dungeon"
     },
     {
       "name": "PopulateRoomDeck",
@@ -17807,7 +17808,7 @@
       "name": "SpawnShopRoom",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "spawn_shop_room",
       "metadata": {
         "dependencies": [
@@ -17937,6 +17938,334 @@
         ]
       },
       "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "ItemChipper",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "item_chipper",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/ItemChipperBlock.java",
+          "src/main/java/net/mcreator/minigames/block/entity/ItemChipperBlockEntity.java",
+          "src/main/java/net/mcreator/minigames/client/renderer/block/ItemChipperRenderer.java",
+          "src/main/resources/data/minigames/loot_table/blocks/item_chipper.json",
+          "src/main/resources/assets/minigames/models/block/item_chipper.json",
+          "src/main/resources/assets/minigames/blockstates/item_chipper.json",
+          "src/main/resources/assets/minigames/items/item_chipper.json",
+          "src/main/resources/assets/minigames/models/item/item_chipper.json"
+        ],
+        "ambientSound": "CUSTOM:grinder_idle",
+        "ambientSoundDelay": 0.0,
+        "muteConnectedBlocks": true,
+        "ambientSoundRange": 1.0
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "ItemChipperEntityCollidesInTheBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "item_chipper_entity_collides_in_the_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ItemChipperEntityCollidesInTheBlockProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "RoguelikeCoin",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "roguelike_coin",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/roguelike_coin.json",
+          "src/main/resources/assets/minigames/items/roguelike_coin.json",
+          "src/main/java/net/mcreator/minigames/item/RoguelikeCoinItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "CoinPickedUp",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "coin_picked_up",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/CoinPickedUpProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "SpawnCoinsFromTube",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_coins_from_tube",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnCoinsFromTubeProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "SpawnShopItem",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_shop_item",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnShopItemProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "ChooseRandomShopItem",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choose_random_shop_item",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "itemstack",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChooseRandomShopItemProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "SpawnShopItemTeam",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "spawn_shop_item_team",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpawnShopItemTeamProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "ChooseRandomShopItemTeam",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "choose_random_shop_item_team",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "itemstack",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ChooseRandomShopItemTeamProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop"
+    },
+    {
+      "name": "Price",
+      "type": "attribute",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "price",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/Dungeon/Shop/Upgrades"
+    },
+    {
+      "name": "SlotUpgrade",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slot_upgrade",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SlotUpgradeItem.java",
+          "src/main/resources/assets/minigames/items/slot_upgrade.json",
+          "src/main/resources/assets/minigames/models/item/slot_upgrade.json"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "SlotUpgradeDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "slot_upgrade_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SlotUpgradeDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "IndividualPriceAlteration",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "individual_price_alteration",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IndividualPriceAlterationProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades"
+    },
+    {
+      "name": "IndividualUpgradePickedUp",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "individual_upgrade_picked_up",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/IndividualUpgradePickedUpProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades"
+    },
+    {
+      "name": "TeamPriceAlteration",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "team_price_alteration",
+      "metadata": {
+        "dependencies": [],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TeamPriceAlterationProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades"
     }
   ],
   "variable_elements": [
@@ -19095,6 +19424,34 @@
       ],
       "category": "player",
       "subtitle": "Coins are obtained"
+    },
+    {
+      "name": "pickupcoin",
+      "files": [
+        "pickupcoin3",
+        "pickupcoin2",
+        "pickupcoin1"
+      ],
+      "category": "player",
+      "subtitle": "Coin is picked uo"
+    },
+    {
+      "name": "grind_item",
+      "files": [
+        "grind_item_3",
+        "grind_item_2",
+        "grind_item"
+      ],
+      "category": "block",
+      "subtitle": "Item is grinded into coins"
+    },
+    {
+      "name": "grinder_idle",
+      "files": [
+        "grinder_idle"
+      ],
+      "category": "neutral",
+      "subtitle": ""
     }
   ],
   "tag_elements": {
@@ -19612,6 +19969,12 @@
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "ITEMS:mod:dungeon_shop": [
+      "CUSTOM:SlotUpgrade"
+    ],
+    "ITEMS:mod:dungeon_shop_team": [
+      "Blocks.DEEPSLATE_TILES"
     ]
   },
   "tab_element_order": {},
@@ -20086,7 +20449,14 @@
       "item.minigames.empty_shop_pedestal": "Empty Shop Pedestal",
       "item.minigames.single_shop_pedestal": "Single Shop Pedestal",
       "item.minigames.team_shop_pedestal": "Team Shop Pedestal",
-      "item.minigames.shop_doors": "Shop Doors"
+      "item.minigames.shop_doors": "Shop Doors",
+      "item.minigames.item_chipper": "Item Chipper",
+      "item.minigames.roguelike_coin": "Roguelike Coin",
+      "subtitles.pickupcoin": "Coin is picked uo",
+      "subtitles.grind_item": "Item is grinded into coins",
+      "subtitles.grinder_idle": "",
+      "attribute.minigames.price": "Price",
+      "item.minigames.slot_upgrade": "+1 Hotbar Slot"
     }
   },
   "metadata": {
@@ -20714,7 +21084,21 @@
           },
           {
             "name": "Shop",
-            "children": []
+            "children": [
+              {
+                "name": "Upgrades",
+                "children": [
+                  {
+                    "name": "Individual",
+                    "children": []
+                  },
+                  {
+                    "name": "Team",
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       },

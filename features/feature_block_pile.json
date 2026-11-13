@@ -1,0 +1,24 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "block",
+      "check": "BlockStateProvider"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Feature",
+  "colour": 0,
+  "extensions": [
+    "add_image_to_bsp_inputs"
+  ],
+  "mcreator": {
+    "toolbox_id": "features",
+    "toolbox_init": [
+      "<value name=\"block\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>"
+    ],
+    "inputs": [
+      "block"
+    ]
+  }
+}

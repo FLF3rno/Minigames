@@ -1,0 +1,41 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "cap",
+      "check": "BlockStateProvider"
+    },
+    {
+      "type": "input_value",
+      "name": "stem",
+      "check": "BlockStateProvider"
+    },
+    {
+      "type": "field_number",
+      "name": "radius",
+      "value": 3,
+      "min": 0,
+      "precision": 1
+    }
+  ],
+  "inputsInline": true,
+  "output": "Feature",
+  "colour": 0,
+  "extensions": [
+    "add_image_to_bsp_inputs"
+  ],
+  "mcreator": {
+    "toolbox_id": "features",
+    "toolbox_init": [
+      "<value name=\"cap\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>",
+      "<value name=\"stem\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>"
+    ],
+    "inputs": [
+      "cap",
+      "stem"
+    ],
+    "fields": [
+      "radius"
+    ]
+  }
+}

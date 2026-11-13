@@ -16,8 +16,8 @@ import net.mcreator.minigames.init.MinigamesModBlocks;
 public class SelectPedestalTypeShopProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
-			if (Mth.nextInt(RandomSource.create(), 1, 3) == 1) {
-				if (Mth.nextInt(RandomSource.create(), 1, 100) <= 85) {
+			if (Mth.nextInt(RandomSource.create(), 1, 5) != 1) {
+				if (Mth.nextInt(RandomSource.create(), 1, 100) <= 65) {
 					world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get().defaultBlockState(), 3);
 				} else {
 					world.setBlock(BlockPos.containing(x, y, z), MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get().defaultBlockState(), 3);

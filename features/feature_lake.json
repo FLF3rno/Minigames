@@ -1,0 +1,34 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "fluid",
+      "check": "BlockStateProvider"
+    },
+    {
+      "type": "input_value",
+      "name": "border",
+      "check": "BlockStateProvider"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Feature",
+  "colour": 0,
+  "extensions": [
+    "add_image_to_bsp_inputs"
+  ],
+  "mcreator": {
+    "toolbox_id": "features",
+    "toolbox_init": [
+      "<value name=\"fluid\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>",
+      "<value name=\"border\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>"
+    ],
+    "inputs": [
+      "fluid",
+      "border"
+    ],
+    "warnings": [
+      "lake_feature_crash"
+    ]
+  }
+}

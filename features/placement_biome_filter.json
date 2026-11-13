@@ -1,0 +1,13 @@
+{
+  "extensions": [
+    "disable_inside_inline_placed_feature"
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": "Placement",
+  "colour": 130,
+  "mcreator": {
+    "group": "filter",
+    "toolbox_id": "placements"
+  }
+}

@@ -357,6 +357,12 @@ public class PlayerSlotsOverlay {
         if (stack.is(DungeonItemAccess.DUNGEON_MAGE)) {
             return new ClassInfo(0xFF55FF);
         }
+        if (stack.is(DungeonItemAccess.DUNGEON_SHOP_TEAM)) {
+            return new ClassInfo(0xFFD700);
+        }
+        if (stack.is(DungeonItemAccess.DUNGEON_SHOP)) {
+            return new ClassInfo(0xFFFFFF);
+        }
         return null;
     }
 

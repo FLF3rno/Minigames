@@ -157,7 +157,6 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
-    "onTickUpdate": "SelectPedestalTypeShop",
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

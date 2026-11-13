@@ -157,6 +157,7 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
+    "onBlockAdded": "SpawnShopItemTeam",
     "generateFeature": false,
     "restrictionBiomes": [],
     "blocksToReplace": [

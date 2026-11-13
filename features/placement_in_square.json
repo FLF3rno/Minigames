@@ -1,0 +1,12 @@
+{
+  "extensions": [
+    "disable_repeated_random_xz"
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": "Placement",
+  "colour": 130,
+  "mcreator": {
+    "toolbox_id": "placements"
+  }
+}

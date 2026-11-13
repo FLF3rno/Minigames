@@ -1,0 +1,46 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "contents",
+      "check": "MCItemBlock"
+    },
+    {
+      "type": "input_value",
+      "name": "rim",
+      "check": "MCItemBlock"
+    },
+    {
+      "type": "input_value",
+      "name": "size",
+      "check": "IntProvider"
+    },
+    {
+      "type": "input_value",
+      "name": "rimSize",
+      "check": "IntProvider"
+    }
+  ],
+  "extensions": [
+    "delta_feature_validator",
+    "add_image_to_blockstate_inputs"
+  ],
+  "inputsInline": true,
+  "output": "Feature",
+  "colour": 0,
+  "mcreator": {
+    "toolbox_id": "features",
+    "toolbox_init": [
+      "<value name=\"contents\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>",
+      "<value name=\"rim\"><block type=\"blockstate_selector\"><mutation inputs=\"0\"/><field name=\"block\"></field></block></value>",
+      "<value name=\"size\"><block type=\"int_provider_constant\"><field name=\"value\">5</field></block></value>",
+      "<value name=\"rimSize\"><block type=\"int_provider_constant\"><field name=\"value\">1</field></block></value>"
+    ],
+    "inputs": [
+      "contents",
+      "rim",
+      "size",
+      "rimSize"
+    ]
+  }
+}

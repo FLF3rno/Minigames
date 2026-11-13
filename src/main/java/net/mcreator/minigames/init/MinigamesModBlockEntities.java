@@ -44,6 +44,7 @@ public class MinigamesModBlockEntities {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThiefItemPedestalBlockEntity>> THIEF_ITEM_PEDESTAL = register("thief_item_pedestal", MinigamesModBlocks.THIEF_ITEM_PEDESTAL, ThiefItemPedestalBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MageItemPedestalBlockEntity>> MAGE_ITEM_PEDESTAL = register("mage_item_pedestal", MinigamesModBlocks.MAGE_ITEM_PEDESTAL, MageItemPedestalBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GiantBellBlockEntity>> GIANT_BELL = register("giant_bell", MinigamesModBlocks.GIANT_BELL, GiantBellBlockEntity::new);
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ItemChipperBlockEntity>> ITEM_CHIPPER = register("item_chipper", MinigamesModBlocks.ITEM_CHIPPER, ItemChipperBlockEntity::new);
 	// Start of user code block custom block entities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AscenscionBlockEntity>> ASCENSCION = register("ascenscion", MinigamesModBlocks.ASCENSCION, AscenscionBlockEntity::new);
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FightDoorsBlockEntity>> FIGHT_DOORS = register("fight_doors", MinigamesModBlocks.FIGHT_DOORS, FightDoorsBlockEntity::new);
@@ -88,5 +89,6 @@ public class MinigamesModBlockEntities {
 		event.registerBlockEntity(Capabilities.Item.BLOCK, THIEF_ITEM_PEDESTAL.get(), WorldlyContainerWrapper::new);
 		event.registerBlockEntity(Capabilities.Item.BLOCK, MAGE_ITEM_PEDESTAL.get(), WorldlyContainerWrapper::new);
 		event.registerBlockEntity(Capabilities.Item.BLOCK, GIANT_BELL.get(), WorldlyContainerWrapper::new);
+		event.registerBlockEntity(Capabilities.Item.BLOCK, ITEM_CHIPPER.get(), WorldlyContainerWrapper::new);
 	}
 }

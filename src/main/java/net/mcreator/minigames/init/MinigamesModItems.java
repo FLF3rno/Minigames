@@ -177,6 +177,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SINGLE_SHOP_PEDESTAL;
 	public static final DeferredItem<Item> TEAM_SHOP_PEDESTAL;
 	public static final DeferredItem<Item> SHOP_DOORS;
+	public static final DeferredItem<Item> ITEM_CHIPPER;
+	public static final DeferredItem<Item> ROGUELIKE_COIN;
+	public static final DeferredItem<Item> SLOT_UPGRADE;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -325,6 +328,9 @@ public class MinigamesModItems {
 		SINGLE_SHOP_PEDESTAL = block(MinigamesModBlocks.SINGLE_SHOP_PEDESTAL);
 		TEAM_SHOP_PEDESTAL = block(MinigamesModBlocks.TEAM_SHOP_PEDESTAL);
 		SHOP_DOORS = block(MinigamesModBlocks.SHOP_DOORS);
+		ITEM_CHIPPER = block(MinigamesModBlocks.ITEM_CHIPPER);
+		ROGUELIKE_COIN = register("roguelike_coin", RoguelikeCoinItem::new);
+		SLOT_UPGRADE = register("slot_upgrade", SlotUpgradeItem::new);
 	}
 
 	// Start of user code block custom items

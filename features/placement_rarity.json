@@ -1,0 +1,22 @@
+{
+  "args0": [
+    {
+      "type": "field_number",
+      "name": "rarity",
+      "value": 5,
+      "min": 1,
+      "precision": 1
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": "Placement",
+  "colour": 130,
+  "mcreator": {
+    "group": "filter",
+    "toolbox_id": "placements",
+    "fields": [
+      "rarity"
+    ]
+  }
+}

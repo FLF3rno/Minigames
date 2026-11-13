@@ -19,11 +19,12 @@ public class PowerHarvesterHitProcedure {
 		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(MinigamesModMobEffects.STUNNED)) {
 			if (sourceentity instanceof LivingEntity _livEnt1 && _livEnt1.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST)) {
 				ApplyEffectProcedure.execute(world, sourceentity, true,
-						GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage")
+						net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage")
 								+ (sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.DAMAGE_BOOST) ? _livEnt.getEffect(MinigamesModMobEffects.DAMAGE_BOOST).getAmplifier() : 0) + 1,
-						GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_boost");
+						net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_boost");
 			} else {
-				ApplyEffectProcedure.execute(world, sourceentity, true, GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_boost");
+				ApplyEffectProcedure.execute(world, sourceentity, true, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage"),
+						net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_boost");
 			}
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {

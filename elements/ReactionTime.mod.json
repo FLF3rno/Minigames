@@ -76,13 +76,13 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:EffectLength",
-        "amount": 25.0,
+        "amount": 80.0,
         "operation": "ADD_VALUE"
       },
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ExtraDamage",
-        "amount": 35.0,
+        "amount": 40.0,
         "operation": "ADD_VALUE"
       }
     ]

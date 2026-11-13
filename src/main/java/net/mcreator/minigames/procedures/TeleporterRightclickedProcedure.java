@@ -18,7 +18,7 @@ public class TeleporterRightclickedProcedure {
 		Vec3 userPos = Vec3.ZERO;
 		Vec3 victimPos = Vec3.ZERO;
 		if (ReturnHoveredTeammateProcedure.execute(world, entity) != null) {
-			ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+			ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 			userPos = entity.position();
 			victimPos = ReturnHoveredTeammateProcedure.execute(world, entity).position();
 			if (world instanceof Level _level) {

@@ -23,7 +23,7 @@ public class PlagueStarterRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		if (world instanceof ServerLevel _level) {
 			Entity entityToSpawn = MinigamesModEntities.PLAGUE_MIDDLE.get().spawn(_level, BlockPos.containing(x, y + 1, z), EntitySpawnReason.MOB_SUMMONED);
 			if (entityToSpawn != null) {

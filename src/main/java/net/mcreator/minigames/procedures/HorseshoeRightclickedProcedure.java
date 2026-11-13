@@ -14,8 +14,9 @@ public class HorseshoeRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"));
-		ApplyEffectProcedure.execute(world, entity, false, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minecraft:luck");
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"));
+		ApplyEffectProcedure.execute(world, entity, false, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"),
+				net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minecraft:luck");
 		if (!world.isClientSide()) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {

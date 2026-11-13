@@ -10,7 +10,7 @@ public class HumanCannonballInventoryCooldownProcedure {
 			return;
 		if (entity.getPersistentData().getBooleanOr("humanCannonball", false)) {
 			if (entity instanceof Player _player)
-				_player.getCooldowns().addCooldown(itemstack, (int) GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+				_player.getCooldowns().addCooldown(itemstack, (int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		}
 	}
 }

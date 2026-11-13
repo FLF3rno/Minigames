@@ -38,7 +38,8 @@ public class PerformDashProcedure {
 				thrustersActive = false;
 				if (CheckAllPlayersRelicProcedure.execute(world, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get()))) {
 					thrustersActive = true;
-					extraImpulse = GetItemAttributeProcedure.execute(ReturnAllPlayersRelicItemstackProcedure.execute(world, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get())), "minigames:effect_potency") / 100 + extraImpulse;
+					extraImpulse = net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnAllPlayersRelicItemstackProcedure.execute(world, new ItemStack(MinigamesModItems.THRUSTERS_ROGUELIKE.get())), "minigames:effect_potency")
+							/ 100 + extraImpulse;
 				}
 				extraImpulse = extraImpulse + 1;
 				entity.setDeltaMovement(new Vec3((extraImpulse * entity.getLookAngle().x * entity.getData(MinigamesModVariables.PLAYER_VARIABLES).dashLength),
@@ -88,7 +89,7 @@ public class PerformDashProcedure {
 							|| (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.BLANK_SWORD.get()
 							|| (entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.BLANK_LONG_SWORD.get()) {
 						ModifyPercentageCooldownProcedure.execute(world, entity, entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, true, true,
-								GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.MOMENTUM.get())), "minigames:effect_potency"));
+								net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.MOMENTUM.get())), "minigames:effect_potency"));
 					}
 				}
 				if (CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.GRAVITY_BOOTS.get()))) {

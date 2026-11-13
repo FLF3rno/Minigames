@@ -8,6 +8,7 @@ public class SickSickleHitProcedure {
 	public static void execute(LevelAccessor world, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyEffectProcedure.execute(world, entity, false, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:decay");
+		ApplyEffectProcedure.execute(world, entity, false, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"),
+				net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:decay");
 	}
 }

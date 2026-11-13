@@ -6476,10 +6476,6 @@
       "metadata": {
         "dependencies": [
           {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
             "name": "target",
             "type": "entity"
           },
@@ -6490,6 +6486,10 @@
           {
             "name": "type",
             "type": "string"
+          },
+          {
+            "name": "world",
+            "type": "world"
           }
         ],
         "files": [
@@ -6568,10 +6568,6 @@
       "registry_name": "potion_effect_expires",
       "metadata": {
         "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
           {
             "name": "target",
             "type": "entity"
@@ -18096,7 +18092,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnShopItemProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Shop"
+      "path": "~/Dungeon/Shop/Upgrades"
     },
     {
       "name": "ChooseRandomShopItem",
@@ -18111,7 +18107,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ChooseRandomShopItemProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Shop"
+      "path": "~/Dungeon/Shop/Upgrades"
     },
     {
       "name": "SpawnShopItemTeam",
@@ -18142,7 +18138,7 @@
           "src/main/java/net/mcreator/minigames/procedures/SpawnShopItemTeamProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Shop"
+      "path": "~/Dungeon/Shop/Upgrades"
     },
     {
       "name": "ChooseRandomShopItemTeam",
@@ -18157,7 +18153,7 @@
           "src/main/java/net/mcreator/minigames/procedures/ChooseRandomShopItemTeamProcedure.java"
         ]
       },
-      "path": "~/Dungeon/Shop"
+      "path": "~/Dungeon/Shop/Upgrades"
     },
     {
       "name": "Price",
@@ -18207,7 +18203,12 @@
       "locked_code": false,
       "registry_name": "individual_price_alteration",
       "metadata": {
-        "dependencies": [],
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          }
+        ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IndividualPriceAlterationProcedure.java"
         ]
@@ -18260,9 +18261,53 @@
       "locked_code": false,
       "registry_name": "team_price_alteration",
       "metadata": {
-        "dependencies": [],
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/TeamPriceAlterationProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades"
+    },
+    {
+      "name": "TeamUpgradePickedUp",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "team_upgrade_picked_up",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "itemstack",
+            "type": "itemstack"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TeamUpgradePickedUpProcedure.java"
         ]
       },
       "path": "~/Dungeon/Shop/Upgrades"

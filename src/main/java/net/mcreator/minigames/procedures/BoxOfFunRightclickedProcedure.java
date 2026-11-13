@@ -20,11 +20,14 @@ public class BoxOfFunRightclickedProcedure {
 	public static void execute(LevelAccessor world, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			ApplyEffectProcedure.execute(world, entityiterator, false,
-					Mth.nextInt(RandomSource.create(), (int) GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), (int) GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency_2")),
-					Mth.nextInt(RandomSource.create(), (int) GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), (int) GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length_2")), RandomPotionProcedure.execute());
+					Mth.nextInt(RandomSource.create(), (int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"),
+							(int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency_2")),
+					Mth.nextInt(RandomSource.create(), (int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"),
+							(int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length_2")),
+					RandomPotionProcedure.execute());
 			if (world instanceof ServerLevel _level) {
 				_level.sendParticles(MinigamesModParticleTypes.CONFETTI.get(), entityiterator.getX(), entityiterator.getY() + 0.5, entityiterator.getZ(), 80, 0.45, 0.7, 0.45, 0.4);
 			}

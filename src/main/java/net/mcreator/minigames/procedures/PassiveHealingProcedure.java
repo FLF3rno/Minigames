@@ -38,10 +38,11 @@ public class PassiveHealingProcedure {
 					bonus = 0;
 					for (Entity entityiterator : new ArrayList<>(world.players())) {
 						if (CheckRelicProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.EMPTY_HEART_AMULET.get()))) {
-							bonus = GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.EMPTY_HEART_AMULET.get())), "minigames:effect_potency") + bonus;
+							bonus = net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.EMPTY_HEART_AMULET.get())), "minigames:effect_potency")
+									+ bonus;
 						}
 					}
-					DungeonHealProcedure.execute(entity, entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealAmount + entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealAmount * (bonus / 100), "passive");
+					DungeonHealProcedure.execute(world, entity, entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealAmount + entity.getData(MinigamesModVariables.PLAYER_VARIABLES).PassiveHealAmount * (bonus / 100), "passive");
 				}
 			}
 		}

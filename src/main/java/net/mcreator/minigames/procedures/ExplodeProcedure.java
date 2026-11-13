@@ -201,12 +201,18 @@ public class ExplodeProcedure {
 		}
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			if (CheckRelicProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())) && !(type.substring(0, 1)).equals("$")) {
-				MinigamesMod.queueServerWork((int) GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:ability_cooldown"), () -> {
-					ExplodeProcedure.execute(world, x, y, z, OwnedBy, DamagePlayers, OwnerImmune,
-							ExplosionDamage * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
-							ExplosionKnockback * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
-							ExplosionSize * (GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100), "$" + ExplosionType);
-				});
+				MinigamesMod.queueServerWork(
+						(int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:ability_cooldown"), () -> {
+							ExplodeProcedure.execute(world, x, y, z, OwnedBy, DamagePlayers, OwnerImmune, ExplosionDamage
+									* (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency") / 100),
+									ExplosionKnockback
+											* (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency")
+													/ 100),
+									ExplosionSize
+											* (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entityiterator, new ItemStack(MinigamesModItems.CLUSTER_BOMB.get())), "minigames:effect_potency")
+													/ 100),
+									"$" + ExplosionType);
+						});
 			}
 		}
 	}

@@ -34,8 +34,9 @@ public class SupportiveArrowHitProcedure {
 			return;
 		if (immediatesourceentity.is(TagKey.create(Registries.ENTITY_TYPE, Identifier.parse("minigames:arrow")))) {
 			if (CheckRelicProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.SUPPORTIVE.get()))) {
-				ApplyEffectProcedure.execute(world, entity, false, GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.SUPPORTIVE.get())), "minigames:effect_length"),
-						GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.SUPPORTIVE.get())), "minigames:effect_length"), "minigames:speed_boost");
+				ApplyEffectProcedure.execute(world, entity, false,
+						net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.SUPPORTIVE.get())), "minigames:effect_potency"),
+						net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(sourceentity, new ItemStack(MinigamesModItems.SUPPORTIVE.get())), "minigames:effect_length"), "minigames:speed_boost");
 			}
 		}
 	}

@@ -33,11 +33,13 @@ public class FullHealthHitProcedure {
 			return;
 		if (!(entity instanceof Player)) {
 			if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) >= (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) {
-				if (GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:stun_full_health_mobs") >= 1) {
-					ApplyEffectProcedure.execute(world, entity, true, 1, GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:effect_length"), "minigames:stunned");
+				if (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), "minigames:stun_full_health_mobs") >= 1) {
+					ApplyEffectProcedure.execute(world, entity, true, 1,
+							net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), "minigames:effect_length"), "minigames:stunned");
 				}
 				if ((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.MIDAS_LONGSWORD.get()) {
-					ApplyEffectProcedure.execute(world, entity, true, 1, GetItemAttributeProcedure.execute(sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:effect_length"), "minigames:golden");
+					ApplyEffectProcedure.execute(world, entity, true, 1,
+							net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), "minigames:effect_length"), "minigames:golden");
 				}
 			}
 		}

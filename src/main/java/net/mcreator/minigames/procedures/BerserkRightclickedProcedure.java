@@ -20,20 +20,23 @@ public class BerserkRightclickedProcedure {
 		if (entity == null)
 			return;
 		if (entity instanceof LivingEntity _entity) {
-			AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:berserkatkspeed"), (GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency") / 100), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+			AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:berserkatkspeed"), (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency") / 100),
+					AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 			if (!_entity.getAttribute(Attributes.ATTACK_SPEED).hasModifier(modifier.id())) {
 				_entity.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(modifier);
 			}
 		}
 		if (entity instanceof LivingEntity _entity) {
-			AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:berserkatkspeed"), (GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency_2") / 100), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+			AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:berserkatkspeed"), (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency_2") / 100),
+					AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 			if (!_entity.getAttribute(Attributes.ATTACK_DAMAGE).hasModifier(modifier.id())) {
 				_entity.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(modifier);
 			}
 		}
-		ApplyEffectProcedure.execute(world, entity, false, GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:lifesteal");
-		SetOnFireProcedure.execute(world, entity, entity, 0, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "red");
-		MinigamesMod.queueServerWork((int) GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), () -> {
+		ApplyEffectProcedure.execute(world, entity, false, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage"),
+				net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:lifesteal");
+		SetOnFireProcedure.execute(world, entity, entity, 0, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "red");
+		MinigamesMod.queueServerWork((int) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), () -> {
 			if (entity instanceof LivingEntity _entity) {
 				_entity.getAttribute(Attributes.ATTACK_SPEED).removeModifier(Identifier.parse("minigames:berserkatkspeed"));
 			}
@@ -42,7 +45,7 @@ public class BerserkRightclickedProcedure {
 			}
 			CustomFireHelper.clearFire(entity);
 		});
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
 				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.blaze.shoot")), SoundSource.PLAYERS, 1, (float) 0.6);

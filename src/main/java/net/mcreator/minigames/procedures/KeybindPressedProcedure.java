@@ -55,10 +55,8 @@ public class KeybindPressedProcedure {
 		boolean jumpWasDown = entity.getPersistentData()
 				.getBooleanOr("jumpWasDown", false);
 
-		// Detect a NEW press, rather than a held key
 		boolean newJumpPress = jumpDown && !jumpWasDown;
 
-		// Save current key state
 		entity.getPersistentData().putBoolean("jumpWasDown", jumpDown);
 
 		if (doubleJumpsUsed >= 2) {

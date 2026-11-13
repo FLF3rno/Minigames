@@ -18,7 +18,7 @@ public class HammerHitProcedure {
 			} else {
 				amp = 1;
 			}
-			ApplyEffectProcedure.execute(world, entity, false, amp, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minecraft:strength");
+			ApplyEffectProcedure.execute(world, entity, false, amp, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minecraft:strength");
 		}
 	}
 }

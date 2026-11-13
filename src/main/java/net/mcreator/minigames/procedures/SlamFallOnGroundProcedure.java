@@ -8,9 +8,8 @@ import net.neoforged.bus.api.Event;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.Entity;
-
+import net.minecraft.world.item.ItemStack;
 import net.mcreator.minigames.init.MinigamesModItems;
 
 import javax.annotation.Nullable;
@@ -30,21 +29,19 @@ public class SlamFallOnGroundProcedure {
 		execute(null, world, x, y, z, entity);
 	}
 
-	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
-		if (entity == null)
-			return;
-		if (entity.getPersistentData().getBooleanOr("slam", false)) {
-			entity.getPersistentData().putBoolean("slam", false);
-			ExplodeProcedure.execute(world, x, y, z, entity, true, true, 0.1, 0, GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.SLAM.get()), "minigames:ability_range"), "groundbreaking");
-			{
-				final Vec3 _center = new Vec3(x, y, z);
-				for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.SLAM.get()), "minigames:ability_range") / 2d), e -> true)
-						.stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
-					if (!(entityiterator == entity)) {
-						entityiterator.setDeltaMovement(new Vec3(0, GetItemAttributeProcedure.execute(new ItemStack(MinigamesModItems.SLAM.get()), "minigames:effect_potency"), 0));
-					}
-				}
-			}
-		}
-	}
+private static void execute(
+@Nullable Event event,LevelAccessor world, double x, double y, double z, Entity entity) {
+if (
+entity == null ) return ;
+if (entity.getPersistentData().getBooleanOr("slam", false)) {entity.getPersistentData().putBoolean("slam", false);
+ExplodeProcedure.execute(world,x,y,z,entity,true,true,0.1,0,net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((new ItemStack(MinigamesModItems.SLAM.get())), "minigames:ranged_damage"),"groundbreaking")
+;
+{
+final Vec3 _center = new Vec3(x, y, z);
+for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((new ItemStack(MinigamesModItems.SLAM.get())), "minigames:ranged_damage") / 2d), e -> true)
+.stream().sorted(Comparator.<Entity>comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
+if (!(entityiterator == entity)) {entityiterator.setDeltaMovement(new Vec3(0, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((new ItemStack(MinigamesModItems.SLAM.get())), "minigames:effect_potency"), 0));}
+}
+}}
+}
 }

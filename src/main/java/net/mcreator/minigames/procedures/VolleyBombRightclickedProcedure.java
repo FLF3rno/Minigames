@@ -20,7 +20,7 @@ public class VolleyBombRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		ShootProjectileProcedure.execute(world, entity, 0, 0, 0, 0, 0.4, "volleybomb");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
@@ -30,7 +30,7 @@ public class VolleyBombRightclickedProcedure {
 			final Vec3 _center = new Vec3(x, y, z);
 			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(4 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 				if (entityiterator instanceof VolleybombEntityEntity) {
-					entityiterator.getPersistentData().putDouble("explosionDamage", GetItemAttributeProcedure.execute(itemstack, "minigames:explosion_damage"));
+					entityiterator.getPersistentData().putDouble("explosionDamage", net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:explosion_damage"));
 					entityiterator.getPersistentData().putDouble("explosionSize", 3);
 				}
 			}

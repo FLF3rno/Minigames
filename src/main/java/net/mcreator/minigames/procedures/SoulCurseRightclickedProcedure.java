@@ -10,7 +10,7 @@ public class SoulCurseRightclickedProcedure {
 		if (entity == null)
 			return;
 		if (ReturnHoveredTeammateProcedure.execute(world, entity) != null && !(ReturnHoveredTeammateProcedure.execute(world, entity) == entity)) {
-			ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+			ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 			if (world instanceof ServerLevel _level) {
 				itemstack.hurtAndBreak(1, _level, null, _stkprov -> {
 				});

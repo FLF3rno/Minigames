@@ -9,7 +9,7 @@ public class MendingMaceHitProcedure {
 		if (sourceentity == null)
 			return;
 		if (!(sourceentity instanceof Player _plrCldCheck1 && _plrCldCheck1.getCooldowns().isOnCooldown(itemstack))) {
-			ApplyCooldownProcedure.execute(sourceentity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:attack_cooldown"));
+			ApplyCooldownProcedure.execute(sourceentity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minecraft:generic.attack_damage"));
 		}
 	}
 }

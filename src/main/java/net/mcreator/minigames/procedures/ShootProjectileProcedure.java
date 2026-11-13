@@ -109,7 +109,7 @@ public class ShootProjectileProcedure {
 					Entity _ent = shooter;
 					if (_ent.level() instanceof ServerLevel _serverLevel) {
 						_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))),
-								(float) GetItemAttributeProcedure.execute(shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY, "minigames:extra_damage"));
+								(float) net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((shooter instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY), "minigames:extra_damage"));
 					}
 				}
 			} else if ((type).equals("cannonball")) {

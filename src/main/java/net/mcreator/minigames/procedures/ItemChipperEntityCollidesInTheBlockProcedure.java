@@ -42,7 +42,7 @@ public class ItemChipperEntityCollidesInTheBlockProcedure {
 			}
 		}
 		if (entity instanceof ItemEntity) {
-			amount = GetItemAttributeProcedure.execute(entity instanceof ItemEntity _itemEnt ? _itemEnt.getItem() : ItemStack.EMPTY, "minigames:salvage_value");
+			amount = net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((entity instanceof ItemEntity _itemEnt ? _itemEnt.getItem() : ItemStack.EMPTY), "minigames:salvage_value");
 			if (!entity.level().isClientSide())
 				entity.discard();
 			wait = 40;

@@ -13,8 +13,8 @@ public class ObsidianIdleRightclickedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
-		ApplyEffectProcedure.execute(world, entity, false, 1, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:obsidianification");
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyEffectProcedure.execute(world, entity, false, 1, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:obsidianification");
 		if (!world.isClientSide()) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {

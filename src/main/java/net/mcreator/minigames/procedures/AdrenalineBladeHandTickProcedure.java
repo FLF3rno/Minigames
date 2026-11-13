@@ -11,13 +11,15 @@ public class AdrenalineBladeHandTickProcedure {
 			return;
 		if ((entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) < (entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1)) {
 			ApplyEffectProcedure.execute(world, entity, false,
-					GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage") * Math.round(
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)) / GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency")),
-					GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_boost");
+					net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage")
+							* Math.round(((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1))
+									/ net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency")),
+					net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_boost");
 			ApplyEffectProcedure.execute(world, entity, false,
-					GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage") * Math.round(
-							((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1)) / GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency")),
-					GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:speed_boost");
+					net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage")
+							* Math.round(((entity instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1))
+									/ net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency")),
+					net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:speed_boost");
 		}
 	}
 }

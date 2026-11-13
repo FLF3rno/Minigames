@@ -16,7 +16,7 @@ public class CompleteRoomProcedure {
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		BreakDoorProcedure.execute(world, MinigamesModVariables.MapVariables.get(world).DoorPosition.x(), MinigamesModVariables.MapVariables.get(world).DoorPosition.y(), MinigamesModVariables.MapVariables.get(world).DoorPosition.z());
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			DungeonHealProcedure.execute(entityiterator, entityiterator, (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1), "room_complete");
+			DungeonHealProcedure.execute(world, entityiterator, (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) - (entityiterator instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1), "room_complete");
 			if (!(entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).gravity == Direction.DOWN)) {
 				ChangeGravityExecuteProcedure.execute(Direction.DOWN, entityiterator);
 			}

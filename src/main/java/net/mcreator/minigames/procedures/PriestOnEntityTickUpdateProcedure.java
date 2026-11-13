@@ -112,7 +112,7 @@ public class PriestOnEntityTickUpdateProcedure {
 										.send();
 							}
 						}
-						DungeonHealProcedure.execute(entity, healTarget, (healTarget instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 13d, "monster");
+						DungeonHealProcedure.execute(entity.level(), healTarget, (healTarget instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 13d, "monster");
 					} else {
 						RemoveFXEntityServer.destroy(entity).name("photon:priest").force(true).send();
 					}

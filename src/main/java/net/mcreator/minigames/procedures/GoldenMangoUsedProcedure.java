@@ -18,8 +18,8 @@ public class GoldenMangoUsedProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
-		DisplayCircularWooshProcedure.execute(world, x, y, z, entity, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_range"), 1, 20, "gold");
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		DisplayCircularWooshProcedure.execute(world, x, y, z, entity, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_range"), 1, 20, "gold");
 		if (!world.isClientSide()) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
@@ -31,15 +31,15 @@ public class GoldenMangoUsedProcedure {
 		}
 		{
 			final Vec3 _center = new Vec3(x, y, z);
-			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(GetItemAttributeProcedure.execute(itemstack, "minigames:ability_range") / 2d), e -> true).stream()
+			for (Entity entityiterator : world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_range") / 2d), e -> true).stream()
 					.sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList()) {
 				if (entityiterator instanceof Player) {
-					if ((entity.position()).distanceTo((entityiterator.position())) <= GetItemAttributeProcedure.execute(itemstack, "minigames:ability_range")) {
-						ApplyEffectProcedure.execute(world, entityiterator, false, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"),
-								"minigames:damage_resistance");
-						ApplyEffectProcedure.execute(world, entityiterator, false, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency_2"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length_2"),
-								"minigames:golden");
-						DungeonHealProcedure.execute(entity, entityiterator, GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage"), "room_complete");
+					if ((entity.position()).distanceTo((entityiterator.position())) <= net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_range")) {
+						ApplyEffectProcedure.execute(world, entityiterator, false, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"),
+								net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"), "minigames:damage_resistance");
+						ApplyEffectProcedure.execute(world, entityiterator, false, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency_2"),
+								net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length_2"), "minigames:golden");
+						DungeonHealProcedure.execute(world, entityiterator, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:extra_damage"), "room_complete");
 					}
 				}
 			}

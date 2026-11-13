@@ -30,8 +30,9 @@ public class PlayerTookDamageProcedure {
 		if (entity == null)
 			return;
 		if (CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.REACTION_TIME.get()))) {
-			ApplyEffectProcedure.execute(world, entity, false, GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.REACTION_TIME.get())), "minigames:extra_damage"),
-					GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.REACTION_TIME.get())), "minigames:effect_length"), "minigames:damage_boost");
+			ApplyEffectProcedure.execute(world, entity, false,
+					net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.REACTION_TIME.get())), "minigames:extra_damage"),
+					net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(ReturnRelicItemstackProcedure.execute(entity, new ItemStack(MinigamesModItems.REACTION_TIME.get())), "minigames:effect_length"), "minigames:damage_boost");
 		}
 	}
 }

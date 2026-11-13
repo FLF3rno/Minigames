@@ -22,7 +22,8 @@ public class ExplorersCharmTickProcedure {
 				&& CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.EXPLORERS_CHARM.get()))) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				if (entityiterator instanceof LivingEntity _entity) {
-					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:explorerscharm"), (GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency") / 100), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:explorerscharm"), (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency") / 100),
+							AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 					if (!_entity.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(modifier.id())) {
 						_entity.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(modifier);
 					}

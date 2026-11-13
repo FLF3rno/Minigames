@@ -24,7 +24,7 @@ public class FeastRightclickedProcedure {
 			return;
 		ArrayList<Object> arrowInRange = new ArrayList<>();
 		double i = 0;
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		if (world instanceof Level _level) {
 			if (!_level.isClientSide()) {
 				_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.player.burp")), SoundSource.NEUTRAL, 1, 1);
@@ -43,12 +43,12 @@ public class FeastRightclickedProcedure {
 		}
 		i = 0;
 		for (int _i1 = 0; _i1 < (int) arrowInRange.size(); _i1++) {
-			ParticleFlowHelperProcedure.execute(world, 1, 20, "easin", "minecraft:heart", (arrowInRange.get((int) i) instanceof Entity _entity8 ? _entity8 : null).position(), entity.position());
-			if (!(arrowInRange.get((int) i) instanceof Entity _entity11 ? _entity11 : null).level().isClientSide())
-				(arrowInRange.get((int) i) instanceof Entity _entity11 ? _entity11 : null).discard();
+			ParticleFlowHelperProcedure.execute(world, 1, 20, "easin", "minecraft:heart", (arrowInRange.get((int) i) instanceof Entity _entity9 ? _entity9 : null).position(), entity.position());
+			if (!(arrowInRange.get((int) i) instanceof Entity _entity12 ? _entity12 : null).level().isClientSide())
+				(arrowInRange.get((int) i) instanceof Entity _entity12 ? _entity12 : null).discard();
 			i = i + 1;
 			MinigamesMod.queueServerWork(20, () -> {
-				DungeonHealProcedure.execute(entity, entity, GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), "utility");
+				DungeonHealProcedure.execute(world, entity, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), "utility");
 			});
 		}
 	}

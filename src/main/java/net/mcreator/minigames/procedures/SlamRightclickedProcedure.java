@@ -15,6 +15,6 @@ public class SlamRightclickedProcedure {
 		} else {
 			entity.setDeltaMovement(new Vec3(0, (-6), 0));
 		}
-		ApplyCooldownProcedure.execute(entity, itemstack, GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
+		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 	}
 }

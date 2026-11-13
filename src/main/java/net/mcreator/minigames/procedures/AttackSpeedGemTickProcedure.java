@@ -15,7 +15,8 @@ public class AttackSpeedGemTickProcedure {
 			return;
 		if (CheckRelicProcedure.execute(entity, new ItemStack(MinigamesModItems.ATTACK_SPEED_GEM.get()))) {
 			if (entity instanceof LivingEntity _entity) {
-				AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:attackspeedgem"), GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"), AttributeModifier.Operation.ADD_VALUE);
+				AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:attackspeedgem"), net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:effect_potency"),
+						AttributeModifier.Operation.ADD_VALUE);
 				if (!_entity.getAttribute(Attributes.ATTACK_SPEED).hasModifier(modifier.id())) {
 					_entity.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(modifier);
 				}

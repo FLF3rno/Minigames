@@ -43,7 +43,6 @@ public class ItemPickedUpDungeonProcedure {
 				TeamUpgradePickedUpProcedure.execute(world, x, y, z, item);
 				MinigamesModVariables.MapVariables.get(world).dungeonCoins = MinigamesModVariables.MapVariables.get(world).dungeonCoins - net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(item, "minigames:price");
 				MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-				item.shrink(1);
 			} else {
 				if (!item.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBooleanOr("pickedUp", false)) {
 					if (!world.isClientSide()) {
@@ -57,13 +56,13 @@ public class ItemPickedUpDungeonProcedure {
 							_level.sendBlockUpdated(_bp, _bs, _bs, 3);
 					}
 					if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SNATCHING_CLAW.get()
-							&& !((getPropertyByName((world.getBlockState(BlockPos.containing(x, y - 0.5, z))), "owner") instanceof IntegerProperty _getip11 ? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip11) : -1) == 0)) {
+							&& !((getPropertyByName((world.getBlockState(BlockPos.containing(x, y - 0.5, z))), "owner") instanceof IntegerProperty _getip10 ? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip10) : -1) == 0)) {
 						explodeOtherPedestals = false;
 						if (world instanceof ServerLevel _level) {
 							(entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).hurtAndBreak(1, _level, null, _stkprov -> {
 							});
 						}
-					} else if ((getPropertyByName((world.getBlockState(BlockPos.containing(x, y - 0.5, z))), "owner") instanceof IntegerProperty _getip15 ? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip15) : -1) == 0) {
+					} else if ((getPropertyByName((world.getBlockState(BlockPos.containing(x, y - 0.5, z))), "owner") instanceof IntegerProperty _getip14 ? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip14) : -1) == 0) {
 						explodeOtherPedestals = false;
 						if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == MinigamesModItems.SNATCHING_CLAW.get()) {
 							if (entity instanceof ServerPlayer _player)
@@ -91,10 +90,10 @@ public class ItemPickedUpDungeonProcedure {
 						for (int _i2 = 0; _i2 < (int) range; _i2++) {
 							if (getBlockNBTNumber(world, BlockPos.containing(x, y - 0.5, z), "player") == getBlockNBTNumber(world, BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ), "player")) {
 								if (!getBlockNBTLogic(world, BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ), "empty")) {
-									if ((getPropertyByName((world.getBlockState(BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ))), "owner") instanceof IntegerProperty _getip25
-											? (world.getBlockState(BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ))).getValue(_getip25)
-											: -1) == (getPropertyByName((world.getBlockState(BlockPos.containing(x, y - 0.5, z))), "owner") instanceof IntegerProperty _getip27
-													? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip27)
+									if ((getPropertyByName((world.getBlockState(BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ))), "owner") instanceof IntegerProperty _getip24
+											? (world.getBlockState(BlockPos.containing(spawnRoomX, y - 0.5, spawnRoomZ))).getValue(_getip24)
+											: -1) == (getPropertyByName((world.getBlockState(BlockPos.containing(x, y - 0.5, z))), "owner") instanceof IntegerProperty _getip26
+													? (world.getBlockState(BlockPos.containing(x, y - 0.5, z))).getValue(_getip26)
 													: -1)) {
 										ExplodeProcedure.execute(world, spawnRoomX, y, spawnRoomZ, entity, false, true, 0, 0, 0.5, "normal");
 										if (!(findEntityInWorldRange(world, ItemEntity.class, spawnRoomX, y, spawnRoomZ, 2)).level().isClientSide())

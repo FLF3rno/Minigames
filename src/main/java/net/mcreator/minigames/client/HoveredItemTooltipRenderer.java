@@ -193,6 +193,9 @@ public class HoveredItemTooltipRenderer {
         if (DungeonItemAccess.isRelic(stack)) {
             return areRelicSlotsFull(player) && !hasOpenBackpackSlot(player);
         }
+        if (DungeonItemAccess.isStolen(stack)) {
+            return false;
+        }
         return isInventoryFull(player) && !hasOpenBackpackSlot(player);
     }
 
@@ -470,12 +473,15 @@ public class HoveredItemTooltipRenderer {
     }
 
     private static boolean canCurrentPlayerPickUp(ItemStack stack, Minecraft minecraft) {
-        if (minecraft.player == null) {
+        if (minecraft.player == null)
             return false;
-        }
-        if (minecraft.player.isCreative()) {
+
+        if (minecraft.player.isCreative())
             return true;
-        }
+
+        if (DungeonItemAccess.isDungeonItem(stack))
+            return true;
+
         String classDungeon = minecraft.player.getData(MinigamesModVariables.PLAYER_VARIABLES).classDungeon;
         return DungeonItemAccess.canClassPickUp(stack, classDungeon);
     }

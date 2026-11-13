@@ -92,6 +92,9 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModItems.SMALLIFICATION.get());
 				tabData.accept(MinigamesModItems.EXTRA_ITEM_ROOM.get());
 				tabData.accept(MinigamesModItems.EXTRA_DAMAGE_UPGRADE.get());
+				tabData.accept(MinigamesModItems.HEALTH_UPGRADE.get());
+				tabData.accept(MinigamesModItems.BACKPACK_UPGRADE.get());
+				tabData.accept(MinigamesModItems.SPEED_UPGRADE.get());
 			}).withSearchBar().build());
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CUSTOM_BLOCKS = REGISTRY.register("custom_blocks",
 			() -> CreativeModeTab.builder().title(Component.translatable("item_group.minigames.custom_blocks")).icon(() -> new ItemStack(MinigamesModBlocks.CHISELED_QUARTZ_WALL.get())).displayItems((parameters, tabData) -> {

@@ -478,5 +478,8 @@
   "item.minigames.slot_upgrade": "+1 Hotbar Slot",
   "item.minigames.smallification": "Smallification",
   "item.minigames.extra_item_room": "Extra Item Room",
-  "item.minigames.extra_damage_upgrade": "Extra Damage"
+  "item.minigames.extra_damage_upgrade": "Extra Damage",
+  "item.minigames.health_upgrade": "Health Upgrade",
+  "item.minigames.backpack_upgrade": "+1 Backpack Slot",
+  "item.minigames.speed_upgrade": "Speed Upgrade"
 }

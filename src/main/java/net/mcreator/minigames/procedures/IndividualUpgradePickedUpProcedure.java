@@ -29,9 +29,29 @@ public class IndividualUpgradePickedUpProcedure {
 				}
 			} else if (MinigamesModItems.EXTRA_DAMAGE_UPGRADE.get() == itemstack.getItem()) {
 				if (entity instanceof LivingEntity _entity) {
-					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:extra_damage_shop"), 1.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:extra_damage_shop"), 1.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 					if (!_entity.getAttribute(Attributes.ATTACK_DAMAGE).hasModifier(modifier.id())) {
 						_entity.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(modifier);
+					}
+				}
+			} else if (MinigamesModItems.HEALTH_UPGRADE.get() == itemstack.getItem()) {
+				if (entity instanceof LivingEntity _entity) {
+					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:health_upgrade_shop"), 2, AttributeModifier.Operation.ADD_VALUE);
+					if (!_entity.getAttribute(Attributes.MAX_HEALTH).hasModifier(modifier.id())) {
+						_entity.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(modifier);
+					}
+				}
+			} else if (MinigamesModItems.BACKPACK_UPGRADE.get() == itemstack.getItem()) {
+				{
+					MinigamesModVariables.PlayerVariables _vars = entity.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.backpackSlots = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).backpackSlots + 1;
+					_vars.markSyncDirty();
+				}
+			} else if (MinigamesModItems.SPEED_UPGRADE.get() == itemstack.getItem()) {
+				if (entity instanceof LivingEntity _entity) {
+					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:speed_upgrade_shop"), 1.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+					if (!_entity.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(modifier.id())) {
+						_entity.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(modifier);
 					}
 				}
 			}

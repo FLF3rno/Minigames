@@ -17804,7 +17804,7 @@
       "name": "SpawnShopRoom",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "spawn_shop_room",
       "metadata": {
         "dependencies": [
@@ -18398,6 +18398,115 @@
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ExtraDamageUpgradeDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "HealthUpgrade",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "health_upgrade",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/health_upgrade.json",
+          "src/main/resources/assets/minigames/items/health_upgrade.json",
+          "src/main/java/net/mcreator/minigames/item/HealthUpgradeItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "HealthUpgradeDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "health_upgrade_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/HealthUpgradeDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "ResetStats",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reset_stats",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ResetStatsProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon"
+    },
+    {
+      "name": "BackpackUpgrade",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "backpack_upgrade",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/backpack_upgrade.json",
+          "src/main/java/net/mcreator/minigames/item/BackpackUpgradeItem.java",
+          "src/main/resources/assets/minigames/items/backpack_upgrade.json"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "BackpackUpgradeDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "backpack_upgrade_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/BackpackUpgradeDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "SpeedUpgrade",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "speed_upgrade",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/speed_upgrade.json",
+          "src/main/java/net/mcreator/minigames/item/SpeedUpgradeItem.java",
+          "src/main/resources/assets/minigames/items/speed_upgrade.json"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "SpeedDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "speed_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SpeedDescriptionProcedure.java"
         ]
       },
       "path": "~/Dungeon/Shop/Upgrades/Individual"
@@ -20115,7 +20224,10 @@
     ],
     "ITEMS:mod:dungeon_shop": [
       "CUSTOM:SlotUpgrade",
-      "CUSTOM:ExtraDamageUpgrade"
+      "CUSTOM:ExtraDamageUpgrade",
+      "CUSTOM:HealthUpgrade",
+      "CUSTOM:BackpackUpgrade",
+      "CUSTOM:SpeedUpgrade"
     ],
     "ITEMS:mod:dungeon_shop_team": [
       "CUSTOM:Smallification",
@@ -20604,7 +20716,10 @@
       "item.minigames.slot_upgrade": "+1 Hotbar Slot",
       "item.minigames.smallification": "Smallification",
       "item.minigames.extra_item_room": "Extra Item Room",
-      "item.minigames.extra_damage_upgrade": "Extra Damage"
+      "item.minigames.extra_damage_upgrade": "Extra Damage",
+      "item.minigames.health_upgrade": "Health Upgrade",
+      "item.minigames.backpack_upgrade": "+1 Backpack Slot",
+      "item.minigames.speed_upgrade": "Speed Upgrade"
     }
   },
   "metadata": {

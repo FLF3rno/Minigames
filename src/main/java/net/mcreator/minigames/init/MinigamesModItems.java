@@ -183,6 +183,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SMALLIFICATION;
 	public static final DeferredItem<Item> EXTRA_ITEM_ROOM;
 	public static final DeferredItem<Item> EXTRA_DAMAGE_UPGRADE;
+	public static final DeferredItem<Item> HEALTH_UPGRADE;
+	public static final DeferredItem<Item> BACKPACK_UPGRADE;
+	public static final DeferredItem<Item> SPEED_UPGRADE;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -337,6 +340,9 @@ public class MinigamesModItems {
 		SMALLIFICATION = register("smallification", SmallificationItem::new);
 		EXTRA_ITEM_ROOM = register("extra_item_room", ExtraItemRoomItem::new);
 		EXTRA_DAMAGE_UPGRADE = register("extra_damage_upgrade", ExtraDamageUpgradeItem::new);
+		HEALTH_UPGRADE = register("health_upgrade", HealthUpgradeItem::new);
+		BACKPACK_UPGRADE = register("backpack_upgrade", BackpackUpgradeItem::new);
+		SPEED_UPGRADE = register("speed_upgrade", SpeedUpgradeItem::new);
 	}
 
 	// Start of user code block custom items

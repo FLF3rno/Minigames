@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
+    "minigames:backpack_upgrade",
     "minigames:extra_damage_upgrade",
-    "minigames:slot_upgrade"
+    "minigames:speed_upgrade",
+    "minigames:slot_upgrade",
+    "minigames:health_upgrade"
   ]
 }

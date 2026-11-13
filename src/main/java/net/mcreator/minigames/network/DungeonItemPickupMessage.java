@@ -1,7 +1,11 @@
 package net.mcreator.minigames.network;
 
+import net.mcreator.minigames.init.MinigamesModBlocks;
 import net.mcreator.minigames.init.MinigamesModItems;
 import net.mcreator.minigames.procedures.CheckRelicProcedure;
+import net.mcreator.minigames.procedures.GetItemAttributeProcedure;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -61,6 +65,10 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 			return;
 		}
 
+		if (DungeonItemAccess.isShopItem(itemEntity.getItem()) &&
+				GetItemAttributeProcedure.execute(itemEntity.getItem(), "minigames:price") > MinigamesModVariables.MapVariables.get(player.level()).dungeonCoins)
+			return;
+
 		ItemStack entityStack = itemEntity.getItem();
 		tryPickupStack(player, entityStack, itemEntity);
 	}
@@ -94,7 +102,7 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 				}
 				return;
 			}
-			if (insertIntoHotbarSlot(player, entityStack.copy())) {
+			if (insertIntoHotbarSlot(player, entityStack.copy()) && !DungeonItemAccess.isShopItem(entityStack)) {
 				inserted = entityStack.getCount();
 			} else {
 				if (itemEntity != null) {
@@ -116,8 +124,11 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 				}
 			}
 		} else {
-			if (isInventoryFull(player)) {
-				if (insertIntoBackpackSlot(player, entityStack.copy())) {
+			if (DungeonItemAccess.isShopItem(entityStack)) {
+				inserted = entityStack.getCount();
+			}
+			else if (isInventoryFull(player)) {
+				if (insertIntoBackpackSlot(player, entityStack.copy()) && !DungeonItemAccess.isShopItem(entityStack)) {
 					inserted = entityStack.getCount();
 				} else if (itemEntity != null) {
 					player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
@@ -126,7 +137,9 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 					player.drop(entityStack, false);
 					inserted = entityStack.getCount();
 				}
-			} else {
+			}
+			else
+			{
 				ItemStack remaining = entityStack.copy();
 				player.getInventory().add(remaining);
 				inserted = entityStack.getCount() - remaining.getCount();
@@ -146,30 +159,35 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 			}
 		}
 
+
 		ItemPickedUpDungeonProcedure.execute(
-			player.level(),
-			px, 
-			py, 
-			pz, 
-			player,
-			entityStack
+				player.level(),
+				px,
+				py,
+				pz,
+				player,
+				entityStack
 		);
 
-		net.minecraft.core.BlockPos belowPos = net.minecraft.core.BlockPos.containing(px, py - 0.5, pz);
+
+		BlockPos belowPos = BlockPos.containing(px, py - 0.5, pz);
 		net.minecraft.world.level.block.state.BlockState belowState = player.level().getBlockState(belowPos);
-		if (belowState.getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get()
-				|| belowState.getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get()) {
-			player.level().setBlock(belowPos, net.mcreator.minigames.init.MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().defaultBlockState(), 3);
-		} else if (player.level().getBlockState(belowPos.below()).getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get()
-				|| player.level().getBlockState(belowPos.below()).getBlock() == net.mcreator.minigames.init.MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get()) {
-			player.level().setBlock(belowPos.below(), net.mcreator.minigames.init.MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().defaultBlockState(), 3);
+		if (belowState.getBlock() == MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get()
+				|| belowState.getBlock() == MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get()) {
+			player.level().setBlock(belowPos, MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().defaultBlockState(), 3);
+		} else if (player.level().getBlockState(belowPos.below()).getBlock() == MinigamesModBlocks.SINGLE_SHOP_PEDESTAL.get()
+				|| player.level().getBlockState(belowPos.below()).getBlock() == MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get()) {
+			player.level().setBlock(belowPos.below(), MinigamesModBlocks.EMPTY_SHOP_PEDESTAL.get().defaultBlockState(), 3);
 		}
 
 		player.containerMenu.broadcastChanges();
 
-		float pitch = ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F;
-		player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-				SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F, pitch);
+		if (!DungeonItemAccess.isShopItem(entityStack)) {
+			float pitch = ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F;
+			player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+					SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F, pitch);
+		}
+
 	}
 
 	public static boolean insertIntoBackpackSlot(ServerPlayer player, ItemStack stack) {

@@ -18311,6 +18311,96 @@
         ]
       },
       "path": "~/Dungeon/Shop/Upgrades"
+    },
+    {
+      "name": "Smallification",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "smallification",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/item/SmallificationItem.java",
+          "src/main/resources/assets/minigames/models/item/smallification.json",
+          "src/main/resources/assets/minigames/items/smallification.json"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Team"
+    },
+    {
+      "name": "SmallificationDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "smallification_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/SmallificationDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Team"
+    },
+    {
+      "name": "ExtraItemRoom",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "extra_item_room",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/extra_item_room.json",
+          "src/main/java/net/mcreator/minigames/item/ExtraItemRoomItem.java",
+          "src/main/resources/assets/minigames/models/item/extra_item_room.json"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Team"
+    },
+    {
+      "name": "ExtraItemRoomDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "extra_item_room_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExtraItemRoomDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Team"
+    },
+    {
+      "name": "ExtraDamageUpgrade",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "extra_damage_upgrade",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/items/extra_damage_upgrade.json",
+          "src/main/resources/assets/minigames/models/item/extra_damage_upgrade.json",
+          "src/main/java/net/mcreator/minigames/item/ExtraDamageUpgradeItem.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "ExtraDamageUpgradeDescription",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "extra_damage_upgrade_description",
+      "metadata": {
+        "dependencies": [],
+        "return_type": "string",
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ExtraDamageUpgradeDescriptionProcedure.java"
+        ]
+      },
+      "path": "~/Dungeon/Shop/Upgrades/Individual"
     }
   ],
   "variable_elements": [
@@ -19237,6 +19327,12 @@
       "type": "arraylist",
       "scope": "map",
       "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "extraItemRooms",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
     }
   ],
   "sound_elements": [
@@ -19826,7 +19922,9 @@
       "CUSTOM:WarriorItemPedestal",
       "CUSTOM:SupportItemPedestal",
       "CUSTOM:ThiefItemPedestal",
-      "CUSTOM:MageItemPedestal"
+      "CUSTOM:MageItemPedestal",
+      "CUSTOM:SingleShopPedestal",
+      "CUSTOM:TeamShopPedestal"
     ],
     "BLOCKS:mod:spleef_anti_spread": [
       "Blocks.AIR",
@@ -20016,10 +20114,12 @@
       "~TuffPedestal@CUSTOM:TuffPedestal"
     ],
     "ITEMS:mod:dungeon_shop": [
-      "CUSTOM:SlotUpgrade"
+      "CUSTOM:SlotUpgrade",
+      "CUSTOM:ExtraDamageUpgrade"
     ],
     "ITEMS:mod:dungeon_shop_team": [
-      "Blocks.DEEPSLATE_TILES"
+      "CUSTOM:Smallification",
+      "CUSTOM:ExtraItemRoom"
     ]
   },
   "tab_element_order": {},
@@ -20501,7 +20601,10 @@
       "subtitles.grind_item": "Item is grinded into coins",
       "subtitles.grinder_idle": "",
       "attribute.minigames.price": "Price",
-      "item.minigames.slot_upgrade": "+1 Hotbar Slot"
+      "item.minigames.slot_upgrade": "+1 Hotbar Slot",
+      "item.minigames.smallification": "Smallification",
+      "item.minigames.extra_item_room": "Extra Item Room",
+      "item.minigames.extra_damage_upgrade": "Extra Damage"
     }
   },
   "metadata": {

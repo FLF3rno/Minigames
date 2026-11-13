@@ -4,6 +4,8 @@
     "minigames:warrior_item_pedestal",
     "minigames:thief_item_pedestal",
     "minigames:support_item_pedestal",
+    "minigames:team_shop_pedestal",
+    "minigames:single_shop_pedestal",
     "minigames:mage_item_pedestal"
   ]
 }

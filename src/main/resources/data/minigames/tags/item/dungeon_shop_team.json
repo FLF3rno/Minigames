@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:deepslate_tiles"
+    "minigames:extra_item_room",
+    "minigames:smallification"
   ]
 }

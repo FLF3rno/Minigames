@@ -13,7 +13,7 @@ public class SpawnGridProcedure {
 		double spawnRoomX = 0;
 		double spawnRoomZ = 0;
 		MinigamesModVariables.MapVariables.get(world).dungeonSize = new Vec3(roomX, 300, roomZ);
-		MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon = loot;
+		MinigamesModVariables.MapVariables.get(world).lootRoomsDungeon = loot + MinigamesModVariables.MapVariables.get(world).extraItemRooms;
 		MinigamesModVariables.MapVariables.get(world).minibossRoomsDungeon = miniboss;
 		MinigamesModVariables.MapVariables.get(world).secretRoomDungeon = secret;
 		MinigamesModVariables.MapVariables.get(world).roomLimitDungeon = new Vec3(minimumRooms, 0, maximumRooms);

@@ -1,13 +1,11 @@
 package net.mcreator.minigames.procedures;
 
-import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.bus.api.Event;
-
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.sounds.SoundSource;
@@ -18,20 +16,8 @@ import net.minecraft.core.BlockPos;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModItems;
 
-import javax.annotation.Nullable;
-
-@EventBusSubscriber
 public class IndividualUpgradePickedUpProcedure {
-	@SubscribeEvent
-	public static void onPickup(ItemEntityPickupEvent.Pre event) {
-		execute(event, event.getPlayer().level(), event.getPlayer().getX(), event.getPlayer().getY(), event.getPlayer().getZ(), event.getPlayer(), event.getItemEntity().getItem());
-	}
-
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
-		execute(null, world, x, y, z, entity, itemstack);
-	}
-
-	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity, ItemStack itemstack) {
 		if (entity == null)
 			return;
 		if (itemstack.is(ItemTags.create(Identifier.parse("minigames:dungeon_shop")))) {
@@ -41,9 +27,14 @@ public class IndividualUpgradePickedUpProcedure {
 					_vars.playerSlots = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots + 1;
 					_vars.markSyncDirty();
 				}
+			} else if (MinigamesModItems.EXTRA_DAMAGE_UPGRADE.get() == itemstack.getItem()) {
+				if (entity instanceof LivingEntity _entity) {
+					AttributeModifier modifier = new AttributeModifier(Identifier.parse("minigames:extra_damage_shop"), 1.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+					if (!_entity.getAttribute(Attributes.ATTACK_DAMAGE).hasModifier(modifier.id())) {
+						_entity.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(modifier);
+					}
+				}
 			}
-		}
-		if (world.isClientSide()) {
 			if (world instanceof Level _level) {
 				if (!_level.isClientSide()) {
 					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.experience_orb.pickup")), SoundSource.PLAYERS, (float) 0.9, 1);
@@ -52,6 +43,5 @@ public class IndividualUpgradePickedUpProcedure {
 				}
 			}
 		}
-		itemstack.shrink(1);
 	}
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "minigames:item/shop_team_extra_item_room"
+  }
+}

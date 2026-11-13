@@ -331,6 +331,7 @@ public class MinigamesModVariables {
 		public ArrayList<Object> roguelike_four = new ArrayList<>();
 		public ArrayList<Object> roguelike_loot = new ArrayList<>();
 		public ArrayList<Object> roguelike_miniboss = new ArrayList<>();
+		public double extraItemRooms = 0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -435,6 +436,7 @@ public class MinigamesModVariables {
 			roguelike_four = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_four"), lookupProvider);
 			roguelike_loot = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_loot"), lookupProvider);
 			roguelike_miniboss = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_miniboss"), lookupProvider);
+			extraItemRooms = nbt.getDoubleOr("extraItemRooms", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -540,6 +542,7 @@ public class MinigamesModVariables {
 			nbt.put("roguelike_four", NbtArrayLists.saveGlobalMap(roguelike_four));
 			nbt.put("roguelike_loot", NbtArrayLists.saveGlobalMap(roguelike_loot));
 			nbt.put("roguelike_miniboss", NbtArrayLists.saveGlobalMap(roguelike_miniboss));
+			nbt.putDouble("extraItemRooms", extraItemRooms);
 			return nbt;
 		}
 

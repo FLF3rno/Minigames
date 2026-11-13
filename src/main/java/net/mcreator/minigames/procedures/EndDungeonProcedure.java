@@ -5,8 +5,11 @@ import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.Identifier;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 
@@ -17,9 +20,15 @@ public class EndDungeonProcedure {
 		MinigamesModVariables.MapVariables.get(world).playingDungeons = false;
 		MinigamesModVariables.MapVariables.get(world).minimap = false;
 		MinigamesModVariables.MapVariables.get(world).waypoints = false;
+		MinigamesModVariables.MapVariables.get(world).extraItemRooms = 0;
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		for (Entity entityiterator : new ArrayList<>(world.players())) {
 			if (entityiterator instanceof Player) {
+				if (entityiterator instanceof LivingEntity _livingEntity1 && _livingEntity1.getAttributes().hasAttribute(Attributes.SCALE))
+					_livingEntity1.getAttribute(Attributes.SCALE).setBaseValue(1);
+				if (entityiterator instanceof LivingEntity _entity) {
+					_entity.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(Identifier.parse("minigames:extra_damage_shop"));
+				}
 				{
 					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.showOnlyHearts = false;

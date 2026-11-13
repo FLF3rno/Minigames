@@ -475,5 +475,8 @@
   "subtitles.grind_item": "Item is grinded into coins",
   "subtitles.grinder_idle": "",
   "attribute.minigames.price": "Price",
-  "item.minigames.slot_upgrade": "+1 Hotbar Slot"
+  "item.minigames.slot_upgrade": "+1 Hotbar Slot",
+  "item.minigames.smallification": "Smallification",
+  "item.minigames.extra_item_room": "Extra Item Room",
+  "item.minigames.extra_damage_upgrade": "Extra Damage"
 }

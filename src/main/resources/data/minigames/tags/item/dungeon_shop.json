@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minigames:extra_damage_upgrade",
     "minigames:slot_upgrade"
   ]
 }

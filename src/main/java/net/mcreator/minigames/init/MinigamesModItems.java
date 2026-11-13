@@ -180,6 +180,9 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> ITEM_CHIPPER;
 	public static final DeferredItem<Item> ROGUELIKE_COIN;
 	public static final DeferredItem<Item> SLOT_UPGRADE;
+	public static final DeferredItem<Item> SMALLIFICATION;
+	public static final DeferredItem<Item> EXTRA_ITEM_ROOM;
+	public static final DeferredItem<Item> EXTRA_DAMAGE_UPGRADE;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -331,6 +334,9 @@ public class MinigamesModItems {
 		ITEM_CHIPPER = block(MinigamesModBlocks.ITEM_CHIPPER);
 		ROGUELIKE_COIN = register("roguelike_coin", RoguelikeCoinItem::new);
 		SLOT_UPGRADE = register("slot_upgrade", SlotUpgradeItem::new);
+		SMALLIFICATION = register("smallification", SmallificationItem::new);
+		EXTRA_ITEM_ROOM = register("extra_item_room", ExtraItemRoomItem::new);
+		EXTRA_DAMAGE_UPGRADE = register("extra_damage_upgrade", ExtraDamageUpgradeItem::new);
 	}
 
 	// Start of user code block custom items

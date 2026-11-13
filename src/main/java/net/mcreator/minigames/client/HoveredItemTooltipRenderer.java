@@ -502,20 +502,28 @@ public class HoveredItemTooltipRenderer {
             else if (block instanceof net.mcreator.minigames.block.ThiefItemPedestalBlock) ownerProp = net.mcreator.minigames.block.ThiefItemPedestalBlock.OWNER;
             else if (block instanceof net.mcreator.minigames.block.SupportItemPedestalBlock) ownerProp = net.mcreator.minigames.block.SupportItemPedestalBlock.OWNER;
             else if (block instanceof net.mcreator.minigames.block.MageItemPedestalBlock) ownerProp = net.mcreator.minigames.block.MageItemPedestalBlock.OWNER;
-            if (ownerProp != null) {
-                int owner = state.getValue(ownerProp);
-                return owner >= 1 && owner <= 4;
-            }
+            int owner = state.getValue(ownerProp);
+            return owner >= 1 && owner <= 4;
         }
         return false;
     }
 
     private static void removeVanillaAttributeLines(List<Component> tooltip) {
-        tooltip.removeIf(line -> {
+        if (tooltip.size() <= 1) return;
+
+        for (int i = tooltip.size() - 1; i >= 1; i--) {
+            Component line = tooltip.get(i);
             String text = line.getString().trim().toLowerCase(Locale.ROOT);
-            return hasTranslatableKey(line, "item.modifiers.") || hasTranslatableKey(line, "attribute.modifier.")
-                    || text.startsWith("when in ") || text.startsWith("when equipped") || text.startsWith("+") || text.startsWith("-");
-        });
+
+            if (hasTranslatableKey(line, "item.modifiers.")
+                    || hasTranslatableKey(line, "attribute.modifier.")
+                    || text.startsWith("when in ")
+                    || text.startsWith("when equipped")
+                    || text.startsWith("+")
+                    || text.startsWith("-")) {
+                tooltip.remove(i);
+            }
+        }
     }
 
     private static boolean hasTranslatableKey(Component component, String prefix) {

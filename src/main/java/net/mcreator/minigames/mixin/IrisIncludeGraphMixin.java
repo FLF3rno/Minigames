@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import net.mcreator.minigames.client.GenericShaderSkyboxPatcher;
 import net.mcreator.minigames.client.SolasShaderDynamicPatcher;
 
 import java.nio.file.Path;
@@ -16,8 +17,13 @@ public class IrisIncludeGraphMixin {
 	@Inject(method = "readFile", at = @At("RETURN"), cancellable = true, require = 0)
 	private static void minigames$onReadFile(Path path, CallbackInfoReturnable<String> cir) {
 		String result = cir.getReturnValue();
-		if (result != null && SolasShaderDynamicPatcher.isSolasActive()) {
-			String patched = SolasShaderDynamicPatcher.patchGlslFile(path, result);
+		if (result != null) {
+			String patched = result;
+			if (SolasShaderDynamicPatcher.isSolasActive() || patched.contains("SOLAS_BY_SEPTONIOUS")) {
+				SolasShaderDynamicPatcher.setSolasActive(true);
+				patched = SolasShaderDynamicPatcher.patchGlslFile(path, patched);
+			}
+			patched = GenericShaderSkyboxPatcher.patchGlslFile(path, patched);
 			if (patched != null && !patched.equals(result)) {
 				cir.setReturnValue(patched);
 			}

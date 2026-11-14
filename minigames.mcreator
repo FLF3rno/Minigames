@@ -20213,15 +20213,6 @@
       "EntityArrow",
       "EntitySpectralArrow"
     ],
-    "ITEMS:minecraft:head_armor": [
-      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
-    ],
-    "BLOCKS:minecraft:mineable/pickaxe": [
-      "~TuffPedestal@CUSTOM:TuffPedestal"
-    ],
-    "BLOCKS:minecraft:needs_stone_tool": [
-      "~TuffPedestal@CUSTOM:TuffPedestal"
-    ],
     "ITEMS:mod:dungeon_shop": [
       "CUSTOM:SlotUpgrade",
       "CUSTOM:ExtraDamageUpgrade",
@@ -20232,6 +20223,15 @@
     "ITEMS:mod:dungeon_shop_team": [
       "CUSTOM:Smallification",
       "CUSTOM:ExtraItemRoom"
+    ],
+    "ITEMS:minecraft:head_armor": [
+      "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
+    ],
+    "BLOCKS:minecraft:mineable/pickaxe": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "BLOCKS:minecraft:needs_stone_tool": [
+      "~TuffPedestal@CUSTOM:TuffPedestal"
     ]
   },
   "tab_element_order": {},
@@ -21490,7 +21490,7 @@
   "workspaceSettings": {
     "modid": "minigames",
     "modName": "Minigames",
-    "version": "3",
+    "version": "4",
     "description": "A mod with a few innovative minigames",
     "author": "Gli FL",
     "websiteURL": "https://www.curseforge.com/minecraft/mc-mods/minigames",

@@ -44,13 +44,15 @@ public class DemonTickProcedure {
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					ApplyEffectProcedure.execute(world, entityiterator, false, 1, 100, "minecraft:darkness");
 				}
-				for (int _i1 = 0; _i1 < 9; _i1++) {
-					SummonMinionProcedure.execute(world, x, y + 1, z, entity, 0, Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), 0, "minigames:sculkling");
+				if (entity.isAlive()) {
+					for (int _i1 = 0; _i1 < 9; _i1++) {
+						SummonMinionProcedure.execute(world, x, y + 1, z, entity, 0, Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), Mth.nextInt(RandomSource.create(), -10, 10), 0, "minigames:sculkling");
+					}
 				}
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 50) {
-				if (entity instanceof DemonEntity _ent13) {
-					_ent13.getEntityData().set(DemonEntity.ANIM, 1000);
-					_ent13.getEntityData().set(DemonEntity.ANIM, 1);
+				if (entity instanceof DemonEntity _ent14) {
+					_ent14.getEntityData().set(DemonEntity.ANIM, 1000);
+					_ent14.getEntityData().set(DemonEntity.ANIM, 1);
 				}
 			} else if ((entity instanceof DemonEntity _datEntI ? _datEntI.getEntityData().get(DemonEntity.DATA_cooldown) : 0) == 275) {
 				if (entity instanceof DemonEntity _datEntSetI)

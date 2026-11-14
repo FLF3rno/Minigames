@@ -23,7 +23,6 @@ import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.Minecraft;
 
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModRenderStateModifiers;
@@ -98,7 +97,7 @@ public class RenderCrownOnPlayerProcedure {
 			capes.forEach(cape -> cape.run());
 			capes.clear();
 		}
-		model.renderToBuffer(poseStack, Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType), state.lightCoords, LivingEntityRenderer.getOverlayCoords(state, 0));
+		MinigamesModRenderStateModifiers.submitModelPart(playerRenderEvent.getSubmitNodeCollector(), model.root(), poseStack, renderType, state.lightCoords, LivingEntityRenderer.getOverlayCoords(state, 0));
 		offset.negate();
 		offsetScale(model, offset);
 		poseStack.popPose();
@@ -119,7 +118,7 @@ public class RenderCrownOnPlayerProcedure {
 		poseStack.scale(-0.938f, -0.938f, 0.938f);
 		poseStack.translate(0.0D, -1.501, 0.0D);
 		model.setupAnim(state);
-		model.renderToBuffer(poseStack, Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType), state.lightCoords, LivingEntityRenderer.getOverlayCoords(state, 0));
+		MinigamesModRenderStateModifiers.submitModelPart(playerRenderEvent.getSubmitNodeCollector(), model.root(), poseStack, renderType, state.lightCoords, LivingEntityRenderer.getOverlayCoords(state, 0));
 		poseStack.popPose();
 	}
 

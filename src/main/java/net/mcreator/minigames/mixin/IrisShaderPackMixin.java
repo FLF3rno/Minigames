@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import net.mcreator.minigames.client.GenericShaderSkyboxPatcher;
 import net.mcreator.minigames.client.SolasShaderDynamicPatcher;
 
 import java.nio.file.Path;
@@ -18,6 +19,7 @@ public class IrisShaderPackMixin {
 		String result = cir.getReturnValue();
 		if (result != null) {
 			String patched = SolasShaderDynamicPatcher.patchProperties(name, result);
+			patched = GenericShaderSkyboxPatcher.patchProperties(name, patched);
 			if (patched != null && !patched.equals(result)) {
 				cir.setReturnValue(patched);
 			}

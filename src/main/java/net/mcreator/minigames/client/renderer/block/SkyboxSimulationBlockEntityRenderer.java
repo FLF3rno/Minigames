@@ -28,9 +28,9 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.mcreator.minigames.MinigamesMod;
 import net.mcreator.minigames.block.SkyboxSimulationBlock;
 import net.mcreator.minigames.block.entity.SkyboxSimulationBlockEntity;
+import net.mcreator.minigames.client.GenericShaderSkyboxPatcher;
 import net.mcreator.minigames.client.IrisCompat;
 import net.mcreator.minigames.client.SkyCaptureManager;
-import net.mcreator.minigames.client.SolasShaderDynamicPatcher;
 import net.mcreator.minigames.init.MinigamesModBlockEntities;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import org.joml.Vector3f;
@@ -493,9 +493,9 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		} else if (state.skyType == SkyboxSimulationBlock.SkyType.GATEWAY) {
 			batchPortal(poseStack, collector, RenderTypes.endGateway(), true, activeFacesMask, bx, by, bz);
 		} else if (state.skyType == SkyboxSimulationBlock.SkyType.DYNAMIC) {
-			if (SolasShaderDynamicPatcher.isLiveSkyReady()) {
-				logRenderMode("SOLAS_LIVE_SKY");
-				batchLiveSkySolas(poseStack, collector, activeFacesMask, bx, by, bz);
+			if (GenericShaderSkyboxPatcher.isLiveSkyReady()) {
+				logRenderMode("SHADER_LIVE_SKY");
+				batchLiveSky(poseStack, collector, activeFacesMask, bx, by, bz);
 			} else if (SkyCaptureManager.hasFreshCapture()) {
 				logRenderMode("VANILLA_SKY_PORTAL");
 				batchSkyPortal(poseStack, collector, SkyCaptureManager.skyPortalRenderType(), activeFacesMask, bx, by, bz);
@@ -736,7 +736,7 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		skyPortalLastFaceDir = -1;
 	}
 
-	private void batchLiveSkySolas(PoseStack poseStack, SubmitNodeCollector collector, int activeFacesMask, double bx, double by, double bz) {
+	private void batchLiveSky(PoseStack poseStack, SubmitNodeCollector collector, int activeFacesMask, double bx, double by, double bz) {
 		if (!atmoSubmitted) {
 			atmoSubmitted = true;
 			atmoOriginX = bx; atmoOriginY = by; atmoOriginZ = bz;

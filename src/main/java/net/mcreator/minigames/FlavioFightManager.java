@@ -243,7 +243,6 @@ public class FlavioFightManager {
 				}
 				removeCageNear(world, entityiterator.getX(), entityiterator.getY(), entityiterator.getZ());
 			}
-			// Clean up any remaining cages anywhere in the dimension
 			for (PlayerCageEntity cage : new ArrayList<>(world.getEntitiesOfClass(PlayerCageEntity.class, new AABB(-500, -100, -500, 500, 300, 500), e -> true))) {
 				if (!cage.level().isClientSide()) {
 					cage.discard();

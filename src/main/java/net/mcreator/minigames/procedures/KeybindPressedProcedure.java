@@ -2,8 +2,13 @@ package net.mcreator.minigames.procedures;
 
 import net.mcreator.minigames.init.MinigamesModItems;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -20,17 +25,13 @@ public class KeybindPressedProcedure {
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		Entity entity = event.getEntity();
 
-		if (entity == null) {
-			return;
-		}
-
-		if (!entity.level().isClientSide()) {
+        if (!entity.level().isClientSide()) {
 			return;
 		}
 
 		Minecraft mc = Minecraft.getInstance();
 
-		if (mc.player == null || !entity.equals(mc.player)) {
+		if (!entity.equals(mc.player)) {
 			return;
 		}
 
@@ -74,6 +75,17 @@ public class KeybindPressedProcedure {
 			if (gravity == null) gravity = Direction.DOWN;
 			Vec3 vel = entity.getDeltaMovement();
 
+			if (doubleJumpsUsed > 0)
+			{
+				if (entity.level() instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(entity.position().x, entity.position().y, entity.position().z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.breeze.wind_burst")), SoundSource.PLAYERS, (float) 0.7, 1);
+					} else {
+						_level.playLocalSound(entity.position().x, entity.position().y, entity.position().z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.breeze.wind_burst")), SoundSource.PLAYERS, (float) 0.7, 1, false);
+					}
+				}
+
+			}
 			if (gravity == Direction.DOWN) {
 				entity.setDeltaMovement(
 						vel.x * 1.1,

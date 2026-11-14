@@ -52,10 +52,19 @@ public class BlockBreakSimulationProcedure {
 						}
 					}
 				} else {
-					level.levelEvent(2001, pos, Block.getId(block));
+					BlockParticleOption particleData = new BlockParticleOption(ParticleTypes.BLOCK, block);
+					serverLevel.sendParticles(
+							particleData,
+							x + 0.5,
+							y + 0.5,
+							z + 0.5,
+							35,
+							0.25,
+							0.25,
+							0.25,
+							0.15
+					);
 				}
-			} else {
-				level.levelEvent(null, 2001, pos, Block.getId(block));
 			}
 		}
 

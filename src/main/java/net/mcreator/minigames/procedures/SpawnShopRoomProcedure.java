@@ -1,13 +1,19 @@
 package net.mcreator.minigames.procedures;
 
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.BlockPos;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandSource;
 
 import net.mcreator.minigames.init.MinigamesModBlocks;
 import net.mcreator.minigames.MinigamesMod;
@@ -16,6 +22,10 @@ public class SpawnShopRoomProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
 		String prefix = "";
 		double rng = 0;
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					"/execute in minigames:dungeon_dimension run forceload add ~ ~ ~31 ~34");
 		prefix = "dungeon_shop_";
 		rng = Mth.nextInt(RandomSource.create(), 1, 1);
 		if (rng == 1) {
@@ -37,6 +47,12 @@ public class SpawnShopRoomProcedure {
 					}
 				}
 			}
+		});
+		MinigamesMod.queueServerWork(20, () -> {
+			if (world instanceof ServerLevel _level)
+				_level.getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						"/execute in minigames:dungeon_dimension run forceload remove ~ ~ ~31 ~34");
 		});
 	}
 }

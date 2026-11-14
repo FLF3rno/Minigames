@@ -18510,6 +18510,25 @@
         ]
       },
       "path": "~/Dungeon/Shop/Upgrades/Individual"
+    },
+    {
+      "name": "ImmobilizedEffectApplied",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "immobilized_effect_applied",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/ImmobilizedEffectAppliedProcedure.java"
+        ]
+      },
+      "path": "~/General/Effects"
     }
   ],
   "variable_elements": [

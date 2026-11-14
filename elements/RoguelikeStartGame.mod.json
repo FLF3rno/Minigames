@@ -14,11 +14,11 @@
         "type": "imagebutton",
         "data": {
           "name": "imagebutton_achievementrunicon",
-          "image": "roguelike.png",
-          "hoveredImage": "roguelike.png",
+          "image": "roguelike_menu_big.png",
+          "hoveredImage": "roguelike_menu_big_hovered.png",
           "onClick": "StartRoguelike",
-          "x": 195,
-          "y": 105,
+          "x": 173,
+          "y": 91,
           "locked": false
         }
       },
@@ -29,10 +29,10 @@
           "text": {
             "fixedValue": "A roguelike mode. With dashes!"
           },
-          "width": 39,
-          "height": 37,
-          "x": 191,
-          "y": 103,
+          "width": 64,
+          "height": 72,
+          "x": 178,
+          "y": 91,
           "locked": false
         }
       },

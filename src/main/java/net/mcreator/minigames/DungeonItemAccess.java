@@ -34,6 +34,16 @@ public final class DungeonItemAccess {
 		return stack != null && !stack.isEmpty() && (stack.is(DUNGEON_SHOP) || stack.is(DUNGEON_SHOP_TEAM));
 	}
 
+	public static boolean isDungeonItemLootPool(ItemStack stack) {
+		if (stack == null || stack.isEmpty()) {
+			return false;
+		}
+		return stack.is(DUNGEON_WARRIOR)
+				|| stack.is(DUNGEON_THIEF)
+				|| stack.is(DUNGEON_SUPPORT)
+				|| stack.is(DUNGEON_MAGE);
+	}
+
 	public static boolean isDungeonItem(ItemStack stack) {
 		if (stack == null || stack.isEmpty()) {
 			return false;

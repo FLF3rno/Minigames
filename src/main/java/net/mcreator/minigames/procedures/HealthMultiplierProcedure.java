@@ -17,10 +17,12 @@ public class HealthMultiplierProcedure {
 		}
 		if (entity instanceof LivingEntity le) {
 			var maxHpAttr = le.getAttribute(Attributes.MAX_HEALTH);
-			if (maxHpAttr != null) {
+			if (maxHpAttr != null && entity.getPersistentData().getBooleanOr("modifiedHP", false)) {
 				double scaled = le.getMaxHealth() * (1 + (world.players().size() - 1) * 0.75);
 				maxHpAttr.setBaseValue(scaled * 1f);
 				le.setHealth((float) scaled);
+				if (!world.isClientSide())
+					entity.getPersistentData().putBoolean("modifiedHP", true);
 			}
 		}
 	}

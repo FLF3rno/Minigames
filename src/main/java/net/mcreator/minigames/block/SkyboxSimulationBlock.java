@@ -38,9 +38,6 @@ public class SkyboxSimulationBlock extends Block implements EntityBlock {
 	public enum SkyType implements StringRepresentable {
 		END("end", "End Cosmic Void"),
 		GATEWAY("gateway", "End Gateway Portal"),
-		DAY("day", "Daytime Sky"),
-		SUNSET("sunset", "Sunset Sky"),
-		NIGHT("night", "Starry Night Sky"),
 		DYNAMIC("dynamic", "Dynamic World Sky");
 
 		private final String name;
@@ -76,9 +73,6 @@ public class SkyboxSimulationBlock extends Block implements EntityBlock {
 	public static int getLightEmission(BlockState state) {
 		SkyType type = state.getValue(SKY_TYPE);
 		return switch (type) {
-			case DAY -> 15;
-			case SUNSET -> 7;
-			case NIGHT -> 1;
 			case END -> 1;
 			case GATEWAY -> 6;
 			case DYNAMIC -> 15;

@@ -101,7 +101,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:EffectPotency2",
-        "amount": -50.0,
+        "amount": -35.0,
         "operation": "ADD_VALUE"
       },
       {

@@ -66,7 +66,7 @@ public class QuickdrawCrossbowItem extends CrossbowItem {
                 .add(MinigamesModAttributes.LOAD_TIME,
                         new AttributeModifier(
                                 Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "quickdraw_crossbow_3"),
-                                30,
+                                15,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
                 .add(MinigamesModAttributes.RANGED_DAMAGE,

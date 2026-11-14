@@ -79,9 +79,9 @@ public class KeybindPressedProcedure {
 			{
 				if (entity.level() instanceof Level _level) {
 					if (!_level.isClientSide()) {
-						_level.playSound(null, BlockPos.containing(entity.position().x, entity.position().y, entity.position().z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.breeze.wind_burst")), SoundSource.PLAYERS, (float) 0.7, 1);
+						_level.playSound(null, BlockPos.containing(entity.position().x, entity.position().y, entity.position().z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.breeze.wind_burst")), SoundSource.PLAYERS, (float) 0.5, 1);
 					} else {
-						_level.playLocalSound(entity.position().x, entity.position().y, entity.position().z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.breeze.wind_burst")), SoundSource.PLAYERS, (float) 0.7, 1, false);
+						_level.playLocalSound(entity.position().x, entity.position().y, entity.position().z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("entity.breeze.wind_burst")), SoundSource.PLAYERS, (float) 0.5, 1, false);
 					}
 				}
 

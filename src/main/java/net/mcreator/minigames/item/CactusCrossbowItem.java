@@ -71,7 +71,7 @@ public class CactusCrossbowItem extends CrossbowItem {
                 .add(MinigamesModAttributes.LOAD_TIME,
                         new AttributeModifier(
                                 Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "cactus_crossbow_3"),
-                                40,
+                                20,
                                 AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND)
                         

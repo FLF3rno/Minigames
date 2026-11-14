@@ -95,7 +95,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		List<Item> classPool = new ArrayList<>();
 		for (Item item : BuiltInRegistries.ITEM) {
 			ItemStack testStack = new ItemStack(item);
-			if (DungeonItemAccess.canClassPickUp(testStack, classDungeon) && DungeonItemAccess.isDungeonItem(testStack)) {
+			if (DungeonItemAccess.canClassPickUp(testStack, classDungeon) && DungeonItemAccess.isDungeonItemLootPool(testStack)) {
 				String path = BuiltInRegistries.ITEM.getKey(item).getPath();
 				if (!isExcludedChoiceItem(path)) {
 					classPool.add(item);
@@ -106,7 +106,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 		if (classPool.isEmpty()) {
 			for (Item item : BuiltInRegistries.ITEM) {
 				ItemStack testStack = new ItemStack(item);
-				if (DungeonItemAccess.isDungeonItem(testStack)) {
+				if (DungeonItemAccess.isDungeonItemLootPool(testStack)) {
 					String path = BuiltInRegistries.ITEM.getKey(item).getPath();
 					if (!isExcludedChoiceItem(path)) {
 						classPool.add(item);

@@ -7,6 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffect;
@@ -14,6 +15,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
+import net.mcreator.minigames.procedures.ImmobilizedEffectAppliedProcedure;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.MinigamesMod;
 
@@ -28,6 +30,11 @@ public class ImmobilizedMobEffect extends MobEffect {
 		this.addAttributeModifier(Attributes.JUMP_STRENGTH, Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_4"), -1000, AttributeModifier.Operation.ADD_VALUE);
 		this.addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_5"), 1000, AttributeModifier.Operation.ADD_VALUE);
 		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, Identifier.fromNamespaceAndPath(MinigamesMod.MODID, "effect.immobilized_6"), -1000, AttributeModifier.Operation.ADD_VALUE);
+	}
+
+	@Override
+	public void onEffectStarted(LivingEntity entity, int amplifier) {
+		ImmobilizedEffectAppliedProcedure.execute(entity);
 	}
 
 	@SubscribeEvent

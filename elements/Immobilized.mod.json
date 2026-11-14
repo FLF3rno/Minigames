@@ -50,6 +50,7 @@
         "amount": -1000.0,
         "operation": "ADD_VALUE"
       }
-    ]
+    ],
+    "onStarted": "ImmobilizedEffectApplied"
   }
 }

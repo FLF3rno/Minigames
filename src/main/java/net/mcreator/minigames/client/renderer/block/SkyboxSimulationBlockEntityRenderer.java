@@ -118,24 +118,6 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 	private static final long[] CORNER_CACHE_KEY = new long[CORNER_CACHE_SIZE];
 	private static final int[] CORNER_CACHE_VAL = new int[CORNER_CACHE_SIZE];
 
-	// Pre-calculated atmosphere static colors
-	private static final float DAY_HR = 0.82f, DAY_HG = 0.90f, DAY_HB = 1.00f;
-	private static final float DAY_ZR = 0.40f, DAY_ZG = 0.65f, DAY_ZB = 1.00f;
-	private static final float DAY_GR = 0.45f, DAY_GG = 0.55f, DAY_GB = 0.65f;
-
-	private static final float SUNSET_HR = 1.00f, SUNSET_HG = 0.48f, SUNSET_HB = 0.18f;
-	private static final float SUNSET_ZR = 0.18f, SUNSET_ZG = 0.12f, SUNSET_ZB = 0.35f;
-	private static final float SUNSET_GR = 0.10f, SUNSET_GG = 0.08f, SUNSET_GB = 0.14f;
-
-	private static final float NIGHT_HR = 0.04f, NIGHT_HG = 0.07f, NIGHT_HB = 0.14f;
-	private static final float NIGHT_ZR = 0.008f, NIGHT_ZG = 0.015f, NIGHT_ZB = 0.035f;
-	private static final float NIGHT_GR = 0.005f, NIGHT_GG = 0.005f, NIGHT_GB = 0.010f;
-
-	// Precomputed static celestial directions
-	private static final float DAY_SUN_X, DAY_SUN_Y, DAY_SUN_Z;
-	private static final float SUNSET_SUN_X, SUNSET_SUN_Y, SUNSET_SUN_Z;
-	private static final float NIGHT_SUN_X, NIGHT_SUN_Y, NIGHT_SUN_Z;
-
 	// Per-frame environmental cache
 	private static java.lang.ref.WeakReference<Level> lastLevelRef = new java.lang.ref.WeakReference<>(null);
 	private static float lastPartialTick = -1.0f;
@@ -246,16 +228,6 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 			if (negX && posZ) QUADRANT_STARS[2][QUADRANT_STAR_COUNTS[2]++] = i;
 			if (posX && posZ) QUADRANT_STARS[3][QUADRANT_STAR_COUNTS[3]++] = i;
 		}
-
-		// Precompute static celestial directions matching original vectors
-		Vector3f dSun = new Vector3f(0.20f, 0.95f, -0.15f).normalize();
-		DAY_SUN_X = dSun.x; DAY_SUN_Y = dSun.y; DAY_SUN_Z = dSun.z;
-
-		Vector3f sSun = new Vector3f(-0.98f, 0.07f, -0.18f).normalize();
-		SUNSET_SUN_X = sSun.x; SUNSET_SUN_Y = sSun.y; SUNSET_SUN_Z = sSun.z;
-
-		Vector3f nSun = new Vector3f(-0.20f, -0.95f, 0.15f).normalize();
-		NIGHT_SUN_X = nSun.x; NIGHT_SUN_Y = nSun.y; NIGHT_SUN_Z = nSun.z;
 	}
 
 	private static float[] calcCelestialDir(float celestialAngle) {
@@ -509,11 +481,6 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 				batchSun(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 				batchMoon(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 			}
-		} else {
-			batchAtmosphere(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
-			batchStars(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
-			batchSun(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
-			batchMoon(state, poseStack, collector, activeFacesMask, bx, by, bz, cx, cy, cz);
 		}
 	}
 
@@ -767,37 +734,20 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 
 	private void batchAtmosphere(SkyboxSimulationRenderState state, PoseStack poseStack, SubmitNodeCollector collector,
 								 int activeFacesMask, double bx, double by, double bz, double cx, double cy, double cz) {
-		SkyboxSimulationBlock.SkyType type = state.skyType;
-		float hr, hg, hb, zr, zg, zb, gr, gg, gb;
+		double angle = state.celestialAngle * (Math.PI * 2.0);
+		float sunY = (float) Math.cos(angle);
+		float dayFactor = Math.clamp((sunY + 0.10f) / 0.28f, 0.0f, 1.0f);
+		float sunsetFactor = (1.0f - Math.abs(dayFactor - 0.5f) * 2.0f) * (1.0f - state.rainLevel);
 
-		if (type == SkyboxSimulationBlock.SkyType.DAY) {
-			hr = DAY_HR; hg = DAY_HG; hb = DAY_HB;
-			zr = DAY_ZR; zg = DAY_ZG; zb = DAY_ZB;
-			gr = DAY_GR; gg = DAY_GG; gb = DAY_GB;
-		} else if (type == SkyboxSimulationBlock.SkyType.SUNSET) {
-			hr = SUNSET_HR; hg = SUNSET_HG; hb = SUNSET_HB;
-			zr = SUNSET_ZR; zg = SUNSET_ZG; zb = SUNSET_ZB;
-			gr = SUNSET_GR; gg = SUNSET_GG; gb = SUNSET_GB;
-		} else if (type == SkyboxSimulationBlock.SkyType.NIGHT) {
-			hr = NIGHT_HR; hg = NIGHT_HG; hb = NIGHT_HB;
-			zr = NIGHT_ZR; zg = NIGHT_ZG; zb = NIGHT_ZB;
-			gr = NIGHT_GR; gg = NIGHT_GG; gb = NIGHT_GB;
-		} else {
-			double angle = state.celestialAngle * (Math.PI * 2.0);
-			float sunY = (float) Math.cos(angle);
-			float dayFactor = Math.clamp((sunY + 0.10f) / 0.28f, 0.0f, 1.0f);
-			float sunsetFactor = (1.0f - Math.abs(dayFactor - 0.5f) * 2.0f) * (1.0f - state.rainLevel);
-
-			hr = lerp3(0.04f, 1.00f, 0.82f, dayFactor, sunsetFactor);
-			hg = lerp3(0.07f, 0.48f, 0.90f, dayFactor, sunsetFactor);
-			hb = lerp3(0.14f, 0.18f, 1.00f, dayFactor, sunsetFactor);
-			zr = lerp3(0.008f, 0.18f, 0.40f, dayFactor, sunsetFactor);
-			zg = lerp3(0.015f, 0.12f, 0.65f, dayFactor, sunsetFactor);
-			zb = lerp3(0.035f, 0.35f, 1.00f, dayFactor, sunsetFactor);
-			gr = lerp3(0.005f, 0.10f, 0.45f, dayFactor, sunsetFactor);
-			gg = lerp3(0.005f, 0.08f, 0.55f, dayFactor, sunsetFactor);
-			gb = lerp3(0.010f, 0.14f, 0.65f, dayFactor, sunsetFactor);
-		}
+		float hr = lerp3(0.04f, 1.00f, 0.82f, dayFactor, sunsetFactor);
+		float hg = lerp3(0.07f, 0.48f, 0.90f, dayFactor, sunsetFactor);
+		float hb = lerp3(0.14f, 0.18f, 1.00f, dayFactor, sunsetFactor);
+		float zr = lerp3(0.008f, 0.18f, 0.40f, dayFactor, sunsetFactor);
+		float zg = lerp3(0.015f, 0.12f, 0.65f, dayFactor, sunsetFactor);
+		float zb = lerp3(0.035f, 0.35f, 1.00f, dayFactor, sunsetFactor);
+		float gr = lerp3(0.005f, 0.10f, 0.45f, dayFactor, sunsetFactor);
+		float gg = lerp3(0.005f, 0.08f, 0.55f, dayFactor, sunsetFactor);
+		float gb = lerp3(0.010f, 0.14f, 0.65f, dayFactor, sunsetFactor);
 
 		float rainLerpInv = 1.0f, rainRTerm = 0.0f, rainGTerm = 0.0f, rainBTerm = 0.0f;
 		float rainLevel = state.rainLevel;
@@ -994,23 +944,13 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 
 	private void batchStars(SkyboxSimulationRenderState state, PoseStack poseStack, SubmitNodeCollector collector,
 							int activeFacesMask, double bx, double by, double bz, double cx, double cy, double cz) {
-		SkyboxSimulationBlock.SkyType type = state.skyType;
-		if (type == SkyboxSimulationBlock.SkyType.DAY) return;
-
-		float starAlpha;
-		if (type == SkyboxSimulationBlock.SkyType.NIGHT) {
-			starAlpha = 1.0f;
-		} else if (type == SkyboxSimulationBlock.SkyType.SUNSET) {
-			starAlpha = 0.55f;
-		} else {
-			double angle = state.celestialAngle * (Math.PI * 2.0);
-			float sy = (float) Math.cos(angle);
-			float sx = (float) -Math.sin(angle);
-			float sz = -0.20f * (float) Math.cos(angle);
-			float invLen = 1.0f / (float) Math.sqrt(sx * sx + sy * sy + sz * sz);
-			float sunY = sy * invLen;
-			starAlpha = Math.clamp((-sunY - 0.05f) / 0.25f, 0.0f, 1.0f);
-		}
+		double angle = state.celestialAngle * (Math.PI * 2.0);
+		float sy = (float) Math.cos(angle);
+		float sx = (float) -Math.sin(angle);
+		float sz = -0.20f * (float) Math.cos(angle);
+		float invLen = 1.0f / (float) Math.sqrt(sx * sx + sy * sy + sz * sz);
+		float sunY = sy * invLen;
+		float starAlpha = Math.clamp((-sunY - 0.05f) / 0.25f, 0.0f, 1.0f);
 		starAlpha *= (1.0f - state.rainLevel);
 		if (starAlpha <= 0.01f) return;
 
@@ -1168,27 +1108,16 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 
 	private void batchSun(SkyboxSimulationRenderState state, PoseStack poseStack, SubmitNodeCollector collector,
 						  int activeFacesMask, double bx, double by, double bz, double cx, double cy, double cz) {
-		SkyboxSimulationBlock.SkyType type = state.skyType;
-		if (type == SkyboxSimulationBlock.SkyType.NIGHT) return;
-
-		float sunDirX, sunDirY, sunDirZ;
-		if (type == SkyboxSimulationBlock.SkyType.DAY) {
-			sunDirX = DAY_SUN_X; sunDirY = DAY_SUN_Y; sunDirZ = DAY_SUN_Z;
-		} else if (type == SkyboxSimulationBlock.SkyType.SUNSET) {
-			sunDirX = SUNSET_SUN_X; sunDirY = SUNSET_SUN_Y; sunDirZ = SUNSET_SUN_Z;
-		} else {
-			double angle = state.celestialAngle * (Math.PI * 2.0);
-			float sy = (float) Math.cos(angle);
-			float sx = (float) -Math.sin(angle);
-			float sz = -0.20f * (float) Math.cos(angle);
-			float invLen = 1.0f / (float) Math.sqrt(sx * sx + sy * sy + sz * sz);
-			sunDirX = sx * invLen; sunDirY = sy * invLen; sunDirZ = sz * invLen;
-		}
+		double angle = state.celestialAngle * (Math.PI * 2.0);
+		float sy = (float) Math.cos(angle);
+		float sx = (float) -Math.sin(angle);
+		float sz = -0.20f * (float) Math.cos(angle);
+		float invLen = 1.0f / (float) Math.sqrt(sx * sx + sy * sy + sz * sz);
+		float sunDirX = sx * invLen, sunDirY = sy * invLen, sunDirZ = sz * invLen;
 
 		if (sunDirY < -0.15f) return;
 
-		float alpha = type == SkyboxSimulationBlock.SkyType.DAY || type == SkyboxSimulationBlock.SkyType.SUNSET ?
-			1.0f : Math.clamp((sunDirY + 0.15f) / 0.25f, 0.0f, 1.0f);
+		float alpha = Math.clamp((sunDirY + 0.15f) / 0.25f, 0.0f, 1.0f);
 		alpha *= (1.0f - state.rainLevel * 0.85f);
 		if (alpha <= 0.01f) return;
 
@@ -1209,25 +1138,17 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 		if (quadCount == 0) return;
 
 		int r = 255, g, b;
-		if (type == SkyboxSimulationBlock.SkyType.DAY) {
+		if (sunDirY > 0.35f) {
 			g = 255;
 			b = 255;
-		} else if (type == SkyboxSimulationBlock.SkyType.SUNSET) {
-			g = 180;
-			b = 100;
+		} else if (sunDirY > 0.15f) {
+			float f = (sunDirY - 0.15f) / 0.20f;
+			g = (int) (225 + 30 * f);
+			b = (int) (160 + 95 * f);
 		} else {
-			if (sunDirY > 0.35f) {
-				g = 255;
-				b = 255;
-			} else if (sunDirY > 0.15f) {
-				float f = (sunDirY - 0.15f) / 0.20f;
-				g = (int) (225 + 30 * f);
-				b = (int) (160 + 95 * f);
-			} else {
-				float f = Math.clamp((sunDirY + 0.05f) / 0.20f, 0.0f, 1.0f);
-				g = (int) (140 + 85 * f);
-				b = (int) (60 + 100 * f);
-			}
+			float f = Math.clamp((sunDirY + 0.05f) / 0.20f, 0.0f, 1.0f);
+			g = (int) (140 + 85 * f);
+			b = (int) (60 + 100 * f);
 		}
 
 		int a = (int) (alpha * 255.0f);
@@ -1306,27 +1227,16 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 
 	private void batchMoon(SkyboxSimulationRenderState state, PoseStack poseStack, SubmitNodeCollector collector,
 						   int activeFacesMask, double bx, double by, double bz, double cx, double cy, double cz) {
-		SkyboxSimulationBlock.SkyType type = state.skyType;
-		if (type == SkyboxSimulationBlock.SkyType.DAY) return;
-
-		float moonDirX, moonDirY, moonDirZ;
-		if (type == SkyboxSimulationBlock.SkyType.NIGHT) {
-			moonDirX = -NIGHT_SUN_X; moonDirY = -NIGHT_SUN_Y; moonDirZ = -NIGHT_SUN_Z;
-		} else if (type == SkyboxSimulationBlock.SkyType.SUNSET) {
-			moonDirX = -SUNSET_SUN_X; moonDirY = -SUNSET_SUN_Y; moonDirZ = -SUNSET_SUN_Z;
-		} else {
-			double angle = state.celestialAngle * (Math.PI * 2.0);
-			float sy = (float) Math.cos(angle);
-			float sx = (float) -Math.sin(angle);
-			float sz = -0.20f * (float) Math.cos(angle);
-			float invLen = 1.0f / (float) Math.sqrt(sx * sx + sy * sy + sz * sz);
-			moonDirX = -sx * invLen; moonDirY = -sy * invLen; moonDirZ = -sz * invLen;
-		}
+		double angle = state.celestialAngle * (Math.PI * 2.0);
+		float sy = (float) Math.cos(angle);
+		float sx = (float) -Math.sin(angle);
+		float sz = -0.20f * (float) Math.cos(angle);
+		float invLen = 1.0f / (float) Math.sqrt(sx * sx + sy * sy + sz * sz);
+		float moonDirX = -sx * invLen, moonDirY = -sy * invLen, moonDirZ = -sz * invLen;
 
 		if (moonDirY < -0.15f) return;
 
-		float alpha = type == SkyboxSimulationBlock.SkyType.NIGHT ? 1.0f :
-			(type == SkyboxSimulationBlock.SkyType.SUNSET ? 0.65f : Math.clamp((moonDirY + 0.15f) / 0.25f, 0.0f, 1.0f));
+		float alpha = Math.clamp((moonDirY + 0.15f) / 0.25f, 0.0f, 1.0f);
 		alpha *= (1.0f - state.rainLevel * 0.85f);
 		if (alpha <= 0.01f) return;
 

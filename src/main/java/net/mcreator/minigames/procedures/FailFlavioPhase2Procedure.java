@@ -25,7 +25,7 @@ public class FailFlavioPhase2Procedure {
 							(float) (34 / ((world.isClientSide() ? Minecraft.getInstance().getConnection().getOnlinePlayers().size() : ServerLifecycleHooks.getCurrentServer().getPlayerCount()) * 1.2)));
 				}
 			}
-			net.mcreator.minigames.FlavioFightManager.completePhase2(world);
 		}
+		net.mcreator.minigames.FlavioFightManager.completePhase2(world);
 	}
 }

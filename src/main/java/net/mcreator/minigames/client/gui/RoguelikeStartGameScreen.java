@@ -46,7 +46,7 @@ public class RoguelikeStartGameScreen extends AbstractContainerScreen<RoguelikeS
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		if (mouseX > leftPos + 188 && mouseX < leftPos + 227 && mouseY > topPos + 82 && mouseY < topPos + 119) {
+		if (mouseX > leftPos + 175 && mouseX < leftPos + 239 && mouseY > topPos + 70 && mouseY < topPos + 142) {
 			guiGraphics.setTooltipForNextFrame(font, Component.translatable("gui.minigames.roguelike_start_game.tooltip_achievement_run"), mouseX, mouseY);
 		}
 		super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
@@ -78,8 +78,8 @@ public class RoguelikeStartGameScreen extends AbstractContainerScreen<RoguelikeS
 	@Override
 	public void init() {
 		super.init();
-		imagebutton_achievementrunicon = new ImageButton(this.leftPos + 192, this.topPos + 84, 32, 32, new WidgetSprites(Identifier.parse("minigames:textures/screens/roguelike.png"), Identifier.parse("minigames:textures/screens/roguelike.png")),
-				e -> {
+		imagebutton_achievementrunicon = new ImageButton(this.leftPos + 170, this.topPos + 70, 74, 74,
+				new WidgetSprites(Identifier.parse("minigames:textures/screens/roguelike_menu_big.png"), Identifier.parse("minigames:textures/screens/roguelike_menu_big_hovered.png")), e -> {
 					int x = RoguelikeStartGameScreen.this.x;
 					int y = RoguelikeStartGameScreen.this.y;
 					if (true) {

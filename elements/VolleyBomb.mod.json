@@ -77,7 +77,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ExplosionDamage",
-        "amount": 9.0,
+        "amount": 14.0,
         "operation": "ADD_VALUE"
       },
       {
@@ -89,7 +89,7 @@
       {
         "equipmentSlot": "mainhand",
         "attribute": "CUSTOM:ExtraDamage",
-        "amount": 50.0,
+        "amount": 100.0,
         "operation": "ADD_VALUE"
       },
       {

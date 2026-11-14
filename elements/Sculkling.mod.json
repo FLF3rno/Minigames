@@ -59,7 +59,7 @@
     "armorBaseValue": 0.0,
     "trackingRange": 26,
     "followRange": 26,
-    "health": 6,
+    "health": 5,
     "xpAmount": 0,
     "waterMob": false,
     "breatheUnderwater": {

@@ -65,10 +65,10 @@ public class FrictionUtilityUsedProcedure {
 										{
 											Entity _ent = entityiterator;
 											if (_ent.level() instanceof ServerLevel _serverLevel) {
-												_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.IN_FIRE)), 3);
+												_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(DamageTypes.IN_FIRE)), 4);
 											}
 										}
-										entityiterator.igniteForSeconds(2);
+										entityiterator.igniteForSeconds(3);
 									}
 								}
 							}

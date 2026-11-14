@@ -34,7 +34,7 @@ public class StopSignHitProcedure {
 		{
 			Entity _ent = entity;
 			if (_ent.level() instanceof ServerLevel _serverLevel) {
-				_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))), (float) (dmg * 1.2));
+				_ent.hurtServer(_serverLevel, new DamageSource(world.holderOrThrow(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:self_damage")))), (float) (dmg * 1.5));
 			}
 		}
 		entity.setDeltaMovement(new Vec3(0, 0, 0));

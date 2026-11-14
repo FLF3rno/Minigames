@@ -28,7 +28,9 @@ public class BreakSnowProcedure {
 				_vars.snowballCountSpleef = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).snowballCountSpleef + 0.75;
 				_vars.markSyncDirty();
 			}
-			SpleefPowerupProcedure.execute(world, entity);
+			if (!world.isClientSide()) {
+				SpleefPowerupProcedure.execute(world, entity);
+			}
 		}
 	}
 }

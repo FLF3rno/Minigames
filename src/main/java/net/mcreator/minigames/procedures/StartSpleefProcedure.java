@@ -32,14 +32,16 @@ public class StartSpleefProcedure {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands()
 						.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/clear @a");
-			for (Entity entityiterator : new ArrayList<>(world.players())) {
-				{
-					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-					_vars.snowballCountSpleef = 0;
-					_vars.markSyncDirty();
-				}
-				if (entityiterator.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
-					setStackInSlot(_resourceHandler, 0, ItemResource.of(new ItemStack(MinigamesModItems.SPLEEF_SHOVEL.get())), 1);
+			if (!world.isClientSide() && world.getServer() != null) {
+				for (Entity entityiterator : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
+					{
+						MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+						_vars.snowballCountSpleef = 0;
+						_vars.markSyncDirty();
+					}
+					if (entityiterator.getCapability(Capabilities.Item.ENTITY, null) instanceof ResourceHandler<ItemResource> _resourceHandler) {
+						setStackInSlot(_resourceHandler, 0, ItemResource.of(new ItemStack(MinigamesModItems.SPLEEF_SHOVEL.get())), 1);
+					}
 				}
 			}
 			MinigamesModVariables.MapVariables.get(world).nightVision = false;

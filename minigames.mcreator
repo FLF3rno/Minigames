@@ -11419,7 +11419,7 @@
       "name": "RerollAchievement",
       "type": "packet",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "reroll_achievement",
       "metadata": {
         "files": [

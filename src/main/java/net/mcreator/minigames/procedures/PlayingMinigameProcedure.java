@@ -17,6 +17,6 @@ public class PlayingMinigameProcedure {
 		} else if (MinigamesModVariables.MapVariables.get(world).playingDungeons) {
 			playin = true;
 		}
-		return true;
+		return playin;
 	}
 }

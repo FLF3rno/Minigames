@@ -58,7 +58,7 @@ damagesource == null ||
 entity == null ||
 sourceentity == null ) return ;
 double damage = 0;Entity target = null;ArrayList<Object> entitiesinrange = new ArrayList<>();
-damage =
+if (MinigamesModVariables.MapVariables.get(world).playingDungeons) {damage =
 ReturnDamageRoguelikeProcedure.execute(world,damagesource,entity,sourceentity,amount)
 ;if (
 IsBackstabProcedure.execute(sourceentity,entity)
@@ -77,8 +77,8 @@ SoundSource.NEUTRAL, 1, 1, false);
 }
 ApplyEffectProcedure.execute(world,entity,true,1,net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((sourceentity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem():ItemStack.EMPTY), "minigames:effect_length"),"minigames:bleed")
 ;
-}if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:decay_dmg")))) {if (entity.getPersistentData().getBooleanOr("parasiteScytheActive", false)) {entity.getPersistentData().putBoolean("parasiteScytheActive", false);damage = damage-damage*(net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get())), "minigames:effect_potency")/ 100);
-ApplyEffectProcedure.execute(world,entity,true,damage/ (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get())), "minigames:effect_length")/ 20),net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute((new ItemStack(MinigamesModItems.PARASITE_SCYTHE.get())), "minigames:effect_length"),"minigames:decay")
+}if (!damagesource.is(ResourceKey.create(Registries.DAMAGE_TYPE, Identifier.parse("minigames:decay_dmg")))) {if (entity.getPersistentData().getBooleanOr("parasiteScytheActive", false)) {entity.getPersistentData().putBoolean("parasiteScytheActive", false);damage = damage-damage*(net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(CUSTOM:ParasiteScythe, "minigames:effect_potency")/ 100);
+ApplyEffectProcedure.execute(world,entity,true,damage/ (net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(CUSTOM:ParasiteScythe, "minigames:effect_length")/ 20),net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(CUSTOM:ParasiteScythe, "minigames:effect_length"),"minigames:decay")
 ;
 damage = 0;}}if (sourceentity instanceof LivingEntity _livEnt10 && _livEnt10.hasEffect(MinigamesModMobEffects.LIFESTEAL)) {
 DungeonHealProcedure.execute(world,sourceentity,(damage*(sourceentity instanceof LivingEntity _livEnt && _livEnt.hasEffect(MinigamesModMobEffects.LIFESTEAL) ?
@@ -120,6 +120,6 @@ new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO,
 _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "playsound minigames:zap player @a ~ ~ ~ 1 1.5");
 RenderBeamProcedure.execute(target,entity,2,10,Identifier.fromNamespaceAndPath("minigames", "textures/entities/zap.png"))
 ;
-}}}
+}}}}
 }
 }

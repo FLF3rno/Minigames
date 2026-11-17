@@ -62,7 +62,12 @@ public class SummonNoOwnerCrownProcedure {
 		}
 
 		if (!(sourceEntity instanceof LivingEntity)) {
-			setTimer(world, -1);
+			for (Entity player : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
+				MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
+
+				vars.timerSpeed = -1;
+				vars.markSyncDirty();
+			}
 		}
 
 		if (sourceEntity instanceof LivingEntity killer && killer != entity) {
@@ -84,9 +89,7 @@ public class SummonNoOwnerCrownProcedure {
 
 				crown.setInvulnerable(true);
 				crown.setGlowingTag(true);
-				crown.setItemSlot(
-						EquipmentSlot.HEAD,
-						new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
+				crown.setItemSlot(EquipmentSlot.HEAD, new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
 
 				String ownerColor = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
 
@@ -104,14 +107,6 @@ public class SummonNoOwnerCrownProcedure {
 
 				GlowColorSync.applyGlowTeam(crown, ownerColor);
 			}
-		}
-	}
-	private static void setTimer(LevelAccessor world, double time){
-		for (Entity player : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
-			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-
-			vars.timerSpeed = time;
-			vars.markSyncDirty();
 		}
 	}
 }

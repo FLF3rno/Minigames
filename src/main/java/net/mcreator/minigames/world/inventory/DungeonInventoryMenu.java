@@ -94,7 +94,6 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		ItemStack slotStack = slot.getItem();
 		itemstack = slotStack.copy();
 
-		boolean inCombat = isInCombat();
 		boolean isRelic = DungeonItemAccess.isRelic(slotStack);
 		boolean isDungeonItem = DungeonItemAccess.isDungeonItem(slotStack);
 
@@ -106,24 +105,16 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 		int backpackEnd = backpackStart + this.backpackSlots;
 
 		if (index >= relicStart && index < relicEnd) {
-			if (inCombat) {
-				return ItemStack.EMPTY;
-			}
 			if (!this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
 				return ItemStack.EMPTY;
 			}
 		} else if (index >= hotbarStart && index < hotbarEnd) {
 			if (isRelic) {
 				if (!this.moveItemStackTo(slotStack, relicStart, relicEnd, false)) {
-					if (inCombat || !this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
-						return ItemStack.EMPTY;
-					}
+					return ItemStack.EMPTY;
 				}
 			} else {
 				if (DungeonItemAccess.isHotbarLocked(slotStack)) {
-					return ItemStack.EMPTY;
-				}
-				if (inCombat && isDungeonItem) {
 					return ItemStack.EMPTY;
 				}
 				if (!this.moveItemStackTo(slotStack, backpackStart, backpackEnd, false)) {
@@ -132,16 +123,10 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 			}
 		} else if (index >= backpackStart && index < backpackEnd) {
 			if (isRelic) {
-				if (inCombat) {
-					return ItemStack.EMPTY;
-				}
 				if (!this.moveItemStackTo(slotStack, relicStart, relicEnd, false)) {
 					return ItemStack.EMPTY;
 				}
 			} else {
-				if (inCombat && isDungeonItem) {
-					return ItemStack.EMPTY;
-				}
 				if (!this.moveItemStackTo(slotStack, hotbarStart, hotbarEnd, false)) {
 					return ItemStack.EMPTY;
 				}
@@ -187,41 +172,7 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 			}
 		}
 
-		if (isInCombat()) {
-			if (clickType == ContainerInput.THROW) {
-				if (slotId >= 0 && slotId < this.slots.size()) {
-					Slot slot = this.slots.get(slotId);
-					if (DungeonItemAccess.isDungeonItem(slot.getItem())) {
-						return;
-					}
-				}
-			}
-			if (clickType == ContainerInput.PICKUP || clickType == ContainerInput.SWAP || clickType == ContainerInput.QUICK_CRAFT) {
-				if (slotId >= 0 && slotId < this.slots.size()) {
-					Slot slot = this.slots.get(slotId);
-					int containerSlot = slot.getContainerSlot();
-					boolean backpackSlot = isBackpackSlot(containerSlot);
-					boolean relicSlot = isRelicSlot(containerSlot);
-					ItemStack carried = this.getCarried();
-					ItemStack slotStack = slot.getItem();
-					boolean carriedIsDungeonClassItem = DungeonItemAccess.isDungeonItem(carried);
-					boolean slotIsDungeonClassItem = DungeonItemAccess.isDungeonItem(slotStack);
-					if ((backpackSlot && DungeonItemAccess.isRelic(carried)) || (backpackSlot && DungeonItemAccess.isRelic(slotStack)) || (relicSlot && DungeonItemAccess.isRelic(slotStack))) {
-						return;
-					}
-					if (backpackSlot && (carriedIsDungeonClassItem || slotIsDungeonClassItem)) {
-						return;
-					}
-				} else {
-					if (clickType == ContainerInput.QUICK_CRAFT && DungeonItemAccess.isRelic(this.getCarried())) {
-						return;
-					}
-					if (slotId == -999 && !this.getCarried().isEmpty() && DungeonItemAccess.isDungeonItem(this.getCarried())) {
-						return;
-					}
-				}
-			}
-		}
+
 		if (clickType == ContainerInput.SWAP && slotId >= 0 && slotId < this.slots.size()) {
 			Slot slot = this.slots.get(slotId);
 			int containerSlot = slot.getContainerSlot();
@@ -237,10 +188,6 @@ public class DungeonInventoryMenu extends AbstractContainerMenu implements Minig
 	public void removed(Player player) {
 		super.removed(player);
 		DungeonItemAccess.dropUnavailableBackpackSlots(player);
-	}
-
-	private boolean isInCombat() {
-		return MinigamesModVariables.MapVariables.get(this.world).inCombat;
 	}
 
 	private static boolean isRelicSlot(int containerSlot) {

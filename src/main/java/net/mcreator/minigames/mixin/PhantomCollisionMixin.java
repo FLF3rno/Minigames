@@ -1,6 +1,7 @@
 package net.mcreator.minigames.mixin;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
+import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.scores.PlayerTeam;
@@ -30,7 +31,7 @@ public class PhantomCollisionMixin {
     @Inject(method = "getTeam", at = @At("HEAD"), cancellable = true)
     private void minigames$phantomTeam(CallbackInfoReturnable<Team> cir) {
         if ((Object) this instanceof Player player) {
-            if (player.hasEffect(MinigamesModMobEffects.PHANTOM)) {
+            if (player.hasEffect(MinigamesModMobEffects.PHANTOM) || player.getData(MinigamesModVariables.PLAYER_VARIABLES).spectative) {
                 cir.setReturnValue(MINIGAMES$PHANTOM_TEAM);
             }
         }

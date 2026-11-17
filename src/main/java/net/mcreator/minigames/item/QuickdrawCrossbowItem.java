@@ -122,7 +122,7 @@ public class QuickdrawCrossbowItem extends CrossbowItem {
         return (int) GetItemAttributeProcedure.execute(
                 itemstack,
                 "minigames:load_time"
-        );
+        ) + 3;
     }
 
     @Override
@@ -174,7 +174,7 @@ public class QuickdrawCrossbowItem extends CrossbowItem {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseTicks) {
         if (!level.isClientSide()) {
             float progress = (float) (stack.getUseDuration(entity) - remainingUseTicks)
-                    / (float) getChargeDuration(stack, entity);
+                    / (float) GetItemAttributeProcedure.execute(stack, "minigames:load_time");
 
             if (progress < 0.2F) {
                 startSoundPlayed = false;

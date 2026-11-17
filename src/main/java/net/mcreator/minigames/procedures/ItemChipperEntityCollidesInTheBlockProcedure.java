@@ -53,7 +53,7 @@ public class ItemChipperEntityCollidesInTheBlockProcedure {
 					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:grind_item")), SoundSource.BLOCKS, (float) 0.9, 1, false);
 				}
 			}
-			SummonFXBlockClient.create(x, y, z).name("grind").send();
+			SummonFXBlockClient.create(x, y, z).name("grind").allowMulti(true).send();
 			for (int index = 0; index < (int) (amount); index++) {
 				MinigamesMod.queueServerWork((int) (Mth.nextInt(RandomSource.create(), 1, 55) + wait), () -> {
 					SpawnCoinsFromTubeProcedure.execute(world);

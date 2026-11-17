@@ -94,7 +94,7 @@ public class CactusCrossbowItem extends CrossbowItem {
         return (int) GetItemAttributeProcedure.execute(
                 itemstack,
                 "minigames:load_time"
-        );
+        ) + 3;
     }
 
     @Override
@@ -144,7 +144,7 @@ public class CactusCrossbowItem extends CrossbowItem {
 
             float progress =
                     (float)(stack.getUseDuration(entity) - remainingUseTicks)
-                            / (float)getChargeDuration(stack, entity);
+                            / (float)GetItemAttributeProcedure.execute(stack, "minigames:load_time");
 
             if (progress < 0.2F) {
                 startSoundPlayed = false;

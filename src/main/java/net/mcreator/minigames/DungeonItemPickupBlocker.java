@@ -31,11 +31,7 @@ public class DungeonItemPickupBlocker {
 
 	@SubscribeEvent
 	public static void onItemToss(ItemTossEvent event) {
-		if (event.getPlayer() == null)
-			return;
-		if (!MinigamesModVariables.MapVariables.get(event.getPlayer().level()).inCombat)
-			return;
-		if (DungeonItemAccess.isDungeonItem(event.getEntity().getItem())) {
+        if (DungeonItemAccess.isDungeonItem(event.getEntity().getItem())) {
 			event.getPlayer().getInventory().placeItemBackInInventory(event.getEntity().getItem().copy());
 			event.setCanceled(true);
 		}

@@ -13,11 +13,10 @@ public class ReturnLoadstateProcedure {
 			return 0;
 		double progress = 0;
 		if (CrossbowItem.isCharged(itemstack)) {
-				return 4;
-			}
-		else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
+			return 4;
+		} else if ((entity instanceof LivingEntity _livEnt ? _livEnt.getMainHandItem() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			progress = (entity instanceof LivingEntity _entUseTicks3 ? _entUseTicks3.getTicksUsingItem() : 0) / GetItemAttributeProcedure.execute(itemstack, "minigames:load_time");
-			 if (progress <= 0) {
+			if (progress <= 0) {
 				return 0;
 			} else if (progress < 0.35) {
 				return 1;
@@ -26,7 +25,7 @@ public class ReturnLoadstateProcedure {
 			} else if (progress < 0.95) {
 				return 3;
 			}
-			return 0;
+			return 3;
 		}
 		return 0;
 	}

@@ -8740,30 +8740,6 @@
       "path": "~/Dungeon/Items/Support/Weapons/Blessed Cursed Crossbow"
     },
     {
-      "name": "ReturnLoadstate",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": true,
-      "registry_name": "return_loadstate",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
-        "return_type": "number",
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/ReturnLoadstateProcedure.java"
-        ]
-      },
-      "path": "~/Dungeon/Items"
-    },
-    {
       "name": "SelfDamage",
       "type": "damagetype",
       "compiles": true,
@@ -18529,6 +18505,57 @@
         ]
       },
       "path": "~/General/Effects"
+    },
+    {
+      "name": "EnableSpectative",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "enable_spectative",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/EnableSpectativeProcedure.java"
+        ]
+      },
+      "path": "~/General/Spectative"
+    },
+    {
+      "name": "DisableSpectative",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "disable_spectative",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/DisableSpectativeProcedure.java"
+        ]
+      },
+      "path": "~/General/Spectative"
+    },
+    {
+      "name": "DebugSpectative",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "debug_spectative",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/DebugSpectativeCommand.java"
+        ]
+      },
+      "path": "~/General/Spectative"
     }
   ],
   "variable_elements": [
@@ -19461,6 +19488,12 @@
       "type": "number",
       "scope": "map",
       "value": "0"
+    },
+    {
+      "name": "spectative",
+      "type": "logic",
+      "scope": "player_persistent",
+      "value": "false"
     }
   ],
   "sound_elements": [
@@ -21501,6 +21534,10 @@
                 "children": []
               }
             ]
+          },
+          {
+            "name": "Spectative",
+            "children": []
           }
         ]
       }

@@ -149,6 +149,7 @@ public class MinigamesModVariables {
 		clone.maximumLightLevel = original.maximumLightLevel;
 		clone.AlwaysShowReminder = original.AlwaysShowReminder;
 		clone.ShowSpleefBlockParticles = original.ShowSpleefBlockParticles;
+		clone.spectative = original.spectative;
 		if (!event.isWasDeath()) {
 		}
 		event.getEntity().setData(PLAYER_VARIABLES, clone);
@@ -652,6 +653,7 @@ public class MinigamesModVariables {
 		public double maximumLightLevel = 15.0;
 		public boolean AlwaysShowReminder = false;
 		public boolean ShowSpleefBlockParticles = true;
+		public boolean spectative = false;
 
 		@Override
 		public void serialize(ValueOutput output) {
@@ -701,6 +703,7 @@ public class MinigamesModVariables {
 			output.putDouble("maximumLightLevel", maximumLightLevel);
 			output.putBoolean("AlwaysShowReminder", AlwaysShowReminder);
 			output.putBoolean("ShowSpleefBlockParticles", ShowSpleefBlockParticles);
+			output.putBoolean("spectative", spectative);
 		}
 
 		@Override
@@ -751,6 +754,7 @@ public class MinigamesModVariables {
 			maximumLightLevel = input.getDoubleOr("maximumLightLevel", 0);
 			AlwaysShowReminder = input.getBooleanOr("AlwaysShowReminder", false);
 			ShowSpleefBlockParticles = input.getBooleanOr("ShowSpleefBlockParticles", false);
+			spectative = input.getBooleanOr("spectative", false);
 		}
 
 		public void markSyncDirty() {

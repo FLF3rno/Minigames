@@ -27,7 +27,8 @@
     "ServerGamePacketListenerImplMixin",
     "GiantBellRaycastMixin",
     "PlayerFoodMixin",
-    "FoodDataMixin"
+    "FoodDataMixin",
+    "SpectativePlayerRenderMixin"
   ],
   "client": [
     "GuiAccessor",
@@ -42,7 +43,7 @@
     "GameRendererMixin",
     "PhantomRenderTypeMixin",
     "LivingEntityRenderStateMixin",
-    "PhantomEntityRendererMixin",
+    "OverlayEntityRendererMixin",
     "ParticleEngineMixin",
     "GoldenRenderMixin",
     "FlameFeatureRendererMixin",

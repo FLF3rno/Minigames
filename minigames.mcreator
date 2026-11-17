@@ -18543,19 +18543,6 @@
         ]
       },
       "path": "~/General/Spectative"
-    },
-    {
-      "name": "DebugSpectative",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "debug_spectative",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/command/DebugSpectativeCommand.java"
-        ]
-      },
-      "path": "~/General/Spectative"
     }
   ],
   "variable_elements": [

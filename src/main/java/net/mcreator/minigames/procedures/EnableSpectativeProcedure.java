@@ -37,8 +37,6 @@ public class EnableSpectativeProcedure {
 				}
 			}
 			if (entity instanceof Player player && player.level() instanceof ServerLevel level) {
-				level.getChunkSource().removeEntity(player);
-				level.getChunkSource().addEntity(player);
 				player.getAbilities().setFlyingSpeed(0.10F);
 			}
 			if (entity instanceof Player _player) {

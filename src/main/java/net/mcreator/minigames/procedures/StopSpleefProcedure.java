@@ -20,7 +20,8 @@ public class StopSpleefProcedure {
 		String secondUuid = MinigamesModVariables.secondSpleef != null ? MinigamesModVariables.secondSpleef.getStringUUID() : "";
 		String thirdUuid = MinigamesModVariables.thirdSpleef != null ? MinigamesModVariables.thirdSpleef.getStringUUID() : "";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-		if (world instanceof ServerLevel _level) {
+		if (world instanceof ServerLevel _level)
+ 	{
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"/effect clear @a night_vision");
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
@@ -71,6 +72,7 @@ public class StopSpleefProcedure {
 			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "clear @a");
 		for (Entity entityiterator : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
 			GrantGameCompassProcedure.execute(world, entityiterator);
+			DisableSpectativeProcedure.execute(entityiterator);
 		}
 		MinigamesModVariables.MapVariables.get(world).playingSpleef = false;
 		MinigamesModVariables.MapVariables.get(world).sky = "normal";

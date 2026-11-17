@@ -26,8 +26,6 @@ public class DisableSpectativeProcedure {
 				_entity.getAttribute(Attributes.BLOCK_INTERACTION_RANGE).removeModifier(Identifier.parse("minigames:spectative"));
 			}
 			if (entity instanceof Player player && player.level() instanceof ServerLevel level) {
-				level.getChunkSource().removeEntity(player);
-				level.getChunkSource().addEntity(player);
 				player.getAbilities().setFlyingSpeed(0.05F);
 			}
 			if (entity instanceof Player _player) {

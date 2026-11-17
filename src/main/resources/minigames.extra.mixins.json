@@ -28,7 +28,14 @@
     "GiantBellRaycastMixin",
     "PlayerFoodMixin",
     "FoodDataMixin",
-    "SpectativePlayerRenderMixin"
+    "SpectativePlayerRenderMixin",
+    "SpectativePlayerMixin",
+    "SpectativeEntityMixin",
+    "SpectativeLivingEntityMixin",
+    "SpectativeBlockPlacementMixin",
+    "SpectativeItemPickupMixin",
+    "SpectativeXpPickupMixin",
+    "SpectativeArrowPickupMixin"
   ],
   "client": [
     "GuiAccessor",
@@ -61,7 +68,8 @@
     "IrisIdMapMixin",
     "IrisIncludeGraphMixin",
     "IrisLanguageMapMixin",
-    "SoundBufferLibraryMixin"
+    "SoundBufferLibraryMixin",
+    "ShouldRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

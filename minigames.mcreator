@@ -882,49 +882,6 @@
       "path": "~/Crown Hunt"
     },
     {
-      "name": "PassCrown",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "pass_crown",
-      "metadata": {
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "sourceentity",
-            "type": "entity"
-          },
-          {
-            "name": "amount",
-            "type": "number"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
-        "files": [
-          "src/main/java/net/mcreator/minigames/procedures/PassCrownProcedure.java"
-        ]
-      },
-      "path": "~/Crown Hunt"
-    },
-    {
       "name": "CrownTickEvent",
       "type": "procedure",
       "compiles": true,

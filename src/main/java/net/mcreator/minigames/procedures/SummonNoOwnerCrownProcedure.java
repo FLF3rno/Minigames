@@ -38,65 +38,38 @@ public class SummonNoOwnerCrownProcedure {
 
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event) {
-		if (event.getEntity() != null) {
-			execute(event.getEntity().level(),
-					event.getEntity(),
-					event.getSource().getEntity());
-		}
-	}
+        execute(event.getEntity().level(),
+                event.getEntity(),
+                event.getSource().getEntity());
+    }
 
-	private static void execute(LevelAccessor world,
-								Entity entity,
-								Entity sourceEntity) {
+	private static void execute(LevelAccessor world, Entity entity, Entity sourceEntity) {
 
-		if (entity == null)
-			return;
+		if (!MinigamesModVariables.MapVariables.get(world).CrownHuntInGame) return;
+		if (entity == null) return;
+		if (world.isClientSide()) return;
 
-		if ((entity instanceof LivingEntity living
-				? living.getItemBySlot(EquipmentSlot.HEAD)
-				: ItemStack.EMPTY).getItem()
-				!= MinigamesModItems.CROWN_HELMET_HELMET.get()) {
+		if ((entity instanceof LivingEntity living ? living.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() != MinigamesModItems.CROWN_HELMET_HELMET.get()) {
 			return;
 		}
 
-		for (Entity player : new ArrayList<>(world.players())) {
-			MinigamesModVariables.PlayerVariables vars =
-					player.getData(MinigamesModVariables.PLAYER_VARIABLES);
-
-			vars.timerSpeed = -1;
-			vars.markSyncDirty();
+		if (entity instanceof LivingEntity livingEntity) {
+			livingEntity.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
 		}
 
-		if (sourceEntity instanceof Projectile projectile
-				&& projectile.getOwner() != null) {
+		if (sourceEntity instanceof Projectile projectile && projectile.getOwner() != null) {
 			sourceEntity = projectile.getOwner();
 		}
 
-		if (sourceEntity instanceof LivingEntity killer) {
+		if (!(sourceEntity instanceof LivingEntity)) {
+			setTimer(world, -1);
+		}
 
-			if (world instanceof ServerLevel level) {
-				level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(
-								CommandSource.NULL,
-								Vec3.ZERO,
-								Vec2.ZERO,
-								level,
-								LevelBasedPermissionSet.OWNER,
-								"",
-								Component.literal(""),
-								level.getServer(),
-								null
-						).withSuppressedOutput(),
-						"/kill @e[type=armor_stand,nbt={equipment:{head:{id:\"minigames:crown_helmet_helmet\",count:1}}}]"
-				);
-			}
-
-			killer.setItemSlot(
-					EquipmentSlot.HEAD,
-					new ItemStack(
-							MinigamesModItems.CROWN_HELMET_HELMET.get()
-					)
-			);
+		if (sourceEntity instanceof LivingEntity killer && killer != entity) {
+			MinigamesModVariables.PlayerVariables vars = killer.getData(MinigamesModVariables.PLAYER_VARIABLES);
+			vars.helmet = killer.getItemBySlot(EquipmentSlot.HEAD).copy();
+			vars.markSyncDirty();
+			killer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
 			AnimateCrownPickupProcedure.execute(world);
 			return;
 		}
@@ -113,26 +86,18 @@ public class SummonNoOwnerCrownProcedure {
 				crown.setGlowingTag(true);
 				crown.setItemSlot(
 						EquipmentSlot.HEAD,
-						new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get())
-				);
+						new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
 
-				String ownerColor =
-						entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
+				String ownerColor = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).color;
 
-				String normalizedColor =
-						ownerColor == null ? "FFFFFF" : ownerColor.trim();
+				String normalizedColor = ownerColor == null ? "FFFFFF" : ownerColor.trim();
 
 				if (normalizedColor.startsWith("#")) {
 					normalizedColor = normalizedColor.substring(1);
 				}
 
-				if (!normalizedColor.matches("^[0-9a-fA-F]{6}$")) {
-					normalizedColor = "FFFFFF";
-				}
 
-				crown.setCustomName(
-						Component.literal("[glow:#" + normalizedColor + "]")
-				);
+				crown.setCustomName(Component.literal("[glow:#" + normalizedColor + "]"));
 				crown.setCustomNameVisible(false);
 
 				level.addFreshEntity(crown);
@@ -140,8 +105,14 @@ public class SummonNoOwnerCrownProcedure {
 				GlowColorSync.applyGlowTeam(crown, ownerColor);
 			}
 		}
+	}
+	private static void setTimer(LevelAccessor world, double time){
+		for (Entity player : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
+			MinigamesModVariables.PlayerVariables vars = player.getData(MinigamesModVariables.PLAYER_VARIABLES);
 
-		return;
+			vars.timerSpeed = time;
+			vars.markSyncDirty();
+		}
 	}
 }
 

@@ -50,17 +50,19 @@ public class TimeOverCrownhuntProcedure {
 								_vars.markSyncDirty();
 							}
 							MinigamesMod.queueServerWork(10, () -> {
-								MinigamesModVariables.MapVariables.get(world).canGrabCrown = true;
-								MinigamesModVariables.MapVariables.get(world).markSyncDirty();
-								StartPVPProcedure.execute(world);
+								if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
+									MinigamesModVariables.MapVariables.get(world).canGrabCrown = true;
+									MinigamesModVariables.MapVariables.get(world).markSyncDirty();
+									StartPVPProcedure.execute(world);
+								}
 							});
-							break;
 						}
 					} else if (MinigamesModVariables.MapVariables.get(world).returnToCastle == false) {
 						if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).timerHours == 0 && entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).timerMinutes == 0
 								&& entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).timerSeconds == 0) {
-							OnWinCrownHuntProcedure.execute(world);
-							break;
+							if (entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES).team == 1) {
+								OnWinCrownHuntProcedure.execute(world);
+							}
 						}
 					}
 				}

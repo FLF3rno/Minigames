@@ -31,7 +31,7 @@ public class AnimateCrownPickupProcedure {
 			}
 			{
 				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.timerSpeed = -1;
+				_vars.timerSpeed = 1;
 				_vars.timerTick = 0;
 				_vars.timerSeconds = 1;
 				_vars.timerMinutes = MinigamesModVariables.MapVariables.get(world).crownMinutes;

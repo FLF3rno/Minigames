@@ -109,6 +109,10 @@ public class MinigamesModEntities {
 			EntityType.Builder.<CryptLurkerEntity>of(CryptLurkerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(2f, 3f));
 	public static final DeferredHolder<EntityType<?>, EntityType<PriestEntity>> PRIEST = register("priest",
 			EntityType.Builder.<PriestEntity>of(PriestEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.1f, 1.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<RockThrowerChurchEntity>> ROCK_THROWER_CHURCH = register("rock_thrower_church",
+			EntityType.Builder.<RockThrowerChurchEntity>of(RockThrowerChurchEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).notInPeaceful().sized(1.4f, 2.8f));
+	public static final DeferredHolder<EntityType<?>, EntityType<BoulderEntity>> BOULDER = register("boulder",
+			EntityType.Builder.<BoulderEntity>of(BoulderEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(2f, 2f));
 	// Start of user code block custom entities
 	public static final DeferredHolder<EntityType<?>, EntityType<GrapplingHitboxEntity>> GRAPPLING_HITBOX = register("grappling_hitbox",
 			EntityType.Builder.<GrapplingHitboxEntity>of(GrapplingHitboxEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.1f, 0.1f));
@@ -153,6 +157,7 @@ public class MinigamesModEntities {
 		ChurchSharpenerEntity.init(event);
 		CryptLurkerEntity.init(event);
 		PriestEntity.init(event);
+		RockThrowerChurchEntity.init(event);
 	}
 
 	@SubscribeEvent
@@ -190,5 +195,6 @@ public class MinigamesModEntities {
 		event.put(CHURCH_SHARPENER.get(), ChurchSharpenerEntity.createAttributes().build());
 		event.put(CRYPT_LURKER.get(), CryptLurkerEntity.createAttributes().build());
 		event.put(PRIEST.get(), PriestEntity.createAttributes().build());
+		event.put(ROCK_THROWER_CHURCH.get(), RockThrowerChurchEntity.createAttributes().build());
 	}
 }

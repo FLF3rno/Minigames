@@ -186,6 +186,7 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> HEALTH_UPGRADE;
 	public static final DeferredItem<Item> BACKPACK_UPGRADE;
 	public static final DeferredItem<Item> SPEED_UPGRADE;
+	public static final DeferredItem<Item> SPAWN_ROCK_THROWER_CHURCH;
 	static {
 		GAME_COMPASS = register("game_compass", GameCompassItem::new);
 		CROWN_HELMET_HELMET = register("crown_helmet_helmet", CrownHelmetItem.Helmet::new);
@@ -343,6 +344,7 @@ public class MinigamesModItems {
 		HEALTH_UPGRADE = register("health_upgrade", HealthUpgradeItem::new);
 		BACKPACK_UPGRADE = register("backpack_upgrade", BackpackUpgradeItem::new);
 		SPEED_UPGRADE = register("speed_upgrade", SpeedUpgradeItem::new);
+		SPAWN_ROCK_THROWER_CHURCH = block(MinigamesModBlocks.SPAWN_ROCK_THROWER_CHURCH);
 	}
 
 	// Start of user code block custom items

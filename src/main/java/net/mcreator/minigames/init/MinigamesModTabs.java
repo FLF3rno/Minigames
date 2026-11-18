@@ -161,6 +161,7 @@ public class MinigamesModTabs {
 				tabData.accept(MinigamesModBlocks.TEAM_SHOP_PEDESTAL.get().asItem());
 				tabData.accept(MinigamesModBlocks.SHOP_DOORS.get().asItem());
 				tabData.accept(MinigamesModBlocks.ITEM_CHIPPER.get().asItem());
+				tabData.accept(MinigamesModBlocks.SPAWN_ROCK_THROWER_CHURCH.get().asItem());
 			}).withSearchBar().withTabsBefore(CUSTOM_BLOCKS.getId()).build());
 
 	@SubscribeEvent

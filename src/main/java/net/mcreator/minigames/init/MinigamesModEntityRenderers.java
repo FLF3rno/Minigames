@@ -59,5 +59,7 @@ public class MinigamesModEntityRenderers {
 		event.registerEntityRenderer(MinigamesModEntities.CACTUS_ARROW.get(), CactusArrowRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.CRYPT_LURKER.get(), CryptLurkerRenderer::new);
 		event.registerEntityRenderer(MinigamesModEntities.PRIEST.get(), PriestRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.ROCK_THROWER_CHURCH.get(), RockThrowerChurchRenderer::new);
+		event.registerEntityRenderer(MinigamesModEntities.BOULDER.get(), BoulderRenderer::new);
 	}
 }

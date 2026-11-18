@@ -20,6 +20,13 @@ public class PriestOnEntityTickUpdateProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
+		if (!entity.isAlive()) {
+			if (!entity.level().isClientSide() && entity instanceof PriestEntity priest && priest.fxSpawned) {
+				RemoveFXEntityServer.destroy(entity).name("photon:priest").force(true).send();
+				priest.fxSpawned = false;
+			}
+			return;
+		}
 		if ((entity instanceof PriestEntity _datEntI ? _datEntI.getEntityData().get(PriestEntity.DATA_ID) : 0) == MinigamesModVariables.MapVariables.get(world).currentRoomID) {
 			if (entity instanceof PriestEntity _datEntSetI)
 				_datEntSetI.getEntityData().set(PriestEntity.DATA_activeTick, (int) ((entity instanceof PriestEntity _datEntI ? _datEntI.getEntityData().get(PriestEntity.DATA_activeTick) : 0) + 1));
@@ -61,72 +68,43 @@ public class PriestOnEntityTickUpdateProcedure {
 					}
 					Entity healTarget = world instanceof ServerLevel _level29 ? getEntityFromUUID(_level29, (entity instanceof PriestEntity _datEntS ? _datEntS.getEntityData().get(PriestEntity.DATA_target) : "")) : null;
 					if (healTarget != null && healTarget.isAlive()) {
-						RemoveFXEntityServer.destroy(entity).name("photon:priest").force(true).send();
-						Vec3 look = entity.getLookAngle();
-						Vec3 forward = new Vec3(look.x, 0, look.z);
-						forward = forward.lengthSqr() < 1.0E-4 ? new Vec3(0, 0, 1) : forward.normalize();
-						int activeTick = (entity instanceof PriestEntity _datEntI ? _datEntI.getEntityData().get(PriestEntity.DATA_activeTick) : 0);
-						double pearlY = entity.getY() + 1.25 + getPearlAnimOffsetY(activeTick);
-						Vec3 P0 = new Vec3(entity.getX(), pearlY, entity.getZ()).add(forward.scale(0.875));
-						Vec3 targetCenter = new Vec3(healTarget.getX(), healTarget.getY() + healTarget.getBbHeight() * 0.5, healTarget.getZ());
-						double rawDist = P0.distanceTo(targetCenter);
-						Vec3 toTargetInit = targetCenter.subtract(P0);
-						Vec3 toTargetHInit = new Vec3(toTargetInit.x, 0, toTargetInit.z);
-						Vec3 inDirInit = toTargetHInit.lengthSqr() < 1.0E-4 ? forward : toTargetHInit.normalize();
-						double targetRadius = (healTarget.getBbWidth() * 0.5) + 0.15;
-						Vec3 P3 = rawDist > targetRadius + 0.5 ? targetCenter.subtract(inDirInit.scale(targetRadius)) : targetCenter;
-						double dist = P0.distanceTo(P3);
-						if (dist > 0.5) {
-
-							double lead = Math.min(3.5, Math.max(1.2, dist * 0.35));
-							Vec3 P1 = P0.add(forward.scale(lead));
-							Vec3 toTarget = P3.subtract(P1);
-							Vec3 targetIn = new Vec3(toTarget.x, 0, toTarget.z);
-							targetIn = targetIn.lengthSqr() < 1.0E-4 ? forward : targetIn.normalize();
-							Vec3 P2 = P3.subtract(targetIn.scale(lead * 0.6));
-							int segments = Math.max(6, (int) Math.round(dist * 2.0));
-							for (int i = 1; i <= segments; i++) {
-								double t = (double) i / (segments + 1);
-								double u = 1.0 - t;
-								double tt = t * t;
-								double uu = u * u;
-								double uuu = uu * u;
-								double ttt = tt * t;
-								Vec3 pt = P0.scale(uuu).add(P1.scale(3 * uu * t)).add(P2.scale(3 * u * tt)).add(P3.scale(ttt));
-								Vec3 tangent = P1.subtract(P0).scale(3 * uu).add(P2.subtract(P1).scale(6 * u * t)).add(P3.subtract(P2).scale(3 * tt));
-								if (tangent.lengthSqr() < 1.0E-6) {
-									tangent = P3.subtract(P0);
-								}
-								Vec3 dir = tangent.normalize();
-								double hDist = Math.hypot(dir.x, dir.z);
-								double rotY = Math.toDegrees(Math.atan2(-dir.z, dir.x));
-								double rotZ = -Math.toDegrees(Math.atan2(hDist, dir.y));
-								Vec3 relOffset = pt.subtract(entity.position());
-								SummonFXEntityServer.create(entity)
-										.name("photon:priest")
-										.offset(relOffset.x, relOffset.y, relOffset.z)
-										.rotation(0, rotY, rotZ)
-										.forcedDeath(true)
-										.allowMulti(true)
-										.duration(15)
-										.send();
-							}
-						}
 						DungeonHealProcedure.execute(entity.level(), healTarget, (healTarget instanceof LivingEntity _livEnt ? _livEnt.getMaxHealth() : -1) / 13d, "monster");
-					} else {
-						RemoveFXEntityServer.destroy(entity).name("photon:priest").force(true).send();
 					}
-
-
-
-
-
+				}
+				if (world instanceof ServerLevel _levelFx && entity instanceof PriestEntity priest) {
+					Entity healTarget = getEntityFromUUID(_levelFx, priest.getEntityData().get(PriestEntity.DATA_target));
+					if (healTarget != null && healTarget.isAlive()) {
+						priest.getEntityData().set(PriestEntity.DATA_target_id, healTarget.getId());
+						if (!priest.fxSpawned) {
+							Vec3 look = entity.getLookAngle();
+							Vec3 forward = new Vec3(look.x, 0, look.z);
+							forward = forward.lengthSqr() < 1.0E-4 ? new Vec3(0, 0, 1) : forward.normalize();
+							int activeTick = priest.getEntityData().get(PriestEntity.DATA_activeTick);
+							double pearlY = entity.getY() + 1.25 + getPearlAnimOffsetY(activeTick);
+							Vec3 P0 = new Vec3(entity.getX(), pearlY, entity.getZ()).add(forward.scale(0.875));
+							Vec3 relOffset = P0.subtract(entity.getEyePosition());
+							SummonFXEntityServer.create(entity)
+									.name("photon:priest")
+									.offset(relOffset.x, relOffset.y, relOffset.z)
+									.rotation(0, 0, 0)
+									.forcedDeath(true)
+									.allowMulti(false)
+									.send();
+							priest.fxSpawned = true;
+						}
+					} else {
+						priest.getEntityData().set(PriestEntity.DATA_target_id, -1);
+						if (priest.fxSpawned) {
+							RemoveFXEntityServer.destroy(entity).name("photon:priest").force(true).send();
+							priest.fxSpawned = false;
+						}
+					}
 				}
 			}
 		}
 	}
 
-	private static double getPearlAnimOffsetY(int activeTick) {
+	public static double getPearlAnimOffsetY(double activeTick) {
 		if (activeTick < 74)
 			return 0.0;
 		double time = ((activeTick - 74) * 0.05) % 4.2917;

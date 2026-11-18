@@ -481,5 +481,7 @@
   "item.minigames.extra_damage_upgrade": "Extra Damage",
   "item.minigames.health_upgrade": "Health Upgrade",
   "item.minigames.backpack_upgrade": "+1 Backpack Slot",
-  "item.minigames.speed_upgrade": "Speed Upgrade"
+  "item.minigames.speed_upgrade": "Speed Upgrade",
+  "entity.minigames.rock_thrower_church": "Rock Thrower (Church)",
+  "item.minigames.spawn_rock_thrower_church": "Spawn Rock Thrower Church"
 }

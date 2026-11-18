@@ -42,6 +42,7 @@ public class AmbientBlockSoundHandler {
 		AmbientSoundInstance instance = new AmbientSoundInstance(sound, immutablePos, block, delay, range, muteConnected);
 		ACTIVE_SOUNDS.put(immutablePos, instance);
 		Minecraft.getInstance().getSoundManager().play(instance);
+		System.out.println("[AmbientSound] Started playing " + sound.location() + " at " + immutablePos + " (vol=" + instance.getVolume() + ", range=" + range + ")");
 	}
 
 	public static void playAmbientSound(Level level, BlockPos pos, Block block, SoundEvent sound, int delay, boolean muteConnected) {
@@ -63,7 +64,7 @@ public class AmbientBlockSoundHandler {
 				BlockPos neighbor = current.relative(dir);
 				if (!visited.contains(neighbor)) {
 					visited.add(neighbor);
-					if (level.getBlockState(neighbor).is(targetBlock)) {
+					if (level.getBlockState(neighbor).getBlock() == targetBlock) {
 						AmbientSoundInstance sound = ACTIVE_SOUNDS.get(neighbor);
 						if (sound != null && !sound.isStopped()) {
 							return true;
@@ -89,7 +90,15 @@ public class AmbientBlockSoundHandler {
 			this.x = pos.getX() + 0.5D;
 			this.y = pos.getY() + 0.5D;
 			this.z = pos.getZ() + 0.5D;
-			this.volume = (float) Math.max(0.01, range > 0 ? (range / 16.0) : 1.0);
+			float soundVol;
+			if (range <= 0) {
+				soundVol = 1.0F;
+			} else if (range <= 1.0) {
+				soundVol = 1.0F;
+			} else {
+				soundVol = (float) (range / 16.0F);
+			}
+			this.volume = soundVol;
 			this.pitch = 1.0F;
 			this.attenuation = Attenuation.LINEAR;
 			this.looping = true;
@@ -114,7 +123,7 @@ public class AmbientBlockSoundHandler {
 				return;
 			}
 
-			if (!mc.level.getBlockState(this.blockPos).is(this.expectedBlock)) {
+			if (mc.level.getBlockState(this.blockPos).getBlock() != this.expectedBlock) {
 				stopSound();
 				return;
 			}

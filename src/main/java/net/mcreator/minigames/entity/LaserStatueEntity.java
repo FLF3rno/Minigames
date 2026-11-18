@@ -229,7 +229,7 @@ public class LaserStatueEntity extends Monster {
 		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
 		builder = builder.add(Attributes.STEP_HEIGHT, 0.6);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 100);
-		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 10);
+		builder = builder.add(MinigamesModAttributes.DROPPED_COINS, 3);
 		return builder;
 	}
 }

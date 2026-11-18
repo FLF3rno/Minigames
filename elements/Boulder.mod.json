@@ -1,0 +1,20 @@
+{
+  "_fv": 89,
+  "_type": "projectile",
+  "definition": {
+    "projectileItem": "Blocks.COBBLESTONE",
+    "showParticles": false,
+    "actionSound": "entity.arrow.shoot",
+    "igniteFire": false,
+    "disableGravity": true,
+    "disableDiscarding": false,
+    "power": 1.0,
+    "damage": 5.0,
+    "knockback": 5,
+    "entityModel": "Modelrock",
+    "customModelTexture": "rock_thrower_church.png",
+    "modelWidth": 2.0,
+    "modelHeight": 2.0,
+    "onHitsBlock": "BoulderProjectileHitsBlock"
+  }
+}

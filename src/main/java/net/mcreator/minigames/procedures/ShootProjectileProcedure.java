@@ -30,6 +30,7 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 import net.mcreator.minigames.init.MinigamesModEntities;
 import net.mcreator.minigames.entity.CannonballEntity;
 import net.mcreator.minigames.entity.CactusArrowEntity;
+import net.mcreator.minigames.entity.BoulderEntity;
 import net.mcreator.minigames.entity.BlessedArrowEntity;
 
 public class ShootProjectileProcedure {
@@ -130,6 +131,18 @@ public class ShootProjectileProcedure {
 					Level projectileLevel = _shootFrom.level();
 					if (!projectileLevel.isClientSide()) {
 						Projectile _entityToSpawn = initArrowProjectile(new CactusArrowEntity(MinigamesModEntities.CACTUS_ARROW.get(), 0, 0, 0, projectileLevel, createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
+								(float) (damage / speed), true, false, false, AbstractArrow.Pickup.DISALLOWED);
+						_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
+						_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);
+						projectileLevel.addFreshEntity(_entityToSpawn);
+					}
+				}
+			} else if ((type).equals("boulder")) {
+				{
+					Entity _shootFrom = shooter;
+					Level projectileLevel = _shootFrom.level();
+					if (!projectileLevel.isClientSide()) {
+						Projectile _entityToSpawn = initArrowProjectile(new BoulderEntity(MinigamesModEntities.BOULDER.get(), 0, 0, 0, projectileLevel, createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
 								(float) (damage / speed), true, false, false, AbstractArrow.Pickup.DISALLOWED);
 						_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 						_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);

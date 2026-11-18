@@ -2,6 +2,7 @@ package net.mcreator.minigames.entity;
 
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.Level;
@@ -22,6 +23,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.minigames.procedures.PriestOnEntityTickUpdateProcedure;
 import net.mcreator.minigames.init.MinigamesModAttributes;
+import net.mcreator.minigames.photon_plugin.RemoveFXEntityServer;
 import net.mcreator.minigames.client.model.animations.priestAnimation;
 
 public class PriestEntity extends Monster {
@@ -30,8 +32,11 @@ public class PriestEntity extends Monster {
 	public static final EntityDataAccessor<Integer> DATA_ID = SynchedEntityData.defineId(PriestEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_activeTick = SynchedEntityData.defineId(PriestEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<String> DATA_target = SynchedEntityData.defineId(PriestEntity.class, EntityDataSerializers.STRING);
+	public static final EntityDataAccessor<Integer> DATA_target_id = SynchedEntityData.defineId(PriestEntity.class, EntityDataSerializers.INT);
 	public final AnimationState animationState0 = new AnimationState();
 	public final AnimationState animationState1 = new AnimationState();
+	public boolean fxSpawned = false;
+	public Vec3 clientVisualP3 = null;
 
 	public PriestEntity(EntityType<PriestEntity> type, Level world) {
 		super(type, world);
@@ -69,6 +74,7 @@ public class PriestEntity extends Monster {
 		builder.define(DATA_ID, 0);
 		builder.define(DATA_activeTick, 0);
 		builder.define(DATA_target, "");
+		builder.define(DATA_target_id, -1);
 	}
 
 	public void setTexture(String texture) {
@@ -147,6 +153,24 @@ public class PriestEntity extends Monster {
 	public void baseTick() {
 		super.baseTick();
 		PriestOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+
+	@Override
+	public void die(DamageSource source) {
+		super.die(source);
+		if (!this.level().isClientSide() && this.fxSpawned) {
+			RemoveFXEntityServer.destroy(this).name("photon:priest").force(true).send();
+			this.fxSpawned = false;
+		}
+	}
+
+	@Override
+	public void remove(RemovalReason reason) {
+		if (!this.level().isClientSide() && this.fxSpawned) {
+			RemoveFXEntityServer.destroy(this).name("photon:priest").force(true).send();
+			this.fxSpawned = false;
+		}
+		super.remove(reason);
 	}
 
 	@Override

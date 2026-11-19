@@ -1,8 +1,8 @@
 {
-  "_fv": 89,
+  "_fv": 92,
   "_type": "projectile",
   "definition": {
-    "projectileItem": "CUSTOM:PotentSulfur",
+    "projectileItem": "Blocks.POTENT_SULFUR",
     "showParticles": false,
     "actionSound": "",
     "igniteFire": false,

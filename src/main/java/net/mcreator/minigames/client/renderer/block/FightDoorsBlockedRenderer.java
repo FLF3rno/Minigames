@@ -60,12 +60,12 @@ public class FightDoorsBlockedRenderer implements BlockEntityRenderer<FightDoors
 		switch (facing) {
 			case NORTH -> {
 			}
-			case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(90));
-			case WEST -> poseStack.mulPose(Axis.YP.rotationDegrees(-90));
-			case SOUTH -> poseStack.mulPose(Axis.YP.rotationDegrees(180));
+			case EAST -> poseStack.rotate(Axis.YP.rotationDegrees(90));
+			case WEST -> poseStack.rotate(Axis.YP.rotationDegrees(-90));
+			case SOUTH -> poseStack.rotate(Axis.YP.rotationDegrees(180));
 		}
 		poseStack.translate(0, -1, 0);
-		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0, null);
+		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 		poseStack.popPose();
 	}
 

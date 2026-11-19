@@ -27,40 +27,35 @@ public class SpawnFloorProcedure {
 		double spawnRoomZ = 0;
 		double neighbour = 0;
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/kill @e[type=!player]");
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+					"/kill @e[type=!player]");
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/gamemode @a adventure");
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+					"/gamemode @a adventure");
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run forceload add -50 -50 "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2)));
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run forceload add "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2) + " "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100)));
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run fill -50 0 -50 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) + " 200 "
 							+ new java.text.DecimalFormat("##").format(MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) + " air"));
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run forceload remove -50 -50 "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2)));
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					("execute in minigames:dungeon_dimension run forceload remove "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.x() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.x() + 100) / 2) + " "
 							+ new java.text.DecimalFormat("##").format((MinigamesModVariables.MapVariables.get(world).dungeonSize.z() * MinigamesModVariables.MapVariables.get(world).dungeonRoomSize.z() + 100) / 2) + " "

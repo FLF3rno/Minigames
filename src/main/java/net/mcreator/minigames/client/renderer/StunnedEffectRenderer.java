@@ -39,8 +39,7 @@ public class StunnedEffectRenderer extends MobRenderer<StunnedEffectEntity, Stun
 						RENDER_TYPE,
 						light,
 						OverlayTexture.NO_OVERLAY,
-						state.outlineColor,
-						null
+						state.outlineColor
 				);
 			}
 		});

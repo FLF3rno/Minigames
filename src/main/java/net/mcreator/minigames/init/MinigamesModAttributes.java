@@ -11,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.minigames.MinigamesMod;
@@ -45,28 +45,28 @@ public class MinigamesModAttributes {
 
 	@SubscribeEvent
 	public static void addAttributes(EntityAttributeModificationEvent event) {
-		event.add(EntityType.PLAYER, SALVAGE_VALUE);
-		event.add(EntityType.PLAYER, COINS_ON_KILL);
-		event.add(EntityType.PLAYER, SHOW_FULL_HEALTH_MOBS);
+		event.add(EntityTypes.PLAYER, SALVAGE_VALUE);
+		event.add(EntityTypes.PLAYER, COINS_ON_KILL);
+		event.add(EntityTypes.PLAYER, SHOW_FULL_HEALTH_MOBS);
 		event.getTypes().forEach(entity -> event.add(entity, IS_MOB_FULL_HP));
-		event.add(EntityType.PLAYER, STUN_FULL_HEALTH_MOBS);
-		event.add(EntityType.PLAYER, REPAIR_VALUE);
+		event.add(EntityTypes.PLAYER, STUN_FULL_HEALTH_MOBS);
+		event.add(EntityTypes.PLAYER, REPAIR_VALUE);
 		event.getTypes().forEach(entity -> event.add(entity, DROPPED_COINS));
-		event.add(EntityType.PLAYER, EFFECT_LENGTH);
-		event.add(EntityType.PLAYER, EXPLOSION_DAMAGE);
-		event.add(EntityType.PLAYER, EXTRA_DAMAGE);
-		event.add(EntityType.PLAYER, ABILITY_COOLDOWN);
-		event.add(EntityType.PLAYER, ABILITY_RANGE);
-		event.add(EntityType.PLAYER, HEAL_AMOUNT);
-		event.add(EntityType.PLAYER, LOAD_TIME);
-		event.add(EntityType.PLAYER, RANGED_DAMAGE);
-		event.add(EntityType.PLAYER, ATTACK_COOLDOWN);
-		event.add(EntityType.PLAYER, EFFECT_LENGTH_2);
-		event.add(EntityType.PLAYER, EFFECT_POTENCY);
-		event.add(EntityType.PLAYER, LUCK);
-		event.add(EntityType.PLAYER, EFFECT_POTENCY_2);
-		event.add(EntityType.PLAYER, ITEM_SIZE);
-		event.add(EntityType.PLAYER, SHOW_ONE_SHOTTABLE_MOBS);
-		event.add(EntityType.PLAYER, PRICE);
+		event.add(EntityTypes.PLAYER, EFFECT_LENGTH);
+		event.add(EntityTypes.PLAYER, EXPLOSION_DAMAGE);
+		event.add(EntityTypes.PLAYER, EXTRA_DAMAGE);
+		event.add(EntityTypes.PLAYER, ABILITY_COOLDOWN);
+		event.add(EntityTypes.PLAYER, ABILITY_RANGE);
+		event.add(EntityTypes.PLAYER, HEAL_AMOUNT);
+		event.add(EntityTypes.PLAYER, LOAD_TIME);
+		event.add(EntityTypes.PLAYER, RANGED_DAMAGE);
+		event.add(EntityTypes.PLAYER, ATTACK_COOLDOWN);
+		event.add(EntityTypes.PLAYER, EFFECT_LENGTH_2);
+		event.add(EntityTypes.PLAYER, EFFECT_POTENCY);
+		event.add(EntityTypes.PLAYER, LUCK);
+		event.add(EntityTypes.PLAYER, EFFECT_POTENCY_2);
+		event.add(EntityTypes.PLAYER, ITEM_SIZE);
+		event.add(EntityTypes.PLAYER, SHOW_ONE_SHOTTABLE_MOBS);
+		event.add(EntityTypes.PLAYER, PRICE);
 	}
 }

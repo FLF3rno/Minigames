@@ -255,7 +255,7 @@ public final class DungeonItemAccess {
 			if (!stack.isEmpty()) {
 				ItemStack toDrop = stack.copy();
 				inventory.setItem(i, ItemStack.EMPTY);
-				player.drop(toDrop, true);
+				player.drop(toDrop, true, net.minecraft.util.Prediction.SERVER_ONLY);
 				dropped = true;
 			}
 		}

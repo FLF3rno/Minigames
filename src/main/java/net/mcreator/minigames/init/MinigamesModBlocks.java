@@ -56,7 +56,6 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SPAWN_GRAVEDIGGER;
 	public static final DeferredBlock<Block> EMPTY_COARSE_DIRT;
 	public static final DeferredBlock<Block> INTERSECTING_END_RODS;
-	public static final DeferredBlock<Block> POTENT_SULFUR;
 	public static final DeferredBlock<Block> FIGHT_DOORS_BLOCKED;
 	public static final DeferredBlock<Block> LOOT_DOORS;
 	public static final DeferredBlock<Block> MINIBOSS_DOORS;
@@ -144,7 +143,6 @@ public class MinigamesModBlocks {
 		SPAWN_GRAVEDIGGER = register("spawn_gravedigger", SpawnGravediggerBlock::new);
 		EMPTY_COARSE_DIRT = register("empty_coarse_dirt", EmptyCoarseDirtBlock::new);
 		INTERSECTING_END_RODS = register("intersecting_end_rods", IntersectingEndRodsBlock::new);
-		POTENT_SULFUR = register("potent_sulfur", PotentSulfurBlock::new);
 		FIGHT_DOORS_BLOCKED = register("fight_doors_blocked", FightDoorsBlockedBlock::new);
 		LOOT_DOORS = register("loot_doors", LootDoorsBlock::new);
 		MINIBOSS_DOORS = register("miniboss_doors", MinibossDoorsBlock::new);

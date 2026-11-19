@@ -37,11 +37,11 @@ public class SpawnTPMarkerExecuteProcedure {
 		if ((world instanceof Level _lvl ? _lvl.dimension() : (world instanceof WorldGenLevel _wgl ? _wgl.getLevel().dimension() : Level.OVERWORLD)) == ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension"))) {
 			if (!((findEntityInWorldRange(world, Player.class, x, y, z, 4)) instanceof Player _plr4 && _plr4.gameMode() == GameType.CREATIVE)) {
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "tp @a ~ ~2 ~");
+					_level.getServer().getCommands()
+							.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "tp @a ~ ~2 ~");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "gamemode adventure @a");
+							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "gamemode adventure @a");
 				world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 				for (Entity entityiterator : new ArrayList<>(world.players())) {
 					if (entityiterator instanceof ServerPlayer _ent) {
@@ -66,11 +66,11 @@ public class SpawnTPMarkerExecuteProcedure {
 				}
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 							"execute as @e[type=item] unless items entity @s contents #minigames:dungeon_warrior unless items entity @s contents #minigames:dungeon_support unless items entity @s contents #minigames:dungeon_thief run kill @s");
 				if (world instanceof ServerLevel _level)
-					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "clear @a");
+					_level.getServer().getCommands()
+							.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "clear @a");
 			}
 		}
 	}

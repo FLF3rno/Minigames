@@ -8,6 +8,8 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 
@@ -17,9 +19,11 @@ import javax.annotation.Nullable;
 public class BlockRightClickWithItemProcedure {
 	@SubscribeEvent
 	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-		if (event.getHand() != event.getEntity().getUsedItemHand())
+		if (event.getHand() != InteractionHand.MAIN_HAND && !event.getEntity().getMainHandItem().isEmpty())
 			return;
 		execute(event, event.getEntity());
+		if (event.isCanceled() && event.getLevel().isClientSide())
+			event.setCancellationResult(InteractionResult.CONSUME);
 	}
 
 	public static void execute(Entity entity) {

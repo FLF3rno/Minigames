@@ -628,7 +628,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 			return false;
 		}
 
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			double mouseX = event.x();
 			double mouseY = event.y();
 
@@ -671,7 +671,7 @@ public class ClassSelectionRoguelikeScreen extends AbstractContainerScreen<Class
 	@Override
 	public boolean keyPressed(KeyEvent event) {
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			if (activeDetailIndex != -1) {
 				activeDetailIndex = -1;
 				rebuildClassWidgets();

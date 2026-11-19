@@ -223,7 +223,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 							current.y * 0.6 + pull.y,
 							current.z * 0.6 + pull.z
 					);
-					target.hurtMarked = true;
+					target.needsSync = true;
 					if (target instanceof LivingEntity le) {
 						le.fallDistance = 0f;
 					}
@@ -337,7 +337,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 				Vec3 toOwner = (resolvedOwner != null ? resolvedOwner.position() : this.position()).subtract(target.position()).normalize();
 				double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
 				target.setDeltaMovement(toOwner.scale(launchSpeed));
-				target.hurtMarked = true;
+				target.needsSync = true;
 			}
 			if (target instanceof FallingBlockEntity fallingBlock) {
 				fallingBlock.setNoGravity(false);
@@ -370,7 +370,7 @@ public class GrappleEntity extends AbstractArrow implements ItemSupplier {
 				Vec3 toOwner = owner.position().subtract(target.position()).normalize();
 				double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
 				target.setDeltaMovement(toOwner.scale(launchSpeed));
-				target.hurtMarked = true;
+				target.needsSync = true;
 			}
 			if (target instanceof FallingBlockEntity fallingBlock) {
 				fallingBlock.setNoGravity(false);

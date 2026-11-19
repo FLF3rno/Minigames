@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +13,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 import org.joml.Matrix4f;
 
 @EventBusSubscriber(modid = "minigames", value = Dist.CLIENT)
@@ -78,84 +77,87 @@ public class ClientWooshManager {
 	}
 
 	@SubscribeEvent
-	public static void onRenderLevel(RenderLevelStageEvent.AfterTranslucentBlocks event) {
+	public static void onRenderLevel(SubmitCustomGeometryEvent event) {
 		if (WOOSHES.isEmpty()) {
 			return;
 		}
 
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.level == null || mc.player == null || mc.gameRenderer == null || mc.gameRenderer.getMainCamera() == null) {
+		if (mc.level == null || mc.player == null || mc.gameRenderer == null || mc.gameRenderer.mainCamera() == null) {
 			return;
 		}
 
 		PoseStack poseStack = event.getPoseStack();
-		MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-		VertexConsumer consumer = bufferSource.getBuffer(RenderTypes.debugQuads());
-		Vec3 camera = mc.gameRenderer.getMainCamera().position();
+		Vec3 camera = mc.gameRenderer.mainCamera().position();
 		float partialTick = mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
-		Matrix4f matrix = poseStack.last().pose();
-
-		for (WooshInstance woosh : WOOSHES) {
-			double cx = woosh.x;
-			double cy = woosh.y;
-			double cz = woosh.z;
-
-			if (woosh.entityId >= 0) {
-				Entity ent = mc.level.getEntity(woosh.entityId);
-				if (ent != null) {
-					cx = Mth.lerp(partialTick, ent.xo, ent.getX());
-					cy = Mth.lerp(partialTick, ent.yo, ent.getY());
-					cz = Mth.lerp(partialTick, ent.zo, ent.getZ());
-				}
-			}
-
-			float relX = (float) (cx - camera.x);
-			float relY = (float) (cy - camera.y);
-			float relZ = (float) (cz - camera.z);
-
-			float elapsed = (woosh.totalTicks - woosh.remainingTicks) + partialTick;
-			float progress = Mth.clamp(elapsed / woosh.totalTicks, 0.0f, 1.0f);
-
-			float easeOut = 1.0f - (float) Math.pow(1.0f - progress, 2.5);
-			float alphaFade = 1.0f - (progress * progress);
-
-			int r = (woosh.color >> 16) & 0xFF;
-			int g = (woosh.color >> 8) & 0xFF;
-			int b = woosh.color & 0xFF;
-
-			float r1 = woosh.size * (0.28f + 0.72f * easeOut);
-			float thick1 = woosh.size * 0.22f * (1.0f - 0.45f * progress);
-			float rot1 = elapsed * woosh.speed * 0.48f;
-			float y1 = relY + 0.12f;
-			float alpha1 = alphaFade * 0.85f;
-
-			drawWindArc(consumer, matrix, relX, y1, relZ, r1, thick1, rot1, 1.48f, r, g, b, alpha1, 14);
-			drawWindArc(consumer, matrix, relX, y1, relZ, r1, thick1, rot1 + 2.094f, 1.48f, r, g, b, alpha1, 14);
-			drawWindArc(consumer, matrix, relX, y1, relZ, r1, thick1, rot1 + 4.188f, 1.48f, r, g, b, alpha1, 14);
-
-			float r2 = woosh.size * 0.72f * (0.22f + 0.78f * easeOut);
-			float thick2 = woosh.size * 0.17f * (1.0f - 0.5f * progress);
-			float rot2 = elapsed * woosh.speed * 0.72f + 1.047f;
-			float y2 = relY + 0.45f + 0.35f * progress;
-			float alpha2 = alphaFade * 0.70f;
-
-			drawWindArc(consumer, matrix, relX, y2, relZ, r2, thick2, rot2, 1.35f, r, g, b, alpha2, 12);
-			drawWindArc(consumer, matrix, relX, y2, relZ, r2, thick2, rot2 + 2.094f, 1.35f, r, g, b, alpha2, 12);
-			drawWindArc(consumer, matrix, relX, y2, relZ, r2, thick2, rot2 + 4.188f, 1.35f, r, g, b, alpha2, 12);
-
-			float r3 = woosh.size * (0.35f + 0.75f * easeOut);
-			float thick3 = woosh.size * 0.08f * (1.0f - 0.3f * progress);
-			float rot3 = elapsed * woosh.speed * 0.30f;
-			float y3 = relY + 0.08f;
-			float alpha3 = alphaFade * 0.55f;
-
-			drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3, 1.57f, r, g, b, alpha3, 10);
-			drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3 + 1.571f, 1.57f, r, g, b, alpha3, 10);
-			drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3 + 3.142f, 1.57f, r, g, b, alpha3, 10);
-			drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3 + 4.712f, 1.57f, r, g, b, alpha3, 10);
+		java.util.List<WooshInstance> snapshot = new java.util.ArrayList<>(WOOSHES);
+		if (snapshot.isEmpty()) {
+			return;
 		}
 
-		bufferSource.endBatch(RenderTypes.debugQuads());
+		event.getSubmitNodeCollector().submitCustomGeometry(poseStack, RenderTypes.debugQuads(), (pose, consumer) -> {
+			Matrix4f matrix = pose.pose();
+
+			for (WooshInstance woosh : snapshot) {
+				double cx = woosh.x;
+				double cy = woosh.y;
+				double cz = woosh.z;
+
+				if (woosh.entityId >= 0 && mc.level != null) {
+					Entity ent = mc.level.getEntity(woosh.entityId);
+					if (ent != null) {
+						cx = Mth.lerp(partialTick, ent.xo, ent.getX());
+						cy = Mth.lerp(partialTick, ent.yo, ent.getY());
+						cz = Mth.lerp(partialTick, ent.zo, ent.getZ());
+					}
+				}
+
+				float relX = (float) (cx - camera.x);
+				float relY = (float) (cy - camera.y);
+				float relZ = (float) (cz - camera.z);
+
+				float elapsed = (woosh.totalTicks - woosh.remainingTicks) + partialTick;
+				float progress = Mth.clamp(elapsed / woosh.totalTicks, 0.0f, 1.0f);
+
+				float easeOut = 1.0f - (float) Math.pow(1.0f - progress, 2.5);
+				float alphaFade = 1.0f - (progress * progress);
+
+				int r = (woosh.color >> 16) & 0xFF;
+				int g = (woosh.color >> 8) & 0xFF;
+				int b = woosh.color & 0xFF;
+
+				float r1 = woosh.size * (0.28f + 0.72f * easeOut);
+				float thick1 = woosh.size * 0.22f * (1.0f - 0.45f * progress);
+				float rot1 = elapsed * woosh.speed * 0.48f;
+				float y1 = relY + 0.12f;
+				float alpha1 = alphaFade * 0.85f;
+
+				drawWindArc(consumer, matrix, relX, y1, relZ, r1, thick1, rot1, 1.48f, r, g, b, alpha1, 14);
+				drawWindArc(consumer, matrix, relX, y1, relZ, r1, thick1, rot1 + 2.094f, 1.48f, r, g, b, alpha1, 14);
+				drawWindArc(consumer, matrix, relX, y1, relZ, r1, thick1, rot1 + 4.188f, 1.48f, r, g, b, alpha1, 14);
+
+				float r2 = woosh.size * 0.72f * (0.22f + 0.78f * easeOut);
+				float thick2 = woosh.size * 0.17f * (1.0f - 0.5f * progress);
+				float rot2 = elapsed * woosh.speed * 0.72f + 1.047f;
+				float y2 = relY + 0.45f + 0.35f * progress;
+				float alpha2 = alphaFade * 0.70f;
+
+				drawWindArc(consumer, matrix, relX, y2, relZ, r2, thick2, rot2, 1.35f, r, g, b, alpha2, 12);
+				drawWindArc(consumer, matrix, relX, y2, relZ, r2, thick2, rot2 + 2.094f, 1.35f, r, g, b, alpha2, 12);
+				drawWindArc(consumer, matrix, relX, y2, relZ, r2, thick2, rot2 + 4.188f, 1.35f, r, g, b, alpha2, 12);
+
+				float r3 = woosh.size * (0.35f + 0.75f * easeOut);
+				float thick3 = woosh.size * 0.08f * (1.0f - 0.3f * progress);
+				float rot3 = elapsed * woosh.speed * 0.30f;
+				float y3 = relY + 0.08f;
+				float alpha3 = alphaFade * 0.55f;
+
+				drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3, 1.57f, r, g, b, alpha3, 10);
+				drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3 + 1.571f, 1.57f, r, g, b, alpha3, 10);
+				drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3 + 3.142f, 1.57f, r, g, b, alpha3, 10);
+				drawWindArc(consumer, matrix, relX, y3, relZ, r3, thick3, rot3 + 4.712f, 1.57f, r, g, b, alpha3, 10);
+			}
+		});
 	}
 
 	private static void drawWindArc(

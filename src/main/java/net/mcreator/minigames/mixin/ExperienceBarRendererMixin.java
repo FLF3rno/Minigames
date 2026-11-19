@@ -8,7 +8,7 @@ import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.contextualbar.ExperienceBarRenderer;
+import net.minecraft.client.gui.contextualbar.ExperienceBar;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ExperienceBarRenderer.class)
+@Mixin(ExperienceBar.class)
 public abstract class ExperienceBarRendererMixin {
 
     private static final Identifier BLUE_BACKGROUND =

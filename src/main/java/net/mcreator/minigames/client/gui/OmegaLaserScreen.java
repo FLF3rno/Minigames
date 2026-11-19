@@ -299,7 +299,7 @@ public class OmegaLaserScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			double mx = event.x();
 			double my = event.y();
 
@@ -342,7 +342,7 @@ public class OmegaLaserScreen extends Screen {
 
 	@Override
 	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			if (draggingUD) {
 				float offset = (float) (event.y() - udCenterY);
 				udKnobY = Math.max(-1.0f, Math.min(1.0f, offset / JOYSTICK_TRACK_RADIUS));
@@ -359,7 +359,7 @@ public class OmegaLaserScreen extends Screen {
 
 	@Override
 	public boolean mouseReleased(MouseButtonEvent event) {
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			if (draggingUD) {
 				draggingUD = false;
 				udKnobY = 0;
@@ -375,7 +375,7 @@ public class OmegaLaserScreen extends Screen {
 	@Override
 	public boolean keyPressed(KeyEvent event) {
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			this.onClose();
 			return true;
 		}

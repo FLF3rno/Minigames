@@ -11,8 +11,8 @@
     "EntityRenderDispatcherMixin",
     "LivingEntityRendererMixin",
     "EntityRendererMixin",
-    "ItemInHandRendererMixin",
-    "LevelRendererMixin"
+    "FirstPersonHandsAndItemsRendererMixin",
+    "LevelExtractorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

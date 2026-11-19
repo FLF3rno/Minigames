@@ -52,7 +52,7 @@ public class QuartzChainsRenderer implements BlockEntityRenderer<QuartzChainsBlo
 		BlockEntityRenderState.extractBase(blockEntity, state, breakProgress);
 		state.blockEntity = blockEntity;
 		state.blockState = blockEntity.getBlockState();
-		int tickCount = (int) blockEntity.getLevel().getGameTime();
+		int tickCount = blockEntity.getTickCount();
 		state.entityRenderState.ageInTicks = tickCount + partialTicks;
 	}
 
@@ -66,15 +66,15 @@ public class QuartzChainsRenderer implements BlockEntityRenderer<QuartzChainsBlo
 		switch (facing) {
 			case NORTH -> {
 			}
-			case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(90));
-			case WEST -> poseStack.mulPose(Axis.YP.rotationDegrees(-90));
-			case SOUTH -> poseStack.mulPose(Axis.YP.rotationDegrees(180));
-			case UP -> poseStack.mulPose(Axis.XN.rotationDegrees(90));
-			case DOWN -> poseStack.mulPose(Axis.XN.rotationDegrees(-90));
+			case EAST -> poseStack.rotate(Axis.YP.rotationDegrees(90));
+			case WEST -> poseStack.rotate(Axis.YP.rotationDegrees(-90));
+			case SOUTH -> poseStack.rotate(Axis.YP.rotationDegrees(180));
+			case UP -> poseStack.rotate(Axis.XN.rotationDegrees(90));
+			case DOWN -> poseStack.rotate(Axis.XN.rotationDegrees(-90));
 		}
 		poseStack.translate(0, -1, 0);
 		model.setupBlockEntityAnim(renderState.blockEntity, renderState.entityRenderState);
-		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0, null);
+		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 		poseStack.popPose();
 	}
 

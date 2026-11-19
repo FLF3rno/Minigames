@@ -137,7 +137,7 @@ public class GrapplingHitboxEntity extends Mob {
         if (targetEntity instanceof FallingBlockEntity fallingBlock) {
             fallingBlock.setNoGravity(true);
             fallingBlock.setDeltaMovement(pull);
-            fallingBlock.hurtMarked = true;
+            fallingBlock.needsSync = true;
         } else {
             // For a living entity: add pull impulse on top of existing motion
             Vec3 current = targetEntity.getDeltaMovement();
@@ -146,7 +146,7 @@ public class GrapplingHitboxEntity extends Mob {
                     current.y * 0.6 + pull.y,
                     current.z * 0.6 + pull.z
             );
-            targetEntity.hurtMarked = true;
+            targetEntity.needsSync = true;
             if (targetEntity instanceof LivingEntity le) {
                 le.fallDistance = 0f;
             }
@@ -175,7 +175,7 @@ public class GrapplingHitboxEntity extends Mob {
                 Vec3 toOwner = owner.position().subtract(target.position()).normalize();
                 double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
                 target.setDeltaMovement(toOwner.scale(launchSpeed));
-                target.hurtMarked = true;
+                target.needsSync = true;
             }
             discard();
         }
@@ -204,11 +204,11 @@ public class GrapplingHitboxEntity extends Mob {
             if (target instanceof FallingBlockEntity fallingBlock) {
                 fallingBlock.setNoGravity(false);
                 fallingBlock.setDeltaMovement(toOwner.scale(Math.min(1.4, 0.1 + pullTicks * 0.01)));
-                fallingBlock.hurtMarked = true;
+                fallingBlock.needsSync = true;
             } else {
                 double launchSpeed = Math.min(1.6, 0.15 + pullTicks * 0.01);
                 target.setDeltaMovement(toOwner.scale(launchSpeed));
-                target.hurtMarked = true;
+                target.needsSync = true;
             }
         }
         discard();

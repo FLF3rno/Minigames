@@ -253,7 +253,7 @@ public class TeammateOverlayOverlay {
 
             event.getGuiGraphics().blitSprite(
                     RenderPipelines.GUI_TEXTURED,
-                    Gui.getMobEffectSprite(effect.getEffect()),
+                    net.minecraft.client.gui.Hud.getMobEffectSprite(effect.getEffect()),
                     x,
                     y,
                     EFFECT_ICON_SIZE,

@@ -92,7 +92,7 @@ public class ObsidianTouchHandler {
 			reboundZ = diff.z * 0.2;
 		}
 		touchedEntity.setDeltaMovement(new Vec3(reboundX, reboundY, reboundZ));
-		touchedEntity.hurtMarked = true;
+		touchedEntity.needsSync = true;
 		if (touchedEntity instanceof ServerPlayer serverPlayer) {
 			serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
 		}

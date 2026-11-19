@@ -34,7 +34,7 @@ public class BlockLeftClickMobEffect extends MobEffect {
 			}
 
 			@Override
-			public boolean renderInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
+			public boolean extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor graphics, int x, int y, int canvasWidth, int color) {
 				return false;
 			}
 

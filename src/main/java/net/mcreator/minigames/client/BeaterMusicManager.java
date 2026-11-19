@@ -633,7 +633,7 @@ public class BeaterMusicManager {
 
 		mc.player.playSound(SoundEvents.UI_BUTTON_CLICK.value(), 0.8f, 1.8f);
 		if (mc.gui != null) {
-			mc.gui.setOverlayMessage(
+			mc.gui.hud.setOverlayMessage(
 					Component.literal("§a[REC Beat #" + recordedBeats.size() + "] §e" + String.format(Locale.US, "%.3fs", roundedTime)),
 					false
 			);

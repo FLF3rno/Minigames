@@ -30,8 +30,7 @@ public class DungeonCheckProcedure {
 					MinigamesModVariables.MapVariables.get(world).minibossRoomsDungeon, MinigamesModVariables.MapVariables.get(world).roomLimitDungeon.x(), MinigamesModVariables.MapVariables.get(world).dungeonSize.x(),
 					MinigamesModVariables.MapVariables.get(world).dungeonSize.z(), MinigamesModVariables.MapVariables.get(world).secretRoomDungeon);
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"/execute in minigames:dungeon_dimension run fill -70 128 -67 -100 100 -100 air");
 		}
 	}

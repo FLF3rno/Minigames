@@ -18,7 +18,7 @@ public class GlueFlyingProcedure {
 			return;
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/particle block{block_state:\"minecraft:snow_block\"} ~ ~ ~ 0 0 0 0 10 normal");
 		MinigamesMod.queueServerWork(100, () -> {
 			if (!immediatesourceentity.level().isClientSide())

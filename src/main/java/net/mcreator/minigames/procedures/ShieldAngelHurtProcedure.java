@@ -27,8 +27,9 @@ public class ShieldAngelHurtProcedure {
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minecraft:block.amethyst_block.break hostile @a ~ ~ ~ 0.3 1");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/playsound minecraft:block.amethyst_block.break hostile @a ~ ~ ~ 0.3 1");
 				}
 			}
 			if ((entity instanceof ShieldAngelEntity _datEntI ? _datEntI.getEntityData().get(ShieldAngelEntity.DATA_HP) : 0) > 1) {
@@ -57,8 +58,7 @@ public class ShieldAngelHurtProcedure {
 									Entity _ent = entityiterator;
 									if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
 										_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(),
-												_ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent),
-												"/effect clear @s minigames:blessed");
+												_ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "/effect clear @s minigames:blessed");
 									}
 								}
 							}
@@ -72,8 +72,9 @@ public class ShieldAngelHurtProcedure {
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minecraft:block.anvil.place hostile @a ~ ~ ~ 0.3 2");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/playsound minecraft:block.anvil.place hostile @a ~ ~ ~ 0.3 2");
 				}
 			}
 		}

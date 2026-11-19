@@ -44,7 +44,7 @@ public class FlavioRenderer extends MobRenderer<FlavioEntity, LivingEntityRender
             public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
                 LAYER_MODEL.setupAnim(state);
 
-                submitNodeCollector.submitModel(LAYER_MODEL, state, poseStack, RENDER_TYPE, 0xF000F0, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
+                submitNodeCollector.submitModel(LAYER_MODEL, state, poseStack, RENDER_TYPE, 0xF000F0, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor);
             }
         });
     }

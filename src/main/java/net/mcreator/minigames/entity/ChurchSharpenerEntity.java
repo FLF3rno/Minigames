@@ -124,11 +124,11 @@ public class ChurchSharpenerEntity extends Monster {
 	}
 
 	@Override
-	public void knockback(double strength, double x, double z) {
+	public void knockback(double strength, double x, double z, net.minecraft.world.damagesource.DamageSource source, float damage, boolean comesFromEffect) {
 		if (this.state == STATE_CHARGING) {
 			return;
 		}
-		super.knockback(strength, x, z);
+		super.knockback(strength, x, z, source, damage, comesFromEffect);
 	}
 
 	@Override

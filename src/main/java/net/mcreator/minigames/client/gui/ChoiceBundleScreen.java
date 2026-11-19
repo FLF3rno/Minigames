@@ -406,7 +406,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		if (event.button() == 0 && !itemClaimed) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && !itemClaimed) {
 			int centerY = getMiddleY();
 			double mouseX = event.x();
 			double mouseY = event.y();
@@ -438,7 +438,7 @@ public class ChoiceBundleScreen extends AbstractContainerScreen<ChoiceBundleMenu
 	@Override
 	public boolean keyPressed(KeyEvent event) {
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			return true;
 		}
 		return super.keyPressed(event);

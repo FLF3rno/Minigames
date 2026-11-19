@@ -15,7 +15,7 @@ public class PlayerGlowScreenOverlay {
 	@SubscribeEvent
 	public static void onRenderGui(RenderGuiEvent.Post event) {
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.options.hideGui || mc.player == null || mc.level == null) {
+		if (mc.gui.hud.isHidden() || mc.player == null || mc.level == null) {
 			return;
 		}
 

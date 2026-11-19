@@ -67,7 +67,6 @@ public class MinigamesModItems {
 	public static final DeferredItem<Item> SPAWN_GRAVEDIGGER;
 	public static final DeferredItem<Item> EMPTY_COARSE_DIRT;
 	public static final DeferredItem<Item> INTERSECTING_END_RODS;
-	public static final DeferredItem<Item> POTENT_SULFUR;
 	public static final DeferredItem<Item> FIGHT_DOORS_BLOCKED;
 	public static final DeferredItem<Item> LOOT_DOORS;
 	public static final DeferredItem<Item> MINIBOSS_DOORS;
@@ -225,7 +224,6 @@ public class MinigamesModItems {
 		SPAWN_GRAVEDIGGER = block(MinigamesModBlocks.SPAWN_GRAVEDIGGER);
 		EMPTY_COARSE_DIRT = block(MinigamesModBlocks.EMPTY_COARSE_DIRT);
 		INTERSECTING_END_RODS = block(MinigamesModBlocks.INTERSECTING_END_RODS);
-		POTENT_SULFUR = block(MinigamesModBlocks.POTENT_SULFUR);
 		FIGHT_DOORS_BLOCKED = block(MinigamesModBlocks.FIGHT_DOORS_BLOCKED);
 		LOOT_DOORS = block(MinigamesModBlocks.LOOT_DOORS);
 		MINIBOSS_DOORS = block(MinigamesModBlocks.MINIBOSS_DOORS);

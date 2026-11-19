@@ -79,7 +79,7 @@ public class MinigamesSettingsScreen extends Screen {
 				return true;
 			}
 			int key = InputConstants.getKey(event).getValue();
-			if (key == 256) {
+			if (key == InputConstants.KEY_ESCAPE) {
 				this.closeColorPicker();
 				return true;
 			}
@@ -87,7 +87,7 @@ public class MinigamesSettingsScreen extends Screen {
 		}
 		if (this.selectedKeyMapping != null) {
 			int key = InputConstants.getKey(event).getValue();
-			if (key == 256) {
+			if (key == InputConstants.KEY_ESCAPE) {
 				this.selectedKeyMapping.setKey(InputConstants.UNKNOWN);
 			} else {
 				this.selectedKeyMapping.setKey(InputConstants.getKey(event));
@@ -103,7 +103,7 @@ public class MinigamesSettingsScreen extends Screen {
 			return true;
 		}
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			this.onClose();
 			return true;
 		}
@@ -149,7 +149,7 @@ public class MinigamesSettingsScreen extends Screen {
 	@Override
 	public void onClose() {
 		if (this.minecraft != null) {
-			this.minecraft.setScreen(this.lastScreen);
+			this.minecraft.gui.setScreen(this.lastScreen);
 		}
 	}
 

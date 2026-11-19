@@ -21,11 +21,11 @@ public class AscendingEffectExpiresProcedure {
             String command = "/execute if entity @a[nbt=!{active_effects:[{id:\"minigames:ascending\"}]}] run stopsound @a * minigames:ascending";
             String command2 = "/playsound minecraft:block.glass.break player @a ~ ~ ~ 2 0.7";
             entity.level().getServer().getCommands().performPrefixedCommand(
-                new CommandSourceStack(CommandSource.NULL, entity.position(), Vec2.ZERO, (ServerLevel) entity.level(), net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", entity.getDisplayName(), entity.level().getServer(), null),
+                new CommandSourceStack(CommandSource.NULL, entity.position(), Vec2.ZERO, (ServerLevel) entity.level(), net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, entity.getDisplayName(), entity.level().getServer()),
                 command
             );
             entity.level().getServer().getCommands().performPrefixedCommand(
-                new CommandSourceStack(CommandSource.NULL, entity.position(), Vec2.ZERO, (ServerLevel) entity.level(), net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", entity.getDisplayName(), entity.level().getServer(), null),
+                new CommandSourceStack(CommandSource.NULL, entity.position(), Vec2.ZERO, (ServerLevel) entity.level(), net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, entity.getDisplayName(), entity.level().getServer()),
                 command2
             );
         }

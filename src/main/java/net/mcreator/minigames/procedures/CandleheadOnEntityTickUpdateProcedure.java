@@ -33,7 +33,7 @@ public class CandleheadOnEntityTickUpdateProcedure {
             }
 
             // attack code
-            if (entity instanceof LivingEntity _livEnt2 && _livEnt2.swinging) {
+            if (entity instanceof LivingEntity _livEnt2 && _livEnt2.isSwinging()) {
                 if (entity instanceof CandleheadEntity _datEntSetL)
                     _datEntSetL.getEntityData().set(CandleheadEntity.DATA_ready, false);
                 if (entity instanceof CandleheadEntity _datEntSetI)

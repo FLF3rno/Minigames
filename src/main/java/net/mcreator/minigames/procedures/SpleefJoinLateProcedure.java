@@ -39,8 +39,8 @@ public class SpleefJoinLateProcedure {
 			if (entity instanceof ServerPlayer _player)
 				_player.setGameMode(GameType.SPECTATOR);
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/tp @s @r[distance=1..]");
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+						"/tp @s @r[distance=1..]");
 		}
 	}
 }

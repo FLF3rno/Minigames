@@ -1,5 +1,11 @@
 {
   "mappings": {
+    "gold": {
+      "name": "gold",
+      "map": {
+        "0": "minecraft:gold_block"
+      }
+    },
     "mage": {
       "name": "mage",
       "map": {
@@ -10,6 +16,12 @@
       "name": "default",
       "map": {
         "0": "minecraft:tuff"
+      }
+    },
+    "blank": {
+      "name": "blank",
+      "map": {
+        "0": "minecraft:quartz_pillar"
       }
     },
     "warrior": {
@@ -28,18 +40,6 @@
       "name": "support",
       "map": {
         "0": "supportpedestal"
-      }
-    },
-    "blank": {
-      "name": "blank",
-      "map": {
-        "0": "minecraft:quartz_pillar"
-      }
-    },
-    "gold": {
-      "name": "gold",
-      "map": {
-        "0": "minecraft:gold_block"
       }
     }
   }

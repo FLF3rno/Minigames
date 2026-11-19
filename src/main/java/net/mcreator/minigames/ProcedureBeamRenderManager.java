@@ -1,8 +1,9 @@
 package net.mcreator.minigames;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -14,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 
 @EventBusSubscriber(modid = "minigames", value = Dist.CLIENT)
 public class ProcedureBeamRenderManager {
@@ -23,20 +24,22 @@ public class ProcedureBeamRenderManager {
             Identifier.fromNamespaceAndPath("minecraft", "textures/misc/white.png");
 
     @SubscribeEvent
-    public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentParticles event) {
+    public static void onRenderLevelStage(SubmitCustomGeometryEvent event) {
         Minecraft mc = Minecraft.getInstance();
 
         if (mc.level == null
                 || mc.player == null
                 || mc.gameRenderer == null
-                || mc.gameRenderer.getMainCamera() == null) {
+                || mc.gameRenderer.mainCamera() == null) {
             return;
         }
 
-        Vec3 cameraPos = mc.gameRenderer.getMainCamera().position();
+        Vec3 cameraPos = mc.gameRenderer.mainCamera().position();
 
-        MultiBufferSource.BufferSource bufferSource =
-                mc.renderBuffers().bufferSource();
+        SubmitNodeCollector submitNodeCollector =
+                event.getSubmitNodeCollector();
+
+        PoseStack poseStack = event.getPoseStack();
 
         float partialTick =
                 mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
@@ -72,7 +75,8 @@ public class ProcedureBeamRenderManager {
                 Vec3 end = getBodyCenter(target, partialTick);
 
                 renderRibbon(
-                        bufferSource,
+                        submitNodeCollector,
+                        poseStack,
                         cameraPos,
                         start,
                         end,
@@ -84,8 +88,6 @@ public class ProcedureBeamRenderManager {
             } catch (Exception ignored) {
             }
         }
-
-        bufferSource.endBatch();
     }
 
     private static Vec3 getBodyCenter(Entity entity, float partialTick) {
@@ -139,7 +141,8 @@ public class ProcedureBeamRenderManager {
     }
 
     private static void renderRibbon(
-            MultiBufferSource.BufferSource bufferSource,
+            SubmitNodeCollector submitNodeCollector,
+            PoseStack poseStack,
             Vec3 cameraPos,
             Vec3 startWorld,
             Vec3 endWorld,
@@ -162,9 +165,6 @@ public class ProcedureBeamRenderManager {
 
         RenderType renderType = RenderTypes.entityTranslucent(texture);
 
-        VertexConsumer buffer = bufferSource.getBuffer(renderType);
-
-
         Vec3 start = startWorld.subtract(cameraPos);
         Vec3 end = endWorld.subtract(cameraPos);
 
@@ -184,13 +184,13 @@ public class ProcedureBeamRenderManager {
             reference = new Vec3(1.0D, 0.0D, 0.0D);
         }
 
-        Vec3 side = reference.cross(forward);
+        Vec3 rawSide = reference.cross(forward);
 
-        if (side.lengthSqr() < 1.0E-6D) {
-            side = new Vec3(0.0D, 0.0D, 1.0D).cross(forward);
+        if (rawSide.lengthSqr() < 1.0E-6D) {
+            rawSide = new Vec3(0.0D, 0.0D, 1.0D).cross(forward);
         }
 
-        side = side.normalize()
+        Vec3 side = rawSide.normalize()
                 .scale(Math.max(0.001D, scale) * 0.12D);
 
         Vec3 up = forward.cross(side)
@@ -206,33 +206,35 @@ public class ProcedureBeamRenderManager {
 
         float animationOffset = (tickTime * 0.1F) % 1.0F;
 
-        for (int i = 0; i < segments; i++) {
+        submitNodeCollector.submitCustomGeometry(poseStack, renderType, (pose, buffer) -> {
+            for (int i = 0; i < segments; i++) {
 
-            double startPercent = (double) i / segments;
-            double endPercent = (double) (i + 1) / segments;
+                double startPercent = (double) i / segments;
+                double endPercent = (double) (i + 1) / segments;
 
-            Vec3 segStart =
-                    start.add(forward.scale(length * startPercent));
+                Vec3 segStart =
+                        start.add(forward.scale(length * startPercent));
 
-            Vec3 segEnd =
-                    start.add(forward.scale(length * endPercent));
+                Vec3 segEnd =
+                        start.add(forward.scale(length * endPercent));
 
-            float u0 =
-                    (float) startPercent - animationOffset;
+                float u0 =
+                        (float) startPercent - animationOffset;
 
-            float u1 =
-                    (float) endPercent - animationOffset;
+                float u1 =
+                        (float) endPercent - animationOffset;
 
-            drawPrism(
-                    buffer,
-                    segStart,
-                    segEnd,
-                    side,
-                    up,
-                    u0,
-                    u1
-            );
-        }
+                drawPrism(
+                        buffer,
+                        segStart,
+                        segEnd,
+                        side,
+                        up,
+                        u0,
+                        u1
+                );
+            }
+        });
     }
 
     private static void drawPrism(

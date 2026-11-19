@@ -414,11 +414,11 @@ public class ClientGlowManager {
 		if (mc.levelRenderer != null) {
 			if (lastEffectiveMinLight != -999) {
 				if (min != lastEffectiveMinLight || max != lastEffectiveMaxLight) {
-					mc.levelRenderer.allChanged();
+					mc.levelExtractor.allChanged();
 				}
 			} else {
 				if (min != 0 || max != 15) {
-					mc.levelRenderer.allChanged();
+					mc.levelExtractor.allChanged();
 				}
 			}
 		}

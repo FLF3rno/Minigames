@@ -57,7 +57,7 @@ public class AchievementInitiateGameProcedure {
 					_entity.removeEffect(MobEffects.RESISTANCE);
 			}
 			MinigamesMod.queueServerWork(80, () -> {
-				for (Entity entityiterator : new ArrayList<>(world.players())) {
+				for (Entity entityiterator : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
 					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
 					_vars.timerSpeed = 1;
 					_vars.markSyncDirty();

@@ -19,7 +19,7 @@ public abstract class ServerGamePacketListenerImplMixin {
 
 	@Redirect(method = "handleUseItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;subtract(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"))
 	private Vec3 minigames$bypassGiantBellHitDistance(Vec3 location, Vec3 blockCenter, ServerboundUseItemOnPacket packet) {
-		BlockHitResult hitResult = packet.getHitResult();
+		BlockHitResult hitResult = packet.hitResult();
 		BlockPos pos = hitResult.getBlockPos();
 		if (this.player != null && this.player.level().getBlockState(pos).getBlock() instanceof GiantBellBlock) {
 			return Vec3.ZERO;

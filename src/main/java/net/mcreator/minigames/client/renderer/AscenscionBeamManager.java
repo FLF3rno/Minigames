@@ -6,7 +6,6 @@ import net.mcreator.minigames.block.entity.AscenscionBlockEntity;
 import net.mcreator.minigames.init.MinigamesModBlocks;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
@@ -16,7 +15,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 import org.joml.Matrix4f;
 
 import java.util.Collections;
@@ -57,16 +56,14 @@ public class AscenscionBeamManager {
 	}
 
 	@SubscribeEvent
-	public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentParticles event) {
+	public static void onRenderLevelStage(SubmitCustomGeometryEvent event) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.level == null || mc.player == null || BLOCKS.isEmpty()) {
 			return;
 		}
 
-		MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-		Vec3 cameraPos = mc.gameRenderer.getMainCamera().position();
-		VertexConsumer buffer = bufferSource.getBuffer(RenderTypes.lightning());
-		boolean renderedAny = false;
+		Vec3 cameraPos = mc.gameRenderer.mainCamera().position();
+		java.util.List<BlockPos> toRender = new java.util.ArrayList<>();
 
 		Iterator<BlockPos> it = BLOCKS.iterator();
 		while (it.hasNext()) {
@@ -81,12 +78,15 @@ public class AscenscionBeamManager {
 			if (pos.distToCenterSqr(cameraPos.x, cameraPos.y, cameraPos.z) > 16384) {
 				continue;
 			}
-			renderAscenscionBeam(mc, pos, buffer, cameraPos);
-			renderedAny = true;
+			toRender.add(pos);
 		}
 
-		if (renderedAny) {
-			bufferSource.endBatch(RenderTypes.lightning());
+		if (!toRender.isEmpty()) {
+			event.getSubmitNodeCollector().submitCustomGeometry(event.getPoseStack(), RenderTypes.lightning(), (pose, buffer) -> {
+				for (BlockPos pos : toRender) {
+					renderAscenscionBeam(mc, pos, buffer, cameraPos);
+				}
+			});
 		}
 	}
 
@@ -97,7 +97,7 @@ public class AscenscionBeamManager {
 			return;
 		}
 
-		Camera camera = mc.gameRenderer.getMainCamera();
+		Camera camera = mc.gameRenderer.mainCamera();
 		if (camera == null) {
 			return;
 		}

@@ -17,9 +17,9 @@ public class GetAchievementInfoProcedure {
 			var display = advancement.value().display().orElse(null);
 
 			if (display != null) {
-				MinigamesModVariables.MapVariables.get(world).AchievementTitle = display.getTitle().getString();
-				MinigamesModVariables.MapVariables.get(world).AchievementDescription = display.getDescription().getString();
-				MinigamesModVariables.MapVariables.get(world).AchievementIcon = display.getIcon().create();
+				MinigamesModVariables.MapVariables.get(world).AchievementTitle = display.title().getString();
+				MinigamesModVariables.MapVariables.get(world).AchievementDescription = display.description().getString();
+				MinigamesModVariables.MapVariables.get(world).AchievementIcon = display.icon().create();
 			}
 		}
 

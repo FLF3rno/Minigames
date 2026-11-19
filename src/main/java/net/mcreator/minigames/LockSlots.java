@@ -84,7 +84,7 @@ public class LockSlots {
 		if (!player.level().isClientSide()) {
 			for (int i = slots; i < 9; i++) {
 				if (!inventory.getItem(i).isEmpty()) {
-					player.drop(inventory.getItem(i), true);
+					player.drop(inventory.getItem(i), true, net.minecraft.util.Prediction.SERVER_ONLY);
 					inventory.setItem(i, net.minecraft.world.item.ItemStack.EMPTY);
 				}
 			}

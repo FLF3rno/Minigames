@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.Prediction;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,13 +34,13 @@ public class SpleefPowerupProcedure {
 					ItemStack _setstack = new ItemStack(
 							(BuiltInRegistries.ITEM.getRandomElementOf(ItemTags.create(Identifier.parse("minigames:spleef_powerup")), RandomSource.create()).orElseGet(() -> BuiltInRegistries.ITEM.wrapAsHolder(Items.AIR)).value())).copy();
 					_setstack.setCount(1);
-					_player.getInventory().placeItemBackInInventory(_setstack);
+					_player.getInventory().placeItemBackInInventory(_setstack, Prediction.SERVER_ONLY);
 				}
 				{
 					Entity _ent = entity;
 					if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
 						_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-								LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minecraft:block.anvil.use master @p ~ ~ ~ 0.5 2");
+								LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent), "/playsound minecraft:block.anvil.use master @p ~ ~ ~ 0.5 2");
 					}
 				}
 				if (entity instanceof ServerPlayer _player)

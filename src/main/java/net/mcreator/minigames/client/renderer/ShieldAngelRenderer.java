@@ -32,7 +32,7 @@ public class ShieldAngelRenderer extends MobRenderer<ShieldAngelEntity, ShieldAn
 
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, ShieldAngelRenderState state, float headYaw, float headPitch) {
-				submitNodeCollector.submitModel(this.getParentModel(), state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+				submitNodeCollector.submitModel(this.getParentModel(), state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
 			}
 		});
 
@@ -42,7 +42,7 @@ public class ShieldAngelRenderer extends MobRenderer<ShieldAngelEntity, ShieldAn
 
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, ShieldAngelRenderState state, float headYaw, float headPitch) {
-				submitNodeCollector.submitModel(this.getParentModel(), state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+				submitNodeCollector.submitModel(this.getParentModel(), state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
 			}
 		});
 	}

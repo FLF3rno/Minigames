@@ -8,6 +8,7 @@ import net.neoforged.bus.api.Event;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 
 import net.mcreator.minigames.init.MinigamesModMobEffects;
@@ -21,6 +22,8 @@ public class BlockRightClickProcedure {
 		if (event.getHand() != InteractionHand.MAIN_HAND)
 			return;
 		execute(event, event.getEntity());
+		if (event.isCanceled())
+			event.setCancellationResult(InteractionResult.FAIL);
 	}
 
 	public static void execute(Entity entity) {

@@ -18,7 +18,7 @@ public class CannonballRightclickedProcedure {
 		ApplyCooldownProcedure.execute(entity, itemstack, net.mcreator.minigames.procedures.GetItemAttributeProcedure.execute(itemstack, "minigames:ability_cooldown"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/playsound minecraft:block.vault.close_shutter player @a ~ ~ ~ 1 0.5");
 		entity.getPersistentData().putBoolean("humanCannonball", true);
 	}

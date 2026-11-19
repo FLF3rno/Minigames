@@ -33,7 +33,7 @@ public class FlavioAntennaRenderer extends MobRenderer<FlavioAntennaEntity, Livi
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		FlavioAntennaEntity entity = (FlavioAntennaEntity) state.getRenderData(ENTITY_KEY);
+		FlavioAntennaEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "flavio_antenna")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

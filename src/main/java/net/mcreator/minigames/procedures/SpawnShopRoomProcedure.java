@@ -23,8 +23,7 @@ public class SpawnShopRoomProcedure {
 		String prefix = "";
 		double rng = 0;
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/execute in minigames:dungeon_dimension run forceload add ~ ~ ~31 ~34");
 		prefix = "dungeon_shop_";
 		rng = Mth.nextInt(RandomSource.create(), 1, 1);
@@ -50,8 +49,7 @@ public class SpawnShopRoomProcedure {
 		});
 		MinigamesMod.queueServerWork(20, () -> {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"/execute in minigames:dungeon_dimension run forceload remove ~ ~ ~31 ~34");
 		});
 	}

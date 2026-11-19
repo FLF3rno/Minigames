@@ -51,7 +51,7 @@ public class AchievementStrongholdPlacementTickProcedure {
 
 		level.getServer().getCommands().performPrefixedCommand(
 				new CommandSourceStack(CommandSource.NULL, new Vec3(pos.getX(), pos.getY(), pos.getZ()), Vec2.ZERO, level,
-						net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(),
+						net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, Component.literal(""), level.getServer()).withSuppressedOutput(),
 				"execute in minecraft:overworld run place structure minecraft:stronghold " + pos.getX() + " " + pos.getY() + " " + pos.getZ());
 		AchievementStrongholdTargets.markPlaced(pos);
 
@@ -66,7 +66,7 @@ public class AchievementStrongholdPlacementTickProcedure {
 			for (int cz = centerChunkZ - half; cz < centerChunkZ - half + chunkDiameter; cz++) {
 				level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(center.getX(), center.getY(), center.getZ()), Vec2.ZERO, level,
-								net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(),
+								net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, Component.literal(""), level.getServer()).withSuppressedOutput(),
 						"forceload add " + (cx << 4) + " " + (cz << 4));
 			}
 		}
@@ -80,7 +80,7 @@ public class AchievementStrongholdPlacementTickProcedure {
 			for (int cz = centerChunkZ - half; cz < centerChunkZ - half + chunkDiameter; cz++) {
 				level.getServer().getCommands().performPrefixedCommand(
 						new CommandSourceStack(CommandSource.NULL, new Vec3(center.getX(), center.getY(), center.getZ()), Vec2.ZERO, level,
-								net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(),
+								net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, Component.literal(""), level.getServer()).withSuppressedOutput(),
 						"forceload remove " + (cx << 4) + " " + (cz << 4));
 			}
 		}

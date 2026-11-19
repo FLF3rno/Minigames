@@ -64,7 +64,7 @@ public abstract class GoldenRenderMixin<T extends LivingEntity, S extends Living
 				Identifier original = this.getTextureLocation(state);
 				Identifier goldenTexture = GoldenTextureManager.getGoldenTexture(original);
 				if (forceTransparent) {
-					cir.setReturnValue(RenderTypes.entityTranslucentCullItemTarget(goldenTexture));
+					cir.setReturnValue(RenderTypes.entityTranslucentCull(goldenTexture));
 				} else if (isBodyVisible) {
 					cir.setReturnValue(this.model.renderType(goldenTexture));
 				}

@@ -28,7 +28,7 @@ public class IntersectingEndRodsBlock extends Block implements EntityBlock {
 	private final Function<BlockState, VoxelShape> shapes = this.makeShapes();
 
 	public IntersectingEndRodsBlock(BlockBehaviour.Properties properties) {
-		super(properties.strength(1f, 10f).lightLevel(blockstate -> 14).noOcclusion().postProcess((bs, br, bp) -> bp).emissiveRendering((bs, br, bp) -> true).isRedstoneConductor((bs, br, bp) -> false));
+		super(properties.strength(1f, 10f).lightLevel(blockstate -> 14).noOcclusion().postProcess((bs, br, bp) -> bp).emissiveRendering(bs -> true).isRedstoneConductor((bs, br, bp) -> false));
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 

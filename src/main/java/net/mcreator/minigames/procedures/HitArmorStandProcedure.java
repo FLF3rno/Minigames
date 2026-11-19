@@ -34,11 +34,6 @@ public class HitArmorStandProcedure {
 		handleCrownStand(event, event.getEntity(), event.getTarget());
 	}
 
-	@SubscribeEvent
-	public static void onRightClickEntitySpecific(PlayerInteractEvent.EntityInteractSpecific event) {
-		handleCrownStand(event, event.getEntity(), event.getTarget());
-	}
-
 	private static void handleCrownStand(ICancellableEvent event, Entity entity, Entity target) {
 		if (!(entity instanceof Player player) || !(target instanceof ArmorStand stand)) {
 			return;

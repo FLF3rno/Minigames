@@ -34,7 +34,7 @@ public class DungeonWeaponOffhand {
 		ItemStack offhand = player.getOffhandItem();
 		if (DungeonItemAccess.isDungeonItem(offhand)) {
 			if (!player.addItem(offhand.copy())) {
-				player.drop(offhand.copy(), false);
+				player.drop(offhand.copy(), false, net.minecraft.util.Prediction.SERVER_ONLY);
 			}
 			player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
 		}

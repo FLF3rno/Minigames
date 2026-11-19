@@ -15,13 +15,13 @@ authors="FL_F3rno"
 [[dependencies.dungeon_dev_mod]]
 modId="neoforge"
 type="required"
-versionRange="[26.1.2.95,)"
+versionRange="[26.3.0.99,)"
 ordering="AFTER"
 side="BOTH"
 
 [[dependencies.dungeon_dev_mod]]
 modId="minecraft"
 type="required"
-versionRange="[26.1.2]"
+versionRange="[26.3]"
 ordering="AFTER"
 side="BOTH"

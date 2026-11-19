@@ -99,7 +99,7 @@ public class MinigameGUIAchievementRunScreen extends AbstractContainerScreen<Min
 	@Override
 	public boolean keyPressed(KeyEvent event) {
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			this.minecraft.player.closeContainer();
 			return true;
 		}

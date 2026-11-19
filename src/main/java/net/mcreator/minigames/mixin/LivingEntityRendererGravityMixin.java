@@ -36,7 +36,7 @@ public abstract class LivingEntityRendererGravityMixin<T extends LivingEntity, S
 		if (state instanceof GravityRenderState grs) {
 			Direction gravity = grs.minigames_getGravity();
 			if (gravity != Direction.DOWN) {
-				poseStack.mulPose(GravityOrientation.getCameraRotation(gravity));
+				poseStack.rotate(GravityOrientation.getCameraRotation(gravity));
 			}
 		}
 	}

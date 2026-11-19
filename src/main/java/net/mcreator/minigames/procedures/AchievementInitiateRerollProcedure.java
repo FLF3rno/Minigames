@@ -14,18 +14,20 @@ import java.util.ArrayList;
 
 public class AchievementInitiateRerollProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z) {
-		for (Entity entityiterator : new ArrayList<>(world.players())) {
-			if (world instanceof Level _level) {
-				if (!_level.isClientSide()) {
-					_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:rolldice")), SoundSource.NEUTRAL, 1000, 1);
-				} else {
-					_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:rolldice")), SoundSource.NEUTRAL, 1000, 1, false);
+		if (!world.isClientSide() && world.getServer() != null) {
+			for (Entity entityiterator : new ArrayList<>(world.getServer().getPlayerList().getPlayers())) {
+				if (world instanceof Level _level) {
+					if (!_level.isClientSide()) {
+						_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:rolldice")), SoundSource.NEUTRAL, 1000, 1);
+					} else {
+						_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("minigames:rolldice")), SoundSource.NEUTRAL, 1000, 1, false);
+					}
 				}
-			}
-			{
-				MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
-				_vars.AchievementLobbyState = "";
-				_vars.markSyncDirty();
+				{
+					MinigamesModVariables.PlayerVariables _vars = entityiterator.getData(MinigamesModVariables.PLAYER_VARIABLES);
+					_vars.AchievementLobbyState = "";
+					_vars.markSyncDirty();
+				}
 			}
 		}
 		RollAchievementProcedure.execute(world, x, y, z);

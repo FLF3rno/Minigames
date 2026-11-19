@@ -35,7 +35,7 @@ public class PlayerCageRenderer extends MobRenderer<PlayerCageEntity, LivingEnti
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		PlayerCageEntity entity = (PlayerCageEntity) state.getRenderData(ENTITY_KEY);
+		PlayerCageEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "cage")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

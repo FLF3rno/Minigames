@@ -39,8 +39,8 @@ public class BlessedArrowRenderer extends EntityRenderer<BlessedArrowEntity, Liv
 
 		poseStack.pushPose();
 
-		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot - 90));
-		poseStack.mulPose(Axis.ZP.rotationDegrees(90 + state.xRot));
+		poseStack.rotate(Axis.YP.rotationDegrees(state.yRot - 90));
+		poseStack.rotate(Axis.ZP.rotationDegrees(90 + state.xRot));
 		poseStack.translate(0.0D, -1.25D, 0.0D);
 
 		nodeCollector.submitModel(
@@ -52,8 +52,7 @@ public class BlessedArrowRenderer extends EntityRenderer<BlessedArrowEntity, Liv
 				OverlayTexture.NO_OVERLAY,
 				-1,
 				null,
-				state.outlineColor,
-				null
+				state.outlineColor
 		);
 
 		poseStack.popPose();

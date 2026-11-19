@@ -133,13 +133,13 @@ public class StartAchievementRunProcedure {
 		}
 		if (world instanceof ServerLevel _level) {
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "worldborder set 50000000");
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "worldborder set 50000000");
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "xp set @a 0 levels ");
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "xp set @a 0 levels ");
 			_level.getServer().getCommands()
-					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "xp set @a 0");
+					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "xp set @a 0");
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "advancement revoke @a everything");
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "advancement revoke @a everything");
 			_level.getGameRules().set(GameRules.ADVANCE_WEATHER, true, world.getServer());
 			_level.getGameRules().set(GameRules.ADVANCE_TIME, true, world.getServer());
 			_level.getGameRules().set(GameRules.LOCATOR_BAR, false, world.getServer());
@@ -148,7 +148,7 @@ public class StartAchievementRunProcedure {
 			Optional<Holder<WorldClock>> _clock = _level.dimensionType().defaultClock();
 			if (_clock.isPresent()) _clockManager.setTotalTicks(_clock.get(), 0);
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/weather clear");
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/weather clear");
 			//modifiers
 			// 1 = always night
 			// 2 = always thunder
@@ -160,7 +160,7 @@ public class StartAchievementRunProcedure {
 
 			} else if (MinigamesModVariables.MapVariables.get(world).AchievementModifier == 2) {
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/weather thunder");
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(), "/weather thunder");
 				_level.getGameRules().set(GameRules.ADVANCE_WEATHER, false, world.getServer());
 			}
 		}

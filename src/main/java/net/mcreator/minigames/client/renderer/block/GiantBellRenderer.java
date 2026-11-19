@@ -66,11 +66,11 @@ public class GiantBellRenderer implements BlockEntityRenderer<GiantBellBlockEnti
 			float angle = (float) (Math.sin(shake / Math.PI) / (4.0 + shake / 3.0) * 2.2);
 			poseStack.translate(0.5, 2.7, 0.5);
 			switch (renderState.clickDirection) {
-				case NORTH -> poseStack.mulPose(Axis.XP.rotation(-angle));
-				case SOUTH -> poseStack.mulPose(Axis.XP.rotation(angle));
-				case EAST -> poseStack.mulPose(Axis.ZP.rotation(-angle));
-				case WEST -> poseStack.mulPose(Axis.ZP.rotation(angle));
-				default -> poseStack.mulPose(Axis.XP.rotation(-angle));
+				case NORTH -> poseStack.rotate(Axis.XP.rotation(-angle));
+				case SOUTH -> poseStack.rotate(Axis.XP.rotation(angle));
+				case EAST -> poseStack.rotate(Axis.ZP.rotation(-angle));
+				case WEST -> poseStack.rotate(Axis.ZP.rotation(angle));
+				default -> poseStack.rotate(Axis.XP.rotation(-angle));
 			}
 			poseStack.translate(-0.5, -2.7, -0.5);
 		}
@@ -78,7 +78,7 @@ public class GiantBellRenderer implements BlockEntityRenderer<GiantBellBlockEnti
 		poseStack.translate(-0.5, -0.5, 0.5);
 		poseStack.translate(0, -1, 0);
 		model.setupBlockEntityAnim(renderState.blockEntity, renderState.entityRenderState);
-		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0, null);
+		submitNodeCollector.submitModel(this.model, renderState.entityRenderState, poseStack, RenderTypes.entityCutout(texture), renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 		poseStack.popPose();
 	}
 

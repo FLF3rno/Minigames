@@ -44,7 +44,7 @@ public class EnableSpectativeProcedure {
 				_player.getAbilities().flying = true;
 				_player.onUpdateAbilities();
 			}
-			entity.invulnerableTime = 10000000;
+			entity.setInvulnerableTime(10000000);
 		}
 	}
 }

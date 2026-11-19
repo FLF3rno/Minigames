@@ -152,7 +152,7 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			if (this.hexEditBox != null && this.hexEditBox.mouseClicked(event, doubleClick)) {
 				return true;
 			}
@@ -168,7 +168,7 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 
 	@Override
 	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-		if (event.button() == 0 && activeDragTarget != 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && activeDragTarget != 0) {
 			updateColorFromDrag(event.x(), event.y());
 			return true;
 		}
@@ -177,7 +177,7 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 
 	@Override
 	public boolean mouseReleased(MouseButtonEvent event) {
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			activeDragTarget = 0;
 		}
 		return super.mouseReleased(event);
@@ -294,14 +294,14 @@ public class CustomizeGUIScreen extends AbstractContainerScreen<CustomizeGUIMenu
 	public boolean keyPressed(KeyEvent event) {
 		if (this.hexEditBox != null && this.hexEditBox.isFocused()) {
 			int key = InputConstants.getKey(event).getValue();
-			if (key == 256) {
+			if (key == InputConstants.KEY_ESCAPE) {
 				this.hexEditBox.setFocused(false);
 				return true;
 			}
 			return this.hexEditBox.keyPressed(event);
 		}
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			this.minecraft.player.closeContainer();
 			return true;
 		}

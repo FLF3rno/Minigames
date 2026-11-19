@@ -80,14 +80,14 @@ public class SummonNoOwnerCrownProcedure {
 		}
 
 		if (world instanceof ServerLevel level) {
-			ArmorStand crown = EntityType.ARMOR_STAND.create(level, EntitySpawnReason.COMMAND);
+			ArmorStand crown = net.minecraft.world.entity.EntityTypes.ARMOR_STAND.create(level, EntitySpawnReason.COMMAND);
 
 			if (crown != null) {
 				crown.setPos(entity.getX(), entity.getY(), entity.getZ());
 				crown.setYRot(entity.getYRot());
 				crown.setXRot(entity.getXRot());
 
-				crown.setInvulnerable(true);
+				crown.setPermanentlyInvulnerable(true);
 				crown.setGlowingTag(true);
 				crown.setItemSlot(EquipmentSlot.HEAD, new ItemStack(MinigamesModItems.CROWN_HELMET_HELMET.get()));
 

@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.mcreator.minigames.procedures.ApplyScreenshakeProcedure;
@@ -16,7 +17,7 @@ public class GameRendererMixin {
             method = "extractCamera",
             at = @At("TAIL")
     )
-    private void minigames$applyScreenshake(CallbackInfo ci) {
+    private void minigames$applyScreenshake(DeltaTracker deltaTracker, float worldPartialTicks, CallbackInfo ci) {
         double intensity = ApplyScreenshakeProcedure.getIntensity();
 
         if (intensity <= 0.0) {
@@ -24,7 +25,7 @@ public class GameRendererMixin {
         }
 
         GameRenderer renderer = (GameRenderer) (Object) this;
-        CameraRenderState cameraState = renderer.getGameRenderState().levelRenderState.cameraRenderState;
+        CameraRenderState cameraState = renderer.gameRenderState().levelRenderState.cameraRenderState;
 
         double time = System.currentTimeMillis() / 50.0;
 

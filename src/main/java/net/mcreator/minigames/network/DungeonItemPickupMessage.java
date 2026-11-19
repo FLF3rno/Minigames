@@ -119,7 +119,7 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 					player.sendSystemMessage(Component.literal("§cRELIC SLOTS FULL"), true);
 					return;
 				} else {
-					player.drop(entityStack, false);
+					player.drop(entityStack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 					inserted = entityStack.getCount();
 				}
 			}
@@ -134,7 +134,7 @@ public record DungeonItemPickupMessage(int entityId) implements CustomPacketPayl
 					player.sendSystemMessage(Component.literal("§cInventory is full!"), true);
 					return;
 				} else {
-					player.drop(entityStack, false);
+					player.drop(entityStack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 					inserted = entityStack.getCount();
 				}
 			}

@@ -8,7 +8,7 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -16,11 +16,8 @@ import net.minecraft.world.item.ItemStack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.joml.Matrix4f;
 
 import net.mcreator.minigames.DungeonItemAccess;
-
-import static net.minecraft.client.renderer.rendertype.RenderTypes.textBackgroundSeeThrough;
 
 public final class WorldTooltipDefinitions {
     private static final int THIEF_COLOR = 0xFFAA00;
@@ -189,23 +186,23 @@ public final class WorldTooltipDefinitions {
         return height;
     }
 
-    public static void renderDefinitions(Matrix4f matrix, MultiBufferSource.BufferSource bufferSource, Font font, List<DefinitionCard> definitions,
+    public static void renderDefinitions(PoseStack poseStack, SubmitNodeCollector collector, Font font, List<DefinitionCard> definitions,
                                          int left, int top) {
         int definitionTop = top;
         for (DefinitionCard definition : definitions) {
             int definitionWidth = definition.width(font) + PADDING_X * 2;
             int definitionHeight = definition.height();
-            renderDefinitionPanel(matrix, bufferSource, left, definitionTop, left + definitionWidth, definitionTop + definitionHeight);
+            renderDefinitionPanel(poseStack, collector, left, definitionTop, left + definitionWidth, definitionTop + definitionHeight);
             definitionTop += definitionHeight + DEFINITION_GAP;
         }
     }
 
-    public static void drawDefinitionText(Matrix4f matrix, MultiBufferSource.BufferSource bufferSource, Font font, List<DefinitionCard> definitions,
+    public static void drawDefinitionText(PoseStack poseStack, SubmitNodeCollector collector, Font font, List<DefinitionCard> definitions,
                                           int left, int top) {
         int definitionTop = top;
         for (DefinitionCard definition : definitions) {
             int definitionHeight = definition.height();
-            definition.draw(font, matrix, bufferSource, left, definitionTop);
+            definition.draw(font, poseStack, collector, left, definitionTop);
             definitionTop += definitionHeight + DEFINITION_GAP;
         }
     }
@@ -250,22 +247,13 @@ public final class WorldTooltipDefinitions {
         }
     }
 
-    private static void renderDefinitionPanel(Matrix4f matrix, MultiBufferSource.BufferSource bufferSource, int left, int top, int right, int bottom) {
-        var background = bufferSource.getBuffer(textBackgroundSeeThrough());
-        addQuad(background, matrix, left, top, right, bottom, DEFINITION_BACKGROUND);
-
-        var border = bufferSource.getBuffer(textBackgroundSeeThrough());
-        addQuad(border, matrix, left - 1, top - 1, right + 1, top, DEFINITION_BORDER_LIGHT);
-        addQuad(border, matrix, left - 1, bottom, right + 1, bottom + 1, DEFINITION_BORDER_DARK);
-        addQuad(border, matrix, left - 1, top, left, bottom, DEFINITION_BORDER_LIGHT);
-        addQuad(border, matrix, right, top, right + 1, bottom, DEFINITION_BORDER_DARK);
-    }
-
-    private static void addQuad(com.mojang.blaze3d.vertex.VertexConsumer consumer, Matrix4f matrix, int left, int top, int right, int bottom, int color) {
-        consumer.addVertex(matrix, left, top, 0.0F).setColor(color).setLight(15728880);
-        consumer.addVertex(matrix, left, bottom, 0.0F).setColor(color).setLight(15728880);
-        consumer.addVertex(matrix, right, bottom, 0.0F).setColor(color).setLight(15728880);
-        consumer.addVertex(matrix, right, top, 0.0F).setColor(color).setLight(15728880);
+    private static void renderDefinitionPanel(PoseStack poseStack, SubmitNodeCollector collector, int left, int top, int right, int bottom) {
+        var ordered = collector.order(0);
+        ordered.submitTextBackground(poseStack, left, top, right, bottom, DEFINITION_BACKGROUND, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, left - 1, top - 1, right + 1, top, DEFINITION_BORDER_LIGHT, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, left - 1, bottom, right + 1, bottom + 1, DEFINITION_BORDER_DARK, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, left - 1, top, left, bottom, DEFINITION_BORDER_LIGHT, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, right, top, right + 1, bottom, DEFINITION_BORDER_DARK, Font.DisplayMode.SEE_THROUGH, 15728880);
     }
 
     private static Component centeredLine(Component... parts) {
@@ -345,7 +333,8 @@ public final class WorldTooltipDefinitions {
             return PADDING_Y * 2 + LINE_HEIGHT * (1 + lines.size());
         }
 
-        void draw(Font font, Matrix4f matrix, MultiBufferSource.BufferSource bufferSource, int left, int top) {
+        void draw(Font font, PoseStack poseStack, SubmitNodeCollector collector, int left, int top) {
+            var ordered = collector.order(1);
             Component renderedTitle = title.render();
             float innerWidth = width(font);
             if (renderedTitle.getStyle().getColor() == null) {
@@ -353,8 +342,7 @@ public final class WorldTooltipDefinitions {
             }
             float titleX = left + PADDING_X + (innerWidth - font.width(renderedTitle)) / 2.0F;
             float titleY = top + PADDING_Y + 1;
-            font.drawInBatch(renderedTitle, titleX, titleY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
-                    15728880);
+            ordered.submitText(poseStack, titleX, titleY, renderedTitle.getVisualOrderText(), false, Font.DisplayMode.SEE_THROUGH, 15728880, 0xFFFFFFFF, 0, 0);
             int bodyHeight = lines.size() * LINE_HEIGHT;
             int bodyAreaTop = top + PADDING_Y + LINE_HEIGHT + TITLE_BODY_GAP;
             int bodyAreaHeight = height() - (PADDING_Y * 2) - LINE_HEIGHT - TITLE_BODY_GAP;
@@ -366,8 +354,7 @@ public final class WorldTooltipDefinitions {
                 }
                 float lineX = left + PADDING_X + (innerWidth - font.width(line)) / 2.0F;
                 float lineY = bodyStartY + (i * LINE_HEIGHT) + 1;
-                font.drawInBatch(line, lineX, lineY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
-                        15728880);
+                ordered.submitText(poseStack, lineX, lineY, line.getVisualOrderText(), false, Font.DisplayMode.SEE_THROUGH, 15728880, 0xFFFFFFFF, 0, 0);
             }
         }
     }

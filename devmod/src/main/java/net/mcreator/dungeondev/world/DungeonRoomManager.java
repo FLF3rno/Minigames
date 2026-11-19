@@ -21,6 +21,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.entity.SignText;
+import net.minecraft.world.level.block.entity.SignTextSlot;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.StructureMode;
@@ -93,7 +94,7 @@ public class DungeonRoomManager {
      */
     public static Set<Identifier> findDungeonStructures(ServerLevel level) {
         Set<Identifier> result = new TreeSet<>(Comparator.comparing(Identifier::toString));
-        StructureTemplateManager structureManager = level.getStructureManager();
+        StructureTemplateManager structureManager = level.getStructureTemplateManager();
 
         // 1. Check registered templates in StructureTemplateManager
         try {
@@ -154,7 +155,7 @@ public class DungeonRoomManager {
         }
 
         Set<Identifier> structures = findDungeonStructures(level);
-        StructureTemplateManager structureManager = level.getStructureManager();
+        StructureTemplateManager structureManager = level.getStructureTemplateManager();
         int currentX = 0;
         int currentZ = 0;
         int startY = 60;
@@ -282,7 +283,7 @@ public class DungeonRoomManager {
             return 0;
         }
 
-        StructureTemplateManager structureManager = level.getStructureManager();
+        StructureTemplateManager structureManager = level.getStructureTemplateManager();
         int currentX = 0;
         int currentZ = 0;
         int startY = 60;
@@ -370,10 +371,12 @@ public class DungeonRoomManager {
                 String path = id.getPath();
                 String line1 = path.length() > 15 ? path.substring(0, 15) : path;
                 String line2 = path.length() > 15 ? (path.length() > 30 ? path.substring(15, 30) : path.substring(15)) : "";
-                SignText st = sign.getText(true)
-                    .setMessage(0, Component.literal(line1))
-                    .setMessage(1, Component.literal(line2));
-                sign.setText(st, true);
+                SignText st = sign.getText(SignTextSlot.FRONT)
+                    .asMutable()
+                    .setLine(0, Component.literal(line1))
+                    .setLine(1, Component.literal(line2))
+                    .asImmutable();
+                sign.setText(st, SignTextSlot.FRONT);
                 sign.setWaxed(true);
                 sign.setChanged();
                 level.sendBlockUpdated(signPos, sign.getBlockState(), sign.getBlockState(), 3);

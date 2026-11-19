@@ -2,6 +2,7 @@ package net.mcreator.minigames.mixin;
 
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,9 +23,9 @@ import net.mcreator.minigames.gravity.GravityOrientation;
 
 @Mixin(Camera.class)
 public abstract class CameraRotationGravityMixin {
-	@Shadow @Final private static Vector3f FORWARDS;
-	@Shadow @Final private static Vector3f UP;
-	@Shadow @Final private static Vector3f LEFT;
+	@Shadow @Final private static Vector3fc FORWARDS;
+	@Shadow @Final private static Vector3fc UP;
+	@Shadow @Final private static Vector3fc LEFT;
 
 	@Shadow private Entity entity;
 	@Shadow private Quaternionf rotation;
@@ -36,7 +37,6 @@ public abstract class CameraRotationGravityMixin {
 
 	@Shadow private float eyeHeight;
 	@Shadow private float eyeHeightOld;
-	@Shadow private net.minecraft.world.level.Level level;
 	@Shadow private Vec3 position;
 
 	@Inject(method = "alignWithEntity", at = @At("HEAD"))
@@ -71,7 +71,8 @@ public abstract class CameraRotationGravityMixin {
 	private void minigames$gravityMaxZoom(float cameraDist, org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<Float> cir) {
 		if (!(this.entity instanceof Player player)) return;
 		if (!net.mcreator.minigames.gravity.client.GravityCameraTransition.isNonDefault()) return;
-		if (this.level == null) return;
+		net.minecraft.world.level.Level level = this.entity.level();
+		if (level == null) return;
 
 		for (int i = 0; i < 8; i++) {
 			float offsetX = (i & 1) * 2 - 1;
@@ -79,12 +80,12 @@ public abstract class CameraRotationGravityMixin {
 			float offsetZ = (i >> 2 & 1) * 2 - 1;
 			Vec3 from = this.position.add(offsetX * 0.1F, offsetY * 0.1F, offsetZ * 0.1F);
 			net.minecraft.core.BlockPos testPos = net.minecraft.core.BlockPos.containing(from);
-			if (this.level.getBlockState(testPos).isViewBlocking(this.level, testPos)) {
+			if (level.getBlockState(testPos).isViewBlocking(level, testPos, net.minecraft.world.phys.AABB.ofSize(from, 0.2, 0.2, 0.2))) {
 				cir.setReturnValue(0.0F);
 				return;
 			}
 			Vec3 to = from.add(new Vec3(this.forwards).scale(-cameraDist));
-			net.minecraft.world.phys.HitResult hitResult = this.level.clip(new net.minecraft.world.level.ClipContext(from, to, net.minecraft.world.level.ClipContext.Block.VISUAL, net.minecraft.world.level.ClipContext.Fluid.NONE, this.entity));
+			net.minecraft.world.phys.HitResult hitResult = level.clip(new net.minecraft.world.level.ClipContext(from, to, net.minecraft.world.level.ClipContext.Block.VISUAL, net.minecraft.world.level.ClipContext.Fluid.NONE, this.entity));
 			if (hitResult.getType() != net.minecraft.world.phys.HitResult.Type.MISS) {
 				float distSq = (float) hitResult.getLocation().distanceToSqr(this.position);
 				if (distSq < Mth.square(cameraDist)) {

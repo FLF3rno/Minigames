@@ -7,7 +7,6 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -23,7 +22,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 import org.joml.Matrix4f;
 
 import java.util.List;
@@ -277,14 +276,13 @@ public class ClientPlayerTrailManager {
 	}
 
 	@SubscribeEvent
-	public static void onRenderLevel(RenderLevelStageEvent.AfterTranslucentBlocks event) {
+	public static void onRenderLevel(SubmitCustomGeometryEvent event) {
 		if (ACTIVE_CLONES.isEmpty()) return;
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.level == null || mc.player == null || mc.gameRenderer == null || mc.gameRenderer.getMainCamera() == null) return;
+		if (mc.level == null || mc.player == null || mc.gameRenderer == null || mc.gameRenderer.mainCamera() == null) return;
 
 		PoseStack poseStack = event.getPoseStack();
-		MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-		Vec3 camera = mc.gameRenderer.getMainCamera().position();
+		Vec3 camera = mc.gameRenderer.mainCamera().position();
 		float partialTick = mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
 
 		for (CloneSnapshot clone : ACTIVE_CLONES) {
@@ -319,10 +317,16 @@ public class ClientPlayerTrailManager {
 
 			PlayerModel model = clone.isSlim ? getSlimModel() : getWideModel();
 			if (model != null) {
-				clone.applyTo(model);
 				RenderType renderType = RenderTypes.entityTranslucent(clone.skin);
-				VertexConsumer vertexConsumer = bufferSource.getBuffer(renderType);
-				model.renderToBuffer(poseStack, vertexConsumer, clone.lightCoords, OverlayTexture.NO_OVERLAY, argb);
+				final var finalClone = clone;
+				final int finalArgb = argb;
+				final PlayerModel finalModel = model;
+				event.getSubmitNodeCollector().submitCustomGeometry(poseStack, renderType, (pose, vertexConsumer) -> {
+					PoseStack renderPose = new PoseStack();
+					renderPose.last().set(pose);
+					finalClone.applyTo(finalModel);
+					finalModel.renderToBuffer(renderPose, vertexConsumer, finalClone.lightCoords, OverlayTexture.NO_OVERLAY, finalArgb);
+				});
 			}
 
 			poseStack.popPose();

@@ -35,7 +35,7 @@ public class SnowbombProjectileProjectileHitsBlockProcedure {
 		if (world instanceof Level _level && !_level.isClientSide())
 			_level.explode(null, x, y, z, 2, Level.ExplosionInteraction.TNT);
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/kill @e[type=item]");
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+					"/kill @e[type=item]");
 	}
 }

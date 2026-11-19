@@ -7,20 +7,24 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.OrderedSubmitNodeCollector;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.MovingBlockRenderState;
-import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.feature.submit.SubmitNode;
+import net.minecraft.client.renderer.gizmos.DrawableGizmoPrimitives;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
+import net.minecraft.client.renderer.texture.UvMapping;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.client.submit.RenderPhaseKey;
 import org.joml.Quaternionf;
 import org.jspecify.annotations.Nullable;
 
@@ -57,7 +61,7 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
         int overlayCoords,
         int outlineColor,
         int[] tintLayers,
-        List<BakedQuad> quads,
+        ItemQuads quads,
         ItemStackRenderState.FoilType foilType
     ) {
         doSubmitItem(delegate, scale, opacity, poseStack, displayContext, lightCoords, overlayCoords, outlineColor, tintLayers, quads, foilType);
@@ -69,13 +73,18 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
     }
 
     @Override
-    public void submitNameTag(PoseStack poseStack, @Nullable Vec3 nameTagAttachment, int offset, Component name, boolean seeThrough, int lightCoords, double distanceToCameraSq, CameraRenderState camera) {
-        delegate.submitNameTag(poseStack, nameTagAttachment, offset, name, seeThrough, lightCoords, distanceToCameraSq, camera);
+    public void submitNameTag(PoseStack poseStack, @Nullable Vec3 nameTagAttachment, int offset, Component name, boolean seeThrough, int lightCoords, CameraRenderState camera) {
+        delegate.submitNameTag(poseStack, nameTagAttachment, offset, name, seeThrough, lightCoords, camera);
     }
 
     @Override
     public void submitText(PoseStack poseStack, float x, float y, FormattedCharSequence string, boolean dropShadow, Font.DisplayMode displayMode, int lightCoords, int color, int backgroundColor, int outlineColor) {
         delegate.submitText(poseStack, x, y, string, dropShadow, displayMode, lightCoords, color, backgroundColor, outlineColor);
+    }
+
+    @Override
+    public void submitTextBackground(PoseStack poseStack, float x0, float y0, float x1, float y1, int color, Font.DisplayMode displayMode, int lightCoords) {
+        delegate.submitTextBackground(poseStack, x0, y0, x1, y1, color, displayMode, lightCoords);
     }
 
     @Override
@@ -89,18 +98,18 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
     }
 
     @Override
-    public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, @Nullable TextureAtlasSprite sprite, int outlineColor, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay) {
-        delegate.submitModel(model, state, poseStack, renderType, lightCoords, overlayCoords, tintedColor, sprite, outlineColor, crumblingOverlay);
+    public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, @Nullable UvMapping uvMapping, int outlineColor) {
+        delegate.submitModel(model, state, poseStack, renderType, lightCoords, overlayCoords, tintedColor, uvMapping, outlineColor);
     }
 
     @Override
-    public void submitModelPart(ModelPart modelPart, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, @Nullable TextureAtlasSprite sprite, boolean sheeted, boolean hasFoil, int tintedColor, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay, int outlineColor) {
-        delegate.submitModelPart(modelPart, poseStack, renderType, lightCoords, overlayCoords, sprite, sheeted, hasFoil, tintedColor, crumblingOverlay, outlineColor);
+    public <S> void submitCrumblingOverlay(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+        delegate.submitCrumblingOverlay(model, state, poseStack, renderType, lightCoords, overlayCoords, tintedColor, crumblingOverlay);
     }
 
     @Override
-    public void submitMovingBlock(PoseStack poseStack, MovingBlockRenderState movingBlockRenderState) {
-        delegate.submitMovingBlock(poseStack, movingBlockRenderState);
+    public void submitMovingBlock(PoseStack poseStack, MovingBlockRenderState movingBlockRenderState, int outlineColor) {
+        delegate.submitMovingBlock(poseStack, movingBlockRenderState, outlineColor);
     }
 
     @Override
@@ -109,8 +118,13 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
     }
 
     @Override
-    public void submitBreakingBlockModel(PoseStack poseStack, BlockStateModel model, long seed, int progress) {
-        delegate.submitBreakingBlockModel(poseStack, model, seed, progress);
+    public void submitBreakingBlockModel(PoseStack poseStack, List<BlockStateModelPart> parts, int progress, boolean isBlockTranslucent) {
+        delegate.submitBreakingBlockModel(poseStack, parts, progress, isBlockTranslucent);
+    }
+
+    @Override
+    public void submitShapeOutline(PoseStack poseStack, VoxelShape shape, RenderType renderType, int color, float width, boolean afterTerrain) {
+        delegate.submitShapeOutline(poseStack, shape, renderType, color, width, afterTerrain);
     }
 
     @Override
@@ -119,13 +133,23 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
     }
 
     @Override
-    public void submitParticleGroup(ParticleGroupRenderer particleGroupRenderer) {
-        delegate.submitParticleGroup(particleGroupRenderer);
+    public void submitQuadParticleGroup(QuadParticleRenderState particles) {
+        delegate.submitQuadParticleGroup(particles);
+    }
+
+    @Override
+    public void submitGizmoPrimitives(DrawableGizmoPrimitives.Group group, CameraRenderState camera, boolean onTop) {
+        delegate.submitGizmoPrimitives(group, camera, onTop);
     }
 
     @Override
     public void submitMultiLayerBlockModel(PoseStack poseStack, List<BlockStateModelPart> modelParts, boolean translucent, int[] tintLayers, int lightCoords, int overlayCoords, int outlineColor) {
         delegate.submitMultiLayerBlockModel(poseStack, modelParts, translucent, tintLayers, lightCoords, overlayCoords, outlineColor);
+    }
+
+    @Override
+    public <T extends SubmitNode, S extends T> void submitSpecial(RenderPhaseKey<T> phaseKey, S submitNode) {
+        delegate.submitSpecial(phaseKey, submitNode);
     }
 
     private static class ScalingOrderedCollector implements OrderedSubmitNodeCollector {
@@ -147,7 +171,7 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
             int overlayCoords,
             int outlineColor,
             int[] tintLayers,
-            List<BakedQuad> quads,
+            ItemQuads quads,
             ItemStackRenderState.FoilType foilType
         ) {
             doSubmitItem(delegate, scale, opacity, poseStack, displayContext, lightCoords, overlayCoords, outlineColor, tintLayers, quads, foilType);
@@ -159,13 +183,18 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
         }
 
         @Override
-        public void submitNameTag(PoseStack poseStack, @Nullable Vec3 nameTagAttachment, int offset, Component name, boolean seeThrough, int lightCoords, double distanceToCameraSq, CameraRenderState camera) {
-            delegate.submitNameTag(poseStack, nameTagAttachment, offset, name, seeThrough, lightCoords, distanceToCameraSq, camera);
+        public void submitNameTag(PoseStack poseStack, @Nullable Vec3 nameTagAttachment, int offset, Component name, boolean seeThrough, int lightCoords, CameraRenderState camera) {
+            delegate.submitNameTag(poseStack, nameTagAttachment, offset, name, seeThrough, lightCoords, camera);
         }
 
         @Override
         public void submitText(PoseStack poseStack, float x, float y, FormattedCharSequence string, boolean dropShadow, Font.DisplayMode displayMode, int lightCoords, int color, int backgroundColor, int outlineColor) {
             delegate.submitText(poseStack, x, y, string, dropShadow, displayMode, lightCoords, color, backgroundColor, outlineColor);
+        }
+
+        @Override
+        public void submitTextBackground(PoseStack poseStack, float x0, float y0, float x1, float y1, int color, Font.DisplayMode displayMode, int lightCoords) {
+            delegate.submitTextBackground(poseStack, x0, y0, x1, y1, color, displayMode, lightCoords);
         }
 
         @Override
@@ -179,18 +208,18 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
         }
 
         @Override
-        public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, @Nullable TextureAtlasSprite sprite, int outlineColor, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay) {
-            delegate.submitModel(model, state, poseStack, renderType, lightCoords, overlayCoords, tintedColor, sprite, outlineColor, crumblingOverlay);
+        public <S> void submitModel(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, @Nullable UvMapping uvMapping, int outlineColor) {
+            delegate.submitModel(model, state, poseStack, renderType, lightCoords, overlayCoords, tintedColor, uvMapping, outlineColor);
         }
 
         @Override
-        public void submitModelPart(ModelPart modelPart, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, @Nullable TextureAtlasSprite sprite, boolean sheeted, boolean hasFoil, int tintedColor, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay, int outlineColor) {
-            delegate.submitModelPart(modelPart, poseStack, renderType, lightCoords, overlayCoords, sprite, sheeted, hasFoil, tintedColor, crumblingOverlay, outlineColor);
+        public <S> void submitCrumblingOverlay(Model<? super S> model, S state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int tintedColor, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+            delegate.submitCrumblingOverlay(model, state, poseStack, renderType, lightCoords, overlayCoords, tintedColor, crumblingOverlay);
         }
 
         @Override
-        public void submitMovingBlock(PoseStack poseStack, MovingBlockRenderState movingBlockRenderState) {
-            delegate.submitMovingBlock(poseStack, movingBlockRenderState);
+        public void submitMovingBlock(PoseStack poseStack, MovingBlockRenderState movingBlockRenderState, int outlineColor) {
+            delegate.submitMovingBlock(poseStack, movingBlockRenderState, outlineColor);
         }
 
         @Override
@@ -199,8 +228,13 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
         }
 
         @Override
-        public void submitBreakingBlockModel(PoseStack poseStack, BlockStateModel model, long seed, int progress) {
-            delegate.submitBreakingBlockModel(poseStack, model, seed, progress);
+        public void submitBreakingBlockModel(PoseStack poseStack, List<BlockStateModelPart> parts, int progress, boolean isBlockTranslucent) {
+            delegate.submitBreakingBlockModel(poseStack, parts, progress, isBlockTranslucent);
+        }
+
+        @Override
+        public void submitShapeOutline(PoseStack poseStack, VoxelShape shape, RenderType renderType, int color, float width, boolean afterTerrain) {
+            delegate.submitShapeOutline(poseStack, shape, renderType, color, width, afterTerrain);
         }
 
         @Override
@@ -209,13 +243,23 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
         }
 
         @Override
-        public void submitParticleGroup(ParticleGroupRenderer particleGroupRenderer) {
-            delegate.submitParticleGroup(particleGroupRenderer);
+        public void submitQuadParticleGroup(QuadParticleRenderState particles) {
+            delegate.submitQuadParticleGroup(particles);
+        }
+
+        @Override
+        public void submitGizmoPrimitives(DrawableGizmoPrimitives.Group group, CameraRenderState camera, boolean onTop) {
+            delegate.submitGizmoPrimitives(group, camera, onTop);
         }
 
         @Override
         public void submitMultiLayerBlockModel(PoseStack poseStack, List<BlockStateModelPart> modelParts, boolean translucent, int[] tintLayers, int lightCoords, int overlayCoords, int outlineColor) {
             delegate.submitMultiLayerBlockModel(poseStack, modelParts, translucent, tintLayers, lightCoords, overlayCoords, outlineColor);
+        }
+
+        @Override
+        public <T extends SubmitNode, S extends T> void submitSpecial(RenderPhaseKey<T> phaseKey, S submitNode) {
+            delegate.submitSpecial(phaseKey, submitNode);
         }
     }
 
@@ -229,7 +273,7 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
         int overlayCoords,
         int outlineColor,
         int[] tintLayers,
-        List<BakedQuad> quads,
+        ItemQuads itemQuads,
         ItemStackRenderState.FoilType foilType
     ) {
         poseStack.pushPose();
@@ -243,6 +287,7 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
             poseStack.translate(-gx, -gy, -gz);
         }
 
+        List<BakedQuad> quads = itemQuads != null ? itemQuads.all() : null;
         if (opacity < 0.999f && quads != null && !quads.isEmpty()) {
             if (opacity <= 0.001f) {
                 poseStack.popPose();
@@ -280,9 +325,12 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
                     mat.sprite(),
                     mat.layer(),
                     newType,
+                    mat.itemGlintRenderType(),
+                    mat.itemGlintSpecialRenderType(),
                     i,
-                    mat.shade(),
-                    mat.lightEmission()
+                    mat.shadeDirectionOverride(),
+                    mat.lightEmission(),
+                    mat.ambientOcclusion()
                 );
 
                 newQuads.add(new BakedQuad(
@@ -299,9 +347,9 @@ public class ScalingSubmitNodeCollector implements SubmitNodeCollector {
                 ));
             }
 
-            delegate.submitItem(poseStack, displayContext, lightCoords, overlayCoords, outlineColor, newTintLayers, newQuads, foilType);
+            delegate.submitItem(poseStack, displayContext, lightCoords, overlayCoords, outlineColor, newTintLayers, ItemQuads.split(newQuads), foilType);
         } else {
-            delegate.submitItem(poseStack, displayContext, lightCoords, overlayCoords, outlineColor, tintLayers, quads, foilType);
+            delegate.submitItem(poseStack, displayContext, lightCoords, overlayCoords, outlineColor, tintLayers, itemQuads, foilType);
         }
 
         poseStack.popPose();

@@ -37,7 +37,7 @@ public class MagmaHitboxRenderer extends HumanoidMobRenderer<MagmaHitboxEntity, 
 
 	@Override
 	public Identifier getTextureLocation(HumanoidRenderState state) {
-		MagmaHitboxEntity entity = (MagmaHitboxEntity) state.getRenderData(ENTITY_KEY);
+		MagmaHitboxEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "empty")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

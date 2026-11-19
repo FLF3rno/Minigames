@@ -15,15 +15,17 @@ public class BlessedEffectExpiresProcedure {
 		{
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-				_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-						LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect clear @s minigames:blessed");
+				_ent.level().getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+						"/effect clear @s minigames:blessed");
 			}
 		}
 		{
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-				_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-						LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/data merge entity @s {CustomName:'',CustomNameVisible:0b}");
+				_ent.level().getServer().getCommands().performPrefixedCommand(
+						new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+						"/data merge entity @s {CustomName:'',CustomNameVisible:0b}");
 			}
 		}
 	}

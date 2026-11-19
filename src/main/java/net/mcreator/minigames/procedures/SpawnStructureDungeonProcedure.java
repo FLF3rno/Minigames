@@ -66,10 +66,8 @@ public class SpawnStructureDungeonProcedure {
 							Vec2.ZERO,
 							_level,
 							net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
-							"",
 							Component.literal(""),
-							_level.getServer(),
-							null
+							_level.getServer()
 					).withSuppressedOutput(),
 					placeCommand
 			);
@@ -148,10 +146,8 @@ public class SpawnStructureDungeonProcedure {
 							Vec2.ZERO,
 							_level,
 							net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
-							"",
 							Component.literal(""),
-							_level.getServer(),
-							null
+							_level.getServer()
 					).withSuppressedOutput(),
 
 					"/execute in minigames:dungeon_dimension as @e[type=#minigames:dungeon,x="

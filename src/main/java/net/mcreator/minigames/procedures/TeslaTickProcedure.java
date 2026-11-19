@@ -369,7 +369,7 @@ public class TeslaTickProcedure {
 	) {
 		if (world instanceof ServerLevel _level) {
 			LightningBolt entityToSpawn =
-					EntityType.LIGHTNING_BOLT.create(
+					net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(
 							_level,
 							EntitySpawnReason.TRIGGERED
 					);

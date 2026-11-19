@@ -67,7 +67,7 @@ public class MovingBlockTickProcedure {
 		entity.setNoGravity(true);
 		entity.setDeltaMovement(vx, vy, vz);
 		entity.setPos(entity.getX() + vx, entity.getY() + vy, entity.getZ() + vz);
-		entity.hurtMarked = true;
+		entity.needsSync = true;
 
 		// Minimal anti-tunneling guard: if rider overlaps platform, correct Y only.
 		double movedSurfaceY = entity.getY() + entity.getBbHeight();

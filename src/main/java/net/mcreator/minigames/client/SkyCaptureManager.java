@@ -1,16 +1,17 @@
 package net.mcreator.minigames.client;
 
-import com.mojang.blaze3d.pipeline.DepthStencilState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.DepthStencilState;
+import com.mojang.renderpearl.api.pipeline.PrimitiveTopology;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.mojang.blaze3d.pipeline.RenderTarget;
-import com.mojang.blaze3d.systems.CommandEncoder;
-import com.mojang.blaze3d.systems.GpuDevice;
+import com.mojang.renderpearl.api.commands.CommandEncoder;
+import com.mojang.renderpearl.api.commands.RenderPass;
+import com.mojang.renderpearl.api.device.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.FilterMode;
-import com.mojang.blaze3d.textures.GpuTexture;
-import com.mojang.blaze3d.textures.TextureFormat;
+import com.mojang.renderpearl.api.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.GpuTexture;
+import com.mojang.renderpearl.api.GpuFormat;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.CloudRenderer;
@@ -44,12 +45,16 @@ import org.joml.Matrix4f;
 public final class SkyCaptureManager {
 	public static final Identifier SNAPSHOT_ID = Identifier.fromNamespaceAndPath("minigames", "dynamic/sky_snapshot");
 
-	public static final RenderPipeline SKY_PORTAL_PIPELINE = RenderPipeline.builder(RenderPipelines.MATRICES_PROJECTION_SNIPPET)
+	public static final RenderPipeline SKY_PORTAL_PIPELINE = RenderPipeline.builder(RenderPipelines.GLOBALS_SNIPPET)
+			.withBindGroupLayout(net.minecraft.client.renderer.BindGroupLayouts.PROJECTION)
+			.withBindGroupLayout(net.minecraft.client.renderer.BindGroupLayouts.DYNAMIC_TRANSFORMS)
 			.withLocation(Identifier.fromNamespaceAndPath("minigames", "pipeline/sky_portal"))
 			.withVertexShader(Identifier.fromNamespaceAndPath("minigames", "core/sky_portal"))
 			.withFragmentShader(Identifier.fromNamespaceAndPath("minigames", "core/sky_portal"))
-			.withSampler("Sampler0")
-			.withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS)
+			.withBindGroupLayout(net.minecraft.client.renderer.BindGroupLayouts.SAMPLER0)
+			.withVertexBinding(0, DefaultVertexFormat.POSITION)
+			.withPrimitiveTopology(PrimitiveTopology.QUADS)
+			.withColorTargetState(com.mojang.renderpearl.api.pipeline.ColorTargetState.DEFAULT)
 			.withDepthStencilState(DepthStencilState.DEFAULT)
 			.build();
 
@@ -98,7 +103,7 @@ public final class SkyCaptureManager {
 			return;
 		}
 		try {
-			RenderTarget main = Minecraft.getInstance().getMainRenderTarget();
+			RenderTarget main = Minecraft.getInstance().gameRenderer.mainRenderTarget();
 			GpuTexture source = main.getColorTexture();
 			if (source == null) {
 				return;
@@ -122,10 +127,11 @@ public final class SkyCaptureManager {
 				CloudStatus cloudStatus = mc.options.getCloudStatus();
 				LevelRenderer levelRenderer = event.getLevelRenderer();
 				LevelRenderState lrs = event.getLevelRenderState();
-				CloudRenderer cloudRenderer = levelRenderer != null ? levelRenderer.getCloudRenderer() : null;
+				CloudRenderer cloudRenderer = levelRenderer != null ? levelRenderer.cloudRenderer() : null;
 
 				if (cloudRenderer != null && cloudStatus != CloudStatus.OFF && lrs != null
-						&& lrs.cameraRenderState != null && lrs.cameraRenderState.pos != null) {
+						&& lrs.cameraRenderState != null && lrs.cameraRenderState.pos != null
+						&& main.getColorTextureView() != null) {
 					int cloudColor = lrs.cloudColor;
 					if ((cloudColor >>> 24) > 0) {
 						float cloudHeight = lrs.cloudHeight;
@@ -137,15 +143,25 @@ public final class SkyCaptureManager {
 						float partialTick = mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
 						long gameTime = lrs.gameTime;
 
-						Matrix4f prevMv = new Matrix4f(RenderSystem.getModelViewMatrix());
+						var modelViewStack = RenderSystem.getModelViewStack();
+						modelViewStack.pushMatrix();
 						if (event.getModelViewMatrix() != null) {
-							RenderSystem.getModelViewMatrix().set(event.getModelViewMatrix());
+							modelViewStack.set(event.getModelViewMatrix());
 						}
 						try {
-							cloudRenderer.render(cloudColor, cloudStatus, cloudHeight, cloudRange, camPos, gameTime, partialTick);
+							cloudRenderer.prepare(cloudColor, cloudStatus, cloudHeight, cloudRange, camPos, gameTime, partialTick);
+							try (RenderPass renderPass = encoder.createRenderPass(
+									() -> "Minigames sky capture clouds",
+									main.getColorTextureView(),
+									java.util.Optional.empty(),
+									main.getDepthTextureView(),
+									java.util.OptionalDouble.empty())) {
+								RenderSystem.bindDefaultUniforms(renderPass);
+								cloudRenderer.render(cloudStatus, renderPass);
+							}
 							cloudsRendered = true;
 						} finally {
-							RenderSystem.getModelViewMatrix().set(prevMv);
+							modelViewStack.popMatrix();
 						}
 					}
 				}
@@ -161,7 +177,7 @@ public final class SkyCaptureManager {
 			if (cloudsRendered) {
 				encoder.copyTextureToTexture(backup.getTexture(), source, 0, 0, 0, 0, 0, width, height);
 				if (main.getDepthTexture() != null) {
-					encoder.clearDepthTexture(main.getDepthTexture(), 1.0);
+					encoder.clearDepthTexture(main.getDepthTexture(), 0.0);
 				}
 			}
 
@@ -183,13 +199,13 @@ public final class SkyCaptureManager {
 		}
 	}
 
-	private static SnapshotTexture ensureSnapshot(int width, int height, TextureFormat format) {
+	private static SnapshotTexture ensureSnapshot(int width, int height, GpuFormat format) {
 		ensureSnapshotRegistered();
 		snapshot.ensureSize(width, height, format);
 		return snapshot;
 	}
 
-	private static SnapshotTexture ensureBackup(int width, int height, TextureFormat format) {
+	private static SnapshotTexture ensureBackup(int width, int height, GpuFormat format) {
 		if (skyBackup == null) {
 			skyBackup = new SnapshotTexture();
 		}
@@ -200,17 +216,17 @@ public final class SkyCaptureManager {
 	private static final class SnapshotTexture extends AbstractTexture {
 		private int width = 1;
 		private int height = 1;
-		private TextureFormat format = TextureFormat.RGBA8;
+		private GpuFormat format = GpuFormat.RGBA8_UNORM;
 
 		SnapshotTexture() {
 			this.sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST);
 			GpuDevice device = RenderSystem.getDevice();
 			this.texture = device.createTexture(() -> "minigames sky snapshot init",
-					GpuTexture.USAGE_COPY_DST | GpuTexture.USAGE_COPY_SRC | GpuTexture.USAGE_TEXTURE_BINDING, TextureFormat.RGBA8, 1, 1, 1, 1);
+					GpuTexture.USAGE_COPY_DST | GpuTexture.USAGE_COPY_SRC | GpuTexture.USAGE_TEXTURE_BINDING, GpuFormat.RGBA8_UNORM, 1, 1, 1, 1);
 			this.textureView = device.createTextureView(this.texture);
 		}
 
-		void ensureSize(int w, int h, TextureFormat fmt) {
+		void ensureSize(int w, int h, GpuFormat fmt) {
 			if (this.texture != null && !this.texture.isClosed() && w == this.width && h == this.height && fmt == this.format) {
 				return;
 			}

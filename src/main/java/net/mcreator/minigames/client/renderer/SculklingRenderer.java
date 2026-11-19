@@ -35,7 +35,7 @@ public class SculklingRenderer extends MobRenderer<SculklingEntity, LivingEntity
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		SculklingEntity entity = (SculklingEntity) state.getRenderData(ENTITY_KEY);
+		SculklingEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "sculkings")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

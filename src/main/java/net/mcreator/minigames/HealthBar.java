@@ -1,12 +1,10 @@
 package net.mcreator.minigames;
 
-import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
@@ -21,8 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import org.joml.Matrix4f;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 
 @EventBusSubscriber(modid = "minigames", value = Dist.CLIENT)
 public class HealthBar {
@@ -30,19 +27,17 @@ public class HealthBar {
     private static final TagKey<EntityType<?>> DUNGEON_BOSS_TAG = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("minigames", "dungeon_boss"));
 
     @SubscribeEvent
-    public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentBlocks event) {
+    public static void onRenderLevelStage(SubmitCustomGeometryEvent event) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) return;
 
         PoseStack poseStack = event.getPoseStack();
-        Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+        Camera camera = Minecraft.getInstance().gameRenderer.mainCamera();
         Vec3 cameraPosition = camera.position();
         double camX = cameraPosition.x;
         double camY = cameraPosition.y;
         double camZ = cameraPosition.z;
-        MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
-
-        boolean anyRendered = false;
+        SubmitNodeCollector collector = event.getSubmitNodeCollector();
 
         for (LivingEntity entity : mc.level.getEntitiesOfClass(
                 LivingEntity.class,
@@ -62,25 +57,12 @@ public class HealthBar {
             poseStack.pushPose();
             poseStack.translate(x, y, z);
 
-            poseStack.mulPose(camera.rotation());
+            poseStack.rotate(camera.rotation());
             poseStack.scale(0.025F, -0.025F, 0.025F);
 
-            PoseStack.Pose pose = poseStack.last();
-            if (pose != null) {
-                if (!anyRendered) {
-                    GlStateManager._disableDepthTest();
-                    anyRendered = true;
-                }
-                Matrix4f matrix = pose.pose();
-                renderBar(matrix, buffers, entity, entity.getHealth(), entity.getMaxHealth());
-            }
+            renderBar(poseStack, collector, entity, entity.getHealth(), entity.getMaxHealth());
 
             poseStack.popPose();
-        }
-
-        if (anyRendered) {
-            buffers.endBatch();
-            GlStateManager._enableDepthTest();
         }
     }
 
@@ -138,7 +120,7 @@ public class HealthBar {
                 && entityDistance <= blockDistance + 1e-6;
     }
 
-    private static void renderBar(Matrix4f matrix, MultiBufferSource.BufferSource buffers, LivingEntity entity, float health, float maxHealth) {
+    private static void renderBar(PoseStack poseStack, SubmitNodeCollector collector, LivingEntity entity, float health, float maxHealth) {
         float healthRatio = Math.max(0.0F, Math.min(health / maxHealth, 1.0F));
 
         int width = 60;
@@ -226,32 +208,15 @@ public class HealthBar {
             }
         }
 
-        VertexConsumer consumer = buffers.getBuffer(RenderTypes.textBackgroundSeeThrough());
         int bgColor = 0xB4000000;
-        drawQuad(consumer, matrix, -halfWidth - 1, -1, halfWidth + 1, height + 1, bgColor, 0.0F);
-        buffers.endBatch(RenderTypes.textBackgroundSeeThrough());
+        collector.order(0).submitTextBackground(poseStack, -halfWidth - 1, -1, halfWidth + 1, height + 1, bgColor, Font.DisplayMode.SEE_THROUGH, 15728880);
 
         if (fillWidth > 0) {
-            VertexConsumer fillConsumer = buffers.getBuffer(RenderTypes.textBackgroundSeeThrough());
             int fgColor = (255 << 24) | (r << 16) | (g << 8) | b;
-            drawQuad(fillConsumer, matrix, -halfWidth, 0, -halfWidth + fillWidth, height, fgColor, 0.03F);
-            buffers.endBatch(RenderTypes.textBackgroundSeeThrough());
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 0.0F, 0.03F);
+            collector.order(1).submitTextBackground(poseStack, -halfWidth, 0, -halfWidth + fillWidth, height, fgColor, Font.DisplayMode.SEE_THROUGH, 15728880);
+            poseStack.popPose();
         }
-    }
-
-    private static void drawQuad(
-            VertexConsumer vertexConsumer,
-            Matrix4f matrix,
-            float left,
-            float top,
-            float right,
-            float bottom,
-            int color,
-            float z
-    ) {
-        vertexConsumer.addVertex(matrix, left, top, z).setColor(color).setLight(15728880);
-        vertexConsumer.addVertex(matrix, left, bottom, z).setColor(color).setLight(15728880);
-        vertexConsumer.addVertex(matrix, right, bottom, z).setColor(color).setLight(15728880);
-        vertexConsumer.addVertex(matrix, right, top, z).setColor(color).setLight(15728880);
     }
 }

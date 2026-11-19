@@ -102,16 +102,16 @@ public class OptionsSectionScreen extends Screen {
 			return true;
 		}
 
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			int halfW = this.width / 2;
 			Minecraft mc = Minecraft.getInstance();
 			mc.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
 
 			if (event.x() < halfW) {
 				OptionsInterceptor.allowVanillaOptions = true;
-				mc.setScreen(new OptionsScreen(this, mc.options, false));
+				mc.gui.setScreen(new OptionsScreen(this, mc.options));
 			} else {
-				mc.setScreen(new MinigamesSettingsScreen(this));
+				mc.gui.setScreen(new MinigamesSettingsScreen(this));
 			}
 			return true;
 		}
@@ -122,7 +122,7 @@ public class OptionsSectionScreen extends Screen {
 	@Override
 	public boolean keyPressed(KeyEvent event) {
 		int key = InputConstants.getKey(event).getValue();
-		if (key == 256) {
+		if (key == InputConstants.KEY_ESCAPE) {
 			this.onClose();
 			return true;
 		}
@@ -132,7 +132,7 @@ public class OptionsSectionScreen extends Screen {
 	@Override
 	public void onClose() {
 		if (this.minecraft != null) {
-			this.minecraft.setScreen(this.lastScreen);
+			this.minecraft.gui.setScreen(this.lastScreen);
 		}
 	}
 }

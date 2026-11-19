@@ -34,7 +34,7 @@ public abstract class CrownHelmetItem extends Item {
 
 	public static class Helmet extends CrownHelmetItem {
 		public Helmet(Item.Properties properties) {
-			super(properties.fireResistant().humanoidArmor(ARMOR_MATERIAL, ArmorType.HELMET));
+			super(properties.humanoidArmor(ARMOR_MATERIAL, ArmorType.HELMET).fireResistant());
 		}
 
 		@Override

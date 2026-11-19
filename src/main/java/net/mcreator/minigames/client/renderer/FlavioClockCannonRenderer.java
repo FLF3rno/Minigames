@@ -39,7 +39,7 @@ public class FlavioClockCannonRenderer extends MobRenderer<FlavioClockCannonEnti
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		FlavioClockCannonEntity entity = (FlavioClockCannonEntity) state.getRenderData(ENTITY_KEY);
+		FlavioClockCannonEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "clock_cannon")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

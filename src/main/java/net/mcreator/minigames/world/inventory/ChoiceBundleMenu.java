@@ -233,12 +233,12 @@ public class ChoiceBundleMenu extends AbstractContainerMenu implements Minigames
 		if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
 			if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {
 				for (int j = 0; j < internal.size(); ++j) {
-					playerIn.drop(ItemUtil.getStack(internal, j), false);
+					playerIn.drop(ItemUtil.getStack(internal, j), false, net.minecraft.util.Prediction.SERVER_ONLY);
 					setItemInSlot(j, ItemResource.EMPTY, 0);
 				}
 			} else {
 				for (int i = 0; i < internal.size(); ++i) {
-					playerIn.getInventory().placeItemBackInInventory(ItemUtil.getStack(internal, i));
+					playerIn.getInventory().placeItemBackInInventory(ItemUtil.getStack(internal, i), net.minecraft.util.Prediction.SERVER_ONLY);
 					setItemInSlot(i, ItemResource.EMPTY, 0);
 				}
 			}

@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.mcreator.minigames.init.MinigamesModMobEffects;
 import net.mcreator.minigames.network.MinigamesModVariables;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
@@ -15,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 import org.joml.Matrix4f;
 
 @EventBusSubscriber(modid = "minigames", value = Dist.CLIENT)
@@ -26,7 +25,7 @@ public class FreeBeamRenderManager {
     private static final float TOP_RADIUS = 0.25F;
 
     @SubscribeEvent
-    public static void onRenderLevelStage(RenderLevelStageEvent.AfterTranslucentParticles event) {
+    public static void onRenderLevelStage(SubmitCustomGeometryEvent event) {
         Minecraft mc = Minecraft.getInstance();
 
         if (mc.level == null || mc.player == null) {
@@ -34,10 +33,8 @@ public class FreeBeamRenderManager {
         }
 
         PoseStack poseStack = event.getPoseStack();
-        MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-        Vec3 cameraPos = mc.gameRenderer.getMainCamera().position();
-        VertexConsumer buffer = bufferSource.getBuffer(RenderTypes.lightning());
-        boolean renderedAny = false;
+        Vec3 cameraPos = mc.gameRenderer.mainCamera().position();
+        java.util.List<Vec3> origins = new java.util.ArrayList<>();
 
         for (Player player : mc.level.players()) {
             try {
@@ -45,15 +42,17 @@ public class FreeBeamRenderManager {
                     continue;
                 }
 
-                Vec3 origin = getGroundOrigin(player);
-                renderBeam(buffer, origin, cameraPos);
-                renderedAny = true;
+                origins.add(getGroundOrigin(player));
             } catch (Exception ignored) {
             }
         }
 
-        if (renderedAny) {
-            bufferSource.endBatch(RenderTypes.lightning());
+        if (!origins.isEmpty()) {
+            event.getSubmitNodeCollector().submitCustomGeometry(poseStack, RenderTypes.lightning(), (pose, buffer) -> {
+                for (Vec3 origin : origins) {
+                    renderBeam(buffer, origin, cameraPos);
+                }
+            });
         }
     }
 

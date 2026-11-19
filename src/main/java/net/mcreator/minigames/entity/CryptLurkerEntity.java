@@ -141,7 +141,7 @@ public class CryptLurkerEntity extends Monster {
 			Vec3 center = this.position();
 			for (LivingEntity victim : serverLevel.getEntitiesOfClass(LivingEntity.class, hitArea)) {
 				if (victim != this && victim.position().distanceTo(center) <= 4.5) {
-					if (victim.invulnerableTime <= 10) {
+					if (victim.getInvulnerableTime() <= 10) {
 						victim.hurtServer(serverLevel, new DamageSource(serverLevel.holderOrThrow(DamageTypes.EXPLOSION), this), 7.0F);
 					}
 				}

@@ -32,7 +32,7 @@ public class DungeonItemPickupBlocker {
 	@SubscribeEvent
 	public static void onItemToss(ItemTossEvent event) {
         if (DungeonItemAccess.isDungeonItem(event.getEntity().getItem())) {
-			event.getPlayer().getInventory().placeItemBackInInventory(event.getEntity().getItem().copy());
+			event.getPlayer().getInventory().placeItemBackInInventory(event.getEntity().getItem().copy(), net.minecraft.util.Prediction.SERVER_ONLY);
 			event.setCanceled(true);
 		}
 	}

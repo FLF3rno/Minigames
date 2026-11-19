@@ -116,7 +116,7 @@ public class OnDamageDealtProcedure {
 						}
 						if (world instanceof ServerLevel _level)
 							_level.getServer().getCommands().performPrefixedCommand(
-									new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+									new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 									"playsound minigames:zap player @a ~ ~ ~ 1 1.5");
 						RenderBeamProcedure.execute(target, entity, 2, 10, Identifier.fromNamespaceAndPath("minigames", "textures/entities/zap.png"));
 					}

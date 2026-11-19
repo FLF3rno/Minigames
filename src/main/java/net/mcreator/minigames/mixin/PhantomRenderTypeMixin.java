@@ -72,7 +72,7 @@ public abstract class PhantomRenderTypeMixin<T extends LivingEntity, S extends L
 	) {
 		if (state instanceof PhantomRenderState phantomState && phantomState.minigames_isPhantom()) {
 			Identifier texture = this.getTextureLocation(state);
-			cir.setReturnValue(RenderTypes.entityTranslucentCullItemTarget(texture));
+			cir.setReturnValue(RenderTypes.entityTranslucentCull(texture));
 		}
 	}
 }

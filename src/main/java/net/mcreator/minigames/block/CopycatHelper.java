@@ -193,19 +193,21 @@ public class CopycatHelper {
 		}
 	}
 
-	public static void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
-		if (level != null && entity != null) {
-			BlockPos pos = entity.getBlockPosBelowThatAffectsMyMovement();
-			BlockEntity be = level.getBlockEntity(pos);
-			if (!(be instanceof CopycatBlockEntity)) {
-				be = level.getBlockEntity(entity.blockPosition());
-			}
-			if (be instanceof CopycatBlockEntity copycat && copycat.hasMaterial()) {
-				copycat.getMaterial().getBlock().updateEntityMovementAfterFallOn(level, entity);
-				return;
-			}
+	public static void bounceOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+		if (level != null && pos != null && level.getBlockEntity(pos) instanceof CopycatBlockEntity copycat && copycat.hasMaterial()) {
+			copycat.getMaterial().getBlock().bounceOn(level, copycat.getMaterial(), pos, entity, fallDistance);
+			return;
 		}
-		entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+		if (entity != null) {
+			entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+		}
+	}
+
+	public static float getBounceRestitution(Level level, BlockPos pos, BlockState state, Entity entity) {
+		if (level != null && pos != null && level.getBlockEntity(pos) instanceof CopycatBlockEntity copycat && copycat.hasMaterial()) {
+			return copycat.getMaterial().getBlock().getBounceRestitution(level, pos, copycat.getMaterial(), entity);
+		}
+		return 0.0F;
 	}
 
 	public static void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {

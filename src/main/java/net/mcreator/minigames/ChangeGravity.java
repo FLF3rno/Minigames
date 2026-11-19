@@ -64,7 +64,7 @@ public class ChangeGravity {
 			living.setOnGround(true);
 			living.fallDistance = 0.0F;
 		}
-		living.hurtMarked = true;
+		living.needsSync = true;
 	}
 
 	private static double clampAxis(double value, int sign, double maxAbs) {

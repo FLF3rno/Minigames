@@ -39,7 +39,7 @@ public class RockThrowerChurchRenderer extends MobRenderer<RockThrowerChurchEnti
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		RockThrowerChurchEntity entity = (RockThrowerChurchEntity) state.getRenderData(ENTITY_KEY);
+		RockThrowerChurchEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "rock_thrower_church")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

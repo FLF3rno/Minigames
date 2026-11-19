@@ -39,7 +39,7 @@ public class PlagueMiddleRenderer extends HumanoidMobRenderer<PlagueMiddleEntity
 
 	@Override
 	public Identifier getTextureLocation(HumanoidRenderState state) {
-		PlagueMiddleEntity entity = (PlagueMiddleEntity) state.getRenderData(ENTITY_KEY);
+		PlagueMiddleEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "empty")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

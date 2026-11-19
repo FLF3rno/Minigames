@@ -120,7 +120,7 @@ public abstract class PlayerAnimationSmoothResetMixin {
 		boolean firstPersonBlocked = !data.getBooleanOr("FirstPersonAnimation", false)
 				&& mc.options.getCameraType().isFirstPerson()
 				&& player == mc.player
-				&& (mc.screen == null || mc.screen instanceof ChatScreen);
+				&& (mc.gui.screen() == null || mc.gui.screen() instanceof ChatScreen);
 
 		MinigamesModPlayerAnimationAPI.PlayerAnimation activeAnim = MinigamesModPlayerAnimationAPI.active_animations.get(player);
 		boolean animChanged = !currentAnimation.equals(animData.lastAnimationName)

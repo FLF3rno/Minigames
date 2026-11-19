@@ -100,7 +100,7 @@ public class DynamicAchievementList {
 			AdvancementHolder candidate = list.get(index);
 			Optional<DisplayInfo> display = candidate.value().display();
 
-			if (display.isPresent() && display.get().getType() == AdvancementType.CHALLENGE) {
+			if (display.isPresent() && display.get().type() == AdvancementType.CHALLENGE) {
 				if (Math.random() < challengeRerollChance) {
 					continue;
 				}
@@ -119,7 +119,7 @@ public class DynamicAchievementList {
 			return false;
 		}
 		return holder.value().display()
-				.map(display -> display.getType() == AdvancementType.CHALLENGE)
+				.map(display -> display.type() == AdvancementType.CHALLENGE)
 				.orElse(false);
 	}
 }

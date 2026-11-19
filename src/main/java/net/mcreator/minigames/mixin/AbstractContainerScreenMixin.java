@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class AbstractContainerScreenMixin {
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
     private void openPauseMenuOnEsc(KeyEvent event, CallbackInfoReturnable<Boolean> cir) {
-        if (event.key() != 256) {
+        if (event.key() != com.mojang.blaze3d.platform.InputConstants.KEY_ESCAPE) {
             return;
         }
 
@@ -25,7 +25,7 @@ public class AbstractContainerScreenMixin {
         }
 
         Minecraft mc = Minecraft.getInstance();
-        mc.setScreen(new PauseScreen(mc.hasSingleplayerServer()));
+        mc.gui.setScreen(new PauseScreen(mc.hasSingleplayerServer()));
         cir.setReturnValue(true);
     }
 }

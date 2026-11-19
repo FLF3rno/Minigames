@@ -12,7 +12,7 @@ public class UpdateChunkProcedure {
 			for (int cx = px - 8; cx <= px + 8; cx++) {
 				for (int cz = pz - 8; cz <= pz + 8; cz++) {
 					for (int sy = mc.level.getMinSectionY(); sy < mc.level.getMaxSectionY(); sy++) {
-						mc.levelRenderer.setSectionDirty(cx, sy, cz);
+						mc.levelExtractor.setSectionDirty(cx, sy, cz);
 					}
 				}
 			}

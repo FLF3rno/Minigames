@@ -24,7 +24,7 @@ public class VolleyBombRightclickedProcedure {
 		ShootProjectileProcedure.execute(world, entity, 0, 0, 0, 0, 0.4, "volleybomb");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/playsound minigames:volleybomb_hit player @a ~ ~ ~ 0.4 1.1");
 		{
 			final Vec3 _center = new Vec3(x, y, z);

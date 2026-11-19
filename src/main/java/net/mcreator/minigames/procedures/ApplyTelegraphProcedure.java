@@ -11,7 +11,7 @@ import net.mcreator.minigames.entity.FlavioTrapdoor3Entity;
 import net.mcreator.minigames.entity.FlavioTrapdoorEntity;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +27,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 
 @EventBusSubscriber(
         modid = "minigames",
@@ -225,7 +225,7 @@ public class ApplyTelegraphProcedure {
 
     @SubscribeEvent
     public static void onRenderLevel(
-            RenderLevelStageEvent.AfterTranslucentBlocks event
+            SubmitCustomGeometryEvent event
     ) {
         Minecraft minecraft = Minecraft.getInstance();
         Level level = minecraft.level;
@@ -238,17 +238,12 @@ public class ApplyTelegraphProcedure {
 
         PoseStack poseStack = event.getPoseStack();
 
-        MultiBufferSource.BufferSource buffer =
-                minecraft.renderBuffers().bufferSource();
-
-        VertexConsumer consumer =
-                buffer.getBuffer(
-                        RenderTypes.debugQuads()
-                );
+        SubmitNodeCollector submitNodeCollector =
+                event.getSubmitNodeCollector();
 
         Vec3 camera =
                 minecraft.gameRenderer
-                        .getMainCamera()
+                        .mainCamera()
                         .position();
 
         for (Telegraph telegraph : TELEGRAPHS) {
@@ -289,20 +284,20 @@ public class ApplyTelegraphProcedure {
                 double maxZ =
                         box.maxZ - camera.z;
 
-                poseStack.pushPose();
-
-                renderQuad(
-                        consumer,
-                        poseStack.last(),
-                        minX,
-                        minY,
-                        minZ,
-                        maxX,
-                        maxY,
-                        maxZ
+                submitNodeCollector.submitCustomGeometry(
+                        poseStack,
+                        RenderTypes.debugQuads(),
+                        (pose, consumer) -> renderQuad(
+                                consumer,
+                                pose,
+                                minX,
+                                minY,
+                                minZ,
+                                maxX,
+                                maxY,
+                                maxZ
+                        )
                 );
-
-                poseStack.popPose();
 
                 continue;
             }
@@ -382,26 +377,22 @@ public class ApplyTelegraphProcedure {
                                 + box.maxZ
                                 - camera.z;
 
-                poseStack.pushPose();
-
-                renderQuad(
-                        consumer,
-                        poseStack.last(),
-                        minX,
-                        minY,
-                        minZ,
-                        maxX,
-                        maxY,
-                        maxZ
+                submitNodeCollector.submitCustomGeometry(
+                        poseStack,
+                        RenderTypes.debugQuads(),
+                        (pose, consumer) -> renderQuad(
+                                consumer,
+                                pose,
+                                minX,
+                                minY,
+                                minZ,
+                                maxX,
+                                maxY,
+                                maxZ
+                        )
                 );
-
-                poseStack.popPose();
             }
         }
-
-        buffer.endBatch(
-                RenderTypes.debugQuads()
-        );
     }
 
     private static class Telegraph {

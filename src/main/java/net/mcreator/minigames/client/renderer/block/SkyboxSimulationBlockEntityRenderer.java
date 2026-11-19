@@ -1,7 +1,7 @@
 package net.mcreator.minigames.client.renderer.block;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.textures.FilterMode;
+import com.mojang.renderpearl.api.textures.FilterMode;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -400,8 +400,8 @@ public class SkyboxSimulationBlockEntityRenderer implements BlockEntityRenderer<
 
 	private static void updateCameraForward(CameraRenderState camera) {
 		net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-		if (mc.gameRenderer != null && mc.gameRenderer.getMainCamera() != null) {
-			Vector3f fw = new Vector3f(0.0f, 0.0f, -1.0f).rotate(mc.gameRenderer.getMainCamera().rotation());
+		if (mc.gameRenderer != null && mc.gameRenderer.mainCamera() != null) {
+			Vector3f fw = new Vector3f(0.0f, 0.0f, -1.0f).rotate(mc.gameRenderer.mainCamera().rotation());
 			camForwardX = fw.x();
 			camForwardY = fw.y();
 			camForwardZ = fw.z();

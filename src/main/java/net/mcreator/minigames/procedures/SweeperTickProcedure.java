@@ -157,7 +157,7 @@ public class SweeperTickProcedure {
 							double knockZ = relative.z / distance;
 							if (target instanceof Player player) {
 								player.push(knockX * KNOCKBACK, 0.25, knockZ * KNOCKBACK);
-								player.hurtMarked = true; }
+								player.needsSync = true; }
 						}
 
 						HIT_THIS_SWEEP.add(target.getUUID());

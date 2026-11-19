@@ -70,7 +70,7 @@ public class AchievementHunterAnimationProcedure {
 				}
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 							"/execute as @a at @s run playsound minecraft:block.note_block.pling ui @s ~ ~ ~ 1 1.1");
 			} else if (MinigamesModVariables.MapVariables.get(world).hunterAnimation == 105) {
 				MinigamesModVariables.MapVariables.get(world).hunterAnimation = 106;
@@ -97,11 +97,11 @@ public class AchievementHunterAnimationProcedure {
 				}
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 							"team modify hunted prefix {\"text\":\"\\uE000  \",\"color\":\"white\"}");
 				if (world instanceof ServerLevel _level)
 					_level.getServer().getCommands().performPrefixedCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+							new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 							"/execute as @a at @s run playsound minecraft:block.note_block.pling ui @s ~ ~ ~ 1 2");
 				UpdateTablistProcedure.execute(player);
 				MinigamesModVariables.MapVariables.get(world).wantsToBeHuntedAchievement.clear();

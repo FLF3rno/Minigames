@@ -12,7 +12,7 @@ import net.minecraft.world.entity.projectile.arrow.Arrow;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
@@ -48,12 +48,12 @@ public class ShootProjectileProcedure {
 			}
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null)
+						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer())
 								.withSuppressedOutput(),
 						"/playsound minecraft:block.vault.close_shutter player @a ~ ~ ~ 1 0.7");
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null)
+						new CommandSourceStack(CommandSource.NULL, new Vec3((shooter.getX()), (shooter.getY()), (shooter.getZ())), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer())
 								.withSuppressedOutput(),
 						"/playsound minecraft:entity.dragon_fireball.explode player @a ~ ~ ~ 1 1.4");
 		} else {
@@ -63,7 +63,7 @@ public class ShootProjectileProcedure {
 					Level projectileLevel = _shootFrom.level();
 					if (!projectileLevel.isClientSide()) {
 						Projectile _entityToSpawn = initArrowProjectile(
-								new Arrow(projectileLevel, 0, 0, 0, new Arrow(EntityType.ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
+								new Arrow(projectileLevel, 0, 0, 0, new Arrow(EntityTypes.ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)), shooter,
 								(float) (damage / speed), false, false, false, AbstractArrow.Pickup.DISALLOWED);
 						_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 						_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);
@@ -76,7 +76,7 @@ public class ShootProjectileProcedure {
 					Level projectileLevel = _shootFrom.level();
 					if (!projectileLevel.isClientSide()) {
 						Projectile _entityToSpawn = initArrowProjectile(
-								new SpectralArrow(projectileLevel, 0, 0, 0, new SpectralArrow(EntityType.SPECTRAL_ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)),
+								new SpectralArrow(projectileLevel, 0, 0, 0, new SpectralArrow(EntityTypes.SPECTRAL_ARROW, projectileLevel).getPickupItemStackOrigin(), createArrowWeaponItemStack(projectileLevel, (int) knockback, (byte) piercing)),
 								shooter, (float) (damage / speed), false, false, false, AbstractArrow.Pickup.DISALLOWED);
 						_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
 						_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, (float) speed, (float) inaccuracy);

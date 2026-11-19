@@ -36,11 +36,11 @@ public class PlagueStarterRightclickedProcedure {
 			_datEntSetI.getEntityData().set(PlagueMiddleEntity.DATA_duration, (int) GetItemAttributeProcedure.execute(itemstack, "minigames:effect_length"));
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/playsound minecraft:entity.splash_potion.break player @a ~ ~ ~ 1 1");
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/playsound minecraft:block.bell.use player @a ~ ~ ~ 1 .4");
 	}
 

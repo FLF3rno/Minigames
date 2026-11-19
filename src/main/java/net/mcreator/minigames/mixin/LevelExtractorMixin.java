@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
+import net.minecraft.client.renderer.extract.LevelExtractor;
 import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.DeltaTracker;
@@ -16,8 +16,8 @@ import net.minecraft.client.Camera;
 
 import net.mcreator.minigames.MinigamesModPlayerAnimationAPI;
 
-@Mixin(LevelRenderer.class)
-public abstract class LevelRendererMixin {
+@Mixin(LevelExtractor.class)
+public abstract class LevelExtractorMixin {
 	private String master = null;
 	private Minecraft mc = Minecraft.getInstance();
 
@@ -32,7 +32,7 @@ public abstract class LevelRendererMixin {
 		if (!master.equals("minigames")) {
 			return;
 		}
-		if (camera.entity() instanceof Player player && player.getPersistentData().getBooleanOr("FirstPersonAnimation", false) && mc.player == player && (mc.screen == null || mc.screen instanceof ChatScreen)) {
+		if (camera.entity() instanceof Player player && player.getPersistentData().getBooleanOr("FirstPersonAnimation", false) && mc.player == player && (mc.gui.screen() == null || mc.gui.screen() instanceof ChatScreen)) {
 			((CameraAccessor) camera).setDetached(true);
 		}
 	}

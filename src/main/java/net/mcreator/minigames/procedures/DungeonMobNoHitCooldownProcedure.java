@@ -28,7 +28,7 @@ public class DungeonMobNoHitCooldownProcedure {
 			return;
 		PlayerTeam team = livingEntity.level().getScoreboard().getPlayersTeam(livingEntity instanceof Player player ? player.getName().getString() : livingEntity.getStringUUID());
 		if (team != null && "dungeon_mobs".equals(team.getName())) {
-			livingEntity.invulnerableTime = 0;
+			livingEntity.setInvulnerableTime(0);
 		}
 	}
 }

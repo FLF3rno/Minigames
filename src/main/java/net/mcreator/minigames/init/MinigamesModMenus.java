@@ -11,6 +11,7 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.registries.Registries;
@@ -50,7 +51,7 @@ public class MinigamesModMenus {
 			if (player instanceof ServerPlayer serverPlayer) {
 				PacketDistributor.sendToPlayer(serverPlayer, new MenuStateUpdateMessage(elementType, name, elementState));
 			} else if (player.level().isClientSide()) {
-				if (Minecraft.getInstance().screen instanceof MinigamesModScreens.ScreenAccessor accessor && needClientUpdate)
+				if (Minecraft.getInstance().gui.screen() instanceof MinigamesModScreens.ScreenAccessor accessor && needClientUpdate)
 					accessor.updateMenuState(elementType, name, elementState);
 				ClientPacketDistributor.sendToServer(new MenuStateUpdateMessage(elementType, name, elementState));
 			}
@@ -63,5 +64,9 @@ public class MinigamesModMenus {
 				return defaultValue;
 			}
 		}
+	}
+
+	public interface BoundBlock {
+		Class<? extends AbstractContainerMenu> getBoundMenuClass();
 	}
 }

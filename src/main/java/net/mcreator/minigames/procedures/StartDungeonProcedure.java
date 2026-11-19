@@ -87,12 +87,10 @@ public class StartDungeonProcedure {
 			}
 		}
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"effect give @a minecraft:saturation infinite 100 true");
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"execute in minigames:dungeon_dimension run forceload add 10 10 -10 -10");
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.FALL_DAMAGE, false, world.getServer());
@@ -105,15 +103,14 @@ public class StartDungeonProcedure {
 		if (world instanceof ServerLevel _serverLevel)
 			_serverLevel.getGameRules().set(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, 0, world.getServer());
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/xp set @a 100 levels");
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+					"/xp set @a 100 levels");
 		net.mcreator.minigames.network.PlayScreenAnimationMessage.sendToAll(world, 200, "fade_in_fill", 1f);
 		MinigamesModVariables.MapVariables.get(world).currentRoomType = "spawn";
 		MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		MinigamesMod.queueServerWork(20, () -> {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"execute in minigames:dungeon_dimension run tp @a 0 200 0");
 			if (world instanceof ServerLevel _origLevel) {
 				LevelAccessor _switchworld16 = _origLevel.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse("minigames:dungeon_dimension")));

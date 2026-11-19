@@ -72,19 +72,19 @@ public class ExplodeProcedure {
 				_level.sendParticles(ParticleTypes.WHITE_SMOKE, x, y, z, (int) (ExplosionSize * 15), (ExplosionSize / 5), (ExplosionSize / 5), (ExplosionSize / 5), 0.3);
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"/playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.8 0.8");
 		} else if ((type).equals("red")) {
 			if (world instanceof ServerLevel _level)
 				_level.sendParticles((SimpleParticleType) (MinigamesModParticleTypes.RED_EXPLOSION.get()), x, y, z, (int) (ExplosionSize * 10), (ExplosionSize / 5), (ExplosionSize / 5), (ExplosionSize / 5), 0.1);
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"/playsound minigames:red_explosion player @a ~ ~ ~ 0.4 1");
 		} else if ((type).equals("groundbreaking")) {
 			if (world instanceof ServerLevel _level)
 				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 						"/playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.8 1.4");
 			Xloop = x + ExplosionSize;
 			Yloop = y + ExplosionSize;

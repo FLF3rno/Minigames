@@ -76,7 +76,7 @@ public class AchievementReminderOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		Player entity = mc.player;
 		if (entity == null || mc.level == null) return;
-		if (mc.screen instanceof InventoryScreen) return;
+		if (mc.gui.screen() instanceof InventoryScreen) return;
 
 		boolean alwaysShow = MinigamesSettingsConfig.getBoolean("AlwaysShowReminder",
 				entity.getData(MinigamesModVariables.PLAYER_VARIABLES).AlwaysShowReminder);

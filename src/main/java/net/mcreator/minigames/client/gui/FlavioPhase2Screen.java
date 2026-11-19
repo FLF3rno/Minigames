@@ -858,7 +858,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 
 		gameOver = true;
 
-		Minecraft.getInstance().setScreen(null);
+		Minecraft.getInstance().gui.setScreen(null);
 		if (world.isClientSide())
 			ClientPacketDistributor.sendToServer(new FailFlavioPacketMessage(""));
 	}
@@ -891,7 +891,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 				victoryFade >= 1f
 						&& victoryTicks > VICTORY_FADE_TICKS + 8
 		) {
-			Minecraft.getInstance().setScreen(null);
+			Minecraft.getInstance().gui.setScreen(null);
 			ClientPacketDistributor.sendToServer(new SucceedFlavioPacketMessage(""));
 		}
 	}
@@ -953,7 +953,7 @@ public class FlavioPhase2Screen extends AbstractContainerScreen<FlavioPhase2Menu
 
 	@Override
 	public boolean keyPressed(KeyEvent event) {
-		if (event.key() == 256)
+		if (event.key() == com.mojang.blaze3d.platform.InputConstants.KEY_ESCAPE)
 			return true;
 
 		Minecraft minecraft =

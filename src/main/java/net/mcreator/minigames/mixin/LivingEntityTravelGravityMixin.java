@@ -81,7 +81,7 @@ public abstract class LivingEntityTravelGravityMixin {
 			yBodyRotT = player.yBodyRot;
 		}
 
-		if (player.attackAnim > 0.0F) {
+		if (player.isSwinging()) {
 			yBodyRotT = player.getYRot();
 		}
 		return yBodyRotT;

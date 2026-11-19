@@ -1,9 +1,10 @@
 package net.mcreator.minigames.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState;
+import net.minecraft.client.renderer.state.level.PlayerRenderState;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
@@ -27,26 +28,27 @@ public class FirstPersonItemSizeHandler {
         if (!reflectionAttempted) {
             reflectionAttempted = true;
             try {
-                for (Method m : ItemInHandRenderer.class.getDeclaredMethods()) {
+                for (Method m : FirstPersonHandsAndItemsRenderer.class.getDeclaredMethods()) {
                     Class<?>[] params = m.getParameterTypes();
-                    if (params.length == 10
-                        && params[0] == AbstractClientPlayer.class
-                        && params[1] == float.class
+                    if (params.length == 11
+                        && params[0] == PlayerRenderState.class
+                        && params[1] == FirstPersonHandsAndItemsRenderState.class
                         && params[2] == float.class
-                        && params[3] == InteractionHand.class
-                        && params[4] == float.class
-                        && params[5] == ItemStack.class
-                        && params[6] == float.class
-                        && params[7] == com.mojang.blaze3d.vertex.PoseStack.class
-                        && SubmitNodeCollector.class.isAssignableFrom(params[8])
-                        && params[9] == int.class) {
+                        && params[3] == float.class
+                        && params[4] == InteractionHand.class
+                        && params[5] == float.class
+                        && params[6] == ItemStack.class
+                        && params[7] == float.class
+                        && params[8] == com.mojang.blaze3d.vertex.PoseStack.class
+                        && SubmitNodeCollector.class.isAssignableFrom(params[9])
+                        && params[10] == int.class) {
                         m.setAccessible(true);
                         renderArmWithItemMethod = m;
                         break;
                     }
                 }
             } catch (Exception e) {
-                MinigamesMod.LOGGER.error("Failed to find renderArmWithItem method on ItemInHandRenderer", e);
+                MinigamesMod.LOGGER.error("Failed to find submitArmWithItem method on FirstPersonHandsAndItemsRenderer", e);
             }
         }
         return renderArmWithItemMethod;
@@ -71,7 +73,8 @@ public class FirstPersonItemSizeHandler {
         }
 
         Method renderArm = getRenderArmWithItemMethod();
-        if (renderArm == null) {
+        PlayerRenderState playerState = event.getPlayerState();
+        if (renderArm == null || playerState == null || playerState.firstPersonHandsAndItems == null) {
             return;
         }
 
@@ -96,10 +99,11 @@ public class FirstPersonItemSizeHandler {
             }
 
             ScalingSubmitNodeCollector scalingCollector = new ScalingSubmitNodeCollector(event.getSubmitNodeCollector(), scale, opacity);
-            ItemInHandRenderer renderer = mc.gameRenderer.itemInHandRenderer;
+            FirstPersonHandsAndItemsRenderer renderer = mc.gameRenderer.firstPersonHandsAndItemsRenderer;
             renderArm.invoke(
                 renderer,
-                mc.player,
+                playerState,
+                playerState.firstPersonHandsAndItems,
                 event.getPartialTick(),
                 event.getInterpolatedPitch(),
                 event.getHand(),

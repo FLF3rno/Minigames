@@ -7,7 +7,6 @@ import com.mojang.math.Axis;
 import net.mcreator.minigames.client.model.Modelgrapple;
 import net.mcreator.minigames.entity.GrappleEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -70,8 +69,8 @@ public class GrappleProjectileRenderer extends EntityRenderer<GrappleEntity, Gra
 
 		poseStack.pushPose();
 		poseStack.translate(0.0D, -1.27D, 0.0D);
-		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 90.0F));
-		poseStack.mulPose(Axis.ZP.rotationDegrees(-state.xRot));
+		poseStack.rotate(Axis.YP.rotationDegrees(state.yRot + 90.0F));
+		poseStack.rotate(Axis.ZP.rotationDegrees(-state.xRot));
 
 		model.setupAnim(state);
 		nodeCollector.submitModel(
@@ -83,19 +82,18 @@ public class GrappleProjectileRenderer extends EntityRenderer<GrappleEntity, Gra
 				OverlayTexture.NO_OVERLAY,
 				0xFFFFFFFF,
 				null,
-				state.outlineColor,
-				null
+				state.outlineColor
 		);
 
 		if (entity != null && state.ownerPos != null && entity.getOwner() != null && entity.getOwner().isAlive()) {
-			renderRope(state);
+			renderRope(state, nodeCollector);
 		}
 
 		poseStack.popPose();
 		super.submit(state, poseStack, nodeCollector, cameraRenderState);
 	}
 
-	private void renderRope(GrappleRenderState state) {
+	private void renderRope(GrappleRenderState state, SubmitNodeCollector nodeCollector) {
 		GrappleEntity grapple = state.grapple;
 		if (grapple == null || state.grapplePos == null || state.ownerPos == null) {
 			return;
@@ -119,23 +117,20 @@ public class GrappleProjectileRenderer extends EntityRenderer<GrappleEntity, Gra
 		sideways = sideways.normalize().scale(0.06D);
 
 		PoseStack ropePose = new PoseStack();
-		Minecraft mc = Minecraft.getInstance();
-		MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-		VertexConsumer consumer = bufferSource.getBuffer(RenderTypes.debugQuads());
-		Matrix4f matrix = ropePose.last().pose();
 		int light = 15728880;
 		int segments = Math.max(4, (int) (length / 0.25D));
-
-		for (int i = 1; i <= segments; i++) {
-			double t0 = (double) (i - 1) / segments;
-			double t1 = (double) i / segments;
-			Vec3 prev = getLeashPoint(startWorld, endWorld, t0).subtract(cameraPos);
-			Vec3 center = getLeashPoint(startWorld, endWorld, t1).subtract(cameraPos);
-			Vec3 segmentSide = sideways.scale(1.0D + 0.08D * Math.sin(t1 * Math.PI * 6.0D));
-			drawRibbonSegment(matrix, consumer, prev, center, segmentSide, light, t1);
-		}
-
-		bufferSource.endBatch(RenderTypes.debugQuads());
+		Vec3 finalSideways = sideways;
+		nodeCollector.submitCustomGeometry(ropePose, RenderTypes.debugQuads(), (pose, consumer) -> {
+			Matrix4f matrix = pose.pose();
+			for (int i = 1; i <= segments; i++) {
+				double t0 = (double) (i - 1) / segments;
+				double t1 = (double) i / segments;
+				Vec3 prev = getLeashPoint(startWorld, endWorld, t0).subtract(cameraPos);
+				Vec3 center = getLeashPoint(startWorld, endWorld, t1).subtract(cameraPos);
+				Vec3 segmentSide = finalSideways.scale(1.0D + 0.08D * Math.sin(t1 * Math.PI * 6.0D));
+				drawRibbonSegment(matrix, consumer, prev, center, segmentSide, light, t1);
+			}
+		});
 	}
 
 	private static Vec3 getLeashPoint(Vec3 start, Vec3 end, double t) {

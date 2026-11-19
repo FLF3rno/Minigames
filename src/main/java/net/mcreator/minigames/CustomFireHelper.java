@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.mcreator.minigames.network.CustomFireStateSyncMessage;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -273,7 +273,7 @@ public class CustomFireHelper {
 		return (b > r && b > 100) || (g > r && g > 150) || (r < 100 && (g > 100 || b > 100));
 	}
 
-	public static void renderCustomEntityFlame(PoseStack.Pose pose, MultiBufferSource bufferSource, EntityRenderState state, Quaternionf rotation, AtlasManager atlasManager, int color) {
+	public static void renderCustomEntityFlame(PoseStack.Pose pose, VertexConsumer buffer, EntityRenderState state, Quaternionf rotation, AtlasManager atlasManager, int color) {
 		boolean cool = isCoolColor(color);
 		SpriteId id1 = cool ? Sheets.BLOCKS_MAPPER.defaultNamespaceApply("soul_fire_0") : ModelBakery.FIRE_0;
 		SpriteId id2 = cool ? Sheets.BLOCKS_MAPPER.defaultNamespaceApply("soul_fire_1") : ModelBakery.FIRE_1;
@@ -292,7 +292,6 @@ public class CustomFireHelper {
 		pose.translate(0.0F, 0.0F, 0.3F - (int) h * 0.02F);
 		float zo = 0.0F;
 		int ss = 0;
-		VertexConsumer buffer = bufferSource.getBuffer(Sheets.cutoutBlockSheet());
 		int vertexColor = (color == SOUL_FIRE_COLOR) ? -1 : color;
 		for (int lightCoords = LightCoordsUtil.withBlock(state.lightCoords, 15); h > 0.0F; ss++) {
 			TextureAtlasSprite tex = ss % 2 == 0 ? fire1 : fire2;
@@ -328,14 +327,13 @@ public class CustomFireHelper {
 		}
 	}
 
-	public static void renderFirstPersonFire(PoseStack poseStack, MultiBufferSource bufferSource, SpriteGetter sprites, int color) {
+	public static void renderFirstPersonFire(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, SpriteGetter sprites, int color) {
 		boolean cool = isCoolColor(color);
 		SpriteId spriteId = cool ? Sheets.BLOCKS_MAPPER.defaultNamespaceApply("soul_fire_1") : ModelBakery.FIRE_1;
 		TextureAtlasSprite sprite = sprites.get(spriteId);
 		if (sprite == null) {
 			sprite = sprites.get(ModelBakery.FIRE_1);
 		}
-		VertexConsumer builder = bufferSource.getBuffer(RenderTypes.fireScreenEffect(sprite.atlasLocation()));
 		float u0 = sprite.getU0();
 		float u1 = sprite.getU1();
 		float v0 = sprite.getV0();
@@ -344,16 +342,17 @@ public class CustomFireHelper {
 		float green = (color == 0 || color == SOUL_FIRE_COLOR) ? 1.0F : (((color >> 8) & 0xFF) / 255.0F);
 		float blue = (color == 0 || color == SOUL_FIRE_COLOR) ? 1.0F : ((color & 0xFF) / 255.0F);
 		float yOffset = isLowFire() ? -0.6F : -0.3F;
-		for (int i = 0; i < 2; i++) {
-			poseStack.pushPose();
-			poseStack.translate(-(i * 2 - 1) * 0.24F, yOffset, 0.0F);
-			poseStack.mulPose(Axis.YP.rotationDegrees((i * 2 - 1) * 10.0F));
-			Matrix4f pose = poseStack.last().pose();
-			builder.addVertex(pose, -0.5F, -0.5F, -0.5F).setUv(u1, v1).setColor(red, green, blue, 0.9F);
-			builder.addVertex(pose, 0.5F, -0.5F, -0.5F).setUv(u0, v1).setColor(red, green, blue, 0.9F);
-			builder.addVertex(pose, 0.5F, 0.5F, -0.5F).setUv(u0, v0).setColor(red, green, blue, 0.9F);
-			builder.addVertex(pose, -0.5F, 0.5F, -0.5F).setUv(u1, v0).setColor(red, green, blue, 0.9F);
-			poseStack.popPose();
-		}
+		submitNodeCollector.submitCustomGeometry(poseStack, RenderTypes.fireScreenEffect(sprite.atlasLocation()), (basePose, builder) -> {
+			Matrix4f pose = new Matrix4f();
+			for (int i = 0; i < 2; i++) {
+				pose.set(basePose.pose());
+				pose.translate(-(i * 2 - 1) * 0.24F, yOffset, 0.0F);
+				pose.rotateY((float) Math.toRadians((i * 2 - 1) * 10.0F));
+				builder.addVertex(pose, -0.5F, -0.5F, -0.5F).setUv(u1, v1).setColor(red, green, blue, 0.9F);
+				builder.addVertex(pose, 0.5F, -0.5F, -0.5F).setUv(u0, v1).setColor(red, green, blue, 0.9F);
+				builder.addVertex(pose, 0.5F, 0.5F, -0.5F).setUv(u0, v0).setColor(red, green, blue, 0.9F);
+				builder.addVertex(pose, -0.5F, 0.5F, -0.5F).setUv(u1, v0).setColor(red, green, blue, 0.9F);
+			}
+		});
 	}
 }

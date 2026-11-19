@@ -33,7 +33,7 @@ public class FlavioTeslaCoilRenderer extends MobRenderer<FlavioTeslaCoilEntity, 
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		FlavioTeslaCoilEntity entity = (FlavioTeslaCoilEntity) state.getRenderData(ENTITY_KEY);
+		FlavioTeslaCoilEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "tesla_coil_flavio")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

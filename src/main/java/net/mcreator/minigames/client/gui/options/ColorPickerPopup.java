@@ -133,7 +133,7 @@ public class ColorPickerPopup {
 	public boolean keyPressed(KeyEvent event) {
 		if (hexEditBox.isFocused()) {
 			int key = InputConstants.getKey(event).getValue();
-			if (key == 256) {
+			if (key == InputConstants.KEY_ESCAPE) {
 				hexEditBox.setFocused(false);
 				return true;
 			}
@@ -155,7 +155,7 @@ public class ColorPickerPopup {
 			return true;
 		}
 
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			if (this.hexEditBox.mouseClicked(event, doubleClick)) {
 				return true;
 			}
@@ -195,7 +195,7 @@ public class ColorPickerPopup {
 	}
 
 	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-		if (event.button() == 0 && activeDragTarget != 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && activeDragTarget != 0) {
 			updateDrag(event.x(), event.y());
 			return true;
 		}
@@ -203,7 +203,7 @@ public class ColorPickerPopup {
 	}
 
 	public boolean mouseReleased(MouseButtonEvent event) {
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			activeDragTarget = 0;
 		}
 		return true;

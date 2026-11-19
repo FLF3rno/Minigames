@@ -7,7 +7,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import org.joml.Matrix4f;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -28,12 +28,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.opengl.GlStateManager;
 
 import java.util.List;
 import java.util.Locale;
@@ -44,9 +44,6 @@ import net.mcreator.minigames.DungeonItemAccess;
 import net.mcreator.minigames.init.MinigamesModAttributes;
 import net.mcreator.minigames.network.DungeonItemPickupMessage;
 import net.mcreator.minigames.network.MinigamesModVariables;
-import org.lwjgl.glfw.GLFW;
-
-import static net.minecraft.client.renderer.rendertype.RenderTypes.textBackgroundSeeThrough;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class HoveredItemTooltipRenderer {
@@ -150,9 +147,9 @@ public class HoveredItemTooltipRenderer {
 
     @SubscribeEvent
     public static void onMouseButton(InputEvent.MouseButton.Post event) {
-        if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && event.getAction() == GLFW.GLFW_PRESS && currentTargetItem != null) {
+        if (event.getButton() == InputConstants.MOUSE_BUTTON_RIGHT && event.getAction() == InputConstants.PRESS && currentTargetItem != null) {
             Minecraft mc = Minecraft.getInstance();
-            if (mc.screen == null && mc.player != null) {
+            if (mc.gui.screen() == null && mc.player != null) {
                 if (canCurrentPlayerPickUp(currentTargetItem.getItem(), mc) && !isFullForItem(mc.player, currentTargetItem.getItem())) {
                     ClientPacketDistributor.sendToServer(new DungeonItemPickupMessage(currentTargetItem.getId()));
                 }
@@ -200,7 +197,7 @@ public class HoveredItemTooltipRenderer {
     }
 
     @SubscribeEvent
-    public static void renderTooltip(RenderLevelStageEvent.AfterTranslucentBlocks event) {
+    public static void renderTooltip(SubmitCustomGeometryEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.level == null) {
             currentTargetItem = null;
@@ -261,11 +258,11 @@ public class HoveredItemTooltipRenderer {
         currentTargetItem = targetItem;
     }
 
-    private static void renderTooltipAtItem(RenderLevelStageEvent event, ItemEntity itemEntity, List<Component> tooltip, Minecraft minecraft, ClassInfo classInfo) {
+    private static void renderTooltipAtItem(SubmitCustomGeometryEvent event, ItemEntity itemEntity, List<Component> tooltip, Minecraft minecraft, ClassInfo classInfo) {
         PoseStack poseStack = event.getPoseStack();
         EntityRenderDispatcher dispatcher = minecraft.getEntityRenderDispatcher();
         Font font = minecraft.font;
-        Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+        Camera camera = Minecraft.getInstance().gameRenderer.mainCamera();
         Vec3 cameraPosition = camera.position();
         float partialTick = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
 
@@ -273,17 +270,16 @@ public class HoveredItemTooltipRenderer {
                 .add(0.0, itemEntity.getBbHeight() + 0.5, 0.0);
         poseStack.pushPose();
         poseStack.translate(itemPosition.x - cameraPosition.x, itemPosition.y - cameraPosition.y, itemPosition.z - cameraPosition.z);
-        poseStack.mulPose(
+        poseStack.rotate(
                 Minecraft.getInstance()
                         .gameRenderer
-                        .getMainCamera()
+                        .mainCamera()
                         .rotation()
         );
         float tooltipScale = getTooltipScale(minecraft);
         poseStack.scale(tooltipScale, -tooltipScale, tooltipScale);
 
-        Matrix4f matrix = poseStack.last().pose();
-        MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
+        SubmitNodeCollector collector = event.getSubmitNodeCollector();
 
         int maxWidth = 0;
         for (Component line : tooltip) {
@@ -350,35 +346,29 @@ public class HoveredItemTooltipRenderer {
         int baseTop = Math.round((totalHeight - (panel1Height + gap + panel2Height)) / 2.0F);
 
         poseStack.translate(RIGHT_OFFSET, -(totalHeight / 2.0F), 0.0F);
-        matrix = poseStack.last().pose();
 
-        GlStateManager._disableDepthTest();
-
-        renderTooltipPanel(matrix, bufferSource, 0, baseTop, maxWidth + PADDING_X * 2, baseTop + panel1Height);
+        renderTooltipPanel(poseStack, collector, 0, baseTop, maxWidth + PADDING_X * 2, baseTop + panel1Height);
         int secondPanelTop = baseTop + panel1Height + gap;
-        renderTooltipPanel(matrix, bufferSource, 0, secondPanelTop, maxWidth + PADDING_X * 2, secondPanelTop + panel2Height);
+        renderTooltipPanel(poseStack, collector, 0, secondPanelTop, maxWidth + PADDING_X * 2, secondPanelTop + panel2Height);
 
         if (!definitions.isEmpty()) {
             int definitionLeft = maxWidth + PADDING_X * 2 + 8;
             int definitionTop = baseTop;
-            WorldTooltipDefinitions.renderDefinitions(matrix, bufferSource, font, definitions, definitionLeft, definitionTop);
+            WorldTooltipDefinitions.renderDefinitions(poseStack, collector, font, definitions, definitionLeft, definitionTop);
         }
 
-        bufferSource.endBatch(textBackgroundSeeThrough());
-
         poseStack.translate(0.0F, 0.0F, 0.05F);
-        matrix = poseStack.last().pose();
+        var textCollector = collector.order(1);
 
         for (int i = 0; i < tooltip.size(); i++) {
             Component line = styleWorldTooltipLine(tooltip.get(i), itemEntity.getItem(), classInfo);
             float lineX = PADDING_X + 1;
             float lineY = PADDING_Y + getLineY(i) + 1;
-            font.drawInBatch(line, lineX, lineY, TEXT_COLOR, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
-                    15728880);
+            textCollector.submitText(poseStack, lineX, lineY, line.getVisualOrderText(), false, Font.DisplayMode.SEE_THROUGH, 15728880, TEXT_COLOR, 0, 0);
         }
 
         if (!definitions.isEmpty()) {
-            WorldTooltipDefinitions.drawDefinitionText(matrix, bufferSource, font, definitions, maxWidth + PADDING_X * 2 + 8, baseTop);
+            WorldTooltipDefinitions.drawDefinitionText(poseStack, collector, font, definitions, maxWidth + PADDING_X * 2 + 8, baseTop);
         }
 
         float fullWidth = maxWidth + PADDING_X * 2;
@@ -386,8 +376,7 @@ public class HoveredItemTooltipRenderer {
             Component prompt = (!canPickUp || full || !isRelic) ? Component.literal(fullPrompt).setStyle(promptStyle) : createRelicGradientText(fullPrompt);
             float promptX = (fullWidth - font.width(prompt)) / 2.0f;
             float promptY = secondPanelTop + PADDING_Y + 1;
-            font.drawInBatch(prompt, promptX, promptY, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
-                    15728880);
+            textCollector.submitText(poseStack, promptX, promptY, prompt.getVisualOrderText(), false, Font.DisplayMode.SEE_THROUGH, 15728880, 0xFFFFFFFF, 0, 0);
         } else {
             Component line1, line2;
             if (!canPickUp) {
@@ -409,33 +398,20 @@ public class HoveredItemTooltipRenderer {
             float line2X = (fullWidth - font.width(line2)) / 2.0f;
             float line1Y = secondPanelTop + PADDING_Y + 1;
             float line2Y = secondPanelTop + PADDING_Y + LINE_HEIGHT + 1;
-            font.drawInBatch(line1, line1X, line1Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
-                    15728880);
-            font.drawInBatch(line2, line2X, line2Y, 0xFFFFFFFF, false, matrix, bufferSource, Font.DisplayMode.SEE_THROUGH, 0,
-                    15728880);
+            textCollector.submitText(poseStack, line1X, line1Y, line1.getVisualOrderText(), false, Font.DisplayMode.SEE_THROUGH, 15728880, 0xFFFFFFFF, 0, 0);
+            textCollector.submitText(poseStack, line2X, line2Y, line2.getVisualOrderText(), false, Font.DisplayMode.SEE_THROUGH, 15728880, 0xFFFFFFFF, 0, 0);
         }
 
-        bufferSource.endBatch();
-        GlStateManager._enableDepthTest();
         poseStack.popPose();
     }
 
-    private static void renderTooltipPanel(Matrix4f matrix, MultiBufferSource.BufferSource bufferSource, int left, int top, int right, int bottom) {
-        var background = bufferSource.getBuffer(textBackgroundSeeThrough());
-        addQuad(background, matrix, left, top, right, bottom, PANEL_BACKGROUND);
-
-        var border = bufferSource.getBuffer(textBackgroundSeeThrough());
-        addQuad(border, matrix, left - 1, top - 1, right + 1, top, PANEL_BORDER_LIGHT);
-        addQuad(border, matrix, left - 1, bottom, right + 1, bottom + 1, PANEL_BORDER_DARK);
-        addQuad(border, matrix, left - 1, top, left, bottom, PANEL_BORDER_LIGHT);
-        addQuad(border, matrix, right, top, right + 1, bottom, PANEL_BORDER_DARK);
-    }
-
-    private static void addQuad(com.mojang.blaze3d.vertex.VertexConsumer consumer, Matrix4f matrix, int left, int top, int right, int bottom, int color) {
-        consumer.addVertex(matrix, left, top, 0.0F).setColor(color).setLight(15728880);
-        consumer.addVertex(matrix, left, bottom, 0.0F).setColor(color).setLight(15728880);
-        consumer.addVertex(matrix, right, bottom, 0.0F).setColor(color).setLight(15728880);
-        consumer.addVertex(matrix, right, top, 0.0F).setColor(color).setLight(15728880);
+    private static void renderTooltipPanel(PoseStack poseStack, SubmitNodeCollector collector, int left, int top, int right, int bottom) {
+        var ordered = collector.order(0);
+        ordered.submitTextBackground(poseStack, left, top, right, bottom, PANEL_BACKGROUND, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, left - 1, top - 1, right + 1, top, PANEL_BORDER_LIGHT, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, left - 1, bottom, right + 1, bottom + 1, PANEL_BORDER_DARK, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, left - 1, top, left, bottom, PANEL_BORDER_LIGHT, Font.DisplayMode.SEE_THROUGH, 15728880);
+        ordered.submitTextBackground(poseStack, right, top, right + 1, bottom, PANEL_BORDER_DARK, Font.DisplayMode.SEE_THROUGH, 15728880);
     }
 
     private static int getContentHeight(int lineCount) {

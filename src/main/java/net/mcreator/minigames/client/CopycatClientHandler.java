@@ -37,7 +37,7 @@ import net.mcreator.minigames.block.CopycatSlabBlock;
 import net.mcreator.minigames.block.CopycatSlabType;
 import net.mcreator.minigames.block.entity.CopycatBlockEntity;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DirtPathBlock;
+import net.minecraft.world.level.block.PathBlock;
 import net.minecraft.world.level.block.NyliumBlock;
 import net.minecraft.world.level.block.SpreadingSnowyBlock;
 import org.joml.Vector3f;
@@ -144,8 +144,10 @@ public class CopycatClientHandler {
 			sprite,
 			layer,
 			original != null ? original.itemRenderType() : null,
+			original != null ? original.itemGlintRenderType() : null,
+			original != null ? original.itemGlintSpecialRenderType() : null,
 			original != null ? original.tintIndex() : -1,
-			original != null ? original.shade() : true,
+			original != null ? original.shadeDirectionOverride() : null,
 			original != null ? original.lightEmission() : 0,
 			original != null ? original.ambientOcclusion() : true
 		);
@@ -223,7 +225,7 @@ public class CopycatClientHandler {
 						}
 					}
 					if (fallbackInfo == null && particle != null) {
-						fallbackInfo = BakedQuad.MaterialInfo.of(particle, Transparency.NONE, -1, true, 0, true);
+						fallbackInfo = BakedQuad.MaterialInfo.of(particle, Transparency.NONE, -1, null, 0, true);
 					}
 
 					boolean isGroundSlab = false;
@@ -340,7 +342,7 @@ public class CopycatClientHandler {
 				|| state.is(Blocks.CRIMSON_NYLIUM)
 				|| state.is(Blocks.WARPED_NYLIUM)
 				|| state.getBlock() instanceof SpreadingSnowyBlock
-				|| state.getBlock() instanceof DirtPathBlock
+				|| state.getBlock() instanceof PathBlock
 				|| state.getBlock() instanceof NyliumBlock
 			);
 		}

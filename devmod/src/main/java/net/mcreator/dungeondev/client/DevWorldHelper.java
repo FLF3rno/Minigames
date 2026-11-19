@@ -29,7 +29,7 @@ public class DevWorldHelper {
         try {
             if (mc.getLevelSource().levelExists(WORLD_NAME)) {
                 DungeonDevMod.LOGGER.info("Opening existing dev world: {}", WORLD_NAME);
-                mc.createWorldOpenFlows().openWorld(WORLD_NAME, () -> mc.setScreen(parentScreen));
+                mc.createWorldOpenFlows().openWorld(WORLD_NAME, () -> mc.gui.setScreen(parentScreen));
             } else {
                 DungeonDevMod.LOGGER.info("Creating fresh empty dev world: {}", WORLD_NAME);
                 LevelSettings settings = new LevelSettings(
@@ -56,7 +56,7 @@ public class DevWorldHelper {
                             return new WorldDimensions(Map.of(LevelStem.OVERWORLD, overworldStem));
                         } catch (Exception e) {
                             DungeonDevMod.LOGGER.warn("Failed creating custom void dimensions, falling back to flat preset", e);
-                            return WorldPresets.createFlatWorldDimensions(provider);
+                            return provider.lookupOrThrow(Registries.WORLD_PRESET).getOrThrow(WorldPresets.FLAT).value().createWorldDimensions();
                         }
                     },
                     parentScreen

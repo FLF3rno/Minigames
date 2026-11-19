@@ -725,7 +725,7 @@ public class DungeonInventoryScreen extends AbstractContainerScreen<DungeonInven
 
 		graphics.blitSprite(
 				RenderPipelines.GUI_TEXTURED,
-				Gui.getMobEffectSprite(effect.getEffect()),
+				net.minecraft.client.gui.Hud.getMobEffectSprite(effect.getEffect()),
 				x,
 				y,
 				12,

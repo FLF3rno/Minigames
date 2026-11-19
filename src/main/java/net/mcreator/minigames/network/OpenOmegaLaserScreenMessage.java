@@ -40,7 +40,7 @@ public record OpenOmegaLaserScreenMessage(int laserEntityId, int screenIndex, in
 	public static void handleData(final OpenOmegaLaserScreenMessage message, final IPayloadContext context) {
 		if (context.flow() == PacketFlow.CLIENTBOUND) {
 			context.enqueueWork(() -> {
-				Minecraft.getInstance().setScreen(new OmegaLaserScreen(message.laserEntityId(), message.screenIndex(), message.totalPlayers()));
+				Minecraft.getInstance().gui.setScreen(new OmegaLaserScreen(message.laserEntityId(), message.screenIndex(), message.totalPlayers()));
 			}).exceptionally(e -> {
 				context.connection().disconnect(Component.literal(e.getMessage()));
 				return null;

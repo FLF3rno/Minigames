@@ -57,7 +57,7 @@ public class ActivatePVPProcedure {
 				if (AnimationTick == Math.round(5 * speed)) {
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(
-								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 								"/execute as @a at @s run playsound minigames:pvp_swind player @a ~ ~ ~ 100000000 1");
 					pvpState = 5;
 				}
@@ -76,18 +76,18 @@ public class ActivatePVPProcedure {
 				if (AnimationTick == Math.round(32 * speed)) {
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(
-								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 								"/execute as @a at @s run playsound minigames:pvp_swordshit player @a ~ ~ ~ 10000000");
 					pvpState = 0;
 				}
 				if (AnimationTick == Math.round(86 * speed)) {
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(
-								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 								"/execute as @a at @s run playsound minigames:pvp_swind player @a ~ ~ ~ 100000000 1");
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(
-								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 								"/execute as @a at @s run playsound minecraft:ui.toast.in player @a ~ ~ ~ 10000000 1");
 					pvpState = 7;
 				}
@@ -100,7 +100,7 @@ public class ActivatePVPProcedure {
 				if (AnimationTick == Math.round(300 * speed)) {
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(
-								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 								"/execute as @a at @s run playsound minecraft:ui.toast.out player @a ~ ~ ~ 10000000 5");
 					pvpState = 8;
 				}
@@ -111,7 +111,7 @@ public class ActivatePVPProcedure {
 					pvpState = 0;
 					if (world instanceof ServerLevel _level)
 						_level.getServer().getCommands().performPrefixedCommand(
-								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+								new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 								"/execute as @a at @s run playsound minigames:pvp_swordshit player @s ~ ~ ~ 1");
 				}
 				if (MinigamesModVariables.MapVariables.get(world).pvpAnimationTick == Math.round(340 * speed)) {

@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class OnWinCrownHuntProcedure {
 	public static void execute(LevelAccessor world) {
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "/worldborder set 50000000");
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(0, 0, 0), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+					"/worldborder set 50000000");
 		MinigamesModVariables.MapVariables.get(world).ShowTimer = false;
 		MinigamesModVariables.MapVariables.get(world).crownHuntWinDisplay = true;
 		MinigamesModVariables.MapVariables.get(world).CrownHuntInGame = false;
@@ -55,8 +55,9 @@ public class OnWinCrownHuntProcedure {
 			{
 				Entity _ent = entityiterator;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minigames:teameliminated ui @s ~ ~ ~ 1 1");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/playsound minigames:teameliminated ui @s ~ ~ ~ 1 1");
 				}
 			}
 			if ((entityiterator instanceof LivingEntity _entGetArmor ? _entGetArmor.getItemBySlot(EquipmentSlot.HEAD) : ItemStack.EMPTY).getItem() == MinigamesModItems.CROWN_HELMET_HELMET.get()) {

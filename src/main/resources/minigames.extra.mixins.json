@@ -69,7 +69,16 @@
     "IrisIncludeGraphMixin",
     "IrisLanguageMapMixin",
     "SoundBufferLibraryMixin",
-    "ShouldRenderMixin"
+    "ShouldRenderMixin",
+    "PlayerAnimationMixin",
+    "PlayerAnimationRendererMixin",
+    "ItemInHandLayerMixin",
+    "CameraAccessor",
+    "EntityRenderDispatcherMixin",
+    "LivingEntityRendererMixin",
+    "EntityRendererMixin",
+    "FirstPersonHandsAndItemsRendererMixin",
+    "LevelExtractorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

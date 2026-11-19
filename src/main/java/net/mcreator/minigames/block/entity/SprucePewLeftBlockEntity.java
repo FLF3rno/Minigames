@@ -26,9 +26,17 @@ import java.util.stream.IntStream;
 
 public class SprucePewLeftBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
 	private NonNullList<ItemStack> stacks = NonNullList.withSize(9, ItemStack.EMPTY);
+	private long tickCountStart = -1;
 
 	public SprucePewLeftBlockEntity(BlockPos position, BlockState state) {
 		super(MinigamesModBlockEntities.SPRUCE_PEW_LEFT.get(), position, state);
+	}
+
+	public int getTickCount() {
+		long gameTime = this.level.getGameTime();
+		if (this.tickCountStart == -1)
+			this.tickCountStart = gameTime;
+		return (int) (gameTime - this.tickCountStart);
 	}
 
 	@Override
@@ -106,6 +114,8 @@ public class SprucePewLeftBlockEntity extends RandomizableContainerBlockEntity i
 
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack itemstack, @Nullable Direction direction) {
+		if (this.getItem(index).getCount() >= this.getMaxStackSize(itemstack))
+			return false;
 		return this.canPlaceItem(index, itemstack);
 	}
 

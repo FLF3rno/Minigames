@@ -15,6 +15,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerLevel;
@@ -33,9 +35,11 @@ import java.util.Comparator;
 public class FrictionUtilityUsedProcedure {
 	@SubscribeEvent
 	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-		if (event.getHand() != event.getEntity().getUsedItemHand())
+		if (event.getHand() != InteractionHand.MAIN_HAND && !event.getEntity().getMainHandItem().isEmpty())
 			return;
 		execute(event, event.getLevel(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), event.getEntity());
+		if (event.isCanceled() && event.getLevel().isClientSide())
+			event.setCancellationResult(InteractionResult.CONSUME);
 	}
 
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {

@@ -149,7 +149,7 @@ public class AscenscionBlockEntity extends BlockEntity {
 				player.removeEffect(MobEffects.LEVITATION);
 				double boostY = 0.65D;
 				player.setDeltaMovement(player.getDeltaMovement().x, boostY, player.getDeltaMovement().z);
-				player.hurtMarked = true;
+				player.needsSync = true;
 			}
 		}
 	}

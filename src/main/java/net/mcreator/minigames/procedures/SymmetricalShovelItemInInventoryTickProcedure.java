@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.Prediction;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.Identifier;
@@ -25,7 +26,7 @@ public class SymmetricalShovelItemInInventoryTickProcedure {
 					ItemStack _setstack = new ItemStack(
 							(BuiltInRegistries.ITEM.getRandomElementOf(ItemTags.create(Identifier.parse("minigames:spleef_powerup")), RandomSource.create()).orElseGet(() -> BuiltInRegistries.ITEM.wrapAsHolder(Items.AIR)).value())).copy();
 					_setstack.setCount(1);
-					_player.getInventory().placeItemBackInInventory(_setstack);
+					_player.getInventory().placeItemBackInInventory(_setstack, Prediction.SERVER_ONLY);
 				}
 				if (entity instanceof ServerPlayer _player)
 					_player.sendSystemMessage(Component.literal("\u00A76Your \u00A7fSymmetrical Shovel \u00A76is now useless and was transformed into another item"), false);

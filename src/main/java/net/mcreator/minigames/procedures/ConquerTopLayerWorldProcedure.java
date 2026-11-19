@@ -211,7 +211,7 @@ public class ConquerTopLayerWorldProcedure {
 	}
 
 	private static CommandSourceStack getSource(ServerLevel level) { 
-		return new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, "", net.minecraft.network.chat.Component.literal(""), level.getServer(), null).withSuppressedOutput();
+		return new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, level, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER, net.minecraft.network.chat.Component.literal(""), level.getServer()).withSuppressedOutput();
 	}
 }
 

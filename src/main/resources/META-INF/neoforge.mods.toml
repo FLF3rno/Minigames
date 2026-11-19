@@ -14,8 +14,6 @@ description="A mod with a few innovative minigames"
 # Start of user code block mod configuration
 # End of user code block mod configuration
 
-[[mixins]]
-config = "minigames.mixins.json"
 
 # Start of user code block custom mixins
 [[mixins]]
@@ -25,14 +23,14 @@ config = "minigames.extra.mixins.json"
 [[dependencies.minigames]]
 modId="neoforge"
 type="required"
-versionRange="[26.1.2.95,)"
+versionRange="[26.3.0.99,)"
 ordering="AFTER"
 side="BOTH"
 
 [[dependencies.minigames]]
 modId="minecraft"
 type="required"
-versionRange="[26.1.2]"
+versionRange="[26.3]"
 ordering="AFTER"
 side="BOTH"
 

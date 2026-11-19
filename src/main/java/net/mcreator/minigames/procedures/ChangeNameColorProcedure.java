@@ -66,7 +66,7 @@ public class ChangeNameColorProcedure {
 							Entity _ent = entity;
 							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
 								_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER,
-										_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), ("customize name " + mainObj.get(resolvedKey).getAsString()));
+										_ent.level().getServer(), _ent), ("customize name " + mainObj.get(resolvedKey).getAsString()));
 							}
 						}
 					}

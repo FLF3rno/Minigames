@@ -87,7 +87,7 @@ public class ManageTimerProcedure {
                     if (_vars.timerTick == 0 && entity.level() instanceof ServerLevel _level && _level.getServer() != null) {
                         _level.getServer().getCommands().performPrefixedCommand(
                             new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), _level,
-                                LevelBasedPermissionSet.OWNER, entity.getName().getString(), entity.getDisplayName(), _level.getServer(), entity), 
+                                LevelBasedPermissionSet.OWNER, _level.getServer(), entity), 
                             "playsound minigames:clock player @s ~ ~ ~ 1 1"
                         );
                     }

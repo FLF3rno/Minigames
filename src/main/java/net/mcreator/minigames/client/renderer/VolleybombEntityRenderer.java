@@ -37,7 +37,7 @@ public class VolleybombEntityRenderer extends MobRenderer<VolleybombEntityEntity
 			@Override
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
 				LAYER_MODEL.setupAnim(state);
-				submitNodeCollector.submitModel(LAYER_MODEL, state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+				submitNodeCollector.submitModel(LAYER_MODEL, state, poseStack, RENDER_TYPE, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
 			}
 		});
 	}
@@ -54,7 +54,7 @@ public class VolleybombEntityRenderer extends MobRenderer<VolleybombEntityEntity
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		VolleybombEntityEntity entity = (VolleybombEntityEntity) state.getRenderData(ENTITY_KEY);
+		VolleybombEntityEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "empty")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

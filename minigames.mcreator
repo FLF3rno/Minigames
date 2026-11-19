@@ -869,13 +869,10 @@
       "registry_name": "crown_helmet",
       "metadata": {
         "files": [
-          "src/main/resources/assets/minigames/items/crown_helmet_chestplate.json",
           "src/main/java/net/mcreator/minigames/item/CrownHelmetItem.java",
           "src/main/resources/assets/minigames/items/crown_helmet_helmet.json",
           "src/main/resources/assets/minigames/models/item/crown_helmet_helmet.json",
           "src/main/resources/assets/minigames/equipment/crown_helmet.json",
-          "src/main/resources/assets/minigames/items/crown_helmet_leggings.json",
-          "src/main/resources/assets/minigames/items/crown_helmet_boots.json",
           "src/main/java/net/mcreator/minigames/client/renderer/item/CrownHelmetArmor.java"
         ]
       },
@@ -5775,12 +5772,7 @@
       "locked_code": false,
       "registry_name": "blank_longsword_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlankLongswordDescriptionProcedure.java"
@@ -5806,12 +5798,7 @@
       "locked_code": false,
       "registry_name": "blank_dagger_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlankDaggerDescriptionProcedure.java"
@@ -7181,24 +7168,6 @@
       "path": "~/Dungeon/Mob Goals"
     },
     {
-      "name": "PotentSulfur",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "potent_sulfur",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/minigames/block/PotentSulfurBlock.java",
-          "src/main/resources/assets/minigames/models/block/potent_sulfur.json",
-          "src/main/resources/data/minigames/loot_table/blocks/potent_sulfur.json",
-          "src/main/resources/assets/minigames/models/item/potent_sulfur.json",
-          "src/main/resources/assets/minigames/items/potent_sulfur.json",
-          "src/main/resources/assets/minigames/blockstates/potent_sulfur.json"
-        ]
-      },
-      "path": "~/General/Vanilla Blocks/26.2"
-    },
-    {
       "name": "FightDoorsBlocked",
       "type": "block",
       "compiles": true,
@@ -8316,12 +8285,7 @@
       "locked_code": false,
       "registry_name": "crystallized_potion_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/CrystallizedPotionDescriptionProcedure.java"
@@ -8399,12 +8363,7 @@
       "locked_code": false,
       "registry_name": "blacksmith_hammer_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlacksmithHammerDescriptionProcedure.java"
@@ -8550,10 +8509,6 @@
             "type": "entity"
           },
           {
-            "name": "itemstack",
-            "type": "itemstack"
-          },
-          {
             "name": "x",
             "type": "number"
           },
@@ -8679,12 +8634,7 @@
       "locked_code": false,
       "registry_name": "blessed_cursed_crossbow_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BlessedCursedCrossbowDescriptionProcedure.java"
@@ -9613,12 +9563,7 @@
       "locked_code": false,
       "registry_name": "hammer_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/HammerDescriptionProcedure.java"
@@ -9637,10 +9582,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           },
           {
             "name": "world",
@@ -10059,12 +10000,7 @@
       "locked_code": false,
       "registry_name": "plug_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/PlugDescriptionProcedure.java"
@@ -10142,12 +10078,7 @@
       "locked_code": false,
       "registry_name": "cluster_bomb_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ClusterBombDescriptionProcedure.java"
@@ -10235,12 +10166,7 @@
       "locked_code": false,
       "registry_name": "reaction_time_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ReactionTimeDescriptionProcedure.java"
@@ -10715,7 +10641,7 @@
       "name": "AchievementReroll",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "achievement_reroll",
       "metadata": {
         "dependencies": [
@@ -10781,7 +10707,7 @@
       "name": "RollAchievement",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "roll_achievement",
       "metadata": {
         "dependencies": [
@@ -11664,12 +11590,7 @@
       "locked_code": false,
       "registry_name": "silent_assassin_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SilentAssassinDescriptionProcedure.java"
@@ -11793,12 +11714,7 @@
       "locked_code": false,
       "registry_name": "power_harvester_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/PowerHarvesterDescriptionProcedure.java"
@@ -11821,10 +11737,6 @@
           {
             "name": "sourceentity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           },
           {
             "name": "x",
@@ -11871,12 +11783,7 @@
       "locked_code": false,
       "registry_name": "parasite_scythe_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ParasiteScytheDescriptionProcedure.java"
@@ -12280,12 +12187,7 @@
       "locked_code": false,
       "registry_name": "cooldown_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/CooldownDescriptionProcedure.java"
@@ -12413,12 +12315,7 @@
       "locked_code": false,
       "registry_name": "attack_speed_gem_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/AttackSpeedGemDescriptionProcedure.java"
@@ -12437,10 +12334,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           }
         ],
         "files": [
@@ -12490,12 +12383,7 @@
       "locked_code": false,
       "registry_name": "wireless_cauldron_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/WirelessCauldronDescriptionProcedure.java"
@@ -14459,12 +14347,7 @@
       "locked_code": false,
       "registry_name": "adrenaline_blade_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/AdrenalineBladeDescriptionProcedure.java"
@@ -14483,10 +14366,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           },
           {
             "name": "world",
@@ -14639,12 +14518,7 @@
       "locked_code": false,
       "registry_name": "midas_longsword_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/MidasLongswordDescriptionProcedure.java"
@@ -14837,12 +14711,7 @@
       "locked_code": false,
       "registry_name": "detonator_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/DetonatorDescriptionProcedure.java"
@@ -14981,12 +14850,7 @@
       "locked_code": false,
       "registry_name": "golden_mango_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/GoldenMangoDescriptionProcedure.java"
@@ -15119,12 +14983,7 @@
       "locked_code": false,
       "registry_name": "big_pocket_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BigPocketDescriptionProcedure.java"
@@ -15223,12 +15082,7 @@
       "locked_code": false,
       "registry_name": "thrusters_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ThrustersDescriptionProcedure.java"
@@ -15258,12 +15112,7 @@
       "locked_code": false,
       "registry_name": "bat_essence_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BatEssenceDescriptionProcedure.java"
@@ -15452,10 +15301,6 @@
             "type": "entity"
           },
           {
-            "name": "itemstack",
-            "type": "itemstack"
-          },
-          {
             "name": "x",
             "type": "number"
           },
@@ -15598,12 +15443,7 @@
       "locked_code": false,
       "registry_name": "berserk_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/BerserkDescriptionProcedure.java"
@@ -15685,12 +15525,7 @@
       "locked_code": false,
       "registry_name": "teleporter_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/TeleporterDescriptionProcedure.java"
@@ -15929,12 +15764,7 @@
       "locked_code": false,
       "registry_name": "heart_amulet_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/HeartAmuletDescriptionProcedure.java"
@@ -16348,12 +16178,7 @@
       "locked_code": false,
       "registry_name": "sick_sickle_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SickSickleDescriptionProcedure.java"
@@ -16372,10 +16197,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           },
           {
             "name": "world",
@@ -16639,12 +16460,7 @@
       "locked_code": false,
       "registry_name": "empty_heart_amulet_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/EmptyHeartAmuletDescriptionProcedure.java"
@@ -16709,12 +16525,7 @@
       "locked_code": false,
       "registry_name": "quickdraw_crossbow_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/QuickdrawCrossbowDescriptionProcedure.java"
@@ -16759,12 +16570,7 @@
       "locked_code": false,
       "registry_name": "soulsmith_katana_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SoulsmithKatanaDescriptionProcedure.java"
@@ -16833,12 +16639,7 @@
       "locked_code": false,
       "registry_name": "potion_explotion_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/PotionExplotionDescriptionProcedure.java"
@@ -16907,12 +16708,7 @@
       "locked_code": false,
       "registry_name": "feast_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/FeastDescriptionProcedure.java"
@@ -16994,12 +16790,7 @@
       "locked_code": false,
       "registry_name": "obsidian_idle_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ObsidianIdleDescriptionProcedure.java"
@@ -17068,12 +16859,7 @@
       "locked_code": false,
       "registry_name": "supportive_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/SupportiveDescriptionProcedure.java"
@@ -17134,12 +16920,7 @@
       "locked_code": false,
       "registry_name": "explorers_charm_description",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "return_type": "string",
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/ExplorersCharmDescriptionProcedure.java"
@@ -17158,10 +16939,6 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           },
           {
             "name": "world",
@@ -18132,12 +17909,7 @@
       "locked_code": false,
       "registry_name": "individual_price_alteration",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          }
-        ],
+        "dependencies": [],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/IndividualPriceAlterationProcedure.java"
         ]
@@ -18190,16 +17962,7 @@
       "locked_code": false,
       "registry_name": "team_price_alteration",
       "metadata": {
-        "dependencies": [
-          {
-            "name": "itemstack",
-            "type": "itemstack"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ],
+        "dependencies": [],
         "files": [
           "src/main/java/net/mcreator/minigames/procedures/TeamPriceAlterationProcedure.java"
         ]
@@ -20600,7 +20363,6 @@
       "subtitles.update_sulfur_hit": "",
       "subtitles.break": "",
       "subtitles.update_sulfur_break": "",
-      "item.minigames.potent_sulfur": "Potent Sulfur",
       "subtitles.update_potent_sulfur_step": "",
       "subtitles.update_potent_sulfur_hit": "",
       "subtitles.update_potent_sulfur_break": "",
@@ -20862,29 +20624,30 @@
   },
   "metadata": {
     "files": [
-      "src/main/java/net/mcreator/minigames/init/MinigamesModAttributes.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModMobEffects.java",
       "src/main/java/net/mcreator/minigames/network/MenuStateUpdateMessage.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModMenus.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModScreens.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
       "src/main/java/net/mcreator/minigames/client/renderer/item/LegacyOverrideSelectItemModel.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModHumanoidModels.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModAttributes.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModKeyMappings.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModParticles.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModParticleTypes.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModMobEffects.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
-      "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModItems.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModBlocks.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModEntityRenderers.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModEntities.java",
+      "src/main/java/net/mcreator/minigames/init/MinigamesModBlockEntities.java",
+      "src/main/resources/META-INF/accesstransformer.cfg",
       "src/main/java/net/mcreator/minigames/init/MinigamesModRenderStateModifiers.java",
       "src/main/java/net/mcreator/minigames/network/MinigamesModVariables.java",
       "src/main/java/net/mcreator/minigames/mixin/CameraAccessor.java",
+      "src/main/java/net/mcreator/minigames/mixin/LevelExtractorMixin.java",
       "src/main/resources/assets/minigames/sounds.json",
       "src/main/java/net/mcreator/minigames/init/MinigamesModTabs.java",
       "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationRendererMixin.java",
       "src/main/java/net/mcreator/minigames/mixin/EntityRenderDispatcherMixin.java",
-      "src/main/resources/META-INF/accesstransformer.cfg",
       "src/main/java/net/mcreator/minigames/mixin/PlayerAnimationMixin.java",
       "src/main/java/net/mcreator/minigames/client/RenderUtils.java",
       "src/main/java/net/mcreator/minigames/MinigamesModPlayerAnimationAPI.java",
@@ -20892,15 +20655,13 @@
       "src/main/java/net/mcreator/minigames/init/MinigamesModSounds.java",
       "src/main/java/net/mcreator/minigames/mixin/ItemInHandLayerMixin.java",
       "src/main/java/net/mcreator/minigames/init/MinigamesModModels.java",
-      "src/main/java/net/mcreator/minigames/mixin/LevelRendererMixin.java",
-      "src/main/resources/minigames.mixins.json",
       "src/main/resources/META-INF/neoforge.mods.toml",
       "src/main/java/net/mcreator/minigames/network/NbtArrayLists.java",
       "src/main/resources/pack.mcmeta",
       "src/main/java/net/mcreator/minigames/network/PlayPlayerAnimationMessage.java",
       "src/main/java/net/mcreator/minigames/MinigamesMod.java",
       "src/main/java/net/mcreator/minigames/mixin/LivingEntityRendererMixin.java",
-      "src/main/java/net/mcreator/minigames/mixin/ItemInHandRendererMixin.java"
+      "src/main/java/net/mcreator/minigames/mixin/FirstPersonHandsAndItemsRendererMixin.java"
     ],
     "betteranimations_models": {},
     "betteranimations_perspectives": {}
@@ -21617,15 +21378,6 @@
             "children": []
           },
           {
-            "name": "Vanilla Blocks",
-            "children": [
-              {
-                "name": "26.2",
-                "children": []
-              }
-            ]
-          },
-          {
             "name": "Spectative",
             "children": []
           }
@@ -21648,9 +21400,9 @@
     "mcreatorDependencies": [
       "photon_plugin"
     ],
-    "currentGenerator": "neoforge-26.1.2",
+    "currentGenerator": "neoforge-26.3",
     "credits": "FL_F3rno",
     "modElementsPackage": "net.mcreator.minigames"
   },
-  "mcreatorVersion": 202600233518
+  "mcreatorVersion": 202600344621
 }

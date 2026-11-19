@@ -109,7 +109,7 @@ public class JaronaDashHandler {
 			LivingEntity hitMonster = enemies.get(0);
 			if (!player.hasEffect(MinigamesModMobEffects.PHANTOM)) {
 			player.setDeltaMovement(Vec3.ZERO); }
-			player.hurtMarked = true;
+			player.needsSync = true;
 			if (player instanceof ServerPlayer serverPlayer) {
 				serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
 			}

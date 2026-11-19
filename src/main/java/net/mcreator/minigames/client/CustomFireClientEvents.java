@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RenderBlockScreenEffectEvent;
+import net.neoforged.neoforge.client.event.ExtractBlockScreenEffectEvent;
 import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 
 @EventBusSubscriber(value = Dist.CLIENT)
@@ -27,14 +27,16 @@ public class CustomFireClientEvents {
 	}
 
 	@SubscribeEvent
-	public static void onRenderScreenOverlay(RenderBlockScreenEffectEvent event) {
-		if (event.getOverlayType() == RenderBlockScreenEffectEvent.OverlayType.FIRE) {
+	public static void onRenderScreenOverlay(ExtractBlockScreenEffectEvent event) {
+		if (event.getOverlayType() == ExtractBlockScreenEffectEvent.OverlayType.FIRE) {
 			Player player = event.getPlayer();
 			int color = CustomFireHelper.getFireColor(player);
 			boolean lowFire = CustomFireHelper.isLowFire();
 			if (color != 0 || lowFire) {
-				CustomFireHelper.renderFirstPersonFire(event.getPoseStack(), event.getBufferSource(), event.getSprites(), color);
-				event.setCanceled(true);
+				event.setCustomRenderer((playerRenderState, cameraRenderState, submitNodeCollector, poseStack, sprites, partialTicks, hideGui) -> {
+					CustomFireHelper.renderFirstPersonFire(poseStack, submitNodeCollector, sprites, color);
+					return true;
+				});
 			}
 		}
 	}

@@ -76,8 +76,13 @@ public class CopycatChainBlock extends ChainBlock implements EntityBlock {
 	}
 
 	@Override
-	public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
-		CopycatHelper.updateEntityMovementAfterFallOn(level, entity);
+	public void bounceOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+		CopycatHelper.bounceOn(level, state, pos, entity, fallDistance);
+	}
+
+	@Override
+	public float getBounceRestitution(Level level, BlockPos pos, BlockState state, Entity entity) {
+		return CopycatHelper.getBounceRestitution(level, pos, state, entity);
 	}
 
 	@Override

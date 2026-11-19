@@ -54,7 +54,7 @@ public class ApplyClassProcedure {
 
 			for (net.minecraft.world.item.ItemStack stack : itemsToGive) {
 				if (!_player.addItem(stack)) {
-					_player.drop(stack, false);
+					_player.drop(stack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 				}
 			}
 		}

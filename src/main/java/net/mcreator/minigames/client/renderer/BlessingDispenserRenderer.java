@@ -39,7 +39,7 @@ public class BlessingDispenserRenderer extends MobRenderer<BlessingDispenserEnti
 
 	@Override
 	public Identifier getTextureLocation(LivingEntityRenderState state) {
-		BlessingDispenserEntity entity = (BlessingDispenserEntity) state.getRenderData(ENTITY_KEY);
+		BlessingDispenserEntity entity = state.getRenderData(ENTITY_KEY);
 		if (entity != null && entity.getTexture() != "blessing_dispenser")
 			return Identifier.parse("minigames:textures/entities/" + entity.getTexture() + ".png");
 		return entityTexture;

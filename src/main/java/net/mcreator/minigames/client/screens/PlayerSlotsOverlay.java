@@ -70,7 +70,7 @@ public class PlayerSlotsOverlay {
             boolean showOnlyHearts = vars.showOnlyHearts;
             String path = event.getName().getPath();
             String layerName = event.getName().toString().toLowerCase(Locale.ROOT);
-            boolean dungeonInventoryOpen = mc.screen instanceof DungeonInventoryScreen;
+            boolean dungeonInventoryOpen = mc.gui.screen() instanceof DungeonInventoryScreen;
             ItemStack selectedStack = entity.getInventory().getItem(getSelectedSlot(entity.getInventory()));
             boolean selectedDungeonItem = !selectedStack.isEmpty() && DungeonItemAccess.isDungeonItem(selectedStack);
 
@@ -127,7 +127,7 @@ public class PlayerSlotsOverlay {
             if (entity.isSpectator()) {
                 return;
             }
-            if (mc.options.hideGui) {
+            if (mc.gui.hud.isHidden()) {
                 return;
             }
             boolean playingDungeons = MinigamesModVariables.MapVariables.get(entity.level()).playingDungeons;
@@ -136,7 +136,7 @@ public class PlayerSlotsOverlay {
             if (playingDungeons && selectedDungeonItem) {
                 renderColoredSelectedItemName(event.getGuiGraphics(), entity, selectedStack);
             }
-            if (!(mc.screen instanceof AbstractContainerScreen)) {
+            if (!(mc.gui.screen() instanceof AbstractContainerScreen)) {
                 double playerSlots = entity.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
                 int nSlots = Math.max(0, Math.min(9, (int) playerSlots));
                 if (nSlots < 9 && nSlots > 0) {
@@ -158,7 +158,7 @@ public class PlayerSlotsOverlay {
                 if (player.isSpectator()) {
                     return;
                 }
-                if (mc.options.hideGui) {
+                if (mc.gui.hud.isHidden()) {
                     return;
                 }
                 double playerSlots = player.getData(MinigamesModVariables.PLAYER_VARIABLES).playerSlots;
@@ -255,7 +255,7 @@ public class PlayerSlotsOverlay {
 
         if (player == null
                 || guiGraphics == null
-                || mc.options.hideGui
+                || mc.gui.hud.isHidden()
                 || AnimationOverlay.isAnimationPlaying()) {
             return;
         }

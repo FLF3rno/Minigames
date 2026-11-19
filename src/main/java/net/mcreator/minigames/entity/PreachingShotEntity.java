@@ -2,6 +2,7 @@ package net.mcreator.minigames.entity;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.ItemStack;
@@ -17,12 +18,11 @@ import net.minecraft.core.registries.Registries;
 import net.mcreator.minigames.procedures.PreachingShotTickProcedure;
 import net.mcreator.minigames.procedures.PreachingShotHitProcedure;
 import net.mcreator.minigames.init.MinigamesModEntities;
-import net.mcreator.minigames.init.MinigamesModBlocks;
 
 import javax.annotation.Nullable;
 
 public class PreachingShotEntity extends AbstractArrow implements ItemSupplier {
-	public static final ItemStack PROJECTILE_ITEM = new ItemStack(MinigamesModBlocks.POTENT_SULFUR.get());
+	public static final ItemStack PROJECTILE_ITEM = new ItemStack(Blocks.POTENT_SULFUR);
 	private int knockback = 0;
 
 	public PreachingShotEntity(EntityType<? extends PreachingShotEntity> type, Level world) {
@@ -51,7 +51,7 @@ public class PreachingShotEntity extends AbstractArrow implements ItemSupplier {
 
 	@Override
 	protected ItemStack getDefaultPickupItem() {
-		return new ItemStack(MinigamesModBlocks.POTENT_SULFUR.get());
+		return new ItemStack(Blocks.POTENT_SULFUR);
 	}
 
 	@Override

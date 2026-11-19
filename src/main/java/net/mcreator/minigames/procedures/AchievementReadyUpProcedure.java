@@ -31,7 +31,7 @@ public class AchievementReadyUpProcedure {
 		readyCount = 0;
 		if (world instanceof ServerLevel _level)
 			_level.getServer().getCommands().performPrefixedCommand(
-					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+					new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
 					"/execute as @a at @s run playsound minecraft:block.beacon.activate ui @s ~ ~ ~ 1 1");
 		if (world instanceof ServerLevel _level) {
 			for (ServerPlayer player : _level.getServer().getPlayerList().getPlayers()) {

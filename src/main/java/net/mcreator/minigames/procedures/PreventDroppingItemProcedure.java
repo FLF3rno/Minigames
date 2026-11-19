@@ -8,6 +8,7 @@ import net.neoforged.bus.api.Event;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.util.Prediction;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.Identifier;
 
@@ -31,7 +32,7 @@ public class PreventDroppingItemProcedure {
 			if (entity instanceof Player _player) {
 				ItemStack _setstack = itemstack.copy();
 				_setstack.setCount(1);
-				_player.getInventory().placeItemBackInInventory(_setstack);
+				_player.getInventory().placeItemBackInInventory(_setstack, Prediction.SERVER_ONLY);
 			}
 			itemstack.shrink(1);
 		}

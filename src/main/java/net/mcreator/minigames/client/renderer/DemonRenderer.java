@@ -33,7 +33,7 @@ public class DemonRenderer extends MobRenderer<DemonEntity, DemonRenderer.DemonR
 
             @Override
             public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, DemonRenderState state, float headYaw, float headPitch) {
-                submitNodeCollector.submitModel(this.getParentModel(), state, poseStack, RENDER_TYPE, light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
+                submitNodeCollector.submitModel(this.getParentModel(), state, poseStack, RENDER_TYPE, light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor);
             }
         });
     }

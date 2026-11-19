@@ -44,7 +44,7 @@ public class GravediggerRenderer extends MobRenderer<GravediggerEntity, LivingEn
 			public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int light, LivingEntityRenderState state, float headYaw, float headPitch) {
 				EntityModel model = new Modelgravedigger(Minecraft.getInstance().getEntityModels().bakeLayer(Modelgravedigger.LAYER_LOCATION));
 				model.setupAnim(state);
-				submitNodeCollector.submitModel(model, state, poseStack, RENDER_TYPE, light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor, null);
+				submitNodeCollector.submitModel(model, state, poseStack, RENDER_TYPE, light, LivingEntityRenderer.getOverlayCoords(state, 0), state.outlineColor);
 			}
 		});
 	}

@@ -31,7 +31,7 @@ public class BeamScreenTintOverlay {
             return;
         }
 
-        Camera camera = mc.gameRenderer.getMainCamera();
+        Camera camera = mc.gameRenderer.mainCamera();
 
         if (camera == null) {
             return;

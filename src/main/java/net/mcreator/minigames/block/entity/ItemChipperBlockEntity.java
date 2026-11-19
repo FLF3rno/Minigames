@@ -28,9 +28,17 @@ import java.util.stream.IntStream;
 public class ItemChipperBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
 	private NonNullList<ItemStack> stacks = NonNullList.withSize(9, ItemStack.EMPTY);
 	public final AnimationState animationState0 = new AnimationState();
+	private long tickCountStart = -1;
 
 	public ItemChipperBlockEntity(BlockPos position, BlockState state) {
 		super(MinigamesModBlockEntities.ITEM_CHIPPER.get(), position, state);
+	}
+
+	public int getTickCount() {
+		long gameTime = this.level.getGameTime();
+		if (this.tickCountStart == -1)
+			this.tickCountStart = gameTime;
+		return (int) (gameTime - this.tickCountStart);
 	}
 
 	@Override
@@ -108,6 +116,8 @@ public class ItemChipperBlockEntity extends RandomizableContainerBlockEntity imp
 
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack itemstack, @Nullable Direction direction) {
+		if (this.getItem(index).getCount() >= this.getMaxStackSize(itemstack))
+			return false;
 		return this.canPlaceItem(index, itemstack);
 	}
 

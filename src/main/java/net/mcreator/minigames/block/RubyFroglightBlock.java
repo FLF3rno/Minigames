@@ -6,6 +6,6 @@ import net.minecraft.world.level.block.Block;
 
 public class RubyFroglightBlock extends Block {
 	public RubyFroglightBlock(BlockBehaviour.Properties properties) {
-		super(properties.sound(SoundType.FROGLIGHT).strength(1f, 10f).lightLevel(blockstate -> 15).postProcess((bs, br, bp) -> bp).emissiveRendering((bs, br, bp) -> true));
+		super(properties.sound(SoundType.FROGLIGHT).strength(1f, 10f).lightLevel(blockstate -> 15).postProcess((bs, br, bp) -> bp).emissiveRendering(bs -> true));
 	}
 }

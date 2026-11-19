@@ -46,8 +46,8 @@ public class MinigameGUICrownHuntThisGUIIsClosedProcedure {
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		} else {
 			if (world instanceof ServerLevel _level)
-				_level.getServer().getCommands().performPrefixedCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "effect clear @a night_vision");
+				_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, LevelBasedPermissionSet.OWNER, Component.literal(""), _level.getServer()).withSuppressedOutput(),
+						"effect clear @a night_vision");
 			MinigamesModVariables.MapVariables.get(world).nightVision = false;
 			MinigamesModVariables.MapVariables.get(world).markSyncDirty();
 		}

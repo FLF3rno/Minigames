@@ -1,7 +1,6 @@
 package net.mcreator.minigames.client;
 
 import org.joml.Vector4f;
-import org.joml.Vector3f;
 import org.joml.Matrix4fStack;
 import org.joml.Matrix4f;
 
@@ -13,20 +12,22 @@ import net.minecraft.client.renderer.state.level.SkyRenderState;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
 
-import java.util.OptionalInt;
 import java.util.OptionalDouble;
+import java.util.Optional;
 
+import com.mojang.renderpearl.api.vertex.VertexFormat;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
+import com.mojang.renderpearl.api.pipeline.PrimitiveTopology;
+import com.mojang.renderpearl.api.commands.RenderPass;
+import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
+import com.mojang.renderpearl.api.buffers.GpuBuffer;
 import com.mojang.math.Axis;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.MeshData;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.systems.RenderPass;
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
-import com.mojang.blaze3d.buffers.GpuBuffer;
 
 public class RenderUtils {
 	private static GpuBuffer sunBuffer;
@@ -48,28 +49,29 @@ public class RenderUtils {
 		PoseStack poseStack = event.getPoseStack();
 		SkyRenderState state = event.getLevelRenderState().skyRenderState;
 		poseStack.pushPose();
-		poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-		poseStack.mulPose(Axis.XP.rotation(state.sunAngle));
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
+		poseStack.rotateDegrees(Axis.XP, state.sunAngle);
 		Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
 		modelViewStack.pushMatrix();
 		modelViewStack.mul(poseStack.last().pose());
 		modelViewStack.translate(0.0F, 100.0F, 0.0F);
 		modelViewStack.scale(30.0F, 1.0F, 30.0F);
-		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(modelViewStack, new Vector4f(1.0F, 1.0F, 1.0F, state.rainBrightness), new Vector3f(), new Matrix4f());
-		GpuTextureView color = mc.getMainRenderTarget().getColorTextureView();
-		GpuTextureView depth = mc.getMainRenderTarget().getDepthTextureView();
-		GpuBuffer indexBuffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).getBuffer(6);
+		Matrix4f modelViewMatrix = new Matrix4f(modelViewStack);
+		modelViewStack.popMatrix();
+		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(modelViewMatrix, new Vector4f(1.0F, 1.0F, 1.0F, state.rainBrightness));
+		GpuTextureView color = mc.gameRenderer.mainRenderTarget().getColorTextureView();
+		GpuTextureView depth = mc.gameRenderer.mainRenderTarget().getDepthTextureView();
+		GpuBuffer indexBuffer = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).getBuffer(6);
 		AbstractTexture texture = mc.getTextureManager().getTexture(textureId);
-		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "minigames Sun", color, OptionalInt.empty(), depth, OptionalDouble.empty())) {
-			renderPass.setPipeline(RenderPipelines.CELESTIAL);
+		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "minigames Sun", color, Optional.empty(), depth, OptionalDouble.empty())) {
+			renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.CELESTIAL));
 			RenderSystem.bindDefaultUniforms(renderPass);
 			renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-			renderPass.bindTexture("Sampler0", texture.getTextureView(), texture.getSampler());
-			renderPass.setVertexBuffer(0, sunBuffer);
-			renderPass.setIndexBuffer(indexBuffer, RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).type());
-			renderPass.drawIndexed(0, 0, 6, 1);
+			renderPass.setUniform("Sampler0", texture.getTextureView(), texture.getSampler());
+			renderPass.setVertexBuffer(0, sunBuffer.slice());
+			renderPass.setIndexBuffer(indexBuffer, RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).type());
+			renderPass.drawIndexed(6, 1, 0, 0, 0);
 		}
-		modelViewStack.popMatrix();
 		poseStack.popPose();
 	}
 
@@ -79,66 +81,62 @@ public class RenderUtils {
 		PoseStack poseStack = event.getPoseStack();
 		SkyRenderState state = event.getLevelRenderState().skyRenderState;
 		poseStack.pushPose();
-		poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-		poseStack.mulPose(Axis.XP.rotation(state.moonAngle));
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
+		poseStack.rotateDegrees(Axis.XP, state.moonAngle);
 		Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
 		modelViewStack.pushMatrix();
 		modelViewStack.mul(poseStack.last().pose());
 		modelViewStack.translate(0.0F, 100.0F, 0.0F);
 		modelViewStack.scale(20.0F, 1.0F, 20.0F);
-		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(modelViewStack, new Vector4f(1.0F, 1.0F, 1.0F, state.rainBrightness), new Vector3f(), new Matrix4f());
-		GpuTextureView color = mc.getMainRenderTarget().getColorTextureView();
-		GpuTextureView depth = mc.getMainRenderTarget().getDepthTextureView();
-		GpuBuffer indexBuffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).getBuffer(6);
+		Matrix4f modelViewMatrix = new Matrix4f(modelViewStack);
+		modelViewStack.popMatrix();
+		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(modelViewMatrix, new Vector4f(1.0F, 1.0F, 1.0F, state.rainBrightness));
+		GpuTextureView color = mc.gameRenderer.mainRenderTarget().getColorTextureView();
+		GpuTextureView depth = mc.gameRenderer.mainRenderTarget().getDepthTextureView();
+		GpuBuffer indexBuffer = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).getBuffer(6);
 		AbstractTexture texture = mc.getTextureManager().getTexture(textureId);
 		int baseVertex = state.moonPhase.index() * 4;
-		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "minigames Moon", color, OptionalInt.empty(), depth, OptionalDouble.empty())) {
-			renderPass.setPipeline(RenderPipelines.CELESTIAL);
+		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "minigames Moon", color, Optional.empty(), depth, OptionalDouble.empty())) {
+			renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.CELESTIAL));
 			RenderSystem.bindDefaultUniforms(renderPass);
 			renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-			renderPass.bindTexture("Sampler0", texture.getTextureView(), texture.getSampler());
-			renderPass.setVertexBuffer(0, moonBuffer);
-			renderPass.setIndexBuffer(indexBuffer, RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).type());
-			renderPass.drawIndexed(baseVertex, 0, 6, 1);
+			renderPass.setUniform("Sampler0", texture.getTextureView(), texture.getSampler());
+			renderPass.setVertexBuffer(0, moonBuffer.slice());
+			renderPass.setIndexBuffer(indexBuffer, RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).type());
+			renderPass.drawIndexed(6, 1, 0, baseVertex, 0);
 		}
-		modelViewStack.popMatrix();
 		poseStack.popPose();
 	}
 
 	public static void renderCustomSkybox(RenderLevelStageEvent.AfterSky event, Identifier textureId, int color, float alpha) {
 		initBuffers();
 		Minecraft mc = Minecraft.getInstance();
-		PoseStack poseStack = event.getPoseStack();
-		Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
-		modelViewStack.pushMatrix();
-		modelViewStack.mul(poseStack.last().pose());
 		float[] rgba = getRGBA(color, alpha);
-		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(modelViewStack, new Vector4f(rgba[0], rgba[1], rgba[2], rgba[3]), new Vector3f(), new Matrix4f());
-		GpuTextureView colorTexture = mc.getMainRenderTarget().getColorTextureView();
-		GpuTextureView depth = mc.getMainRenderTarget().getDepthTextureView();
-		GpuBuffer indexBuffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).getBuffer(36);
+		GpuBufferSlice dynamicTransforms = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrixCopy(), new Vector4f(rgba[0], rgba[1], rgba[2], rgba[3]));
+		GpuTextureView colorTexture = mc.gameRenderer.mainRenderTarget().getColorTextureView();
+		GpuTextureView depth = mc.gameRenderer.mainRenderTarget().getDepthTextureView();
+		GpuBuffer indexBuffer = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).getBuffer(36);
 		AbstractTexture texture = mc.getTextureManager().getTexture(textureId);
-		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "minigames Skybox", colorTexture, OptionalInt.empty(), depth, OptionalDouble.empty())) {
-			renderPass.setPipeline(RenderPipelines.END_SKY);
+		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "minigames Skybox", colorTexture, Optional.empty(), depth, OptionalDouble.empty())) {
+			renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.END_SKY));
 			RenderSystem.bindDefaultUniforms(renderPass);
 			renderPass.setUniform("DynamicTransforms", dynamicTransforms);
-			renderPass.bindTexture("Sampler0", texture.getTextureView(), texture.getSampler());
-			renderPass.setVertexBuffer(0, skyboxBuffer);
-			renderPass.setIndexBuffer(indexBuffer, RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).type());
-			renderPass.drawIndexed(0, 0, 36, 1);
+			renderPass.setUniform("Sampler0", texture.getTextureView(), texture.getSampler());
+			renderPass.setVertexBuffer(0, skyboxBuffer.slice());
+			renderPass.setIndexBuffer(indexBuffer, RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).type());
+			renderPass.drawIndexed(36, 1, 0, 0, 0);
 		}
-		modelViewStack.popMatrix();
 	}
 
 	private static GpuBuffer buildSunBuffer() {
 		VertexFormat format = DefaultVertexFormat.POSITION_TEX;
 		try (ByteBufferBuilder byteBufferBuilder = ByteBufferBuilder.exactlySized(4 * format.getVertexSize())) {
-			BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, VertexFormat.Mode.QUADS, format);
+			BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, PrimitiveTopology.QUADS, format);
 			bufferBuilder.addVertex(-1.0F, 0.0F, -1.0F).setUv(0.0F, 0.0F);
 			bufferBuilder.addVertex(1.0F, 0.0F, -1.0F).setUv(1.0F, 0.0F);
 			bufferBuilder.addVertex(1.0F, 0.0F, 1.0F).setUv(1.0F, 1.0F);
 			bufferBuilder.addVertex(-1.0F, 0.0F, 1.0F).setUv(0.0F, 1.0F);
-			try (com.mojang.blaze3d.vertex.MeshData mesh = bufferBuilder.buildOrThrow()) {
+			try (MeshData mesh = bufferBuilder.buildOrThrow()) {
 				return RenderSystem.getDevice().createBuffer(() -> "minigames Sun", 32, mesh.vertexBuffer());
 			}
 		}
@@ -147,7 +145,7 @@ public class RenderUtils {
 	private static GpuBuffer buildMoonBuffer() {
 		VertexFormat format = DefaultVertexFormat.POSITION_TEX;
 		try (ByteBufferBuilder byteBufferBuilder = ByteBufferBuilder.exactlySized(8 * 4 * format.getVertexSize())) {
-			BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, VertexFormat.Mode.QUADS, format);
+			BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, PrimitiveTopology.QUADS, format);
 			for (int k = 0; k < 8; k++) {
 				int l = k % 4;
 				int i1 = k / 4 % 2;
@@ -160,7 +158,7 @@ public class RenderUtils {
 				bufferBuilder.addVertex(1.0F, 0.0F, 1.0F).setUv(f13, f14);
 				bufferBuilder.addVertex(-1.0F, 0.0F, 1.0F).setUv(f15, f14);
 			}
-			try (com.mojang.blaze3d.vertex.MeshData mesh = bufferBuilder.buildOrThrow()) {
+			try (MeshData mesh = bufferBuilder.buildOrThrow()) {
 				return RenderSystem.getDevice().createBuffer(() -> "minigames Moon", 32, mesh.vertexBuffer());
 			}
 		}
@@ -169,7 +167,7 @@ public class RenderUtils {
 	private static GpuBuffer buildSkyboxBuffer() {
 		VertexFormat format = DefaultVertexFormat.POSITION_TEX_COLOR;
 		try (ByteBufferBuilder byteBufferBuilder = ByteBufferBuilder.exactlySized(24 * format.getVertexSize())) {
-			BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, VertexFormat.Mode.QUADS, format);
+			BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, PrimitiveTopology.QUADS, format);
 			float distance = 100.0F;
 			float size = 100.0F;
 			int color = 0xFFFFFFFF;
@@ -179,7 +177,7 @@ public class RenderUtils {
 			addSkyboxFace(bufferBuilder, -size, -size, -distance, 1.0F / 4.0F, 2.0F / 3.0F, size, -size, -distance, 2.0F / 4.0F, 2.0F / 3.0F, size, size, -distance, 2.0F / 4.0F, 1.0F / 3.0F, -size, size, -distance, 1.0F / 4.0F, 1.0F / 3.0F, color);
 			addSkyboxFace(bufferBuilder, distance, -size, -size, 2.0F / 4.0F, 2.0F / 3.0F, distance, -size, size, 3.0F / 4.0F, 2.0F / 3.0F, distance, size, size, 3.0F / 4.0F, 1.0F / 3.0F, distance, size, -size, 2.0F / 4.0F, 1.0F / 3.0F, color);
 			addSkyboxFace(bufferBuilder, size, -size, distance, 3.0F / 4.0F, 2.0F / 3.0F, -size, -size, distance, 4.0F / 4.0F, 2.0F / 3.0F, -size, size, distance, 4.0F / 4.0F, 1.0F / 3.0F, size, size, distance, 3.0F / 4.0F, 1.0F / 3.0F, color);
-			try (com.mojang.blaze3d.vertex.MeshData meshData = bufferBuilder.buildOrThrow()) {
+			try (MeshData meshData = bufferBuilder.buildOrThrow()) {
 				return RenderSystem.getDevice().createBuffer(() -> "minigames Skybox", 40, meshData.vertexBuffer());
 			}
 		}

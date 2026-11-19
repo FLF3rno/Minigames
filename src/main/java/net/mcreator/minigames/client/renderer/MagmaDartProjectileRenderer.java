@@ -40,8 +40,8 @@ public class MagmaDartProjectileRenderer extends EntityRenderer<MagmaDartProject
 		poseStack.pushPose();
 
 		poseStack.translate(0.0D, -0.75D, 0.0D);
-		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 90.0F));
-		poseStack.mulPose(Axis.ZP.rotationDegrees(-state.xRot));
+		poseStack.rotate(Axis.YP.rotationDegrees(state.yRot + 90.0F));
+		poseStack.rotate(Axis.ZP.rotationDegrees(-state.xRot));
 
 		nodeCollector.submitModel(
 				model,
@@ -52,8 +52,7 @@ public class MagmaDartProjectileRenderer extends EntityRenderer<MagmaDartProject
 				OverlayTexture.NO_OVERLAY,
 				-1,
 				null,
-				state.outlineColor,
-				null
+				state.outlineColor
 		);
 
 		poseStack.popPose();

@@ -149,6 +149,11 @@ public class MagmaHitboxEntity extends Monster {
 	}
 
 	@Override
+	public boolean canBreatheUnderwater() {
+		return !this.canDrownInFluidType(NeoForgeMod.WATER_TYPE.value());
+	}
+
+	@Override
 	public boolean isPushedByFluid() {
 		double x = this.getX();
 		double y = this.getY();

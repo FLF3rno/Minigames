@@ -25,8 +25,9 @@ public class AnimateCrownPickupProcedure {
 			{
 				Entity _ent = entityiterator;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/playsound minigames:teameliminated ui @s ~ ~ ~ 10000000 1");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/playsound minigames:teameliminated ui @s ~ ~ ~ 10000000 1");
 				}
 			}
 			{

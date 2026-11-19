@@ -1,5 +1,5 @@
 {
-  "_fv": 89,
+  "_fv": 92,
   "_type": "block",
   "definition": {
     "texture": "giant_bell",
@@ -14,6 +14,7 @@
     "enablePitch": false,
     "emissiveRendering": false,
     "displayFluidOverlay": false,
+    "multipartModel": false,
     "states": [],
     "animations": [],
     "itemTexture": "minecraft:bell",
@@ -75,6 +76,7 @@
     "tickRandomly": false,
     "isReplaceable": false,
     "canProvidePower": false,
+    "forceRedstoneConductor": false,
     "emittedRedstonePower": {
       "fixedValue": 15.0
     },

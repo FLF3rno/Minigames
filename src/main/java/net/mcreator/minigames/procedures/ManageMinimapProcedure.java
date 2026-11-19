@@ -34,30 +34,34 @@ public class ManageMinimapProcedure {
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect give @p xaerominimap:no_minimap infinite 1 true");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/effect give @p xaerominimap:no_minimap infinite 1 true");
 				}
 			}
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect give @p xaeroworldmap:no_world_map infinite 1 true");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/effect give @p xaeroworldmap:no_world_map infinite 1 true");
 				}
 			}
 		} else {
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect clear @p xaerominimap:no_minimap");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/effect clear @p xaerominimap:no_minimap");
 				}
 			}
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-					_ent.level().getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null,
-							LevelBasedPermissionSet.OWNER, _ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "/effect clear @p xaeroworldmap:no_world_map");
+					_ent.level().getServer().getCommands().performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, LevelBasedPermissionSet.OWNER, _ent.level().getServer(), _ent),
+							"/effect clear @p xaeroworldmap:no_world_map");
 				}
 			}
 		}

@@ -33,7 +33,7 @@ public class DisableSpectativeProcedure {
 				_player.getAbilities().flying = false;
 				_player.onUpdateAbilities();
 			}
-			entity.invulnerableTime = 0;
+			entity.setInvulnerableTime(0);
 		}
 	}
 }

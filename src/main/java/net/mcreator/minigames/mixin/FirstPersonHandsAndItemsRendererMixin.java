@@ -7,12 +7,13 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.client.renderer.state.level.PlayerRenderState;
+import net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.ItemInHandRenderer;
-import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.gui.screens.ChatScreen;
@@ -22,14 +23,14 @@ import net.mcreator.minigames.MinigamesModPlayerAnimationAPI;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-@Mixin(ItemInHandRenderer.class)
-public abstract class ItemInHandRendererMixin {
+@Mixin(FirstPersonHandsAndItemsRenderer.class)
+public abstract class FirstPersonHandsAndItemsRendererMixin {
 	private String master = null;
 	private Minecraft mc = Minecraft.getInstance();
 	private EntityRenderDispatcher dispatcher = null;
 
-	@Inject(method = "renderHandsWithItems", at = @At("HEAD"), cancellable = true)
-	private void renderHandsWithItems(float f, PoseStack poseStack, SubmitNodeCollector collector, LocalPlayer localPlayer, int i, CallbackInfo ci) {
+	@Inject(method = "submitHandsWithItems", at = @At("HEAD"), cancellable = true)
+	private void renderHandsWithItems(float f, PoseStack poseStack, SubmitNodeCollector collector, PlayerRenderState playerState, FirstPersonHandsAndItemsRenderState state, CallbackInfo ci) {
 		if (master == null) {
 			if (!MinigamesModPlayerAnimationAPI.animations.isEmpty())
 				master = "minigames";
@@ -38,7 +39,12 @@ public abstract class ItemInHandRendererMixin {
 		}
 		if (!master.equals("minigames"))
 			return;
-		if (localPlayer instanceof Player player && mc.player == player) {
+		if (playerState.avatarRenderState != null) {
+			Player player = (Player) playerState.avatarRenderState.getRenderData(MinigamesModPlayerAnimationAPI.ClientAttachments.PLAYER);
+			if (player == null)
+				return;
+			if (mc.player != player)
+				return;
 			if (dispatcher == null)
 				dispatcher = mc.getEntityRenderDispatcher();
 			CompoundTag playerData = player.getPersistentData();
@@ -57,7 +63,7 @@ public abstract class ItemInHandRendererMixin {
 				else
 					playerData.putInt("setNullRender", ticks - 1);
 			}
-			if (playerData.getBooleanOr("FirstPersonAnimation", false) && (mc.screen == null || mc.screen instanceof ChatScreen))
+			if (playerData.getBooleanOr("FirstPersonAnimation", false) && (mc.gui.screen() == null || mc.gui.screen() instanceof ChatScreen))
 				ci.cancel();
 		}
 	}

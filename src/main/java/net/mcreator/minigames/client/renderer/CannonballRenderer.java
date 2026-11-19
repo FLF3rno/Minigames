@@ -37,8 +37,8 @@ public class CannonballRenderer extends EntityRenderer<CannonballEntity, LivingE
 	) {
 		poseStack.pushPose();
 		poseStack.translate(0.0D, -2.7D, 0.0D);
-		poseStack.mulPose(Axis.YP.rotationDegrees(-state.yRot));
-		poseStack.mulPose(Axis.XP.rotationDegrees(state.xRot));
+		poseStack.rotate(Axis.YP.rotationDegrees(-state.yRot));
+		poseStack.rotate(Axis.XP.rotationDegrees(state.xRot));
 
 		model.setupAnim(state);
 
@@ -49,8 +49,7 @@ public class CannonballRenderer extends EntityRenderer<CannonballEntity, LivingE
 				TEXTURE,
 				state.lightCoords,
 				OverlayTexture.NO_OVERLAY,
-				state.outlineColor,
-				null
+				state.outlineColor
 		);
 
 		poseStack.popPose();

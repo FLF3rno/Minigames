@@ -18403,6 +18403,199 @@
         ]
       },
       "path": "~/Dungeon/Mob/Rock Thrower Church"
+    },
+    {
+      "name": "StartTNTRoulette",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "start_tnt_roulette",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StartTNTRouletteProcedure.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "StopTNTRoulette",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "stop_tnt_roulette",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/StopTNTRouletteProcedure.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "TNTRoulette",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "tnt_roulette",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/command/TNTRouletteCommand.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "RouletteGrid",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "roulette_grid",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/minigames/block/RouletteGridBlock.java",
+          "src/main/resources/assets/minigames/models/block/roulette_grid_3.json",
+          "src/main/resources/assets/minigames/blockstates/roulette_grid.json",
+          "src/main/resources/assets/minigames/models/block/roulette_grid.json",
+          "src/main/resources/assets/minigames/models/block/roulette_grid_0.json",
+          "src/main/resources/assets/minigames/models/block/roulette_grid_2.json",
+          "src/main/resources/assets/minigames/models/block/roulette_grid_1.json",
+          "src/main/resources/data/minigames/loot_table/blocks/roulette_grid.json"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "TNTRouletteDimension",
+      "type": "dimension",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "tnt_roulette_dimension",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/minigames/dimension_type/tnt_roulette_dimension.json",
+          "src/main/resources/data/minigames/timeline/tnt_roulette_dimension_effects.json",
+          "src/main/resources/data/minigames/dimension/tnt_roulette_dimension.json"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "PlaceTNTRouletteGrid",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "place_tnt_roulette_grid",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/PlaceTNTRouletteGridProcedure.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "TeleportToTNTRoulette",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "teleport_to_tnt_roulette",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/TeleportToTNTRouletteProcedure.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "GrantTNTRoulettePickaxe",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "grant_tnt_roulette_pickaxe",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/GrantTNTRoulettePickaxeProcedure.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "TNTRoulettePickaxe",
+      "type": "tool",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "tnt_roulette_pickaxe",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/minigames/models/item/tnt_roulette_pickaxe.json",
+          "src/main/java/net/mcreator/minigames/item/TNTRoulettePickaxeItem.java",
+          "src/main/resources/assets/minigames/items/tnt_roulette_pickaxe.json"
+        ]
+      },
+      "path": "~/TNT Roulette"
+    },
+    {
+      "name": "RouletteGridDestroyed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "roulette_grid_destroyed",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "blockstate",
+            "type": "blockstate"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/minigames/procedures/RouletteGridDestroyedProcedure.java"
+        ]
+      },
+      "path": "~/TNT Roulette"
     }
   ],
   "variable_elements": [
@@ -19341,6 +19534,42 @@
       "type": "logic",
       "scope": "player_persistent",
       "value": "false"
+    },
+    {
+      "name": "playingTNTRoulette",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "TNTRouletteGrid",
+      "type": "arraylist",
+      "scope": "map",
+      "value": "new ArrayList\u003c\u003e()"
+    },
+    {
+      "name": "TNTRouletteGridHeight",
+      "type": "number",
+      "scope": "map",
+      "value": "6.0"
+    },
+    {
+      "name": "TNTRouletteGridLength",
+      "type": "number",
+      "scope": "map",
+      "value": "7.0"
+    },
+    {
+      "name": "TNTamountTNTRoulette",
+      "type": "number",
+      "scope": "map",
+      "value": "3.0"
+    },
+    {
+      "name": "PowerupAmountTNTRoulette",
+      "type": "number",
+      "scope": "map",
+      "value": "4.0"
     }
   ],
   "sound_elements": [
@@ -19924,7 +20153,8 @@
       "CUSTOM:GameCompass",
       "CUSTOM:SpleefShovel",
       "CUSTOM:ReplaySpleef",
-      "CUSTOM:DungeonCompass"
+      "CUSTOM:DungeonCompass",
+      "CUSTOM:TNTRoulettePickaxe"
     ],
     "BLOCKS:mod:pedestal": [
       "CUSTOM:WarriorItemPedestal",
@@ -20127,10 +20357,17 @@
       "~CrownHelmet@CUSTOM:CrownHelmet.helmet"
     ],
     "BLOCKS:minecraft:mineable/pickaxe": [
+      "~RouletteGrid@CUSTOM:RouletteGrid",
       "~TuffPedestal@CUSTOM:TuffPedestal"
     ],
     "BLOCKS:minecraft:needs_stone_tool": [
       "~TuffPedestal@CUSTOM:TuffPedestal"
+    ],
+    "BLOCKS:minecraft:overworld_carver_replaceables": [
+      "~TNTRouletteDimension@CUSTOM:StartingRoomGridBlock"
+    ],
+    "ITEMS:minecraft:pickaxes": [
+      "~TNTRoulettePickaxe@CUSTOM:TNTRoulettePickaxe"
     ]
   },
   "tab_element_order": {},
@@ -20619,7 +20856,9 @@
       "item.minigames.backpack_upgrade": "+1 Backpack Slot",
       "item.minigames.speed_upgrade": "Speed Upgrade",
       "entity.minigames.rock_thrower_church": "Rock Thrower (Church)",
-      "item.minigames.spawn_rock_thrower_church": "Spawn Rock Thrower Church"
+      "item.minigames.spawn_rock_thrower_church": "Spawn Rock Thrower Church",
+      "item.minigames.roulette_grid": "Roulette Grid",
+      "item.minigames.tnt_roulette_pickaxe": "Pickaxe"
     }
   },
   "metadata": {
@@ -21382,6 +21621,10 @@
             "children": []
           }
         ]
+      },
+      {
+        "name": "TNT Roulette",
+        "children": []
       }
     ]
   },

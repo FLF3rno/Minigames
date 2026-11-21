@@ -333,6 +333,12 @@ public class MinigamesModVariables {
 		public ArrayList<Object> roguelike_loot = new ArrayList<>();
 		public ArrayList<Object> roguelike_miniboss = new ArrayList<>();
 		public double extraItemRooms = 0;
+		public boolean playingTNTRoulette = false;
+		public ArrayList<Object> TNTRouletteGrid = new ArrayList<>();
+		public double TNTRouletteGridHeight = 6.0;
+		public double TNTRouletteGridLength = 7.0;
+		public double TNTamountTNTRoulette = 3.0;
+		public double PowerupAmountTNTRoulette = 4.0;
 
 		public void read(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
 			nightVision = nbt.getBooleanOr("nightVision", false);
@@ -438,6 +444,12 @@ public class MinigamesModVariables {
 			roguelike_loot = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_loot"), lookupProvider);
 			roguelike_miniboss = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("roguelike_miniboss"), lookupProvider);
 			extraItemRooms = nbt.getDoubleOr("extraItemRooms", 0);
+			playingTNTRoulette = nbt.getBooleanOr("playingTNTRoulette", false);
+			TNTRouletteGrid = NbtArrayLists.loadGlobalMap(nbt.getListOrEmpty("TNTRouletteGrid"), lookupProvider);
+			TNTRouletteGridHeight = nbt.getDoubleOr("TNTRouletteGridHeight", 0);
+			TNTRouletteGridLength = nbt.getDoubleOr("TNTRouletteGridLength", 0);
+			TNTamountTNTRoulette = nbt.getDoubleOr("TNTamountTNTRoulette", 0);
+			PowerupAmountTNTRoulette = nbt.getDoubleOr("PowerupAmountTNTRoulette", 0);
 		}
 
 		public CompoundTag save(CompoundTag nbt, HolderLookup.Provider lookupProvider) {
@@ -544,6 +556,12 @@ public class MinigamesModVariables {
 			nbt.put("roguelike_loot", NbtArrayLists.saveGlobalMap(roguelike_loot));
 			nbt.put("roguelike_miniboss", NbtArrayLists.saveGlobalMap(roguelike_miniboss));
 			nbt.putDouble("extraItemRooms", extraItemRooms);
+			nbt.putBoolean("playingTNTRoulette", playingTNTRoulette);
+			nbt.put("TNTRouletteGrid", NbtArrayLists.saveGlobalMap(TNTRouletteGrid));
+			nbt.putDouble("TNTRouletteGridHeight", TNTRouletteGridHeight);
+			nbt.putDouble("TNTRouletteGridLength", TNTRouletteGridLength);
+			nbt.putDouble("TNTamountTNTRoulette", TNTamountTNTRoulette);
+			nbt.putDouble("PowerupAmountTNTRoulette", PowerupAmountTNTRoulette);
 			return nbt;
 		}
 

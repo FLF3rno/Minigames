@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minigames:tuff_pedestal"
+    "minigames:tuff_pedestal",
+    "minigames:roulette_grid"
   ]
 }

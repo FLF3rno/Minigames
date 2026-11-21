@@ -21,7 +21,7 @@
     "blank": {
       "name": "blank",
       "map": {
-        "0": "minecraft:quartz_pillar"
+        "0": "minecraft:quartz_pillar_side"
       }
     },
     "warrior": {

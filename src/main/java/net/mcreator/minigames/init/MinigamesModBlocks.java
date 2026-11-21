@@ -102,6 +102,7 @@ public class MinigamesModBlocks {
 	public static final DeferredBlock<Block> SHOP_DOORS;
 	public static final DeferredBlock<Block> ITEM_CHIPPER;
 	public static final DeferredBlock<Block> SPAWN_ROCK_THROWER_CHURCH;
+	public static final DeferredBlock<Block> ROULETTE_GRID;
 	static {
 		CROWN_HUNT_CAPTURE = register("crown_hunt_capture", CrownHuntCaptureBlock::new);
 		CASTLE_BRICKS = register("castle_bricks", CastleBricksBlock::new);
@@ -189,6 +190,7 @@ public class MinigamesModBlocks {
 		SHOP_DOORS = register("shop_doors", ShopDoorsBlock::new);
 		ITEM_CHIPPER = register("item_chipper", ItemChipperBlock::new);
 		SPAWN_ROCK_THROWER_CHURCH = register("spawn_rock_thrower_church", SpawnRockThrowerChurchBlock::new);
+		ROULETTE_GRID = register("roulette_grid", RouletteGridBlock::new);
 	}
 
 	// Start of user code block custom blocks

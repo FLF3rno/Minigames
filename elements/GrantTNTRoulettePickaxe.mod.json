@@ -1,0 +1,8 @@
+{
+  "_fv": 92,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><variables><variable type=\"MCItem\" id=\"pick\">pick</variable></variables><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"world_entity_player_server_foreach\"><value name=\"_placeholder\"><block type=\"entity_iterator\" deletable=\"false\" movable=\"false\"></block></value><statement name=\"foreach\"><block type=\"variables_set_itemstack\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">local:pick</field><value name=\"VAL\"><block type=\"mcitem_all\"><field name=\"value\">CUSTOM:TNTRoulettePickaxe</field></block></value><next><block type=\"entity_set_slot\"><value name=\"amount\"><block type=\"math_number\"><field name=\"NUM\">1</field></block></value><value name=\"slotitem\"><block type=\"variables_get_itemstack\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" is_player_var=\"false\" has_entity=\"false\"></mutation><field name=\"VAR\">local:pick</field></block></value><value name=\"slotid\"><block type=\"math_number\"><field name=\"NUM\">0</field></block></value><value name=\"entity\"><block type=\"entity_iterator\"></block></value></block></next></block></statement></block></next></block></xml>",
+    "skipDependencyNullCheck": false
+  }
+}

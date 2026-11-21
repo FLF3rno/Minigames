@@ -66,7 +66,7 @@ public class VotePopupOverlay {
 
             event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, IMAGE_1, leftButtonX, popupCenterY, 0, 0, 28, 16, 28, 16);
             event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, IMAGE_0, rightButtonX, popupCenterY, 0, 0, 28, 16, 28, 16);
-            int voteIconIndex = Math.max(0, Math.min(8, (int) VoteIconProcedure.execute(world)));
+            int voteIconIndex = (int) VoteIconProcedure.execute(world);
             int voteIconRenderWidth = 66;
             int voteIconRenderHeight = 32;
             int voteIconFrameSize = 32;

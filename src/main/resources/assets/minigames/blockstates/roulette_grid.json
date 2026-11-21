@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "gridstate=none": {
+      "model": "minigames:block/roulette_grid_0"
+    },
+    "gridstate=mined_none": {
+      "model": "minigames:block/roulette_grid_1"
+    },
+    "gridstate=mined_tnt": {
+      "model": "minigames:block/roulette_grid_2"
+    },
+    "gridstate=mined_powerup": {
+      "model": "minigames:block/roulette_grid_3"
+    },
+    "gridstate=tnt": {
+      "model": "minigames:block/roulette_grid"
+    },
+    "gridstate=powerup": {
+      "model": "minigames:block/roulette_grid"
+    }
+  }
+}
